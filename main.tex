@@ -2,7 +2,7 @@
 \usepackage[OT1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{kpfonts}
-\usepackage{graphicx} 
+\usepackage{graphicx}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{amsthm}
 \usepackage[margin=1.25in]{geometry}
@@ -44,28 +44,42 @@
 
 \section{Introduction}
 
-A set $X$ of vertices in a graph $G$ is a \defin{dominating set} if each vertex of $G$ is in $X$ or adjacent to a vertex in $X$.  A dominating set $X$ of $G$ is \defin{connected} if the induced graph $G[X]$ is connected.  
+A set $X$ of vertices in a graph $G$ is a \defin{dominating set} if each vertex of $G$ is in $X$ or adjacent to a vertex in $X$.  A dominating set $X$ of $G$ is \defin{connected} if the induced graph $G[X]$ is connected.
 
-% Observe that, for any connected dominating set $X$, $G$ has a spanning-tree in which all vertices in $V(G)\setminus X$ are leaves.  Similarly, by removing the leaves of any spanning tree of $G$ we obtain a tree whose vertex set is a connected dominating set of $G$. 
+% Observe that, for any connected dominating set $X$, $G$ has a spanning-tree in which all vertices in $V(G)\setminus X$ are leaves.  Similarly, by removing the leaves of any spanning tree of $G$ we obtain a tree whose vertex set is a connected dominating set of $G$.
 %  Therefore, an $n$-vertex graph $G$ has a connected dominating set of size $q$ if and only if $G$ has a spanning tree with at least $n-q$ leaves.
 
-\begin{thm}\label{main_result}
-  For any $n\ge 4$, any $n$-vertex triangulation $G$ has a connected dominating set of size at most $4n/7 + O(1)$. 
+The main result in this paper is the following:
+
+\begin{thm}\label{main_result2}
+  For any $n\ge 4$, any $n$-vertex triangulation $G$ has a connected dominating set of size at most $10n/19 + O(1)$.
 \end{thm}
 
-\section{The Proof}
+\subsection{Related Work}
+
+Dominating sets in graphs is an enormous field of research, with a $4$-volume book set devoted to it \cite{haynes.hedetniemi:domination1}.
+
+
+
+
+\begin{thm}\label{main_result}
+  For any $n\ge 4$, any $n$-vertex triangulation $G$ has a connected dominating set of size at most $4n/7 + O(1)$.
+\end{thm}
+
+
+\section{The Proofs}
 
 For a graph $G$, let $|G|=|V(G)|$ denote the number of vertices of $G$.  A \defin{bridge} in a graph $G$ is an edge $e$ of $G$ such that $G-e$ has more connected components than $G$.  A \defin{plane graph} is a graph equipped with a non-crossing embedding in $\mathbb{R}^2$.  A plane graph is \defin{outerplane} if all its vertices appear on the outer face.  A \defin{triangle} is a cycle of length $3$. A \defin{near-triangulation} is a plane graph whose outer face is bounded by a cycle and whose inner faces are all bounded by triangles.  A \defin{generalized near-triangulation} is a plane graph whose inner faces are bounded by triangles.
 
 
-For a plane graph $H$, we use the notation $B(H)$ to denote the vertex set of the outer face of $H$ and define $I(H):=V(H)\setminus B(H)$.  The vertices in $B(H)$ are \defin{boundary vertices} of $H$ and the vertices in $I(G)$ are \defin{inner vertices} of $H$. For a vertex $v\in B(H)$, the \defin{inner neighbourhood} of $v$ in $H$ is defined as $N_H^+(v):=N_H(v)\cap I(H)$, and the \defin{inner degree} of $v$ in $H$ is $\deg^+_H(v)=|N^+_H(v)|$. 
+For a plane graph $H$, we use the notation $B(H)$ to denote the vertex set of the outer face of $H$ and define $I(H):=V(H)\setminus B(H)$.  The vertices in $B(H)$ are \defin{boundary vertices} of $H$ and the vertices in $I(G)$ are \defin{inner vertices} of $H$. For a vertex $v\in B(H)$, the \defin{inner neighbourhood} of $v$ in $H$ is defined as $N_H^+(v):=N_H(v)\cap I(H)$, the vertices in $N^+_H(v)$ are \defin{inner neighbours} of $v$ in $H$, and $\deg^+_H(v)=|N^+_H(v)|$ is the \defin{inner degree} of $v$ in $H$.
 
-Let $G$ be a triangulation.  Our procedure for constructing a connected dominating set $X$ begins with an incremental phase that eats away at the triangulation $G$ ``from the outside.'' The process of constructing $X$ is captured by the following definition:   A vertex subset $X\subseteq V(G)$ is \defin{outer-domatic} if it can be partitioned into non-empty subsets $\Delta_0,\Delta_1,\ldots,\Delta_{r-1}$ such that 
+Let $G$ be a triangulation.  Our procedure for constructing a connected dominating set $X$ begins with an incremental phase that eats away at the triangulation $G$ ``from the outside.'' The process of constructing $X$ is captured by the following definition:   A vertex subset $X\subseteq V(G)$ is \defin{outer-domatic} if it can be partitioned into non-empty subsets $\Delta_0,\Delta_1,\ldots,\Delta_{r-1}$ such that
 \begin{compactenum}[(P1)]
     \item $\Delta_0\subseteq B(G)$; \label{outer_face}
     \item $\Delta_i\subseteq B(G-(\bigcup_{j=0}^{i-1}\Delta_j))$ for each $i\in\{1,\ldots,r-1\}$; and \label{incremental}
     \item $G-(\bigcup_{j=0}^{r-1}\Delta_j)$ is outerplanar. \label{outerplanar}
-\end{compactenum} 
+\end{compactenum}
 
 \begin{lem}\label{outer_domatic}
     Let $G$ be a triangulation.  Then any outer-domatic $X\subseteq V(G)$ is a connected dominating set of $G$.
@@ -74,13 +88,13 @@ Let $G$ be a triangulation.  Our procedure for constructing a connected dominati
 \begin{proof}
   First, suppose $X$ is $f$-domatic and let $\Delta_0,\ldots,\Delta_r$ be the corresponding partition of $X$.  For each $i\in\{1,\ldots,r\}$, let $X_i:=\bigcup_{j=0}^{i-1} \Delta_i$.  First observe that, since $\Delta_0\subseteq B(G)$ is non-empty, $X_i$ contains at least one vertex of $B(G)$, for each $i\in\{1,\ldots,r\}$. We claim that
   \begin{compactenum}[(P1)]\setcounter{enumi}{3}
-    \item each vertex in $B(G-X_{i-1})$ is adjacent to some vertex in $X_{i-1}$, for each $i\in\{2,\ldots,r\}$. \label{adjacent} 
-  \end{compactenum} 
+    \item each vertex in $B(G-X_{i-1})$ is adjacent to some vertex in $X_{i-1}$, for each $i\in\{2,\ldots,r\}$. \label{adjacent}
+  \end{compactenum}
   Indeed, for any $i\in\{2,\ldots,r\}$ and any vertex $v\in B(G-X_{i-1})$ is either in $B(G)$ or adjacent to a vertex in $X_{i-1}$. Even in the former case $v$ is adjacent to a vertex in $X_1=\Delta_0\subseteq X_{i-1}$, because because $G[B(G)]$ is a clique.
 
   We now prove, by induction on $i$, that $G[X_i]$ is connected, for each $i\in\{1,\ldots,r\}$.
-  The fact that $G[B(G)]$ is a clique and \pref{outer_face} implies that $G[X_1]=G[\Delta_0]$ is connected. For each $i\in\{2,\ldots,r\}$, the assumption that $G[X_{i-1}]$ is connected, \pref{incremental}, and \pref{adjacent} then imply that $G[X_i]=G[X_{i-1}\cup\Delta_{i-1}]$ is connected.  
-  
+  The fact that $G[B(G)]$ is a clique and \pref{outer_face} implies that $G[X_1]=G[\Delta_0]$ is connected. For each $i\in\{2,\ldots,r\}$, the assumption that $G[X_{i-1}]$ is connected, \pref{incremental}, and \pref{adjacent} then imply that $G[X_i]=G[X_{i-1}\cup\Delta_{i-1}]$ is connected.
+
   In particular $G[X_r]=G[X]$ is connected.  Finally, \pref{adjacent}, with $i=r$ and \pref{outerplanar} implies that $N_G(X_r)=B(G-X_r)=V(G-X_r)$, so $X_r=X$ is a dominating set of $G$.
 \end{proof}
 
@@ -92,7 +106,7 @@ A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ f
 
 
 \begin{lem}\label{base_case}
-    Let $H$ be critical generalized near-triangulation. Then $|B(H)|\ge 3|I(H)|$ and there exists $\Delta\subseteq B(H)$ of size at most $|I(H)|$ that dominates $I(H)$. 
+    Let $H$ be critical generalized near-triangulation. Then $|B(H)|\ge 3|I(H)|$ and there exists $\Delta\subseteq B(H)$ of size at most $|I(H)|$ that dominates $I(H)$.
 \end{lem}
 
 \begin{proof}
@@ -106,23 +120,23 @@ A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ f
         \caption{Some critical graphs \pat{Add some examples where $H[B(H)]$ has some non-triangular faces}}
         \label{critical_fig}
     \end{figure}
-    
-  Consider the graph $H'$ obtained by adding edges to the inner faces of $H[B]$ so that each inner face is a triangle. For each marked face $f$ of $H[B]$, select one triangular face $t_f$ of $H'$ that is contained in $f$ and \defin{mark} $t_f$.  Observe that the three vertices of $t_f$ are all adjacent, in $G$ to $x_f$.  Thus there is a bijection from the set of marked faces of $H[B]$ to the set of marked faces in $H'$ and both of these sets have size $|I|$.  Since each vertex in $B$ is on the boundary of at most one marked face of $H[B]$, each vertex in $B$ is on the boundary of at most one marked triangular face of $H'$.  Therefore, $|B| \ge 3|I|$ so $|H|=|B|+|I|\ge 4|I|$.  By choosing one vertex from each marked triangular face of $H'$ we obtain the desired set $\Delta$. 
+
+  Consider the graph $H'$ obtained by adding edges to the inner faces of $H[B]$ so that each inner face is a triangle. For each marked face $f$ of $H[B]$, select one triangular face $t_f$ of $H'$ that is contained in $f$ and \defin{mark} $t_f$.  Observe that the three vertices of $t_f$ are all adjacent, in $G$ to $x_f$.  Thus there is a bijection from the set of marked faces of $H[B]$ to the set of marked faces in $H'$ and both of these sets have size $|I|$.  Since each vertex in $B$ is on the boundary of at most one marked face of $H[B]$, each vertex in $B$ is on the boundary of at most one marked triangular face of $H'$.  Therefore, $|B| \ge 3|I|$ so $|H|=|B|+|I|\ge 4|I|$.  By choosing one vertex from each marked triangular face of $H'$ we obtain the desired set $\Delta$.
 \end{proof}
 
 
 \section{A Simple Algorithm}
 
-% We will construct a sequence of vertex sets $\emptyset = X_0\subsetneq X_1\subsetneq\cdots\subsetneq X_r$ such that $G[X_i]$ is connected for each $i\in\{1,\ldots,r\}$ and $X_r$ dominates $G$.  Let $G_0:=G$, let $D_0:=B_0:=B(G_0)$, and let $I_0:=V(G_0-D_0)$. For each $i\in\{1,\ldots,r\}$, let $D_i:=N_G[X_i]$, let $I_i:=V(G-D_i)$, let $B_i:=N_G(I_i)$, let $\Delta_{i-1}:=X_{i}\setminus X_{i-1}$, and let $G_i:=G[I_i\cup B_i]$.  
+% We will construct a sequence of vertex sets $\emptyset = X_0\subsetneq X_1\subsetneq\cdots\subsetneq X_r$ such that $G[X_i]$ is connected for each $i\in\{1,\ldots,r\}$ and $X_r$ dominates $G$.  Let $G_0:=G$, let $D_0:=B_0:=B(G_0)$, and let $I_0:=V(G_0-D_0)$. For each $i\in\{1,\ldots,r\}$, let $D_i:=N_G[X_i]$, let $I_i:=V(G-D_i)$, let $B_i:=N_G(I_i)$, let $\Delta_{i-1}:=X_{i}\setminus X_{i-1}$, and let $G_i:=G[I_i\cup B_i]$.
 
 
 % In words, $D_i$ contains all the vertices that are dominated by $X_i$; $I_i$ contains the vertices that are not dominated by $X_i$; $B_i$ contains all the vertices on the boundary between $X_i$ and $I_i$ (each vertex in $B_i$ is adjacent to at least one vertex in $X_i$ and at least one vertex in $I_i$); and $\Delta_i$ is the set of vertices we add to $X_i$ to get $X_{i+1}$. These sets will obey the following conditions:
 % \begin{compactenum}[(P1)]
-%     \item $\Delta_i\subseteq B_i$, for each $i\in\{0,\ldots,r-1\}$; 
-%     \item $G_r$ is outerplane. 
+%     \item $\Delta_i\subseteq B_i$, for each $i\in\{0,\ldots,r-1\}$;
+%     \item $G_r$ is outerplane.
 % \end{compactenum}
 
-We start with the simplest imaginable greedy algorithm, that we call $\textsc{SimpleGreedy}(G)$, to choose $\Delta_0,\ldots,\Delta_{r-1}$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i:=G-X_i$, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are only two cases to consider:  
+We start with the simplest imaginable greedy algorithm, that we call $\textsc{SimpleGreedy}(G)$, to choose $\Delta_0,\ldots,\Delta_{r-1}$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i:=G-X_i$, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are only two cases to consider:
 \begin{compactenum}
     \item If $\deg^+_{G_i}(v_i)\ge 2$ then we set $\Delta_i\gets\{v_i\}$.
     \item If $\deg^+_{G_i}(v_i)\le 1$ for all $v\in G_i$ then $G_i$ is critical and this is the final step, so $r:=i+1$.  By \cref{base_case}, there exists $\Delta_i\subseteq B_i$ of size at most $|I_i|$ that dominates $I_i$. Then $X_r:=X_{r-1}+\Delta_{i}$ and we are done.
@@ -139,21 +153,21 @@ First observe that, for $i\in\{0,\ldots,r-2\}$, $|D_{i+1}|\ge |D_i|+\deg_{G_i}^+
 \[
     |D_{r-1}| \ge |D_0| + \sum_{i=0}^{r-2} \deg_{G_i}^+(v_i) \ge 3 + \sum_{i=0}^{r-2} 2 =  2r+1 \enspace . \label{double_d}
 \]
-Since $D_{r-1}$ and $I_{r-1}$ partition $V(G)$, 
+Since $D_{r-1}$ and $I_{r-1}$ partition $V(G)$,
 \begin{equation}
   n = |D_{r-1}| + |I_{r-1}| \ge 2r+1 + |I_{r-1}|  \enspace . \label{c1}
 \end{equation}
 % so
 % \begin{equation}
-%     r\le \frac{n-|I_{r-1}|-1}{2}  \enspace . 
+%     r\le \frac{n-|I_{r-1}|-1}{2}  \enspace .
 % \end{equation}
 
-Since $X_{r-1}$ and $B_{r-1}$ are disjoint and $D_{r-1}\supseteq B_{r-1}\cup X_{r-1}$, we have $|D_{r-1}|\ge |X_{r-1}| + |B_{r-1}|=r-1+|B_{r-1}|$.  Therefore, 
+Since $X_{r-1}$ and $B_{r-1}$ are disjoint and $D_{r-1}\supseteq B_{r-1}\cup X_{r-1}$, we have $|D_{r-1}|\ge |X_{r-1}| + |B_{r-1}|=r-1+|B_{r-1}|$.  Therefore,
 \begin{equation}
     n = |D_{r-1}| + |I_{r-1}| \ge r-1 + |B_{r-1}| + |I_{r-1}| = r-1 + |B_{r-1}| + |I_{r-1}|
     \ge r - 1 + 4|I_{r-1}| \enspace , \label{c2}
 \end{equation}
-where the last inequality follows from \cref{base_case}.  
+where the last inequality follows from \cref{base_case}.
 
 The final dominating set $X_r$ has size $|X_r| = |X_{r-1}| + \Delta_{r-1} = r - 1 +|I_{r-1}|$, so the size of $|X_r|$ can be upper-bounded by maximizing $r+|I_{r-1}|$ subject to the constraints \cref{c1,c2}.  More precisely, the maximum size of $X_r$ is upper bounded by the maximum value of $x-1+y$ subject to the constraints
 \begin{align*}
@@ -161,7 +175,7 @@ The final dominating set $X_r$ has size $|X_r| = |X_{r-1}| + \Delta_{r-1} = r - 
   2x + y +1 & \le n
 \end{align*}
 
-% r\le (n+1-I_{r-1})/2$ and $r+4|I_{r-1}|\le n$.  
+% r\le (n+1-I_{r-1})/2$ and $r+4|I_{r-1}|\le n$.
 This is an easy linear programming exercise and the maximum value of $X_{r}$ is obtained when $r=(3n-5)/7$ and $|I_{r-1}|=(n+3)/7$, which gives
 $|X_r| \le (4n-9)/7$.
 \end{proof}
@@ -170,10 +184,10 @@ $|X_r| \le (4n-9)/7$.
 
 Next we devise an algorithm that produces a smaller connected dominating set than what is guaranteed by $\textsc{SimpleGreedy}(G)$.  This involves a more careful analysis of the cases in which \textsc{SimpleGreedy} is forced to take a vertex $v_i$ with $\deg^+_{G_i}(v_i)=2$.  We begin by identifying unnecessary vertices and edges that can appear in the graphs $G_1,\ldots,G_{r-1}$ during the construction of $X$.   We say that a near-triangulation $H$ is \defin{dom-minimal} if
 \begin{compactenum}[({DM}1)]
-    \item $\deg^+_H(v)\ge 1$ for each $v\in B(H)$; and \label{bad_vertex} 
+    \item $\deg^+_H(v)\ge 1$ for each $v\in B(H)$; and \label{bad_vertex}
     \item $vw$ is on the boundary of an inner face $vwx$ for some $x\not\in B(H)$, for each edge $vw\in G[B(H)]$. \label{bad_edge}
 \end{compactenum}
-We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each of its biconnected components are dom-minimal. 
+We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each of its biconnected components are dom-minimal.
 
 \begin{obs}
     Any dom-minimal generalized near-triangulation $H$ is bridgeless.
@@ -187,28 +201,28 @@ A subgraph $H'$ of a generalized near-triangulation $H$ is \defin{dom-preserving
 \begin{compactenum}[({DP}1)]
   \item $B(H')\subseteq B(H)$;
   \item $N^+_{H'}(v)=N^+_H(v)$ for all $v\in B(H')$;
-  \item $I(H')=I(H)$; and 
+  \item $I(H')=I(H)$; and
   \item $N_{H'}(v)=N_H(v)$ for all $v\in I(H)$.
-\end{compactenum} 
+\end{compactenum}
 
 \begin{obs}
-  Let $H$ be a generalized near-triangulation, let $H'$ be a dom-preserving subgraph of $H$, and let $\Delta$ be a subset of $V(H)$ that dominates $I(H)$.  Then $\Delta\cap V(H')$ dominates $I(H)$.    
+  Let $H$ be a generalized near-triangulation, let $H'$ be a dom-preserving subgraph of $H$, and let $\Delta$ be a subset of $V(H)$ that dominates $I(H)$.  Then $\Delta\cap V(H')$ dominates $I(H)$.
 \end{obs}
 
 \begin{proof}
-  Each vertex $v\in I(H')$ is adjacent to some vertex $w\in \Delta$.  Since $N_{H'}(v)=N_H(v)$, $w\in\Delta\cap V(H')$, so $v$ is dominated by $\Delta\cap V(H')$.  Since this is true for each $v\in I(H)=I(H')$, $\Delta\cap V(H')$ dominates $I(H)$.    
+  Each vertex $v\in I(H')$ is adjacent to some vertex $w\in \Delta$.  Since $N_{H'}(v)=N_H(v)$, $w\in\Delta\cap V(H')$, so $v$ is dominated by $\Delta\cap V(H')$.  Since this is true for each $v\in I(H)=I(H')$, $\Delta\cap V(H')$ dominates $I(H)$.
 \end{proof}
 
 \begin{lem}\label{dom-minimal}
-  For any generalized near-triangulation $H$, there exists a dom-preserving subgraph $H'$ of $H$ that is dom-minimal. 
+  For any generalized near-triangulation $H$, there exists a dom-preserving subgraph $H'$ of $H$ that is dom-minimal.
 \end{lem}
 
 \begin{proof}
   The proof is by induction on $|V(H)|+|E(H)|$.  If $H$ is already dom-minimal, then setting $H'=H$ satisfies the requirements of the lemma, so assume that $H$ is not dom-minimal.  It is straightforward to verify that the dom-preserving subgraph relationship is transitive, so if $H$ has a dom-preserving subgraph $H^*$ and $H^*$ has a dom-preserving subgraph $H'$ then $H'$ is a dom-preserving subgraph of $H$.  Therefore, it is sufficient to show the existence of a dom-preserving subgraph $H^*$ of $H$ with fewer edges or fewer vertices than $H$, and the inductive hypothesis provides the desired dom-minimal dom-preserving subgraph $H'$ of $H$.
-  
+
   If $H$ contains a vertex $v\in B(H)$ with $\deg^+_H(v)=0$ then $H-v$ is a dom-preserving subgraph of $H$ with fewer vertices than $H$.  We now assume that $\deg^+_H(v)\ge 1$ for all $v\in B(H)$.
-  
-  Since $H$ is not dom-minimal then $H$ contains a biconnected component $C$ that is not dom-minimal.  
+
+  Since $H$ is not dom-minimal then $H$ contains a biconnected component $C$ that is not dom-minimal.
   \begin{compactenum}
     \item If there exists an edge $vw$ on the outer face of $C$ that is not incident to any inner face $vwx$ with $x\in I(C)$ then $B(H-vw)=B(H)$ and $I(H-vw)=I(H)$, and $H-vw$ is a is dom-preserving subgraph of $H$ that has fewer edges than $H$.
 
@@ -216,7 +230,7 @@ A subgraph $H'$ of a generalized near-triangulation $H$ is \defin{dom-preserving
   \end{compactenum}
 \end{proof}
 
-We say that a generalized near-triangulation $H$ is \defin{good} if 
+We say that a generalized near-triangulation $H$ is \defin{good} if
 \begin{compactenum}[(G1)]
       \item $H$ is critical;
       \item there exists $v\in B(H)$ with $\deg^+_H(v)\ge 3$; or
@@ -225,7 +239,7 @@ We say that a generalized near-triangulation $H$ is \defin{good} if
 
 \begin{lem}\label{not_good}
   Let $H$ be a dom-minimal generalized near-triangulation.  Then \begin{compactenum}[(i)]
-    \item $H$ is good or 
+    \item $H$ is good or
     \item $B(H)$ contains a vertex $v$ with $\deg^+_H(v)=2$ such that $G-v$ is good.
   \end{compactenum}
 \end{lem}
@@ -233,7 +247,7 @@ We say that a generalized near-triangulation $H$ is \defin{good} if
 \begin{proof}
   Since $H$ is dom-minimal, each vertex in $B(H)$ has inner-degree greater than $0$.  If some vertex in $B(H)$ has inner-degree at least $3$ then $H$ is good and there is nothing to prove, so we may assume that each vertex in $B(H)$ has inner-degree $1$ or $2$.  Since $H$ is not critical, at least one vertex in $B(H)$ has inner-degree $2$.
 
-  If $H$ is $2$-connected, let $C:=H$ and let $v_0$ be any vertex of $H$ with inner-degree $2$.  
+  If $H$ is $2$-connected, let $C:=H$ and let $v_0$ be any vertex of $H$ with inner-degree $2$.
   If $H$ is not $2$-connected, then let $C$ be a biconnected component of $H$ that contains a single cut-vertex $v_0$ of $H$ (so $C$ is a leaf in the block-cut tree of $H$). Then $v_0$ is contained in a second biconnected component $C'\neq C$ of $H$. Since $H$ is dom-minimal, $\deg^+_{C}(v_0)\ge 1$ and $\deg^+_{C'}(v_0)\ge 1$, so $\deg^+_H(v)= 2$.
 
   Since $C$ is biconnected its outer face is bounded by a cycle $v_0,v_1,v_2,\ldots,v_{k-1}$.  From this point on, all subscripts on $v$ are taken modulo $k$.  If $\deg^+_C(v_1)=1$ then, since $H$ is dom-minimal, the edge $v_0v_1$ is on the boundary of an inner face $v_0v_1x$ with $x\in I(H)$.  Since $v_0$ is the only cut-vertex of $H$ in $C$, $N^+_H(v_1)=N^+_C(v_1)=\{x\}\subseteq N_H(v_0)$ and $\deg^+_H(v_0)=2$, so $H$ is good and there is nothing to prove.  We now assume that $\deg^+_C(v_1)=2$.  By the same reasoning, we may assume that $\deg^+_C(v_i)=2$ for each $i\in\{1,\ldots,k-1\}$.  (Otherwise, $N^+_H(v_i)\subseteq N^+_H(v_{i-1})$ and $\deg^+_H(v_{i-1})=2$ for some $i\in\{2,\ldots,k-1\}$ and $H$ is good.)
@@ -242,7 +256,7 @@ We say that a generalized near-triangulation $H$ is \defin{good} if
 \end{proof}
 
 
-This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BetterGreedy}(G)$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i$ be a dom-preserving subgraph of $G-X_i$ that is dom-minimal, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are only two cases to consider:  
+This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BetterGreedy}(G)$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i$ be a dom-preserving subgraph of $G-X_i$ that is dom-minimal, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are only two cases to consider:
 \begin{compactenum}
     \item If $\deg^+_{G_i}(v_i)\ge 3$ then we set $\Delta_i\gets\{v_i\}$.
     \item If there exists distinct $v_i,w\in B(H)$ such that $\deg^+_H(v)=2$ and $N^+_H(w)\subseteq N^+_H(v)$ then set $\Delta_i:=\{v_i\}$.
@@ -262,7 +276,7 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
   \end{equation}
   The size of the dominated set $D_{r-1}$ is at least
   \[
-    |D_{r-1}| \ge 3 + \sum_{t\ge 2}tx_t + 2z 
+    |D_{r-1}| \ge 3 + \sum_{t\ge 2}tx_t + 2z
   \]
   The size of the boundary $B_{r-1}$ is at most
   \begin{equation}
@@ -270,7 +284,7 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
   \end{equation}
   By definition,
   \[
-     r-1 = |X_{r-1}| = \sum_{t\ge 2} x_t + z 
+     r-1 = |X_{r-1}| = \sum_{t\ge 2} x_t + z
   \]
   As in the previous proof, we combine these constraints with the constraints $n=|D_{r-1}|+|I_{r-1}|$,  $|D_{r-1}|\ge r-1+|B_{r-1}|$ and $|D_{r-1}|\ge r-1+3|I_{r-1}|$.
 
@@ -324,7 +338,7 @@ print(sol)
   % \end{equation}
   % By definition,
   % \[
-  %    r-1 = |X_{r-1}| = x_2 + \sum_{t\ge 3} x_t + z 
+  %    r-1 = |X_{r-1}| = x_2 + \sum_{t\ge 3} x_t + z
   % \]
   % As before, we have
   % \[
@@ -360,7 +374,7 @@ print(sol)
 
 % \subsection{Basic Graphs}
 
-% For ease of notation, let $G=G_i$ and suppose that $\deg_G^+(v)=1$ for each $v\in L(G)$.  Consider the induced subgraph $H:=G[L(G)]$.  Then $H$ is outerplanar because it is a subgraph of $G$ that only contains vertices on the outer face of $G$.  
+% For ease of notation, let $G=G_i$ and suppose that $\deg_G^+(v)=1$ for each $v\in L(G)$.  Consider the induced subgraph $H:=G[L(G)]$.  Then $H$ is outerplanar because it is a subgraph of $G$ that only contains vertices on the outer face of $G$.
 
 % % Suppose that $H$ contains a cut vertex $v$ and let $G_0$ and $G_1$ be two subgraphs of $G$ whose union is $G$ and whose intersection is the vertex $v$.  Since $\deg^+G(v)=1$, exactly one of these subgraphs, say $G_0$, has $\deg_G^+(v)=1$ and the other, $G_1$ has $\deg_G^+(v)=0$.  Then any component of $G[X]$ that contains vertices of $G_1-v$ intersects $L(G_1-v)$, so we can treat induction on $G_0$ and $G_1-v$.  Therefore, we may assume that $H$ contains no cut vertices, so $H$ is $2$-connected.
 
@@ -381,13 +395,13 @@ print(sol)
 
 % \begin{proof}
 %     Let $H:=G[L(G)]$.
-%     Triangulate the face of $H$ that contains $v$ by adding edges incident to $v$ and triangulate the other faces of $H$ by adding edge arbitrarily.  Call the resulting outerplanar graph $H'$.  Create a set $Q$ that contains, for each marked face $f$ of $H$, one triangular face $t$ of $H'$ that is contained in $f$.  Notice that one of the triangular faces in $Q$ contains $v$.  Let $H''$ be the graph obtained from $H'$ by removing any vertex that is not incident on any triangle in $Q$.  
-    
+%     Triangulate the face of $H$ that contains $v$ by adding edges incident to $v$ and triangulate the other faces of $H$ by adding edge arbitrarily.  Call the resulting outerplanar graph $H'$.  Create a set $Q$ that contains, for each marked face $f$ of $H$, one triangular face $t$ of $H'$ that is contained in $f$.  Notice that one of the triangular faces in $Q$ contains $v$.  Let $H''$ be the graph obtained from $H'$ by removing any vertex that is not incident on any triangle in $Q$.
+
 %     We claim that $|H''|=3|Q|$.  Indeed, each triangle in $|Q'|$ is incident to exactly three vertices of $H''$ and each vertex of $H''$ is incident to exactly one triangle in $Q'$.  Thus, $|H''|=3|Q'|=3|Q|$.
-    
-%     Since $H''$ is a subgraph of $H'$, it is outerplanar and therefore has a proper vertex $3$-colouring.  Each triangle in $Q'$ contains vertices of all three colours, so each face in $Q$ contains vertices of all three colours. Take $X$ to be the colour class that contains $v$.  Then 
-%     \[  
-%         |X| = |Q| = |H''|/3 = |H''|/6 + |H''|/6 = |Q|/2 + |H''|/6 \le |Q|/2 + |H|/6 \enspace . 
+
+%     Since $H''$ is a subgraph of $H'$, it is outerplanar and therefore has a proper vertex $3$-colouring.  Each triangle in $Q'$ contains vertices of all three colours, so each face in $Q$ contains vertices of all three colours. Take $X$ to be the colour class that contains $v$.  Then
+%     \[
+%         |X| = |Q| = |H''|/3 = |H''|/6 + |H''|/6 = |Q|/2 + |H''|/6 \le |Q|/2 + |H|/6 \enspace .
 %     \]
 %     We finish by observing that $|G-L(G)|$ is exactly the number of marked faces in $H$, which is exactly the size of $Q$.
 % \end{proof}
@@ -440,7 +454,7 @@ print(sol)
 
 \subsection{Useless Vertices}
 
-We say that a vertex $v$ in $F(G)$ is \defin{useless} if $\deg^+_{G}(v)=0$.  Suppose $v$ is a useless vertex and let $G':=G-v$.  Then $G'$ has $n':=n-1$ vertices and has the $\ell':=\ell-1$ vertices of $L':=L\setminus\{v\}$ on its outer face.  Since $L'\subseteq L$, $\mu':=\mu(G')=\mu-\mu_{G}(v')\le \mu-1$.  We apply induction to $G'$, to obtain a set $X$ of size at most 
+We say that a vertex $v$ in $F(G)$ is \defin{useless} if $\deg^+_{G}(v)=0$.  Suppose $v$ is a useless vertex and let $G':=G-v$.  Then $G'$ has $n':=n-1$ vertices and has the $\ell':=\ell-1$ vertices of $L':=L\setminus\{v\}$ on its outer face.  Since $L'\subseteq L$, $\mu':=\mu(G')=\mu-\mu_{G}(v')\le \mu-1$.  We apply induction to $G'$, to obtain a set $X$ of size at most
 \[
   \frac{n'-\ell'}{2} + \frac{\mu'}{6} = \frac{(n-1)-(\ell-1)}{2} + \frac{\mu-1}{6}
   = \frac{n-\ell}{2}+\frac{\mu}{6} - \frac{1}{6} \enspace ,
@@ -476,21 +490,21 @@ In the remainder of this section, we prove \cref{main_lemma}.  Globally, the pro
 
 \subsection{Boring Vertices}
 
-We say that a vertex $v$ in $F(G)$ is \defin{boring} if $\deg^+_{G-v}(w)\le 1$ for all $w\in N_G^+(v)$.  Suppose $v$ is a boring vertex and let $G':=G-v$.  As with a useless vertex, we can apply induction on $G'$ to get a set $X$ of size at most $\frac{n-\ell}{2}+\frac{\mu}{6}$.  The only danger is if $G[X]$ has a component that does not contain a vertex in $L$.  By (\ref{boundary}), every component of $G[X]$ does contain a vertex in $L':=L(G')$.  But $L'=L\setminus\{v\}\cup N^+_G(v)$ and $\deg^+_{G'}(w)\le 1$ for every $w\in N^+_G(v)$.  Then (\ref{no_ones}) implies that $X\cap N^+_G(v)=\emptyset$, so every component of $X$ must contain a vertex of $L'\setminus N^+_G(v)\subseteq L$ on its boundary, as required.  From this point on, we assume that $X$ contains no boring vertices.  That is, for each $v\in L$, $N^+_G(v)$ contains at least one vertex $w$ such that $\deg^+_G(v)\ge 2$. 
+We say that a vertex $v$ in $F(G)$ is \defin{boring} if $\deg^+_{G-v}(w)\le 1$ for all $w\in N_G^+(v)$.  Suppose $v$ is a boring vertex and let $G':=G-v$.  As with a useless vertex, we can apply induction on $G'$ to get a set $X$ of size at most $\frac{n-\ell}{2}+\frac{\mu}{6}$.  The only danger is if $G[X]$ has a component that does not contain a vertex in $L$.  By (\ref{boundary}), every component of $G[X]$ does contain a vertex in $L':=L(G')$.  But $L'=L\setminus\{v\}\cup N^+_G(v)$ and $\deg^+_{G'}(w)\le 1$ for every $w\in N^+_G(v)$.  Then (\ref{no_ones}) implies that $X\cap N^+_G(v)=\emptyset$, so every component of $X$ must contain a vertex of $L'\setminus N^+_G(v)\subseteq L$ on its boundary, as required.  From this point on, we assume that $X$ contains no boring vertices.  That is, for each $v\in L$, $N^+_G(v)$ contains at least one vertex $w$ such that $\deg^+_G(v)\ge 2$.
 
 \subsection{Cut Vertices}
 
-Suppose that $G$ contains a cut vertex $v$,  so that $G=G_0\cup G_1$ where $G_0$ and $G_1$ are each non-empty and are vertex disjoint except for their common vertex $v$.  For each $b\in\{0,1\}$, define $n_b$, $\ell_b$, $L_b$, and $\mu_b$ with respect to $G_b$ in the obvious way. 
+Suppose that $G$ contains a cut vertex $v$,  so that $G=G_0\cup G_1$ where $G_0$ and $G_1$ are each non-empty and are vertex disjoint except for their common vertex $v$.  For each $b\in\{0,1\}$, define $n_b$, $\ell_b$, $L_b$, and $\mu_b$ with respect to $G_b$ in the obvious way.
 
 \begin{compactenum}
   \item If $\deg_{G_b}^+(v)=0$ for some $b\in\{0,1\}$ then $v$ is a useless vertex in $G_b$.  Without loss of generality, suppose $v$ is useless in $G_0$.  Apply the lemma inductively to $G_0-v$ to get a set $X_0$ of size $(n_0-\ell_0)/2) + \mu_0/6 - 1/6$.  Next, apply the lemma to the graph $G_{1}$ to get a set $X_{1}$ of size at most $|X_{1}|\le (n_1-\ell_1)/2 + \mu_1/6$. (Notice that the first graph does not contains $v$ while the second one does.) Since $v$ is a cut vertex, $\mu_{1}=\mu_{G_{1}}(v)\le \mu_G(v)-1$.  This implies that $\mu_0+\mu_1\le \mu-1$.   Let $X:=X_0\cup X_1$.  Then
   \[
     |X| = |X_0|+|X_1| \le \frac{n-\ell}{2}+\frac{\mu-2}{6}
   \]
-  
+
   \item \pat{Continue here, dealing with cases of higher degrees.}Otherwise, since $\deg_{G}^+(v)=2$ it must be the case that $\deg^+_{G_0}(v)=\deg^+_{G_1}(v)=1$.  For each $b\in\{0,1\}$, let $n_b:=|V(G_b)|$, and let $L_b$ be the set of vertices on the outer face of $G_b$.  There are two subcases to consider:
   \begin{compactenum}
-      \item At least one of $G_0$ or $G_1$ is a padded basic graph.  Suppose that $G_0$ is.  Apply \cref{padded_basic} to $G_0$ to obtain a dominating set $X_0$ that contains $v$ and has size at most $(n_0-|L_0|)/2+|L_0|/6$. 
+      \item At least one of $G_0$ or $G_1$ is a padded basic graph.  Suppose that $G_0$ is.  Apply \cref{padded_basic} to $G_0$ to obtain a dominating set $X_0$ that contains $v$ and has size at most $(n_0-|L_0|)/2+|L_0|/6$.
 
       Next apply the lemma to $G_1-v$ to obtain a forest $F_1$ and let $X_1:=V(F_1)$. Then
       \begin{align*}
@@ -502,13 +516,13 @@ Suppose that $G$ contains a cut vertex $v$,  so that $G=G_0\cup G_1$ where $G_0$
         = \frac{n-|L|}{2} + \frac{|L|}{6} - \frac{1}{3} \enspace .
       \]
 
-      \item Neither $G_1$ nor $G_2$ is a padded basic graph.  Since $\deg_{G_0}^+(v)=1$ and $\deg_{G_1}^+(v)=1$, this implies that neither of $G_0-v$ nor $G_1-v$ is a padded basic graph.  Applying the lemma to each of these graphs gives sets $X_0$ and $X_1$ of size 
+      \item Neither $G_1$ nor $G_2$ is a padded basic graph.  Since $\deg_{G_0}^+(v)=1$ and $\deg_{G_1}^+(v)=1$, this implies that neither of $G_0-v$ nor $G_1-v$ is a padded basic graph.  Applying the lemma to each of these graphs gives sets $X_0$ and $X_1$ of size
       \[
         |X_0\cup X_1| = \frac{n - 2 - (|L|+1)}{2} + \frac{|L|-1}{6}
         = \frac{n-|L|}{2} + \frac{|L|-1}{6} - 1 \enspace .
       \]
       Now the set $\{v\}\cup X_0\cup X_1$ satisfies the requirements of the lemma.
-    \end{compactenum}    
+    \end{compactenum}
 \end{compactenum}
 
 
@@ -531,7 +545,7 @@ There is a class of graphs in which we may not be able to reduce the size of $G$
 % \end{obs}
 
 % \begin{proof}
-    
+
 % \end{proof}
 
 For basic graphs, we will use the following lemma:
@@ -542,17 +556,17 @@ For basic graphs, we will use the following lemma:
 
 \begin{proof}[Proof sketch]
     Triangulate the face in $Q$ that contains $v$ by adding edges incident to $v$ and triangulate the other faces in $Q$ by adding edge arbitrarily.  Call the resulting outerplanar graph $G'$.  Create a set $Q'$ that contains, for each face $f$ in $Q$, one triangular face $t$ of $G'$ that is contained in $f$.  Notice that one of the triangular faces in $Q'$ contains $v$.  Let $Q''$ be the graph obtained from $Q$ by removing any vertex that is not incident to some triangle in $Q'$.
-    
+
     We claim that $|G''|=3|Q|$.  Indeed, each triangle in $|Q'|$ is incident to exactly three vertices of $G''$ and each vertex of $G''$ is incident to exactly one triangle in $Q'$.  Thus, $|V(G'')|=3|Q'|=3|Q|$.
-    
-    Since $G''$ is a subgraph of $G'$, it is outerplanar and therefore has a proper vertex $3$-colouring.  Each triangle in $Q'$ contains vertices of all three colours, so each face in $Q$ contains vertices of all three colours. Take $X$ to be the colour class that contains $v$.  Then 
-    \[  
+
+    Since $G''$ is a subgraph of $G'$, it is outerplanar and therefore has a proper vertex $3$-colouring.  Each triangle in $Q'$ contains vertices of all three colours, so each face in $Q$ contains vertices of all three colours. Take $X$ to be the colour class that contains $v$.  Then
+    \[
         |X| = |Q| = |G''|/3 = |G''|/6 + |G''|/6 = |Q|/2 + |G''|/6 \le |Q|/2 + |G_0|/6 \enspace . \qedhere
     \]
 \end{proof}
 
-% We say that a basic graph $G$ described by $(G_0,Q)$ is \defin{critical} if $G_0$ is edge maximal and each vertex of $G_0$ is incident to exactly one face in $Q$.  Observe that, if $G$ is critical, then the number of vertices of $G$ is exactly $3|Q|$ since each face in $Q$ is a triangle and each vertex of $G$ appears on exactly one face.  
- 
+% We say that a basic graph $G$ described by $(G_0,Q)$ is \defin{critical} if $G_0$ is edge maximal and each vertex of $G_0$ is incident to exactly one face in $Q$.  Observe that, if $G$ is critical, then the number of vertices of $G$ is exactly $3|Q|$ since each face in $Q$ is a triangle and each vertex of $G$ appears on exactly one face.
+
 We say that a generalized near triangulation $G$ is a \defin{(critical) padded basic graph} if $G$ is a (critical) basic graph or if $\deg^+_G(v)=2$ for each vertex $v\in F_o(G)$ and $G-F_o(G)$ is a (critical) padded basic graph.
 
 
@@ -560,23 +574,23 @@ We say that a generalized near triangulation $G$ is a \defin{(critical) padded b
 \begin{lem}\label{padded_basic}
     Let $G$ be an $n$-vertex padded basic graph with outer face $F$.  Then, for any $v\in F$, $G$ contains a forest $F$ such that
     \begin{compactenum}
-        \item each component of $F$ contains exactly one vertex in $L$; 
-        \item each vertex of $V(G)\setminus L$ is either in $F$ or adjacent to a vertex in $F$; 
-        \item $|F|\le (n-|L|)/2 + |L|/6$. 
+        \item each component of $F$ contains exactly one vertex in $L$;
+        \item each vertex of $V(G)\setminus L$ is either in $F$ or adjacent to a vertex in $F$;
+        \item $|F|\le (n-|L|)/2 + |L|/6$.
         \item $v$ is a vertex of $F$.
     \end{compactenum}
 \end{lem}
 
 
 \begin{proof}
-    If $G$ is a basic graph (without padding) described by $(G_0,Q)$ then apply \cref{base_case}.  Otherwise, if $|F|$ is even, then put every second vertex of $F$ (including $v$) into $X$ and apply induction of $G-F$.  If $|F|$ is odd, then add every second vertex of $F$ to $X$ (including $v$), leaving one edge $xy$ of the outer face of $G$ neither of whose endpoints is in $X$.  Opposite this edge is a face $xyz$ and the vertex $z$ has no neighbour in $X$.  In fact $z$ is the only vertex on the outer face of $G-F$ that has no neighbour in $X$.  Now we apply induction on $G-F$ but make use of the fact that we can choose a vertex $v'$ on the outer face of $G-F$ that must be included in $X$.  In particular, we choose $v'$ to be a neighbour of $z$ on the outer face of $G-F$.  This  ensures that $z$ is adjacent the vertex $v'\in X$.  (Note that in this case, we actually win something, 
+    If $G$ is a basic graph (without padding) described by $(G_0,Q)$ then apply \cref{base_case}.  Otherwise, if $|F|$ is even, then put every second vertex of $F$ (including $v$) into $X$ and apply induction of $G-F$.  If $|F|$ is odd, then add every second vertex of $F$ to $X$ (including $v$), leaving one edge $xy$ of the outer face of $G$ neither of whose endpoints is in $X$.  Opposite this edge is a face $xyz$ and the vertex $z$ has no neighbour in $X$.  In fact $z$ is the only vertex on the outer face of $G-F$ that has no neighbour in $X$.  Now we apply induction on $G-F$ but make use of the fact that we can choose a vertex $v'$ on the outer face of $G-F$ that must be included in $X$.  In particular, we choose $v'$ to be a neighbour of $z$ on the outer face of $G-F$.  This  ensures that $z$ is adjacent the vertex $v'\in X$.  (Note that in this case, we actually win something,
 \begin{figure}[htbp]
     \begin{center}
         \includegraphics{figs/odd} \\
     \end{center}
     \caption{Dealing with the case where $|F|$ is odd in \cref{padded_basic}.}
     \label{odd_case}
-\end{figure}    
+\end{figure}
 \end{proof}
 
 
@@ -586,14 +600,14 @@ We say that a generalized near triangulation $G$ is a \defin{(critical) padded b
 
 \subsection{No Gains}
 
-For any plane graph $G$ with outer face $F_o(G)$, and any vertex $v$ of $G$, let $N_{G}^+(v)=N_G(v)\setminus V(F_o(G))$ and let $\deg_G^+(v)=|N^+_G(v)|$.  
+For any plane graph $G$ with outer face $F_o(G)$, and any vertex $v$ of $G$, let $N_{G}^+(v)=N_G(v)\setminus V(F_o(G))$ and let $\deg_G^+(v)=|N^+_G(v)|$.
 
-If $G$ contains a vertex $v$ with $\deg^+_G(v)=0$, we let $G':=G-v$, $n':=n-1$, and $L':=L\setminus\{v\}$.  Observe that $L'$ is the set of vertices on the outer face of $G'$.  Applying induction on $G'$ gives a forest $F$ with    
+If $G$ contains a vertex $v$ with $\deg^+_G(v)=0$, we let $G':=G-v$, $n':=n-1$, and $L':=L\setminus\{v\}$.  Observe that $L'$ is the set of vertices on the outer face of $G'$.  Applying induction on $G'$ gives a forest $F$ with
 \begin{align*}
-    |F'| 
+    |F'|
         % & \le \frac{n'-|L'|}{2} + \frac{|L'|+|L'|\bmod 2}{6} \\
         & \le \frac{n'-|L'|}{2} + \frac{|L'|}{6} \\
-        & = \frac{n-|L|}{2} + \frac{|L|-1}{6} \enspace . 
+        & = \frac{n-|L|}{2} + \frac{|L|-1}{6} \enspace .
 \end{align*}
 
 We now assume that $d_G^+(v)\ge 1$ for all $v\in L$.
@@ -610,15 +624,15 @@ If $\deg_G^+(v)=1$ for each $v\in L$, then we appeal to \cref{base_case}.    The
 
 \subsection{Big Gains}
 
-If there exist a vertex $v\in L$ with $\deg^+(v)\ge 3$ then let $G':=G-v$, let $n':=n-1=|V(G')|$, and let $L'$ be the set of vertices on the outer face of $G'$.  
+If there exist a vertex $v\in L$ with $\deg^+(v)\ge 3$ then let $G':=G-v$, let $n':=n-1=|V(G')|$, and let $L'$ be the set of vertices on the outer face of $G'$.
 Then $|L'|=|L|+\deg_{G}^+(v)-1$.  Applying induction on $G'$ gives a forest $F'$ of size
 \begin{align*}
-    |F'| 
+    |F'|
         % & \le \frac{n'-|L'|}{2} + \frac{|L'|+|L'|\bmod 2}{6} \\
         & \le \frac{n'-|L'|}{2} + \frac{|L'|}{6} \\
-        & = \frac{n-|L|-\deg_{G}^+(v)}{2} + \frac{|L|+\deg_{G}^+(v)}{6} \\ 
-        & = \frac{n-|L|}{2} + \frac{|L|}{6} - \frac{\deg_{G}^+(v)}{3} \\ 
-        & \le \frac{n-|L|}{2} + \frac{|L|}{6} - 1 \enspace . 
+        & = \frac{n-|L|-\deg_{G}^+(v)}{2} + \frac{|L|+\deg_{G}^+(v)}{6} \\
+        & = \frac{n-|L|}{2} + \frac{|L|}{6} - \frac{\deg_{G}^+(v)}{3} \\
+        & \le \frac{n-|L|}{2} + \frac{|L|}{6} - 1 \enspace .
 \end{align*}
 \pat{Argue that if $G'$ is critical then $\deg^+_G(v)\ge 4$, so there is an extra $-1/3$ in the preceding equation. Critical graphs are full of $1$-win vertices.  Before removing $v$, one of these vertices was a $2$-win vertex adjacent to a $1$-win vertex, and we could have gotten rid of it that way, instead.}
 
@@ -634,7 +648,7 @@ We now assume that $d_G^+(v)\le 2$ for all $v\in L$.
 
 \subsection{All $2$-Wins}
 
-The only remaining possibility is that $\deg_{G}^+(v)=2$ for each $v\in L$.   
+The only remaining possibility is that $\deg_{G}^+(v)=2$ for each $v\in L$.
 
 \subsubsection{Eliminating Cut Vertices}
 
@@ -645,7 +659,7 @@ Without loss of generality, we may assume that $G$ is connected since, otherwise
 
   \item Otherwise, since $\deg_{G}^+(v)=2$ it must be the case that $\deg^+_{G_0}(v)=\deg^+_{G_1}(v)=1$.  For each $b\in\{0,1\}$, let $n_b:=|V(G_b)|$, and let $L_b$ be the set of vertices on the outer face of $G_b$.  There are two subcases to consider:
   \begin{compactenum}
-      \item At least one of $G_0$ or $G_1$ is a padded basic graph.  Suppose that $G_0$ is.  Apply \cref{padded_basic} to $G_0$ to obtain a dominating set $X_0$ that contains $v$ and has size at most $(n_0-|L_0|)/2+|L_0|/6$. 
+      \item At least one of $G_0$ or $G_1$ is a padded basic graph.  Suppose that $G_0$ is.  Apply \cref{padded_basic} to $G_0$ to obtain a dominating set $X_0$ that contains $v$ and has size at most $(n_0-|L_0|)/2+|L_0|/6$.
 
       Next apply the lemma to $G_1-v$ to obtain a forest $F_1$ and let $X_1:=V(F_1)$. Then
       \begin{align*}
@@ -657,14 +671,16 @@ Without loss of generality, we may assume that $G$ is connected since, otherwise
         = \frac{n-|L|}{2} + \frac{|L|}{6} - \frac{1}{3} \enspace .
       \]
 
-      \item Neither $G_1$ nor $G_2$ is a padded basic graph.  Since $\deg_{G_0}^+(v)=1$ and $\deg_{G_1}^+(v)=1$, this implies that neither of $G_0-v$ nor $G_1-v$ is a padded basic graph.  Applying the lemma to each of these graphs gives sets $X_0$ and $X_1$ of size 
+      \item Neither $G_1$ nor $G_2$ is a padded basic graph.  Since $\deg_{G_0}^+(v)=1$ and $\deg_{G_1}^+(v)=1$, this implies that neither of $G_0-v$ nor $G_1-v$ is a padded basic graph.  Applying the lemma to each of these graphs gives sets $X_0$ and $X_1$ of size
       \[
         |X_0\cup X_1| = \frac{n - 2 - (|L|+1)}{2} + \frac{|L|-1}{6}
         = \frac{n-|L|}{2} + \frac{|L|-1}{6} - 1 \enspace .
       \]
       Now the set $\{v\}\cup X_0\cup X_1$ satisfies the requirements of the lemma.
-    \end{compactenum}    
+    \end{compactenum}
 \end{compactenum}
 
+\bibliographystyle{plainurl}
+\bibliography{main}
 
 \end{document}
