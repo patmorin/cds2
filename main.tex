@@ -59,12 +59,12 @@ The main result in this paper is the following:
 
 Dominating sets in graphs is an enormous field of research, with several books  devoted to the topic \cite{haynes.hedetniemi.ea:domination,haynes.hedetniemi.ea:topics}.
 
+\pat{Expand.  Explain how Kleitman-West result gives $3n/4$.  Explain how Matheson-Tarjan gives $2n/3$.}
 
 
-
-\begin{thm}\label{main_result}
-  For any $n\ge 4$, any $n$-vertex triangulation $G$ has a connected dominating set of size at most $4n/7 + O(1)$.
-\end{thm}
+% \begin{thm}\label{main_result}
+%   For any $n\ge 4$, any $n$-vertex triangulation $G$ has a connected dominating set of size at most $4n/7 + O(1)$.
+% \end{thm}
 
 
 \section{The Proofs}
@@ -86,7 +86,7 @@ Let $G$ be a triangulation.  Our procedure for constructing a connected dominati
 \end{lem}
 
 \begin{proof}
-  First, suppose $X$ is $f$-domatic and let $\Delta_0,\ldots,\Delta_r$ be the corresponding partition of $X$.  For each $i\in\{1,\ldots,r\}$, let $X_i:=\bigcup_{j=0}^{i-1} \Delta_i$.  First observe that, since $\Delta_0\subseteq B(G)$ is non-empty, $X_i$ contains at least one vertex of $B(G)$, for each $i\in\{1,\ldots,r\}$. We claim that
+  Suppose $X$ is outer-domatic and let $\Delta_0,\ldots,\Delta_r$ be the corresponding partition of $X$.  For each $i\in\{1,\ldots,r\}$, let $X_i:=\bigcup_{j=0}^{i-1} \Delta_i$.  First observe that, since $\Delta_0\subseteq B(G)$ is non-empty, $X_i$ contains at least one vertex of $B(G)$, for each $i\in\{1,\ldots,r\}$. We claim that
   \begin{compactenum}[(P1)]\setcounter{enumi}{3}
     \item each vertex in $B(G-X_{i-1})$ is adjacent to some vertex in $X_{i-1}$, for each $i\in\{2,\ldots,r\}$. \label{adjacent}
   \end{compactenum}
@@ -263,7 +263,9 @@ We say that a generalized near-triangulation $H$ is \defin{good} if
 
   Since $C$ is biconnected its outer face is bounded by a cycle $v_0,v_1,v_2,\ldots,v_{k-1}$.  From this point on, all subscripts on $v$ are taken modulo $k$.  If $\deg^+_C(v_1)=1$ then, since $H$ is dom-minimal, the edge $v_0v_1$ is on the boundary of an inner face $v_0v_1x$ with $x\in I(H)$.  Since $v_0$ is the only cut-vertex of $H$ in $C$, $N^+_H(v_1)=N^+_C(v_1)=\{x\}\subseteq N_H(v_0)$ and $\deg^+_H(v_0)=2$, so $H$ is good and there is nothing to prove.  We now assume that $\deg^+_C(v_1)=2$.  By the same reasoning, we may assume that $\deg^+_C(v_i)=2$ for each $i\in\{1,\ldots,k-1\}$.  (Otherwise, $N^+_H(v_i)\subseteq N^+_H(v_{i-1})$ and $\deg^+_H(v_{i-1})=2$ for some $i\in\{2,\ldots,k-1\}$ and $H$ is good.)
 
-  To summarize, so far we know that some vertex $x\in I(H)$ is in $N^+_H(v_0)$, $N^+_H(v_1)$, and $N^+_H(v_{k-1})$.  If $k=3$ then, since $H$ is dom-minimal, $H$ contains a face $v_1v_{k-1}y$ with $y\in I(H)$.  Since $\deg^+_H(v_1)=\deg^+_H(v_{k-1})=2$, $y\neq x$ and $N^+_H(v_1)=N^+_H(v_2)=\{x,y\}$. Again, this implies that $H$ is good.  If $k\ge 5$, then consider the graph $H':=H-v_0$.  Then $\deg^+_{H'}(v_1)=1$, $\deg^+_{H'}(v_2)=2$, and $N_{H'}(v_1)\subseteq N_{H'}(v_2)$.   Therefore $G'$ is good, so $G$ contains a vertex $v=v_0$ of inner-degree $2$ such that $G-v$ is good.  This completes the proof.
+  To summarize, so far we know that some vertex $x\in I(H)$ is in $N^+_H(v_0)$, $N^+_H(v_1)$, and $N^+_H(v_{k-1})$.  If $k=3$ then, since $H$ is dom-minimal, $H$ contains a face $v_1v_{k-1}y$ with $y\in I(H)$.  Since $\deg^+_H(v_1)=\deg^+_H(v_{k-1})=2$, $y\neq x$ and $N^+_H(v_1)=N^+_H(v_2)=\{x,y\}$. Again, this implies that $H$ is good.
+
+  If $k\ge 4$, then consider the vertex $v_2$. The edge $v_1v_2$ is on the boundary of a face $v_1v_2y$.  Since $\deg^+_H(v_1)=2$, $x\neq y$.  If $N^+_H(v_1)=N^+_H(v_2)=\{x,y\}$ then $v_1$ and $v_2$ satisfy (GM3), so $H$ is good.  Otherwise, consider the graph $H':=H-v_0$.  Then $\deg^+_{H'}(v_1)=1$, $\deg^+_{H'}(v_2)=2$, and $N_{H'}(v_1)\subseteq N_{H'}(v_2)$.   Therefore $G'$ is good, so $G$ contains a vertex $v=v_0$ of inner-degree $2$ such that $G-v$ is good.  This completes the proof.
 \end{proof}
 
 
