@@ -8,6 +8,10 @@
 \usepackage[margin=1.25in]{geometry}
 \usepackage[sf,bf,small,raggedright,compact]{titlesec}
 \usepackage{hyperref}
+\definecolor{linkblue}{named}{MidnightBlue}
+\hypersetup{colorlinks=true, linkcolor=linkblue,  anchorcolor=linkblue,
+        citecolor=linkblue, filecolor=linkblue, menucolor=linkblue,
+        urlcolor=linkblue}
 \usepackage[capitalize]{cleveref}
 \usepackage{paralist}
 \usepackage[longnamesfirst,numbers,sort&compress]{natbib}
@@ -27,7 +31,7 @@
 
 \newcommand{\defin}[1]{\emph{\textcolor{Maroon}{#1}}}
 
-\newcommand{\pat}[1]{[\textcolor{red}{#1}]}
+\newcommand{\pat}[1]{[\textcolor{red}{PM: #1}]}
 
 \title{Connected Dominating Sets in Triangulations}
 \author{Prosenjit Bose \and Vida Dujmović \and Hussein Houdrouge \and Pat Morin \and Saeed Odak \and Anyone Else?}
@@ -54,7 +58,7 @@ A set $X$ of vertices in a graph $G$ is a \defin{dominating set} if each vertex 
 The main result in this paper is the following:
 
 \begin{thm}\label{main_result2}
-  For any $n\ge 4$, any $n$-vertex triangulation $G$ has a connected dominating set of size at most $10n/19 + O(1)$.
+  For any $n\ge 4$, any $n$-vertex triangulation $G$ has a connected dominating set of size at most $7n/13 + O(1)$.
 \end{thm}
 
 \subsection{Related Work}
@@ -71,7 +75,7 @@ Dominating sets in graphs is an enormous field of research, with several books  
 
 \section{The Proofs}
 
-For a graph $G$, let $|G|=|V(G)|$ denote the number of vertices of $G$.  A \defin{bridge} in a graph $G$ is an edge $e$ of $G$ such that $G-e$ has more connected components than $G$.  A set $X\subseteq V(G)$ \defin{dominates} a set $B\subseteq V(G)$ if each vertex in $B$ is in $X$ or adjacent to a vertex in $X$.  Thus, $X$ is a dominating set of $G$ if and only if $X$ dominates $V(G)$.
+For a graph $G$, let $|G|=|V(G)|$ denote the number of vertices of $G$.  A \defin{bridge} in a graph $G$ is an edge $e$ of $G$ such that $G-e$ has more connected components than $G$.  For a vertex $v\in G$, $N_G(v):=\{w\in V(G):vw\in E(G)\}$ is the \defin{open neighbourhood} of $v$ in $G$,  $N_G[v]:=N_G(v)\cup\{v\}$ is the \defin{closed neighbourhood} of $v$ in $G$.  For a vertex subset $S\subseteq V(G)$, $N_G[S]:=\bigcup_{v\in S} N_{G}[v]$ is the \defin{closed neighbourhood} of $S$ in $G$ and $N_G(S):=N_G[S]\setminus S$ is the \defin{open neighbourhood} of $S$ in $G$.  A set $X\subseteq V(G)$ \defin{dominates} a set $B\subseteq V(G)$ if $B\subseteq N_G[X]$.  Thus, $X$ is a dominating set of $G$ if and only if $X$ dominates $V(G)$.
 
 A \defin{plane graph} is a graph equipped with a non-crossing embedding in $\mathbb{R}^2$.  A plane graph is \defin{outerplane} if all its vertices appear on the outer face.  A \defin{triangle} is a cycle of length $3$. A \defin{near-triangulation} is a plane graph whose outer face is bounded by a cycle and whose inner faces are all bounded by triangles.  A \defin{generalized near-triangulation} is a plane graph whose inner faces are bounded by triangles.
 
@@ -114,7 +118,7 @@ A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ f
 \end{lem}
 
 \begin{proof}
-  Let $B:=B(H)$ and $I:=I(H)$.  If $I$ is empty then the result is trivially true, by taking $X:=\emptyset$, so we now assume that $I$ is non-empty.  By definition, the graph $H[B]$ is outerplanar.  Say that an inner face of $H[B]$ is \defin{marked} if it contains an inner vertex of $H$.  Consider some marked face $f$ of $H[B]$.  This face is marked because it contains at least one vertex in $I$.  Since $H$ is a triangulation, there is an edge $vx$ in $H$ with $v\in B$ on the boundary of $f$ and $x\in I$ in the interior of $f$. Since $G$ is a triangulation and $x$ is an inner vertex of $H$, the edge $vx$ is on the boundary of two faces $vxv_1$ and $vxv_{k-1}$ of $H$ with $v_1\neq v_k$.  Since $\deg^+_H(v)=1$, each of $v_1$ and $v_{k-1}$ are in $B$.  By the same argument, $H$ contains a face $v_1v_2x$ with $v_2\in B$, and repeating this argument shows that $v,v_1,\ldots,v_{k-1}$ is the cycle in $H[B]$ that bounds $f$.  Therefore, $f$ contains exactly one vertex $x_f:=x$ of $I$ and $x_f$ is adjacent to each vertex of $f$.  Thus, $H$ is formed from an outerplanar graph $H[B]$ by adding $|I|$ stars, one in the interior of each marked face of $H[B]$.  Furthermore, since $\deg_H^+(v)=1$ for each $v\in B$, each vertex of $H[B]$ is on the boundary of exactly one marked face.
+  Let $B:=B(H)$ and $I:=I(H)$.  If $I$ is empty then the result is trivially true, by taking $X:=\emptyset$, so we now assume that $I$ is non-empty.  By definition, the graph $H[B]$ is outerplanar.  Say that an inner face of $H[B]$ is \defin{marked} if it contains an inner vertex of $H$.  Consider some marked face $f$ of $H[B]$.  This face is marked because it contains at least one vertex in $I$.  Since $H$ is a triangulation, there is an edge $vx$ in $H$ with $v\in B$ on the boundary of $f$ and $x\in I$ in the interior of $f$. Since $G$ is a triangulation and $x$ is an inner vertex of $H$, the edge $vx$ is on the boundary of two faces $vxv_1$ and $vxv_{k-1}$ of $H$ with $v_1\neq v_{k-1}$.  Since $\deg^+_H(v)=1$, each of $v_1$ and $v_{k-1}$ are in $B$.  By the same argument, $H$ contains a face $v_1xv_2$ with $v_2\in B$, $v_2\neq v$, and repeating this argument shows that $v,v_1,v_2,\ldots,v_{k-1}$ is the cycle in $H[B]$ that bounds $f$.  Therefore, $f$ contains exactly one vertex $x_f:=x$ of $I$ and $x_f$ is adjacent to each vertex of $f$.  Thus, $H$ is formed from an outerplanar graph $H[B]$ by adding $|I|$ stars, one in the interior of each marked face of $H[B]$.  Furthermore, since $\deg_H^+(v)=1$ for each $v\in B$, each vertex of $H[B]$ is on the boundary of exactly one marked face.
 
     \begin{figure}
         \begin{center}
@@ -125,32 +129,23 @@ A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ f
         \label{critical_fig}
     \end{figure}
 
-  Consider the graph $H'$ obtained by adding edges to the inner faces of $H[B]$ so that each inner face is a triangle. For each marked face $f$ of $H[B]$, select one triangular face $t_f$ of $H'$ that is contained in $f$ and \defin{mark} $t_f$.  Observe that the three vertices of $t_f$ are all adjacent, in $G$ to $x_f$.  Thus there is a bijection from the set of marked faces of $H[B]$ to the set of marked faces in $H'$ and both of these sets have size $|I|$.  Since each vertex in $B$ is on the boundary of at most one marked face of $H[B]$, each vertex in $B$ is on the boundary of at most one marked triangular face of $H'$.  Therefore, $|B| \ge 3|I|$ so $|H|=|B|+|I|\ge 4|I|$.  By choosing one vertex from each marked triangular face of $H'$ we obtain the desired set $\Delta$.
+  Consider the graph $H'$ obtained by adding edges to the inner faces of $H[B]$ so that each inner face is a triangle. For each marked face $f$ of $H[B]$, select one triangular face $t_f$ of $H'$ that is contained in $f$ and \defin{mark} $t_f$. Thus there is a bijection from the set of marked faces of $H[B]$ to the set of marked faces in $H'$ and both of these sets have size $|I|$.  Since each vertex in $B$ is on the boundary of at most one marked face of $H[B]$, each vertex in $B$ is on the boundary of at most one marked triangular face of $H'$.  Therefore, $|B| \ge 3|I|$ so $|H|=|B|+|I|\ge 4|I|$. By choosing one vertex from each marked face of $H$ we obtain the desired set $\Delta$.
 \end{proof}
 
 \section{A Simple Algorithm}
 
-% We will construct a sequence of vertex sets $\emptyset = X_0\subsetneq X_1\subsetneq\cdots\subsetneq X_r$ such that $G[X_i]$ is connected for each $i\in\{1,\ldots,r\}$ and $X_r$ dominates $G$.  Let $G_0:=G$, let $D_0:=B_0:=B(G_0)$, and let $I_0:=V(G_0-D_0)$. For each $i\in\{1,\ldots,r\}$, let $D_i:=N_G[X_i]$, let $I_i:=V(G-D_i)$, let $B_i:=N_G(I_i)$, let $\Delta_{i-1}:=X_{i}\setminus X_{i-1}$, and let $G_i:=G[I_i\cup B_i]$.
-
-
-% In words, $D_i$ contains all the vertices that are dominated by $X_i$; $I_i$ contains the vertices that are not dominated by $X_i$; $B_i$ contains all the vertices on the boundary between $X_i$ and $I_i$ (each vertex in $B_i$ is adjacent to at least one vertex in $X_i$ and at least one vertex in $I_i$); and $\Delta_i$ is the set of vertices we add to $X_i$ to get $X_{i+1}$. These sets will obey the following conditions:
-% \begin{compactenum}[(P1)]
-%     \item $\Delta_i\subseteq B_i$, for each $i\in\{0,\ldots,r-1\}$;
-%     \item $G_r$ is outerplane.
-% \end{compactenum}
-
-We start with the simplest imaginable greedy algorithm, that we call $\textsc{SimpleGreedy}(G)$, to choose $\Delta_0,\ldots,\Delta_{r-1}$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i:=G-X_i$, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are only two cases to consider:
+We start with the simplest possible greedy algorithm, that we call $\textsc{SimpleGreedy}(G)$, to choose $\Delta_0,\ldots,\Delta_{r-1}$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i:=G-X_i$, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are only two cases to consider:
 \begin{compactenum}
     \item If $\deg^+_{G_i}(v_i)\ge 2$ then we set $\Delta_i\gets\{v_i\}$.
-    \item If $\deg^+_{G_i}(v_i)\le 1$ for all $v\in G_i$ then $G_i$ is critical and this is the final step, so $r:=i+1$.  By \cref{base_case}, there exists $\Delta_i\subseteq B_i$ of size at most $|I_i|$ that dominates $I_i$. Then $X_r:=X_{r-1}+\Delta_{i}$ and we are done.
+    \item If $\deg^+_{G_i}(v_i)\le 1$ for all $v\in G_i$ then $G_i$ is critical and this is the final step, so $r:=i+1$.  By \cref{base_case}, there exists $\Delta_i\subseteq B_i$ of size at most $|I_i|$ that dominates $I_i$. Then $X_r:=X_{r-1}\cup\Delta_{i}$ and we are done.
 \end{compactenum}
 
 \begin{thm}\label{simple_greedy}
-  When applied to an $n$-vertex triangulation $G$,  $\textsc{SimpleGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $(4n+6)/7$.
+  When applied to an $n$-vertex triangulation $G$,  $\textsc{SimpleGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $(4n-9)/7$.
 \end{thm}
 
 \begin{proof}
-By the choice of $\Delta_0,\ldots,\Delta_{r-1}$, $X_r$ is an outer-domatic subset of $V(G)$ so, by \cref{outer_domatic}, $X_r$ is a connected dominating set of $G$.  All that remains is to analyze the size of $X_r$.  For each $i\in\{1,\ldots,r\}$, let $D_i:=N_G(X_i)$ be the subset of $V(G)$ that is dominated by $X_i$, let $I_i:=V(G)\setminus D_i$ be the subset of $V(G)$ not dominated by $X_i$, and let $B_i:=N_G(I_i)$ be the vertices of $G$ that have at least one neighbour in each of $X_i$ and $I_i$.  We use the convention that $D_0:=B(G)$.
+By the choice of $\Delta_0,\ldots,\Delta_{r-1}$, $X_r$ is an outer-domatic subset of $V(G)$ so, by \cref{outer_domatic}, $X_r$ is a connected dominating set of $G$.  All that remains is to analyze the size of $X_r$.  For each $i\in\{1,\ldots,r\}$, let $D_i:=N_G[X_i]$ be the subset of $V(G)$ that is dominated by $X_i$, let $I_i:=V(G)\setminus D_i$ be the subset of $V(G)$ not dominated by $X_i$, and let $B_i:=N_G(I_i)$ be the vertices of $G$ that have at least one neighbour in each of $X_i$ and $I_i$.  We use the convention that $D_0:=B(G)$.
 
 First observe that, for $i\in\{0,\ldots,r-2\}$, $|D_{i+1}|\ge |D_i|+\deg_{G_i}^+(v_i)$ since $D_{i+1}\supseteq D_i$ and $D_{i+1}$ contains the $\deg_{G_i}^+(v_i)$ inner neighbours of $v_i$ in $G_i$.  Therefore
 \[
@@ -172,10 +167,10 @@ Since $X_{r-1}$ and $B_{r-1}$ are disjoint and $D_{r-1}\supseteq B_{r-1}\cup X_{
 \end{equation}
 where the last inequality follows from \cref{base_case}.
 
-The final dominating set $X_r$ has size $|X_r| = |X_{r-1}| + \Delta_{r-1} = r - 1 +|I_{r-1}|$, so the size of $|X_r|$ can be upper-bounded by maximizing $r+|I_{r-1}|$ subject to the constraints \cref{c1,c2}.  More precisely, the maximum size of $X_r$ is upper bounded by the maximum value of $x-1+y$ subject to the constraints
+The final dominating set $X_r$ has size $|X_r| = |X_{r-1}| + \Delta_{r-1} = r - 1 +|I_{r-1}|$, so the size of $|X_r|$ can be upper-bounded by maximizing $r-1+|I_{r-1}|$ subject to the constraints \cref{c1,c2}.  More precisely, by setting $x:=r$ and $y:=|I_{r-1}|$, the maximum size of $X_r$ is upper-bounded by the maximum value of $x-1+y$ subject to the constraints
 \begin{align*}
   x - 1 + 4y & \le n \\
-  2x + y +1 & \le n
+  2x + 1 + y & \le n
 \end{align*}
 
 % r\le (n+1-I_{r-1})/2$ and $r+4|I_{r-1}|\le n$.
@@ -193,7 +188,7 @@ Besides the data structure used for representing the triangulation $G$, each ver
 Next we devise an algorithm that produces a smaller connected dominating set than what is guaranteed by $\textsc{SimpleGreedy}(G)$.  This involves a more careful analysis of the cases in which \textsc{SimpleGreedy} is forced to take a vertex $v_i$ with $\deg^+_{G_i}(v_i)=2$.  We begin by identifying unnecessary vertices and edges that can appear in the graphs $G_1,\ldots,G_{r-1}$ during the construction of $X$.   We say that a near-triangulation $H$ is \defin{dom-minimal} if
 \begin{compactenum}[({DM}1)]
     \item each vertex $v\in B(H)$ has $\deg^+_H(v)\ge 1$; and \label{bad_vertex}
-    \item each edge $vw$ on the boundary of the outer face of $G$ is on the boundary an inner face $vwx$ of $H$ for some $x\in I(H)$. \label{bad_edge}
+    \item each edge $vw$ on the boundary of the outer face of $H$ is on the boundary an inner face $vwx$ of $H$ for some $x\in I(H)$. \label{bad_edge}
 \end{compactenum}
 We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each of its biconnected components are dom-minimal.
 
@@ -256,24 +251,24 @@ We say that a generalized near-triangulation $H$ is \defin{good} if
   If $H$ is $2$-connected, let $C:=H$ and let $v_0$ be any vertex of $H$ with inner-degree $2$.
   If $H$ is not $2$-connected, then let $C$ be a biconnected component of $H$ that contains a single cut-vertex $v_0$ of $H$ (so $C$ is a leaf in the block-cut tree of $H$). Then $v_0$ is contained in a second biconnected component $C'\neq C$ of $H$. Since $H$ is dom-minimal, $\deg^+_{C}(v_0)\ge 1$ and $\deg^+_{C'}(v_0)\ge 1$, so $\deg^+_H(v)= 2$.
 
-  Since $C$ is biconnected its outer face is bounded by a cycle $v_0,v_1,v_2,\ldots,v_{k-1}$.  From this point on, all subscripts on $v$ are taken modulo $k$.  If $\deg^+_C(v_1)=1$ then, since $H$ is dom-minimal, the edge $v_0v_1$ is on the boundary of an inner face $v_0v_1x$ with $x\in I(H)$.  Since $v_0$ is the only cut-vertex of $H$ in $C$, $N^+_H(v_1)=N^+_C(v_1)=\{x\}\subseteq N_H(v_0)$ and $\deg^+_H(v_0)=2$, so $H$ is good and there is nothing to prove.  We now assume that $\deg^+_C(v_1)=2$.  By the same reasoning, we may assume that $\deg^+_C(v_i)=2$ for each $i\in\{1,\ldots,k-1\}$.  (Otherwise, $N^+_H(v_i)\subseteq N^+_H(v_{i-1})$ and $\deg^+_H(v_{i-1})=2$ for some $i\in\{2,\ldots,k-1\}$ and $H$ is good.)
+  Since $C$ is biconnected its outer face is bounded by a cycle $v_0,v_1,v_2,\ldots,v_{k-1}$.  If $\deg^+_C(v_1)=1$ then, since $H$ is dom-minimal, the edge $v_0v_1$ is on the boundary of an inner face $v_0v_1x$ with $x\in I(H)$.  Since $v_0$ is the only cut-vertex of $H$ in $C$, $N^+_H(v_1)=N^+_C(v_1)=\{x\}\subseteq N_H(v_0)$ and $\deg^+_H(v_0)=2$, so $H$ is good and there is nothing to prove.  We may therefore  assume that $\deg^+_C(v_1)=2$ and,  by the same reasoning, that $\deg^+_C(v_i)=2$ for each $i\in\{1,\ldots,k-1\}$.  (Otherwise, $N^+_H(v_i)\subseteq N^+_H(v_{i-1})$ and $\deg^+_H(v_{i-1})=2$ for some $i\in\{2,\ldots,k-1\}$ so $H$ is good.)
 
-  To summarize, so far we know that some vertex $x\in I(H)$ is in $N^+_H(v_0)$, $N^+_H(v_1)$, and $N^+_H(v_{k-1})$.  If $k=3$ then, since $H$ is dom-minimal, $H$ contains a face $v_1v_{k-1}y$ with $y\in I(H)$.  Since $\deg^+_H(v_1)=\deg^+_H(v_{k-1})=2$, $y\neq x$ and $N^+_H(v_1)=N^+_H(v_2)=\{x,y\}$. Again, this implies that $H$ is good.
+  To summarize, so far we know that some vertex $x\in I(H)$ is in $N^+_H(v_0)$, $N^+_H(v_1)$, and $N^+_H(v_{k-1})$.  If $k=3$ then, since $H$ is dom-minimal, $H$ contains a face $v_1v_{k-1}y$ with $y\in I(H)$.  Since $\deg^+_H(v_1)=\deg^+_H(v_{k-1})=2$, $y\neq x$ and $N^+_H(v_1)=N^+_H(v_2)=\{x,y\}$. Again, this implies that $H$ is good.  We now assume that $k\ge 4$.
 
-  If $k\ge 4$, then consider the vertex $v_2$. The edge $v_1v_2$ is on the boundary of a face $v_1v_2y$.  Since $\deg^+_H(v_1)=2$, $x\neq y$.  If $N^+_H(v_1)=N^+_H(v_2)=\{x,y\}$ then $v_1$ and $v_2$ satisfy (GM3), so $H$ is good.  Otherwise, consider the graph $H':=H-v_0$.  Then $\deg^+_{H'}(v_1)=1$, $\deg^+_{H'}(v_2)=2$, and $N_{H'}(v_1)\subseteq N_{H'}(v_2)$.   Therefore $G'$ is good, so $G$ contains a vertex $v=v_0$ of inner-degree $2$ such that $G-v$ is good.  This completes the proof.
+  The edge $v_1v_2$ is on the boundary of a face $v_1v_2y$.  Since $\deg^+_H(v_1)=2$, $x\neq y$.  If $N^+_H(v_1)=N^+_H(v_2)=\{x,y\}$ then $v_1$ and $v_2$ satisfy (GM3), so $H$ is good.  Otherwise, consider the graph $H':=H-v_0$.  Then $\deg^+_{H'}(v_1)=1$, $\deg^+_{H'}(v_2)=2$, and $N_{H'}(v_1)\subseteq N_{H'}(v_2)$.   Therefore $G'$ is good, so $G$ contains a vertex $v=v_0$ of inner-degree $2$ such that $G-v$ is good.  This completes the proof.
 \end{proof}
 
 
-This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BetterGreedy}(G)$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i$ be a dom-preserving subgraph of $G-X_i$ that is dom-minimal, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are only two cases to consider:
+This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BetterGreedy}(G)$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i$ be a dom-preserving subgraph of $G-X_i$ that is dom-minimal, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are now four cases to consider:
 \begin{compactenum}
     \item If $\deg^+_{G_i}(v_i)\ge 3$ then we set $\Delta_i\gets\{v_i\}$.
-    \item If there exists distinct $v_i,w\in B(H)$ such that $\deg^+_H(v)=2$ and $N^+_H(w)\subseteq N^+_H(v)$ then set $\Delta_i:=\{v_i\}$.
+    \item If there exists distinct $v_i,w\in B(H)$ such that $\deg^+_H(v_i)=2$ and $N^+_H(w)\subseteq N^+_H(v_i)$ then set $\Delta_i:=\{v_i\}$.
     \item If $\deg^+_{G_i}(v_i)\le 1$ for all $v\in G_i$ then $G_i$ is critical and this is the final step, so $r:=i+1$.  By \cref{base_case}, there exists $\Delta_i\subseteq B_i$ of size at most $|I_i|$ that dominates $I_i$. Then $X_r:=X_{r-1}+\Delta_{i}$ and we are done.
-    \item Otherwise, $G_i$ is not good.  By \cref{not_good}, $G$ contains a vertex $v_i$ such that $G-v_i$ is good.  Set $\Delta_i:=\{v_i\}$.
+    \item Otherwise, $G_i$ is not good.  By \cref{not_good}, $G$ contains a vertex $v_i$ of inner-degree $2$ such that $G-v_i$ is good.  Set $\Delta_i:=\{v_i\}$.
 \end{compactenum}
 
 \begin{thm}\label{better_greedy}
-  When applied to an $n$-vertex triangulation $G$,  $\textsc{BetterGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $10n/19\pm{?}$.
+  When applied to an $n$-vertex triangulation $G$,  $\textsc{BetterGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $7n/13\pm{?}$.
 \end{thm}
 
 \begin{proof}
@@ -298,34 +293,38 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
 
   Here is an approximation of this in Sage:
   \begin{verbatim}
-p = MixedIntegerLinearProgram()
-v = p.new_variable()
-D, I, B, r, n, x2, x3, x4, x5, x12 = v["D"], v["I"], v["B"], v["r"], v["n"], v["x2"], v["x3"], v["x4"], v["x5"], v["x12"]
-N = 1000000000
-p.add_constraint(n <= N)
-p.add_constraint(x2 >= 0)
-p.add_constraint(x3 >= 0)
-p.add_constraint(x4 >= 0)
-p.add_constraint(x5 >= 0)
-p.add_constraint(x12 >= 0)
-p.add_constraint(D + I == n)
-p.add_constraint(D >= 3 + 2*x2 + 3*x3 + 4*x4 + 5*x5 + 2*x12)
-p.add_constraint(r - 1 == x2 + x3 + x4 + x5 + x12)
-p.add_constraint(B <= 3 + x2 + 2*x3 + 3*x4 + 4*x5)
-p.add_constraint(x2 <= (x3 + x4 + x5 + x12 + 1)/2)
-p.add_constraint(D >= r - 1 + B)
-p.add_constraint(B >= 3*I)
-p.set_objective(r - 1 + I)
-ds = p.solve()
-print("n={}, sol={}n, sol-10/19={:.20f}".format(N, ds/N, ds/N - 10/19))
-sol = p.get_values(v)
-print(sol)
+    p = MixedIntegerLinearProgram()
+    v = p.new_variable()
+    D, I, B, r, n, x2, x3, x4, x5, x12 = v["D"],
+      v["I"], v["B"], v["r"], v["n"], v["x2"],
+      v["x3"], v["x4"], v["x5"], v["x12"]
+    N = 1000000000000000
+    p.add_constraint(n <= N)
+    p.add_constraint(x2 >= 0)
+    p.add_constraint(x3 >= 0)
+    p.add_constraint(x4 >= 0)
+    p.add_constraint(x5 >= 0)
+    p.add_constraint(x12 >= 0)
+    p.add_constraint(D + I == n)
+    p.add_constraint(D >= 3 + 2*x2 + 3*x3 + 4*x4 + 5*x5 + 2*x12)
+    p.add_constraint(r - 1 == x2 + x3 + x4 + x5 + x12)
+    p.add_constraint(B <= 3 + x2 + 2*x3 + 3*x4 + 4*x5)
+    p.add_constraint(x2 <= x3 + x4 + x5 + x12 + 1)
+    p.add_constraint(D >= r - 1 + B)
+    p.add_constraint(B >= 3*I)
+    p.set_objective(r - 1 + I)
+    ds = p.solve()
+    print("n={}, sol={}n, sol-7n/13={:.20f}n".format(N, ds/N, ds/N - 7/13))
+    sol = p.get_values(v)
+    print(sol)
   \end{verbatim}
   and we get the output:
   \begin{verbatim}
-      n=1000000000, sol=0.5263157884210526n, sol-10/19=-0.00000000105263153749
-{'D': 947368420.1578947, 'I': 52631579.84210527, 'B': 157894739.5263158, 'r': 473684209.57894737, 'n': 1000000000.0, 'x2': 157894736.5263158, 'x3': -0.0, 'x4': -0.0, 'x5': -0.0, 'x12': 315789472.05263156}
-
+    n=1000000000000000, sol=0.5384615384615375n,
+    sol-7n/13=-0.00000000000000088818n
+    {'D': 923076923076922.2, 'I': 76923076923077.88, 'B': 230769230769233.3,
+     'r': 461538461538460.6, 'n': 1000000000000000.1, 'x2': 230769230769230.3,
+     'x3': -0.0, 'x4': -0.0, 'x5': -0.0, 'x12': 230769230769229.3}
   \end{verbatim}
   %   & = 3 + 2x_2+2z+\sum_{t\ge 3}(t-1)tx_t + x_{\ge 3} \\
   %   & \ge 3 + x_2 + 2z + |B_{r-1}| + x_{\ge3} \\
