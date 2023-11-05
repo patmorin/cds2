@@ -298,7 +298,7 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
     3 + \sum_{t\ge 2} tx_t + 2z + I \le n \label{c_second} \\ 
     3 + \sum_{t\ge 2}(t-1)x_t \ge 3I\label{c_third} \\ 
     x_2 \le \sum_{t\ge 3} x_t + z + 1 \label{c_fourth}
-  \end{align}
+z  \end{align}
   and our goal is to maximize 
   \begin{align}
       \sum_{t\ge 2} x_t + z + I 
@@ -315,6 +315,7 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
      If $x_t = c >0$ then we can set $x_t\gets 0$, $z\gets tc/2$, $B\gets B-2c$, and $I\gets I-2/t$.  This increases the value of \cref{objective2} and still satisfies \cref{c_first,c_second,c_third,c_fourth}.
   \end{clmproof}
   \pat{Continue here....Now everything gets easy...}
+  \newline {\color{cyan} SO: we can prove $x_2 \ge z$. That is $x_2 \in \{z, z+1\}$.}
   
   Here is an approximation of this in Sage:
   \begin{verbatim}
