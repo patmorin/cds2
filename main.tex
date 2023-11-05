@@ -165,7 +165,7 @@ Since $D_{r-1}$ and $I_{r-1}$ partition $V(G)$,
 Since $X_{r-1}$ and $B_{r-1}$ are disjoint and $D_{r-1}\supseteq B_{r-1}\cup X_{r-1}$, we have $|D_{r-1}|\ge |X_{r-1}| + |B_{r-1}|=r-1+|B_{r-1}|$.  Therefore,
 \begin{align}
     n & = |D_{r-1}| + |I_{r-1}| \ge r-1 + |B_{r-1}| + |I_{r-1}| = r-1 + |B_{r-1}| + |I_{r-1}| \notag
-    \\ 
+    \\
     & \ge r - 1 + 4|I_{r-1}| \enspace , \label{c2}
 \end{align}
 where the last inequality follows from \cref{base_case}.
@@ -278,79 +278,67 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
   Let $x_2$ be the number of times $\textsc{BetterGreedy}(G)$ falls into Case~4.
   For each integer $t\ge 3$, let $x_t$ be the number of times $\textsc{BetterGreedy}(G)$ falls into case $1$ and chooses $v_i$ such that $\deg^+_{G_i}(v_i)=t$.  Let $z$ be the number of times $\textsc{BetterGreedy}(G)$ falls into Case~2.  From \cref{not_good}, we know that Case~4 never occurs during two consecutive iterations.  Therefore,
   \begin{equation}
-      x_2 \le \sum_{t\ge 3}x_t + z + 1 \enspace .
+      x_2 \le \sum_{t\ge 3}x_t + z + 1 \enspace .  \label{a1}
   \end{equation}
-  The size of the dominated set $D_{r-1}$ is at least
-  \[
-    |D_{r-1}| \ge 3 + \sum_{t\ge 2}tx_t + 2z
-  \]
-  The size of the boundary $B_{r-1}$ is at most
+  The size of the dominated set $D_{r-1}$ is at least $|D_{r-1}| \ge 3 + \sum_{t\ge 2}tx_t + 2z$.
+  Since $|D_{r-1}|+|I_{r-1}|=n$,
   \begin{equation}
-       |B_{r-1}| \le 3 + \sum_{t\ge 2} (t-1)x_t \\
+   3 + \sum_{t\ge 2}tx_t + 2z + I_{r-1} \le |D_{r-1}| + I_{r-1} \le n  \enspace . \label{a2}
   \end{equation}
-  By definition,
-  \[
-     r-1 = |X_{r-1}| = \sum_{t\ge 2} x_t + z
-  \]
-  As in the previous proof, we combine these constraints with the constraints $n=|D_{r-1}|+|I_{r-1}|$ and $|B_{r-1}|\ge 3|I_{r-1}|$ to get the following collection of inequalities:
-  \begin{align}
-    \sum_{t\ge 2} x_t + z + 4I \le n \label{c_first}\\ 
-    3 + \sum_{t\ge 2} tx_t + 2z + I \le n \label{c_second} \\ 
-    3 + \sum_{t\ge 2}(t-1)x_t \ge 3I\label{c_third} \\ 
-    x_2 \le \sum_{t\ge 3} x_t + z + 1 \label{c_fourth}
-  \end{align}
-  and our goal is to maximize 
-  \begin{align}
-      \sum_{t\ge 2} x_t + z + I 
-      & \le \sum_{t\ge 2} x_t + z + B/3 \notag \\
-      & \le \sum_{t\ge 2} x_t + + z + \tfrac{1}{3}\left(3+ \sum_{t\ge 2}(t-1)x_t\right) \notag \\
-      & = \tfrac{2}{3}\sum_{t\ge 2} x_t + z + 1 + \tfrac{1}{3}\sum_{t\ge 2}tx_t
-      \label{objective2}
-  \end{align} 
+  The of the boundary $B_{r-1}$ is at most $|B_{r-1}|\le 3+\sum_{t\ge 2}(t-1)x_t$.
+  By \cref{base_case},
+  \begin{equation}
+    3+\sum_{t\ge 2}(t-1)x_t \ge |B_{r-1}| \ge 3|I_{r-1}| \label{a3}
+  \end{equation}
+  The size of the final set $X_{r}$ is
+  \begin{equation}
+    |X_r| = \sum_{t\ge 2}x_t + z + |I_{r-1}| \enspace . \label{objective2}
+  \end{equation}
   The unbounded number of variables $x_t$, $t\ge 2$ is problematic. We resolve this with the following claim:
   \begin{clm}
-    In any assignment of $I$, $B$, and $x_t$, $t\ge 2$ that maximizes \cref{objective2} subject to \cref{c_first,c_second,c_third,c_fourth}, $x_t=0$ for each $t\ge 3$.
+    In any assignment of non-negative values to $|I_{r-1}|$, $z$, and $x_2,x_3,\ldots$ that maximizes \cref{objective2} subject to \cref{a1,a2,a3}, $x_t=0$ for each $t\ge 3$.
   \end{clm}
   \begin{clmproof}
-     If $x_t = c >0$ then we can set $x_t\gets 0$, $z\gets tc/2$, $B\gets B-2c$, and $I\gets I-2/t$.  This increases the value of \cref{objective2} and still satisfies \cref{c_first,c_second,c_third,c_fourth}.
+     If $x_t = c >0$ for some $t\ge 3$, then we can set $x_t\gets 0$, $z\gets z+tc/2$, and $|I_{r-1}|\gets |I_{r-1}|-(t-1)c/3$.  This increases the value of \cref{objective2} by $tc/2-(t-1)c/3 =(t+2)c/6>0$.  The new values still satisfy \cref{a1} because the right hand side of \cref{a1} increases and the left hand side is unchanged.  The new values still satisfy \cref{a2} because the left hand side of \cref{a2} changes by $tc - 2tc/2 = 0$.  The new values still satisfy \cref{a3} because the left and right hand sides of \cref{a3} each decrease by $(t-1)c$.
   \end{clmproof}
-  \pat{Continue here....Now everything gets easy...}
-  
-  Here is an approximation of this in Sage:
-  \begin{verbatim}
-    p = MixedIntegerLinearProgram()
-    v = p.new_variable()
-    D, I, B, r, n, x2, x3, x4, x5, x12 = v["D"],
-      v["I"], v["B"], v["r"], v["n"], v["x2"],
-      v["x3"], v["x4"], v["x5"], v["x12"]
-    N = 1000000000000000
-    p.add_constraint(n <= N)
-    p.add_constraint(x2 >= 0)
-    p.add_constraint(x3 >= 0)
-    p.add_constraint(x4 >= 0)
-    p.add_constraint(x5 >= 0)
-    p.add_constraint(x12 >= 0)
-    p.add_constraint(D + I == n)
-    p.add_constraint(D >= 3 + 2*x2 + 3*x3 + 4*x4 + 5*x5 + 2*x12)
-    p.add_constraint(r - 1 == x2 + x3 + x4 + x5 + x12)
-    p.add_constraint(B <= 3 + x2 + 2*x3 + 3*x4 + 4*x5)
-    p.add_constraint(x2 <= x3 + x4 + x5 + x12 + 1)
-    p.add_constraint(D >= r - 1 + B)
-    p.add_constraint(B >= 3*I)
-    p.set_objective(r - 1 + I)
-    ds = p.solve()
-    print("n={}, sol={}n, sol-7n/13={:.20f}n".format(N, ds/N, ds/N - 7/13))
-    sol = p.get_values(v)
-    print(sol)
-  \end{verbatim}
-  and we get the output:
-  \begin{verbatim}
-    n=1000000000000000, sol=0.5384615384615375n,
-    sol-7n/13=-0.00000000000000088818n
-    {'D': 923076923076922.2, 'I': 76923076923077.88, 'B': 230769230769233.3,
-     'r': 461538461538460.6, 'n': 1000000000000000.1, 'x2': 230769230769230.3,
-     'x3': -0.0, 'x4': -0.0, 'x5': -0.0, 'x12': 230769230769229.3}
-  \end{verbatim}
+  Therefore, \cref{a1,a2,a3} are three inequalities in three non-negative variables $x_2$, $z$, and $|I_{r-1}|$.  Again, this is an easy linear programming exercise that gives $x_2:=(3n-6)/13$, $z=(3n-19)/13$ and $I_{r-1}=(n+11)/13$.  \url{https://www.wolframalpha.com/input?i=solve%28%7Bx%3Dz%2B1%2C+3%2B2*x%2B2*z%2By%3Dn%2C+3%2Bx%3D3*y%7D%29+}....
+  % \pat{Continue here....Now everything gets easy...}
+
+  % Here is an approximation of this in Sage:
+  % \begin{verbatim}
+  %   p = MixedIntegerLinearProgram()
+  %   v = p.new_variable()
+  %   D, I, B, r, n, x2, x3, x4, x5, x12 = v["D"],
+  %     v["I"], v["B"], v["r"], v["n"], v["x2"],
+  %     v["x3"], v["x4"], v["x5"], v["x12"]
+  %   N = 1000000000000000
+  %   p.add_constraint(n <= N)
+  %   p.add_constraint(x2 >= 0)
+  %   p.add_constraint(x3 >= 0)
+  %   p.add_constraint(x4 >= 0)
+  %   p.add_constraint(x5 >= 0)
+  %   p.add_constraint(x12 >= 0)
+  %   p.add_constraint(D + I == n)
+  %   p.add_constraint(D >= 3 + 2*x2 + 3*x3 + 4*x4 + 5*x5 + 2*x12)
+  %   p.add_constraint(r - 1 == x2 + x3 + x4 + x5 + x12)
+  %   p.add_constraint(B <= 3 + x2 + 2*x3 + 3*x4 + 4*x5)
+  %   p.add_constraint(x2 <= x3 + x4 + x5 + x12 + 1)
+  %   p.add_constraint(D >= r - 1 + B)
+  %   p.add_constraint(B >= 3*I)
+  %   p.set_objective(r - 1 + I)
+  %   ds = p.solve()
+  %   print("n={}, sol={}n, sol-7n/13={:.20f}n".format(N, ds/N, ds/N - 7/13))
+  %   sol = p.get_values(v)
+  %   print(sol)
+  % \end{verbatim}
+  % and we get the output:
+  % \begin{verbatim}
+  %   n=1000000000000000, sol=0.5384615384615375n,
+  %   sol-7n/13=-0.00000000000000088818n
+  %   {'D': 923076923076922.2, 'I': 76923076923077.88, 'B': 230769230769233.3,
+  %    'r': 461538461538460.6, 'n': 1000000000000000.1, 'x2': 230769230769230.3,
+  %    'x3': -0.0, 'x4': -0.0, 'x5': -0.0, 'x12': 230769230769229.3}
+  % \end{verbatim}
   %   & = 3 + 2x_2+2z+\sum_{t\ge 3}(t-1)tx_t + x_{\ge 3} \\
   %   & \ge 3 + x_2 + 2z + |B_{r-1}| + x_{\ge3} \\
   %   & \ge 3 + x_2 + 2z + |B_{r-1}| + x_{\ge3} \\
@@ -393,7 +381,7 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
   % \[
   %    3 + \sum_{t\ge 2} tx_t + |I_{r-1}| \le n
   % \]
-  Now we just need to solve the actual LP by hand to get a rigorous proof.  This is a little bit annoying because we have infinitely many variables $x_t$, $t\ge 2$, but $x_t$ seems to be redundant for all $t\ge 3$. \pat{If someone is good at linear algebra, this would be really helpful.}
+  % Now we just need to solve the actual LP by hand to get a rigorous proof.  This is a little bit annoying because we have infinitely many variables $x_t$, $t\ge 2$, but $x_t$ seems to be redundant for all $t\ge 3$. \pat{If someone is good at linear algebra, this would be really helpful.}
 \end{proof}
 
 \bibliographystyle{plainurl}
