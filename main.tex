@@ -23,6 +23,8 @@
 
 \newtheorem{thm}{Theorem}
 \newtheorem{obs}{Observation}
+\newtheorem{clm}{Claim}
+\newenvironment{clmproof}{\noindent\emph{Proof of Claim:}}{\hfill$\triangle$\par}
 \newtheorem{lem}{Lemma}
 
 \DeclareMathOperator{\dist}{d}
@@ -58,14 +60,14 @@ A set $X$ of vertices in a graph $G$ is a \defin{dominating set} if each vertex 
 The main result in this paper is the following:
 
 \begin{thm}\label{main_result2}
-  For any $n\ge 4$, any $n$-vertex triangulation $G$ has a connected dominating set of size at most $7n/13 + O(1)$.
+  For any $n\ge 4$, any $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $7n/13 + O(1)$ and there exists an algorithm that finds $X$ in linear time.
 \end{thm}
 
 \subsection{Related Work}
 
 Dominating sets in graphs is an enormous field of research, with several books  devoted to the topic \cite{haynes.hedetniemi.ea:domination,haynes.hedetniemi.ea:topics}.
 
-\pat{Expand.  Explain how Kleitman-West result gives $3n/4$.  Explain how Matheson-Tarjan gives $2n/3$.}
+\pat{Expand.  Explain how Kleitman-West result gives $3n/4$.  Explain how Matheson-Tarjan gives $2n/3$.  Talk about connected dominating sets in unit disk graphs.}
 
 
 % \begin{thm}\label{main_result}
@@ -161,13 +163,14 @@ Since $D_{r-1}$ and $I_{r-1}$ partition $V(G)$,
 % \end{equation}
 
 Since $X_{r-1}$ and $B_{r-1}$ are disjoint and $D_{r-1}\supseteq B_{r-1}\cup X_{r-1}$, we have $|D_{r-1}|\ge |X_{r-1}| + |B_{r-1}|=r-1+|B_{r-1}|$.  Therefore,
-\begin{equation}
-    n = |D_{r-1}| + |I_{r-1}| \ge r-1 + |B_{r-1}| + |I_{r-1}| = r-1 + |B_{r-1}| + |I_{r-1}|
-    \ge r - 1 + 4|I_{r-1}| \enspace , \label{c2}
-\end{equation}
+\begin{align}
+    n & = |D_{r-1}| + |I_{r-1}| \ge r-1 + |B_{r-1}| + |I_{r-1}| = r-1 + |B_{r-1}| + |I_{r-1}| \notag
+    \\ 
+    & \ge r - 1 + 4|I_{r-1}| \enspace , \label{c2}
+\end{align}
 where the last inequality follows from \cref{base_case}.
 
-The final dominating set $X_r$ has size $|X_r| = |X_{r-1}| + \Delta_{r-1} = r - 1 +|I_{r-1}|$, so the size of $|X_r|$ can be upper-bounded by maximizing $r-1+|I_{r-1}|$ subject to the constraints \cref{c1,c2}.  More precisely, by setting $x:=r$ and $y:=|I_{r-1}|$, the maximum size of $X_r$ is upper-bounded by the maximum value of $x-1+y$ subject to the constraints
+The final dominating set $X_r$ has size $|X_r| = |X_{r-1}| + \Delta_{r-1} = r - 1 +|I_{r-1}|$, so the size of $|X_r|$ can be upper-bounded by maximizing $r-1+|I_{r-1}|$ subject to \cref{c1,c2}.  More precisely, by setting $x:=r$ and $y:=|I_{r-1}|$, the maximum size of $X_r$ is upper-bounded by the maximum value of $x-1+y$ subject to the constraints
 \begin{align*}
   x - 1 + 4y & \le n \\
   2x + 1 + y & \le n
@@ -273,9 +276,9 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
 
 \begin{proof}
   Let $x_2$ be the number of times $\textsc{BetterGreedy}(G)$ falls into Case~4.
-  For each integer $t\ge 3$, let $x_t$ be the number of times $\textsc{BetterGreedy}(G)$ falls into case $1$ and chooses $v_i$ such that $\deg^+_{G_i}(v_i)=t$.  Let $z$ be the number of times $\textsc{BetterGreedy}(G)$ falls into Case~2.  From \cref{not_good}, we know that
+  For each integer $t\ge 3$, let $x_t$ be the number of times $\textsc{BetterGreedy}(G)$ falls into case $1$ and chooses $v_i$ such that $\deg^+_{G_i}(v_i)=t$.  Let $z$ be the number of times $\textsc{BetterGreedy}(G)$ falls into Case~2.  From \cref{not_good}, we know that Case~4 never occurs during two consecutive iterations.  Therefore,
   \begin{equation}
-      x_2 \le \sum_{t\ge 3}x_t + z \enspace .
+      x_2 \le \sum_{t\ge 3}x_t + z + 1 \enspace .
   \end{equation}
   The size of the dominated set $D_{r-1}$ is at least
   \[
@@ -289,8 +292,30 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
   \[
      r-1 = |X_{r-1}| = \sum_{t\ge 2} x_t + z
   \]
-  As in the previous proof, we combine these constraints with the constraints $n=|D_{r-1}|+|I_{r-1}|$,  $|D_{r-1}|\ge r-1+|B_{r-1}|$ and $|D_{r-1}|\ge r-1+3|I_{r-1}|$.
-
+  As in the previous proof, we combine these constraints with the constraints $n=|D_{r-1}|+|I_{r-1}|$ and $|B_{r-1}|\ge 3|I_{r-1}|$ to get the following collection of inequalities:
+  \begin{align}
+    \sum_{t\ge 2} x_t + z + 4I \le n \label{c_first}\\ 
+    3 + \sum_{t\ge 2} tx_t + 2z + I \le n \label{c_second} \\ 
+    3 + \sum_{t\ge 2}(t-1)x_t \ge 3I\label{c_third} \\ 
+    x_2 \le \sum_{t\ge 3} x_t + z + 1 \label{c_fourth}
+  \end{align}
+  and our goal is to maximize 
+  \begin{align}
+      \sum_{t\ge 2} x_t + z + I 
+      & \le \sum_{t\ge 2} x_t + z + B/3 \notag \\
+      & \le \sum_{t\ge 2} x_t + + z + \tfrac{1}{3}\left(3+ \sum_{t\ge 2}(t-1)x_t\right) \notag \\
+      & = \tfrac{2}{3}\sum_{t\ge 2} x_t + z + 1 + \tfrac{1}{3}\sum_{t\ge 2}tx_t
+      \label{objective2}
+  \end{align} 
+  The unbounded number of variables $x_t$, $t\ge 2$ is problematic. We resolve this with the following claim:
+  \begin{clm}
+    In any assignment of $I$, $B$, and $x_t$, $t\ge 2$ that maximizes \cref{objective2} subject to \cref{c_first,c_second,c_third,c_fourth}, $x_t=0$ for each $t\ge 3$.
+  \end{clm}
+  \begin{clmproof}
+     If $x_t = c >0$ then we can set $x_t\gets 0$, $z\gets tc/2$, $B\gets B-2c$, and $I\gets I-2/t$.  This increases the value of \cref{objective2} and still satisfies \cref{c_first,c_second,c_third,c_fourth}.
+  \end{clmproof}
+  \pat{Continue here....Now everything gets easy...}
+  
   Here is an approximation of this in Sage:
   \begin{verbatim}
     p = MixedIntegerLinearProgram()
@@ -368,7 +393,7 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
   % \[
   %    3 + \sum_{t\ge 2} tx_t + |I_{r-1}| \le n
   % \]
-  Now we just need to solve the actual LP by hand to get a rigorous proof.  This is a little bit annoying because we have infinitely many variables $x_t$, $t\ge 2$, but $x_t$ seems to be redundant for all $t\ge 3$.
+  Now we just need to solve the actual LP by hand to get a rigorous proof.  This is a little bit annoying because we have infinitely many variables $x_t$, $t\ge 2$, but $x_t$ seems to be redundant for all $t\ge 3$. \pat{If someone is good at linear algebra, this would be really helpful.}
 \end{proof}
 
 \bibliographystyle{plainurl}
