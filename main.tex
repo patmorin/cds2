@@ -311,11 +311,11 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
 
 \section{Better Still?}
 
-I think we can probably do even better than \cref{main_result2}. If we look at the proof of \cref{not_good}, there are only two case in which $H$ is not good and we have to remove a vertex $v$.
+I think we can probably do even better than \cref{main_result2}. If we look at the proof of \cref{not_good}, there are only two case in which $H$ is not good and we have to remove a vertex $v$ to get a good graph.
 \begin{compactenum}
-  \item When $H$ is biconnected,  In this case, we should look at the graph $H-B(H)$.  If this graph has a vertex $w$ of inner-degree $2$ or more than we can remove a vertex $v\in B(H)$ so that the inner-degree of $w$ in $H-v$ is at least $3$ (and $w$ is also adjacent to a vertex of inner-degree $1$). Otherwise, the graph $H-B(H)$ is critical and we should be able to do something with it.
+  \item When $H$ is biconnected.  In this case, we should look at the graph $H-B(H)$.  If this graph has a vertex $w$ of inner-degree $2$ or more than we can remove a neighbour $v\in B(H)$ of $w$ so that the inner-degree of $w$ in $H-v$ is at least $3$ (and $w$ is also adjacent to a vertex of inner-degree $1$). Otherwise, the graph $H-B(H)$ is critical and we should be able to do something with it.
 
-  \item When $H$ has a cut-vertex $v_0$ and we focus on a biconnected component $C$ that contains $v_0$ and no other cut vertices.  In this case we're only forced to take a degree-$2$ vertex $v_0$ when $C$ has at least four vertices on its boundary and all of them, except $v_0$ have inner-degree $2$.  
+  \item When $H$ has a cut-vertex $v_0$ and we focus on a biconnected component $C$ that contains $v_0$ and no other cut vertices.  In this case we're only forced to take a degree-$2$ vertex $v_0$ when $C$ has at least four vertices on its boundary and all of them, except $v_0$ have inner-degree $2$.  In this case, we should also focus on $C-B(C)$ and look for a vertex of inner-degree at least $2$, as in the previous case.
 \end{compactenum}
 \bibliographystyle{plainurl}
 \bibliography{main}
