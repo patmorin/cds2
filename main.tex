@@ -313,9 +313,11 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
 
 I think we can probably do even better than \cref{main_result2}. If we look at the proof of \cref{not_good}, there are only two case in which $H$ is not good and we have to remove a vertex $v$ to get a good graph.
 \begin{compactenum}
-  \item When $H$ is biconnected.  In this case, we should look at the graph $H-B(H)$.  If this graph has a vertex $w$ of inner-degree $2$ or more than we can remove a neighbour $v\in B(H)$ of $w$ so that the inner-degree of $w$ in $H-v$ is at least $3$ (and $w$ is also adjacent to a vertex of inner-degree $1$). Otherwise, the graph $H-B(H)$ is critical and we should be able to do something with it.
+  \item When $H$ is biconnected.  The only time we have to remove a vertex to get a good graph is when all vertices in $B(H)$ have inner-degree $2$.  In this case, we should look at the graph $H':=H-B(H)$.  If $H'$ has a vertex $w$ of inner-degree $2$ or more then we can remove a neighbour $v\in B(H)$ of $w$ so that the inner-degree of $w$ in $H-v$ is at least $3$ (and $w$ is also adjacent to a vertex of inner-degree $1$).
 
-  \item When $H$ has a cut-vertex $v_0$ and we focus on a biconnected component $C$ that contains $v_0$ and no other cut vertices.  In this case we're only forced to take a degree-$2$ vertex $v_0$ when $C$ has at least four vertices on its boundary and all of them, except $v_0$ have inner-degree $2$.  In this case, we should also focus on $C-B(C)$ and look for a vertex of inner-degree at least $2$, as in the previous case.
+  Otherwise, the graph $H'$ is critical. In this case we use the fact that, since everyone in $B(H)$ has inner-degree $2$, $|B(H)|=|B(H')|$.  We use \cref{base_case} to find a subset $X'$ of $B(H')$ that dominates $H'$ and then, for each $x\in X'$ we choose a neighbour of $x$ in $B(H)$.  This gives a set whose size is at most $\tfrac{2}{3}|B(H')| \le \tfrac{1}{3}|H|$.
+
+  \item When $H$ has a cut-vertex $v_0$ and we focus on a biconnected component $C$ that contains $v_0$ and no other cut vertices.  In this case we're only forced to take a degree-$2$ vertex $v_0$ when $C$ has at least four vertices on its boundary and all of them, except $v_0$ have inner-degree $2$.  In this case, we should also focus on $C-B(C)$ and look for a vertex of inner-degree at least $2$, as in the previous case.  If we don't find one, we proceed the same way as before, but we're even in better shape because $|B(H)|=|B(H')|+1$
 \end{compactenum}
 \bibliographystyle{plainurl}
 \bibliography{main}
