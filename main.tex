@@ -24,7 +24,7 @@
 \newtheorem{thm}{Theorem}
 \newtheorem{obs}{Observation}
 \newtheorem{clm}{Claim}
-\newenvironment{clmproof}{\noindent\emph{Proof of Claim:}}{\hfill$\triangle$\par}
+\newenvironment{clmproof}{\noindent\emph{Proof of Claim:}}{\hfill$\blacksquare$\par}
 \newtheorem{lem}{Lemma}
 
 \DeclareMathOperator{\dist}{d}
@@ -60,7 +60,7 @@ A set $X$ of vertices in a graph $G$ is a \defin{dominating set} if each vertex 
 The main result in this paper is the following:
 
 \begin{thm}\label{main_result2}
-  For any $n\ge 4$, any $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $7n/13 + O(1)$ and there exists an algorithm that finds $X$ in linear time.
+  For any $n\ge 4$, any $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $(7n-14)/13$ and there exists an algorithm that finds $X$ in linear time.
 \end{thm}
 
 \subsection{Related Work}
@@ -271,7 +271,7 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
 \end{compactenum}
 
 \begin{thm}\label{better_greedy}
-  When applied to an $n$-vertex triangulation $G$,  $\textsc{BetterGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $7n/13\pm{?}$.
+  When applied to an $n$-vertex triangulation $G$,  $\textsc{BetterGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $(7n-14)/13$.
 \end{thm}
 
 \begin{proof}
@@ -301,87 +301,7 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
   \begin{clmproof}
      If $x_t = c >0$ for some $t\ge 3$, then we can set $x_t\gets 0$, $z\gets z+tc/2$, and $|I_{r-1}|\gets |I_{r-1}|-(t-1)c/3$.  This increases the value of \cref{objective2} by $tc/2-(t-1)c/3 =(t+2)c/6>0$.  The new values still satisfy \cref{a1} because the right hand side of \cref{a1} increases and the left hand side is unchanged.  The new values still satisfy \cref{a2} because the left hand side of \cref{a2} changes by $tc - 2tc/2 = 0$.  The new values still satisfy \cref{a3} because the left and right hand sides of \cref{a3} each decrease by $(t-1)c$.
   \end{clmproof}
-  Therefore, \cref{a1,a2,a3} are three inequalities in three non-negative variables $x_2$, $z$, and $|I_{r-1}|$.  Again, this is an easy linear programming exercise that gives $x_2:=(3n-6)/13$, $z=(3n-19)/13$ and $I_{r-1}=(n+11)/13$.  \url{https://www.wolframalpha.com/input?i=solve%28%7Bx%3Dz%2B1%2C+3%2B2*x%2B2*z%2By%3Dn%2C+3%2Bx%3D3*y%7D%29+}....
-  % \pat{Continue here....Now everything gets easy...}
-
-  % Here is an approximation of this in Sage:
-  % \begin{verbatim}
-  %   p = MixedIntegerLinearProgram()
-  %   v = p.new_variable()
-  %   D, I, B, r, n, x2, x3, x4, x5, x12 = v["D"],
-  %     v["I"], v["B"], v["r"], v["n"], v["x2"],
-  %     v["x3"], v["x4"], v["x5"], v["x12"]
-  %   N = 1000000000000000
-  %   p.add_constraint(n <= N)
-  %   p.add_constraint(x2 >= 0)
-  %   p.add_constraint(x3 >= 0)
-  %   p.add_constraint(x4 >= 0)
-  %   p.add_constraint(x5 >= 0)
-  %   p.add_constraint(x12 >= 0)
-  %   p.add_constraint(D + I == n)
-  %   p.add_constraint(D >= 3 + 2*x2 + 3*x3 + 4*x4 + 5*x5 + 2*x12)
-  %   p.add_constraint(r - 1 == x2 + x3 + x4 + x5 + x12)
-  %   p.add_constraint(B <= 3 + x2 + 2*x3 + 3*x4 + 4*x5)
-  %   p.add_constraint(x2 <= x3 + x4 + x5 + x12 + 1)
-  %   p.add_constraint(D >= r - 1 + B)
-  %   p.add_constraint(B >= 3*I)
-  %   p.set_objective(r - 1 + I)
-  %   ds = p.solve()
-  %   print("n={}, sol={}n, sol-7n/13={:.20f}n".format(N, ds/N, ds/N - 7/13))
-  %   sol = p.get_values(v)
-  %   print(sol)
-  % \end{verbatim}
-  % and we get the output:
-  % \begin{verbatim}
-  %   n=1000000000000000, sol=0.5384615384615375n,
-  %   sol-7n/13=-0.00000000000000088818n
-  %   {'D': 923076923076922.2, 'I': 76923076923077.88, 'B': 230769230769233.3,
-  %    'r': 461538461538460.6, 'n': 1000000000000000.1, 'x2': 230769230769230.3,
-  %    'x3': -0.0, 'x4': -0.0, 'x5': -0.0, 'x12': 230769230769229.3}
-  % \end{verbatim}
-  %   & = 3 + 2x_2+2z+\sum_{t\ge 3}(t-1)tx_t + x_{\ge 3} \\
-  %   & \ge 3 + x_2 + 2z + |B_{r-1}| + x_{\ge3} \\
-  %   & \ge 3 + x_2 + 2z + |B_{r-1}| + x_{\ge3} \\
-  %   % & \ge 3 + 2x_2 + 2z + 3|I_{r-1}| + x_{\ge3} \\
-  %   % & \ge 3 + 2x_2 + 2z + \sum_{t\ge 3}2x_t + x_{\ge3} \\
-  %   % & = 1 + 2(x_2+ z+x_{\ge 3}) + x_{\ge3} \\
-  %   % & \ge 3 + 2(x_2+z)+3x_{\ge 3}  \\
-  %   % & = 3 + 2(x_2+z)+3(r-1-x_2-z) & \text{(since $x_{\ge 2}+z=r-1$)} \\
-  %   % & = 3r - x_2 - z  \\
-  %   % & \ge 3r - r/2 - z  & \text{(since $x_2\le r/2$)}\\
-  %   % & \ge 5r/2 - z  & \text{(since $x_2\le r/2$)}\\
-  %   % \enspace .
-  % \end{align*}
-  % Since $|D_{r-1}|+|I_{r-1}|=n$, this gives
-  % \begin{equation}
-  %   3 + 2x_2 + 2z + \sum_{t\ge 3}tx_t + |I_{r-1}| \le n
-  % \end{equation}
-  % By definition,
-  % \[
-  %    r-1 = |X_{r-1}| = x_2 + \sum_{t\ge 3} x_t + z
-  % \]
-  % As before, we have
-  % \[
-  %    |B_{r-1}| \ge 3|I_{r-1}|
-  % \]
-  % but now we also have
-  % \begin{align*}
-  %    |B_{r-1}| & \le 3 + \sum_{t\ge 2} (t-1)x_t \\
-  %    & = 3 + \sum_{t\ge 2} tx_t - (r-1) \\
-  %    & = 3 + \sum_{t\ge 2} tx_t - (r-1) \\
-  %    & \le |D_{r-1}| - 2z -(r-1)
-  %    \enspace .
-  % \end{align*}
-  % Therefore,
-  % \[
-  % 3|I_{r-1}| \le |B_{r-1}| \le 3 + \sum_{t\ge 2} (t-1)x_t
-  % = -r+4 + \sum_{t\ge 2} tx_t
-  % \]
-  % Since $|D_{r-1}|\ge |X_{r-1}|+|B_{r-1}|=r-1+|B_{r-1}|$ the identity $|D_{r-1}|+|I_{r-1}|=n$ gives
-  % \[
-  %    3 + \sum_{t\ge 2} tx_t + |I_{r-1}| \le n
-  % \]
-  % Now we just need to solve the actual LP by hand to get a rigorous proof.  This is a little bit annoying because we have infinitely many variables $x_t$, $t\ge 2$, but $x_t$ seems to be redundant for all $t\ge 3$. \pat{If someone is good at linear algebra, this would be really helpful.}
+  Therefore, \cref{a1,a2,a3} are three inequalities in three non-negative variables $x_2$, $z$, and $|I_{r-1}|$.  Maximizing \cref{objective2} subject to these constraints is an easy linear programming exercise that gives $x_2:=(3n-6)/13$, $z=(3n-19)/13$ and $I_{r-1}=(n+11)/13$, which gives $|X_r|= (7n+8)/13$.
 \end{proof}
 
 \bibliographystyle{plainurl}
