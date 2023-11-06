@@ -195,7 +195,7 @@ Next we devise an algorithm that produces a smaller connected dominating set tha
 \end{compactenum}
 We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each of its biconnected components are dom-minimal.
 
-\begin{obs}
+\begin{obs}\label{bridgeless}
     Any dom-minimal generalized near-triangulation $H$ is bridgeless.
 \end{obs}
 
@@ -249,16 +249,21 @@ We say that a generalized near-triangulation $H$ is \defin{good} if
 \end{lem}
 
 \begin{proof}
-  Since $H$ is dom-minimal, each vertex in $B(H)$ has inner-degree greater than $0$.  If some vertex in $B(H)$ has inner-degree at least $3$ then $H$ is good and there is nothing to prove, so we may assume that each vertex in $B(H)$ has inner-degree $1$ or $2$.  Since $H$ is not critical, at least one vertex in $B(H)$ has inner-degree $2$.
+  Since $H$ is dom-minimal, each vertex in $B(H)$ has inner-degree greater than $0$.  If some vertex in $B(H)$ has inner-degree at least $3$ then $H$ is good and there is nothing to prove, so we may assume that each vertex in $B(H)$ has inner-degree $1$ or $2$.  Since $H$ is not critical, at least one vertex in $B(H)$ has inner-degree $2$.  We distinguish between two cases, depending on whether $H$ is biconnected.
 
-  If $H$ is $2$-connected, let $C:=H$ and let $v_0$ be any vertex of $H$ with inner-degree $2$.
-  If $H$ is not $2$-connected, then let $C$ be a biconnected component of $H$ that contains a single cut-vertex $v_0$ of $H$ (so $C$ is a leaf in the block-cut tree of $H$). Then $v_0$ is contained in a second biconnected component $C'\neq C$ of $H$. Since $H$ is dom-minimal, $\deg^+_{C}(v_0)\ge 1$ and $\deg^+_{C'}(v_0)\ge 1$, so $\deg^+_H(v)= 2$.
+  \pat{Updated here. The case where $H$ is biconnected needs a separate argument when $k=3$.}
+  If $H$ is biconnected then, since $H$ is bridgeless (by \cref{bridgeless}) the outer face of $C$ is a cycle $v_0,\ldots,v_{k-1}$ with $k\ge 3$. If there exists an edge $v_iv_{i+1}$ of this cycle with $\deg^+_H(v_i)=2$ and $\deg^+_H(v_{i+1})=1$ then $N_H^+(v_{i+1})\subset N_H^+(v_i)$ and $H$ is good, so we may assume that $\deg^+_H(v_i)=2$ for all $i\in\{0,\ldots,k-1\}$.
+  Let $v_i$ be a vertex in $B(H)$ such that $N_H(v_i)=N_H^+(v_i)\cup\{v_{i-1},v_{i+1}\}$.  Without loss of generality, assume $i=0$. Now consider the graph $H'=H-v_0$.  This graph contains two vertices, namely $v_{1}$ and $v_{k-1}$ with inner-degree $1$.  If $k\ge 4$, then $H'$ is good, because $\deg_{H'}^+(v_2)=2$ and $N^+_{H'}(v_1)\subseteq N^+_{H'}(v_2)$.  Otherwise, the outer face of $H'$ is a $4$-cycle $x_1,x_2,v_1,v_2$ and $N_H^+(v_1)\subseteq N_H^+(x_2)$ and $N_H^+(v_2)\subseteq N_H^+(x_1)$.  If $\deg^+_H(x_2)\ge 2$ or $\deg^+_H(x_1)\ge 2$ then $H'$ is good.  Otherwise all vertices in $B(H')$ have inner-degree at most $1$ in $H'$, so $H'$ is also good. Therefore $H$ contains a vertex $v:=v_0$ such that $H-v$ is good, as required.
 
-  Since $C$ is biconnected its outer face is bounded by a cycle $v_0,v_1,v_2,\ldots,v_{k-1}$.  If $\deg^+_C(v_1)=1$ then, since $H$ is dom-minimal, the edge $v_0v_1$ is on the boundary of an inner face $v_0v_1x$ with $x\in I(H)$.  Since $v_0$ is the only cut-vertex of $H$ in $C$, $N^+_H(v_1)=N^+_C(v_1)=\{x\}\subseteq N_H(v_0)$ and $\deg^+_H(v_0)=2$, so $H$ is good and there is nothing to prove.  We may therefore  assume that $\deg^+_C(v_1)=2$ and,  by the same reasoning, that $\deg^+_C(v_i)=2$ for each $i\in\{1,\ldots,k-1\}$.  (Otherwise, $N^+_H(v_i)\subseteq N^+_H(v_{i-1})$ and $\deg^+_H(v_{i-1})=2$ for some $i\in\{2,\ldots,k-1\}$ so $H$ is good.)
+
+
+  If $H$ is not biconnected, then let $C$ be a biconnected component of $H$ that contains a single cut-vertex $v_0$ of $H$ (so $C$ is a leaf in the block-cut tree of $H$). Then $v_0$ is contained in a second biconnected component $C'\neq C$ of $H$. Since $H$ is dom-minimal, $\deg^+_{C}(v_0)\ge 1$ and $\deg^+_{C'}(v_0)\ge 1$, so $\deg^+_H(v)= 2$.
+
+  Since $C$ is biconnected, its outer face is bounded by a cycle $v_0,v_1,v_2,\ldots,v_{k-1}$.  If $\deg^+_C(v_1)=1$ then, since $H$ is dom-minimal, the edge $v_0v_1$ is on the boundary of an inner face $v_0v_1x$ with $x\in I(H)$.  Since $v_0$ is the only cut-vertex of $H$ in $C$, $N^+_H(v_1)=N^+_C(v_1)=\{x\}\subseteq N_H(v_0)$ and $\deg^+_H(v_0)=2$, so $H$ is good and there is nothing to prove.  We may therefore  assume that $\deg^+_C(v_1)=2$ and,  by the same reasoning, that $\deg^+_C(v_i)=2$ for each $i\in\{1,\ldots,k-1\}$.  (Otherwise, $N^+_H(v_i)\subseteq N^+_H(v_{i-1})$ and $\deg^+_H(v_{i-1})=2$ for some $i\in\{2,\ldots,k-1\}$ so $H$ is good.)
 
   To summarize, so far we know that some vertex $x\in I(H)$ is in $N^+_H(v_0)$, $N^+_H(v_1)$, and $N^+_H(v_{k-1})$.  If $k=3$ then, since $H$ is dom-minimal, $H$ contains a face $v_1v_{k-1}y$ with $y\in I(H)$.  Since $\deg^+_H(v_1)=\deg^+_H(v_{k-1})=2$, $y\neq x$ and $N^+_H(v_1)=N^+_H(v_2)=\{x,y\}$. Again, this implies that $H$ is good.  We now assume that $k\ge 4$.
 
-  The edge $v_1v_2$ is on the boundary of a face $v_1v_2y$.  Since $\deg^+_H(v_1)=2$, $x\neq y$.  If $N^+_H(v_1)=N^+_H(v_2)=\{x,y\}$ then $v_1$ and $v_2$ satisfy (GM3), so $H$ is good.  Otherwise, consider the graph $H':=H-v_0$.  Then $\deg^+_{H'}(v_1)=1$, $\deg^+_{H'}(v_2)=2$, and $N_{H'}(v_1)\subseteq N_{H'}(v_2)$.   Therefore $G'$ is good, so $G$ contains a vertex $v=v_0$ of inner-degree $2$ such that $G-v$ is good.  This completes the proof.
+  The edge $v_1v_2$ is on the boundary of a face $v_1v_2y$.  Since $\deg^+_H(v_1)=2$, $x\neq y$.  If $N^+_H(v_1)=N^+_H(v_2)=\{x,y\}$ then $v_1$ and $v_2$ satisfy (GM3), so $H$ is good.  Otherwise, consider the graph $H':=H-v_0$.  Then $\deg^+_{H'}(v_1)=1$, $\deg^+_{H'}(v_2)=2$, and $N_{H'}(v_1)\subseteq N_{H'}(v_2)$.   Therefore $H'$ is good, so $H$ contains a vertex $v=v_0$ of inner-degree $2$ such that $H-v$ is good.  This completes the proof.
 \end{proof}
 
 
@@ -304,6 +309,14 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
   Therefore, \cref{a1,a2,a3} are three inequalities in three non-negative variables $x_2$, $z$, and $|I_{r-1}|$.  Maximizing \cref{objective2} subject to these constraints is an easy linear programming exercise that gives $x_2:=(3n-6)/13$, $z=(3n-19)/13$ and $I_{r-1}=(n+11)/13$, which gives $|X_r|= (7n+8)/13$.
 \end{proof}
 
+\section{Better Still?}
+
+I think we can probably do even better than \cref{main_result2}. If we look at the proof of \cref{not_good}, there are only two case in which $H$ is not good and we have to remove a vertex $v$.
+\begin{compactenum}
+  \item When $H$ is biconnected,  In this case, we should look at the graph $H-B(H)$.  If this graph has a vertex $w$ of inner-degree $2$ or more than we can remove a vertex $v\in B(H)$ so that the inner-degree of $w$ in $H-v$ is at least $3$ (and $w$ is also adjacent to a vertex of inner-degree $1$). Otherwise, the graph $H-B(H)$ is critical and we should be able to do something with it.
+
+  \item When $H$ has a cut-vertex $v_0$ and we focus on a biconnected component $C$ that contains $v_0$ and no other cut vertices.  In this case we're only forced to take a degree-$2$ vertex $v_0$ when $C$ has at least four vertices on its boundary and all of them, except $v_0$ have inner-degree $2$.  
+\end{compactenum}
 \bibliographystyle{plainurl}
 \bibliography{main}
 
