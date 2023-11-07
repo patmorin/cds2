@@ -426,6 +426,9 @@ A generalized near-triangulation $H$ is \defin{$2$-critical} if $\deg^+_H(v)\le 
   Let $H_0$ be a graph obtained by triangulating the inner faces of $H[B(H-B(H))]$. Now $3$-colour $H_0$ and let $X_0$ be the smallest colour class.  Say that a face $f$ of $H[B(H-B(H))]$ is \defin{marked} if it contains a vertex of $H$ in its interior. For each marked face $f$ of $H[B(H-B(H))]$, mark exactly one of the triangular faces of $H_0$ that is contained in $f$.  Create the set $X$ as follows.  For each vertex $w\in X_0$, choose a vertex $v\in N_H(w)\cap B(H)$ and put $v$ in $X$. If $w$ is on the boundary of a marked triangular face of $H_0$, then also put $w\in X$.  The size of the resulting set $X$ is at most $|X_0|+|I(I(H))|\le |B(H-B(H))|/3 + |I(I(H))|$.
 \end{proof}
 
+\pat{TODO:  Show how to handle graphs that are not biconnected by looking at a leaf in the block-cut tree and working on it, like we do with $\textsc{BetterGreedy}(G)$}
+
+
 \subsection{The Algorithm}
 
 This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BestGreedy}(G)$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i$ be a dom-preserving subgraph of $G-X_i$ that is dom-minimal, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are now three cases to consider:
