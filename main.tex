@@ -219,7 +219,7 @@ A subgraph $H'$ of a generalized near-triangulation $H$ is \defin{dom-preserving
   Each vertex $v\in I(H')$ is adjacent to some vertex $w\in \Delta$.  Since $N_{H'}(v)=N_H(v)$, $w\in\Delta\cap V(H')$, so $v$ is dominated by $\Delta\cap V(H')$.  Since this is true for each $v\in I(H)=I(H')$, $\Delta\cap V(H')$ dominates $I(H)$.
 \end{proof}
 
-\begin{lem}\label{dom-minimal}
+\begin{lem}\label{dom_minimal}
   For any generalized near-triangulation $H$, there exists a dom-preserving subgraph $H'$ of $H$ that is dom-minimal.
 \end{lem}
 
@@ -311,6 +311,7 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
 
 \section{Better Still?}
 
+
 I think we can probably do even better than \cref{main_result2}. If we look at the proof of \cref{not_good}, there are only two case in which $H$ is not good and we have to remove a vertex $v$ to get a good graph.
 \begin{compactenum}
   \item When $H$ is biconnected.  The only time we have to remove a vertex to get a good graph is when all vertices in $B(H)$ have inner-degree $2$.  In this case, we should look at the graph $H':=H-B(H)$.  If $H'$ has a vertex $w$ of inner-degree $2$ or more then we can remove a neighbour $v\in B(H)$ of $w$ so that the inner-degree of $w$ in $H-v$ is at least $3$ (and $w$ is also adjacent to a vertex of inner-degree $1$).
@@ -319,6 +320,97 @@ I think we can probably do even better than \cref{main_result2}. If we look at t
 
   \item When $H$ has a cut-vertex $v_0$ and we focus on a biconnected component $C$ that contains $v_0$ and no other cut vertices.  In this case we're only forced to take a degree-$2$ vertex $v_0$ when $C$ has at least four vertices on its boundary and all of them, except $v_0$ have inner-degree $2$.  In this case, we should also focus on $C-B(C)$ and look for a vertex of inner-degree at least $2$, as in the previous case.  If we don't find one, we proceed the same way as before, but we're even in better shape because $|B(H)|=|B(H')|+1$
 \end{compactenum}
+
+\subsection{Let's Try}
+Let's see if we can get this to work.  First, we need to rework our definition of dom-minimal a little bit:
+
+We say that a near-triangulation $H$ is \defin{dom-minimal} if
+\begin{compactenum}[({DM}1)]
+    \item there are no two vertices $v,w\in B(H)$ such that $N^+_H(w)\subseteq N^+_H(v)$; and
+    \item each edge $vw$ on the boundary of the outer face of $H$ is on the boundary of an inner face $vwx$ of $H$ for some $x\in I(H)$.
+\end{compactenum}
+We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each of its biconnected components are dom-minimal.
+Note that (DM1) implies that, unless $|H|=1$, each vertex $v\in B(H)$ has $\deg^+_H(v)\ge 1$.
+
+\Cref{bridgeless,dom_minimal} still hold under this new definition of dom-minimal.
+
+\pat{Did I really need to change the definition of dom-minimal?  Check.}
+
+\begin{lem}\label{chord_adjacent}
+  let $H$ be a (biconnected) dom-minimal non-critical near-triangulation and let $v_0$ be a vertex in $B(H)$ with $|N_H(v_0)\cap B(H)|\ge 3$.  Then $\deg^+_H(v_0)\ge 2$.  In other words, if $v_0$ is incident to a chord of the outerplane graph $H[B(H)]$, then $v_0$ is incident to at least $2$ inner vertices of $H$.
+\end{lem}
+
+\begin{proof}
+  Since $H$ is a near-triangulation its outer face is bounded by a cycle $v_0,\ldots,v_{k-1}$.  Let $a:=\min\{i\in\{2,\ldots,k-2\}:v_0v_i\in E(H)\}$ and $b:=\max\{i\in\{2,\ldots,k-2\}:v_0v_i\in E(H)\}$. (Possibly $a=b$, but both $a$ and $b$ are well-defined since $|N^+_H(v_0)|\ge 3$.)   Since $H$ is dom-minimal, the edge $v_0v_1$ is on the boundary of an inner face $v_0v_1x$ of $H$ where $x$ is an inner vertex of $H$.  Since $H$ is dom-minimal, the edge $v_{k-1}v_0$ is on the boundary of an inner face $v_{k-1}v_0y$ of $H$ where $y$ is an inner vertex of $H$.  Then $x$ is in the interior of the face of $H[B(H)]$ bounded by the cycle $v_0,v_1,\ldots,v_a$ and $y$ is in the interior of the face of $H[B(H)]$ bounded by the cycle $v_0,v_b,\ldots,v_{k-1}$.  Therefore, $x\neq y$ and $N^+_H(v_0)\supseteq\{x,y\}$ so $\deg^+_H(v_0)\ge 2$.
+\end{proof}
+
+\begin{lem}\label{degree_2_outer_neighbour}
+  Let $H$ be a (biconnected) dom-minimal near-triangulation. Then either:
+  \begin{compactenum}
+    \item $H$ is outerplane;
+    \item $H$ consists of a cycle on the vertices in $B(H)$ plus one dominant inner vertex $w$; or
+    \item each vertex $w\in B(H-B(H))$ has a neighbour $v$ in $H$ with $\deg^+_H(v)\ge 2$.
+  \end{compactenum}
+\end{lem}
+
+\begin{proof}
+   If $H$ is outerplane then there is nothing to prove, so assume otherwise. Let $w$ be a vertex in $B(H-B(H))$. Since $w\not\in B(H)$, $w$ is an inner vertex of $H$. Consider the face $f:=v_0,\ldots,v_{k-1}$ of the outerplane graph $H[B(H)]$ that contains $w$.
+
+   Since $w\in B(H-B(H))$, $w$ is adjacent to at least one vertex, say $v_0$, of $f$.  If $v_0v_{1}$ is a chord of $H[B(H)]$ then, by \cref{chord_adjacent}, $\deg^+_H(v_0)\ge 2$ and we are done, so assume that $v_0v_{1}$ is not a chord of $H[B(H)]$.  Since $H$ is dom-minimal, $H$ contains an inner face $v_0v_{1}x$ where $x$ is an inner vertex of $H$.  If $x\neq w$, then $\deg_H^+(v_0)\ge 2$ and we are done, so assume that $x=w$.  Therefore, $w$ is adjacent to $v_1$.  Thus, by assuming that $v_0w$ is an edge of $H$ we were able to show that $v_0v_1$ is not a chord of $H[B(H)]$ and that $v_0v_1w$ is an inner face of $H$. This latter fact implies that $v_1w$ is an edge of $H$, so we can repeat this argument to establish that $v_{j}v_{j+1}$ is not a chord of $H[B(H)]$ and that $v_{j}v_{j+1}w$ is an inner face of $H$ for all $j\in\{0,\ldots,k-1\}$.  But this implies that $H$ is the graph described in the second alternative given by the lemma.
+\end{proof}
+
+
+\begin{lem}
+  Let $H$ be a (biconnected) dom-minimal near triangulation.  Then either:
+  \begin{compactenum}
+    \item $H$ is critical;
+    \item $H-B(H)$ is critical;
+    \item $B(H)$ contains a vertex $v$ with $\deg^+_H(v)\ge 3$; or
+    \item $H$ contains distinct vertices $v_0$, $v_j$, and $w$ such that
+    \begin{compactenum}
+      \item $v_0\in B(H)$ and $\deg^+_H(v_0)=2$;
+      \item $w\in B(H-v_0)$ and $\deg^+_{H-v_0}(w)\ge 3$; and
+      \item $v_j\in B(H)$ and $N^+_H(v_j) \subseteq N_H[w] $.
+    \end{compactenum}
+  \end{compactenum}
+\end{lem}
+
+\begin{proof}
+  We will assume that none of the first three conditions apply to $H$ and show that the fourth condition must apply.  Since $H-B(H)$ is not critical, $B(H-B(H))$ contains a vertex $w$ with $\deg_{H-B(H)}(w)\ge 2$.
+  Since $H-B(H)$ is not critical, we can apply \cref{degree_2_outer_neighbour} to $H$ and conclude that $N_H(w)\cap B(H)$ contains a vertex $v_0$ with $\deg^+_H(v_0)\ge 2$.  Since $\deg^+_H(v_0)< 3$, $\deg^+_H(v_0)=2$.
+
+  Let $v_0,\ldots,v_{k-1}$ be the cycle that bounds the inner face $f$ of $H[B(H)]$ that that contains $w$ in its interior.  Since $H$ is a near-triangulation, $H$ contains triangles $v_0v_1x$ and $v_{k-1}v_0 y$ with $x$ and $y$ in the interior of $f$.  At least one of $x$ or $y$ is equal to $w$, say $x$, since otherwise $\deg^+_H(v_0)\ge 3$.  Therefore $v_0v_1 w$ is an inner face of $H$.  Let $j\ge 1$ be the maximum integer such that $v_{a-1}v_{a}w$ is an inner face of $H$ for all $a\in\{1,\ldots,j\}$.  Note that $j<\ell-1$ since, otherwise, the component of $H-B(H)$ that contains $w$ contains only a single vertex, contradicting the fact that $\deg^+_{H-B(H)}(w)=2$.
+
+  % We claim that $N^+_H(v_j)\subseteq N_H[w]$.
+
+  Since $H$ is a near-triangulation, $H$ has some face $v_j v_{j+1} x$ with $x$ in the interior of $f$.  By the definition of $j$, $x\neq w$.  Therefore, $N_H^+(v_j)\supseteq \{w,x\}$ and, since $\deg^+_H(v_j)\le 2$, $N_H^+(v_j))= \{w,x\}$.  Therefore $N^+_H(v_j)\subseteq N_H[w]$.
+
+  All that remains is to show that $\deg^+_{H-v_0}(w)\ge 3$.  First, observe that $x$ is in $B(H-B(H))$, so $x$ does not contribute to $\deg^+_{H-B(H)}(w)$. We claim that $x$ is in $I(H-v_0)$, so $x$ does contribute to $\deg^+_{H-v_0}(w)$.  Indeed, the only other possibility that $x$ is adjacent to $v_0$.  In this case, consider the cycle $C:=v_0,\ldots,v_j,x$.  This cycle has $w$ in its interior. The vertices of $N^+_{H-B(H)}(w)$ must be in the interior of $C$. For each $a\in\{1,\ldots,j\}$, $v_{a-1}v_a w$ is a face of $H$, so the cycle $D:=v_0,\ldots,v_j,w$ does not contain any vertices of $N^+_{H-B(H)}(w)$ in its interior.  Therefore, the vertices in $N^+_{H-B(H)}(w)$ must be in the interior of the cycle $\overline{D}:=v_0,w,v_j,x$.  Since $H$ is a near-triangulation, this implies that at least one of $v_0$ or $v_j$ is adjacent to some vertex $y\in I(H)\setminus\{w,x\}$. But this is not possible since it would imply that $\deg^+_H(v_0)\ge 3$ or $\deg^+_H(v_j)\ge 3$.  Therefore $v_0$ is not adjacent to $x$, so $x$ is in the interior of $H-v_0$ and $N^+_{H-v_0}(w)\supseteq N^+_{H-B(H)}(w)\uplus\{x\}$, so $\deg^+_H(w)\ge 3$.
+\end{proof}
+
+\begin{lem}\label{big_boundary}
+  Let $H$ be a generalized near-triangulation with $\deg^+_H(v)\le 2$ for each $v\in B(H)$.  Then $|B(H)|\ge |B(H-B(H))|$.
+\end{lem}
+
+\begin{proof}[Proof Sketch]
+  The fact that $\deg^+_H(v)\le 2$ for each $v\in B(H)$ implies that each vertex in $B(H-B(H))$ is adjacent to at least two vertices in $B(H)$.  (We make similar arguments repeatedly, above)  Therefore, the number of edges between $B(H)$ and $B(H-B(H))$ is at least $2B(H-B(H))\le \sum_{v\in B(H)}\deg^+_H(v)\le 2|B(H)|$.
+\end{proof}
+
+A generalized near-triangulation $H$ is \defin{$2$-critical} if $\deg^+_H(v)\le 2$ for each $v\in B(H)$ and $H-B(H)$ is critical.
+
+\begin{lem}
+  Let $H$ be a $2$-critical dom-minimal generalized near-triangulation.  Then there exists $X\subseteq V(H)$ of size at most $|B(H-B(H))|/3 + |I(I(H))|$ such that $I(H)\subseteq N_H[X]$.
+\end{lem}
+
+\begin{proof}
+  Let $H_0$ be a graph obtained by triangulating the inner faces of $H[B(H-B(H))]$. Now $3$-colour $H_0$ and let $X_0$ be the smallest colour class.  Say that a face $f$ of $H[B(H-B(H))]$ is \defin{marked} if it contains a vertex of $H$ in its interior. For each marked face $f$ of $H[B(H-B(H))]$, mark exactly one of the triangular faces of $H_0$ that is contained in $f$.  Create the set $X$ as follows.  For each vertex $w\in X_0$, choose a vertex $v\in N_H(w)\cap B(H)$ and put $v$ in $X$. If $w$ is on the boundary of a marked triangular face of $H_0$, then also put $w\in X$.  The size of the resulting set $X$ is at most $|X_0|+|I(I(H))|\le |B(H-B(H))|/3 + |I(I(H))|$.
+\end{proof}
+
+
+
+
+
+
 \bibliographystyle{plainurl}
 \bibliography{main}
 
