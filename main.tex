@@ -68,7 +68,7 @@ A set $X$ of vertices in a graph $G$ is a \defin{dominating set} if each vertex 
 The main result in this paper is the following:
 
 \begin{thm}\label{main_result2}
-  For any $n\ge 4$, any $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $(7n-14)/13$ and there exists an algorithm that finds $X$ in linear time.
+  For any $n\ge 4$, any $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $(7n-12)/15$ and there exists an algorithm that finds $X$ in linear time.
 \end{thm}
 
 \subsection{Related Work}
@@ -415,7 +415,7 @@ A subgraph $H'$ of a generalized near-triangulation $H$ is \defin{dom-preserving
 \end{proof}
 
 \begin{lem}\label{big_boundary}
-  Let $H$ be a dom-minimal generalized near-triangulation with $\deg^+_H(v)\le 2$ for each $v\in B(H)$.  Then $|B(H)|\ge |B(H-B(H))|$.
+  Let $H$ be a generalized near-triangulation with $\deg^+_H(v)\le 2$ for each $v\in B(H)$.  Then $|B(H)|\ge |B(H-B(H))|$.
 \end{lem}
 
 \begin{proof}
@@ -473,7 +473,7 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BestG
   \begin{equation}
     r-1 + R/3 + S \enspace .  \label{best_objective}
   \end{equation}
-  As in the proof of \cref{better_greedy}, we can eliminate the variables $x_t$ for $t\ge 4$:
+  We can eliminate the variables $x_t$ for $t\ge 4$:
   \begin{clm}
     In any assignment of non-negative values to $Q, R, S$, $z$, and $x_3,x_4\ldots$ that maximizes \cref{best_objective} subject to \cref{best2,best3,best4,best5}, $x_t=0$ for all $t\ge 4$.
   \end{clm}
@@ -490,6 +490,9 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BestG
   Therefore, \cref{best2,best3,best4,best5} are inequalities in four non-negative variables $x_3$, $Q$, $R$ and $S$.  Maximizing \cref{best_objective} subject to these constraints is an easy linear programming exercise and the maximum is achieved when $x_3=(n-6)/5$, $Q=R=(2n+3)/5$, $S=0$, giving a final bound of $|X|\le r-1+R/3\le (7n-12)/15$.
 \end{proof}
 
+\section{Discussion}
+
+\Cref{two_critical_handler} is the best result we have right now for handling $2$-critical graphs.  This is a shame, because it is know that maximal outerplanar graphs have connected dominating sets of size at most $4n/11$. Unfortunately our critical graphs are not maximal outerplanar---they may not even be connected.  We can end up in a situation where we have a $2$-critical graph that is a collection of disjoint $6$-vertex graphs (a triangle inside a triangle), each of which requires $2$ vetices to dominate.  In this setting $Q=R=3k$ and we need $2k$ vertices in our dominating set, so the analysis is tight.
 
 % \section{Moonshot}
 %
