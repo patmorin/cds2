@@ -41,6 +41,11 @@
 
 \newcommand{\defin}[1]{\emph{\textcolor{Maroon}{#1}}}
 
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{observation}{Observation}
+
 \newcommand{\pat}[1]{[\textcolor{red}{PM: #1}]}
 
 \title{Connected Dominating Sets in Triangulations}
@@ -53,6 +58,9 @@
 
 \maketitle
 
+\begin{abstract}
+  We show that every $n$-vertex triangulation has a connected dominating set of size at most $7n/15$.  Equivalently, every $n$ vertex triangulation has a spanning tree with at least $8n/15$ leaves. Prior to the current work, the best known bounds were $2n/3$ and $n/3$, respectively.  As an application of this, we show that every $n$-vertex planar graph has a one-bend non-crossing drawing in which some set of at least $8n/15$ vertices is drawn on the $x$-axis.
+\end{abstract}
 % \begin{abstract}
 %   We show that every $n$ vertex triangulation $G$ has a spanning tree with at least $n/2\pm{?}$ leaves.  This improves the previous best bound of $2n/5\pm {?}$, due to Kleitman and West (1991). \pat{Is this true? I only find $n/3$.}
 % \end{abstract}
@@ -490,9 +498,16 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BestG
   Therefore, \cref{best2,best3,best4,best5} are inequalities in four non-negative variables $x_3$, $Q$, $R$ and $S$.  Maximizing \cref{best_objective} subject to these constraints is an easy linear programming exercise and the maximum is achieved when $x_3=(n-6)/5$, $Q=R=(2n+3)/5$, $S=0$, giving a final bound of $|X|\le r-1+R/3\le (7n-12)/15$.
 \end{proof}
 
+
+%%%%%%%% The application section %%%%
+
+\input{application}
+
 \section{Discussion}
 
-\Cref{two_critical_handler} is the best result we have right now for handling $2$-critical graphs.  This is a shame, because it is know that maximal outerplanar graphs have connected dominating sets of size at most $4n/11$. Unfortunately our critical graphs are not maximal outerplanar---they may not even be connected.  We can end up in a situation where we have a $2$-critical graph that is a collection of disjoint $6$-vertex graphs (a triangle inside a triangle), each of which requires $2$ vetices to dominate.  In this setting $Q=R=3k$ and we need $2k$ vertices in our dominating set, so the analysis is tight.
+\Cref{two_critical_handler} is the best result we have right now for handling $2$-critical graphs.  This is a shame, because it is known that maximal outerplanar graphs have connected dominating sets of size at most $4n/11$. Unfortunately our critical graphs are not maximal outerplanar---they may not even be connected.  We can end up in a situation where we have a $2$-critical graph that is a collection of disjoint $6$-vertex graphs (a triangle inside a triangle), each of which requires $2$ vetices to dominate.  In this setting $Q=R=3k$ and we need $2k$ vertices in our dominating set, so the analysis is tight.
+
+If we wanted to make use of the results for outerplanar graphs, then we would need to be way more careful in the way we choose vertices to delete.  In fact, I don't say any reasonable way to do this without using some variant of the canonical ordering (so that each intermediate graph $G_i$ is a near-triangulation).  Even then
 
 % \section{Moonshot}
 %
