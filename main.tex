@@ -69,16 +69,16 @@ A set $X$ of vertices in a graph $G$ is a \defin{dominating set} if each vertex 
 
 A \defin{triangulation} is an edge-maximal planar graph.  \citet{matheson.tarjan:dominating} proved that every $n$-vertex triangulation has a dominating set of size at most $n/3=0.33\overline{3}n$ and that there exists $n$-vertex triangulations with no dominating set of size less than $n/4=0.25n$. The gap between these upper and lower bounds stood for over $20$ years until a recent breakthrough by \citet{spacapan:domination} reduced the upper bound to $17n/53\approx 0.32075471698n$.  This was swiftly followed by an improvement to $2n/7\approx 0.2\overline{857142}n$ by \citet{christiansen.rotenberg.ea:triangulations}.
 
-In the current paper, we consider the version of this problem that considers connected dominating sets.  An easy consequence of the proof used by \citet{matheson.tarjan:dominating} is that triangulations have connected dominating sets of size at most $2n/3=0.66\overline{6}n$.  A more general result, due to  \citet{kleitman.west:spanning} shows that graphs of minimum-degree $3$ in which each edge is included in a $3$-cycle has a connected dominating set of size at most $2(n-5)/3<0.66\overline{6}n$.  \citet{kleitman.west:spanning} also show that graphs of minimum degree $4$ have connected dominating sets of size at most $(3n-8)/5<0.6n$. This result applies to triangulations of minimum degree $4$, which includes all $4$-connected triangulations.  The main result in this paper is the following:
+In the current paper, we consider connected dominating sets in triangulations.  An easy consequence of the proof used by \citet{matheson.tarjan:dominating} is that triangulations have connected dominating sets of size at most $2n/3=0.66\overline{6}n$.  A more general result, due to  \citet{kleitman.west:spanning} shows that graphs of minimum-degree $3$ in which each edge is included in a $3$-cycle has a connected dominating set of size at most $2(n-5)/3<0.66\overline{6}n$.  \citet{kleitman.west:spanning} also show that graphs of minimum degree $4$ have connected dominating sets of size at most $(3n-8)/5<0.6n$. This result applies to triangulations of minimum degree $4$, which includes all $4$-connected triangulations.  The main result in this paper is the following:
 
 \begin{thm}\label{main_result2}
   For every $n\ge 4$, every $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $(7n-12)/15< 0.46\overline{6}n$.
 \end{thm}
 
 The proof of \cref{main_result2} is constructive and gives an $O(n)$ time algorithm for finding the set $X$.
-\pat{Say something about the lower bound?}
+\pat{Say something about the lower bound---$n/3$?}
 
-The original motivation for this research was a graph drawing problem.  It is know that every $n$-vertex planar graph $G$ has a non-crossing drawing in the plane with edges of $G$ drawn as line segments and such that some set $Y$ of $\Omega(n^{1/4})$ vertices of $G$ are drawn on the $x$-axis \cite{bose.dujmovic:polynomial,dujmovic:utility}.  The set $Y$ is called a \defin{collinear set}.  For bounded-degree planar graphs, this result can be improved to $|Y|=\Omega(n^{0.8})$ \cite{dujmovic.morin:dual}.  Determining the supremum value of $\alpha$ such that every $n$-vertex planar graph has a collinear set of size $\Omega(n^{\alpha})$ remains a difficult open problem, but it is known that $\alpha < 1$ \cite{ravsky.verbitsky:collinear}.
+The original motivation for this research was a graph drawing problem.  It is know that every $n$-vertex planar graph $G$ has a non-crossing drawing in the plane with edges of $G$ drawn as line segments and such that some set $Y$ of $\Omega(n^{1/2})$ vertices of $G$ are drawn on the $x$-axis \cite{bose.dujmovic:polynomial,dujmovic:utility}.  The set $Y$ is called a \defin{collinear set}.  For bounded-degree planar graphs, this result can be improved to $|Y|=\Omega(n^{0.8})$ \cite{dujmovic.morin:dual}.  Determining the supremum value of $\alpha$ such that every $n$-vertex planar graph has a collinear set of size $\Omega(n^{\alpha})$ remains a difficult open problem, but it is known that $\alpha < 1$ \cite{ravsky.verbitsky:collinear}.
 
 We consider a relaxation of this problem in which the edges of the graph can be drawn as a polygonal path consisting of at most two line segments.  Such a drawing is called a \defin{$1$-bend} drawing of $G$.  A subset $Y$ of $V(G)$ is a \defin{$1$-bend collinear set} if $G$ has a $1$-bend drawing in which all vertices of $Y$ appear on the $x$-axis.  We show that, for any connected dominating set $X$ in a triangulation $G$, the set $Y:=V(G)\setminus X$ is a $1$-bend collinear set of $G$.  Combined with \cref{main_result2}, this gives:
 
@@ -211,15 +211,29 @@ This is an easy linear programming exercise and the maximum value of $X_{r}$ is 
 $|X_r| \le (4n-9)/7$.
 \end{proof}
 
+\subsection{An $O(n)$ Time Implementation}
 
 We note that the implementation of $\textsc{SimpleGreedy}(G)$ is even simpler than the definition given above.  Nothing special needs to be done for the critical graph $G_{r-1}$.  Repeatedly selecting a vertex of maximum innner-degree and removing it will produce a dominating set of size exactly $|I_{r-1}|$.  Thus, $\textsc{SimpleGreedy}(G)$ has a simple linear time implementation.  In this implementation, each vertex $v$ stores a value $d_v$ which is initially set to $\deg_G(v)$.  For the three vertices on the outer face of $G$, $d_v$ is initially set to $\deg_G(v)-2$.  In general, $d_v$ is kept updated so that it is always equal to the inner-degree of $v$ in $G_i$.
 
 Besides the data structure used for representing the triangulation $G$, each vertex $v$ also participates in a doubly-linked list $L_{d_v}$  that stores all the vertices with the same $d_v$ value.  A global doubly-linked list $L$ then stores all the lists $L_d$ such that $L_d$ is non-empty, sorted by increasing order of $d$.   Extracting a vertex of maximum inner-degree can then be done in constant time and the total time spent moving vertices between different lists in $L$ is proportional to the number of edges of $G$. Thus, the entire algorithm can be implemented in $O(n)$ time.
 
-\section{A Less Simple Algorithm}
+\section{A Better Algorithm}
 \label{full_result}
 
-Next we devise an algorithm that produces a smaller connected dominating set than what is guaranteed by $\textsc{SimpleGreedy}(G)$.  This involves a more careful analysis of the cases in which \textsc{SimpleGreedy} is forced to take a vertex $v_i$ with $\deg^+_{G_i}(v_i)=2$.  We begin by identifying unnecessary vertices and edges that can appear in the graphs $G_1,\ldots,G_{r-1}$ during the construction of $X$.   We say that a near-triangulation $H$ is \defin{dom-minimal} if
+Next we devise an algorithm that produces a smaller connected dominating set than what $\textsc{SimpleGreedy}(G)$ can guarantee.  This involves a more careful analysis of the cases in which \textsc{SimpleGreedy} is forced to take a vertex $v_i$ with $\deg^+_{G_i}(v_i)=2$.  We will show that when this happens, one of the following two cases occurs:
+\begin{compactenum}
+  \item We can directly complete the dominating set $X_r$ by adding a set $\Delta_{r-1}$ with at most $|G_i|/3$ additional vertices.
+  \item We can add a pair of vertices $\{v_i,w_i\}$ that increase the size of the dominated set $N[X_{i+1}]$ by at least $5$ but only increase the size of the boundary set $B(G_{i+1})$ by at most $2$.
+\end{compactenum}
+
+\subsection{A Heuristic Analysis}
+Before diving into the details, we present a heuristic analysis.  Roughly speaking, Case~1 above implies that each vertex left in $G_{r-1}$ contributes $1/3$ to the final dominating set $X_r$.  This implies that Case~2 above is more efficient than taking a vertex of inner-degree $3$.  Indeed, Case~1 has a cost $2+2/3=8/3$ but decreases the number of undominated vertices by $5$.  On the other hand, choosing a vertex of inner-degree $3$ has a cost of $1+3/3=2$ but only decreases the number of undominated vertices by $3$.  If we consider the progress over cost ratio, the former case has a ratio of $5/(8/3)=15/8=1.875$ while the latter case has a ratio of $3/2=1.5$. We formalize this by setting a linear program to bound the maximum size of the final dominating set $X_r$.
+
+In the end, the theoretical worst-case for the resulting algorithm is that it chooses inner-degree $3$ vertices for the first $r-1$ consecutive rounds, resulting in a graph $G_{r-1}$ with $|B(G_{r-1})|\approx 2r$ and $|I(G_{r-1})|\approx n-3r$, so $|G_{r-1}|\approx 2r+n-3r=n-r$.  The algorithm then finishes in Case~1, above, by taking a set $\Delta_{r-1}$ of size $(n-r)/3$.  This results in a dominating set $X_r$ of size roughly $r+(n-r)/3=n/3+(2/3)r$. This is a strictly increasing function of $r$, but the value of $r$ is constrained by the fact that $G_{r-1}$ has no vertices of inner-degree $3$, which implies that $|B(G_{r-1})|\ge |I(G_{r-1})|$.  This translates to the constraint $2r \le n-3r$ or $r \le n/5$.  Thus, the final dominating set has size at most $n/3 + (2/3)n/5=7n/15$.  We now make this heuristic analysis more formal.
+
+\subsection{Dom-Minimal and Dom-Preserving Subgraphs}
+
+We begin by identifying unnecessary vertices and edges that can appear in the graphs $G_1,\ldots,G_{r-1}$ during the construction of $X$.   We say that a near-triangulation $H$ is \defin{dom-minimal} if
 \begin{compactenum}[({DM}1)]
     \item each vertex $v\in B(H)$ has $\deg^+_H(v)\ge 1$; and \label{bad_vertex}
     \item each edge $vw$ on the boundary of the outer face of $H$ is on the boundary an inner face $vwx$ of $H$ for some $x\in I(H)$. \label{bad_edge}
