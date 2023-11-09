@@ -49,7 +49,7 @@
 \newcommand{\pat}[1]{[\textcolor{red}{PM: #1}]}
 
 \title{Connected Dominating Sets in Triangulations}
-\author{Prosenjit Bose \and Vida Dujmović \and Hussein Houdrouge \and Pat Morin \and Saeed Odak \and Anyone Else?}
+\author{Prosenjit Bose \and Vida Dujmović \and Hussein Houdrouge \and Pat Morin \and Saeed Odak}
 \date{October 2023}
 
 
@@ -61,37 +61,39 @@
 \begin{abstract}
   We show that every $n$-vertex triangulation has a connected dominating set of size at most $7n/15$.  Equivalently, every $n$ vertex triangulation has a spanning tree with at least $8n/15$ leaves. Prior to the current work, the best known bounds were $2n/3$ and $n/3$, respectively.  As an application of this, we show that every $n$-vertex planar graph has a one-bend non-crossing drawing in which some set of at least $8n/15$ vertices is drawn on the $x$-axis.
 \end{abstract}
-% \begin{abstract}
-%   We show that every $n$ vertex triangulation $G$ has a spanning tree with at least $n/2\pm{?}$ leaves.  This improves the previous best bound of $2n/5\pm {?}$, due to Kleitman and West (1991). \pat{Is this true? I only find $n/3$.}
-% \end{abstract}
 
 
 \section{Introduction}
 
-A set $X$ of vertices in a graph $G$ is a \defin{dominating set} if each vertex of $G$ is in $X$ or adjacent to a vertex in $X$.  A dominating set $X$ of $G$ is \defin{connected} if the induced graph $G[X]$ is connected.
+A set $X$ of vertices in a graph $G$ is a \defin{dominating set} if each vertex of $G$ is in $X$ or adjacent to a vertex in $X$.  A dominating set $X$ of $G$ is \defin{connected} if the subgraph $G[X]$ of $G$ induced by $X$ is connected.  There is an enormous body of literature on dominating sets, and several books are devoted to the topic \cite{haynes.hedetniemi.ea:domination,haynes.hedetniemi.ea:topics}.  A typical result in the area is of the form: ``Every $n$-vertex graph in some family $\mathcal{G}$ of graphs has a (connected) dominating set of size at most $f(n)$.'' or ``For infinitely many $n$, there exists an $n$-vertex member of $\mathcal{G}$ with no (connected) dominating set of size less than $g(n)$.''
 
-% Observe that, for any connected dominating set $X$, $G$ has a spanning-tree in which all vertices in $V(G)\setminus X$ are leaves.  Similarly, by removing the leaves of any spanning tree of $G$ we obtain a tree whose vertex set is a connected dominating set of $G$.
-%  Therefore, an $n$-vertex graph $G$ has a connected dominating set of size $q$ if and only if $G$ has a spanning tree with at least $n-q$ leaves.
+A \defin{triangulation} is an edge-maximal planar graph.  \citet{matheson.tarjan:dominating} proved that every $n$-vertex triangulation has a dominating set of size at most $n/3=0.33\overline{3}n$ and that there exists $n$-vertex triangulations with no dominating set of size less than $n/4=0.25n$. The gap between these upper and lower bounds stood for over $20$ years until a recent breakthrough by \citet{spacapan:domination} reduced the upper bound to $17n/53\approx 0.32075471698n$.  This was swiftly followed by an improvement to $2n/7\approx 0.28571428571n$ by \citet{christiansen.rotenberg.ea:triangulations}.
 
-The main result in this paper is the following:
+In the current paper, we consider the version of this problem that considers connected dominating sets.  An easy consequence of the proof used by \citet{matheson.tarjan:dominating} is that triangulations have connected dominating sets of size at most $2n/3=0.66\overline{6}n$.  A more general result, due to  \citet{kleitman.west:spanning} shows that graphs of minimum-degree $3$ in which each edge is included in a $3$-cycle has a connected dominating set of size at most $2(n-5)/3<0.66\overline{6}n$.  \citet{kleitman.west:spanning} also show that graphs of minimum degree $4$ have connected dominating sets of size at most $(3n-8)/5<0.6n$. This result applies to triangulations of minimum degree $4$, which includes all $4$-connected triangulations.  The main result in this paper is the following:
 
 \begin{thm}\label{main_result2}
-  For any $n\ge 4$, any $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $(7n-12)/15$ and there exists an algorithm that finds $X$ in linear time.
+  For every $n\ge 4$, every $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $(7n-12)/15< 0.46\overline{6}n$.
 \end{thm}
 
-\subsection{Related Work}
+The proof of \cref{main_result2} is constructive and gives an $O(n)$ time algorithm for finding the set $X$.
 
-Dominating sets in graphs is an enormous field of research, with several books  devoted to the topic \cite{haynes.hedetniemi.ea:domination,haynes.hedetniemi.ea:topics}.
+The original motivation for this research was a graph drawing problem.  It is know that every $n$-vertex planar graph $G$ has a non-crossing drawing in the plane with edges of $G$ drawn as line segments and such that some set $Y$ of $\Omega(n^{1/4})$ vertices of $G$ are drawn on the $x$-axis \cite{bose.dujmovic:polynomial,dujmovic:utility}.  The set $Y$ is called a \defin{collinear set}.  For bounded-degree planar graphs, this result can be improved to $|Y|=\Omega(n^{0.8})$ \cite{dujmovic.morin:dual}.  Determining the supremum value of $\alpha$ such that every $n$-vertex planar graph has a collinear set of size $\Omega(n^{\alpha})$ remains a difficult open problem, but it is known that $\alpha < 1$ \cite{ravsky.verbitsky:collinear}.
 
-\pat{Expand.  Explain how Kleitman-West result gives $3n/4$.  Explain how Matheson-Tarjan gives $2n/3$.  Talk about connected dominating sets in unit disk graphs.}
+We consider a relaxation of this problem in which the edges of the graph can be drawn as a polygonal path consisting of at most two line segments.  Such a drawing is called a \defin{$1$-bend} drawing of $G$.  A subset $Y$ of $V(G)$ is a \defin{$1$-bend collinear set} if $G$ has a $1$-bend drawing in which all vertices of $Y$ appear on the $x$-axis.  We show that, for any connected dominating set $X$ in a triangulation $G$, the set $Y:=V(G)\setminus X$ is a $1$-bend collinear set of $G$.  Combined with \cref{main_result2}, this gives:
+
+\begin{thm}\label{one_bend_collinear}
+  For every $n\ge 4$, every $n$-vertex planar graph has a $1$-bend collinear set of size at least $(8n+12)/15>0.53\overline{3}n$.
+\end{thm}
+
+The remainder of this paper is organized as follows:  In \cref{strategy}, we describe the general strategy we use for finding connected dominating sets in triangulations.  In \cref{warm_up} we show that a simple version of this strategy can be used to obtain a connected dominating set of size at most $4n/7= 0.\overline{571428}n$, which is already better than the best known bounds for triangulations and even $4$-connected triangulations.  In \cref{full_result} we show that a more careful construction leads to a proof of \cref{main_result2}.  In \cref{one_bend}, we discuss the connection between connected dominating sets and one-bend collinear drawings that leads to \cref{one_bend_collinear}.
+
+% \subsection{Related Work}
+%
+% \pat{Explain how Kleitman-West result gives $3n/4$.  Explain how Matheson-Tarjan gives $2n/3$. Mention results on connected dominating sets in maximal outerplanar graphs.  Talk about connected dominating sets in unit disk graphs.}
 
 
-% \begin{thm}\label{main_result}
-%   For any $n\ge 4$, any $n$-vertex triangulation $G$ has a connected dominating set of size at most $4n/7 + O(1)$.
-% \end{thm}
-
-
-\section{The Proofs}
+\section{The Strategy}
+\label{strategy}
 
 For a graph $G$, let $|G|=|V(G)|$ denote the number of vertices of $G$.  A \defin{bridge} in a graph $G$ is an edge $e$ of $G$ such that $G-e$ has more connected components than $G$.  For a vertex $v\in G$, $N_G(v):=\{w\in V(G):vw\in E(G)\}$ is the \defin{open neighbourhood} of $v$ in $G$,  $N_G[v]:=N_G(v)\cup\{v\}$ is the \defin{closed neighbourhood} of $v$ in $G$.  For a vertex subset $S\subseteq V(G)$, $N_G[S]:=\bigcup_{v\in S} N_{G}[v]$ is the \defin{closed neighbourhood} of $S$ in $G$ and $N_G(S):=N_G[S]\setminus S$ is the \defin{open neighbourhood} of $S$ in $G$.  A set $X\subseteq V(G)$ \defin{dominates} a set $B\subseteq V(G)$ if $B\subseteq N_G[X]$.  Thus, $X$ is a dominating set of $G$ if and only if $X$ dominates $V(G)$.
 
@@ -151,6 +153,7 @@ A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ f
 \end{proof}
 
 \section{A Simple Algorithm}
+\label{warm_up}
 
 We start with the simplest possible greedy algorithm, that we call $\textsc{SimpleGreedy}(G)$, to choose $\Delta_0,\ldots,\Delta_{r-1}$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i:=G-X_i$, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are only two cases to consider:
 \begin{compactenum}
@@ -203,6 +206,7 @@ We note that the implementation of $\textsc{SimpleGreedy}(G)$ is even simpler th
 Besides the data structure used for representing the triangulation $G$, each vertex $v$ also participates in a doubly-linked list $L_{d_v}$  that stores all the vertices with the same $d_v$ value.  A global doubly-linked list $L$ then stores all the lists $L_d$ such that $L_d$ is non-empty, sorted by increasing order of $d$.   Extracting a vertex of maximum inner-degree can then be done in constant time and the total time spent moving vertices between different lists in $L$ is proportional to the number of edges of $G$. Thus, the entire algorithm can be implemented in $O(n)$ time.
 
 \section{A Less Simple Algorithm}
+\label{full_result}
 
 Next we devise an algorithm that produces a smaller connected dominating set than what is guaranteed by $\textsc{SimpleGreedy}(G)$.  This involves a more careful analysis of the cases in which \textsc{SimpleGreedy} is forced to take a vertex $v_i$ with $\deg^+_{G_i}(v_i)=2$.  We begin by identifying unnecessary vertices and edges that can appear in the graphs $G_1,\ldots,G_{r-1}$ during the construction of $X$.   We say that a near-triangulation $H$ is \defin{dom-minimal} if
 \begin{compactenum}[({DM}1)]
@@ -465,7 +469,7 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BestG
     Q \ge R \ge 3S \enspace . \label{best2}
   \end{equation}
   By definition $r-1 = \sum_{t\ge 3}x_t+z$.
-  As in the proofs of \cref{simple_greedy} and \cref{better_greedy}, $D+|I(G_i)|=D+R+S=n$, so we get the constraint:
+  As in the proofs of \cref{simple_greedy}, $D+|I(G_i)|=D+R+S=n$, so we get the constraint:
   \begin{equation}
     n = D+R+S \ge \sum_{t\ge 3} tx_t + 5z + R + S \label{best3}
   \end{equation}
@@ -590,7 +594,7 @@ If we wanted to make use of the results for outerplanar graphs, then we would ne
 %
 
 
-\bibliographystyle{plainurl}
+\bibliographystyle{plainurlnat}
 \bibliography{main}
 
 \end{document}
