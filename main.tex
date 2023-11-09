@@ -50,7 +50,7 @@
 
 \title{Connected Dominating Sets in Triangulations}
 \author{Prosenjit Bose \and Vida Dujmović \and Hussein Houdrouge \and Pat Morin \and Saeed Odak}
-\date{October 2023}
+% \date{}
 
 
 
@@ -67,7 +67,7 @@
 
 A set $X$ of vertices in a graph $G$ is a \defin{dominating set} if each vertex of $G$ is in $X$ or adjacent to a vertex in $X$.  A dominating set $X$ of $G$ is \defin{connected} if the subgraph $G[X]$ of $G$ induced by $X$ is connected.  There is an enormous body of literature on dominating sets, and several books are devoted to the topic \cite{haynes.hedetniemi.ea:domination,haynes.hedetniemi.ea:topics}.  A typical result in the area is of the form: ``Every $n$-vertex graph in some family $\mathcal{G}$ of graphs has a (connected) dominating set of size at most $f(n)$.'' or ``For infinitely many $n$, there exists an $n$-vertex member of $\mathcal{G}$ with no (connected) dominating set of size less than $g(n)$.''
 
-A \defin{triangulation} is an edge-maximal planar graph.  \citet{matheson.tarjan:dominating} proved that every $n$-vertex triangulation has a dominating set of size at most $n/3=0.33\overline{3}n$ and that there exists $n$-vertex triangulations with no dominating set of size less than $n/4=0.25n$. The gap between these upper and lower bounds stood for over $20$ years until a recent breakthrough by \citet{spacapan:domination} reduced the upper bound to $17n/53\approx 0.32075471698n$.  This was swiftly followed by an improvement to $2n/7\approx 0.28571428571n$ by \citet{christiansen.rotenberg.ea:triangulations}.
+A \defin{triangulation} is an edge-maximal planar graph.  \citet{matheson.tarjan:dominating} proved that every $n$-vertex triangulation has a dominating set of size at most $n/3=0.33\overline{3}n$ and that there exists $n$-vertex triangulations with no dominating set of size less than $n/4=0.25n$. The gap between these upper and lower bounds stood for over $20$ years until a recent breakthrough by \citet{spacapan:domination} reduced the upper bound to $17n/53\approx 0.32075471698n$.  This was swiftly followed by an improvement to $2n/7\approx 0.2\overline{857142}n$ by \citet{christiansen.rotenberg.ea:triangulations}.
 
 In the current paper, we consider the version of this problem that considers connected dominating sets.  An easy consequence of the proof used by \citet{matheson.tarjan:dominating} is that triangulations have connected dominating sets of size at most $2n/3=0.66\overline{6}n$.  A more general result, due to  \citet{kleitman.west:spanning} shows that graphs of minimum-degree $3$ in which each edge is included in a $3$-cycle has a connected dominating set of size at most $2(n-5)/3<0.66\overline{6}n$.  \citet{kleitman.west:spanning} also show that graphs of minimum degree $4$ have connected dominating sets of size at most $(3n-8)/5<0.6n$. This result applies to triangulations of minimum degree $4$, which includes all $4$-connected triangulations.  The main result in this paper is the following:
 
@@ -76,6 +76,7 @@ In the current paper, we consider the version of this problem that considers con
 \end{thm}
 
 The proof of \cref{main_result2} is constructive and gives an $O(n)$ time algorithm for finding the set $X$.
+\pat{Say something about the lower bound?}
 
 The original motivation for this research was a graph drawing problem.  It is know that every $n$-vertex planar graph $G$ has a non-crossing drawing in the plane with edges of $G$ drawn as line segments and such that some set $Y$ of $\Omega(n^{1/4})$ vertices of $G$ are drawn on the $x$-axis \cite{bose.dujmovic:polynomial,dujmovic:utility}.  The set $Y$ is called a \defin{collinear set}.  For bounded-degree planar graphs, this result can be improved to $|Y|=\Omega(n^{0.8})$ \cite{dujmovic.morin:dual}.  Determining the supremum value of $\alpha$ such that every $n$-vertex planar graph has a collinear set of size $\Omega(n^{\alpha})$ remains a difficult open problem, but it is known that $\alpha < 1$ \cite{ravsky.verbitsky:collinear}.
 
@@ -84,6 +85,16 @@ We consider a relaxation of this problem in which the edges of the graph can be 
 \begin{thm}\label{one_bend_collinear}
   For every $n\ge 4$, every $n$-vertex planar graph has a $1$-bend collinear set of size at least $(8n+12)/15>0.53\overline{3}n$.
 \end{thm}
+
+\subsection{Related Work}
+
+\pat{Add: \newline
+results on edge-maximal outerplanar graphs \newline
+connected dominating sets in unit disc graphs \newline
+$2$-bend collinear sets
+}
+
+
 
 The remainder of this paper is organized as follows:  In \cref{strategy}, we describe the general strategy we use for finding connected dominating sets in triangulations.  In \cref{warm_up} we show that a simple version of this strategy can be used to obtain a connected dominating set of size at most $4n/7= 0.\overline{571428}n$, which is already better than the best known bounds for triangulations and even $4$-connected triangulations.  In \cref{full_result} we show that a more careful construction leads to a proof of \cref{main_result2}.  In \cref{one_bend}, we discuss the connection between connected dominating sets and one-bend collinear drawings that leads to \cref{one_bend_collinear}.
 
@@ -511,7 +522,9 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BestG
 
 \Cref{two_critical_handler} is the best result we have right now for handling $2$-critical graphs.  This is a shame, because it is known that maximal outerplanar graphs have connected dominating sets of size at most $4n/11$. Unfortunately our critical graphs are not maximal outerplanar---they may not even be connected.  We can end up in a situation where we have a $2$-critical graph that is a collection of disjoint $6$-vertex graphs (a triangle inside a triangle), each of which requires $2$ vetices to dominate.  In this setting $Q=R=3k$ and we need $2k$ vertices in our dominating set, so the analysis is tight.
 
-If we wanted to make use of the results for outerplanar graphs, then we would need to be way more careful in the way we choose vertices to delete.  In fact, I don't say any reasonable way to do this without using some variant of the canonical ordering (so that each intermediate graph $G_i$ is a near-triangulation).  Even then
+If we wanted to make use of the results for outerplanar graphs, then we would need to be way more careful in the way we choose vertices to delete.  In fact, I don't see any reasonable way to do this without using some variant of the canonical ordering (so that each intermediate graph $G_i$ is a near-triangulation).  Even if we could do that we'll still need something more because the process of making $G_i$ dom-minimal removes useless vertices and edges.
+
+% because we could we reach a step where $G_{r-1}$ is a $2$-critical near-triangulation but $G_{r-1}-B(G_{r-1})$ has many components.  (Think of a serpentine triangulation where one out of every $4$ faces contains three vertices inside it.)
 
 % \section{Moonshot}
 %
