@@ -47,6 +47,8 @@
 \newtheorem{observation}{Observation}
 
 \newcommand{\pat}[1]{[\textcolor{red}{PM: #1}]}
+\newcommand{\vida}[1]{[{\color{pink}VD: #1}]}
+
 
 \title{Connected Dominating Sets in Triangulations}
 \author{Prosenjit Bose \and Vida Dujmović \and Hussein Houdrouge \and Pat Morin \and Saeed Odak}
@@ -61,6 +63,11 @@
 \begin{abstract}
   We show that every $n$-vertex triangulation has a connected dominating set of size at most $7n/15$.  Equivalently, every $n$ vertex triangulation has a spanning tree with at least $8n/15$ leaves. Prior to the current work, the best known bounds were $2n/3$ and $n/3$, respectively.  As an application of this, we show that every $n$-vertex planar graph has a one-bend non-crossing drawing in which some set of at least $8n/15$ vertices is drawn on the $x$-axis.
 \end{abstract}
+
+\vida{Note that if all the vertices of G are on a line then no edge in a 1-bend drawing crosses the line and thus G is subhamiltonian. Since not all planar graphs are subhamiltonian, that implies that the tight bound for the drawings above is strictly less than n. I wonder how much smaller than n it has to be. Is it a fraction of n? Do we know anything about the side of the largest induced subhamiltonian graph in a planar triangulation? Whatever we have on that line induces a subhamiltonian planar graph. So basically the result above also says that each planar graph has induced subgraph of size at least 8n/15 that is subhamiltonian planar. Do not know if that is interesting. n/4 follows trivially from 4-colour theorem. n/2 follows from the fact that every other layer of BFS induced an outerplanar graph. 
+
+In either case we should say that n is not possible (or even better if we know that c*n is not possible for some $c<1$)
+}
 
 
 \section{Introduction}
@@ -103,12 +110,12 @@ The remainder of this paper is organized as follows:  In \cref{strategy}, we des
 % \pat{Explain how Kleitman-West result gives $3n/4$.  Explain how Matheson-Tarjan gives $2n/3$. Mention results on connected dominating sets in maximal outerplanar graphs.  Talk about connected dominating sets in unit disk graphs.}
 
 
-\section{The Strategy}
+\section{The General Strategy}
 \label{strategy}
 
 For a graph $G$, let $|G|=|V(G)|$ denote the number of vertices of $G$.  A \defin{bridge} in a graph $G$ is an edge $e$ of $G$ such that $G-e$ has more connected components than $G$.  For a vertex $v\in G$, $N_G(v):=\{w\in V(G):vw\in E(G)\}$ is the \defin{open neighbourhood} of $v$ in $G$,  $N_G[v]:=N_G(v)\cup\{v\}$ is the \defin{closed neighbourhood} of $v$ in $G$.  For a vertex subset $S\subseteq V(G)$, $N_G[S]:=\bigcup_{v\in S} N_{G}[v]$ is the \defin{closed neighbourhood} of $S$ in $G$ and $N_G(S):=N_G[S]\setminus S$ is the \defin{open neighbourhood} of $S$ in $G$.  A set $X\subseteq V(G)$ \defin{dominates} a set $B\subseteq V(G)$ if $B\subseteq N_G[X]$.  Thus, $X$ is a dominating set of $G$ if and only if $X$ dominates $V(G)$.
 
-A \defin{plane graph} is a graph equipped with a non-crossing embedding in $\mathbb{R}^2$.  A plane graph is \defin{outerplane} if all its vertices appear on the outer face.  A \defin{triangle} is a cycle of length $3$. A \defin{near-triangulation} is a plane graph whose outer face is bounded by a cycle and whose inner faces are all bounded by triangles.  A \defin{generalized near-triangulation} is a plane graph whose inner faces are bounded by triangles.
+A \defin{plane graph} is a graph equipped with a non-crossing embedding in $\mathbb{R}^2$.  A plane graph is \defin{outerplane} if all its vertices appear on the outer face.  A \defin{triangle} is a cycle of length $3$. A \defin{near-triangulation} is a plane graph whose outer face is bounded by a cycle and whose inner faces are all bounded by triangles.  A \defin{generalized near-triangulation} is a plane graph whose inner faces are bounded by triangles. Note that a generalized near triangulation may have multiple components, cut vertices, and bridges
 
 
 For a plane graph $H$, we use the notation $B(H)$ to denote the vertex set of the outer face of $H$ and define $I(H):=V(H)\setminus B(H)$.  The vertices in $B(H)$ are \defin{boundary vertices} of $H$ and the vertices in $I(G)$ are \defin{inner vertices} of $H$. For any vertex $v$ of $H$, the \defin{inner neighbourhood} of $v$ in $H$ is defined as $N_H^+(v):=N_H(v)\cap I(H)$, the vertices in $N^+_H(v)$ are \defin{inner neighbours} of $v$ in $H$, and $\deg^+_H(v)=|N^+_H(v)|$ is the \defin{inner degree} of $v$ in $H$.
@@ -137,7 +144,7 @@ Let $G$ be a triangulation.  Our procedure for constructing a connected dominati
   In particular $G[X_r]=G[X]$ is connected.  Finally, \pref{adjacent}, with $i=r$ and \pref{outerplanar} implies that $N_G(X_r)=B(G-X_r)=V(G-X_r)$, so $X_r=X$ is a dominating set of $G$.
 \end{proof}
 
-We will present two algorithms that grow a connected dominating in small batches $\Delta_0,\Delta_1,\ldots,\Delta_{r-2}$ that result in a sequence of sets $X_1,\ldots,X_{r-1}$ where $X_{i}=\bigcup_{j=0}^{i-1}\Delta_j$.  However, each of these algorithms is unable to continue once they reach a point where each vertex in $B(G-X_i)$ has inner-degree at most $1$ in $G-X_i$.  We begin by studying the graphs that cause this to happen.
+We will present two algorithms that grow a connected dominating in small batches $\Delta_0,\Delta_1,\ldots,\Delta_{r-2}$ that result in a sequence of sets $X_1,\ldots,X_{r-1}$ where $X_{i}=\bigcup_{j=0}^{i-1}\Delta_j$.  Each of these algorithms is unable to continue once they reach a point where each vertex in $B(G-X_i)$ has inner-degree at most $1$ in $G-X_i$.  We begin by studying the graphs that cause this to happen.
 
 \subsection{Critical Graphs}
 
@@ -202,6 +209,7 @@ where the last inequality follows from \cref{base_case}.
 
 The final dominating set $X_r$ has size $|X_r| = |X_{r-1}| + \Delta_{r-1} = r - 1 +|I_{r-1}|$, so the size of $|X_r|$ can be upper-bounded by maximizing $r-1+|I_{r-1}|$ subject to \cref{c1,c2}.  More precisely, by setting $x:=r$ and $y:=|I_{r-1}|$, the maximum size of $X_r$ is upper-bounded by the maximum value of $x-1+y$ subject to the constraints
 \begin{align*}
+x,y \ge 0 \\
   x - 1 + 4y & \le n \\
   2x + 1 + y & \le n
 \end{align*}
@@ -222,21 +230,21 @@ Besides the data structure used for representing the triangulation $G$, each ver
 
 Next we devise an algorithm that produces a smaller connected dominating set than what $\textsc{SimpleGreedy}(G)$ can guarantee.  This involves a more careful analysis of the cases in which \textsc{SimpleGreedy} is forced to take a vertex $v_i$ with $\deg^+_{G_i}(v_i)=2$.  We will show that when this happens, one of the following two cases occurs:
 \begin{compactenum}
-  \item We can directly complete the dominating set $X_r$ by adding a set $\Delta_{r-1}$ with at most $|G_i|/3$ additional vertices.
-  \item We can add a pair of vertices $\{v_i,w_i\}$ that increase the size of the dominated set $N[X_{i+1}]$ by at least $5$ but only increase the size of the boundary set $B(G_{i+1})$ by at most $2$.
+  \item We can directly complete the dominating set $X_r=X_{i+1}$ by adding a set $\Delta_{r-1}=\Delta_i$ with at most $|G_i|/3$ additional vertices.
+  \item We can add a pair of vertices $\{v_i,w_i\}$ that increase the size of the dominated set $D_{i+1}=N[X_{i+1}]$ by at least $5$ but only increase the size of the boundary set $B_{i+1}=B(G_{i+1})$ by at most $2$.
 \end{compactenum}
 
 \subsection{A Heuristic Analysis}
-Before diving into the details, we present a heuristic analysis.  Roughly speaking, Case~1 above implies that each vertex left in $G_{r-1}$ contributes $1/3$ to the final dominating set $X_r$.  This implies that Case~2 above is more efficient than taking a vertex of inner-degree $3$.  Indeed, Case~1 has a cost $2+2/3=8/3$ but decreases the number of undominated vertices by $5$.  On the other hand, choosing a vertex of inner-degree $3$ has a cost of $1+3/3=2$ but only decreases the number of undominated vertices by $3$.  If we consider the progress over cost ratio, the former case has a ratio of $5/(8/3)=15/8=1.875$ while the latter case has a ratio of $3/2=1.5$. We formalize this by setting a linear program to bound the maximum size of the final dominating set $X_r$.
+Before diving into the details of how to make all this work, we present a heuristic analysis that explains why it gives a set $X$ of size at most $7n/15$.  Roughly speaking, Case~1 above implies that each vertex left in $G_{r-1}$ contributes $1/3$ to the size of the final dominating set $X_r$.  This implies that Case~2 above is more efficient than taking a vertex of inner-degree $3$.  Indeed, Case~1 adds two vertices $v_i$ and $y_i$ and increases the size of the boundary by $2$.  If the algorithm were to stop in the next iteration, these two new boundary vertices would contribute an additional $2/3$ to the size of $X_r$. Thus, Case~1 has a cost of $2+2/3=8/3$.  On the other hand, Case~1 decreases the number of undominated vertices by $5$, which is a measure of its progress.  On the other hand, choosing a vertex of inner-degree $3$ adds one vertex to $X$ and increases the size of the boundary by $2$, resulting in a cost of $1+2/3=5/3$ but only decreases the number of undominated vertices by $3$.  If we consider the ``progress over cost ratio'', the former case has a ratio of $5/(8/3)=15/8=1.875$ while the latter case has a ratio of $3/(5/3)=1.8$. We will formalize this informal argument by setting up a linear program to bound the maximum size of the final dominating set $X_r$. \pat{Maybe we can turn this informal argument into a potential function argument, instead?}
 
-In the end, the theoretical worst-case for the resulting algorithm is that it chooses inner-degree $3$ vertices for the first $r-1$ consecutive rounds, resulting in a graph $G_{r-1}$ with $|B(G_{r-1})|\approx 2r$ and $|I(G_{r-1})|\approx n-3r$, so $|G_{r-1}|\approx 2r+n-3r=n-r$.  The algorithm then finishes in Case~1, above, by taking a set $\Delta_{r-1}$ of size $(n-r)/3$.  This results in a dominating set $X_r$ of size roughly $r+(n-r)/3=n/3+(2/3)r$. This is a strictly increasing function of $r$, but the value of $r$ is constrained by the fact that $G_{r-1}$ has no vertices of inner-degree $3$, which implies that $|B(G_{r-1})|\ge |I(G_{r-1})|$.  This translates to the constraint $2r \le n-3r$ or $r \le n/5$.  Thus, the final dominating set has size at most $n/3 + (2/3)n/5=7n/15$.  We now make this heuristic analysis more formal.
+In the end, optimizing this linear program shows that they hypothetical worst-case for the resulting algorithm is that it chooses inner-degree $3$ vertices for the first $r-1$ consecutive rounds, resulting in a graph $G_{r-1}$ with $|B(G_{r-1})|\approx 2r$ and $|I(G_{r-1})|\approx n-3r$, so $|G_{r-1}|\approx 2r+n-3r=n-r$.  The algorithm then finishes in Case~1, above, by taking a set $\Delta_{r-1}$ of size $|G_{r-1}|\approx (n-r)/3$.  This results in a dominating set $X_r$ of size roughly $r+(n-r)/3=n/3+(2/3)r$. This is a strictly increasing function of $r$, but the value of $r$ is constrained by the fact that $G_{r-1}$ has no vertices of inner-degree $3$, which implies that $|B(G_{r-1})|\ge |I(G_{r-1})|$.  This translates to the constraint $2r \le n-3r$ or $r \le n/5$.  Thus, the final dominating set has size at most $n/3 + (2/3)n/5=7n/15$.  We now make this heuristic analysis more formal.
 
 \subsection{Dom-Minimal and Dom-Preserving Subgraphs}
 
 We begin by identifying unnecessary vertices and edges that can appear in the graphs $G_1,\ldots,G_{r-1}$ during the construction of $X$.   We say that a near-triangulation $H$ is \defin{dom-minimal} if
 \begin{compactenum}[({DM}1)]
-    \item each vertex $v\in B(H)$ has $\deg^+_H(v)\ge 1$; and \label{bad_vertex}
-    \item each edge $vw$ on the boundary of the outer face of $H$ is on the boundary an inner face $vwx$ of $H$ for some $x\in I(H)$. \label{bad_edge}
+    \item each vertex $v\in B(H)$ has $\deg^+_H(v)\ge 1$; and \label[dm]{bad_vertex}
+    \item each edge $vw$ on the boundary of the outer face of $H$ is on the boundary an inner face $vwx$ of $H$ for some $x\in I(H)$. \label[dm]{bad_edge}
 \end{compactenum}
 We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each of its biconnected components are dom-minimal.
 
@@ -245,7 +253,7 @@ We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each 
 \end{obs}
 
 \begin{proof}
-   If $vw$ is a bridge in $H$ then both $v$ and $w$ are in $B(H)$.  Since $vw$ is a bridge in $H$, there is no inner face $vwx$ in $H$. Thus $H$ does not satisfy the second condition for dom-minimality.
+   If $vw$ is a bridge in $H$ then both $v$ and $w$ are in $B(H)$.  Since $vw$ is a bridge in $H$, there is no path $vxw$ in $H$ and hence no inner face $vwx$ in $H$. Thus $H$ does not satisfy \cref{bad_edge}.
 \end{proof}
 
 A subgraph $H'$ of a generalized near-triangulation $H$ is \defin{dom-preserving} if
@@ -261,7 +269,7 @@ A subgraph $H'$ of a generalized near-triangulation $H$ is \defin{dom-preserving
 \end{obs}
 
 \begin{proof}
-  Each vertex $v\in I(H')$ is adjacent to some vertex $w\in \Delta$.  Since $N_{H'}(v)=N_H(v)$, $w\in\Delta\cap V(H')$, so $v$ is dominated by $\Delta\cap V(H')$.  Since this is true for each $v\in I(H)=I(H')$, $\Delta\cap V(H')$ dominates $I(H)$.
+  Each vertex $v\in I(H)=I(H')$ is adjacent to some vertex $w\in \Delta$.  Since $N_{H'}(v)=N_H(v)$, $w\in\Delta\cap V(H')$, so $v$ is dominated by $\Delta\cap V(H')$.  Since this is true for each $v\in I(H)=I(H')$, $\Delta\cap V(H')$ dominates $I(H)$.
 \end{proof}
 
 \begin{lem}\label{dom_minimal}
@@ -371,6 +379,9 @@ A subgraph $H'$ of a generalized near-triangulation $H$ is \defin{dom-preserving
 %
 % \pat{Did I really need to change the definition of dom-minimal?  Check.}
 
+
+Note that the next two lemmas each consider a graph $H$ that is a near triangulation, not a generalized near-triangulation.
+
 \begin{lem}\label{chord_incident}
   let $H$ be a dom-minimal near-triangulation and let $v_0$ be a vertex in $B(H)$ with $|N_H(v_0)\cap B(H)|\ge 3$.  Then $\deg^+_H(v_0)\ge 2$.  In other words, if $v_0$ is incident to a chord of the outerplane graph $H[B(H)]$, then $v_0$ is incident to at least $2$ inner vertices of $H$.
 \end{lem}
@@ -413,6 +424,9 @@ A subgraph $H'$ of a generalized near-triangulation $H$ is \defin{dom-preserving
    Since $w\in B(H-B(H))$, $w$ is adjacent to at least one vertex, say $v_0$, of $f$.  If $v_0v_{1}$ is a chord of $H[B(H)]$ then, by \cref{chord_incident}, $\deg^+_H(v_0)\ge 2$ and we are done, so assume that $v_0v_{1}$ is not a chord of $H[B(H)]$.  Since $H$ is dom-minimal, $H$ contains an inner face $v_0v_{1}x$ where $x$ is an inner vertex of $H$.  If $x\neq w$, then $\deg_H^+(v_0)\ge 2$ and we are done, so assume that $x=w$.  Therefore, $w$ is adjacent to $v_1$.  Thus, by assuming that $\deg^+_H(v_0)\le 2$ and that $v_0w$ is an edge of $H$ we were able to show that $v_0v_1$ is not a chord of $H[B(H)]$ and that $v_0v_1w$ is an inner face of $H$. This latter fact implies that $v_1w$ is an edge of $H$, so we can repeat this argument to establish that $\deg^+_H(v_j)\ge 2$ for some $j\in\{0,\ldots,k-1\}$ or that $v_{j}v_{j+1}$ is not a chord of $H[B(H)]$ and that $v_{j}v_{j+1}w$ is an inner face of $H$ for all $j\in\{0,\ldots,k-1\}$.  In the first case we are obviously done. In the latter case, $H$ is the graph described in the second alternative given by the lemma.
 \end{proof}
 
+
+Note that the next three lemmas consider the case where $H$ is a generalized near triangulation. 
+
 \begin{lem}\label{really_good}
   Let $H$ be a dom-minimal generalized near-triangulation.  Then either:
   \begin{compactenum}[(1)]
@@ -446,9 +460,9 @@ A subgraph $H'$ of a generalized near-triangulation $H$ is \defin{dom-preserving
 
   Let $v_0,\ldots,v_{k-1}$ be the cycle that bounds the inner face $f$ of $H[B(H)]$ that contains $w$ in its interior.  Since $H$ is a near-triangulation, $H$ contains triangles $v_0v_1x$ and $v_{k-1}v_0 y$ with $x$ and $y$ in the interior of or on the boundary of $f$.  Since $f$ is a face of $H[B(H)]$ each of $x$ and $y$ is in the interior of $f$.  At least one of $x$ or $y$ is equal to $w$, say $x$, since otherwise $\deg^+_H(v_0)\ge 3$.  Therefore $v_0v_1 w$ is an inner face of $H$.  Let $j\ge 1$ be the maximum integer such that $v_{a-1}v_{a}w$ is an inner face of $H$ for all $a\in\{1,\ldots,j\}$.  Note that $j<\ell-1$ since, otherwise, the component of $H-B(H)$ that contains $w$ contains only a single vertex, contradicting the fact that $\deg^+_{H-B(H)}(w)=2$.
 
-  Since $H$ is a near-triangulation and $f$ is a face of $H$, $H$ has some face $v_j v_{j+1} z$ with $z$ in the interior of $f$.  By the definition of $j$, $z\neq w$.  Therefore, $N_H^+(v_j)\supseteq \{w,z\}$ and, since $\deg^+_H(v_j)\le 2$, $N_H^+(v_j))= \{w,z\}$.  Therefore $N^+_H(v_j)\subseteq N_H[w]$.
+  Since $H$ is a near-triangulation and $f$ is a face of $H[B(H)]$, $H$ has some face $v_j v_{j+1} z$ with $z$ in the interior of $f$.  By the definition of $j$, $z\neq w$.  Therefore, $N_H^+(v_j)\supseteq \{w,z\}$ and, since $\deg^+_H(v_j)\le 2$, $N_H^+(v_j))= \{w,z\}$.  Therefore $N^+_H(v_j)\subseteq N_H[w]$.  Since $f$ is a face of $H[B(H)]$, the only neighbours of $v_j$ in $B(H)$ are $v_{j-1}$ and $v_{j+1}$. Since $H$ is a near-triangulation, this implies that $w v_j z$ is a face of $H$.  In particular $wz$ is an edge of $H$.\pat{Add the edge $wz$ to the figure.}
 
-  All that remains is to show that $\deg^+_{H-v_0}(w)\ge 3$.  First, observe that $z$ is in $B(H-B(H))$, so $z$ does not contribute to $\deg^+_{H-B(H)}(w)$. We claim that $z$ is in $I(H-v_0)$, so $z$ does contribute to $\deg^+_{H-v_0}(w)$.  Indeed, the only other possibility is that $z$ is adjacent to $v_0$.  In this case, consider the cycle $C:=v_0,\ldots,v_j,z$.  This cycle has $w$ in its interior. The vertices of $N^+_{H-B(H)}(w)$ must be in the interior of $C$. For each $a\in\{1,\ldots,j\}$, $v_{a-1}v_a w$ is a face of $H$, so the cycle $D:=v_0,\ldots,v_j,w$ does not contain any vertices of $N^+_{H-B(H)}(w)$ in its interior.  Therefore, the vertices in $N^+_{H-B(H)}(w)$ must be in the interior of the cycle $\overline{D}:=v_0,w,v_j,z$.  Since $H$ is a near-triangulation, this implies that at least one of $v_0$ or $v_j$ is adjacent to some vertex in $I(H)\setminus\{w,z\}$. But this is not possible since it would imply that $\deg^+_H(v_0)\ge 3$ or $\deg^+_H(v_j)\ge 3$.  Therefore $v_0$ is not adjacent to $z$, so $z$ is in the interior of $H-v_0$ and $N^+_{H-v_0}(w)\supseteq N^+_{H-B(H)}(w)\uplus\{z\}$, so $\deg^+_H(w)\ge 3$.
+  All that remains is to show that $\deg^+_{H-v_0}(w)\ge 3$.  First, observe that $z$ is in $B(H-B(H))$, so $z$ does not contribute to $\deg^+_{H-B(H)}(w)$. We claim that $z$ is in $I(H-v_0)$, so $z$ does contribute to $\deg^+_{H-v_0}(w)$.   Indeed, the only other possibility is that $z$ is adjacent to $v_0$.  In this case, consider the cycle $C:=v_0,\ldots,v_j,z$.  This cycle has $w$ in its interior. The vertices of $N^+_{H-B(H)}(w)$ must be in the interior of $C$. For each $a\in\{1,\ldots,j\}$, $v_{a-1}v_a w$ is a face of $H$, so the cycle $D:=v_0,\ldots,v_j,w$ does not contain any vertices of $N^+_{H-B(H)}(w)$ in its interior.  Therefore, the vertices in $N^+_{H-B(H)}(w)$ must be in the interior of the cycle $\overline{D}:=v_0,w,z$.  Since $H$ is a near-triangulation, this implies that at least one of $v_0$ is adjacent to some vertex in $I(H)\setminus\{w,z\}$. But this is not possible since it would imply that $\deg^+_H(v_0)\ge 3$.  Therefore $v_0$ is not adjacent to $z$, so $z$ is in the interior of $H-v_0$ and $N^+_{H-v_0}(w)\supseteq N^+_{H-B(H)}(w)\uplus\{z\}$, so $\deg^+_H(w)\ge 3$.
 \end{proof}
 
 \begin{lem}\label{big_boundary}
@@ -456,7 +470,7 @@ A subgraph $H'$ of a generalized near-triangulation $H$ is \defin{dom-preserving
 \end{lem}
 
 \begin{proof}
-  Each vertex $w$ in $B(H-B(H))$ is adjacent to at least one vertex $v_0$ on the outer face of $H$.  The vertex $v_0$ has two neighbours $v_{-1}$ and $v_1$ on the outer face of $H$. Since $H$ is dom-minimal, it contains faces $v_0v_1x$ and $v_0v_{-1}y$ with $x$ and $y$ being inner vertices of $H$.  Then at least one of $x$ or $y$ must be $w$ since, otherwise, $\deg^+_H(v_0)\ge 3$ \pat{Explain}.   But then $w$ is adjacent to at least one of $v_{-1}$ or $v_1$.  Therefore $w$ is adjacent to at least two vertices in $B(H)$.  Therefore, each $w\in B(H-B(H))$ contributes at least $2$ to $\sum_{v\in B(H)}\deg^+_H(v)$, so $2|B(H)|\ge \sum_{v\in B(H)}\deg^+_H(v)\ge 2|B(H-H(B))|$, as required.
+  Each vertex $w$ in $B(H-B(H))$ is adjacent to at least one vertex $v_0$ on the outer face of $H$.  The vertex $v_0$ has two neighbours $v_{-1}$ and $v_1$ on the outer face of $H$. Since $H$ is dom-minimal, it contains faces $v_0v_1x$ and $v_0v_{-1}y$ with $x$ and $y$ being inner vertices of $H$.  Then at least one of $x$ or $y$ must be $w$ since, otherwise, $\deg^+_H(v_0)\ge 3$. (Note that the case $x=y\neq w$ is not possible since $v_0v_1x$ and $v_0v_{-1}y$ are each faces of $H$, which would leave no place for $w$.)   But then $w$ is adjacent to at least one of $v_{-1}$ or $v_1$.  Therefore $w$ is adjacent to at least two vertices in $B(H)$.  Therefore, each $w\in B(H-B(H))$ contributes at least $2$ to $\sum_{v\in B(H)}\deg^+_H(v)$, so $2|B(H)|\ge \sum_{v\in B(H)}\deg^+_H(v)\ge 2|B(H-H(B))|$, as required.
 \end{proof}
 
 We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B(H)$ is critical and $\deg^+_H(v)\le 2$ for each $v\in B(H)$.  Observe that any critical graph is also $2$-critical.
@@ -466,7 +480,10 @@ We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B
 \end{lem}
 
 \begin{proof}
-  Let $H_0$ be a graph obtained by triangulating the inner faces of $H[B(H-B(H))]$. Now $3$-colour $H_0$ and let $X$ be the smallest colour class.
+  \pat{There is some work to do here.  We need to do a star triangulation on each face of $H_0[B(H_0)]$ and then argue that, if we choose the colour class on the high-degree vertex then we can afford to also take the interior vertex.  Faces of size $4$ are really tight, but we will still be able to get $1/3$.}
+  Let $H_0:=H-B(H)$ and let $H_1$ be a graph obtained by triangulating the inner faces of $H_0[B(H_0)]$. Since $H_1$ is outerplane, it has a proper $3$-colouring.  Let $X$ be the smallest colour class in this colouring.  Each face of $H_1$ contains at least one vertex in $X$, so 
+  
+  Now $3$-colour $H_0$ and let $X$ be the smallest colour class.
   For each vertex $w\in X$, choose a vertex $v\in N_H(w)\cap B(H)$ and put $v$ in $X$.  The size of the resulting set $X$ is at most $2|X_0|\le 2|B(H-B(H))|/3$.
 \end{proof}
 
