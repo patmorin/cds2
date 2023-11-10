@@ -15,6 +15,7 @@
 \usepackage[capitalize]{cleveref}
 \usepackage{paralist}
 \usepackage[longnamesfirst,numbers,sort&compress]{natbib}
+\usepackage[normalem]{ulem}
 
 \usepackage{listings,newtxtt}
 \lstset{basicstyle=\ttfamily, keywordstyle=\bfseries}
@@ -50,6 +51,7 @@
 
 \newcommand{\pat}[1]{[\textcolor{red}{PM: #1}]}
 \newcommand{\vida}[1]{[{\color{pink}VD: #1}]}
+\newcommand{\saeed}[1]{[{\color{cyan}SO: #1}]}
 
 
 \title{Connected Dominating Sets in Triangulations}
@@ -71,6 +73,9 @@
 In either case we should say that n is not possible (or even better if we know that c*n is not possible for some $c<1$)
 }
 
+\saeed{As far as I am aware, all we know is Goldner–Harary Graph (\url{https://en.wikipedia.org/wiki/Goldner–Harary_graph}) is the smallest triangulation that is not subhamiltonian. you can put 10/11 of the vertices on a line. so the trivial upper bound on the size of the one-bend collinear set is 10/11. It would be interesting if we could glue a lot of copies of this example nicely to get a better upper bound. We conjecture that the size of the connected dominating set is at most $\frac{n}{3}$.  \sout{I guess (might be wrong) that the size of the largest collinear set is also at most $\frac{2n}{3}$.}}
+
+\vida{what if we take many copies of that graph and add one dominating vertex adjacent to all the vertices on outer faces of GH graph. Did not think about this. It is the first thing that came to my mind}
 
 \section{Introduction}
 
