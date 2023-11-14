@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[75]:
+# In[15]:
 
 
 ## Stuff common to all our models
@@ -13,21 +13,18 @@ v = p.new_variable()
 # p.add_constraint(n == N)
 vars = tuple()
 t = r0, X0, D0, Q0 = v["r0"], v["X0"], v["D0"], v["Q0"]
-vars = vars + (L,)
+vars = vars + t
 t = x2, x3, x4 = v["x2"], v["x3"], v["x4"] # xi = number of times we choose inner-degree i vertex
-vars = vars + (L,)
-L = v["L"]  
-vars = vars + (L,)
+vars = vars + t
 p.add_constraint(r0 == x2 + x3 + x4 + 1) # number of rounds, including final round
 p.add_constraint(X0 == x2 + x3 + x4) # size of X_{r-1}
 p.add_constraint(D0 >= 3 + 2*x2 + 3*x3 + 4*x4) # size of N_G[X_{r-1}]
 p.add_constraint(Q0 <= 3 + x2 + 2*x3 + 3*x4) # size of N_G[X_{r-1}]
 
-vars2 = r, X, D, L, Q, K, n = v["r"], v["X"], v["D"], v["L"], v["Q"], v["K"], v["n"]
+t = r, X, D, L, Q, K, n = v["r"], v["X"], v["D"], v["L"], v["Q"], v["K"], v["n"]
+vars = vars + t
+
 p.add_constraint(n == N)  # number of vertices in G
-
-vars = vars0 + vars1 + vars2
-
 for x in vars:
     p.add_constraint(x >= 0)
 
@@ -41,14 +38,11 @@ p.add_constraint(R >= 0)
 S = v["S"] # isolated vertices after peeling two layers off of $G_{r-1}
 p.add_constraint(S >= 0)
 
-print(vars)
 p.add_constraint(x2 == 0) # We never take an inner-degree 2 vertex by itself
 p.add_constraint(r == r0 + x23u) # number of rounds, including final round
 p.add_constraint(D >= D0 + 5*x23u) # each 2-3 move creates 5 new dominated vertices
 p.add_constraint(Q <= Q0 + 2*x23u) # each 2-3 move increases boundary size by at most 2
 p.add_constraint(R <= Q)  # because G_{r-1} is 2-critical
-# p.add_constraint(R >= 3*S)  # Because each isolated vertex is surrounded
-# p.add_constraint(R >= 4*S)  # Because vertices in triangles are irrelevant in this approach
 p.add_constraint(L >= x23u) # each 2-3 move isolates v_1
 p.add_constraint(X == X0 + 2*x23u) # size of X_{r-1}
 p.add_constraint(D == X + L + Q)

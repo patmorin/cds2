@@ -99,7 +99,7 @@ We consider a relaxation of this problem in which the edges of the graph can be 
   For every $n\ge 4$, every $n$-vertex planar graph has a $1$-bend collinear set of size at least $11n/21=0.\overline{523809}n$.
 \end{thm}
 
-Note that if all the vertices of $G$ are on the $x$-axis then no edge in a $1$-bend drawing of $G$ crosses the $x$-axis and thus $G$ has a $2$-page book embedding. This implies that $G$ is a spanning subgraph of some Hamiltonian graph $G^+$.  The Goldner–Harary graph is an $11$-vertex triangulation that is not Hamiltonian, giving an example of a graph that has $1$-bend collinear set of size greater than $10n/11=0.90\overline{90}n$.jae
+Note that if all the vertices of $G$ are on the $x$-axis then no edge in a $1$-bend drawing of $G$ crosses the $x$-axis, so this one bend drawing is a $2$-page book-embedding of $G$. This implies that $G$ is a spanning subgraph of some Hamiltonian triangulation $G^+$.  The Goldner–Harary graph is an $11$-vertex triangulation that is not Hamiltonian. It follows that the graph $G$ obtained by taking $k$ vertex-disjoint copies of the Goldner-Harary graph has $n:=11k$ vertices and has no $1$-bend collinear set of size greater than $10k=10n/11=0.90\overline{90}n$.
 
 
 
@@ -208,10 +208,6 @@ Since $D_{r-1}$ and $I_{r-1}$ partition $V(G)$,
 \begin{equation}
   n = |D_{r-1}| + |I_{r-1}| \ge 2r+1 + |I_{r-1}|  \enspace . \label{c1}
 \end{equation}
-% so
-% \begin{equation}
-%     r\le \frac{n-|I_{r-1}|-1}{2}  \enspace .
-% \end{equation}
 
 Since $X_{r-1}$ and $B_{r-1}$ are disjoint and $D_{r-1}\supseteq B_{r-1}\cup X_{r-1}$, we have $|D_{r-1}|\ge |X_{r-1}| + |B_{r-1}|=r-1+|B_{r-1}|$.  Therefore,
 \begin{align}
@@ -475,7 +471,7 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
 
   Let $v_0,\ldots,v_{k-1}$ be the cycle that bounds the inner face $f$ of $H[B(H)]$ that contains $w$ in its interior.  Since $H$ is a near-triangulation, $H$ contains triangles $v_0v_1x$ and $v_{k-1}v_0 y$ with $x$ and $y$ in the interior of or on the boundary of $f$.  Since $f$ is a face of $H[B(H)]$ each of $x$ and $y$ is in the interior of $f$.  At least one of $x$ or $y$ is equal to $w$, say $x$, since otherwise $\deg^+_H(v_0)\ge 3$.  Therefore $v_0v_1 w$ is an inner face of $H$.  Let $j\ge 1$ be the maximum integer such that $v_{a-1}v_{a}w$ is an inner face of $H$ for all $a\in\{1,\ldots,j\}$.  Note that $j<\ell-1$ since, otherwise, the component of $H-B(H)$ that contains $w$ contains only a single vertex, contradicting the fact that $\deg^+_{H-B(H)}(w)=2$.
 
-  Since $H$ is a near-triangulation and $f$ is a face of $H[B(H)]$, $H$ has some face $v_j v_{j+1} z$ with $z$ in the interior of $f$.  By the definition of $j$, $z\neq w$.  Therefore, $N_H^+(v_j)\supseteq \{w,z\}$ and, since $\deg^+_H(v_j)\le 2$, $N_H^+(v_j))= \{w,z\}$.  Therefore $N^+_H(v_j)\subseteq N_H[w]$.  Since $f$ is a face of $H[B(H)]$, the only neighbours of $v_j$ in $B(H)$ are $v_{j-1}$ and $v_{j+1}$. Since $H$ is a near-triangulation, this implies that $w v_j z$ is a face of $H$.  In particular $wz$ is an edge of $H$.\pat{Add the edge $wz$ to the figure.}
+  Since $H$ is a near-triangulation and $f$ is a face of $H[B(H)]$, $H$ has some face $v_j v_{j+1} z$ with $z$ in the interior of $f$.  By the definition of $j$, $z\neq w$.  Therefore, $N_H^+(v_j)\supseteq \{w,z\}$ and, since $\deg^+_H(v_j)\le 2$, $N_H^+(v_j))= \{w,z\}$.  Therefore $N^+_H(v_j)\subseteq N_H[w]$.  Since $f$ is a face of $H[B(H)]$, the only neighbours of $v_j$ in $B(H)$ are $v_{j-1}$ and $v_{j+1}$. Since $H$ is a near-triangulation, this implies that $w v_j z$ is a face of $H$.  In particular $wz$ is an edge of $H$.
 
   All that remains is to show that $\deg^+_{H-v_0}(w)\ge 3$.  First, observe that $z$ is in $B(H-B(H))$, so $z$ does not contribute to $\deg^+_{H-B(H)}(w)$. We claim that $z$ is in $I(H-v_0)$, so $z$ does contribute to $\deg^+_{H-v_0}(w)$.   Indeed, the only other possibility is that $z$ is adjacent to $v_0$.  In this case, consider the cycle $C:=v_0,\ldots,v_j,z$.  This cycle has $w$ in its interior. The vertices of $N^+_{H-B(H)}(w)$ must be in the interior of $C$. For each $a\in\{1,\ldots,j\}$, $v_{a-1}v_a w$ is a face of $H$, so the cycle $D:=v_0,\ldots,v_j,w$ does not contain any vertices of $N^+_{H-B(H)}(w)$ in its interior.  Therefore, the vertices in $N^+_{H-B(H)}(w)$ must be in the interior of the cycle $\overline{D}:=v_0,w,z$.  Since $H$ is a near-triangulation, this implies that at least one of $v_0$ is adjacent to some vertex in $I(H)\setminus\{w,z\}$. But this is not possible since it would imply that $\deg^+_H(v_0)\ge 3$.  Therefore $v_0$ is not adjacent to $z$, so $z$ is in the interior of $H-v_0$ and $N^+_{H-v_0}(w)\supseteq N^+_{H-B(H)}(w)\uplus\{z\}$, so $\deg^+_H(w)\ge 3$.
 \end{proof}
@@ -522,15 +518,14 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BestG
 \begin{thm}\label{best_greedy}
   When applied to an $n$-vertex triangulation $G$,  $\textsc{BestGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $10n/21\pm O(1)$.
 \end{thm}
-\hussein{Is adding the following inequality to the constrains helpful  $r \leq |E|/4 \leq 3n/4 - 3/2$? I don t think so  }
+\hussein{Is adding the following inequality to the constrains helpful  $r \leq |E|/4 \leq 3n/4 - 3/2$? I don t think so  } \pat{No: The optimal is achieve when $r\approx n/7$}
 \begin{proof}
   For each integer $t\ge 3$, let $x_t$ be the number of times $\textsc{BetterGreedy}(G)$ falls into case $1$ and chooses $v_i$ such that $\deg^+_{G_i}(v_i)=t$.  Let $z$ be the number of times $\textsc{BetterGreedy}(G)$ falls into Case~2.  Let
   \[
      D:=|D_{r-1}| = 3 + \sum_{t\ge 3}tx_t + 5z \enspace .
   \]
-  Let $I:=|I(G_{r-1})|$, let $B:=|B(G_{r-1})|$, let $Q:=|B(G_{r-1}-B(G_{r-1}))|$ and let $R:=|I(G_{r-1}-B(G_{r-1}))|$.  Then, by \cref{big_boundary} and \cref{base_case}
+  Let $I:=|I(G_{r-1})|$, let $B:=|B(G_{r-1})|$, let $Q:=|B(G_{r-1}-B(G_{r-1}))|$, let $R:=|I(G_{r-1}-B(G_{r-1}))|$, and let $S:=|I(G_{r-1}-B^2(G_{r-1}))|$.  Then, by \cref{big_boundary} and \cref{base_case}
 
-  \hussein{S is equals to $I$ ?}
   \begin{equation}
     Q \ge R \ge 3S \enspace . \label{best2}
   \end{equation}
