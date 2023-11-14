@@ -2,7 +2,7 @@
 \label{one_bend}
 This section illustrates an application for a connected dominating set in planar triangulation. We show that every connected dominating set induces a $1$-bend collinear set. An \defin{$h$-bend drawing} of a planar graph $G$ is an embedding in the plane such that every edge is drawn as a sequence of at most $h + 1$ straight line segment. For $h \in \mathbb{N}$, a set $S \subseteq V(G)$ is \defin{$h$-bend collinear set} if there is an $h$-bend drawing of $G$ that maps $S$ to a straight line.
 
-We are interested in finding bounds on the size of $h$-bend collinear set. For $0$-bend collinear set, \cite{DBLP:journals/jct/GrunbaumW73}\cite{DBLP:conf/wg/RavskyV11}\cite{DBLP:journals/jocg/LozzoDFMR18} imply that planar triangulation has a 0-bend collinear set of size at most $O(n^{\sigma})$ where $\sigma < 0.986$. Moreover, every planar triangulation has a 0-bend collinear set of size at least $\Omega(\sqrt{n})$ \cite{DBLP:journals/dcg/BoseDHLMW09} \cite{DBLP:journals/jgaa/Dujmovic17}. In a recent work, Dujmovic and Morin \cite{DBLP:conf/compgeom/DujmovicM19} show that every planar triangulation with maximum degree $\Delta$ has $0$-bend collinear set of size at least $\Omega(\frac{n^{0.8}}{\Delta^4})$.
+We are interested in finding bounds on the size of $h$-bend collinear set. For $0$-bend collinear set, constructions of non-Hamiltonian cubic triconnected planar graphs \cite{DBLP:journals/jct/GrunbaumW73,DBLP:conf/wg/RavskyV11,DBLP:journals/jocg/LozzoDFMR18} imply that planar triangulation has a 0-bend collinear set of size at most $O(n^{\sigma})$ where $\sigma < 0.986$. Moreover, every planar triangulation has a 0-bend collinear set of size at least $\Omega(\sqrt{n})$ \cite{DBLP:journals/dcg/BoseDHLMW09} \cite{DBLP:journals/jgaa/Dujmovic17}. In a recent work, Dujmovic and Morin \cite{DBLP:conf/compgeom/DujmovicM19} show that every planar triangulation with maximum degree $\Delta$ has $0$-bend collinear set of size at least $\Omega(\frac{n^{0.8}}{\Delta^4})$.
 
 For the $1$-bend drawing of planar triangulation with $n$ vertices,  Everett et al. \cite{DBLP:conf/gd/EverettLLW07} show the existence of a set $\mathcal{U}$ of $n$ distinct points in the plane such that every $n$-vertex planar graph admits an embedding on vertex set $\mathcal{U}$ with at most one bend along each edge. Furthermore, Giacomo et al. \cite{DBLP:journals/comgeo/GiacomoDLW05} show that for a linear ordering $L$ of vertices of a planar triangulation $G$ and strictly convex curve $\lambda$, there is a $1$-bend planar drawing of $G$ such that vertices of $G$ appear on $\lambda$ with the same order in $L$.
 
@@ -77,7 +77,7 @@ We provide a proof that a spanning tree induces a 1-bend Collinear Set. Precisel
 
 \begin{thm} \label{app-main}
 
-Let $G$ be a planar graph and $T$ be a spanning tree of $G$. Then, $G$ has a $1$-bend plane drawing such that all the leaves of $T$ form a collinear set.
+Let $G$ be a planar graph and $T$ be a spanning tree of $G$. Then, the leaves of $T$ form a $1$-bend collinear set for $G$.
 
 \end{thm}
 
@@ -98,12 +98,16 @@ Let $G$ be a planar graph and $T$ be a spanning tree of $G$. Then, $G$ has a $1$
         \item [(P3)] if $uv \notin E(T)$, then $|uv \cap \ell| = 2$.
     \end{enumerate}
 
-    The properties P1-P3 guarantee that $\ell$ is a 2-proper curve. Since the tree $T$ is not empty, $\ell$ on the circle of a vertex in $T$ touches a face of $\Gamma$. Therefore, $\ell$ is $2$-proper good curve and by Observation 1, there exists a $1$-bend drawing of $G$ such that all the vertices on $\ell$ are collinear.
+    The properties P1-P3 guarantee that $\ell$ is a 2-proper curve. Since the tree $T$ is not empty, $\ell$ on the circle of a vertex in $T$ touches a face of $\Gamma$. Therefore, $\ell$ is $2$-proper good curve and by Observation 1, there exists a $1$-bend collinear set for $G$ formed by the leaves of $T$.
 
 
 \end{proof}
 
 
 \begin{thm}
-    Let $G$ be a planar graph, then $G$ has a $1$-bend collinear set of size at least $\frac{10|G|}{17}$.
+    Let $G$ be a planar graph on $n$ vertices, then $G$ has a $1$-bend collinear set of size at least $n(1 - \frac{10}{21})$.
 \end{thm}
+
+\begin{proof}
+We first triangulate $G$ by adding edges. So, $G$ becomes an edge maximal planar graph. We apply Theorem 4 to obtain a dominating set $X$ of size at most $10n/21$. Next, we compute a spanning tree $T$ on $G[X]$. we append every vertex $v \in V(G)\setminus X$ to $T$ as leaf. This operation is possible because every $v \in V(G) \setminus X$ is dominated by $X$. Thus, $T$ has at least $n(1 - 10/21)$ leaves. By Theorem 6, we obtain the desired 1-bend collinear set.
+\end{proof}

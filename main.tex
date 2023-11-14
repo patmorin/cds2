@@ -52,7 +52,7 @@
 \newcommand{\pat}[1]{[\textcolor{red}{PM: #1}]}
 \newcommand{\vida}[1]{[{\color{pink}VD: #1}]}
 \newcommand{\saeed}[1]{[{\color{cyan}SO: #1}]}
-
+\newcommand{\hussein}[1]{[\textcolor{purple}{$H^2$: #1}]}
 
 \title{Connected Dominating Sets in Triangulations}
 \author{Prosenjit Bose \and Vida Dujmović \and Hussein Houdrouge \and Pat Morin \and Saeed Odak}
@@ -65,10 +65,10 @@
 \maketitle
 
 \begin{abstract}
-  We show that every $n$-vertex triangulation has a connected dominating set of size at most $7n/15$.  Equivalently, every $n$ vertex triangulation has a spanning tree with at least $8n/15$ leaves. Prior to the current work, the best known bounds were $2n/3$ and $n/3$, respectively.  As an application of this, we show that every $n$-vertex planar graph has a one-bend non-crossing drawing in which some set of at least $8n/15$ vertices is drawn on the $x$-axis.
+  We show that every $n$-vertex triangulation has a connected dominating set of size at most $10n/21$.  Equivalently, every $n$ vertex triangulation has a spanning tree with at least $11n/21$ leaves. Prior to the current work, the best known bounds were $2n/3$ and $n/3$, respectively.  As an application of this, we show that every $n$-vertex planar graph has a one-bend non-crossing drawing in which some set of at least $11n/21$ vertices is drawn on the $x$-axis.
 \end{abstract}
 
-\vida{Note that if all the vertices of G are on a line then no edge in a 1-bend drawing crosses the line and thus G is subhamiltonian. Since not all planar graphs are subhamiltonian, that implies that the tight bound for the drawings above is strictly less than n. I wonder how much smaller than n it has to be. Is it a fraction of n? Do we know anything about the side of the largest induced subhamiltonian graph in a planar triangulation? Whatever we have on that line induces a subhamiltonian planar graph. So basically the result above also says that each planar graph has induced subgraph of size at least 8n/15 that is subhamiltonian planar. Do not know if that is interesting. n/4 follows trivially from 4-colour theorem. n/2 follows from the fact that every other layer of BFS induced an outerplanar graph.
+\vida{Note that if all the vertices of G are on a line then no edge in a 1-bend drawing crosses the line and thus G is subhamiltonian. Since not all planar graphs are subhamiltonian, that implies that the tight bound for the drawings above is strictly less than n. I wonder how much smaller than n it has to be. Is it a fraction of n? Do we know anything about the side of the largest induced subhamiltonian graph in a planar triangulation? Whatever we have on that line induces a subhamiltonian planar graph. So basically the result above also says that each planar graph has induced subgraph of size at least 11n/21 that is subhamiltonian planar. Do not know if that is interesting. n/4 follows trivially from 4-colour theorem. n/2 follows from the fact that every other layer of BFS induced an outerplanar graph.
 
 In either case we should say that n is not possible (or even better if we know that c*n is not possible for some $c<1$)
 }
@@ -83,10 +83,10 @@ A set $X$ of vertices in a graph $G$ is a \defin{dominating set} if each vertex 
 
 A \defin{triangulation} is an edge-maximal planar graph.  \citet{matheson.tarjan:dominating} proved that every $n$-vertex triangulation has a dominating set of size at most $n/3=0.33\overline{3}n$ and that there exists $n$-vertex triangulations with no dominating set of size less than $n/4=0.25n$. The gap between these upper and lower bounds stood for over $20$ years until a recent breakthrough by \citet{spacapan:domination} reduced the upper bound to $17n/53\approx 0.32075471698n$.  This was swiftly followed by an improvement to $2n/7\approx 0.2\overline{857142}n$ by \citet{christiansen.rotenberg.ea:triangulations}.
 
-In the current paper, we consider connected dominating sets in triangulations.  An easy consequence of the proof used by \citet{matheson.tarjan:dominating} is that triangulations have connected dominating sets of size at most $2n/3=0.66\overline{6}n$.  A more general result, due to  \citet{kleitman.west:spanning} shows that graphs of minimum-degree $3$ in which each edge is included in a $3$-cycle has a connected dominating set of size at most $2(n-5)/3<0.66\overline{6}n$.  \citet{kleitman.west:spanning} also show that graphs of minimum degree $4$ have connected dominating sets of size at most $(3n-8)/5<0.6n$. This result applies to triangulations of minimum degree $4$, which includes all $4$-connected triangulations.  The main result in this paper is the following:
+In the current paper, we consider connected dominating sets in triangulations.  An easy consequence of the proof used by \citet{matheson.tarjan:dominating} is that triangulations have connected dominating sets of size at most $2n/3=0.66\overline{6}n$.  A more general result, due to  \citet{kleitman.west:spanning} shows that graphs of minimum-degree $3$ in which each edge is included in a $3$-cycle have connected dominating set of size at most $2(n-5)/3<0.66\overline{6}n$.  \citet{kleitman.west:spanning} also show that graphs of minimum degree $4$ have connected dominating sets of size at most $(3n-8)/5<0.6n$. This result applies to triangulations of minimum degree $4$, which includes all $4$-connected triangulations.  The main result in this paper is the following:
 
 \begin{thm}\label{main_result2}
-  For every $n\ge 4$, every $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $(7n-12)/15< 0.46\overline{6}n$.
+  For every $n\ge 4$, every $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $10n/21= 0.\overline{476190}n$.
 \end{thm}
 
 The proof of \cref{main_result2} is constructive and gives an $O(n)$ time algorithm for finding the set $X$.
@@ -97,7 +97,7 @@ The original motivation for this research was a graph drawing problem.  It is kn
 We consider a relaxation of this problem in which the edges of the graph can be drawn as a polygonal path consisting of at most two line segments.  Such a drawing is called a \defin{$1$-bend} drawing of $G$.  A subset $Y$ of $V(G)$ is a \defin{$1$-bend collinear set} if $G$ has a $1$-bend drawing in which all vertices of $Y$ appear on the $x$-axis.  We show that, for any connected dominating set $X$ in a triangulation $G$, the set $Y:=V(G)\setminus X$ is a $1$-bend collinear set of $G$.  Combined with \cref{main_result2}, this gives:
 
 \begin{thm}\label{one_bend_collinear}
-  For every $n\ge 4$, every $n$-vertex planar graph has a $1$-bend collinear set of size at least $(8n+12)/15>0.53\overline{3}n$.
+  For every $n\ge 4$, every $n$-vertex planar graph has a $1$-bend collinear set of size at least $11n/21=0.\overline{523809}n$.
 \end{thm}
 
 \subsection{Related Work}
@@ -241,10 +241,11 @@ Next we devise an algorithm that produces a smaller connected dominating set tha
   \item We can add a pair of vertices $\{v_i,w_i\}$ that increase the size of the dominated set $D_{i+1}=N[X_{i+1}]$ by at least $5$ but only increase the size of the boundary set $B_{i+1}=B(G_{i+1})$ by at most $2$.
 \end{compactenum}
 
-\subsection{A Heuristic Analysis}
-Before diving into the details of how to make all this work, we present a heuristic analysis that explains why it gives a set $X$ of size at most $7n/15$.  Roughly speaking, Case~1 above implies that each vertex left in $G_{r-1}$ contributes $1/3$ to the size of the final dominating set $X_r$.  This implies that Case~2 above is more efficient than taking a vertex of inner-degree $3$.  Indeed, Case~1 adds two vertices $v_i$ and $y_i$ and increases the size of the boundary by $2$.  If the algorithm were to stop in the next iteration, these two new boundary vertices would contribute an additional $2/3$ to the size of $X_r$. Thus, Case~1 has a cost of $2+2/3=8/3$.  On the other hand, Case~1 decreases the number of undominated vertices by $5$, which is a measure of its progress.  On the other hand, choosing a vertex of inner-degree $3$ adds one vertex to $X$ and increases the size of the boundary by $2$, resulting in a cost of $1+2/3=5/3$ but only decreases the number of undominated vertices by $3$.  If we consider the ``progress over cost ratio'', the former case has a ratio of $5/(8/3)=15/8=1.875$ while the latter case has a ratio of $3/(5/3)=1.8$. We will formalize this informal argument by setting up a linear program to bound the maximum size of the final dominating set $X_r$. \pat{Maybe we can turn this informal argument into a potential function argument, instead?}
+% The commented out text below turns out to be completely bullshit
+% \subsection{A Heuristic Analysis}
+% Before diving into the details of how to make all this work, we present a heuristic analysis that explains why it gives a set $X$ of size at most $10n/21$.  Roughly speaking, Case~1 above implies that each vertex left in $G_{r-1}$ contributes $1/3$ to the size of the final dominating set $X_r$.  This implies that Case~2 above is more efficient than taking a vertex of inner-degree $3$.  Indeed, Case~1 adds two vertices $v_i$ and $y_i$ and increases the size of the boundary by $2$.  If the algorithm were to stop in the next iteration, these two new boundary vertices would contribute an additional $2/3$ to the size of $X_r$. Thus, Case~1 has a cost of $2+2/3=8/3$.  On the other hand, Case~1 decreases the number of undominated vertices by $5$, which is a measure of its progress.  On the other hand, choosing a vertex of inner-degree $3$ adds one vertex to $X$ and increases the size of the boundary by $2$, resulting in a cost of $1+2/3=5/3$ but only decreases the number of undominated vertices by $3$.  If we consider the ``progress over cost ratio'', the former case has a ratio of $5/(8/3)=15/8=1.875$ while the latter case has a ratio of $3/(5/3)=1.8$. We will formalize this informal argument by setting up a linear program to bound the maximum size of the final dominating set $X_r$. \pat{Maybe we can turn this informal argument into a potential function argument, instead?}
 
-In the end, optimizing this linear program shows that they hypothetical worst-case for the resulting algorithm is that it chooses inner-degree $3$ vertices for the first $r-1$ consecutive rounds, resulting in a graph $G_{r-1}$ with $|B(G_{r-1})|\approx 2r$ and $|I(G_{r-1})|\approx n-3r$, so $|G_{r-1}|\approx 2r+n-3r=n-r$.  The algorithm then finishes in Case~1, above, by taking a set $\Delta_{r-1}$ of size $|G_{r-1}|\approx (n-r)/3$.  This results in a dominating set $X_r$ of size roughly $r+(n-r)/3=n/3+(2/3)r$. This is a strictly increasing function of $r$, but the value of $r$ is constrained by the fact that $G_{r-1}$ has no vertices of inner-degree $3$, which implies that $|B(G_{r-1})|\ge |I(G_{r-1})|$.  This translates to the constraint $2r \le n-3r$ or $r \le n/5$.  Thus, the final dominating set has size at most $n/3 + (2/3)n/5=7n/15$.  We now make this heuristic analysis more formal.
+% In the end, optimizing this linear program shows that they hypothetical worst-case for the resulting algorithm is that it chooses inner-degree $3$ vertices for the first $r-1$ consecutive rounds, resulting in a graph $G_{r-1}$ with $|B(G_{r-1})|\approx 2r$ and $|I(G_{r-1})|\approx n-3r$, so $|G_{r-1}|\approx 2r+n-3r=n-r$.  The algorithm then finishes in Case~1, above, by taking a set $\Delta_{r-1}$ of size $|G_{r-1}|\approx (n-r)/3$.  This results in a dominating set $X_r$ of size roughly $r+(n-r)/3=n/3+(2/3)r$. This is a strictly increasing function of $r$, but the value of $r$ is constrained by the fact that $G_{r-1}$ has no vertices of inner-degree $3$, which implies that $|B(G_{r-1})|\ge |I(G_{r-1})|$.  This translates to the constraint $2r \le n-3r$ or $r \le n/5$.  Thus, the final dominating set has size at most $n/3 + (2/3)n/5=10n/21$.  We now make this heuristic analysis more formal.
 
 \subsection{Dom-Minimal and Dom-Preserving Subgraphs}
 
@@ -487,7 +488,18 @@ We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B
 \end{lem}
 
 \begin{proof}
-  \pat{There is some work to do here.  We should break this up into cases where we eliminate eliminate bridges and cut vertices first.  Then, finally, we're left with the case where each component of $H-B(H)$ is a $2$-connected critical graph. To deal with this, we first deal with the stupid cases where this graph is just a $3$-cycle or a cycle with one inner vertex. (We can handle these by choosing any vertex on the face).  Otherwise the graph is an outerplanar graph with stars in some of its faces.  In each such face we'll contract one of the star edges (we should choose on incident to a chord of $H[B(H)]$, which is why we had to rule out the second stupid case) to we get an outerplanar graph and those special faces are star-triangulated.  When we contract, the vertex we contract into gets a weight of $3$. All other vertices get a weight of $2$. The total weight is then $2|B(H-B(H))|+|H-BB(H)|\le |H|/3$, by \cref{big_boundary}. Then we $3$-colour and take the lowest weight colour class.  The key point is that, for each weight-$2$ vertex $w$ we choose, we have to include $w$ and a neighbour $v$ of $w$ in $B(H)$.  For each weight $3$ vertex $w$ we choose, we have to take $w$, a neighbour $v$ of $w$ in $B(H)$, and the inner vertex of $H-B(H)$ that caused $w$ to have weight $3$.}
+  \pat{There is still some work to do here.  We should break this up into cases where we eliminate bridges and cut vertices first.  Then, finally, we're left with the case where each component of $H-B(H)$ is a $2$-connected critical graph. To deal with this, we first deal with the stupid cases where this graph is just a $3$-cycle or a cycle with one inner vertex. (We can handle these by choosing any vertex on the face).  Otherwise the graph is an outerplanar graph with stars in some of its faces.  See \cref{contraction}. In each such face we'll contract one of the star edges (we should choose one incident to a chord of $H[B(H)]$, which is why we had to rule out the second stupid case) to we get an outerplanar graph and those special faces are star-triangulated.  When we contract, the vertex we contract into gets a weight of $3$. All other vertices get a weight of $2$. The total weight is then $2|B(H-B(H))|+|H-BB(H)|\le |H|$, by \cref{big_boundary}. Then we $3$-colour and take the lowest weight colour class.  The key point is that, for each weight-$2$ vertex $w$ we choose, we have to include $w$ and a neighbour $v$ of $w$ in $B(H)$.  For each weight $3$ vertex $w$ we choose, we have to take $w$, a neighbour $v$ of $w$ in $B(H)$, and the inner vertex of $H-B(H)$ that caused $w$ to have weight $3$.}
+\begin{figure}
+    \begin{center}
+        \begin{tabular}{ccc}
+            \includegraphics[page=1]{figs/contractor} &
+            \includegraphics[page=2]{figs/contractor} &
+            \includegraphics[page=3]{figs/contractor} 
+        \end{tabular}
+        \caption{Contracting an inner vertex of a $1$-planar graph into a boundary vertex}
+        \label{contraction}
+    \end{center}
+\end{figure}
 \end{proof}
 
 
@@ -501,15 +513,17 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BestG
 \end{compactenum}
 
 \begin{thm}\label{best_greedy}
-  When applied to an $n$-vertex triangulation $G$,  $\textsc{BestGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $7n/15\pm O(1)$.
+  When applied to an $n$-vertex triangulation $G$,  $\textsc{BestGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $10n/21\pm O(1)$.
 \end{thm}
-
+\hussein{Is adding the following inequality to the constrains helpful  $r \leq |E|/4 \leq 3n/4 - 3/2$? I don t think so  }
 \begin{proof}
   For each integer $t\ge 3$, let $x_t$ be the number of times $\textsc{BetterGreedy}(G)$ falls into case $1$ and chooses $v_i$ such that $\deg^+_{G_i}(v_i)=t$.  Let $z$ be the number of times $\textsc{BetterGreedy}(G)$ falls into Case~2.  Let
   \[
      D:=|D_{r-1}| = 3 + \sum_{t\ge 3}tx_t + 5z \enspace .
   \]
-  Let $I:=|I(G_{r-1})$, let $B:=|B(G_{r-1})|$, let $Q:=|B(G_{r-1}-B(G_{r-1}))|$ and let $R:=|I(G_{r-1}-B(G_{r-1}))|$.  Then, by \cref{big_boundary} and \cref{base_case}
+  Let $I:=|I(G_{r-1})|$, let $B:=|B(G_{r-1})|$, let $Q:=|B(G_{r-1}-B(G_{r-1}))|$ and let $R:=|I(G_{r-1}-B(G_{r-1}))|$.  Then, by \cref{big_boundary} and \cref{base_case}
+  
+  \hussein{S is equals to $I$ ?}
   \begin{equation}
     Q \ge R \ge 3S \enspace . \label{best2}
   \end{equation}
@@ -545,7 +559,7 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BestG
     If $z = c >0$  then we can set $z\gets 0$, $x_3\gets x_3+5c/3$, $Q\gets Q+10c/3-2c=Q+4c/3$, $R\gets 10c/3-2c=Q+4c/3$, and $S\gets 10c/9-2c/3=S+4c/9$. Then the objective function \cref{best_objective} increases by $(5/3+4/3+4/9)c >0$.  \Cref{best2} is still satisfied because the quantities $Q$, $R$, and $3S$ change by exactly the same amount.  \Cref{best3} is still satisfied because the right hand side decreases by $(5-4/3+4/3)c=7c/3$. \Cref{best4} still holds because the right hand side decreases by $4c/3 + 4c/3 +4c/9 - 5c/3>0$  \Cref{best5} still holds because the left hand side decreases by $4c/3$ and the right hand side increases by $10c/3 - 2c=4c/3$.
 
   \end{clmproof}
-  Therefore, \cref{best2,best3,best4,best5} are inequalities in four non-negative variables $x_3$, $Q$, $R$ and $S$.  Maximizing \cref{best_objective} subject to these constraints is an easy linear programming exercise and the maximum is achieved when $x_3=(n-6)/5$, $Q=R=(2n+3)/5$, $S=0$, giving a final bound of $|X|\le r-1+R/3\le (7n-12)/15$.
+  Therefore, \cref{best2,best3,best4,best5} are inequalities in four non-negative variables $x_3$, $Q$, $R$ and $S$.  Maximizing \cref{best_objective} subject to these constraints is an easy linear programming exercise and the maximum is achieved when \pat{Correct these: $x_3=(n-6)/5$, $Q=R=(2n+3)/5$, $S=0$, giving a final bound of $|X|\le r-1+R/3\le (7n-12)/15$}.
 \end{proof}
 
 
@@ -556,6 +570,8 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BestG
 \section{Discussion}
 
 \Cref{two_critical_handler} is the best result we have right now for handling $2$-critical graphs.  This is a shame, because it is known that maximal outerplanar graphs have connected dominating sets of size at most $4n/11$. Unfortunately our critical graphs are not maximal outerplanar---they may not even be connected.  We can end up in a situation where we have a $2$-critical graph that is a collection of disjoint $6$-vertex graphs (a triangle inside a triangle), each of which requires $2$ vetices to dominate.  In this setting $Q=R=3k$ and we need $2k$ vertices in our dominating set, so the analysis is tight.
+
+\hussein{One approach is : why we ended with a graph where all the boundary vertices has $deg^+(v) = 2$? I think before reaching such a graph we had a sequence of vertices $v_i,...,v_j$  such that $\sum_i deg^+(v_i) = |\text{the boundary of the current graph}|$ and $deg^+(v_i) \geq 3$.}
 
 If we wanted to make use of the results for outerplanar graphs, then we would need to be way more careful in the way we choose vertices to delete.  In fact, I don't see any reasonable way to do this without using some variant of the canonical ordering (so that each intermediate graph $G_i$ is a near-triangulation).  Even if we could do that we'll still need something more because the process of making $G_i$ dom-minimal removes useless vertices and edges.
 
