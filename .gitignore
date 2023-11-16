@@ -4,3 +4,7 @@
 *.fls
 *.log
 *.out
+*.fdb_latexmk
+*.synctex.gz
+.ipynb_checkpoints/
+main.pdf
