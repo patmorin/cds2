@@ -582,12 +582,17 @@ We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B
 
 \begin{lem}
   Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X_0,X_1,X_2\subseteq V(H)$ such that
-  \begin{compactenum}
-      \item $|X_0|+|X_1|+|X_2| \le |H|$;
-      \item for each $i\in\{0,1,2\}$, $X_i$ dominates $I(H)$ in $H$; and
-      \item for each $i\in\{0,1,2\}$, each component of $H[X_i]$ contains at least one vertex in $B(H)$.
+  \begin{compactenum}[(i)]
+      \item $|X_0|+|X_1|+|X_2| \le |H|$; \label[p]{total_size}
+      \item for each $i\in\{0,1,2\}$, $X_i$ dominates $I(H)$ in $H$; and \label[p]{dominates_i}
+      \item for each $i\in\{0,1,2\}$, each component of $H[X_i]$ contains at least one vertex in $B(H)$. \label[p]{connectivity}
   \end{compactenum}
 \end{lem}
+
+\begin{proof}
+  Let $B_0:=B(H)$, let $H_1:=H-B(H)$, let $B_1:=B(H_1)$, let $I_1:=I(H_1)$, and let $L$ be the set of degree-$1$ vertices in $H_1$.  We call the vertices in $L$ \defin{leaves}.
+  By \cref{boundary_vs_leaves}, to satisfy \cref{total_size} it suffices to construct three sets whose total size is not more $|I_1|+2|B_1|+|L|$.  Intuitively, each vertex in $I_1$ should appear in at most one $X_i$. Each vertex $w$ in $B_1$ appears in one $X_i$ and, in order to satisfy \cref{connectivity}, a neighbour $v\in B_0$ of $w$ should appear in the same $X_i$.  Each vertex $w$ in $L$ (which is also in $B_1$) may need to contribute an additional vertex in order to satisfy \cref{dominates_i}.  Indeed, if $w$ is placed in $X_i$ and its unique neighbour $w'$ in $H_1$ is placed in $X_j$, then $w$ is dominated by $X_i$ and by $X_j$ but not by the third set $X_k$. To fix this, we add a neighbour $v\in B_0$ of $w$ to $X_k$, which ensures that $w$ is dominated by $X_k$.
+\end{proof}
 
 
 
