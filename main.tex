@@ -487,8 +487,8 @@ Note that the next two lemmas each consider a graph $H$ that is a near triangula
 \end{proof}
 
 
-Note that the next three lemmas consider the case where $H$ is a generalized near triangulation.
-
+Note that the next three lemmas consider the case where $H$ is a generalized near triangulation. 
+ 
 \begin{lem}\label{really_good}
   Let $H$ be a dom-minimal generalized near-triangulation.  Then either:
   \begin{compactenum}[(1)]
@@ -527,34 +527,66 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
   All that remains is to show that $\deg^+_{H-v_0}(w)\ge 3$.  First, observe that $z$ is in $B(H-B(H))$, so $z$ does not contribute to $\deg^+_{H-B(H)}(w)$. We claim that $z$ is in $I(H-v_0)$, so $z$ does contribute to $\deg^+_{H-v_0}(w)$.   Indeed, the only other possibility is that $z$ is adjacent to $v_0$.  In this case, consider the cycle $C:=v_0,\ldots,v_j,z$.  This cycle has $w$ in its interior. The vertices of $N^+_{H-B(H)}(w)$ must be in the interior of $C$. For each $a\in\{1,\ldots,j\}$, $v_{a-1}v_a w$ is a face of $H$, so the cycle $D:=v_0,\ldots,v_j,w$ does not contain any vertices of $N^+_{H-B(H)}(w)$ in its interior.  Therefore, the vertices in $N^+_{H-B(H)}(w)$ must be in the interior of the cycle $\overline{D}:=v_0,w,z$.  Since $H$ is a near-triangulation, this implies that at least one of $v_0$ is adjacent to some vertex in $I(H)\setminus\{w,z\}$. But this is not possible since it would imply that $\deg^+_H(v_0)\ge 3$.  Therefore $v_0$ is not adjacent to $z$, so $z$ is in the interior of $H-v_0$ and $N^+_{H-v_0}(w)\supseteq N^+_{H-B(H)}(w)\uplus\{z\}$, so $\deg^+_H(w)\ge 3$.
 \end{proof}
 
-\begin{lem}\label{big_boundary}
-  Let $H$ be a generalized near-triangulation with $\deg^+_H(v)\le 2$ for each $v\in B(H)$.  Then $|B(H)|\ge |B(H-B(H))|$.
-\end{lem}
 
-\begin{proof}
-  Each vertex $w$ in $B(H-B(H))$ is adjacent to at least one vertex $v_0$ on the outer face of $H$.  The vertex $v_0$ has two neighbours $v_{-1}$ and $v_1$ on the outer face of $H$. Since $H$ is dom-minimal, it contains faces $v_0v_1x$ and $v_0v_{-1}y$ with $x$ and $y$ being inner vertices of $H$.  Then at least one of $x$ or $y$ must be $w$ since, otherwise, $\deg^+_H(v_0)\ge 3$. (Note that the case $x=y\neq w$ is not possible since $v_0v_1x$ and $v_0v_{-1}y$ are each faces of $H$, which would leave no place for $w$.)   But then $w$ is adjacent to at least one of $v_{-1}$ or $v_1$.  Therefore $w$ is adjacent to at least two vertices in $B(H)$.  Therefore, each $w\in B(H-B(H))$ contributes at least $2$ to $\sum_{v\in B(H)}\deg^+_H(v)$, so $2|B(H)|\ge \sum_{v\in B(H)}\deg^+_H(v)\ge 2|B(H-H(B))|$, as required.
-\end{proof}
+\subsection{$2$-Critical Graphs}
 
-We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B(H)$ is critical and $\deg^+_H(v)\le 2$ for each $v\in B(H)$.  Observe that any critical graph is also $2$-critical.
+We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B(H)$ is critical and $\deg^+_H(v)\le 2$ for each $v\in B(H)$.  Observe that any critical graph is also $2$-critical.  We will work our way up to a proof of the following lemma, which allows our algorithm to handle $2$-critical graphs directly, in one step:
 
 \begin{lem}\label{two_critical_handler}
   Let $H$ be a $2$-critical dom-minimal generalized near-triangulation.  Then there exists $X\subseteq V(H)$ of size at most $|H|/3$ that dominates $I(H)$ and such that each component of $H[X]$ contains at least one vertex in $B(H)$.
 \end{lem}
 
+% \begin{proof}
+%   \pat{There is still some work to do here.  We should break this up into cases where we eliminate bridges and cut vertices first.  Then, finally, we're left with the case where each component of $H-B(H)$ is a $2$-connected critical graph. To deal with this, we first deal with the stupid cases where this graph is just a $3$-cycle or a cycle with one inner vertex. (We can handle these by choosing any vertex on the face).  Otherwise the graph is an outerplanar graph with stars in some of its faces.  See \cref{contraction}. In each such face we'll contract one of the star edges (we should choose one incident to a chord of $H[B(H)]$, which is why we had to rule out the second stupid case) to we get an outerplanar graph and those special faces are star-triangulated.  When we contract, the vertex we contract into gets a weight of $3$. All other vertices get a weight of $2$. The total weight is then $2|B(H-B(H))|+|H-BB(H)|\le |H|$, by \cref{big_boundary}. Then we $3$-colour and take the lowest weight colour class.  The key point is that, for each weight-$2$ vertex $w$ we choose, we have to include $w$ and a neighbour $v$ of $w$ in $B(H)$.  For each weight $3$ vertex $w$ we choose, we have to take $w$, a neighbour $v$ of $w$ in $B(H)$, and the inner vertex of $H-B(H)$ that caused $w$ to have weight $3$.}
+% \begin{figure}
+%     \begin{center}
+%         \begin{tabular}{ccc}
+%             \includegraphics[page=1]{figs/contractor} &
+%             \includegraphics[page=2]{figs/contractor} &
+%             \includegraphics[page=3]{figs/contractor}
+%         \end{tabular}
+%         \caption{Contracting an inner vertex of a $1$-planar graph into a boundary vertex}
+%         \label{contraction}
+%     \end{center}
+% \end{figure}
+% \end{proof}
+
+\pat{Define boundary walk around a face.}  For a boundary walk $W:=w_0,\ldots,w_{r-1}$, $|W|:=r$ is the number of edges used by $W$, counted with multiplicity, and including the edge $w_{r-1}w_0$ that closes the walk.
+
+\begin{lem}\label{boundary_vs_walk}
+  Let $H$ be a $2$-critical generalized near-triangulation, let $C_1,\ldots,C_k$ be the components of $H-B(H)$ and, for each $i\in\{1,\ldots,k\}$, let $W_i$ be the boundary walk around the outer face of $C_i$. Then $|B(H)|\ge \sum_{i=1}^k |W_i|$.
+\end{lem}
+
 \begin{proof}
-  \pat{There is still some work to do here.  We should break this up into cases where we eliminate bridges and cut vertices first.  Then, finally, we're left with the case where each component of $H-B(H)$ is a $2$-connected critical graph. To deal with this, we first deal with the stupid cases where this graph is just a $3$-cycle or a cycle with one inner vertex. (We can handle these by choosing any vertex on the face).  Otherwise the graph is an outerplanar graph with stars in some of its faces.  See \cref{contraction}. In each such face we'll contract one of the star edges (we should choose one incident to a chord of $H[B(H)]$, which is why we had to rule out the second stupid case) to we get an outerplanar graph and those special faces are star-triangulated.  When we contract, the vertex we contract into gets a weight of $3$. All other vertices get a weight of $2$. The total weight is then $2|B(H-B(H))|+|H-BB(H)|\le |H|$, by \cref{big_boundary}. Then we $3$-colour and take the lowest weight colour class.  The key point is that, for each weight-$2$ vertex $w$ we choose, we have to include $w$ and a neighbour $v$ of $w$ in $B(H)$.  For each weight $3$ vertex $w$ we choose, we have to take $w$, a neighbour $v$ of $w$ in $B(H)$, and the inner vertex of $H-B(H)$ that caused $w$ to have weight $3$.}
-\begin{figure}
-    \begin{center}
-        \begin{tabular}{ccc}
-            \includegraphics[page=1]{figs/contractor} &
-            \includegraphics[page=2]{figs/contractor} &
-            \includegraphics[page=3]{figs/contractor}
-        \end{tabular}
-        \caption{Contracting an inner vertex of a $1$-planar graph into a boundary vertex}
-        \label{contraction}
-    \end{center}
-\end{figure}
+  \pat{TODO}
 \end{proof}
+
+
+
+\begin{lem}\label{walk_vs_leaves}
+  Let $H$ be a $2$-critical generalized near-triangulation, let $\ell$ be the number of degree-$1$ vertices in $H-B(H)$ \pat{Need condition on size of $H-B(H)$}, let $C_1,\ldots,C_k$ be the components of $H-B(H)$ and, for each $i\in\{1,\ldots,k\}$, let $W_i$ be the boundary walk around the outer face of $C_i$. Then $\sum_{i=1}^k |W_i|\ge |B(H-B(H))|+\ell$.
+\end{lem}
+
+\begin{proof}
+ \pat{TODO}
+\end{proof}
+
+\Cref{boundary_vs_walk,walk_vs_leaves} immediately give the following corollary:
+
+\begin{cor}\label{boundary_vs_leaves}
+  Let $H$ be a $2$-critical generalized near-triangulation and let $\ell$ be the number of degree-$1$ vertices in $H-B(H)$ \pat{Need condition on size of $H-B(H)$}. Then $\sum_{i=1}^k |W_i|\ge |B(H-B(H))|+\ell$.
+\end{cor}
+
+
+\begin{lem}
+  Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X_0,X_1,X_2\subseteq V(H)$ such that
+  \begin{compactenum}
+      \item $|X_0|+|X_1|+|X_2| \le |H|$;
+      \item for each $i\in\{0,1,2\}$, $X_i$ dominates $I(H)$ in $H$; and
+      \item for each $i\in\{0,1,2\}$, each component of $H[X_i]$ contains at least one vertex in $B(H)$.
+  \end{compactenum}
+\end{lem}
+
 
 
 \subsection{The Algorithm}
