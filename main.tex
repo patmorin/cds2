@@ -579,19 +579,56 @@ We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B
   Let $H$ be a $2$-critical generalized near-triangulation and let $\ell$ be the number of degree-$1$ vertices in $H-B(H)$ \pat{Need condition on size of $H-B(H)$}. Then $|B(H)|\ge |B(H-B(H))|+\ell$.
 \end{cor}
 
+Note that the following lemma is about critical graphs, not $2$-critical graphs.
 
 \begin{lem}
-  Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X_0,X_1,X_2\subseteq V(H)$ such that
+  Let $H$ be a $2$-connected critical generalized near-triangulation with at least $3$ vertices.  Then there exists $X_0,X_1,X_2\subseteq V(H)$ such that
   \begin{compactenum}[(i)]
-      \item $|X_0|+|X_1|+|X_2| \le |H|$; \label[p]{total_size}
-      \item for each $i\in\{0,1,2\}$, $X_i$ dominates $I(H)$ in $H$; and \label[p]{dominates_i}
-      \item for each $i\in\{0,1,2\}$, each component of $H[X_i]$ contains at least one vertex in $B(H)$. \label[p]{connectivity}
+    \item $\sum_{i=0}^2(2|X_i\cap B(H)|+|X_i\cap I(H)| \le 2|B(H)|+I(H)$; \label[p]{total_size_critical}
+    \item for each $i\in\{0,1,2\}$, $X_i$ dominates $H$; and \label[p]{dominates_h}
+    \item for each $i\in\{0,1,2\}$, each component of $H[X_i]$ contains at least one vertex in $B(H)$. \label[p]{connectivity_critical}
+  \end{compactenum}
+\end{lem}
+
+\begin{proof}
+  If $H$ has three vertices then choose any vertex $v$ of $H$ and set $X_0:=X_1:=X_2=\{v\}$.  If $H$ has four vertices, then $B(H)$ contains a vertex $v$ of degree $3$, in which case we take $X_0:=X_1:=X_2=\{v\}$. \pat{Split into two cases, giving a partition in each case.} In each of these cases, the choice of $X_0$, $X_1$, and $X_2$ easily satisfy \cref{total_size_critical,dominates_h,connectivity_critical}.
+
+  We now assume that $H$ has at least five vertices.  If $H[B(H)]$ has a single inner face $f$ then, by \cref{critical_structure}, $I(H)$ consists of a single vertex $x$ in the interior of $f$ that is adjacent to every vertex in $f$. In this case we choose a vertex $v$ of $f$ and set $X_0:=X_1:=X_2:=\{v,x\}$.  Then $2|X_0\cap B(H)|+|X_0\cap I(H)| = 3 = 9/3 = (8 + 1) \le (2|B(H)|+|I(H)|)/3$. Therefore, this choice of $X_0$, $X_1$, and $X_2$ satisfy \cref{total_size_critical}, since $X_0=X_1=X_2$.
+
+  We now assume that $H$ has at least five vertices and that $H[B(H)]$ has at least two inner faces.  In this case, we will prove a strengthening of the lemma in which
+  \begin{inparaenum}[(a)]
+    \item $X_0$, $X_1$, and $X_2$ are pairwise-disjoint, \label[p]{disjoint}
+    \item $X_0$, $X_1$, and $X_2$ cover $B(H)$, and \label[p]{cover}
+    \item no edge of $H[B(H)]$ has both endpoints in a single $X_i$.\label[p]{proper}
+  \end{inparaenum}
+  Note that \cref{disjoint} immediately implies that these sets satisfy \cref{total_size_critical}, so we will ignore \cref{total_size_critical} from this point on.
+  % \Cref{critical_structure} and \cref{} the fact that $X_0$, $X_1$, and $X_2$ cover $B(H)$ immediately imply \cref{dominates_h,connectivity_critical}.  Thus, we will ignore \cref{total_size_critical,dominates_h,connectivity_critical} from this point onward and focus on
+
+
+   % so we will ignore \cref{total_size_critical} from this point onward.
+
+  We prove this stronger lemma by induction on $|I(H)|$.  If $|I(H)|=0$ then $H$ is an edge-maximal outerplanar graph, and therefore has a proper $3$-colouring.  We take $X_0$, $X_1$, and $X_2$ to be the three colour classes in this colouring.  This choice clearly satisfies \cref{disjoint,cover,proper}.
+  % Since $V(H)=B(H)$ and $\{X_0,X_1,X_2\}$ is partition of $B(H)$, this choice clearly satisfies \cref{total_size_critical}.
+  Since each vertex of $H$ is included in at least one triangle, each vertex of $H$ is dominated by each of $X_0$, $X_1$, and $X_2$, so this choice satisfies \cref{dominates_h}.  Since $V(H)=B(H)$ this choice trivially satisfies \cref{connectivity_critical}.
+
+  Otherwise $|I(H)|\ge 1$. Let $x$ be an inner vertex of $H$ and let $f$ be the face of $H[B(H)]$ that contains $x$. If $f$ has only three vertices, then we apply induction on $H-x$. Again, the resulting sets $X_0$, $X_1$, and $X_2$ clearly satisfy \cref{disjoint,cover,proper}.  By \cref{proper}, the face $f$ has one vertex in each of $X_0$, $X_1$, and $X_2$, so each of these sets dominates $H$, so these sets satisfy \cref{dominates_h}. These sets satisfy \cref{connectivity_critical} by the inductive hypothesis.
+
+  Since $H[B(H)]$ has at least two inner faces and $H$ is biconnected, $f$ contains an edge $vw$ that is on the boundary of two faces of $H$.  Let $H'$ be the graph obtained by contracting the edge $vx$ to obtain a single vertex $v'$. Then $H'$ is still biconnected and $H'[B(H')]$ still has at least two inner faces. \pat{Continue here....}
+\end{proof}
+
+
+\begin{lem}
+  Let $H$ be a $2$-critical generalized near-triangulation \pat{Add condition on the size of $H-B(H)$}.  Then there exists $X_0,X_1,X_2\subseteq V(H)$ such that
+  \begin{compactenum}[(i)]
+    \item $|X_0|+|X_1|+|X_2| \le |H|$; \label[p]{total_size}
+    \item for each $i\in\{0,1,2\}$, $X_i$ dominates $I(H)$ in $H$; and \label[p]{dominates_i}
+    \item for each $i\in\{0,1,2\}$, each component of $H[X_i]$ contains at least one vertex in $B(H)$. \label[p]{connectivity}
   \end{compactenum}
 \end{lem}
 
 \begin{proof}
   Let $B_0:=B(H)$, let $H_1:=H-B(H)$, let $B_1:=B(H_1)$, let $I_1:=I(H_1)$, and let $L$ be the set of degree-$1$ vertices in $H_1$.  We call the vertices in $L$ \defin{leaves}.
-  By \cref{boundary_vs_leaves}, to satisfy \cref{total_size} it suffices to construct three sets whose total size is not more $|I_1|+2|B_1|+|L|$.  Intuitively, each vertex in $I_1$ should appear in at most one $X_i$. Each vertex $w$ in $B_1$ appears in one $X_i$ and, in order to satisfy \cref{connectivity}, a neighbour $v\in B_0$ of $w$ should appear in the same $X_i$.  Each vertex $w$ in $L$ (which is also in $B_1$) may need to contribute an additional vertex in order to satisfy \cref{dominates_i}.  Indeed, if $w$ is placed in $X_i$ and its unique neighbour $w'$ in $H_1$ is placed in $X_j$, then $w$ is dominated by $X_i$ and by $X_j$ but not by the third set $X_k$. To fix this, we add a neighbour $v\in B_0$ of $w$ to $X_k$, which ensures that $w$ is dominated by $X_k$.
+  By \cref{boundary_vs_leaves}, to satisfy \cref{total_size} it suffices to construct three sets whose total size is not more $|I_1|+2|B_1|+|L|$.  Intuitively, each vertex in $I_1$ should appear in at most one $X_i$. Each vertex $w$ in $B_1$ appears in one $X_i$ and, in order to satisfy \cref{connectivity}, a neighbour $v\in B_0$ of $w$ should appear in the same $X_i$.  Each vertex $w$ in $L$ (which is also in $B_1$) may need to contribute an additional vertex in order to satisfy \cref{dominates_i}.  Indeed, if $w$ is placed in $X_i$ and its unique neighbour $w'$ in $H_1$ is placed in $X_j$, then $w$ is dominated by $X_i$ and by $X_j$ but not necessarily by the third set $X_k$. To fix this, we add a neighbour $v\in B_0$ of $w$ to $X_k$, which ensures that $w$ is dominated by $X_k$.
 \end{proof}
 
 
