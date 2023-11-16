@@ -579,46 +579,82 @@ We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B
   Let $H$ be a $2$-critical generalized near-triangulation and let $\ell$ be the number of degree-$1$ vertices in $H-B(H)$ \pat{Need condition on size of $H-B(H)$}. Then $|B(H)|\ge |B(H-B(H))|+\ell$.
 \end{cor}
 
+For each integer $r\ge 3$, let $W_r$ be the near-triangulation whose outer face is bounded by a cycle $v_0,\ldots,v_{r-1}$ that contains a single vertex $x$ in its interior and that is adjacent to each of $v_0,\ldots,v_{r-1}$.
+
 Note that the following lemma is about critical graphs, not $2$-critical graphs.
 
-\begin{lem}
-  Let $H$ be a $2$-connected critical generalized near-triangulation with at least $3$ vertices.  Then there exists $X_0,X_1,X_2\subseteq V(H)$ such that
+\begin{lem}\label{two_connected_critical}
+  Let $H$ be a biconnected critical generalized near-triangulation with at least $3$ vertices and not isomorphic to $W_k$ for any even integer $k$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
   \begin{compactenum}[(i)]
-    \item $\sum_{i=0}^2(2|X_i\cap B(H)|+|X_i\cap I(H)| \le 2|B(H)|+I(H)$; \label[p]{total_size_critical}
-    \item for each $i\in\{0,1,2\}$, $X_i$ dominates $H$; and \label[p]{dominates_h}
-    \item for each $i\in\{0,1,2\}$, each component of $H[X_i]$ contains at least one vertex in $B(H)$. \label[p]{connectivity_critical}
+    \item For each edge $vw$ of $H[B(H)]$, $v\in X_i$ and $w\in X_j$ for some $i\neq j$;\label[p]{proper}
+    \item For each inner face $f$ of $H[B(H)]$ and each $i\in\{0,1,2\}$, $V(f)\cap X_i\neq\emptyset$; and \label[p]{colourful} \pat{Consider eliminating this, since we only use it to prove \cref{dominates_h}.}
+    % that contains $x_f\in I(H)$ in its interior, exactly one vertex $v_f$ of $f$ is in the set $X_i$ that contains $x$ and $v_f$ is incident to a chord of $H[B(H)]$. \pat{Define chord.}
+    \item for each $i\in\{0,1,2\}$, $X_i$ dominates $H$. \label[p]{dominates_h}
   \end{compactenum}
 \end{lem}
 
 \begin{proof}
-  If $H$ has three vertices then choose any vertex $v$ of $H$ and set $X_0:=X_1:=X_2=\{v\}$.  If $H$ has four vertices, then $B(H)$ contains a vertex $v$ of degree $3$, in which case we take $X_0:=X_1:=X_2=\{v\}$. \pat{Split into two cases, giving a partition in each case.} In each of these cases, the choice of $X_0$, $X_1$, and $X_2$ easily satisfy \cref{total_size_critical,dominates_h,connectivity_critical}.
+  If $H$ is isomorphic to $W_k$ for some odd integer $k\ge 3$, then we take $X_0:=\{v_0, x\}$, $X_1:=\{v_{2i-1}:i\in\{1,\ldots,\lfloor k/2\rfloor\}$, and $X_2:=\{v_{2i}:i\in\{1,\ldots,\lfloor k/2\rfloor\}$.  It is straightforward to verify that these sets satisfy \cref{proper,colourful,dominates_h}.  (The fact that $k$ is odd ensures that $v_0$ has a neighbour $v_1\in X_1$ and $v_{k-1}\in X_2$, which ensures \cref{dominates_h}---this is not true for even $k$.)   We now assume that $H$ is not isomorphic to $W_k$ for any integer $k$.  By \cref{critical_structure}, this implies that $H$ is outerplanar or that $H[B(H)]$ has at least two inner faces.
 
-  We now assume that $H$ has at least five vertices.  If $H[B(H)]$ has a single inner face $f$ then, by \cref{critical_structure}, $I(H)$ consists of a single vertex $x$ in the interior of $f$ that is adjacent to every vertex in $f$. In this case we choose a vertex $v$ of $f$ and set $X_0:=X_1:=X_2:=\{v,x\}$.  Then $2|X_0\cap B(H)|+|X_0\cap I(H)| = 3 = 9/3 = (8 + 1) \le (2|B(H)|+|I(H)|)/3$. Therefore, this choice of $X_0$, $X_1$, and $X_2$ satisfy \cref{total_size_critical}, since $X_0=X_1=X_2$.
+  We now proceed by induction on $|I(H)|$.  If $|I(H)|=0$ then $H$ is an edge-maximal outerplanar graph, and therefore has a proper $3$-colouring.  We take $X_0$, $X_1$, and $X_2$ to be the three colour classes in this colouring.  This choice clearly satisfies \cref{proper} and trivially satisfies \cref{colourful}.  Since each vertex of $H$ is included in at least one triangle, each vertex of $H$ is dominated by each of $X_0$, $X_1$, and $X_2$, so this choice satisfies \cref{dominates_h}.
 
-  We now assume that $H$ has at least five vertices and that $H[B(H)]$ has at least two inner faces.  In this case, we will prove a strengthening of the lemma in which
-  \begin{inparaenum}[(a)]
-    \item $X_0$, $X_1$, and $X_2$ are pairwise-disjoint, \label[p]{disjoint}
-    \item $X_0$, $X_1$, and $X_2$ cover $B(H)$, and \label[p]{cover}
-    \item no edge of $H[B(H)]$ has both endpoints in a single $X_i$.\label[p]{proper}
-  \end{inparaenum}
-  Note that \cref{disjoint} immediately implies that these sets satisfy \cref{total_size_critical}, so we will ignore \cref{total_size_critical} from this point on.
-  % \Cref{critical_structure} and \cref{} the fact that $X_0$, $X_1$, and $X_2$ cover $B(H)$ immediately imply \cref{dominates_h,connectivity_critical}.  Thus, we will ignore \cref{total_size_critical,dominates_h,connectivity_critical} from this point onward and focus on
+  If $|I(H)|\ge 1$ then $H$ is not outerplanar and therefore $H[B(H)]$ contains at least two inner faces.  Let $x$ be an inner vertex of $H$ and let $f$ be the marked face of $H[B(H)]$ that contains $x$.
+  % If $f$ has only three vertices, then we apply induction on $H':=H-x$ to obtain sets $X_0'$, $X_1'$, and $X_2'$.  We then set $X_0:=X_0'\cup\{x\}$, $X_1:=X_1'$ and $X_2:=X_2'$.  These sets satisfy \cref{proper} because every edge of $H[B(H)]$ is also an edge of $H'[B(H')]$.  These sets satisfy \cref{colourful} because $f$ is a clique of size $3$ in $H'$ so, by \cref{proper}, each $X_i$ contains at least one vertex of $f$. Now, \cref{colourful} also implies that each $X_i$ dominates $x$ and (by induction) dominates $V(H)\setminus\{x\}$, so each $X_i$ is a dominating set.
+  Since $H[B(H)]$ has at least two inner faces and $H$ is biconnected, $f$ contains an edge $vw$ that is on the boundary of two faces of $H$.  Let $H'$ be the graph obtained by contracting the edge $vx$ into $v$. Then $H'[B(H')]=H[B(H)]$ and $H'$ is a biconnected critical generalized near-triangulation so we apply induction to obtain sets $X_0'$, $X_1'$ and $X_2'$.  Without loss of generality, we can assume that $v$ is in $X_0'$.  Then we set $X_0:=X_0'\cup\{x\}$, $X_1:=X_1'$ and $X_2:=X_2'$. Since $H'[B(H')]=H[B(H)]$ this clearly satisfies \cref{proper}.  Since $H'$ contains the edge $vw$ for each $w\in V(f)\setminus\{v\}$, \cref{proper} implies that the vertices of the path $f-v$ are alternately contained in $X_1$ and $X_2$.  In particular, since $f$ has at least three vertices these sets satisfy \cref{colourful}.
+
+  All that remains is to show that $X_0$, $X_1$, and $X_2$ satisfy \cref{dominates_h}.  The inductive hypothesis already implies that each of these sets dominates $V(H)\setminus V(f)$.  Since $x$ is adjacent to every vertex of $f$, \cref{colourful}, implies that each of these sets dominates $x$.  For each vertex $w\in V(f)\setminus\{v\}$, $w$ is adjacent to $x\in X_0$, $w\in X_{i}$ and $w$ is adjacent a neighbour $w'\in X_{3-i}$ in $f$, so each of these sets dominates $w$.  Finally, since the vertex $v$ is incident to a chord of $H[B(H)]$, it is incident to a second face $f'\neq f$ of $H[B(H)]$.  Since $f$ is marked and $H$ is critical, $f'$ is not marked.  Therefore $f'$ is a triangle with one vertex in each of $X_0$, $X_1$, and $X_2$. Therefore each of these sets dominates $v$.
+\end{proof}
+
+The following lemma explains how we deal with wheel graphs:
+
+\begin{lem}\label{wheelie}
+  Let $H:=W_k$ for some even integer $k\ge 4$ and let $v$ be any vertex in $B(H)$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
+  \begin{compactenum}[(i)]
+    \item For each edge $vw$ of $H[B(H)]$, $v\in X_i$ and $w\in X_j$ for some $i\neq j$;\label[p]{proper}
+    \item For each inner face $f$ of $H[B(H)]$ and each $i\in\{0,1,2\}$, $V(f)\cap X_i\neq\emptyset$; and \label[p]{colourful}
+    % that contains $x_f\in I(H)$ in its interior, exactly one vertex $v_f$ of $f$ is in the set $X_i$ that contains $x$ and $v_f$ is incident to a chord of $H[B(H)]$. \pat{Define chord.}
+    \item $X_0$ dominates $V(H)\setminus\{v\}$ and $X_1$ and $X_2$ each dominate $H$. \label[p]{weak_dominates_h}
+  \end{compactenum}
+\end{lem}
+
+\begin{proof}
+  Label the vertices of $W_k$ as $v_0,\ldots,v_{k-1}$ so that $v=v_0$.  Then the sets $X_0:=\{v_0, x\}$, $X_1:=\{v_{2i-1}:i\in\{1,\ldots,\lfloor k/2\rfloor\}$, and $X_2:=\{v_{2i}:i\in\{1,\ldots,\lfloor k/2\rfloor\}$ satisfy the requirements of the lemma.
+\end{proof}
 
 
-   % so we will ignore \cref{total_size_critical} from this point onward.
+Now we drop the requirement that $H$ is biconnected.
 
-  We prove this stronger lemma by induction on $|I(H)|$.  If $|I(H)|=0$ then $H$ is an edge-maximal outerplanar graph, and therefore has a proper $3$-colouring.  We take $X_0$, $X_1$, and $X_2$ to be the three colour classes in this colouring.  This choice clearly satisfies \cref{disjoint,cover,proper}.
-  % Since $V(H)=B(H)$ and $\{X_0,X_1,X_2\}$ is partition of $B(H)$, this choice clearly satisfies \cref{total_size_critical}.
-  Since each vertex of $H$ is included in at least one triangle, each vertex of $H$ is dominated by each of $X_0$, $X_1$, and $X_2$, so this choice satisfies \cref{dominates_h}.  Since $V(H)=B(H)$ this choice trivially satisfies \cref{connectivity_critical}.
 
-  Otherwise $|I(H)|\ge 1$. Let $x$ be an inner vertex of $H$ and let $f$ be the face of $H[B(H)]$ that contains $x$. If $f$ has only three vertices, then we apply induction on $H-x$. Again, the resulting sets $X_0$, $X_1$, and $X_2$ clearly satisfy \cref{disjoint,cover,proper}.  By \cref{proper}, the face $f$ has one vertex in each of $X_0$, $X_1$, and $X_2$, so each of these sets dominates $H$, so these sets satisfy \cref{dominates_h}. These sets satisfy \cref{connectivity_critical} by the inductive hypothesis.
+\begin{lem}\label{two_connected_critical}
+  Let $H$ be a connected critical generalized near-triangulation with at least $3$ vertices and not isomorphic to $W_k$ for any even integer $k$ and let $L$ be the set of degree-$1$ vertices of $H$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ and partition $\{L_0,L_1,L_2\}$ of $L$ such that
+  \begin{compactenum}[(i)]
+    \item for each edge $vw$ of $H[B(H)]$, $v\in X_i$ and $w\in X_j$ for some $i\neq j$;\label[p]{proper_2}
+    \item for each marked face $f$ of $H[B(H)]$ and each $i\in\{0,1,2\}$, $V(f)\cap X_i\neq\emptyset$; and \label[p]{colourful_2}
+    % that contains $x_f\in I(H)$ in its interior, exactly one vertex $v_f$ of $f$ is in the set $X_i$ that contains $x$ and $v_f$ is incident to a chord of $H[B(H)]$. \pat{Define chord.}
+    \item for each $i\in\{0,1,2\}$, $X_i$ dominates $V(H)\setminus L_i$,  \label[p]{dominates_h_minus_l}
+  \end{compactenum}
+\end{lem}
 
-  Since $H[B(H)]$ has at least two inner faces and $H$ is biconnected, $f$ contains an edge $vw$ that is on the boundary of two faces of $H$.  Let $H'$ be the graph obtained by contracting the edge $vx$ to obtain a single vertex $v'$. Then $H'$ is still biconnected and $H'[B(H')]$ still has at least two inner faces. \pat{Continue here....}
+\begin{proof}[Proof Sketch]
+  The proof is by induction on $|H|$.  If $|H|=3$ then $H$ is either a triangle $v_0,v_1,v_2$ or a path $v_0,v_1,v_2$.  In either case, we take $X_i:=\{v_i\}$ for each $i\in\{0,1,2\}$.  If $H$ is a triangle, then $L=\emptyset$ and we take $L_0:=L_1:=L_2:=\emptyset$.  If $H$ is a path then $L=\{v_0,v_2\}$ and we take $L_0:=\{v_2\}$, $L_1:=\emptyset$ and $L_2:=\{v_0\}$.  It is straightforward to verify these sets satisfy the requirements of the lemma.
+
+  If $L\neq\emptyset$ then let $z_0$ be a vertex in $L$ and let $z_0,\ldots,z_r$ the maximal path in $H$ such that each of $z_1,\ldots,z_{r-1}$ has degree $2$ in $H$. Consider the graph $H':=H-\{z_0,\ldots,z_{r-1}$.
+  \begin{enumerate}
+    \item If $z_r\in L$, then $H'$ is the graph that contains only $z_r$ and $H=z_0,\ldots,z_r$ is a path.  In this case $L:=\{z_0,z_r\}$. We take $X_i:=\{z_j:j\equiv i\pmod 3\}$ for each $i\in\{0,1,2\}$, $L_2=\{z_0\}$.  Starting with $L_0:=L_1:=\emptyset$ and $L_2:=\{z_0\}$, we then set
+    $L_{(r-2)\bmod 3}\gets L_{(r-2)\bmod 3} \cup \{z_r\}$.  This produces sets that satisfy the requirements of the lemma.
+
+    \item If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} with $v=z_r$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
+
+    \item Otherwise, we apply the currently lemma inductively on $H'$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
+  \end{enumerate}
+  In the latter two cases, we may assume, without loss of generality (by renaming colours), that $z_r\in X_{r\bmod 3}'$.   Since $z_r\not\in L$, $\deg_H(z_r)\ge 3$. By \cref{wheelie} or the inductive hypothesis, $z_r$ has a neighbour $w$ in $H'$ that, without loss of generality (by renaming colours) is in $X_{(r+1)\bmod 3}$.
+
+  Then we take $X_i:=X_{i}'\cup\{z_j:j\equiv i\pmod 3\}$, $L_0:=L_0'$, $L_1:= L_1'$, and $L_2:=L_2'\cup\{z_0\}$.  Then these sets satisfy the requirements of the lemma.  Indeed, $z_r$ has a neighbour $z_{r-1}$ in $X_{(r-1)\bmod 3}$, $z_r$ is in $X_{r\bmod 3}$ and $z_r$ has a neighbour $w$ in $X_{(r+1)\bmod 3}$.  Thus each $X_i$ dominates $z_r$.\pat{Explain further}
 \end{proof}
 
 
 \begin{lem}
-  Let $H$ be a $2$-critical generalized near-triangulation \pat{Add condition on the size of $H-B(H)$}.  Then there exists $X_0,X_1,X_2\subseteq V(H)$ such that
+  Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X_0,X_1,X_2\subseteq V(H)$ such that
   \begin{compactenum}[(i)]
     \item $|X_0|+|X_1|+|X_2| \le |H|$; \label[p]{total_size}
     \item for each $i\in\{0,1,2\}$, $X_i$ dominates $I(H)$ in $H$; and \label[p]{dominates_i}
@@ -627,8 +663,10 @@ Note that the following lemma is about critical graphs, not $2$-critical graphs.
 \end{lem}
 
 \begin{proof}
+  \pat{First deal with small components of $H-B(H)$.}
+
   Let $B_0:=B(H)$, let $H_1:=H-B(H)$, let $B_1:=B(H_1)$, let $I_1:=I(H_1)$, and let $L$ be the set of degree-$1$ vertices in $H_1$.  We call the vertices in $L$ \defin{leaves}.
-  By \cref{boundary_vs_leaves}, to satisfy \cref{total_size} it suffices to construct three sets whose total size is not more $|I_1|+2|B_1|+|L|$.  Intuitively, each vertex in $I_1$ should appear in at most one $X_i$. Each vertex $w$ in $B_1$ appears in one $X_i$ and, in order to satisfy \cref{connectivity}, a neighbour $v\in B_0$ of $w$ should appear in the same $X_i$.  Each vertex $w$ in $L$ (which is also in $B_1$) may need to contribute an additional vertex in order to satisfy \cref{dominates_i}.  Indeed, if $w$ is placed in $X_i$ and its unique neighbour $w'$ in $H_1$ is placed in $X_j$, then $w$ is dominated by $X_i$ and by $X_j$ but not necessarily by the third set $X_k$. To fix this, we add a neighbour $v\in B_0$ of $w$ to $X_k$, which ensures that $w$ is dominated by $X_k$.
+  By \cref{boundary_vs_leaves}, to satisfy \cref{total_size} it suffices to construct three sets whose total size is not more $|I_1|+2|B_1|+|L|$.  Intuitively, each vertex in $I_1$ should appear in at most one $X_i$. Each vertex $w$ in $B_1$ appears in one $X_i$ and, in order to satisfy \cref{connectivity}, a neighbour $v\in B_0$ of $w$ should appear in the same $X_i$.  Each vertex $w$ in $L$ (which is also in $B_1$) may need to contribute an additional vertex in order to satisfy \cref{dominates_i}. Specifically, if $w\in L_j$ then we take a neighbour $w'$ of $w$ in $B_0$ and add it to $X_j$.  This ensures that $w$ is dominated by $X_j$.
 \end{proof}
 
 
