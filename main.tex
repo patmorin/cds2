@@ -161,7 +161,7 @@ We will present two algorithms that grow a connected dominating in small batches
 
 \subsection{Critical Graphs}
 
-A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ for each $v\in B(H)$.
+A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ for each $v\in B(H)$. We that an inner face of $H[B(H)]$ is \defin{marked} if it contains an inner vertex of $H$.
 
 \begin{figure}[htbp]
     \begin{center}
@@ -178,7 +178,7 @@ A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ f
 \end{lem}
 
 \begin{proof}
-  By definition, the graph $H[B]$ is outerplanar.  Say that an inner face of $H[B]$ is \defin{marked} if it contains an inner vertex of $H$.  Consider some marked face $f$ of $H[B]$.  This face is marked because it contains at least one vertex in $I$.  Since $H$ is a triangulation, there is an edge $vx$ in $H$ with $v\in B$ on the boundary of $f$ and $x\in I$ in the interior of $f$. Since $H$ is a generalized near-triangulation and $x$ is an inner vertex of $H$, the edge $vx$ is on the boundary of two faces $vxv_1$ and $vxv_{k-1}$ of $H$ with $v_1\neq v_{k-1}$.  Since $\deg^+_H(v)=1$, each of $v_1$ and $v_{k-1}$ are in $B$.  By the same argument, $H$ contains a face $v_1xv_2$ with $v_2\in B$, $v_2\neq v$, and repeating this argument shows that $v,v_1,v_2,\ldots,v_{k-1}$ is the cycle in $H[B]$ that bounds $f$.  Therefore, $f$ contains exactly one vertex $x$ of $I$ and $x$ is adjacent to each vertex of $f$.
+  By definition, the graph $H[B]$ is outerplanar.  Consider some marked face $f$ of $H[B]$.  This face is marked because it contains at least one vertex in $I$.  Since $H$ is a triangulation, there is an edge $vx$ in $H$ with $v\in B$ on the boundary of $f$ and $x\in I$ in the interior of $f$. Since $H$ is a generalized near-triangulation and $x$ is an inner vertex of $H$, the edge $vx$ is on the boundary of two faces $vxv_1$ and $vxv_{k-1}$ of $H$ with $v_1\neq v_{k-1}$.  Since $\deg^+_H(v)=1$, each of $v_1$ and $v_{k-1}$ are in $B$.  By the same argument, $H$ contains a face $v_1xv_2$ with $v_2\in B$, $v_2\neq v$, and repeating this argument shows that $v,v_1,v_2,\ldots,v_{k-1}$ is the cycle in $H[B]$ that bounds $f$.  Therefore, $f$ contains exactly one vertex $x$ of $I$ and $x$ is adjacent to each vertex of $f$.
 \end{proof}
 
 \begin{lem}\label{base_case}
@@ -186,50 +186,50 @@ A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ f
 \end{lem}
 
 \begin{proof}
-  Let $B:=B(H)$ and $I:=I(H)$.  If $I$ is empty then the result is trivially true, by taking $X:=\emptyset$, so we now assume that $I$ is non-empty.  Say that a face $f$ of $H[B]$ is \defin{marked} if it contains a vertex of $I$ in its interior.  By \cref{critical_structure}, $H$ is formed from the outerplanar graph $H[B]$ by adding $|I|$ stars, one in the interior of each marked face of $H[B]$.  Furthermore, since $\deg_H^+(v)=1$ for each $v\in B$, each vertex of $H[B]$ is on the boundary of exactly one marked face.  For each vertex $w\in I$, the marked face that $f$ of $H[B]$ that contains $w$ has at least $3$ vertices, which do not belong to any other marked face. Therefore $|B|\ge 3|I|$ and by choosing one vertex from each marked face of $H[B]$ we obtain the desired set $\Delta$.
+  Let $B:=B(H)$ and $I:=I(H)$.  If $I$ is empty then the result is trivially true, by taking $X:=\emptyset$, so we now assume that $I$ is non-empty.  By \cref{critical_structure}, $H$ is formed from the outerplanar graph $H[B]$ by adding $|I|$ stars, one in the interior of each marked face of $H[B]$.  Furthermore, since $\deg_H^+(v)=1$ for each $v\in B$, each vertex of $H[B]$ is on the boundary of exactly one marked face.  For each vertex $w\in I$, the marked face that $f$ of $H[B]$ that contains $w$ has at least $3$ vertices, which do not belong to any other marked face. Therefore $|B|\ge 3|I|$ and by choosing one vertex from each marked face of $H[B]$ we obtain the desired set $\Delta$.
 \end{proof}
 
-\begin{lem}\label{two_critical_helper}
-  Let $H$ be a biconnected critical generalized near-triangulation with at least two vertices.  Then $H[B(H)]$ has a proper $3$-colouring such that
-  \begin{compactenum}[(i)]
-    \item For each face $f$ of $H[B(H)]$ each colour appeas at least once;
-    \item For each marked face $f$ of $H[B(H)]$, there is a vertex $v_f$ whose colour is different from every other vertex in $f$.
-  \end{compactenum}
-\end{lem}
-
-\begin{proof}
- The proof is by induction on the number $p$ of inner faces of $H[B(H)]$ with four or more vertices.  If $p=0$ then $H=H[B(H)]$ is an edge-maximal outerplanar graph and $H$ has a proper $3$-colouring that easily satisifies the conditions of the lemma.
-
- Otherwise, let $f$ be a face of $H[B(H)]$ with four or more vertices. Then, by \cref{critical_structure}, the interior of $f$ contains a single vertex $x\in I(H)$ that is adjacent to every vertex in $f$.  Let $H'$ 
-
- Otherwise, let $v$ be a vertex in $I(H)$ and let
-
-
-
- If $|H|=3$ then, since $H$ is connected and bridgeless, $H$ is a cycle $vrw$. Then the conditions of the lemma are easily satisfied with $X_0:=\{v\}$, $X_1:=\{r\}$, and $X_2:=\{w\}$.  We now assume that $|H|\ge 3$.
-
-  % If $r$ has degree $1$, then let $r'$ be the unique neighbour of $r$ in $H$ and let $H':=H-r$.  Then $r'\in B(H')$ so we apply the inductive hypothesis on the instance $(H',r')$ to obtain sets $X_0',X_1',X_2'$ where $r'\in X_1'$, each of $X_1'$ and $X_2'$ dominate $V(H')$ and $X_0'$ dominates $V(H')\setminus \{r'\}$. Then we take $X_0:=X_{2}'$, $X_1:=X_0'\cup\{r'\}$ and $X_2:=X_1'$.  Then $X_1$ dominates $V(H)$ since $X_0'$ dominates $V(H)\setminus\{r,r'\}$ and $N_H[r]=\{r,r'\}$. Since $r'\in X_1'$, $X_2$ also dominates $V(H)$. The final set $X_0=X_2'$ dominates $V(H')=V(H)\setminus\{r\}$, as required.
-
-  If $r$ is a cut vertex of $H$, then $H-r$ has $k\ge 2$ components $C_1,\ldots,C_k$. For each $i\in\{1,\ldots,k\}$, let $H_i:=H[V(C_i)\cup\{r\}]$ and observe that $r\in B(H_i)$.  For each $i\in\{1,\ldots,k\}$,  we apply the inductive hypothesis on the instance $(H_i,r)$ to obtaine three sets $X_{i,0},X_{i,1},X_{i,2}$. Then, for each $i\in\{1,\ldots,k\}$,  $r\in X_{i,1}$, each of $X_{i,1}$ and $X_{i,2}$ dominate $V(H_i)$, and $X_{i,0}$ dominates $V(H_i)\setminus\{r\}$.  Then taking $X_0:=\bigcup_{i=1}^k X_{i,0}$,$X_1:=\bigcup_{i=1}^k X_{i,1}$, and $X_2:=\bigcup_{i=1}^k X_{i,2}$ gives the desired subsets of vertices.
-
-  If $\deg^+H(r)=1$ then let $f$ be the face of $H[B]$ that contains the single vertex $x\in N_H(r)\cap I$. Let $H'$ be the graph obtrained from $H$ by contracting the edge $rx$, creating a new vertex $r'$.  Then we apply the inductive hypothesis on the instance $(H',r')$ to obtain sets $X_0'$, $X_1'$, and $X_2'$ where $r'\in X_1'$, $X_1'$ and $X_2'$ dominate $V(H')$ and $X_0'$ dominates $V(H')\setminus\{r'\}$.
-
-
-  .  Without loss of generality, $r'\in X_1'$, each of $X_1'$ ad $X_2'$ dominate $V(H')$ and $X_0'$ dominates $V(H)\setminus\{r'
-  \}$.
-
-
-  Otherwise, suppose $r$ is not
-
-  Otherwise, $r$ is a vertex on the boundary of some inner face $f$ of $H[B]$.  If $f$ is a triangle $vrw$, then let $
-
-  If $f$ has four or more vertices then, by \cref{critical_structure}, $r$ is adjacent to an inner vertex $x$ contains in $f$.
-
-
-
-
-   each of which is a dominating set of $H$ and
-\end{proof}
+% \begin{lem}\label{two_critical_helper}
+%   Let $H$ be a biconnected critical generalized near-triangulation with at least two vertices.  Then $H[B(H)]$ has a proper $3$-colouring such that
+%   \begin{compactenum}[(i)]
+%     \item For each face $f$ of $H[B(H)]$ each colour appeas at least once;
+%     \item For each marked face $f$ of $H[B(H)]$, there is a vertex $v_f$ whose colour is different from every other vertex in $f$.
+%   \end{compactenum}
+% \end{lem}
+%
+% \begin{proof}
+%  The proof is by induction on the number $p$ of inner faces of $H[B(H)]$ with four or more vertices.  If $p=0$ then $H=H[B(H)]$ is an edge-maximal outerplanar graph and $H$ has a proper $3$-colouring that easily satisifies the conditions of the lemma.
+%
+%  Otherwise, let $f$ be a face of $H[B(H)]$ with four or more vertices. Then, by \cref{critical_structure}, the interior of $f$ contains a single vertex $x\in I(H)$ that is adjacent to every vertex in $f$.  Let $H'$
+%
+%  Otherwise, let $v$ be a vertex in $I(H)$ and let
+%
+%
+%
+%  If $|H|=3$ then, since $H$ is connected and bridgeless, $H$ is a cycle $vrw$. Then the conditions of the lemma are easily satisfied with $X_0:=\{v\}$, $X_1:=\{r\}$, and $X_2:=\{w\}$.  We now assume that $|H|\ge 3$.
+%
+%   % If $r$ has degree $1$, then let $r'$ be the unique neighbour of $r$ in $H$ and let $H':=H-r$.  Then $r'\in B(H')$ so we apply the inductive hypothesis on the instance $(H',r')$ to obtain sets $X_0',X_1',X_2'$ where $r'\in X_1'$, each of $X_1'$ and $X_2'$ dominate $V(H')$ and $X_0'$ dominates $V(H')\setminus \{r'\}$. Then we take $X_0:=X_{2}'$, $X_1:=X_0'\cup\{r'\}$ and $X_2:=X_1'$.  Then $X_1$ dominates $V(H)$ since $X_0'$ dominates $V(H)\setminus\{r,r'\}$ and $N_H[r]=\{r,r'\}$. Since $r'\in X_1'$, $X_2$ also dominates $V(H)$. The final set $X_0=X_2'$ dominates $V(H')=V(H)\setminus\{r\}$, as required.
+%
+%   If $r$ is a cut vertex of $H$, then $H-r$ has $k\ge 2$ components $C_1,\ldots,C_k$. For each $i\in\{1,\ldots,k\}$, let $H_i:=H[V(C_i)\cup\{r\}]$ and observe that $r\in B(H_i)$.  For each $i\in\{1,\ldots,k\}$,  we apply the inductive hypothesis on the instance $(H_i,r)$ to obtaine three sets $X_{i,0},X_{i,1},X_{i,2}$. Then, for each $i\in\{1,\ldots,k\}$,  $r\in X_{i,1}$, each of $X_{i,1}$ and $X_{i,2}$ dominate $V(H_i)$, and $X_{i,0}$ dominates $V(H_i)\setminus\{r\}$.  Then taking $X_0:=\bigcup_{i=1}^k X_{i,0}$,$X_1:=\bigcup_{i=1}^k X_{i,1}$, and $X_2:=\bigcup_{i=1}^k X_{i,2}$ gives the desired subsets of vertices.
+%
+%   If $\deg^+H(r)=1$ then let $f$ be the face of $H[B]$ that contains the single vertex $x\in N_H(r)\cap I$. Let $H'$ be the graph obtrained from $H$ by contracting the edge $rx$, creating a new vertex $r'$.  Then we apply the inductive hypothesis on the instance $(H',r')$ to obtain sets $X_0'$, $X_1'$, and $X_2'$ where $r'\in X_1'$, $X_1'$ and $X_2'$ dominate $V(H')$ and $X_0'$ dominates $V(H')\setminus\{r'\}$.
+%
+%
+%   .  Without loss of generality, $r'\in X_1'$, each of $X_1'$ ad $X_2'$ dominate $V(H')$ and $X_0'$ dominates $V(H)\setminus\{r'
+%   \}$.
+%
+%
+%   Otherwise, suppose $r$ is not
+%
+%   Otherwise, $r$ is a vertex on the boundary of some inner face $f$ of $H[B]$.  If $f$ is a triangle $vrw$, then let $
+%
+%   If $f$ has four or more vertices then, by \cref{critical_structure}, $r$ is adjacent to an inner vertex $x$ contains in $f$.
+%
+%
+%
+%
+%    each of which is a dominating set of $H$ and
+% \end{proof}
 
 
 
