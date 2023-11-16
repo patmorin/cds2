@@ -538,46 +538,34 @@ We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B
   Let $H$ be a $2$-critical dom-minimal generalized near-triangulation.  Then there exists $X\subseteq V(H)$ of size at most $|H|/3$ that dominates $I(H)$ and such that each component of $H[X]$ contains at least one vertex in $B(H)$.
 \end{lem}
 
-% \begin{proof}
-%   \pat{There is still some work to do here.  We should break this up into cases where we eliminate bridges and cut vertices first.  Then, finally, we're left with the case where each component of $H-B(H)$ is a $2$-connected critical graph. To deal with this, we first deal with the stupid cases where this graph is just a $3$-cycle or a cycle with one inner vertex. (We can handle these by choosing any vertex on the face).  Otherwise the graph is an outerplanar graph with stars in some of its faces.  See \cref{contraction}. In each such face we'll contract one of the star edges (we should choose one incident to a chord of $H[B(H)]$, which is why we had to rule out the second stupid case) to we get an outerplanar graph and those special faces are star-triangulated.  When we contract, the vertex we contract into gets a weight of $3$. All other vertices get a weight of $2$. The total weight is then $2|B(H-B(H))|+|H-BB(H)|\le |H|$, by \cref{big_boundary}. Then we $3$-colour and take the lowest weight colour class.  The key point is that, for each weight-$2$ vertex $w$ we choose, we have to include $w$ and a neighbour $v$ of $w$ in $B(H)$.  For each weight $3$ vertex $w$ we choose, we have to take $w$, a neighbour $v$ of $w$ in $B(H)$, and the inner vertex of $H-B(H)$ that caused $w$ to have weight $3$.}
-% \begin{figure}
-%     \begin{center}
-%         \begin{tabular}{ccc}
-%             \includegraphics[page=1]{figs/contractor} &
-%             \includegraphics[page=2]{figs/contractor} &
-%             \includegraphics[page=3]{figs/contractor}
-%         \end{tabular}
-%         \caption{Contracting an inner vertex of a $1$-planar graph into a boundary vertex}
-%         \label{contraction}
-%     \end{center}
-% \end{figure}
-% \end{proof}
+\begin{lem}\label{degree_isolated}
+  Let $H$ be a generalized near-triangulation and let $C$ be a component of $H-B(H)$ that consists of a single vertex. Then $H$ contains at least $3$ edges with one endpoint in $C$ and one endpoint in $B(H)$.
+\end{lem}
+
+\begin{proof}
+  Follows from the fact that $H$ is a generalized near-triangulation and the vertex in $C$ is an inner vertex of $H$.
+\end{proof}
+
 
 \pat{Define boundary walk around a face.}  For a boundary walk $W:=w_0,\ldots,w_{r-1}$, $|W|:=r$ is the number of edges used by $W$, counted with multiplicity, and including the edge $w_{r-1}w_0$ that closes the walk.
 
-\begin{lem}\label{boundary_vs_walk}
-  Let $H$ be a $2$-critical generalized near-triangulation, let $C_1,\ldots,C_k$ be the components of $H-B(H)$ and, for each $i\in\{1,\ldots,k\}$, let $W_i$ be the boundary walk around the outer face of $C_i$. Then $|B(H)|\ge \sum_{i=1}^k |W_i|$.
+\begin{lem}\label{degree_walk}
+  Let $H$ be a $2$-critical generalized near-triangulation, let $C$ be a component of $H-B(H)$ with at least two vertices and let $W$ be the boundary walk around the outer face of $H-B(H)$. Then $H$ contains at least $|W|$ edges with one endpoint in $C$ and one endpoint in $B(H)$.
 \end{lem}
 
 \begin{proof}
-  \pat{TODO}
+  Consider two consecutive edges $uv$ and $vw$ in some $W$, so the outer face of $H-B(H)$ is to the left of the path $uvw$.  Since $u,v,w$ are in $I(H)$, $H$ contains faces $uxv$ and $vyw$ that are to the left of $uv$ and $vw$, respectively. Since $uvw$ is in the boundary walk of the outer face of $C$ $C$, these faces are not faces of $H-B(H)$, so $x,y\in B(H)$.  We claim that $x\neq y$.  To see this, there are two cases to consider.  If $u\neq w$ and $x=y$ then $x\in B(H)$ is adjacent to each of $u,v,w\in I(H)$, so $\deg^+_H(x)\ge 3$, contradicting the fact that $H$ is $2$-critical  If $u=w$ and $x=y$, then there are two inner faces of $H$ that have $uv$ on their boundary, which is not possible because $H$ does not have parallel edges.  Therefore, the edges $vx$ and $vy$ can be assigned to the consecutive pair $uv$ and $vw$. We can do this to each of the consecutive pairs of edges without assigning any edge to more than one consecutive pair.
 \end{proof}
 
+For a generalized near-triangulation $H_1$, let $\mu(H_1)$ be two times the number of degree-$0$ vertices in $H_1$ plus the number of degree-$1$ vertices in $H_1$ plus the number of vertices in $B(H_1)$.
 
-
-\begin{lem}\label{walk_vs_leaves}
-  Let $H$ be a $2$-critical generalized near-triangulation, let $\ell$ be the number of degree-$1$ vertices in $H-B(H)$ \pat{Need condition on size of $H-B(H)$}, let $C_1,\ldots,C_k$ be the components of $H-B(H)$ and, for each $i\in\{1,\ldots,k\}$, let $W_i$ be the boundary walk around the outer face of $C_i$. Then $\sum_{i=1}^k |W_i|\ge |B(H-B(H))|+\ell$.
+\begin{lem}\label{boundary_size}
+  Let $H$ be a $2$-critical generalized near-triangulation.  Then $|B(H)|\ge\mu(H-B(H))$.
 \end{lem}
 
 \begin{proof}
- \pat{TODO}
+  Follows immediately from \cref{degree_isolated,degree_walk} and the fact that $\deg^+_H(v)\le 2$ for all $v\in B(H)$.
 \end{proof}
-
-\Cref{boundary_vs_walk,walk_vs_leaves} immediately give the following corollary:
-
-\begin{cor}\label{boundary_vs_leaves}
-  Let $H$ be a $2$-critical generalized near-triangulation and let $\ell$ be the number of degree-$1$ vertices in $H-B(H)$ \pat{Need condition on size of $H-B(H)$}. Then $|B(H)|\ge |B(H-B(H))|+\ell$.
-\end{cor}
 
 For each integer $r\ge 3$, let $W_r$ be the near-triangulation whose outer face is bounded by a cycle $v_0,\ldots,v_{r-1}$ that contains a single vertex $x$ in its interior and that is adjacent to each of $v_0,\ldots,v_{r-1}$.
 
@@ -636,6 +624,7 @@ Now we drop the requirement that $H$ is biconnected.
 \end{lem}
 
 \begin{proof}[Proof Sketch]
+  \pat{Watch out for biconnected components with two internal vertices.}
   The proof is by induction on $|H|$.  If $|H|=3$ then $H$ is either a triangle $v_0,v_1,v_2$ or a path $v_0,v_1,v_2$.  In either case, we take $X_i:=\{v_i\}$ for each $i\in\{0,1,2\}$.  If $H$ is a triangle, then $L=\emptyset$ and we take $L_0:=L_1:=L_2:=\emptyset$.  If $H$ is a path then $L=\{v_0,v_2\}$ and we take $L_0:=\{v_2\}$, $L_1:=\emptyset$ and $L_2:=\{v_0\}$.  It is straightforward to verify these sets satisfy the requirements of the lemma.
 
   If $L\neq\emptyset$ then let $z_0$ be a vertex in $L$ and let $z_0,\ldots,z_r$ the maximal path in $H$ such that each of $z_1,\ldots,z_{r-1}$ has degree $2$ in $H$. Consider the graph $H':=H-\{z_0,\ldots,z_{r-1}$.
@@ -653,7 +642,7 @@ Now we drop the requirement that $H$ is biconnected.
 \end{proof}
 
 
-\begin{lem}
+\begin{lem}\label{three_sets_coverage}
   Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X_0,X_1,X_2\subseteq V(H)$ such that
   \begin{compactenum}[(i)]
     \item $|X_0|+|X_1|+|X_2| \le |H|$; \label[p]{total_size}
@@ -663,12 +652,26 @@ Now we drop the requirement that $H$ is biconnected.
 \end{lem}
 
 \begin{proof}
-  \pat{First deal with small components of $H-B(H)$.}
+  Let $B_0:=B(H)$, let $H_1:=H-B(H)$, let $B_1:=B(H_1)$, let $I_1:=I(H_1)$,  let $L$ be the set of degree-$1$ vertices in $H_1$ and let $Z$ be the set of degree-$0$ vertices in $H_1$.
+  By \cref{boundary_vs_leaves}, to satisfy \cref{boundary_size} it suffices to construct three sets whose total size is not more than $|I_1|+\mu(H_1)=|I_1|+2|Z| + |L| + |B_1|$.
 
-  Let $B_0:=B(H)$, let $H_1:=H-B(H)$, let $B_1:=B(H_1)$, let $I_1:=I(H_1)$, and let $L$ be the set of degree-$1$ vertices in $H_1$.  We call the vertices in $L$ \defin{leaves}.
-  By \cref{boundary_vs_leaves}, to satisfy \cref{total_size} it suffices to construct three sets whose total size is not more $|I_1|+2|B_1|+|L|$.  Intuitively, each vertex in $I_1$ should appear in at most one $X_i$. Each vertex $w$ in $B_1$ appears in one $X_i$ and, in order to satisfy \cref{connectivity}, a neighbour $v\in B_0$ of $w$ should appear in the same $X_i$.  Each vertex $w$ in $L$ (which is also in $B_1$) may need to contribute an additional vertex in order to satisfy \cref{dominates_i}. Specifically, if $w\in L_j$ then we take a neighbour $w'$ of $w$ in $B_0$ and add it to $X_j$.  This ensures that $w$ is dominated by $X_j$.
+  For each biconnected component $C$ of $H-B(H)$ with at least $3$ vertices, we apply \cref{two_connected_critical} to obtain sets $X_0,X_1,X_2,L_0,L_1,L_2$.
+  For each $w\in L_j$ then take a neighbour $w'$ of $w$ in $B_0$ and add it to $X_j$.  This ensures that $w$ is dominated by $X_j$.
+
+  For each degree-$0$ vertex $w$ in $H-B(H)$ we will choose a vertex in $N_H(v)\cap B(H)$ and place $v$ in each of $X_0$, $X_1$, and $X_2$. This accounts for a total of $3|Z|$ vertices in $X_0$, $X_1$, and $X_2$.
+
+  For each component $C$ of size $2$ in $H-B(H)$ we choose one vertex $v$ in $B(H)$ that dominates $C$ and use this to
+
+
+
+  % We call the vertices in $L$ \defin{leaves}.
+
+  % Intuitively, each vertex in $I_1$ should appear in at most one $X_i$. Each vertex $w$ in $B_1$ appears in one $X_i$ and, in order to satisfy \cref{connectivity}, a neighbour $v\in B_0$ of $w$ should appear in the same $X_i$.  Each vertex $w$ in $L$ (which is also in $B_1$) may need to contribute an additional vertex in order to satisfy \cref{dominates_i}.
 \end{proof}
 
+\begin{proof}[Proof of \cref{two_critical_handler}]
+  Take $X$ to be the smallest of the three sets $X_0$, $X_1$, and $X_2$ guaranteed by \cref{three_sets_coverage}.
+\end{proof}
 
 
 \subsection{The Algorithm}
