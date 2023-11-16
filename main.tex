@@ -68,14 +68,16 @@
   We show that every $n$-vertex triangulation has a connected dominating set of size at most $10n/21$.  Equivalently, every $n$ vertex triangulation has a spanning tree with at least $11n/21$ leaves. Prior to the current work, the best known bounds were $2n/3$ and $n/3$, respectively.  As an application of this, we show that every $n$-vertex planar graph has a one-bend non-crossing drawing in which some set of at least $11n/21$ vertices is drawn on the $x$-axis.
 \end{abstract}
 
-\vida{Note that if all the vertices of G are on a line then no edge in a 1-bend drawing crosses the line and thus G is subhamiltonian. Since not all planar graphs are subhamiltonian, that implies that the tight bound for the drawings above is strictly less than n. I wonder how much smaller than n it has to be. Is it a fraction of n? Do we know anything about the side of the largest induced subhamiltonian graph in a planar triangulation? Whatever we have on that line induces a subhamiltonian planar graph. So basically the result above also says that each planar graph has induced subgraph of size at least 11n/21 that is subhamiltonian planar. Do not know if that is interesting. n/4 follows trivially from 4-colour theorem. n/2 follows from the fact that every other layer of BFS induced an outerplanar graph.
+% \vida{Note that if all the vertices of G are on a line then no edge in a 1-bend drawing crosses the line and thus G is subhamiltonian. Since not all planar graphs are subhamiltonian, that implies that the tight bound for the drawings above is strictly less than n. I wonder how much smaller than n it has to be. Is it a fraction of n? Do we know anything about the side of the largest induced subhamiltonian graph in a planar triangulation? Whatever we have on that line induces a subhamiltonian planar graph. So basically the result above also says that each planar graph has induced subgraph of size at least 11n/21 that is subhamiltonian planar. Do not know if that is interesting. n/4 follows trivially from 4-colour theorem. n/2 follows from the fact that every other layer of BFS induced an outerplanar graph.
 
-In either case we should say that n is not possible (or even better if we know that c*n is not possible for some $c<1$)
-}
+% In either case we should say that n is not possible (or even better if we know that c*n is not possible for some $c<1$)
+% }
 
-\saeed{As far as I am aware, all we know is Goldner–Harary Graph (\url{https://en.wikipedia.org/wiki/Goldner–Harary_graph}) is the smallest triangulation that is not subhamiltonian. you can put 10/11 of the vertices on a line. so the trivial upper bound on the size of the one-bend collinear set is 10/11. It would be interesting if we could glue a lot of copies of this example nicely to get a better upper bound. We conjecture that the size of the connected dominating set is at most $\frac{n}{3}$.  \sout{I guess (might be wrong) that the size of the largest collinear set is also at most $\frac{2n}{3}$.}}
+% \saeed{As far as I am aware, all we know is Goldner–Harary Graph (\url{https://en.wikipedia.org/wiki/Goldner–Harary_graph}) is the smallest triangulation that is not subhamiltonian. you can put 10/11 of the vertices on a line. so the trivial upper bound on the size of the one-bend collinear set is 10/11. It would be interesting if we could glue a lot of copies of this example nicely to get a better upper bound. We conjecture that the size of the connected dominating set is at most $\frac{n}{3}$.  \sout{I guess (might be wrong) that the size of the largest collinear set is also at most $\frac{2n}{3}$.}}
 
-\vida{what if we take many copies of that graph and add one dominating vertex adjacent to all the vertices on outer faces of GH graph. Did not think about this. It is the first thing that came to my mind}
+% \vida{what if we take many copies of that graph and add one dominating vertex adjacent to all the vertices on outer faces of GH graph. Did not think about this. It is the first thing that came to my mind}
+
+% \pat{I added a discussion of the relationship with subhamiltonian graphs after the statement of Theorem 2.}
 
 \section{Introduction}
 
@@ -108,13 +110,13 @@ Note that if all the vertices of $G$ are on the $x$-axis then no edge in a $1$-b
 \subsection{Related Work}
 
 \pat{Add: \newline
-results on edge-maximal outerplanar graphs \newline
+results on edge-maximal outerplanar graphs --- implies $n/2$ bound for Hamiltonian planar graphs (including $4$-connected.) \newline
 connected dominating sets in unit disc graphs \newline
 $2$-bend collinear sets \newline
 $15$-approximation for minimum connected dominating set in planar graphs \newline
 }
 
-The remainder of this paper is organized as follows:  In \cref{strategy}, we describe the general strategy we use for finding connected dominating sets in triangulations.  In \cref{warm_up} we show that a simple version of this strategy can be used to obtain a connected dominating set of size at most $4n/7= 0.\overline{571428}n$, which is already better than the best known bounds for triangulations and even $4$-connected triangulations.  In \cref{full_result} we show that a more careful construction leads to a proof of \cref{main_result2}.  In \cref{one_bend}, we discuss the connection between connected dominating sets and one-bend collinear drawings that leads to \cref{one_bend_collinear}.
+The remainder of this paper is organized as follows:  In \cref{strategy}, we describe the general strategy we use for finding connected dominating sets in triangulations.  In \cref{warm_up} we show that a simple version of this strategy can be used to obtain a connected dominating set of size at most $4n/7= 0.\overline{571428}n$, which is already better than the best known bounds for triangulations.  In \cref{full_result} we show that a more careful construction leads to a proof of \cref{main_result2}.  In \cref{one_bend}, we discuss the connection between connected dominating sets and one-bend collinear drawings that leads to \cref{one_bend_collinear}.
 
 % \subsection{Related Work}
 %
@@ -171,18 +173,67 @@ A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ f
 \end{figure}
 
 
+\begin{lem}\label{critical_structure}
+    Let $H$ be a critical generalized near-triangulation. Then each $f$ face of $H[B(H)]$ contains at most one vertex of $I(H)$ and this vertex is adjacent to every vertex of $f$.
+\end{lem}
+
+\begin{proof}
+  By definition, the graph $H[B]$ is outerplanar.  Say that an inner face of $H[B]$ is \defin{marked} if it contains an inner vertex of $H$.  Consider some marked face $f$ of $H[B]$.  This face is marked because it contains at least one vertex in $I$.  Since $H$ is a triangulation, there is an edge $vx$ in $H$ with $v\in B$ on the boundary of $f$ and $x\in I$ in the interior of $f$. Since $H$ is a generalized near-triangulation and $x$ is an inner vertex of $H$, the edge $vx$ is on the boundary of two faces $vxv_1$ and $vxv_{k-1}$ of $H$ with $v_1\neq v_{k-1}$.  Since $\deg^+_H(v)=1$, each of $v_1$ and $v_{k-1}$ are in $B$.  By the same argument, $H$ contains a face $v_1xv_2$ with $v_2\in B$, $v_2\neq v$, and repeating this argument shows that $v,v_1,v_2,\ldots,v_{k-1}$ is the cycle in $H[B]$ that bounds $f$.  Therefore, $f$ contains exactly one vertex $x$ of $I$ and $x$ is adjacent to each vertex of $f$.
+\end{proof}
+
 \begin{lem}\label{base_case}
     Let $H$ be a critical generalized near-triangulation. Then $|B(H)|\ge 3|I(H)|$ and there exists $\Delta\subseteq B(H)$ of size at most $|I(H)|$ that dominates $I(H)$.
 \end{lem}
 
 \begin{proof}
-  Let $B:=B(H)$ and $I:=I(H)$.  If $I$ is empty then the result is trivially true, by taking $X:=\emptyset$, so we now assume that $I$ is non-empty.  By definition, the graph $H[B]$ is outerplanar.  Say that an inner face of $H[B]$ is \defin{marked} if it contains an inner vertex of $H$.  Consider some marked face $f$ of $H[B]$.  This face is marked because it contains at least one vertex in $I$.  Since $H$ is a triangulation, there is an edge $vx$ in $H$ with $v\in B$ on the boundary of $f$ and $x\in I$ in the interior of $f$. Since $G$ is a triangulation and $x$ is an inner vertex of $H$, the edge $vx$ is on the boundary of two faces $vxv_1$ and $vxv_{k-1}$ of $H$ with $v_1\neq v_{k-1}$.  Since $\deg^+_H(v)=1$, each of $v_1$ and $v_{k-1}$ are in $B$.  By the same argument, $H$ contains a face $v_1xv_2$ with $v_2\in B$, $v_2\neq v$, and repeating this argument shows that $v,v_1,v_2,\ldots,v_{k-1}$ is the cycle in $H[B]$ that bounds $f$.  Therefore, $f$ contains exactly one vertex $x_f:=x$ of $I$ and $x_f$ is adjacent to each vertex of $f$.  Thus, $H$ is formed from an outerplanar graph $H[B]$ by adding $|I|$ stars, one in the interior of each marked face of $H[B]$.  Furthermore, since $\deg_H^+(v)=1$ for each $v\in B$, each vertex of $H[B]$ is on the boundary of exactly one marked face.
-
-
-
-  \pat{Replace the following paragraph with charging argument?}
-  Consider the graph $H'$ obtained by adding edges to the inner faces of $H[B]$ so that each inner face is a triangle. For each marked face $f$ of $H[B]$, select one triangular face $t_f$ of $H'$ that is contained in $f$ and \defin{mark} $t_f$. Thus there is a bijection from the set of marked faces of $H[B]$ to the set of marked faces in $H'$ and both of these sets have size $|I|$.  Since each vertex in $B$ is on the boundary of at most one marked face of $H[B]$, each vertex in $B$ is on the boundary of at most one marked triangular face of $H'$.  Therefore, $|B| \ge 3|I|$ so $|H|=|B|+|I|\ge 4|I|$. By choosing one vertex from each marked face of $H$ we obtain the desired set $\Delta$.
+  Let $B:=B(H)$ and $I:=I(H)$.  If $I$ is empty then the result is trivially true, by taking $X:=\emptyset$, so we now assume that $I$ is non-empty.  Say that a face $f$ of $H[B]$ is \defin{marked} if it contains a vertex of $I$ in its interior.  By \cref{critical_structure}, $H$ is formed from the outerplanar graph $H[B]$ by adding $|I|$ stars, one in the interior of each marked face of $H[B]$.  Furthermore, since $\deg_H^+(v)=1$ for each $v\in B$, each vertex of $H[B]$ is on the boundary of exactly one marked face.  For each vertex $w\in I$, the marked face that $f$ of $H[B]$ that contains $w$ has at least $3$ vertices, which do not belong to any other marked face. Therefore $|B|\ge 3|I|$ and by choosing one vertex from each marked face of $H[B]$ we obtain the desired set $\Delta$.
 \end{proof}
+
+\begin{lem}\label{two_critical_helper}
+  Let $H$ be a biconnected critical generalized near-triangulation with at least two vertices.  Then $H[B(H)]$ has a proper $3$-colouring such that
+  \begin{compactenum}[(i)]
+    \item For each face $f$ of $H[B(H)]$ each colour appeas at least once;
+    \item For each marked face $f$ of $H[B(H)]$, there is a vertex $v_f$ whose colour is different from every other vertex in $f$.
+  \end{compactenum}
+\end{lem}
+
+\begin{proof}
+ The proof is by induction on the number $p$ of inner faces of $H[B(H)]$ with four or more vertices.  If $p=0$ then $H=H[B(H)]$ is an edge-maximal outerplanar graph and $H$ has a proper $3$-colouring that easily satisifies the conditions of the lemma.
+
+ Otherwise, let $f$ be a face of $H[B(H)]$ with four or more vertices. Then, by \cref{critical_structure}, the interior of $f$ contains a single vertex $x\in I(H)$ that is adjacent to every vertex in $f$.  Let $H'$ 
+
+ Otherwise, let $v$ be a vertex in $I(H)$ and let
+
+
+
+ If $|H|=3$ then, since $H$ is connected and bridgeless, $H$ is a cycle $vrw$. Then the conditions of the lemma are easily satisfied with $X_0:=\{v\}$, $X_1:=\{r\}$, and $X_2:=\{w\}$.  We now assume that $|H|\ge 3$.
+
+  % If $r$ has degree $1$, then let $r'$ be the unique neighbour of $r$ in $H$ and let $H':=H-r$.  Then $r'\in B(H')$ so we apply the inductive hypothesis on the instance $(H',r')$ to obtain sets $X_0',X_1',X_2'$ where $r'\in X_1'$, each of $X_1'$ and $X_2'$ dominate $V(H')$ and $X_0'$ dominates $V(H')\setminus \{r'\}$. Then we take $X_0:=X_{2}'$, $X_1:=X_0'\cup\{r'\}$ and $X_2:=X_1'$.  Then $X_1$ dominates $V(H)$ since $X_0'$ dominates $V(H)\setminus\{r,r'\}$ and $N_H[r]=\{r,r'\}$. Since $r'\in X_1'$, $X_2$ also dominates $V(H)$. The final set $X_0=X_2'$ dominates $V(H')=V(H)\setminus\{r\}$, as required.
+
+  If $r$ is a cut vertex of $H$, then $H-r$ has $k\ge 2$ components $C_1,\ldots,C_k$. For each $i\in\{1,\ldots,k\}$, let $H_i:=H[V(C_i)\cup\{r\}]$ and observe that $r\in B(H_i)$.  For each $i\in\{1,\ldots,k\}$,  we apply the inductive hypothesis on the instance $(H_i,r)$ to obtaine three sets $X_{i,0},X_{i,1},X_{i,2}$. Then, for each $i\in\{1,\ldots,k\}$,  $r\in X_{i,1}$, each of $X_{i,1}$ and $X_{i,2}$ dominate $V(H_i)$, and $X_{i,0}$ dominates $V(H_i)\setminus\{r\}$.  Then taking $X_0:=\bigcup_{i=1}^k X_{i,0}$,$X_1:=\bigcup_{i=1}^k X_{i,1}$, and $X_2:=\bigcup_{i=1}^k X_{i,2}$ gives the desired subsets of vertices.
+
+  If $\deg^+H(r)=1$ then let $f$ be the face of $H[B]$ that contains the single vertex $x\in N_H(r)\cap I$. Let $H'$ be the graph obtrained from $H$ by contracting the edge $rx$, creating a new vertex $r'$.  Then we apply the inductive hypothesis on the instance $(H',r')$ to obtain sets $X_0'$, $X_1'$, and $X_2'$ where $r'\in X_1'$, $X_1'$ and $X_2'$ dominate $V(H')$ and $X_0'$ dominates $V(H')\setminus\{r'\}$.
+
+
+  .  Without loss of generality, $r'\in X_1'$, each of $X_1'$ ad $X_2'$ dominate $V(H')$ and $X_0'$ dominates $V(H)\setminus\{r'
+  \}$.
+
+
+  Otherwise, suppose $r$ is not
+
+  Otherwise, $r$ is a vertex on the boundary of some inner face $f$ of $H[B]$.  If $f$ is a triangle $vrw$, then let $
+
+  If $f$ has four or more vertices then, by \cref{critical_structure}, $r$ is adjacent to an inner vertex $x$ contains in $f$.
+
+
+
+
+   each of which is a dominating set of $H$ and
+\end{proof}
+
+
+
+
 
 \section{A Simple Algorithm}
 \label{warm_up}
@@ -546,7 +597,6 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BestG
   \begin{equation}
     r-1 + z + 2(R + S)/3 \enspace .  \label{best_objective}
   \end{equation}
-  \pat{There was a not-so-little mistake in \cref{best_objective} that I fixed.  (I was forgetting to count the extra vertex that is added to $X$ each time Case~2 occurs.) Unfortunately now we get a bound of $10/21$, but still better than a half.}
   We can eliminate the variables $x_t$ for $t\ge 4$:
   \begin{clm}
     In any assignment of non-negative values to $Q, R, S$, $z$, and $x_3,x_4\ldots$ that maximizes \cref{best_objective} subject to \cref{best2,best3,best4,best5}, $x_t=0$ for all $t\ge 4$.
