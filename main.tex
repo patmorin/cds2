@@ -653,7 +653,7 @@ The following lemma explains how we deal with even wheels:
 \begin{lem}\label{wheelie}
   Let $H:=W_k$ for some even integer $k\ge 4$ and let $v$ be any vertex in $B(H)$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
   \begin{compactenum}[(i)]
-    \item For each edge $vw$ of $H[B(H)]$, $v\in X_i$ and $w\in X_j$ for some $i\neq j$;\label[p]{proper}
+    \item For each edge $vw$ of $H[B(H)]$, $v\in X_i$ and $w\in X_j$ for some $i\neq j$;\label[p]{proper2}
     % \item For each inner face $f$ of $H[B(H)]$ and each $i\in\{0,1,2\}$, $V(f)\cap X_i\neq\emptyset$; and \label[p]{colourful}
     % that contains $x_f\in I(H)$ in its interior, exactly one vertex $v_f$ of $f$ is in the set $X_i$ that contains $x$ and $v_f$ is incident to a chord of $H[B(H)]$. \pat{Define chord.}
     \item $X_0$ dominates $V(H)\setminus\{v\}$ and $X_1$ and $X_2$ each dominate $H$. \label[p]{weak_dominates_h}
@@ -753,11 +753,11 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BestG
 \end{thm}
 \hussein{Is adding the following inequality to the constrains helpful  $r \leq |E|/4 \leq 3n/4 - 3/2$? I don t think so  } \pat{No: The optimal is achieve when $r\approx n/7$}
 \begin{proof}
-  For each integer $t\ge 3$, let $x_t$ be the number of times $\textsc{BetterGreedy}(G)$ falls into case $1$ and chooses $v_i$ such that $\deg^+_{G_i}(v_i)=t$.  Let $z$ be the number of times $\textsc{BetterGreedy}(G)$ falls into Case~2.  Let
+  For each integer $t\ge 3$, let $x_t$ be the number of times $\textsc{BestGreedy}(G)$ falls into case $1$ and chooses $v_i$ such that $\deg^+_{G_i}(v_i)=t$.  Let $z$ be the number of times $\textsc{BestGreedy}(G)$ falls into Case~2.  Let
   \[
      D:=|D_{r-1}| = 3 + \sum_{t\ge 3}tx_t + 5z \enspace .
   \]
-  Let $I:=|I(G_{r-1})|$, let $B:=|B(G_{r-1})|$, let $Q:=|B(G_{r-1}-B(G_{r-1}))|$, let $R:=|I(G_{r-1}-B(G_{r-1}))|$, and let $S:=|I(G_{r-1}-B^2(G_{r-1}))|$.  Then, by \cref{big_boundary} and \cref{base_case}
+  Let $I:=|I(G_{r-1})|$, let $B:=|B(G_{r-1})|$, let $Q:=|B(G_{r-1}-B(G_{r-1}))|$, let $R:=|I(G_{r-1}-B(G_{r-1}))|$, and let $S:=|I(G_{r-1}-B^2(G_{r-1}))|$.\pat{Define $B^2(G)=G[B(G-B(G))]-B(G[B(G-B(G))])$}  Then, by \cref{degree_corners_and_leaves} and \cref{base_case}
 
   \begin{equation}
     Q \ge R \ge 3S \enspace . \label{best2}
@@ -793,7 +793,7 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BestG
     If $z = c >0$  then we can set $z\gets 0$, $x_3\gets x_3+5c/3$, $Q\gets Q+10c/3-2c=Q+4c/3$, $R\gets 10c/3-2c=Q+4c/3$, and $S\gets 10c/9-2c/3=S+4c/9$. Then the objective function \cref{best_objective} increases by $(5/3+4/3+4/9)c >0$.  \Cref{best2} is still satisfied because the quantities $Q$, $R$, and $3S$ change by exactly the same amount.  \Cref{best3} is still satisfied because the right hand side decreases by $(5-4/3+4/3)c=7c/3$. \Cref{best4} still holds because the right hand side decreases by $4c/3 + 4c/3 +4c/9 - 5c/3>0$  \Cref{best5} still holds because the left hand side decreases by $4c/3$ and the right hand side increases by $10c/3 - 2c=4c/3$.
 
   \end{clmproof}
-  Therefore, \cref{best2,best3,best4,best5} are inequalities in four non-negative variables $x_3$, $Q$, $R$ and $S$.  Maximizing \cref{best_objective} subject to these constraints is an easy linear programming exercise and the maximum is achieved when \pat{Correct these: $x_3=(n-6)/5$, $Q=R=(2n+3)/5$, $S=0$, giving a final bound of $|X|\le r-1+R/3\le (7n-12)/15$}.
+  Therefore, \cref{best2,best3,best4,best5} are inequalities in four non-negative variables $x_3$, $Q$, $R$ and $S$.  Maximizing \cref{best_objective} subject to these constraints is an easy linear programming exercise and the maximum is achieved when \pat{Correct these: $x_3=(n-6)/5$, $Q=R=(2n+3)/5$, $S=0$, giving a final bound of $|X|\le r-1+R/3\le (7n-12)/15$---See Sage Code in the appendix.}.
 \end{proof}
 
 
