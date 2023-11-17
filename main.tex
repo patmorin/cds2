@@ -17,6 +17,7 @@
 \usepackage[longnamesfirst,numbers,sort&compress]{natbib}
 % \usepackage[normalem]{ulem}
 
+
 \usepackage{listings,newtxtt}
 \lstset{basicstyle=\ttfamily, keywordstyle=\bfseries}
 
@@ -40,6 +41,7 @@
 \creflabelformat{p}{#2(#1)#3}
 
 
+\DeclareMathOperator{\corners}{\Gamma}
 \DeclareMathOperator{\dist}{d}
 \DeclareMathOperator{\pack}{pack}
 \DeclareMathOperator{\hit}{hit}
@@ -538,34 +540,83 @@ We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B
   Let $H$ be a $2$-critical dom-minimal generalized near-triangulation.  Then there exists $X\subseteq V(H)$ of size at most $|H|/3$ that dominates $I(H)$ and such that each component of $H[X]$ contains at least one vertex in $B(H)$.
 \end{lem}
 
-\begin{lem}\label{degree_isolated}
-  Let $H$ be a generalized near-triangulation and let $C$ be a component of $H-B(H)$ that consists of a single vertex. Then $H$ contains at least $3$ edges with one endpoint in $C$ and one endpoint in $B(H)$.
-\end{lem}
+For any graph $H$ and two subsets $A$ and $B$ of vertices of $H$, we use $E_H(A,B):=\{vw\in E(H):v\in A, w\in B\}$ to denote the set of edges of $H$ with one endpoint in $A$ and one endpoint in $B$.
+
+
+\begin{obs}\label{degree_isolated}
+  Let $H$ be a generalized near-triangulation and let $C$ be a component of $H-B(H)$ that consists of a single vertex. Then $|E_H(V(C),B(H))|\ge 3$.
+\end{obs}
 
 \begin{proof}
-  Follows from the fact that $H$ is a generalized near-triangulation and the vertex in $C$ is an inner vertex of $H$.
+  The single vertex $w$ in $C$ is an inner vertex of the generalized near-triangulation $H$, $\deg_H(w)\ge 3$.  Since $\deg_{H-B(H)}(w)=0$, every edge incident to $w$ has an endpoint in $B(H)$, so $|E_H(V(C),B(H))|=\deg_H(w)\ge 3$.
 \end{proof}
 
 
-\pat{Define boundary walk around a face.}  For a boundary walk $W:=w_0,\ldots,w_{r-1}$, $|W|:=r$ is the number of edges used by $W$, counted with multiplicity, and including the edge $w_{r-1}w_0$ that closes the walk.
+% \begin{obs}\label{degree_minimum}
+%   Let $H$ be a generalized near-triangulation and let $C$ be a component of $H-B(H)$. Then $|E_H(V(C),B(H))|\ge 3$.
+% \end{obs}
+%
+% \begin{proof}
+%   By contracting all the vertices of $C$ into a single vertex $w$ and eliminating multiple edges, we obtain a generalized near-triangulation $H'$ in which $w$ is an isolated vertex in $H'-B(H')=H'-B(H)$.  By \cref{degree_isolated}, $|E_{H'}(\{w\},B(H))|\ge 3$.  For every edge $wv\in E_{H'}(\{w\},B(H))$, there is at least one edge $w'v\in E_H(V(C),B(H))$, so $|E_H(V(C),B(H))|\ge |E_{H'}(\{w\},B(H))|\ge 3$.
+% \end{proof}
 
-\begin{lem}\label{degree_walk}
-  Let $H$ be a $2$-critical generalized near-triangulation, let $C$ be a component of $H-B(H)$ with at least two vertices and let $W$ be the boundary walk around the outer face of $H-B(H)$. Then $H$ contains at least $|W|$ edges with one endpoint in $C$ and one endpoint in $B(H)$.
+
+% \begin{obs}\label{degree_minimum}
+%   Let $H$ be a generalized near-triangulation and let $C$ be a component of $H-B(H)$. Then $|E_H(V(C),B(H))|\ge 3$.
+% \end{obs}
+
+
+
+
+
+A \defin{corner} of a face $f$ in a plane graph $H$ is an ordered pair $(uv,vw)$ of edges in $H$ that occur consecutively around $v$ and such that the face $f$ is to the left of the path $uvw$.  Note that this includes the possibility that $u=w$, which occurs when $v$ has degree $1$.  We let $\corners(H)$ denote the set of corners on the outer face of $H$.
+
+\begin{lem}\label{corner_degree}
+  Let $H$ be a $2$-critical generalized near-triangulation, and let $C$ be a component of $H-B(H)$ with at least two vertices. Then $|E_H(V(C),B(H))|\ge 2|\corners(C)|$.
 \end{lem}
 
 \begin{proof}
-  Consider two consecutive edges $uv$ and $vw$ in some $W$, so the outer face of $H-B(H)$ is to the left of the path $uvw$.  Since $u,v,w$ are in $I(H)$, $H$ contains faces $uxv$ and $vyw$ that are to the left of $uv$ and $vw$, respectively. Since $uvw$ is in the boundary walk of the outer face of $C$ $C$, these faces are not faces of $H-B(H)$, so $x,y\in B(H)$.  We claim that $x\neq y$.  To see this, there are two cases to consider.  If $u\neq w$ and $x=y$ then $x\in B(H)$ is adjacent to each of $u,v,w\in I(H)$, so $\deg^+_H(x)\ge 3$, contradicting the fact that $H$ is $2$-critical  If $u=w$ and $x=y$, then there are two inner faces of $H$ that have $uv$ on their boundary, which is not possible because $H$ does not have parallel edges.  Therefore, the edges $vx$ and $vy$ can be assigned to the consecutive pair $uv$ and $vw$. We can do this to each of the consecutive pairs of edges without assigning any edge to more than one consecutive pair.
+  Consider some corner $(uv, vw)$ of the outer face of $C$.  Since $u,v,w$ are in $I(H)$, $H$ contains faces $uxv$ and $vyw$ that are to the left of $uv$ and $vw$, respectively. Since $uvw$ is in the boundary walk of the outer face of $C$ $C$, these faces are not faces of $H-B(H)$, so $x,y\in B(H)$.  We claim that $x\neq y$.  To see this, there are two cases to consider.
+  \begin{compactenum}
+    \item If $u\neq w$ and $x=y$ then $x\in B(H)$ is adjacent to each of $u,v,w\in I(H)$, so $\deg^+_H(x)\ge 3$, contradicting the fact that $H$ is $2$-critical.
+    \item If $u=w$ and $x=y$, then there are two inner faces of $H$ that have $uv$ on their boundary, which is not possible because $H$ does not have parallel edges.
+  \end{compactenum}
+  Therefore, the edges $vx$ and $vy$ can be assigned to the corner $(uv,vw)$. By doing this for each corner of the outer face of $C$ we obtain a mapping from a subset of $E_H(V(C),B(H))$ onto $\corners(C)$ in which each corner has two edges mapped onto it. Therefure, $|E_H(V(C),B(H))|\ge 2|\corners(C)$.
 \end{proof}
 
-For a generalized near-triangulation $H_1$, let $\mu(H_1)$ be two times the number of degree-$0$ vertices in $H_1$ plus the number of degree-$1$ vertices in $H_1$ plus the number of vertices in $B(H_1)$.
+A \defin{star} is a tree with one vertex of degree at least $2$ and all other vertices of degree $1$.
+For a graph $H$ and a non-negative integer $d$, let $V_d(H):=\{v\in V(H):\deg_H(v)=d\}$ be the set of vertices of $H$ having degree $d$.
 
-\begin{lem}\label{boundary_size}
-  Let $H$ be a $2$-critical generalized near-triangulation.  Then $|B(H)|\ge\mu(H-B(H))$.
+\begin{lem}
+  Let $H$ be a $2$-critical generalized near-triangulation, and let $C$ be a component of $H-B(H)$. Then $|E_H(V(C),B(H))|\ge 2|B(C)|$.  Furthermore, if $C$ has at least three vertices and is not a star then $|E_H(V(C),B(H))|\ge 2(|B(C)| + |V_1(C)|)$
 \end{lem}
 
 \begin{proof}
-  Follows immediately from \cref{degree_isolated,degree_walk} and the fact that $\deg^+_H(v)\le 2$ for all $v\in B(H)$.
+  If $C$ is single vertex then $|E_H(V(C),B(H))|\ge 3 = 3|B(C)|\ge 2|B(C)|$. Otherwise, each vertex in $B(C)$ is the internal vertex of at least one corner in $\corners(C)$ so, by \cref{corner_degree}, $|E_H(V(C),B(H))|\ge 2|B(C)|$.  This establishes the first part of the corollary.
+
+  Now suppose $|C|\ge 3$ and $C$ is not a star and consider some vertex $v\in V(C)$ that is adjacent to $d\ge 1$ vertices $v_1,\ldots,v_d$ in $V_1(C)$.  Since $C$ is not a star, $v$ is also adjacent to at least one vertex $w$ in $B(C)\setminus V_1(C)$. We claim that $v$ is the internal vertex of at least $d+1$ corners in $\corners(C)$. Indeed, for each $i\in\{1,\ldots,d\}$ $v$ is the internal vertex of the corners $(x_iv,vv_i)$ and $(v_iv,vy_i)$ for some $x_i,y_i\in B(C)$.  There is at least one value of $i$ for which $x_i\not\in\{v_1,\ldots,v_d\}$
+  % and at least one value of $i$ for which $y_1\not\in\{v_1,\ldots,v_d\}$.
+  For each $i\in\{1,\ldots,d\}$, there is at most one value $j$ such that $(x_iv,vv_i)=(v_jv,vy_j)$ and there is at least one value $i\in\{1,\ldots,d\}$ for which no such $j$ exists.  Therefore
+  $
+  |\bigcup_{i=1}^d \{(x_iv,vv_i),(v_iv,vy_i)\}| > d.
+  $
+  If we let $A$ denote the subset of vertices in $B(C)$ that are adjacent to at least one vertex in $V_1(C)$ we see that
+  \[
+    |\corners(C)| \ge |B(C)\setminus A| + |A| + |V_1(C)|
+    = |B(C)\setminus A| + |V_1(C)|  \enspace .
+  \]
+  Now the second part of the lemma follows from \cref{corner_degree}.
 \end{proof}
+
+%
+% \begin{lem}\label{boundary_size}
+%   Let $H$ be a $2$-critical generalized near-triangulation.  Then $|B(H)|\ge\mu(H-B(H))$.
+% \end{lem}
+%
+% \begin{proof}
+%
+%   Follows immediately from \cref{degree_isolated,degree_walk} and the fact that $\deg^+_H(v)\le 2$ for all $v\in B(H)$.
+% \end{proof}
 
 For each integer $r\ge 3$, let $W_r$ be the near-triangulation whose outer face is bounded by a cycle $v_0,\ldots,v_{r-1}$ that contains a single vertex $x$ in its interior and that is adjacent to each of $v_0,\ldots,v_{r-1}$.
 
@@ -623,8 +674,7 @@ Now we drop the requirement that $H$ is biconnected.
   \end{compactenum}
 \end{lem}
 
-\begin{proof}[Proof Sketch]
-  \pat{Watch out for biconnected components with two internal vertices.}
+\begin{proof}
   The proof is by induction on $|H|$.  If $|H|=3$ then $H$ is either a triangle $v_0,v_1,v_2$ or a path $v_0,v_1,v_2$.  In either case, we take $X_i:=\{v_i\}$ for each $i\in\{0,1,2\}$.  If $H$ is a triangle, then $L=\emptyset$ and we take $L_0:=L_1:=L_2:=\emptyset$.  If $H$ is a path then $L=\{v_0,v_2\}$ and we take $L_0:=\{v_2\}$, $L_1:=\emptyset$ and $L_2:=\{v_0\}$.  It is straightforward to verify these sets satisfy the requirements of the lemma.
 
   If $L\neq\emptyset$ then let $z_0$ be a vertex in $L$ and let $z_0,\ldots,z_r$ the maximal path in $H$ such that each of $z_1,\ldots,z_{r-1}$ has degree $2$ in $H$. Consider the graph $H':=H-\{z_0,\ldots,z_{r-1}$.
@@ -652,17 +702,20 @@ Now we drop the requirement that $H$ is biconnected.
 \end{lem}
 
 \begin{proof}
-  Let $B_0:=B(H)$, let $H_1:=H-B(H)$, let $B_1:=B(H_1)$, let $I_1:=I(H_1)$,  let $L$ be the set of degree-$1$ vertices in $H_1$ and let $Z$ be the set of degree-$0$ vertices in $H_1$.
-  By \cref{boundary_vs_leaves}, to satisfy \cref{boundary_size} it suffices to construct three sets whose total size is not more than $|I_1|+\mu(H_1)=|I_1|+2|Z| + |L| + |B_1|$.
+  Let $B_0:=B(H)$, let $H_1:=H-B(H)$, let $B_1:=B(H_1)$, let $I_1:=I(H_1)$,  let $V_1:=V_1(H_1)$ and let $V_0:=V_0(H_1)$, let $C_2$ be the set of components of $H_1$ having exactly two vertices, and let $C_\star$ be the set of components of $H_1$ that are stars.
 
-  For each biconnected component $C$ of $H-B(H)$ with at least $3$ vertices, we apply \cref{two_connected_critical} to obtain sets $X_0,X_1,X_2,L_0,L_1,L_2$.
-  For each $w\in L_j$ then take a neighbour $w'$ of $w$ in $B_0$ and add it to $X_j$.  This ensures that $w$ is dominated by $X_j$.
+  % By \cref{boundary_vs_leaves}, to satisfy \cref{boundary_size} it suffices to construct three sets whose total size is not more than $|I_1|+\mu(H_1)=|I_1|+2|Z| + |L| + |B_1|$.
 
-  For each degree-$0$ vertex $w$ in $H-B(H)$ we will choose a vertex in $N_H(v)\cap B(H)$ and place $v$ in each of $X_0$, $X_1$, and $X_2$. This accounts for a total of $3|Z|$ vertices in $X_0$, $X_1$, and $X_2$.
+  For each biconnected component $C$ of $H-B(H)$ with at least $3$ vertices that is not a star, we apply \cref{two_connected_critical} to obtain sets $X_0,X_1,X_2,L_0,L_1,L_2$.
+  For each $w\in L_j$ then take a neighbour $w'$ of $w$ in $B_0$ and add it to $X_j$.  This ensures that $w$ is dominated by $X_j$.  The total number of vertices added to $X_0$, $X_1$, and $X_2$ by this step is $|C|+|B(C)|+|L|=|C|+|B(C)|+|V_0(C)|$.
 
-  For each component $C$ of size $2$ in $H-B(H)$ we choose one vertex $v$ in $B(H)$ that dominates $C$ and use this to
+  For each degree-$0$ vertex $w$ in $H-B(H)$ we will choose a vertex in $N_H(v)\cap B(H)$ and place $v$ in each of $X_0$, $X_1$, and $X_2$. This accounts for a total of $3|V_0|$ vertices in $X_0$, $X_1$, and $X_2$.
 
+  For each component $C$ in $C_2$ we choose one vertex $v$ in $B(H)$ that dominates $V(C)$ and place $v$ in each of $X_0$, $X_1$, and $X_2$. This accounts for a total of $3||$ vertices in $X_0$, $X_1$, and $X_2$.
 
+  For each component $C$ in $C_{\star}$ we choose the vertex $w\in C$ that dominates the star $C$ and a vertex $v\in B(H)$ adjacent to $w$.  We place $\{v,w\}$ in each of $X_0$, $X_1$, and $X_2$.
+
+  \pat{Not quite so simple. In the preceding three steps we need to make sure that we pick a vertex $v$ in $B(H)$ with $\deg^+_C(v)=2$ or that we use the same vertex twice if it is adjacent to more than one component. (We may need to do this for components of sizes $1$ and $2$, where vertices with $\deg^+_H(C)=1$ are unavoidable.)}
 
   % We call the vertices in $L$ \defin{leaves}.
 
