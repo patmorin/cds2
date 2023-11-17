@@ -69,7 +69,7 @@
 \maketitle
 
 \begin{abstract}
-  We show that every $n$-vertex triangulation has a connected dominating set of size at most $10n/21$.  Equivalently, every $n$ vertex triangulation has a spanning tree with at least $11n/21$ leaves. Prior to the current work, the best known bounds were $2n/3$ and $n/3$, respectively.  As an application of this, we show that every $n$-vertex planar graph has a one-bend non-crossing drawing in which some set of at least $11n/21$ vertices is drawn on the $x$-axis.
+  We show that every $n$-vertex triangulation has a connected dominating set of size at most $10n/21$.  Equivalently, every $n$ vertex triangulation has a spanning tree with at least $11n/21$ leaves. Prior to the current work, the best known bounds were $2n/3$ and $n/3$, respectively. (In the special case of Hamiltonian triangulations the previous bounds were $n/2$.)  As an application of this, we show that every $n$-vertex planar graph has a one-bend non-crossing drawing in which some set of at least $11n/21$ vertices is drawn on the $x$-axis.
 \end{abstract}
 
 % \vida{Note that if all the vertices of G are on a line then no edge in a 1-bend drawing crosses the line and thus G is subhamiltonian. Since not all planar graphs are subhamiltonian, that implies that the tight bound for the drawings above is strictly less than n. I wonder how much smaller than n it has to be. Is it a fraction of n? Do we know anything about the side of the largest induced subhamiltonian graph in a planar triangulation? Whatever we have on that line induces a subhamiltonian planar graph. So basically the result above also says that each planar graph has induced subgraph of size at least 11n/21 that is subhamiltonian planar. Do not know if that is interesting. n/4 follows trivially from 4-colour theorem. n/2 follows from the fact that every other layer of BFS induced an outerplanar graph.
@@ -537,20 +537,23 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
 We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B(H)$ is critical and $\deg^+_H(v)\le 2$ for each $v\in B(H)$.  Observe that any critical graph is also $2$-critical.  We will work our way up to a proof of the following lemma, which allows our algorithm to handle $2$-critical graphs directly, in one step:
 
 \begin{lem}\label{two_critical_handler}
-  Let $H$ be a $2$-critical dom-minimal generalized near-triangulation.  Then there exists $X\subseteq V(H)$ of size at most $|H|/3$ that dominates $I(H)$ and such that each component of $H[X]$ contains at least one vertex in $B(H)$.
+  Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X\subseteq V(H)$ of size at most $|H|/3$ that dominates $I(H)$ and such that each component of $H[X]$ contains at least one vertex in $B(H)$.
 \end{lem}
 
-For any graph $H$ and two subsets $A$ and $B$ of vertices of $H$, we use $E_H(A,B):=\{vw\in E(H):v\in A, w\in B\}$ to denote the set of edges of $H$ with one endpoint in $A$ and one endpoint in $B$.
 
 
-\begin{obs}\label{degree_isolated}
-  Let $H$ be a generalized near-triangulation and let $C$ be a component of $H-B(H)$ that consists of a single vertex. Then $|E_H(V(C),B(H))|\ge 3$.
-\end{obs}
+%
+% For any graph $H$ and two subsets $A$ and $B$ of vertices of $H$, we use $E_H(A,B):=\{vw\in E(H):v\in A, w\in B\}$ to denote the set of edges of $H$ with one endpoint in $A$ and one endpoint in $B$.
 
-\begin{proof}
-  The single vertex $w$ in $C$ is an inner vertex of the generalized near-triangulation $H$, $\deg_H(w)\ge 3$.  Since $\deg_{H-B(H)}(w)=0$, every edge incident to $w$ has an endpoint in $B(H)$, so $|E_H(V(C),B(H))|=\deg_H(w)\ge 3$.
-\end{proof}
 
+% \begin{obs}\label{degree_isolated}
+%   Let $H$ be a generalized near-triangulation and let $C$ be a component of $H-B(H)$ that consists of a single vertex. Then $|E_H(V(C),B(H))|\ge 3$.
+% \end{obs}
+%
+% \begin{proof}
+%   The single vertex $w$ in $C$ is an inner vertex of the generalized near-triangulation $H$, $\deg_H(w)\ge 3$.  Since $\deg_{H-B(H)}(w)=0$, every edge incident to $w$ has an endpoint in $B(H)$, so $|E_H(V(C),B(H))|=\deg_H(w)\ge 3$.
+% \end{proof}
+%
 
 % \begin{obs}\label{degree_minimum}
 %   Let $H$ be a generalized near-triangulation and let $C$ be a component of $H-B(H)$. Then $|E_H(V(C),B(H))|\ge 3$.
@@ -567,34 +570,34 @@ For any graph $H$ and two subsets $A$ and $B$ of vertices of $H$, we use $E_H(A,
 
 
 
-
-
-A \defin{corner} of a face $f$ in a plane graph $H$ is an ordered pair $(uv,vw)$ of edges in $H$ that occur consecutively around $v$ and such that the face $f$ is to the left of the path $uvw$.  Note that this includes the possibility that $u=w$, which occurs when $v$ has degree $1$.  We let $\corners(H)$ denote the set of corners on the outer face of $H$.
+For a graph $H$ and a subset $A$ of the vertices of $H$, $\widehat{N}_{H}(A):=\{v\in N_H(A):|N_H(v)\cap A|\ge 2\}$. We will abuse this notation slightly by using the shorthand $\widehat{N}_H(C):=\widehat{N}_H(V(C))$ when $C$ is a subgraph of $H$.
+% Let $H$ be a $2$-critical graph and let $C$ be a component of $H-B(H)$. We say that a vertex $v$ in $B(H)$ \defin{belongs} to $C$ if $|N_H(v)\cap V(C)|= 2$.  Note that, since $H$ is $2$-critical any $v\in B(H)$ belongs to at most once component of $H-B(H)$. We use the notation $S_H(C)$ to denote the set of all vertices in $B(H)$ that belong to $C$.
+A \defin{corner} of a face $f$ in a plane graph $H$ is an ordered pair $(uv,vw)$ of (directed) edges in $H$ that occur consecutively around $v$ and such that the face $f$ is to the left of the path $uvw$.  Note that this includes the possibility that $u=w$, which occurs when $v$ has degree $1$. The vertex $v$ is the \defin{internal vertex} of the corner $(uv,vw)$.  For a plane graph $H$, $\corners(H)$ denotes the set of corners on the outer face of $H$.
 
 \begin{lem}\label{corner_degree}
-  Let $H$ be a $2$-critical generalized near-triangulation, and let $C$ be a component of $H-B(H)$ with at least two vertices. Then $|E_H(V(C),B(H))|\ge 2|\corners(C)|$.
+  Let $H$ be a $2$-critical generalized near-triangulation, and let $C$ be a component of $H-B(H)$ with at least two vertices. Then $|\widehat{N}_H(C)|\ge |\corners(C)|$.
 \end{lem}
 
 \begin{proof}
-  Consider some corner $(uv, vw)$ of the outer face of $C$.  Since $u,v,w$ are in $I(H)$, $H$ contains faces $uxv$ and $vyw$ that are to the left of $uv$ and $vw$, respectively. Since $uvw$ is in the boundary walk of the outer face of $C$ $C$, these faces are not faces of $H-B(H)$, so $x,y\in B(H)$.  We claim that $x\neq y$.  To see this, there are two cases to consider.
+  Consider some corner $(uv, vw)$ of the outer face of $C$.  Since $u,v,w$ are in $I(H)$, $H$ contains faces $uxv$ and $vyw$ that are to the left of $uv$ and $vw$, respectively. Since the path $uvw$ is on the outer face of $C$, these faces are not faces of $H-B(H)$, so $x,y\in B(H)$.  Since $x$ is adjacent to $u$ and $v$ and $y$ is adjacent to $v$ and $w$, each of $x$ and $y$ is in $\widehat{N}_H(C)$.  We claim that $x\neq y$.  To see this, there are two cases to consider.
   \begin{compactenum}
     \item If $u\neq w$ and $x=y$ then $x\in B(H)$ is adjacent to each of $u,v,w\in I(H)$, so $\deg^+_H(x)\ge 3$, contradicting the fact that $H$ is $2$-critical.
-    \item If $u=w$ and $x=y$, then there are two inner faces of $H$ that have $uv$ on their boundary, which is not possible because $H$ does not have parallel edges.
+    \item If $u=w$ and $x=y$, then there are two distinct inner faces of $H$ (one on each side of $ux$) that each have $u$, $v$, and $w$ on their boundary, which is not possible because $H$ does not have parallel edges.
   \end{compactenum}
-  Therefore, the edges $vx$ and $vy$ can be assigned to the corner $(uv,vw)$. By doing this for each corner of the outer face of $C$ we obtain a mapping from a subset of $E_H(V(C),B(H))$ onto $\corners(C)$ in which each corner has two edges mapped onto it. Therefure, $|E_H(V(C),B(H))|\ge 2|\corners(C)$.
+  Therefore, the edges $vx$ and $vy$ can be assigned to the corner $(uv,vw)$. By doing this for each corner of the outer face of $C$ we obtain a mapping from a subset of $B(H)$ onto $\corners(C)$ in which each corner has two edges between $\widehat{N}_H(C)$ and $C$ mapped onto it.  Therefore, the number of edges between $\widehat{N}_H(C)$ and $C$ is at least $2|\corners{C}|$.  By definition, each vertex in $\widehat{N}_H(C)$ has two neighbours in $C$, so $|\widehat{N}_H(C)|\ge |\corners(C)|$.
 \end{proof}
 
 A \defin{star} is a tree with one vertex of degree at least $2$ and all other vertices of degree $1$.
 For a graph $H$ and a non-negative integer $d$, let $V_d(H):=\{v\in V(H):\deg_H(v)=d\}$ be the set of vertices of $H$ having degree $d$.
 
-\begin{lem}
-  Let $H$ be a $2$-critical generalized near-triangulation, and let $C$ be a component of $H-B(H)$. Then $|E_H(V(C),B(H))|\ge 2|B(C)|$.  Furthermore, if $C$ has at least three vertices and is not a star then $|E_H(V(C),B(H))|\ge 2(|B(C)| + |V_1(C)|)$
+\begin{lem}\label{degree_corners_and_leaves}
+  Let $H$ be a $2$-critical generalized near-triangulation and let $C$ be a component of $H-B(H)$ with at least two vertices. Then $|\widehat{N}_H(C)|\ge |B(C)|$.  Furthermore, if $C$ has at least three vertices and is not a star then $|\widehat{N}_H(C)|\ge |B(C)| + |V_1(C)|$.
 \end{lem}
 
 \begin{proof}
-  If $C$ is single vertex then $|E_H(V(C),B(H))|\ge 3 = 3|B(C)|\ge 2|B(C)|$. Otherwise, each vertex in $B(C)$ is the internal vertex of at least one corner in $\corners(C)$ so, by \cref{corner_degree}, $|E_H(V(C),B(H))|\ge 2|B(C)|$.  This establishes the first part of the corollary.
+  Each vertex in $B(C)$ is the internal vertex of at least one corner in $\corners(C)$ so, by \cref{corner_degree}, $|E_H(V(C),B(H))|\ge 2|B(C)|$.  This establishes the first part of the corollary.
 
-  Now suppose $|C|\ge 3$ and $C$ is not a star and consider some vertex $v\in V(C)$ that is adjacent to $d\ge 1$ vertices $v_1,\ldots,v_d$ in $V_1(C)$.  Since $C$ is not a star, $v$ is also adjacent to at least one vertex $w$ in $B(C)\setminus V_1(C)$. We claim that $v$ is the internal vertex of at least $d+1$ corners in $\corners(C)$. Indeed, for each $i\in\{1,\ldots,d\}$ $v$ is the internal vertex of the corners $(x_iv,vv_i)$ and $(v_iv,vy_i)$ for some $x_i,y_i\in B(C)$.  There is at least one value of $i$ for which $x_i\not\in\{v_1,\ldots,v_d\}$
+  Now suppose $|C|\ge 3$ and $C$ is not a star and consider some vertex $v\in V(C)$ that is adjacent to $d\ge 1$ vertices $v_1,\ldots,v_d$ in $V_1(C)$.  Since $C$ is not a star, $v$ is also adjacent to at least one vertex $w$ in $B(C)\setminus V_1(C)$. We claim that $v$ is the internal vertex of at least $d+1$ corners in $\corners(C)$. Indeed, for each $i\in\{1,\ldots,d\}$ $v$ is the internal vertex of the corners $(x_iv,vv_i)$ and $(v_iv,vy_i)$ for some $x_i,y_i\in B(C)$.  There is at least one value of $i$ for which $x_i\not\in\{v_1,\ldots,v_d\}$.
   % and at least one value of $i$ for which $y_1\not\in\{v_1,\ldots,v_d\}$.
   For each $i\in\{1,\ldots,d\}$, there is at most one value $j$ such that $(x_iv,vv_i)=(v_jv,vy_j)$ and there is at least one value $i\in\{1,\ldots,d\}$ for which no such $j$ exists.  Therefore
   $
@@ -603,7 +606,7 @@ For a graph $H$ and a non-negative integer $d$, let $V_d(H):=\{v\in V(H):\deg_H(
   If we let $A$ denote the subset of vertices in $B(C)$ that are adjacent to at least one vertex in $V_1(C)$ we see that
   \[
     |\corners(C)| \ge |B(C)\setminus A| + |A| + |V_1(C)|
-    = |B(C)\setminus A| + |V_1(C)|  \enspace .
+    = |B(C)| + |V_1(C)|  \enspace .
   \]
   Now the second part of the lemma follows from \cref{corner_degree}.
 \end{proof}
@@ -677,18 +680,20 @@ Now we drop the requirement that $H$ is biconnected.
 \begin{proof}
   The proof is by induction on $|H|$.  If $|H|=3$ then $H$ is either a triangle $v_0,v_1,v_2$ or a path $v_0,v_1,v_2$.  In either case, we take $X_i:=\{v_i\}$ for each $i\in\{0,1,2\}$.  If $H$ is a triangle, then $L=\emptyset$ and we take $L_0:=L_1:=L_2:=\emptyset$.  If $H$ is a path then $L=\{v_0,v_2\}$ and we take $L_0:=\{v_2\}$, $L_1:=\emptyset$ and $L_2:=\{v_0\}$.  It is straightforward to verify these sets satisfy the requirements of the lemma.
 
-  If $L\neq\emptyset$ then let $z_0$ be a vertex in $L$ and let $z_0,\ldots,z_r$ the maximal path in $H$ such that each of $z_1,\ldots,z_{r-1}$ has degree $2$ in $H$. Consider the graph $H':=H-\{z_0,\ldots,z_{r-1}$.
+  If $L\neq\emptyset$ then let $z$ be a vertex in $L$ and let $z_r,\ldots,z_0$ the maximal path in $H$ such that $z=z_r$ and each of $z_1,\ldots,z_{r-1}$ has degree $2$ in $H$. Consider the graph $H':=H-\{z_0,\ldots,z_{r-1}\}$.
   \begin{enumerate}
-    \item If $z_r\in L$, then $H'$ is the graph that contains only $z_r$ and $H=z_0,\ldots,z_r$ is a path.  In this case $L:=\{z_0,z_r\}$. We take $X_i:=\{z_j:j\equiv i\pmod 3\}$ for each $i\in\{0,1,2\}$, $L_2=\{z_0\}$.  Starting with $L_0:=L_1:=\emptyset$ and $L_2:=\{z_0\}$, we then set
-    $L_{(r-2)\bmod 3}\gets L_{(r-2)\bmod 3} \cup \{z_r\}$.  This produces sets that satisfy the requirements of the lemma.
+    \item If $z_0\in L$, then $H'$ is the graph that contains only $z_0$ and $H=z_r,\ldots,z_0$ is a path.  In this case $L:=\{z_0,z_r\}$. We take $X_i:=\{z_j:j\equiv i\pmod 3\}$ for each $i\in\{0,1,2\}$, $L_2=\{z_0\}$.  Starting with $L_0:=L_1:=\emptyset$ and $L_2:=\{z_0\}$, we then set
+    $L_{(r-2)\bmod 3}\gets L_{(r-2)\bmod 3} \cup \{z_r\}$.  This produces sets that satisfy the requirements of the lemma, and we are done.
 
-    \item If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} with $v=z_r$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
+    \item If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} with $v=z_0$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
 
-    \item Otherwise, we apply the currently lemma inductively on $H'$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
+    \item Otherwise, we apply the inductive hypothesis on $H'$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
   \end{enumerate}
-  In the latter two cases, we may assume, without loss of generality (by renaming colours), that $z_r\in X_{r\bmod 3}'$.   Since $z_r\not\in L$, $\deg_H(z_r)\ge 3$. By \cref{wheelie} or the inductive hypothesis, $z_r$ has a neighbour $w$ in $H'$ that, without loss of generality (by renaming colours) is in $X_{(r+1)\bmod 3}$.
+  In the latter two cases, we may assume, without loss of generality (by renaming colours), that $z_0\in X_{1}'$.  Since $z_0\not\in L$, $\deg_H(z_0)\ge 3$ so $\deg_{H'}(z_0)\ge 2$.  Therefore we may assume, without loss of generality), that $X_1'$ and $X_2'$ each dominate $z_0$. Redefine $L_{(r-1)\bmod 3}'\gets L_{(r-1)\bmod 3}'\cup\{z_r\}$ so that $L_0'$, $L_1'$ and $L_2'$ is a partitition of $L$.  Then we take $X_i:=X_{i}'\cup\{z_j:j+1\equiv i\pmod 3\}$, $L_0:=L_0'$, $L_1:= L_1'$, and $L_2:=L_2'$.  Then these sets satisfy the requirements of the lemma.  Indeed, the only concern would be that $z_0$ is not dominated by $X_0$ because $z_0$ is not necessarily dominated by $X_0'$, but this does not occur because $X_0$ includes $z_1$.
 
-  Then we take $X_i:=X_{i}'\cup\{z_j:j\equiv i\pmod 3\}$, $L_0:=L_0'$, $L_1:= L_1'$, and $L_2:=L_2'\cup\{z_0\}$.  Then these sets satisfy the requirements of the lemma.  Indeed, $z_r$ has a neighbour $z_{r-1}$ in $X_{(r-1)\bmod 3}$, $z_r$ is in $X_{r\bmod 3}$ and $z_r$ has a neighbour $w$ in $X_{(r+1)\bmod 3}$.  Thus each $X_i$ dominates $z_r$.\pat{Explain further}
+  Finally, we arrive at the case in which $L=\emptyset$. If $H$ is biconnected then, since $H$ is not a wheel, we can immediately apply \cref{two_connected_critical} and we are done.  Otherwise, $H$ contains a cut vertex $v$ that separates $H$ into components $C_1,\ldots,C_k$ and such that $H':=H[V(C_1)\cup\{v\}]$ is biconnected. If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H'$ and $v$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'=\emptyset$, $L_1'=\emptyset$, and $L_2'=\emptyset$. Otherwise, we apply \cref{two_connected_critical} to $H'$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'=\emptyset$, $L_1'=\emptyset$, and $L_2'=\emptyset$.  In either case we may assume, without loss of generality that $v\in X_1'$, that $X_1'$ and $X_2'$ each dominate $H'$ and that $X_0'$ dominates $V(H')\setminus\{v\}$.
+
+  Let $H'':=H-V(C_1)$. If $H''$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H''$ and $v$ to obtain sets $X_0''$, $X_1''$, $X_2''$, $L_0''=\emptyset$, $L_1''=\emptyset$, and $L_2''=\emptyset$. Otherwise, we apply the inductive hypothesis to $H''$ to obtain sets $X_0''$, $X_1''$, $X_2''$ that each dominate $H''$. In either case we may assume, without loss of generality (by renaming) that $v\in X_1''$, that $X_1''$ and $X_2''$ each dominate $H'$ and that $X_0''$ dominates $V(H'')\setminus\{v\}$.  Then the sets $X_0:=X_0'\cup X_2''$, $X_1:=X_1'\cup X_1''$ and $X_2:=X_2'\cup X_0''$ satisfy the requirements of the lemma.  (Again, the only concern is whether each set dominates $v$, but this is guaranteed by the fact that $v\in X_i$, and that $X_2'\subseteq X_2$ and $X_2''\subseteq X_0$ each dominate $v$.)
 \end{proof}
 
 
@@ -702,24 +707,30 @@ Now we drop the requirement that $H$ is biconnected.
 \end{lem}
 
 \begin{proof}
-  Let $B_0:=B(H)$, let $H_1:=H-B(H)$, let $B_1:=B(H_1)$, let $I_1:=I(H_1)$,  let $V_1:=V_1(H_1)$ and let $V_0:=V_0(H_1)$, let $C_2$ be the set of components of $H_1$ having exactly two vertices, and let $C_\star$ be the set of components of $H_1$ that are stars.
+  Let $B_0:=B(H)$, let $H_1:=H-B(H)$, let $B_1:=B(H_1)$, let $I_1:=I(H_1)$, let $C_1$ be the set of components of $H_1$ having exactly one vertex, let $C_2$ be the set of components of $H_1$ having exactly two vertices, let $C_\star$ be the set of components of $H_1$ that are stars, let $C_{\boxtimes}$ be the set of components of $H_1$ that are even wheels, and let $\overline{C}$ be the set of componets of $H_1$ that are not in $C_1\cup C_2\cup C_{\star}\cup C_{\boxplus}$.
 
   % By \cref{boundary_vs_leaves}, to satisfy \cref{boundary_size} it suffices to construct three sets whose total size is not more than $|I_1|+\mu(H_1)=|I_1|+2|Z| + |L| + |B_1|$.
 
-  For each biconnected component $C$ of $H-B(H)$ with at least $3$ vertices that is not a star, we apply \cref{two_connected_critical} to obtain sets $X_0,X_1,X_2,L_0,L_1,L_2$.
-  For each $w\in L_j$ then take a neighbour $w'$ of $w$ in $B_0$ and add it to $X_j$.  This ensures that $w$ is dominated by $X_j$.  The total number of vertices added to $X_0$, $X_1$, and $X_2$ by this step is $|C|+|B(C)|+|L|=|C|+|B(C)|+|V_0(C)|$.
+  For each component $C$ in $C_2$ we choose one vertex $v$ in $B(H)$ that dominates $V(C)$ and place $v$ in each of $X_0$, $X_1$, and $X_2$. This contributes a total of $3|C_2|$ vertices in $X_0$, $X_1$, and $X_2$. On the other hand, $\sum_{C\in C_2} |C|=2|C_2|$ and, by \cref{degree_corners_and_leaves},  $\sum_{C\in C_2} |\widehat{N}_H(C)|\ge 2|C_2|$.
 
-  For each degree-$0$ vertex $w$ in $H-B(H)$ we will choose a vertex in $N_H(v)\cap B(H)$ and place $v$ in each of $X_0$, $X_1$, and $X_2$. This accounts for a total of $3|V_0|$ vertices in $X_0$, $X_1$, and $X_2$.
+  For each component $C$ in $C_{\star}$ we choose the vertex $w\in C$ that dominates the star $C$ and a vertex $v\in B(H)$ adjacent to $w$.  We place $\{v,w\}$ in each of $X_0$, $X_1$, and $X_2$.  This contributes a total of $6|C_{\star}|$ vertices to $X_0$, $X_1$, and $X_2$.  On the other hand, $\sum_{C\in C_{\star}} |C|\ge 3|C_{\star}|$ and, by \cref{degree_corners_and_leaves}, $\sum_{C\in C_{\star}} |\widehat{N}_H(C)|\ge 3|C_\star|$. \pat{Remark: this inequality is always loose, in fact $|\widehat{N}_H(C)|\ge 4|C|$}
 
-  For each component $C$ in $C_2$ we choose one vertex $v$ in $B(H)$ that dominates $V(C)$ and place $v$ in each of $X_0$, $X_1$, and $X_2$. This accounts for a total of $3||$ vertices in $X_0$, $X_1$, and $X_2$.
+  For each component $C$ in $C_{\boxtimes}$ we choose the vertex $x$ that dominates $C$, some vertex $w$ in $B(C)$ and some vertex $v\in B(H)$ adjacent to $w$.  We place $\{v,w,x\}$ in each of $X_0$, $X_1$, and $X_2$.  This contributes a total of $9|C_{\boxplus}|$ vertices to $X_0$, $X_1$, and $X_2$. On the other hand, $\sum_{C\in C_{\boxplus}} |C|\ge 5|C_{\star}|$ and, by \cref{degree_corners_and_leaves}, $\sum_{C\in C_{\star}} |\widehat{N}_H(C)|\ge 4|C_\star|$.
 
-  For each component $C$ in $C_{\star}$ we choose the vertex $w\in C$ that dominates the star $C$ and a vertex $v\in B(H)$ adjacent to $w$.  We place $\{v,w\}$ in each of $X_0$, $X_1$, and $X_2$.
+  For each component $C$ in $\overline{C}$, we apply \cref{two_connected_critical} to obtain sets $X_0',X_1',X_2',L_0',L_1',L_2'$.
+  For each $j\in\{0,1,2\}$ we add $X_j'$ to $X_j$ and for each $w\in L_j'$ we choose a neighbour $w'$ of $w$ in $B_0$ and add it to $X_j$.  This ensures that $X_j$ dominates every vertex in $C$.  The total number of vertices added to $X_0$, $X_1$, and $X_2$ by this step is $\sum_{C\in\overline{C}}(|C|+|B(C)|+|V_1(C)|)$.  On the other hand, by \cref{degree_corners_and_leaves}, $\sum_{C\in \overline{C}} |\widehat{N}_H(C)|\ge \sum_{C\in \overline{C}} (|B(C)|+|V_1(C)|)$.
 
-  \pat{Not quite so simple. In the preceding three steps we need to make sure that we pick a vertex $v$ in $B(H)$ with $\deg^+_C(v)=2$ or that we use the same vertex twice if it is adjacent to more than one component. (We may need to do this for components of sizes $1$ and $2$, where vertices with $\deg^+_H(C)=1$ are unavoidable.)}
-
-  % We call the vertices in $L$ \defin{leaves}.
-
-  % Intuitively, each vertex in $I_1$ should appear in at most one $X_i$. Each vertex $w$ in $B_1$ appears in one $X_i$ and, in order to satisfy \cref{connectivity}, a neighbour $v\in B_0$ of $w$ should appear in the same $X_i$.  Each vertex $w$ in $L$ (which is also in $B_1$) may need to contribute an additional vertex in order to satisfy \cref{dominates_i}.
+  Finally, it remains to consider the components of $H_1$ that are in $C_1$. Each of these components is a single vertex in $V_0(B_1)$. These we deal with as a group. For each $w\in V_0(B_1)$, let $H_w:=H[N_H[w]]$ and let $Q:=\bigcup_{w\in V_0(B_1)} H_w$.  For each $w\in V_0(V_1)$, the graph $H_w$ is isomorphic to $W_k$ for some $k\ge 3$, $B(H_w)\subseteq B(H)$ and, for any component $C$ other than the one containing $w$, $\widehat{N}_H(C)\cap B(H_w)=\emptyset$. In other words, none of the vertices in $B(Q)$ has been counted in the preceding paragraphs.  We construct a $X'\subseteq B(Q)\subseteq B(H)$ that dominates $I(Q)=V_0(V_1)$ by repeating the following as long as there is vertex $w$ in $V_0(B_1)$ not dominated by $X'$:
+  \begin{compactenum}
+    \item  If $H_w$ has no vertex in common with $H_{w'}$ for any $w'\in V_0(B_1)\setminus\{w\}$ then we add any vertex of $B(H_w)$ to $X'$.
+    \item Otherwise there exists $w'\neq w$ and $v\in B(H_w)\cap B(H_{w'})$ and we add $v$ to $Z'$.
+  \end{compactenum}
+  In the first case, the (at least four) vertices of $H_w$ are no longer relevant and can be removed from $Q$. In the second case, the vertices $v$, $w$, and $w'$ are no longer relevant and can be removed from $Q$. Thus, at each step we add one vertex to $X'$ and eliminate at least three vertices from $Q$.  Therefore $|X'|\le |Q|/3$.  We finish by adding $X'$ to each of $X_1$, $X_2$, and $X_3$.
+  Putting everything together we get that
+  \[
+   |X_1|+|X_2|+|X_3| \le \sum_{C\in\mathcal{C}} (|C|+\widehat{N}_H(C)) + |Q|
+   \le \sum_{C\in\mathcal{C}} |C| + B(H) = I(H)+B(H)=|H| \enspace . \qedhere
+  \]
 \end{proof}
 
 \begin{proof}[Proof of \cref{two_critical_handler}]
