@@ -176,10 +176,8 @@ We will present two algorithms that grow a connected dominating in small batches
 A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ for each $v\in B(H)$. We that an inner face of $H[B(H)]$ is \defin{marked} if it contains an inner vertex of $H$.
 
 \begin{figure}[htbp]
-    \begin{center}
-        \includegraphics[page=1]{figs/critical} \\
-        % \includegraphics[page=2]{figs/critical} \\
-    \end{center}
+    \centering
+    \includegraphics[page=1]{figs/critical}
     \caption{Some critical graphs.}
     \label{critical_fig}
 \end{figure}
@@ -461,9 +459,8 @@ Note that the next two lemmas each consider a graph $H$ that is a near triangula
 \end{lem}
 
 \begin{figure}[htbp]
-  \begin{center}
-    \includegraphics{figs/chord_incident}
-  \end{center}
+  \centering
+  \includegraphics{figs/chord_incident}
   \caption{The proof of \cref{chord_incident}}
   \label{chord_incident_fig}
 \end{figure}
@@ -485,12 +482,11 @@ Note that the next two lemmas each consider a graph $H$ that is a near triangula
    If $H$ is outerplane then there is nothing to prove, so assume otherwise. Let $w$ be a vertex in $B(H-B(H))$. Since $w\not\in B(H)$, $w$ is an inner vertex of $H$. Consider the face $f:=v_0,\ldots,v_{k-1}$ of the outerplane graph $H[B(H)]$ that contains $w$. See \cref{degree_2_outer_neighbour_fig}.
 
    \begin{figure}[htbp]
-     \begin{center}
-       \begin{tabular}{cc}
-         \includegraphics[page=1]{figs/degree_2_outer_neighbour} &
-         \includegraphics[page=2]{figs/degree_2_outer_neighbour}
-       \end{tabular}
-     \end{center}
+     \centering
+     \begin{tabular}{cc}
+       \includegraphics[page=1]{figs/degree_2_outer_neighbour} &
+       \includegraphics[page=2]{figs/degree_2_outer_neighbour}
+     \end{tabular}
      \caption{The proof of \cref{degree_2_outer_neighbour}.}
      \label{degree_2_outer_neighbour_fig}
    \end{figure}
@@ -521,13 +517,12 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
 
   Let $C$ be the biconnected component of $H$ that contains $w$, so $C$ is a near-triangulation.  Therefore, we can apply \cref{degree_2_outer_neighbour} to $C$ and $w$. Each of the first two alternatives in \cref{degree_2_outer_neighbour} are incompatible with the assumption that $\deg^+_{H-B(H)}(w)\ge 2$.  Therefore, we conclude that $N_H(w)\cap B(H)$ contains a vertex $v_0$ with $\deg^+_H(v_0)\ge 2$.  Since $H$ does not satisfy \cref{degree_three}, $\deg^+_H(v_0)< 3$, so $\deg^+_H(v_0)=2$.  Refer to \cref{really_good_fig}
   \begin{figure}
-    \begin{center}
-      \begin{tabular}{ccc}
-        \includegraphics[page=1]{figs/really_good} &
-        \includegraphics[page=2]{figs/really_good} &
-        \includegraphics[page=3]{figs/really_good}
-      \end{tabular}
-    \end{center}
+    \centering
+    \begin{tabular}{ccc}
+      \includegraphics[page=1]{figs/really_good} &
+      \includegraphics[page=2]{figs/really_good} &
+      \includegraphics[page=3]{figs/really_good}
+    \end{tabular}
     \caption{The proof of \cref{really_good}}
     \label{really_good_fig}
   \end{figure}
@@ -542,7 +537,14 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
 
 \subsection{$2$-Critical Graphs}
 
-We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B(H)$ is critical and $\deg^+_H(v)\le 2$ for each $v\in B(H)$.  Observe that any critical graph is also $2$-critical.  We will work our way up to a proof of the following lemma, which allows our algorithm to handle $2$-critical graphs directly, in one step:
+We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B(H)$ is critical and $\deg^+_H(v)\le 2$ for each $v\in B(H)$. (See \cref{two_critical_figure}.)  Observe that any critical graph is also $2$-critical.  We will work our way up to a proof of the following lemma, which allows our algorithm to handle $2$-critical graphs directly, in one step:
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[page=3,trim={0 15 0 0},clip]{figs/bg_layers}
+  \caption{A $2$-critical generalized near-triangulation.}
+  \label{two_critical_figure}
+\end{figure}
 
 \begin{lem}\label{two_critical_handler}
   Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X\subseteq V(H)$ of size at most $|H|/3$ that dominates $I(H)$ and such that each component of $H[X]$ contains at least one vertex in $B(H)$.
@@ -578,7 +580,14 @@ We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B
 
 
 
-For a graph $H$ and a subset $A$ of the vertices of $H$, $\widehat{N}_{H}(A):=\{v\in N_H(A):|N_H(v)\cap A|\ge 2\}$. We will abuse this notation slightly by using the shorthand $\widehat{N}_H(C):=\widehat{N}_H(V(C))$ when $C$ is a subgraph of $H$.
+
+For a graph $H$ and a subset $A$ of the vertices of $H$, $\widehat{N}_{H}(A):=\{v\in N_H(A):|N_H(v)\cap A|\ge 2\}$. We will abuse this notation slightly by using the shorthand $\widehat{N}_H(C):=\widehat{N}_H(V(C))$ when $C$ is a subgraph of $H$. (See \cref{n2}.)
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[page=3]{figs/n2}
+  \caption{An illustration of $\widehat{N}_H(A)$. Vertices of $A$ are black, vertices in $\widehat{N}_H(A)$ are orange and vertices in $N_H(A)\setminus \widehat{N}_H(A)$ are in grey.}
+  \label{n2}
+\end{figure}
 % Let $H$ be a $2$-critical graph and let $C$ be a component of $H-B(H)$. We say that a vertex $v$ in $B(H)$ \defin{belongs} to $C$ if $|N_H(v)\cap V(C)|= 2$.  Note that, since $H$ is $2$-critical any $v\in B(H)$ belongs to at most once component of $H-B(H)$. We use the notation $S_H(C)$ to denote the set of all vertices in $B(H)$ that belong to $C$.
 A \defin{corner} of a face $f$ in a plane graph $H$ is an ordered pair $(uv,vw)$ of (directed) edges in $H$ that occur consecutively around $v$ and such that the face $f$ is to the left of the path $uvw$.  Note that this includes the possibility that $u=w$, which occurs when $v$ has degree $1$. The vertex $v$ is the \defin{internal vertex} of the corner $(uv,vw)$.  For a plane graph $H$, $\corners(H)$ denotes the set of corners on the outer face of $H$.
 
@@ -587,12 +596,21 @@ A \defin{corner} of a face $f$ in a plane graph $H$ is an ordered pair $(uv,vw)$
 \end{lem}
 
 \begin{proof}
-  Consider some corner $(uv, vw)$ of the outer face of $C$.  Since $u,v,w$ are in $I(H)$, $H$ contains faces $uxv$ and $vyw$ that are to the left of $uv$ and $vw$, respectively. Since the path $uvw$ is on the outer face of $C$, these faces are not faces of $H-B(H)$, so $x,y\in B(H)$.  Since $x$ is adjacent to $u$ and $v$ and $y$ is adjacent to $v$ and $w$, each of $x$ and $y$ is in $\widehat{N}_H(C)$.  We claim that $x\neq y$.  To see this, there are two cases to consider.
+  Consider some corner $(uv, vw)$ of the outer face of $C$.  Since $u,v,w$ are in $I(H)$, $H$ contains faces $uxv$ and $vyw$ that are to the left of $uv$ and $vw$, respectively. Since the path $uvw$ is on the outer face of $C$, these faces are not faces of $H-B(H)$, so $x,y\in B(H)$.  Since $x$ is adjacent to $u$ and $v$ and $y$ is adjacent to $v$ and $w$, each of $x$ and $y$ is in $\widehat{N}_H(C)$.  We claim that $x\neq y$.  To see this, there are two cases to consider. (See \cref{uvw}.)
+  \begin{figure}[htbp]
+    \centering
+    \begin{tabular}{cc}
+      \includegraphics[page=1]{figs/corners} &
+      \includegraphics[page=2]{figs/corners}
+    \end{tabular}
+    \caption{The two cases in the  proof of \cref{corner_degree}.}
+    \label{uvw}
+  \end{figure}
   \begin{compactenum}
     \item If $u\neq w$ and $x=y$ then $x\in B(H)$ is adjacent to each of $u,v,w\in I(H)$, so $\deg^+_H(x)\ge 3$, contradicting the fact that $H$ is $2$-critical.
     \item If $u=w$ and $x=y$, then there are two distinct inner faces of $H$ (one on each side of $ux$) that each have $u$, $v$, and $w$ on their boundary, which is not possible because $H$ does not have parallel edges.
   \end{compactenum}
-  Therefore, the edges $vx$ and $vy$ can be assigned to the corner $(uv,vw)$. By doing this for each corner of the outer face of $C$ we obtain a mapping from a subset of $B(H)$ onto $\corners(C)$ in which each corner has two edges between $\widehat{N}_H(C)$ and $C$ mapped onto it.  Therefore, the number of edges between $\widehat{N}_H(C)$ and $C$ is at least $2|\corners{C}|$.  By definition, each vertex in $\widehat{N}_H(C)$ has two neighbours in $C$, so $|\widehat{N}_H(C)|\ge |\corners(C)|$.
+  Therefore, the edges $vx$ and $vy$ can be assigned to the corner $(uv,vw)$. By doing this for each corner of the outer face of $C$ we obtain a mapping from the edges between $\widehat{N}_H(C)$ and $B(C)$ onto $\corners(C)$ in which each corner has two edges mapped onto it.  Therefore, the number of edges between $\widehat{N}_H(C)$ and $B(C)$ is at least $2|\corners{C}|$.  By definition, each vertex in $\widehat{N}_H(C)$ has two neighbours in $C$, so $|\widehat{N}_H(C)|\ge |\corners(C)|$.
 \end{proof}
 
 A \defin{star} is a tree with one vertex of degree at least $2$ and all other vertices of degree $1$.
@@ -633,12 +651,10 @@ For each integer $r\ge 3$, the \defin{$r$-wheel} $W_r$ is the near-triangulation
 
 Note that the following lemma is about critical graphs, not $2$-critical graphs.
 
-\begin{lem}\label{two_connected_critical}
+\begin{lem}\label{biconnected_critical}
   Let $H$ be a biconnected critical generalized near-triangulation with at least $3$ vertices and not isomorphic to $W_k$ for any even integer $k$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
   \begin{compactenum}[(i)]
     \item For each edge $vw$ of $H[B(H)]$, $v\in X_i$ and $w\in X_j$ for some $i\neq j$;\label[p]{proper}
-    % \item For each inner face $f$ of $H[B(H)]$ and each $i\in\{0,1,2\}$, $V(f)\cap X_i\neq\emptyset$; and \label[p]{colourful} \pat{Consider eliminating this, since we only use it to prove \cref{dominates_h}.}
-    % that contains $x_f\in I(H)$ in its interior, exactly one vertex $v_f$ of $f$ is in the set $X_i$ that contains $x$ and $v_f$ is incident to a chord of $H[B(H)]$. \pat{Define chord.}
     \item for each $i\in\{0,1,2\}$, $X_i$ dominates $H$. \label[p]{dominates_h}
   \end{compactenum}
 \end{lem}
@@ -648,15 +664,26 @@ Note that the following lemma is about critical graphs, not $2$-critical graphs.
 
   We now proceed by induction on $|I(H)|$.  If $|I(H)|=0$ then $H$ is an edge-maximal outerplanar graph, and therefore has a proper $3$-colouring.  We take $X_0$, $X_1$, and $X_2$ to be the three colour classes in this colouring.  This choice clearly satisfies \cref{proper}. Since each vertex of $H$ is included in at least one triangle, each vertex of $H$ is dominated by each of $X_0$, $X_1$, and $X_2$, so this choice satisfies \cref{dominates_h}.
 
-  If $|I(H)|\ge 1$ then $H$ is not outerplanar and therefore $H[B(H)]$ contains at least two inner faces.  Let $x$ be an inner vertex of $H$ and let $f$ be the marked face of $H[B(H)]$ that contains $x$.
+  \begin{figure}
+    \centering
+    \begin{tabular}{ccc}
+      \includegraphics[page=1]{figs/biconnected} &
+      \includegraphics[page=2]{figs/biconnected} &
+      \includegraphics[page=3]{figs/biconnected}
+    \end{tabular}
+    \caption{The proof of \cref{biconnected_critical}}
+    \label{contraction_proof}
+  \end{figure}
+  If $|I(H)|\ge 1$ then $H$ is not outerplanar.  See \cref{contraction_proof}.  Since $H$ is not isomorphic to $W_k$ for any integer $k$, $H[B(H)]$ contains at least two inner faces.  Let $x$ be an inner vertex of $H$ and let $f$ be the marked face of $H[B(H)]$ that contains $x$.
   % If $f$ has only three vertices, then we apply induction on $H':=H-x$ to obtain sets $X_0'$, $X_1'$, and $X_2'$.  We then set $X_0:=X_0'\cup\{x\}$, $X_1:=X_1'$ and $X_2:=X_2'$.  These sets satisfy \cref{proper} because every edge of $H[B(H)]$ is also an edge of $H'[B(H')]$.  These sets satisfy \cref{colourful} because $f$ is a clique of size $3$ in $H'$ so, by \cref{proper}, each $X_i$ contains at least one vertex of $f$. Now, \cref{colourful} also implies that each $X_i$ dominates $x$ and (by induction) dominates $V(H)\setminus\{x\}$, so each $X_i$ is a dominating set.
-  Since $H[B(H)]$ has at least two inner faces and $H$ is biconnected, $f$ contains an edge $vw$ that is on the boundary of two faces of $H$.  Let $H'$ be the graph obtained by contracting the edge $vx$ into $v$. Then $H'[B(H')]=H[B(H)]$ and $H'$ is a biconnected critical generalized near-triangulation so we apply induction to obtain sets $X_0'$, $X_1'$ and $X_2'$.  Without loss of generality, we can assume that $v$ is in $X_0'$.  Then we set $X_0:=X_0'\cup\{x\}$, $X_1:=X_1'$ and $X_2:=X_2'$. Since $H'[B(H')]=H[B(H)]$ this clearly satisfies \cref{proper}.  Since $H'$ contains the edge $vw$ for each $w\in V(f)\setminus\{v\}$, \cref{proper} implies that the vertices of the path $f-v$ are alternately contained in $X_1$ and $X_2$.
+  Since $H[B(H)]$ has at least two inner faces and $H$ is biconnected, $f$ contains an edge $vw$ that is on the boundary of two faces of $H$.  Let $H'$ be the graph obtained by contracting the edge $vx$ into $v$. Then $H'[B(H')]=H[B(H)]$ and $H'$ is a biconnected critical generalized near-triangulation so we apply induction to obtain sets $X_0'$, $X_1'$ and $X_2'$.  Without loss of generality, we can assume that $v$ is in $X_1'$.  Then we set $X_0:=X_0'$, $X_1:=X_1'\cup\{x\}$ and $X_2:=X_2'$. Since $H'[B(H')]=H[B(H)]$ this clearly satisfies \cref{proper}.  Since $H'$ contains the edge $vw$ for each $w\in V(f)\setminus\{v\}$, \cref{proper} implies that the vertices of the path $f-v$ are alternately contained in $X_2$ and $X_0$.
   % In particular, since $f$ has at least three vertices these sets satisfy \cref{colourful}.
 
-  All that remains is to show that $X_0$, $X_1$, and $X_2$ satisfy \cref{dominates_h}.  The inductive hypothesis already implies that each of these sets dominates $V(H)\setminus V(f)$.  Since $x$ is adjacent to every vertex of $f$, it is adjacent to at least one vertex of $X_1$ at least one vertex of $X_2$.  Therefore, each of $X_0$, $X_1$, and $X_2$ dominates $x$.  For each vertex $w\in V(f)\setminus\{v\}$, $w$ is adjacent to $x\in X_0$, $w\in X_{i}$ and $w$ is adjacent a neighbour $w'\in X_{3-i}$ in $f$, so each of these sets dominates $w$.  Finally, since the vertex $v$ is incident to a chord of $H[B(H)]$, it is incident to a second face $f'\neq f$ of $H[B(H)]$.  Since $f$ is marked and $H$ is critical, $f'$ is not marked.  Therefore $f'$ is a triangle with one vertex in each of $X_0$, $X_1$, and $X_2$. Therefore each of these sets dominates $v$.
+  All that remains is to show that $X_0$, $X_1$, and $X_2$ satisfy \cref{dominates_h}.  The inductive hypothesis already implies that each of these sets dominates $V(H)\setminus V(f)$.  Since $x$ is adjacent to every vertex of $f$, it is adjacent to at least one vertex of $X_0$ at least one vertex of $X_2$.  Therefore, each of $X_0$, $X_1$, and $X_2$ dominates $x$.  For each vertex $w\in V(f)\setminus\{v\}$, $w$ is adjacent to $x\in X_1$, $w\in X_{i}$ for some $i\in\{0,2\}$ and $w$ is adjacent a neighbour $w'\in X_{2-i}$ in $f$, so each of these sets dominates $w$.  Finally, since the vertex $v$ is incident to a chord of $H[B(H)]$, it is incident to a second face $f'\neq f$ of $H[B(H)]$.  Since $f$ is marked and $H$ is critical, $f'$ is not marked.  Therefore $f'$ is a triangle with one vertex in each of $X_0$, $X_1$, and $X_2$. Therefore each of these sets dominates $v$.
 \end{proof}
 
-The following lemma explains how we deal with even wheels:
+The following lemma, illustrated in \cref{even_wheel}
+ explains how we deal with even wheels:
 
 \begin{lem}\label{wheelie}
   Let $H:=W_k$ for some even integer $k\ge 4$ and let $v$ be any vertex in $B(H)$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
@@ -668,6 +695,12 @@ The following lemma explains how we deal with even wheels:
   \end{compactenum}
 \end{lem}
 
+\begin{figure}
+  \centering
+  \includegraphics{figs/even_wheel}
+  \caption{Partitioning the vertices of an even wheel into sets $X_0$, $X_1$, and $X_2$.}
+  \label{even_wheel}
+\end{figure}
 \begin{proof}
   Label the vertices of $W_k$ as $v_0,\ldots,v_{k-1}$ so that $v=v_0$.  Then the sets $X_1:=\{v_0, x\}$, $X_2:=\{v_{2i-1}:i\in\{1,\ldots,k/2\}\}$, and $X_0:=\{v_{2i}:i\in\{1,\ldots, k/2-1\}\}$ satisfy the requirements of the lemma.
 \end{proof}
@@ -698,9 +731,16 @@ Now we drop the requirement that $H$ is biconnected.
 
     \item Otherwise, we apply the inductive hypothesis on $H'$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
   \end{enumerate}
+  \begin{figure}
+    \centering
+    \includegraphics{figs/tail}
+    \caption{Dealing with a degree-$1$ vertex, $z_r$, in the proof of \cref{critical}.}
+    \label{critical_degree_one}
+  \end{figure}
+  See \cref{critical_degree_one}.
   In the latter two cases, we may assume, without loss of generality (by renaming colours), that $z_0\in X_{1}'$.  Since $z_0\not\in L$, $\deg_H(z_0)\ge 3$ so $\deg_{H'}(z_0)\ge 2$.  Therefore we may assume, without loss of generality, that $X_1'$ and $X_2'$ each dominate $z_0$. Redefine $L_{(2-r)\bmod 3}'\gets L_{(2-r)\bmod 3}'\cup\{z_r\}$ so that $L_0'$, $L_1'$ and $L_2'$ is a partitition of $L$.  Then we take $X_i:=X_{i}'\cup\{z_j:1-j\equiv i\pmod 3\}$, $L_0:=L_0'$, $L_1:= L_1'$, and $L_2:=L_2'$.  These sets satisfy the requirements of the lemma.  Indeed, the only concern would be that $z_0$ is not dominated by $X_0$ because $z_0$ is not necessarily dominated by $X_0'$, but this does not occur because $X_0$ includes $z_1$.
 
-  Finally, we arrive at the case in which $L=\emptyset$. If $H$ is biconnected then, since $H$ is not a wheel, we can immediately apply \cref{two_connected_critical} and we are done.  Otherwise, $H$ contains a cut vertex $v$ that separates $H$ into components $C_1,\ldots,C_k$ and such that $H':=H[V(C_1)\cup\{v\}]$ is biconnected. Since $L=\emptyset$, $H'$ has at least three vertices. If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H'$ and $v$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'=\emptyset$, $L_1'=\emptyset$, and $L_2'=\emptyset$. Otherwise, we apply \cref{two_connected_critical} to $H'$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'=\emptyset$, $L_1'=\emptyset$, and $L_2'=\emptyset$.  In either case we may assume, without loss of generality that $v\in X_1'$, that $X_1'$ and $X_2'$ each dominate $H'$ and that $X_0'$ dominates $V(H')\setminus\{v\}$.
+  Finally, we arrive at the case in which $L=\emptyset$. If $H$ is biconnected then, since $H$ is not a wheel, we can immediately apply \cref{biconnected_critical} and we are done.  Otherwise, $H$ contains a cut vertex $v$ that separates $H$ into components $C_1,\ldots,C_k$ and such that $H':=H[V(C_1)\cup\{v\}]$ is biconnected. Since $L=\emptyset$, $H'$ has at least three vertices. If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H'$ and $v$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'=\emptyset$, $L_1'=\emptyset$, and $L_2'=\emptyset$. Otherwise, we apply \cref{biconnected_critical} to $H'$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'=\emptyset$, $L_1'=\emptyset$, and $L_2'=\emptyset$.  In either case we may assume, without loss of generality that $v\in X_1'$, that $X_1'$ and $X_2'$ each dominate $H'$ and that $X_0'$ dominates $V(H')\setminus\{v\}$.
 
   Let $H'':=H-V(C_1)$. If $H''$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H''$ and $v$ to obtain sets $X_0''$, $X_1''$, $X_2''$, $L_0''=\emptyset$, $L_1''=\emptyset$, and $L_2''=\emptyset$. Otherwise, we apply the inductive hypothesis to $H''$ to obtain sets $X_0''$, $X_1''$, $X_2''$ that each dominate $H''$. In either case we may assume, without loss of generality (by renaming) that $v\in X_1''$, that $X_1''$ and $X_2''$ each dominate $H'$ and that $X_0''$ dominates $V(H'')\setminus\{v\}$.  Then the sets $X_0:=X_0'\cup X_2''$, $X_1:=X_1'\cup X_1''$ and $X_2:=X_2'\cup X_0''$ satisfy the requirements of the lemma.  (Again, the only concern is whether each set dominates $v$, but this is guaranteed by the fact that $v\in X_1$, and that $X_2'\subseteq X_2$ and $X_2''\subseteq X_0$ each dominate $v$.)
 \end{proof}
@@ -716,7 +756,15 @@ Now we drop the requirement that $H$ is biconnected.
 \end{lem}
 
 \begin{proof}
+  Refer to \cref{covers}.
   Let $H_1:=H-B(H)$, let $\mathcal{C}_1$ be the set of components of $H_1$ having exactly one vertex, let $\mathcal{C}_2$ be the set of components of $H_1$ having exactly two vertices, let $\mathcal{C}_\star$ be the set of components of $H_1$ that are stars, let $\mathcal{C}_{\boxtimes}$ be the set of components of $H_1$ that are even wheels, and let $\overline{\mathcal{C}}$ be the set of componets of $H_1$ that are not in $\mathcal{C}_1\cup \mathcal{C}_2\cup \mathcal{C}_{\star}\cup \mathcal{C}_{\boxplus}$.
+
+  \begin{figure}
+    \centering
+    \includegraphics[page=5,trim={0 10 0 0},clip]{figs/bg_layers}
+    \caption{Partitioning the components of $H-B(H)$ into the classes $\mathcal{C}_1$, $\mathcal{C}_2$, $\mathcal{C}_{\star}$, and $\overline{\mathcal{C}}$.  Edges within each component are ultrafat. Each class is drawn so that it contains the associated vertices of $B(H)$.}
+    \label{covers}
+  \end{figure}
 
   % By \cref{boundary_vs_leaves}, to satisfy \cref{boundary_size} it suffices to construct three sets whose total size is not more than $|I_1|+\mu(H_1)=|I_1|+2|Z| + |L| + |B_1|$.
 
@@ -726,7 +774,7 @@ Now we drop the requirement that $H$ is biconnected.
 
   For each component $C$ in $\mathcal{C}_{\boxtimes}$ we choose the vertex $x$ that dominates $C$, some vertex $w$ in $B(C)$ and some vertex $v\in B(H)$ adjacent to $w$.  We place $\{v,w,x\}$ in each of $X_0$, $X_1$, and $X_2$.  This contributes a total of $9|\mathcal{C}_{\boxplus}|$ vertices to $X_0$, $X_1$, and $X_2$. On the other hand, $\sum_{C\in \mathcal{C}_{\boxplus}} |C|\ge 5|\mathcal{C}_{\star}|$ and, by \cref{degree_corners_and_leaves}, $\sum_{C\in \mathcal{C}_{\star}} |\widehat{N}_H(C)|\ge 4|\mathcal{C}_{\boxtimes}|$.
 
-  For each component $C$ in $\overline{\mathcal{C}}$, we apply \cref{two_connected_critical} to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
+  For each component $C$ in $\overline{\mathcal{C}}$, we apply \cref{biconnected_critical} to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
   For each $j\in\{0,1,2\}$ we add $X_j'$ to $X_j$ and for each $w\in L_j'$ we choose a neighbour $w'$ of $w$ in $B(H)$ and add it to $X_j$.  This ensures that $X_j$ dominates every vertex in $C$.  The total number of vertices added to $X_0$, $X_1$, and $X_2$ by this step is $\sum_{C\in\overline{\mathcal{C}}}(|C|+|B(C)|+|V_1(C)|)$.  On the other hand, by \cref{degree_corners_and_leaves}, $\sum_{C\in \overline{\mathcal{C}}} |\widehat{N}_H(C)|\ge \sum_{C\in \overline{\mathcal{C}}} (|B(C)|+|V_1(C)|)$.
 
   Finally, it remains to consider the components of $H_1$ that are in $\mathcal{C}_1$. Each of these components is a single vertex in $V_0(H_1)$. These we deal with as a group. For each $w\in V_0(H_1)$, let $H_w:=H[N_H[w]]$ and let $Q:=\bigcup_{w\in V_0(H_1)} H_w$.  For each $w\in V_0(V_1)$, the graph $H_w$ is isomorphic to $W_k$ for some $k\ge 3$, $B(H_w)\subseteq B(H)$ and, for any component $C$ of $H_1$ other than the one containing $w$, $\widehat{N}_H(C)\cap B(H_w)=\emptyset$. In other words, none of the vertices in $B(Q)$ has been counted in the preceding paragraphs.  We construct a $X'\subseteq B(Q)\subseteq B(H)$ that dominates $I(Q)=V_0(V_1)$ by repeating the following as long as there is vertex $w$ in $V_0(H_1)$ not dominated by $X'$:
@@ -760,14 +808,13 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
 \end{compactenum}
 
 \begin{figure}
-  \begin{center}
-      \includegraphics[page=2]{figs/bg_layers.pdf} \\[-5ex]
-      $G[R\cup S]$ \\[-1ex]
-      \includegraphics[page=3]{figs/bg_layers.pdf} \\[-3ex]
-      $G[Q\cup R\cup S]$ \\[2ex]
-      \includegraphics[page=4]{figs/bg_layers.pdf} \\[-.7ex] 
-      $G[X\cup Q\cup R\cup S]$ \\[2ex]
-  \end{center}
+  \centering
+  \includegraphics[page=2,trim={0 28 0 23},clip]{figs/bg_layers.pdf} \\[0ex]
+  $G[R\cup S]$ \\[2ex]
+  \includegraphics[page=3,trim={0 18 0 10},clip]{figs/bg_layers.pdf} \\
+  $G[Q\cup R\cup S]$ \\[2ex]
+  \includegraphics[page=4]{figs/bg_layers.pdf} \\
+  $G[X\cup Q\cup R\cup S]$ \\[2ex]
   \caption{A useful figure?}
 \end{figure}
 \begin{thm}\label{best_greedy}
@@ -858,9 +905,9 @@ If we wanted to make use of the results for outerplanar graphs, then we would ne
 % \end{lem}
 %
 % \begin{figure}[htbp]
-%   \begin{center}
+%   \centering
 %     \includegraphics{figs/chord_incident}
-%   \end{center}
+%
 %   \caption{The proof of \cref{chord_incident}}
 %   \label{chord_incident_fig}
 % \end{figure}
