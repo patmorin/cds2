@@ -55,7 +55,7 @@
 
 \newcommand{\pat}[1]{[\textcolor{red}{PM: #1}]}
 \newcommand{\vida}[1]{[{\color{pink}VD: #1}]}
-\newcommand{\saeed}[1]{[{\color{cyan}SO: #1}]}
+\newcommand{\saeed}[1]{[{\color{blue}SO: #1}]}
 \newcommand{\hussein}[1]{[\textcolor{purple}{$H^2$: #1}]}
 
 \title{Connected Dominating Sets in Triangulations}
@@ -118,6 +118,12 @@ results on edge-maximal outerplanar graphs --- implies $n/2$ bound for Hamiltoni
 connected dominating sets in unit disc graphs \newline
 $2$-bend collinear sets \newline
 $15$-approximation for minimum connected dominating set in planar graphs \newline
+}
+\saeed{
+
+For every $n \in \mathbb{N}$, Everett et al. \cite{DBLP:conf/gd/EverettLLW07} show that there exists a universal set $\mathcal{U}_n$ of $n$ distinct points in the plane such that every $n$-vertex planar graph admits a 1-bend drawing with vertices on the points of set $\mathcal{U}_n$. Furthermore, Giacomo et al. \cite{DBLP:journals/comgeo/GiacomoDLW05} demonstrate that for a linear ordering $L$ of vertices of a planar triangulation $G$ and strictly convex curve $\lambda$, there is a $1$-bend plane drawing of $G$ such that vertices of $G$ appear on $\lambda$ with the same order as in $L$.
+
+With further relaxation on the drawing of the edges, de Fraysseix et al. \cite{DBLP:journals/combinatorica/FraysseixPP90} show that any set of $n$ points in the plane is a universal set for the 2-bend drawing of planar graphs. Furthermore, They show that the planar embedding problem of any $n$-vertex graph on an $n$ collinear points in $\mathbb{R}^2$ with at most one bend along each edge is NP-complete.
 }
 
 The remainder of this paper is organized as follows:  In \cref{strategy}, we describe the general strategy we use for finding connected dominating sets in triangulations.  In \cref{warm_up} we show that a simple version of this strategy can be used to obtain a connected dominating set of size at most $4n/7= 0.\overline{571428}n$, which is already better than the best known bounds for triangulations.  In \cref{full_result} we show that a more careful construction leads to a proof of \cref{main_result2}.  In \cref{one_bend}, we discuss the connection between connected dominating sets and one-bend collinear drawings that leads to \cref{one_bend_collinear}.
