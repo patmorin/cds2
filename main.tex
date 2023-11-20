@@ -39,6 +39,8 @@
 \creflabelformat{dp}{#2(DP#1)#3}
 \crefname{p}{}{}
 \creflabelformat{p}{#2(#1)#3}
+\crefname{bg}{}{}
+\creflabelformat{bg}{#2[bg#1]#3}
 
 
 \DeclareMathOperator{\corners}{\Gamma}
@@ -249,7 +251,7 @@ A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ f
 \label{warm_up}
 
 We start with the simplest possible greedy algorithm, that we call $\textsc{SimpleGreedy}(G)$, to choose $\Delta_0,\ldots,\Delta_{r-1}$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i:=G-X_i$, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are only two cases to consider:
-\begin{compactenum}
+\begin{compactenum}[{[}g1{]}]
     \item If $\deg^+_{G_i}(v_i)\ge 2$ then we set $\Delta_i\gets\{v_i\}$.
     \item If $\deg^+_{G_i}(v_i)\le 1$ for all $v\in G_i$ then $G_i$ is critical and this is the final step, so $r:=i+1$.  By \cref{base_case}, there exists $\Delta_i\subseteq B_i$ of size at most $|I_i|$ that dominates $I_i$. Then $X_r:=X_{r-1}\cup\Delta_{i}$ and we are done.
 \end{compactenum}
@@ -747,22 +749,27 @@ Now we drop the requirement that $H$ is biconnected.
 
 \subsection{The Algorithm}
 
-This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BestGreedy}(G)$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i$ be a dom-preserving subgraph of $G-X_i$ that is dom-minimal, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are now three cases to consider:
-\begin{compactenum}
+This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BetterGreedy}(G)$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i$ be a dom-preserving subgraph of $G-X_i$ that is dom-minimal, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are now three cases to consider:
+\begin{compactenum}[{[}bg1{]}]
     \item If $\deg^+_{G_i}(v_i)\ge 3$ then we set $\Delta_i\gets\{v_i\}$.
+    \label[bg]{bg_high_degree}
     \item If there exists distinct $u,v\in B(G_i)$ and $w\in B(G_i-B(G_i))$ such that $\deg^+_{G_i}(v)=2$, $\deg^+_{G_i-v}(w)\ge 3$, and $N^+_{G_i}(u)\subseteq N_{G_i}(w)$ then set $\Delta_i:=\{v,w\}$.
+    \label[bg]{bg_two_three}
     \item Otherwise, $G_i$ is $2$-critical and $i+1=r$.  By \cref{two_critical_handler}, there exists $\Delta_{r-1}\subseteq V(G_i)$ of size at most $|B(G_i-B(G_i))|/3 + |I(G_i[I(G_i)])|$ that dominates $I(G_i)$.
+    \label[bg]{bg_two_critical}
 \end{compactenum}
 
 \begin{thm}\label{best_greedy}
-  When applied to an $n$-vertex triangulation $G$,  $\textsc{BestGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $10n/21\pm O(1)$.
+  When applied to an $n$-vertex triangulation $G$,  $\textsc{BetterGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $10n/21\pm O(1)$.
 \end{thm}
-\hussein{Is adding the following inequality to the constrains helpful  $r \leq |E|/4 \leq 3n/4 - 3/2$? I don t think so  } \pat{No: The optimal is achieve when $r\approx n/7$}
+% \hussein{Is adding the following inequality to the constrains helpful  $r \leq |E|/4 \leq 3n/4 - 3/2$? I don t think so  } \pat{No: The optimal is achieve when $r\approx n/7$}
 \begin{proof}
-  For each integer $t\ge 3$, let $x_t$ be the number of times $\textsc{BestGreedy}(G)$ falls into case $1$ and chooses $v_i$ such that $\deg^+_{G_i}(v_i)=t$.  Let $z$ be the number of times $\textsc{BestGreedy}(G)$ falls into Case~2.  Let
+  For each integer $t\ge 3$, let $x_t$ be the number of times $\textsc{BetterGreedy}(G)$ falls into case \cref{bg_high_degree} and chooses $v_i$ such that $\deg^+_{G_i}(v_i)=t$ and let $z$ be the number of times $\textsc{BetterGreedy}(G)$ falls into case \cref{bg_two_three}.  Then
   \[
-     D:=|D_{r-1}| = 3 + \sum_{t\ge 3}tx_t + 5z \enspace .
+     D:=\left|N_G[X_{r-1}]\right| = 3 + \sum_{t\ge 3}tx_t + 5z \enspace .
   \]
+  is the size of the set dominated $X_{r-1}$ immediately before the final iteration of $\textsc{BetterGreedy}(G)$.
+
   Let $I:=|I(G_{r-1})|$, let $B:=|B(G_{r-1})|$, let $Q:=|B(G_{r-1}-B(G_{r-1}))|$, let $R:=|I(G_{r-1}-B(G_{r-1}))|$, and let $S:=|I(G_{r-1}-B^2(G_{r-1}))|$.\pat{Define $B^2(G)=G[B(G-B(G))]-B(G[B(G-B(G))])$}  Then, by \cref{degree_corners_and_leaves} and \cref{base_case}
 
   \begin{equation}
