@@ -333,10 +333,10 @@ We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each 
 
 A subgraph $H'$ of a generalized near-triangulation $H$ is \defin{dom-preserving} if
 \begin{compactenum}[({DP}1)]
-  \item $B(H')\subseteq B(H)$;
-  \item $N^+_{H'}(v)=N^+_H(v)$ for all $v\in B(H')$;
-  \item $I(H')=I(H)$; and
-  \item $N_{H'}(v)=N_H(v)$ for all $v\in I(H)$.
+  \item $B(H')\subseteq B(H)$; \label[dp]{boundary_subset}
+  \item $N^+_{H'}(v)=N^+_H(v)$ for all $v\in B(H')$; \label[dp]{same_inner_neighbourhood}
+  \item $I(H')=I(H)$; and \label[dp]{same_inner_vertices}
+  \item $N_{H'}(v)=N_H(v)$ for all $v\in I(H)$. \label[dp]{same_neighbourhood}
 \end{compactenum}
 
 \begin{obs}
@@ -455,6 +455,8 @@ A subgraph $H'$ of a generalized near-triangulation $H$ is \defin{dom-preserving
 % \pat{Did I really need to change the definition of dom-minimal?  Check.}
 
 
+\subsection{Finding a $2$--$3$ Combo}
+
 Note that the next two lemmas each consider a graph $H$ that is a near triangulation, not a generalized near-triangulation.
 
 \begin{lem}\label{chord_incident}
@@ -538,9 +540,45 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
 \end{proof}
 
 
+\subsection{Eliminating an Inner Leaf}
+
+
+\begin{lem}\label{leaf_killer}
+  Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$ and such that $H-B(H)$ contains a vertex $w$ with $\deg_{H-B(H)}(w)=1$.  Then there exists $v\in B(H)$ and a dom-preserving subgraph $H'$ of $H-v$ such that $|H'|\le |H|-3$ and $|B(H')|\le |B(H)|-1$.
+\end{lem}
+
+\begin{proof}
+  Refer to \cref{killing_a_leaf}.
+  Let $x$ be the unique neighbour of $w$ in $H-B(H)$. Since $x$ and $w$ are vertices of $H-B(X)$, $x,w\in I(H)$.  Since $w$ is an inner vertex in a near-triangulation, it is incident to $t\ge 3$ faces $v_iv_{i+1}w$ for $i\in\{0,\ldots,v_{t}\}$, with $v_0=v_t=x$.  Since $\deg_{H-B(H)}(w)=1$, $v_1,\ldots,v_{t-1}\in B(H)$.  Therefore, $H$ contains no edge $v_i v_{i+r}$ for any $i\in\{0,t-r\}$ and any $r\ge 2$.  Therefore, for each $i\in\{1,\ldots,t-1\}$, the only two inner faces of $H$ that include $v_i$ are $v_{i-1}v_iw$ and $v_iv_{i+1}w$.  Therefore $N^+_H(v_i)=\{w\}$ for each $i\in\{2,\ldots,t-2\}$ and $N^+_H(v_1)=N^+_H(v_{t-1})=\{x,w\}$.
+
+  \begin{figure}
+    \centering
+    \begin{tabular}{ccc}
+      \includegraphics[page=1]{figs/killing_a_leaf} &
+      \includegraphics[page=2]{figs/killing_a_leaf} &
+      \includegraphics[page=3]{figs/killing_a_leaf} \\
+      $H$ & $H-v$ & $H'$
+    \end{tabular}
+    \caption{The proof of \cref{leaf_killer}}
+    \label{killing_a_leaf}
+  \end{figure}
+
+  Let $v:=v_1$ and let $H'$ be a dom-preserving subgraph of $H-v$ that is dom-minimal.  Then $w,x\in B(H-v)$.  Since $H'$ is dom-minimal, $v_1,\ldots,v_{t-1}\not\in V(H')$, by \cref{bad_vertex}.  Therefore $N_H(w)\cap V(H')=\{v_t\}=\{x\}$. Since $H'$ is dom-minimal, $w\not\in V(H')$. Therefore $V(H')\subseteq V(H)\setminus\{v_1,\ldots,v_{t-1},w\}$, so $|V(H')|\le |H|-t\le |H|-3$.  Finally, $B(H-v)=B(H)\setminus \{v\}\cup\{w,x\}$. By \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus\{v_1,\ldots,v_{t-1},w\}\cup\{x\}$, so $|B(H')|\le |B(H)|+2-t\le |B(H)|-1$.
+\end{proof}
+
+
+
 \subsection{$2$-Critical Graphs}
 
-We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B(H)$ is critical and $\deg^+_H(v)\le 2$ for each $v\in B(H)$. (See \cref{two_critical_figure}.)  Observe that any critical graph is also $2$-critical.  We will work our way up to a proof of the following lemma, which allows our algorithm to handle $2$-critical graphs directly, in one step:
+\pat{Note: Change in definition}
+We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B(H)$ is critical, $H-B(H)$ has no vertices of degree $1$, and $\deg^+_H(v)\le 2$ for each $v\in B(H)$. (See \cref{two_critical_figure}.)
+% Observe that any critical graph is also $2$-critical.
+We will work our way up to a proof of the following lemma, which allows our algorithm to handle $2$-critical graphs directly, in one step:
+
+
+\begin{lem}\label{two_critical_handler}
+  Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X\subseteq V(H)$ of size at most $(2|B(H-B(H))| + I(H-B(H)))/3$ that dominates $I(H)$ and such that each component of $H[X]$ contains at least one vertex in $B(H)$.
+\end{lem}
 
 \begin{figure}[htbp]
   \centering
@@ -548,11 +586,6 @@ We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B
   \caption{A $2$-critical generalized near-triangulation.}
   \label{two_critical_figure}
 \end{figure}
-
-\begin{lem}\label{two_critical_handler}
-  Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X\subseteq V(H)$ of size at most $|H|/3$ that dominates $I(H)$ and such that each component of $H[X]$ contains at least one vertex in $B(H)$.
-\end{lem}
-
 
 
 %
@@ -582,7 +615,7 @@ We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B
 % \end{obs}
 
 
-
+\pat{Much of this section can be simplified, since we don't care about degree-$1$ vertices in $H-B(H)$ anymore.}
 
 For a graph $H$ and a subset $A$ of the vertices of $H$, $\widehat{N}_{H}(A):=\{v\in N_H(A):|N_H(v)\cap A|\ge 2\}$. We will abuse this notation slightly by using the shorthand $\widehat{N}_H(C):=\widehat{N}_H(V(C))$ when $C$ is a subgraph of $H$. (See \cref{n2}.)
 \begin{figure}[htbp]
