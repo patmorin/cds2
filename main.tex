@@ -304,8 +304,11 @@ Besides the data structure used for representing the triangulation $G$, each ver
 
 Next we devise an algorithm that produces a smaller connected dominating set than what $\textsc{SimpleGreedy}(G)$ can guarantee.  This involves a more careful analysis of the cases in which \textsc{SimpleGreedy} is forced to take a vertex $v_i$ with $\deg^+_{G_i}(v_i)=2$.  We will show that when this happens, one of the following two cases occurs:
 \begin{compactenum}
-  \item We can directly complete the dominating set $X_r=X_{i+1}$ by adding a set $\Delta_{r-1}=\Delta_i$ with at most $|G_i|/3$ additional vertices.
+  \item We can directly complete the dominating set $X_r=X_{i+1}$ by adding a set $\Delta_{r-1}=\Delta_i$ with at most $2|B(G_i)|+|I(G_i)|$ additional vertices.
   \item We can add a pair of vertices $\{v_i,w_i\}$ that increase the size of the dominated set $D_{i+1}=N[X_{i+1}]$ by at least $5$ but only increase the size of the boundary set $B_{i+1}=B(G_{i+1})$ by at most $2$.
+  \item We can add a vertex $v_i$ that increases the size of the dominated set $D_{i+1}$ by at least $2$ and decreases the size of the boundary set $B_{i+1}$ by at least $1$.
+  \item We can add a vertex $v_i$ that increases the size of the dominated set $D_{i+1}$ by $1$ and decreases the size of the boundary set $B_{i+1}$ by at least $3$.
+
 \end{compactenum}
 
 % The commented out text below turns out to be completely bullshit
@@ -319,6 +322,7 @@ Next we devise an algorithm that produces a smaller connected dominating set tha
 We begin by identifying unnecessary vertices and edges that can appear in the graphs $G_1,\ldots,G_{r-1}$ during the construction of $X$.   We say that a near-triangulation $H$ is \defin{dom-minimal} if
 \begin{compactenum}[({DM}1)]
     \item each vertex $v\in B(H)$ has $\deg^+_H(v)\ge 1$; and \label[dm]{bad_vertex}
+    % \item if $v\in B(H)$ has $\deg^+_H(v)=1$, then $H[N_H[v]]$ is isomorphic to $K_4$.
     \item each edge $vw$ on the boundary of the outer face of $H$ is on the boundary an inner face $vwx$ of $H$ for some $x\in I(H)$. \label[dm]{bad_edge}
 \end{compactenum}
 We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each of its biconnected components are dom-minimal.
@@ -565,6 +569,7 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
   Let $v:=v_1$ and let $H'$ be a dom-preserving subgraph of $H-v$ that is dom-minimal.  Then $w,x\in B(H-v)$.  Since $H'$ is dom-minimal, $v_1,\ldots,v_{t-1}\not\in V(H')$, by \cref{bad_vertex}.  Therefore $N_H(w)\cap V(H')=\{v_t\}=\{x\}$. Since $H'$ is dom-minimal, $w\not\in V(H')$. Therefore $V(H')\subseteq V(H)\setminus\{v_1,\ldots,v_{t-1},w\}$, so $|V(H')|\le |H|-t\le |H|-3$.  Finally, $B(H-v)=B(H)\setminus \{v\}\cup\{w,x\}$. By \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus\{v_1,\ldots,v_{t-1},w\}\cup\{x\}$, so $|B(H')|\le |B(H)|+2-t\le |B(H)|-1$.
 \end{proof}
 
+\subsection{Eliminating Inner Isolated Vertices}
 
 \begin{lem}\label{degree_zero_killer}
   Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$ and such that $H-B(H)$ contains a vertex $w$ with $\deg_{H-B(H)}(w)=0$.  Then at least one of the following is true:
