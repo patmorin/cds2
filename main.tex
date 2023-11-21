@@ -542,7 +542,6 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
 
 \subsection{Eliminating an Inner Leaf}
 
-
 \begin{lem}\label{leaf_killer}
   Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$ and such that $H-B(H)$ contains a vertex $w$ with $\deg_{H-B(H)}(w)=1$.  Then there exists $v\in B(H)$ and a dom-preserving subgraph $H'$ of $H-v$ such that $|H'|\le |H|-3$ and $|B(H')|\le |B(H)|-1$.
 \end{lem}
@@ -564,6 +563,25 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
   \end{figure}
 
   Let $v:=v_1$ and let $H'$ be a dom-preserving subgraph of $H-v$ that is dom-minimal.  Then $w,x\in B(H-v)$.  Since $H'$ is dom-minimal, $v_1,\ldots,v_{t-1}\not\in V(H')$, by \cref{bad_vertex}.  Therefore $N_H(w)\cap V(H')=\{v_t\}=\{x\}$. Since $H'$ is dom-minimal, $w\not\in V(H')$. Therefore $V(H')\subseteq V(H)\setminus\{v_1,\ldots,v_{t-1},w\}$, so $|V(H')|\le |H|-t\le |H|-3$.  Finally, $B(H-v)=B(H)\setminus \{v\}\cup\{w,x\}$. By \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus\{v_1,\ldots,v_{t-1},w\}\cup\{x\}$, so $|B(H')|\le |B(H)|+2-t\le |B(H)|-1$.
+\end{proof}
+
+
+\begin{lem}\label{degree_zero_killer}
+  Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$ and such that $H-B(H)$ contains a vertex $w$ with $\deg_{H-B(H)}(w)=0$.  Then at least one of the following is true:
+  \begin{compactenum}[(a)]
+    \item there exists $v\in B(H)$ and a dom-preserving subgraph $H'$ of $H-v$ such that $|H'|\le |H|-3$ and $|B(H')|\le |B(H)|-1$; or \label[p]{kill_pair}
+    \item there exists $v\in B(H)$ and a dom-preserving subgraph $H'$ of $H-v$ such that $|H'|\le |H|-4$ and $|B(H')|\le |B(H)|-3$. \label[p]{kill_k4}
+  \end{compactenum}
+\end{lem}
+
+\begin{proof}
+  By definition $N_H(w)\subseteq B(H)$ and, since $w$ is an inner vertex in a generalized near triangulation $|N_H(w)|\ge 3$. There are two cases to consider:
+  \begin{compactenum}[(a)]
+    \item There exists $v\in N_H(w)$ with $\deg^+_H(v)=2$. In this case, $N^+_H(v)=\{w,w'\}$ and the vertices $w$ and $w'$ are in a different biconnected components of $H$. \pat{Annoyingly, we have to be concerned about the possibility that the bicomponent that contains $w'$ is a more interesting one, so $\deg_{H-B(H)}(w')\ge 2$.  Still not an issue with the right definition of dom-minimal, but annoying.}
+
+    \item $\deg^+_H(v)=1$ for all $v\in N_H(w)$.  In this case let $v$ be any vertex in $N_H(w)$ and let $H'$ be a dom-preserving subgraph of $H-v$ that is dom-minimal.  Then $w\in B(H-v)$, so $\deg^+_{H-v}(v')=0$ for all $v'\in N_H(w)$. Since $H'$ is dom-minimal, $N_H(w)\cap V(H')=\emptyset$, by \cref{bad_vertex}.  Similarly $w\not\in V(H')$, also by \cref{bad_vertex}. Therefore $|H'|\le |H-(\{w\}\cup N_H(w))| \le |H|-4$. Then $B(H-v)=B(H)\setminus\{v\}\cup\{w\}$.
+    By \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus N_H[w]$, so $|B(H')|\le |B(H)|-\deg_H(w) \le |B(H)|-3$. \qedhere
+  \end{compactenum}
 \end{proof}
 
 
@@ -746,60 +764,58 @@ Now we drop the requirement that $H$ is biconnected.
 
 
 \begin{lem}\label{critical}
-  Let $H$ be a connected critical generalized near-triangulation with at least $3$ vertices and not isomorphic to $W_k$ for any even integer $k$ and let $L:=V_1(H)$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ and partition $\{L_0,L_1,L_2\}$ of $L$ such that
+  Let $H$ be a connected critical generalized near-triangulation with at least $3$ vertices, no vertices of degree $1$ and not isomorphic to $W_k$ for any even integer $k$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
   \begin{compactenum}[(i)]
     \item for each edge $vw$ of $H[B(H)]$, $v\in X_i$ and $w\in X_j$ for some $i\neq j$;\label[p]{proper_2}
     % \item for each marked face $f$ of $H[B(H)]$ and each $i\in\{0,1,2\}$, $V(f)\cap X_i\neq\emptyset$; and \label[p]{colourful_2}
     % that contains $x_f\in I(H)$ in its interior, exactly one vertex $v_f$ of $f$ is in the set $X_i$ that contains $x$ and $v_f$ is incident to a chord of $H[B(H)]$. \pat{Define chord.}
-    \item for each $i\in\{0,1,2\}$, $X_i$ dominates $V(H)\setminus L_i$,  \label[p]{dominates_h_minus_l}
+    \item for each $i\in\{0,1,2\}$, $X_i$ dominates $H$,  \label[p]{dominates_h_minus_l}
   \end{compactenum}
 \end{lem}
 
 \begin{proof}
-  The proof is by induction on $|H|$.  If $|H|=3$ then $H$ is either a triangle $v_0,v_1,v_2$ or a path $v_0,v_1,v_2$.  In either case, we take $X_i:=\{v_i\}$ for each $i\in\{0,1,2\}$.  If $H$ is a triangle, then $L=\emptyset$ and we take $L_0:=L_1:=L_2:=\emptyset$.  If $H$ is a path then $L=\{v_0,v_2\}$ and we take $L_0:=\{v_2\}$, $L_1:=\emptyset$ and $L_2:=\{v_0\}$.  It is straightforward to verify these sets satisfy the requirements of the lemma.
+  The proof is by induction on $|H|$.  First, suppose $|H|=3$. Since $H$ is connected and has no vertices of degree $1$ then $H$ is a triangle $v_0v_1v_2$. We take $X_i:=\{v_i\}$ for each $i\in\{0,1,2\}$.  Clearly these sets satisfy the requirements of the lemma.
 
-  If $L\neq\emptyset$ then let $z$ be a vertex in $L$ and let $z_r,\ldots,z_0$ the maximal path in $H$ such that $z=z_r$ and each of $z_1,\ldots,z_{r-1}$ has degree $2$ in $H$. Consider the graph $H':=H-\{z_1,\ldots,z_{r}\}$.
-  \begin{enumerate}
-    \item If $z_0\in L$, then $H'$ is the graph that contains only $z_0$ and $H=z_r,\ldots,z_0$ is a path.  In this case $L:=\{z_0,z_r\}$. We take $X_i:=\{z_j:j\equiv i\pmod 3\}$ for each $i\in\{0,1,2\}$, $L_2=\{z_0\}$.  Starting with $L_0:=L_1:=\emptyset$ and $L_2:=\{z_0\}$, we then set
-    $L_{(r-2)\bmod 3}\gets L_{(r-2)\bmod 3} \cup \{z_r\}$.  This produces sets that satisfy the requirements of the lemma, and we are done.
+  % If $L\neq\emptyset$ then let $z$ be a vertex in $L$ and let $z_r,\ldots,z_0$ the maximal path in $H$ such that $z=z_r$ and each of $z_1,\ldots,z_{r-1}$ has degree $2$ in $H$. Consider the graph $H':=H-\{z_1,\ldots,z_{r}\}$.
+  % \begin{enumerate}
+  %   \item If $z_0\in L$, then $H'$ is the graph that contains only $z_0$ and $H=z_r,\ldots,z_0$ is a path.  In this case $L:=\{z_0,z_r\}$. We take $X_i:=\{z_j:j\equiv i\pmod 3\}$ for each $i\in\{0,1,2\}$, $L_2=\{z_0\}$.  Starting with $L_0:=L_1:=\emptyset$ and $L_2:=\{z_0\}$, we then set
+  %   $L_{(r-2)\bmod 3}\gets L_{(r-2)\bmod 3} \cup \{z_r\}$.  This produces sets that satisfy the requirements of the lemma, and we are done.
+  %
+  %   \item If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} with $v=z_0$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
+  %
+  %   \item Otherwise, we apply the inductive hypothesis on $H'$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
+  % \end{enumerate}
+  % \begin{figure}
+  %   \centering
+  %   \includegraphics{figs/tail}
+  %   \caption{Dealing with a degree-$1$ vertex, $z_r$, in the proof of \cref{critical}.}
+  %   \label{critical_degree_one}
+  % \end{figure}
+  % See \cref{critical_degree_one}.
+  % In the latter two cases, we may assume, without loss of generality (by renaming colours), that $z_0\in X_{1}'$.  Since $z_0\not\in L$, $\deg_H(z_0)\ge 3$ so $\deg_{H'}(z_0)\ge 2$.  Therefore we may assume, without loss of generality, that $X_1'$ and $X_2'$ each dominate $z_0$. Redefine $L_{(2-r)\bmod 3}'\gets L_{(2-r)\bmod 3}'\cup\{z_r\}$ so that $L_0'$, $L_1'$ and $L_2'$ is a partitition of $L$.  Then we take $X_i:=X_{i}'\cup\{z_j:1-j\equiv i\pmod 3\}$, $L_0:=L_0'$, $L_1:= L_1'$, and $L_2:=L_2'$.  These sets satisfy the requirements of the lemma.  Indeed, the only concern would be that $z_0$ is not dominated by $X_0$ because $z_0$ is not necessarily dominated by $X_0'$, but this does not occur because $X_0$ includes $z_1$.
 
-    \item If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} with $v=z_0$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
+  % Finally, we arrive at the case in which $L=\emptyset$.
+  If $H$ is biconnected then, since $H$ is not an even wheel, we can immediately apply \cref{biconnected_critical} and we are done.  Otherwise, $H$ contains a cut vertex $v$ that separates $H$ into components $C_1,\ldots,C_k$ and such that $H':=H[V(C_1)\cup\{v\}]$ is biconnected. Since $L=\emptyset$, $H'$ has at least three vertices. If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H'$ and $v$ to obtain sets $X_0'$, $X_1'$, and $X_2'$. Otherwise, we apply \cref{biconnected_critical} to $H'$ to obtain sets $X_0'$, $X_1'$, and $X_2'$.  In either case we may assume, without loss of generality that $v\in X_1'$, that $X_1'$ and $X_2'$ each dominate $H'$ and that $X_0'$ dominates $V(H')\setminus\{v\}$.
 
-    \item Otherwise, we apply the inductive hypothesis on $H'$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
-  \end{enumerate}
-  \begin{figure}
-    \centering
-    \includegraphics{figs/tail}
-    \caption{Dealing with a degree-$1$ vertex, $z_r$, in the proof of \cref{critical}.}
-    \label{critical_degree_one}
-  \end{figure}
-  See \cref{critical_degree_one}.
-  In the latter two cases, we may assume, without loss of generality (by renaming colours), that $z_0\in X_{1}'$.  Since $z_0\not\in L$, $\deg_H(z_0)\ge 3$ so $\deg_{H'}(z_0)\ge 2$.  Therefore we may assume, without loss of generality, that $X_1'$ and $X_2'$ each dominate $z_0$. Redefine $L_{(2-r)\bmod 3}'\gets L_{(2-r)\bmod 3}'\cup\{z_r\}$ so that $L_0'$, $L_1'$ and $L_2'$ is a partitition of $L$.  Then we take $X_i:=X_{i}'\cup\{z_j:1-j\equiv i\pmod 3\}$, $L_0:=L_0'$, $L_1:= L_1'$, and $L_2:=L_2'$.  These sets satisfy the requirements of the lemma.  Indeed, the only concern would be that $z_0$ is not dominated by $X_0$ because $z_0$ is not necessarily dominated by $X_0'$, but this does not occur because $X_0$ includes $z_1$.
-
-  Finally, we arrive at the case in which $L=\emptyset$. If $H$ is biconnected then, since $H$ is not a wheel, we can immediately apply \cref{biconnected_critical} and we are done.  Otherwise, $H$ contains a cut vertex $v$ that separates $H$ into components $C_1,\ldots,C_k$ and such that $H':=H[V(C_1)\cup\{v\}]$ is biconnected. Since $L=\emptyset$, $H'$ has at least three vertices. If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H'$ and $v$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'=\emptyset$, $L_1'=\emptyset$, and $L_2'=\emptyset$. Otherwise, we apply \cref{biconnected_critical} to $H'$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'=\emptyset$, $L_1'=\emptyset$, and $L_2'=\emptyset$.  In either case we may assume, without loss of generality that $v\in X_1'$, that $X_1'$ and $X_2'$ each dominate $H'$ and that $X_0'$ dominates $V(H')\setminus\{v\}$.
-
-  Let $H'':=H-V(C_1)$. If $H''$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H''$ and $v$ to obtain sets $X_0''$, $X_1''$, $X_2''$, $L_0''=\emptyset$, $L_1''=\emptyset$, and $L_2''=\emptyset$. Otherwise, we apply the inductive hypothesis to $H''$ to obtain sets $X_0''$, $X_1''$, $X_2''$ that each dominate $H''$. In either case we may assume, without loss of generality (by renaming) that $v\in X_1''$, that $X_1''$ and $X_2''$ each dominate $H'$ and that $X_0''$ dominates $V(H'')\setminus\{v\}$.  Then the sets $X_0:=X_0'\cup X_2''$, $X_1:=X_1'\cup X_1''$ and $X_2:=X_2'\cup X_0''$ satisfy the requirements of the lemma.  (Again, the only concern is whether each set dominates $v$, but this is guaranteed by the fact that $v\in X_1$, and that $X_2'\subseteq X_2$ and $X_2''\subseteq X_0$ each dominate $v$.)
+  Let $H'':=H-V(C_1)$. If $H''$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H''$ and $v$ to obtain sets $X_0''$, $X_1''$, $X_2''$. Otherwise, we apply the inductive hypothesis to $H''$ to obtain sets $X_0''$, $X_1''$, $X_2''$ that each dominate $H''$. In either case we may assume, without loss of generality (by renaming) that $v\in X_1''$, that $X_1''$ and $X_2''$ each dominate $H'$ and that $X_0''$ dominates $V(H'')\setminus\{v\}$.  Then the sets $X_0:=X_0'\cup X_2''$, $X_1:=X_1'\cup X_1''$ and $X_2:=X_2'\cup X_0''$ satisfy the requirements of the lemma.  (The only concern is whether each set dominates $v$, but this is guaranteed by the fact that $v\in X_1$, and that $X_2'\subseteq X_2$ and $X_2''\subseteq X_0$ each dominate $v$.)
 \end{proof}
 
 
 \begin{lem}\label{three_sets_coverage}
   Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X_0,X_1,X_2\subseteq V(H)$ such that
   \begin{compactenum}[(i)]
-    \item $|X_0|+|X_1|+|X_2| \le |H|$; \label[p]{total_size}
-    \pat{Bouding just in terms of $|H|$ is not enough.  We need a bound of at most $2|B(H-B(H))| + |I(H-B(H))|$.}
+    \item $|X_0|+|X_1|+|X_2| \le 2|B(H-B(H))|+|I(H-B(H))|$; \label[p]{total_size}
     \item for each $i\in\{0,1,2\}$, $X_i$ dominates $I(H)$ in $H$; and \label[p]{dominates_i}
     \item for each $i\in\{0,1,2\}$, each component of $H[X_i]$ contains at least one vertex in $B(H)$. \label[p]{connectivity}
   \end{compactenum}
 \end{lem}
 
-\pat{To see the problem, imagine the algoritm runs for $r=1000$ iterations, taking a degree-$3$ vertex at each step.  After $r$ iterations, what's left is a $2$-critical graph $G_r$ with $|B(G_r)|=2000$ and $|I(G_r)|=1000$. Then $n=|G|=|X|+|G_r|=1000+3000=4000$ and $|X|=r+|G_r|/3=2000$, so $|X|/n=1/2$.}
-
-\pat{The underlying issue is the contribution of $V_1(C)$ for the components $C\in\overline{C}$.  }
-
-
 \begin{proof}
   Refer to \cref{covers}.
-  Let $H_1:=H-B(H)$, let $\mathcal{C}_1$ be the set of components of $H_1$ having exactly one vertex, let $\mathcal{C}_2$ be the set of components of $H_1$ having exactly two vertices, let $\mathcal{C}_\star$ be the set of components of $H_1$ that are stars, let $\mathcal{C}_{\boxtimes}$ be the set of components of $H_1$ that are even wheels, and let $\overline{\mathcal{C}}$ be the set of componets of $H_1$ that are not in $\mathcal{C}_1\cup \mathcal{C}_2\cup \mathcal{C}_{\star}\cup \mathcal{C}_{\boxplus}$.
+  Let $H_1:=H-B(H)$, let $\mathcal{C}$ be the set of components of $H_1$, let $\mathcal{C}_1$ be the set of components of $H_1$ having exactly one vertex,
+  % let $\mathcal{C}_2$ be the set of components of $H_1$ having exactly two vertices, let $\mathcal{C}_\star$ be the set of components of $H_1$ that are stars,
+  and let $\mathcal{C}_{\boxtimes}$ be the set of components of $H_1$ that are even wheels.
+  % , and let $\overline{\mathcal{C}}:=\mathcal{C}$ be the set of componets of $H_1$ that are not in $\mathcal{C}_1\cup \mathcal{C}_{\boxplus}$.
 
   \begin{figure}
     \centering
@@ -810,21 +826,33 @@ Now we drop the requirement that $H$ is biconnected.
 
   % By \cref{boundary_vs_leaves}, to satisfy \cref{boundary_size} it suffices to construct three sets whose total size is not more than $|I_1|+\mu(H_1)=|I_1|+2|Z| + |L| + |B_1|$.
 
-  For each component $C$ in $\mathcal{C}_2$ we choose one vertex $v$ in $B(H)$ that dominates $V(C)$ and place $v$ in each of $X_0$, $X_1$, and $X_2$. This contributes a total of $3|\mathcal{C}_2|$ vertices in $X_0$, $X_1$, and $X_2$. On the other hand, $\sum_{C\in \mathcal{C}_2} |C|=2|\mathcal{C}_2|$ and, by \cref{degree_corners_and_leaves},  $\sum_{C\in \mathcal{C}_2} |\widehat{N}_H(C)|\ge 2|\mathcal{C}_2|$.
+  % For each component $C$ in $\mathcal{C}_2$ we choose one vertex $v$ in $B(H)$ that dominates $V(C)$ and place $v$ in each of $X_0$, $X_1$, and $X_2$. This contributes a total of $3|\mathcal{C}_2|$ vertices in $X_0$, $X_1$, and $X_2$. On the other hand, $\sum_{C\in \mathcal{C}_2} |C|=2|\mathcal{C}_2|$ and, by \cref{degree_corners_and_leaves},  $\sum_{C\in \mathcal{C}_2} |\widehat{N}_H(C)|\ge 2|\mathcal{C}_2|$.
 
-  For each component $C$ in $\mathcal{C}_{\star}$ we choose the vertex $w\in C$ that dominates the star $C$ and a vertex $v\in B(H)$ adjacent to $w$.  We place $\{v,w\}$ in each of $X_0$, $X_1$, and $X_2$.  This contributes a total of $6|\mathcal{C}_{\star}|$ vertices to $X_0$, $X_1$, and $X_2$.  On the other hand, $\sum_{C\in \mathcal{C}_{\star}} |C|\ge 3|\mathcal{C}_{\star}|$ and, by \cref{degree_corners_and_leaves}, $\sum_{C\in \mathcal{C}_{\star}} |\widehat{N}_H(C)|\ge 3|\mathcal{C}_\star|$. \pat{Remark: this inequality is always loose, in fact $|\widehat{N}_H(C)|\ge 4|C|$}
+  % For each component $C$ in $\mathcal{C}_{\star}$ we choose the vertex $w\in C$ that dominates the star $C$ and a vertex $v\in B(H)$ adjacent to $w$.  We place $\{v,w\}$ in each of $X_0$, $X_1$, and $X_2$.  This contributes a total of $6|\mathcal{C}_{\star}|$ vertices to $X_0$, $X_1$, and $X_2$.  On the other hand, $\sum_{C\in \mathcal{C}_{\star}} |C|\ge 3|\mathcal{C}_{\star}|$ and, by \cref{degree_corners_and_leaves}, $\sum_{C\in \mathcal{C}_{\star}} |\widehat{N}_H(C)|\ge 3|\mathcal{C}_\star|$. \pat{Remark: this inequality is always loose, in fact $|\widehat{N}_H(C)|\ge 4|C|$}
 
-  For each component $C$ in $\mathcal{C}_{\boxtimes}$ we choose the vertex $x$ that dominates $C$, some vertex $w$ in $B(C)$ and some vertex $v\in B(H)$ adjacent to $w$.  We place $\{v,w,x\}$ in each of $X_0$, $X_1$, and $X_2$.  This contributes a total of $9|\mathcal{C}_{\boxplus}|$ vertices to $X_0$, $X_1$, and $X_2$. On the other hand, $\sum_{C\in \mathcal{C}_{\boxplus}} |C|\ge 5|\mathcal{C}_{\star}|$ and, by \cref{degree_corners_and_leaves}, $\sum_{C\in \mathcal{C}_{\star}} |\widehat{N}_H(C)|\ge 4|\mathcal{C}_{\boxtimes}|$.
+  % For each component $C$ in $\mathcal{C}_{1}$ we choose an arbitrary vertex $v$ in $B(C)$ and add it to each of $X_1$, $X_2$, and $X_3$.  This contributes at most $|\mathcal{C}_1|$ to the total size of these sets.  On the other hand, for each $v
+  %
+  %
+  % the vertex $x$
 
-  For each component $C$ in $\overline{\mathcal{C}}$, we apply \cref{biconnected_critical} to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
-  For each $j\in\{0,1,2\}$ we add $X_j'$ to $X_j$ and for each $w\in L_j'$ we choose a neighbour $w'$ of $w$ in $B(H)$ and add it to $X_j$.  This ensures that $X_j$ dominates every vertex in $C$.  The total number of vertices added to $X_0$, $X_1$, and $X_2$ by this step is $\sum_{C\in\overline{\mathcal{C}}}(|C|+|B(C)|+|V_1(C)|)$.  On the other hand, by \cref{degree_corners_and_leaves}, $\sum_{C\in \overline{\mathcal{C}}} |\widehat{N}_H(C)|\ge \sum_{C\in \overline{\mathcal{C}}} (|B(C)|+|V_1(C)|)$.
+  For each component $C$ in $\mathcal{C}_{\boxtimes}$ we choose the vertex $x$ that dominates $C$, some vertex $w$ in $B(C)$ and some vertex $v\in B(H)$ adjacent to $w$.  We add $\{v,w,x\}$ to each of $X_0$, $X_1$, and $X_2$.  This contributes a total of $9|\mathcal{C}_{\boxplus}|$ vertices to $X_0$, $X_1$, and $X_2$. On the other hand, $|B(C)|\ge 4$ and $|I(C)|\ge 1$ for each $C\in \mathcal{C}_{\boxplus}$, so
+  $\sum_{C\in \mathcal{C}_{\boxplus}} (2|B(C)| + I(C))\ge (2\cdot 4+1)|\mathcal{C}_{\boxplus}| = 9|\mathcal{C}_{\boxplus}|$.
+
+  For each component $C$ in $\mathcal{C}\setminus(\mathcal{C}_{\boxplus}\cup\mathcal{C}_1)$, we apply \cref{biconnected_critical} to obtain sets $X_0'$, $X_1'$, $X_2'$.
+  For each $j\in\{0,1,2\}$ we add $X_j'$ to $X_j$.  The total number of vertices added to $X_0$, $X_1$, and $X_2$ by this step is $\sum_{C\in\mathcal{C}\setminus(\mathcal{C}_{\boxplus}\cup\mathcal{C}_1)}(|C|+|B(C)|)=\sum_{C\in\mathcal{C}\setminus(\mathcal{C}_{\boxplus}\cup\mathcal{C}_1)}(2|B(C)|+|I(C)|)$.
+
+   % and, by \cref{degree_corners_and_leaves}, $\sum_{C\in \mathcal{C}_{\star}} |\widehat{N}_H(C)|\ge 4|\mathcal{C}_{\boxtimes}|$.
+
+  % On the other hand, by \cref{degree_corners_and_leaves}, $\sum_{C\in \overline{\mathcal{C}}} |\widehat{N}_H(C)|\ge \sum_{C\in \overline{\mathcal{C}}} (|B(C)|+|V_1(C)|)$.
 
   Finally, it remains to consider the components of $H_1$ that are in $\mathcal{C}_1$. Each of these components is a single vertex in $V_0(H_1)$. These we deal with as a group. For each $w\in V_0(H_1)$, let $H_w:=H[N_H[w]]$ and let $Q:=\bigcup_{w\in V_0(H_1)} H_w$.  For each $w\in V_0(V_1)$, the graph $H_w$ is isomorphic to $W_k$ for some $k\ge 3$, $B(H_w)\subseteq B(H)$ and, for any component $C$ of $H_1$ other than the one containing $w$, $\widehat{N}_H(C)\cap B(H_w)=\emptyset$. In other words, none of the vertices in $B(Q)$ has been counted in the preceding paragraphs.  We construct a $X'\subseteq B(Q)\subseteq B(H)$ that dominates $I(Q)=V_0(V_1)$ by repeating the following as long as there is vertex $w$ in $V_0(H_1)$ not dominated by $X'$:
   \begin{compactenum}
     \item  If $H_w$ has no vertex in common with $H_{w'}$ for any $w'\in V_0(H_1)\setminus\{w\}$ then we add any vertex of $B(H_w)$ to $X'$.
-    \item Otherwise there exists $w'\neq w$ and $v\in B(H_w)\cap B(H_{w'})$ and we add $v$ to $Z'$.
+    \item Otherwise there exists $w'\neq w$ and $v\in B(H_w)\cap B(H_{w'})$ and we add $v$ to $X'$.
   \end{compactenum}
-  In the first case, the (at least four) vertices of $H_w$ are no longer relevant and can be removed from $Q$. In the second case, the vertices $v$, $w$, and $w'$ are no longer relevant and can be removed from $Q$. Thus, at each step we add one vertex to $X'$ and eliminate at least three vertices from $Q$.  Therefore $|X'|\le |Q|/3$.  We finish by adding $X'$ to each of $X_1$, $X_2$, and $X_3$.
+  In the first case, the four vertices of $B(H_w)$ are no longer relevant and can be removed from $Q$, so $2|V(Q)\cap B(H_1)| + |V(Q)|\cap I(H_1)$ decreases by $7$. In the second case, the vertices $v$, $w$, and $w'$ are no longer relevant and can be removed from $Q$, so $2|V(Q)\cap B(H_1)| + |V(Q)|\cap I(H_1)$ decreases by $4$. Thus, at each step we add one vertex to $X'$ and $2|V(Q)\cap B(H_1)| + |V(Q)|\cap I(H_1)$ decreases by at least $4$, so |X'|\le (2|B(Q)|+I(Q))/4$. We finish by adding $X'$ to each of $X_1$, $X_2$, and $X_3$, which only increases their total size by at most $3|X'| <  2|B(Q)|+I(Q)$.
+
+
   Putting everything together we get that
   \[
    |X_1|+|X_2|+|X_3| \le \sum_{C\in\mathcal{C}} (|C|+\widehat{N}_H(C)) + |Q|
