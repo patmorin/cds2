@@ -759,6 +759,11 @@ Now we drop the requirement that $H$ is biconnected.
   \end{compactenum}
 \end{lem}
 
+\pat{To see the problem, imagine the algoritm runs for $r=1000$ iterations, taking a degree-$3$ vertex at each step.  After $r$ iterations, what's left is a $2$-critical graph $G_r$ with $|B(G_r)|=2000$ and $|I(G_r)|=1000$. Then $n=|G|=|X|+|G_r|=1000+3000=4000$ and $|X|=r+|G_r|/3=2000$, so $|X|/n=1/2$.}
+
+\pat{The underlying issue is the contribution of $V_1(C)$ for the components $C\in\overline{C}$.  }
+
+
 \begin{proof}
   Refer to \cref{covers}.
   Let $H_1:=H-B(H)$, let $\mathcal{C}_1$ be the set of components of $H_1$ having exactly one vertex, let $\mathcal{C}_2$ be the set of components of $H_1$ having exactly two vertices, let $\mathcal{C}_\star$ be the set of components of $H_1$ that are stars, let $\mathcal{C}_{\boxtimes}$ be the set of components of $H_1$ that are even wheels, and let $\overline{\mathcal{C}}$ be the set of componets of $H_1$ that are not in $\mathcal{C}_1\cup \mathcal{C}_2\cup \mathcal{C}_{\star}\cup \mathcal{C}_{\boxplus}$.
