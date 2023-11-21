@@ -750,6 +750,7 @@ Now we drop the requirement that $H$ is biconnected.
   Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X_0,X_1,X_2\subseteq V(H)$ such that
   \begin{compactenum}[(i)]
     \item $|X_0|+|X_1|+|X_2| \le |H|$; \label[p]{total_size}
+    \pat{Bouding just in terms of $|H|$ is not enough.  We need a bound of at most $2|B(H-B(H))| + |I(H-B(H))|$.}
     \item for each $i\in\{0,1,2\}$, $X_i$ dominates $I(H)$ in $H$; and \label[p]{dominates_i}
     \item for each $i\in\{0,1,2\}$, each component of $H[X_i]$ contains at least one vertex in $B(H)$. \label[p]{connectivity}
   \end{compactenum}
@@ -828,7 +829,8 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
   \]
   is the size of the set dominated $X_{r-1}$ immediately before the final iteration of $\textsc{BetterGreedy}(G)$.
 
-  Let $B:=|B(G_{r-1})|$, let $Q:=|B(G_{r-1}-B(G_{r-1}))|$, let $R:=|I(G_{r-1}-B(G_{r-1}))|$, and let $S:=|I(G_{r-1}-B^2(G_{r-1}))|$.\pat{Define $B^2(G)=G[B(G-B(G))]-B(G[B(G-B(G))])$}  Then, by \cref{degree_corners_and_leaves} and \cref{base_case}
+  Let $Q:=|B(G_{r-1})|$, let $R:=|B(G_{r-1}-B(G_{r-1}))|$, and let $S:=|I(G_{r-1}-B(G_{r-1}))$.  In words: $Q$ is the size of the boundary of the $2$-critical graph $G_{r-1}$; $R$ is the size of the of the boundary of the critical graph obtained after removing the boundary of $G_{r-1}$; and $S$ is the independent set of vertices in the interior of this critical graph.
+  Then, by \cref{degree_corners_and_leaves} and \cref{base_case}
 
   \begin{equation}
     Q \ge R \ge 3S \enspace . \label{best2}
@@ -836,19 +838,19 @@ This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{Bette
   By definition $r-1 = \sum_{t\ge 3}x_t+z$.
   As in the proofs of \cref{simple_greedy}, $D+|I(G_i)|=D+R+S=n$, so we get the constraint:
   \begin{equation}
-    n = D+R+S \ge \sum_{t\ge 3} tx_t + 5z + R + S \label{best3}
+    n = D+R+S = \sum_{t\ge 3} tx_t + 5z + R + S \label{best3} \enspace .
   \end{equation}
-  and
+  Since $B(G_{r-1})\subseteq N_G(X_{r-1})$, $D \ge |X_{r-1}|+|B(G_{r-1})|=r-1+Q$, so
   \begin{equation}
     n = D+R+S \ge r-1 + Q + R + S \enspace . \label{best4}
   \end{equation}
   Finally, the size $Q$ of the boundary $B(G_{r-1})$ is at most
   \begin{equation}
-    Q \le 3 + \sum_{t\ge 3}(t-1)x_t + 2z \label{best5}
+    Q \le 3 + \sum_{t\ge 3}(t-1)x_t + 2z \enspace . \label{best5}
   \end{equation}
   By \cref{two_critical_handler}, the size of $\Delta_{r-1}$ is at most $2(R+S)/3$, so the total size of the final set $X$ is at most
   \begin{equation}
-    r-1 + z + 2(R + S)/3 \enspace .  \label{best_objective}
+    r-1 + z + (Q+R+S)2(R + S)/3 \enspace .  \label{best_objective}
   \end{equation}
   We can eliminate the variables $x_t$ for $t\ge 4$:
   \begin{clm}
