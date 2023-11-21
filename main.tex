@@ -321,8 +321,8 @@ Next we devise an algorithm that produces a smaller connected dominating set tha
 
 We begin by identifying unnecessary vertices and edges that can appear in the graphs $G_1,\ldots,G_{r-1}$ during the construction of $X$.   We say that a near-triangulation $H$ is \defin{dom-minimal} if
 \begin{compactenum}[({DM}1)]
-    \item each vertex $v\in B(H)$ has $\deg^+_H(v)\ge 1$; and \label[dm]{bad_vertex}
-    \item if $v\in B(H)$ has $\deg^+_H(v)=1$, then $H[N_H[v]]$ is isomorphic to $K_4$. \label[dm]{inner_degree_1}
+    \item each vertex $v\in B(H)$ has $\deg^+_H(v)\ge 1$;  \label[dm]{bad_vertex}
+    \item for each $v\in B(H)$ with $\deg^+_H(v)=1$,  $H[N_H[v]]$ is isomorphic to $K_4$; and \label[dm]{inner_degree_1}
     \item each edge $vw$ on the boundary of the outer face of $H$ is on the boundary an inner face $vwx$ of $H$ for some $x\in I(H)$. \label[dm]{bad_edge}
 \end{compactenum}
 We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each of its biconnected components are dom-minimal.
@@ -335,14 +335,13 @@ We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each 
    If $vw$ is a bridge in $H$ then both $v$ and $w$ are in $B(H)$.  Since $vw$ is a bridge in $H$, there is no path $vxw$ in $H$ and hence no inner face $vwx$ in $H$. Thus $H$ does not satisfy \cref{bad_edge}.
 \end{proof}
 
-\pat{Define minor and subminor}
-A subminor $H'$ of a generalized near-triangulation $H$ is \defin{dom-preserving} if
+% For a graph $H$ and an edge $vw$, $H_{v\leftarrow w}$ is the graph with vertex set $V(H)\setminus w$ and edge set $E(H)\cup\{vx : wx\in E(H)\}\setminus\{wx\in E(H)\}$. We say that $H_{v\leftarrow w}$ is the graph obtained from $H$ by performing the edge contraction $v\leftarrow w$.  The edge contraction $v\leftarrow w$ is a \defin{subcontraction} if $N_H(w)\subseteq N_H[v]$.  A graph $H'$ is a \defin{subminor} of a graph $H$ if $H'$ can be obtained from $H$ by a sequence of edge and vertex deletions and edge subcontractions. A subminor $H'$ of a generalized near-triangulation $H$ is \defin{dom-preserving} if
+Let $H$ and $H'$ be two generalized near-triangulations.  We say that $H'$ \defin{dom-respects} $H$ if
 \begin{compactenum}[({DP}1)]
-  \item $H'$ is a generalized near-triangulation; \label[dp]{same_class}
   \item $B(H')\subseteq B(H)$; \label[dp]{boundary_subset}
-  \item $N^+_{H'}(v)=N^+_H(v)$ for all $v\in B(H')$; \label[dp]{same_inner_neighbourhood}
+  \item $N^+_{H'}(v)\subseteq N^+_H(v)$ for all $v\in B(H')$; \label[dp]{same_inner_neighbourhood}
   \item $I(H')=I(H)$; and \label[dp]{same_inner_vertices}
-  \item $N_{H'}(v)=N_H(v)\cap V(H')$ for all $v\in I(H)$. \label[dp]{same_neighbourhood}
+  \item $N_{H'}(w)\subseteq N_H(w)$ for all $w\in I(H)$. \label[dp]{same_neighbourhood}
 \end{compactenum}
 
 % \begin{obs}
@@ -354,7 +353,7 @@ A subminor $H'$ of a generalized near-triangulation $H$ is \defin{dom-preserving
 % \end{proof}
 
 \begin{lem}\label{dom_minimal}
-  For any generalized near-triangulation $H$, there exists a dom-preserving subminor $H'$ of $H$ that is dom-minimal.
+  For any generalized near-triangulation $H$, dom-minimal generalized near-triangulation $H'$ that dom-respects $H$.
 \end{lem}
 
 \begin{proof}
@@ -604,7 +603,6 @@ We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B
 % Observe that any critical graph is also $2$-critical.
 We will work our way up to a proof of the following lemma, which allows our algorithm to handle $2$-critical graphs directly, in one step:
 
-
 \begin{lem}\label{two_critical_handler}
   Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X\subseteq V(H)$ of size at most $(2|B(H-B(H))| + I(H-B(H)))/3$ that dominates $I(H)$ and such that each component of $H[X]$ contains at least one vertex in $B(H)$.
 \end{lem}
@@ -644,7 +642,7 @@ We will work our way up to a proof of the following lemma, which allows our algo
 % \end{obs}
 
 
-\pat{Much of this section can be simplified, since we don't care about degree-$1$ vertices in $H-B(H)$ anymore.}
+\pat{Much of this section can be simplified, since we don't care about degree-$1$ vertices in $H-B(H)$ anymore and we have lots of control over .}
 
 For a graph $H$ and a subset $A$ of the vertices of $H$, $\widehat{N}_{H}(A):=\{v\in N_H(A):|N_H(v)\cap A|\ge 2\}$. We will abuse this notation slightly by using the shorthand $\widehat{N}_H(C):=\widehat{N}_H(V(C))$ when $C$ is a subgraph of $H$. (See \cref{n2}.)
 \begin{figure}[htbp]
@@ -861,14 +859,16 @@ Now we drop the requirement that $H$ is biconnected.
     \item  If $H_w$ has no vertex in common with $H_{w'}$ for any $w'\in V_0(H_1)\setminus\{w\}$ then we add any vertex of $B(H_w)$ to $X'$.
     \item Otherwise there exists $w'\neq w$ and $v\in B(H_w)\cap B(H_{w'})$ and we add $v$ to $X'$.
   \end{compactenum}
-  In the first case, the four vertices of $B(H_w)$ are no longer relevant and can be removed from $Q$, so $2|V(Q)\cap B(H_1)| + |V(Q)|\cap I(H_1)$ decreases by $7$. In the second case, the vertices $v$, $w$, and $w'$ are no longer relevant and can be removed from $Q$, so $2|V(Q)\cap B(H_1)| + |V(Q)|\cap I(H_1)$ decreases by $4$. Thus, at each step we add one vertex to $X'$ and $2|V(Q)\cap B(H_1)| + |V(Q)|\cap I(H_1)$ decreases by at least $4$, so |X'|\le (2|B(Q)|+I(Q))/4$. We finish by adding $X'$ to each of $X_1$, $X_2$, and $X_3$, which only increases their total size by at most $3|X'| <  2|B(Q)|+I(Q)$.
 
-
-  Putting everything together we get that
-  \[
-   |X_1|+|X_2|+|X_3| \le \sum_{C\in\mathcal{C}} (|C|+\widehat{N}_H(C)) + |Q|
-   \le \sum_{C\in\mathcal{C}} |C| + B(H) = I(H)+B(H)=|H| \enspace . \qedhere
-  \]
+  \pat{Continue.}
+  % In the first case, the four vertices of $B(H_w)$ are no longer relevant and can be removed from $Q$, so $2|V(Q)\cap B(H_1)| + |V(Q)|\cap I(H_1)$ decreases by $7$. In the second case, the vertices $v$, $w$, and $w'$ are no longer relevant and can be removed from $Q$, so $2|V(Q)\cap B(H_1)| + |V(Q)|\cap I(H_1)$ decreases by $4$. Thus, at each step we add one vertex to $X'$ and $2|V(Q)\cap B(H_1)| + |V(Q)|\cap I(H_1)$ decreases by at least $4$, so |X'|\le (2|B(Q)|+I(Q))/4$. We finish by adding $X'$ to each of $X_1$, $X_2$, and $X_3$, which only increases their total size by at most $3|X'| <  2|B(Q)|+I(Q)$.
+  %
+  %
+  % Putting everything together we get that
+  % \[
+  %  |X_1|+|X_2|+|X_3| \le \sum_{C\in\mathcal{C}} (|C|+\widehat{N}_H(C)) + |Q|
+  %  \le \sum_{C\in\mathcal{C}} |C| + B(H) = I(H)+B(H)=|H| \enspace . \qedhere
+  % \]
 \end{proof}
 
 \begin{proof}[Proof of \cref{two_critical_handler}]
