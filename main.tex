@@ -507,7 +507,7 @@ Next we show that, even when all vertices in $B(H)$ have inner-degree at most $2
   Refer to \cref{killing_a_leaf}.
   Let $x$ be the unique neighbour of $w$ in $H-B(H)$. Since $x$ and $w$ are vertices of $H-B(X)$, $x,w\in I(H)$.  Since $w$ is an inner vertex in a near-triangulation, it is incident to $t\ge 3$ faces $v_iv_{i+1}w$ for $i\in\{0,\ldots,v_{t}\}$, with $v_0=v_t=x$.  Since $\deg_{H-B(H)}(w)=1$, $v_1,\ldots,v_{t-1}\in B(H)$.  Therefore, $H$ contains no edge $v_i v_{i+r}$ for any $i\in\{0,t-r\}$ and any $r\ge 2$.  Therefore, for each $i\in\{1,\ldots,t-1\}$, the only two inner faces of $H$ that include $v_i$ are $v_{i-1}v_iw$ and $v_iv_{i+1}w$.  Therefore $N^+_H(v_i)=\{w\}$ for each $i\in\{2,\ldots,t-2\}$ and $N^+_H(v_1)=N^+_H(v_{t-1})=\{x,w\}$.\footnote{In fact, \cref{inner_degree_1} implies that $t=3$, but this is not important for this proof.}
 
-  \begin{figure}
+  \begin{figure}[htbp]
     \centering
     \begin{tabular}{ccc}
       \includegraphics[page=1]{figs/killing_a_leaf} &
@@ -533,7 +533,19 @@ Next we show that, even when all vertices in $B(H)$ have inner-degree at most $2
 \end{lem}
 
 \begin{proof}
-  By definition $N_H(w)\subseteq B(H)$ and, since $w$ is an inner vertex in a generalized near triangulation $|N_H(w)|\ge 3$. There are two cases to consider:
+  By definition $N_H(w)\subseteq B(H)$ and, since $w$ is an inner vertex in a generalized near triangulation $|N_H(w)|\ge 3$. There are two cases to consider (see \cref{isolated_fig}):
+  \begin{figure}[htpb]
+    \centering
+    \begin{tabular}{cc}
+      \includegraphics[page=1]{figs/isolated} &
+      \includegraphics[page=3]{figs/isolated} \\
+      $\Downarrow$ & $\Downarrow$ \\
+      \includegraphics[page=2]{figs/isolated} &
+      \includegraphics[page=4]{figs/isolated}
+    \end{tabular}
+    \caption{Eliminating isolated vertices in $H-B(H)$.}
+    \label{isolated_fig}
+  \end{figure}
   \begin{compactenum}[(a)]
     \item There exists $v\in N_H(w)$ with $\deg^+_H(v)=2$. In this case, $N^+_H(v)=\{w,w'\}$ and the vertices $w$ and $w'$ are in a different biconnected components $C$ and $C'$, respectively, of $H$. The component $C$ has exactly one inner vertex, $w$ so, by \cref{inner_degree_1}, $C$ is isomorphic to $K_4$.  By \cref{inner_degree_1}, $C'[N_{C'}(v)]$ is also isomorphic to $K_4$  Let $x$ and $y$ be the two neighbours of $v$ on the outer face of $C'$. Since $\deg^+_H(v)=2$, $\deg_{C'}^+(v)=1$, so the cycle $vxw'y$ has no vertices of $H$ in its interior.
     We claim that the triangle $yw'x$ also contains no vertices of $H$ in its interior. Indeed, if $yw'x$ contains more than one inner vertex then $\deg^+_H(x)>2$ or $\deg^+_H(y)>2$, which is ruled out by the statement of the lemma.  If $yw'x$ contains exactly one inner vertex then $\deg_{H-B(H)}(w')=1$, which is ruled out by the statement of the lemma.
@@ -772,7 +784,7 @@ Now we drop the requirement that $H$ is biconnected.
   % In the latter two cases, we may assume, without loss of generality (by renaming colours), that $z_0\in X_{1}'$.  Since $z_0\not\in L$, $\deg_H(z_0)\ge 3$ so $\deg_{H'}(z_0)\ge 2$.  Therefore we may assume, without loss of generality, that $X_1'$ and $X_2'$ each dominate $z_0$. Redefine $L_{(2-r)\bmod 3}'\gets L_{(2-r)\bmod 3}'\cup\{z_r\}$ so that $L_0'$, $L_1'$ and $L_2'$ is a partitition of $L$.  Then we take $X_i:=X_{i}'\cup\{z_j:1-j\equiv i\pmod 3\}$, $L_0:=L_0'$, $L_1:= L_1'$, and $L_2:=L_2'$.  These sets satisfy the requirements of the lemma.  Indeed, the only concern would be that $z_0$ is not dominated by $X_0$ because $z_0$ is not necessarily dominated by $X_0'$, but this does not occur because $X_0$ includes $z_1$.
 
   % Finally, we arrive at the case in which $L=\emptyset$.
-  If $H$ is biconnected then, since $H$ is not an even wheel, we can immediately apply \cref{biconnected_critical} and we are done.  Otherwise, $H$ contains a cut vertex $v$ that separates $H$ into components $C_1,\ldots,C_k$ and such that $H':=H[V(C_1)\cup\{v\}]$ is biconnected. Since $L=\emptyset$, $H'$ has at least three vertices. If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H'$ and $v$ to obtain sets $X_0'$, $X_1'$, and $X_2'$. Otherwise, we apply \cref{biconnected_critical} to $H'$ to obtain sets $X_0'$, $X_1'$, and $X_2'$.  In either case we may assume, without loss of generality that $v\in X_1'$, that $X_1'$ and $X_2'$ each dominate $H'$ and that $X_0'$ dominates $V(H')\setminus\{v\}$.  
+  If $H$ is biconnected then, since $H$ is not an even wheel, we can immediately apply \cref{biconnected_critical} and we are done.  Otherwise, $H$ contains a cut vertex $v$ that separates $H$ into components $C_1,\ldots,C_k$ and such that $H':=H[V(C_1)\cup\{v\}]$ is biconnected. Since $L=\emptyset$, $H'$ has at least three vertices. If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H'$ and $v$ to obtain sets $X_0'$, $X_1'$, and $X_2'$. Otherwise, we apply \cref{biconnected_critical} to $H'$ to obtain sets $X_0'$, $X_1'$, and $X_2'$.  In either case we may assume, without loss of generality that $v\in X_1'$, that $X_1'$ and $X_2'$ each dominate $H'$ and that $X_0'$ dominates $V(H')\setminus\{v\}$.
 
   Let $H'':=H-V(C_1)$. \pat{Deal with the case where $\deg_{H''}(v)=1$.}
 
