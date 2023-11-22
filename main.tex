@@ -317,7 +317,7 @@ Next we devise an algorithm that produces a smaller connected dominating set tha
 
 % In the end, optimizing this linear program shows that they hypothetical worst-case for the resulting algorithm is that it chooses inner-degree $3$ vertices for the first $r-1$ consecutive rounds, resulting in a graph $G_{r-1}$ with $|B(G_{r-1})|\approx 2r$ and $|I(G_{r-1})|\approx n-3r$, so $|G_{r-1}|\approx 2r+n-3r=n-r$.  The algorithm then finishes in Case~1, above, by taking a set $\Delta_{r-1}$ of size $|G_{r-1}|\approx (n-r)/3$.  This results in a dominating set $X_r$ of size roughly $r+(n-r)/3=n/3+(2/3)r$. This is a strictly increasing function of $r$, but the value of $r$ is constrained by the fact that $G_{r-1}$ has no vertices of inner-degree $3$, which implies that $|B(G_{r-1})|\ge |I(G_{r-1})|$.  This translates to the constraint $2r \le n-3r$ or $r \le n/5$.  Thus, the final dominating set has size at most $n/3 + (2/3)n/5=10n/21$.  We now make this heuristic analysis more formal.
 
-\subsection{Dom-Minimal and Dom-Preserving subminors}
+\subsection{Dom-Respecting Graphs}
 
 We begin by identifying unnecessary vertices and edges that can appear in the graphs $G_1,\ldots,G_{r-1}$ during the construction of $X$.   We say that a near-triangulation $H$ is \defin{dom-minimal} if
 \begin{compactenum}[({DM}1)]
@@ -339,135 +339,56 @@ We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each 
 Let $H$ and $H'$ be two generalized near-triangulations.  We say that $H'$ \defin{dom-respects} $H$ if
 \begin{compactenum}[({DP}1)]
   \item $B(H')\subseteq B(H)$; \label[dp]{boundary_subset}
-  \item $N^+_{H'}(v)\subseteq N^+_H(v)$ for all $v\in B(H')$; \label[dp]{same_inner_neighbourhood}
+  % \item $N^+_{H'}(v)\subseteq N^+_H(v)$ for all $v\in B(H')$; \label[dp]{same_inner_neighbourhood}
   \item $I(H')=I(H)$; and \label[dp]{same_inner_vertices}
-  \item $N_{H'}(w)\subseteq N_H(w)$ for all $w\in I(H)$. \label[dp]{same_neighbourhood}
+  \item $N_{H'}(v)\cap I(H)\subseteq N_H(v)\cap I(H)$ for all $v\in V(H')$. \label[dp]{same_neighbourhood}
 \end{compactenum}
 
-% \begin{obs}
-%   Let $H$ be a generalized near-triangulation, let $H'$ be a dom-preserving subminor of $H$, and let $\Delta$ be a subset of $V(H)$ that dominates $I(H)$.  Then $\Delta\cap V(H')$ dominates $I(H)$.
-% \end{obs}
-%
-% \begin{proof}
-%   Each vertex $v\in I(H)=I(H')$ is adjacent to some vertex $w\in \Delta$.  Since $N_{H'}(v)=N_H(v)$, $w\in\Delta\cap V(H')$, so $v$ is dominated by $\Delta\cap V(H')$.  Since this is true for each $v\in I(H)=I(H')$, $\Delta\cap V(H')$ dominates $I(H)$.
-% \end{proof}
+\begin{obs}
+  Let $H$ and $H'$ be generalized near-triangulations where $H'$ dom-respect $H$ and let $\Delta'$ be a subset of $V(H')$ that dominates $I(H')$ in $H'$.  Then $\Delta'$ dominates $I(H)$ in $H$.
+\end{obs}
+
+\begin{proof}
+  By \cref{same_inner_vertices}, $I(H)=I(H')$. For each $w\in I(H)=I(H')$, $w\in \Delta'$ or there exists an edge $vw\in E(H')$ with $v\in\Delta'$.  In the latter case, $vw\in E(H)$ by \cref{same_neighbourhood}, so $\Delta'$ dominates $w$.
+\end{proof}
 
 \begin{lem}\label{dom_minimal}
-  For any generalized near-triangulation $H$, dom-minimal generalized near-triangulation $H'$ that dom-respects $H$.
+  For any generalized near-triangulation $H$, there exists dom-minimal generalized near-triangulation $H'$ that dom-respects $H$.
 \end{lem}
 
 \begin{proof}
-  The proof is by induction on $|V(H)|+|E(H)|$.  If $H$ is already dom-minimal, then setting $H'=H$ satisfies the requirements of the lemma, so assume that $H$ is not dom-minimal.  It is straightforward to verify that the dom-preserving subminor relationship is transitive, so if $H$ has a dom-preserving subminor $H^*$ and $H^*$ has a dom-preserving subminor $H'$ then $H'$ is a dom-preserving subminor of $H$.  Therefore, it is sufficient to show the existence of a dom-preserving subminor $H^*$ of $H$ with fewer edges or fewer vertices than $H$, and the inductive hypothesis provides the desired dom-minimal dom-preserving subminor $H'$ of $H$.
+  The proof is by induction on $|V(H)|+|E(H)|$.  If $H$ is already dom-minimal, then setting $H'=H$ satisfies the requirements of the lemma, so assume that $H$ is not dom-minimal.  Since \cref{boundary_subset,same_inner_vertices,same_neighbourhood} are transitive relations, the dom-respecting relation is transitive: If $H'$ dom-respects $H^*$ and $H^*$ dom-respects $H$, then $H'$ dom-respects $H$.  Therefore, it is sufficient to find $H^*$ with fewer edges or fewer vertices than $H$ that dom-respects $H$, and the inductive hypothesis provides the desired dom-minimal graph $H'$ that dom-respects $H^*$ and $H$.
 
-  If $H$ contains a vertex $v\in B(H)$ with $\deg^+_H(v)=0$ then $H-v$ is a dom-preserving subminor of $H$ with fewer vertices than $H$.  We now assume that $\deg^+_H(v)\ge 1$ for all $v\in B(H)$.  Since $H$ is not dom-minimal then $H$ contains a biconnected component $C$ that is not dom-minimal.
+  If $H$ contains a vertex $v\in B(H)$ with $\deg^+_H(v)=0$ then $H-v$ is a generalized near-triangulation, $B(H-v)=B(H)$, $I(H-v)=I(H)$, and $N_{H-v}(v)\cap I(H)=N_{H}(v)\cap I(H)$ for all $v\in V(H-v)$. Therefore $H-v$ dom-respects $H$ and has fewer vertices than $H$.  We now assume that $\deg^+_H(v)\ge 1$ for all $v\in B(H)$.  Since $H$ is not dom-minimal then $H$ contains a biconnected component $C$ that is not dom-minimal. (See \cref{minimal_fig}.)
+  \begin{figure}
+    \centering
+    \begin{tabular}{ccc}
+      \includegraphics[page=1]{figs/minimal} &
+      \includegraphics[page=3]{figs/minimal} &
+      \includegraphics[page=5]{figs/minimal} \\
+      $\Downarrow$ & $\Downarrow$ & $\Downarrow$ \\
+      \includegraphics[page=2]{figs/minimal} &
+      \includegraphics[page=4]{figs/minimal} &
+      \includegraphics[page=6]{figs/minimal}
+    \end{tabular}
+    \caption{Three cases on the way to making $H$ dom-minimal.}
+    \label{minimal_fig}
+  \end{figure}
   \begin{compactenum}
-    \item If there exists an edge $vw$ on the outer face of $C$ that is not incident to any inner face $vwx$ with $x\in I(C)$ then $B(H-vw)=B(H)$ and $I(H-vw)=I(H)$, and $H-vw$ is a is dom-preserving subminor of $H$ that has fewer edges than $H$.
+    \item \cref{bad_edge}: If there exists an edge $vw$ on the outer face of $C$ that is not incident to any inner face $vwx$ with $x\in I(C)$ then $H-vw$ is a generalized near-triangulation, $B(H-vw)=B(H)$, and $I(H-vw)=I(H)$, and $N_{H-vw}(v)\cap I(H)=N_{H}(v)\cap I(H)$ for all $v\in V(H-vw)$. Therefore, $H-vw$ dom-respects $H$ and has few edges than $H$. (This includes the case where $C$ consists of a single edge.)
 
-    \item If there exists a vertex $v\in B(C)$ with $\deg^+_C(v)=0$ then $v$ is incident to an edge $vw$ that is on the outer face of $C$ and on the outer face of $H$. Since $\deg^+_C(v)=0$, $vw$ is not incident to any inner face $vwx$ with $x\in I(C)$ and we can proceed as in the previous case.
+    \item \cref{bad_vertex}: If there exists a vertex $v\in B(C)$ with $\deg^+_C(v)=0$ then $v$ is incident to an edge $vw$ that is on the outer face of $C$ and on the outer face of $H$. Since $\deg^+_C(v)=0$, $vw$ is not incident to any inner face $vwx$ with $x\in I(C)$ and we can proceed as in the previous case.
 
-    \item If there exists a vertex $v\in B(C)$ with $\deg^+C(v)=1$ then $H$ contains faces $xvw$ and $vyw$ where $x$ and $y$ are on the outer face of $C$ and $w$ is an inner vertex. If $H[N_H[v]]$ is not isomorphic to $K_4$, then $xy\not\in E(H)$.  In this case, we contract $v$ into $x$ to obtain dom-preserving subminor of $H$ with fewer vertices than $H$. \qedhere
+    \item \cref{inner_degree_1}: If there exists a vertex $v\in B(C)$ with $\deg^+_C(v)=1$ then $H$ contains faces $xvw$ and $vyw$ where $x$ and $y$ are on the outer face of $C$ and $w$ is an inner vertex. If $H[N_H[v]]$ is not isomorphic to $K_4$, then $xy\not\in E(H)$.  In this case, let $H^\star$ be the graph obtained from $H$ by replacing the edges $xv$ and $vy$ with the edge $xy$. Then $H^\star$ is a generalized near-triangulation, $B(H^*)=B(H)$, $I(H^*)=I(H)$, and $N_{H^*}(v)\cap I(H)\subseteq N_{H}(v)\cap I(H)$.  Therefore $H^*$ dom-respects $H$ and has fewer edges than $H$. \qedhere
   \end{compactenum}
 \end{proof}
 
-% We say that a generalized near-triangulation $H$ is \defin{good} if
-% \begin{compactenum}[(G1)]
-%       \item $H$ is critical;
-%       \item there exists $v\in B(H)$ with $\deg^+_H(v)\ge 3$; or
-%       \item there exists distinct $v,w\in B(H)$ such that $\deg^+_H(v)=2$ and $N^+_H(w)\subseteq N^+_H(v)$.
-% \end{compactenum}
-%
-% \begin{lem}\label{not_good}
-%   Let $H$ be a dom-minimal generalized near-triangulation.  Then \begin{compactenum}[(i)]
-%     \item $H$ is good or
-%     \item $B(H)$ contains a vertex $v$ with $\deg^+_H(v)=2$ such that $G-v$ is good.
-%   \end{compactenum}
-% \end{lem}
-%
-% \begin{proof}
-%   Since $H$ is dom-minimal, each vertex in $B(H)$ has inner-degree greater than $0$.  If some vertex in $B(H)$ has inner-degree at least $3$ then $H$ is good and there is nothing to prove, so we may assume that each vertex in $B(H)$ has inner-degree $1$ or $2$.  Since $H$ is not critical, at least one vertex in $B(H)$ has inner-degree $2$.  We distinguish between two cases, depending on whether $H$ is biconnected.
-%
-%   \pat{Updated here. The case where $H$ is biconnected needs a separate argument when $k=3$.}
-%   If $H$ is biconnected then, since $H$ is bridgeless (by \cref{bridgeless}) the outer face of $C$ is a cycle $v_0,\ldots,v_{k-1}$ with $k\ge 3$. If there exists an edge $v_iv_{i+1}$ of this cycle with $\deg^+_H(v_i)=2$ and $\deg^+_H(v_{i+1})=1$ then $N_H^+(v_{i+1})\subset N_H^+(v_i)$ and $H$ is good, so we may assume that $\deg^+_H(v_i)=2$ for all $i\in\{0,\ldots,k-1\}$.
-%   Let $v_i$ be a vertex in $B(H)$ such that $N_H(v_i)=N_H^+(v_i)\cup\{v_{i-1},v_{i+1}\}$.  Without loss of generality, assume $i=0$. Now consider the graph $H'=H-v_0$.  This graph contains two vertices, namely $v_{1}$ and $v_{k-1}$ with inner-degree $1$.  If $k\ge 4$, then $H'$ is good, because $\deg_{H'}^+(v_2)=2$ and $N^+_{H'}(v_1)\subseteq N^+_{H'}(v_2)$.  Otherwise, the outer face of $H'$ is a $4$-cycle $x_1,x_2,v_1,v_2$ and $N_H^+(v_1)\subseteq N_H^+(x_2)$ and $N_H^+(v_2)\subseteq N_H^+(x_1)$.  If $\deg^+_H(x_2)\ge 2$ or $\deg^+_H(x_1)\ge 2$ then $H'$ is good.  Otherwise all vertices in $B(H')$ have inner-degree at most $1$ in $H'$, so $H'$ is also good. Therefore $H$ contains a vertex $v:=v_0$ such that $H-v$ is good, as required.
-%
-%
-%
-%   If $H$ is not biconnected, then let $C$ be a biconnected component of $H$ that contains a single cut-vertex $v_0$ of $H$ (so $C$ is a leaf in the block-cut tree of $H$). Then $v_0$ is contained in a second biconnected component $C'\neq C$ of $H$. Since $H$ is dom-minimal, $\deg^+_{C}(v_0)\ge 1$ and $\deg^+_{C'}(v_0)\ge 1$, so $\deg^+_H(v)= 2$.
-%
-%   Since $C$ is biconnected, its outer face is bounded by a cycle $v_0,v_1,v_2,\ldots,v_{k-1}$.  If $\deg^+_C(v_1)=1$ then, since $H$ is dom-minimal, the edge $v_0v_1$ is on the boundary of an inner face $v_0v_1x$ with $x\in I(H)$.  Since $v_0$ is the only cut-vertex of $H$ in $C$, $N^+_H(v_1)=N^+_C(v_1)=\{x\}\subseteq N_H(v_0)$ and $\deg^+_H(v_0)=2$, so $H$ is good and there is nothing to prove.  We may therefore  assume that $\deg^+_C(v_1)=2$ and,  by the same reasoning, that $\deg^+_C(v_i)=2$ for each $i\in\{1,\ldots,k-1\}$.  (Otherwise, $N^+_H(v_i)\subseteq N^+_H(v_{i-1})$ and $\deg^+_H(v_{i-1})=2$ for some $i\in\{2,\ldots,k-1\}$ so $H$ is good.)
-%
-%   To summarize, so far we know that some vertex $x\in I(H)$ is in $N^+_H(v_0)$, $N^+_H(v_1)$, and $N^+_H(v_{k-1})$.  If $k=3$ then, since $H$ is dom-minimal, $H$ contains a face $v_1v_{k-1}y$ with $y\in I(H)$.  Since $\deg^+_H(v_1)=\deg^+_H(v_{k-1})=2$, $y\neq x$ and $N^+_H(v_1)=N^+_H(v_2)=\{x,y\}$. Again, this implies that $H$ is good.  We now assume that $k\ge 4$.
-%
-%   The edge $v_1v_2$ is on the boundary of a face $v_1v_2y$.  Since $\deg^+_H(v_1)=2$, $x\neq y$.  If $N^+_H(v_1)=N^+_H(v_2)=\{x,y\}$ then $v_1$ and $v_2$ satisfy (GM3), so $H$ is good.  Otherwise, consider the graph $H':=H-v_0$.  Then $\deg^+_{H'}(v_1)=1$, $\deg^+_{H'}(v_2)=2$, and $N_{H'}(v_1)\subseteq N_{H'}(v_2)$.   Therefore $H'$ is good, so $H$ contains a vertex $v=v_0$ of inner-degree $2$ such that $H-v$ is good.  This completes the proof.
-% \end{proof}
-%
-%
-% This gives variant of the $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BetterGreedy}(G)$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i$ be a dom-preserving subgraph of $G-X_i$ that is dom-minimal, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are now four cases to consider:
-% \begin{compactenum}
-%     \item If $\deg^+_{G_i}(v_i)\ge 3$ then we set $\Delta_i\gets\{v_i\}$.
-%     \item If there exists distinct $v_i,w\in B(H)$ such that $\deg^+_H(v_i)=2$ and $N^+_H(w)\subseteq N^+_H(v_i)$ then set $\Delta_i:=\{v_i\}$.
-%     \item If $\deg^+_{G_i}(v_i)\le 1$ for all $v\in G_i$ then $G_i$ is critical and this is the final step, so $r:=i+1$.  By \cref{base_case}, there exists $\Delta_i\subseteq B_i$ of size at most $|I_i|$ that dominates $I_i$. Then $X_r:=X_{r-1}+\Delta_{i}$ and we are done.
-%     \item Otherwise, $G_i$ is not good.  By \cref{not_good}, $G$ contains a vertex $v_i$ of inner-degree $2$ such that $G-v_i$ is good.  Set $\Delta_i:=\{v_i\}$.
-% \end{compactenum}
-%
-% \begin{thm}\label{better_greedy}
-%   When applied to an $n$-vertex triangulation $G$,  $\textsc{BetterGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $(7n-14)/13$.
-% \end{thm}
-%
-% \begin{proof}
-%   Let $x_2$ be the number of times $\textsc{BetterGreedy}(G)$ falls into Case~4.
-%   For each integer $t\ge 3$, let $x_t$ be the number of times $\textsc{BetterGreedy}(G)$ falls into case $1$ and chooses $v_i$ such that $\deg^+_{G_i}(v_i)=t$.  Let $z$ be the number of times $\textsc{BetterGreedy}(G)$ falls into Case~2.  From \cref{not_good}, we know that Case~4 never occurs during two consecutive iterations.  Therefore,
-%   \begin{equation}
-%       x_2 \le \sum_{t\ge 3}x_t + z + 1 \enspace .  \label{a1}
-%   \end{equation}
-%   The size of the dominated set $D_{r-1}$ is at least $|D_{r-1}| \ge 3 + \sum_{t\ge 2}tx_t + 2z$.
-%   Since $|D_{r-1}|+|I_{r-1}|=n$,
-%   \begin{equation}
-%    3 + \sum_{t\ge 2}tx_t + 2z + I_{r-1} \le |D_{r-1}| + I_{r-1} \le n  \enspace . \label{a2}
-%   \end{equation}
-%   The of the boundary $B_{r-1}$ is at most $|B_{r-1}|\le 3+\sum_{t\ge 2}(t-1)x_t$.
-%   By \cref{base_case},
-%   \begin{equation}
-%     3+\sum_{t\ge 2}(t-1)x_t \ge |B_{r-1}| \ge 3|I_{r-1}| \label{a3}
-%   \end{equation}
-%   The size of the final set $X_{r}$ is
-%   \begin{equation}
-%     |X_r| = \sum_{t\ge 2}x_t + z + |I_{r-1}| \enspace . \label{objective2}
-%   \end{equation}
-%   The unbounded number of variables $x_t$, $t\ge 2$ is problematic. We resolve this with the following claim:
-%   \begin{clm}
-%     In any assignment of non-negative values to $|I_{r-1}|$, $z$, and $x_2,x_3,\ldots$ that maximizes \cref{objective2} subject to \cref{a1,a2,a3}, $x_t=0$ for each $t\ge 3$.
-%   \end{clm}
-%   \begin{clmproof}
-%      If $x_t = c >0$ for some $t\ge 3$, then we can set $x_t\gets 0$, $z\gets z+tc/2$, and $|I_{r-1}|\gets |I_{r-1}|-(t-1)c/3$.  This increases the value of \cref{objective2} by $tc/2-(t-1)c/3 =(t+2)c/6>0$.  The new values still satisfy \cref{a1} because the right hand side of \cref{a1} increases and the left hand side is unchanged.  The new values still satisfy \cref{a2} because the left hand side of \cref{a2} changes by $tc - 2tc/2 = 0$.  The new values still satisfy \cref{a3} because the left and right hand sides of \cref{a3} each decrease by $(t-1)c$.
-%   \end{clmproof}
-%   Therefore, \cref{a1,a2,a3} are three inequalities in three non-negative variables $x_2$, $z$, and $|I_{r-1}|$.  Maximizing \cref{objective2} subject to these constraints is an easy linear programming exercise that gives $x_2:=(3n-6)/13$, $z=(3n-19)/13$ and $I_{r-1}=(n+11)/13$, which gives $|X_r|= (7n+8)/13$.
-% \end{proof}
-%
-
-% \section{The Best Algorithm}
-% Let's see if we can beat $\textsc{BetterGreedy}(G)$.
-% First, we need to rework our definition of dom-minimal a little bit:
-%
-% We say that a near-triangulation $H$ is \defin{dom-minimal} if
-% \begin{compactenum}[({DM}1)]
-%     \item there are no two vertices $v,w\in B(H)$ such that $N^+_H(w)\subseteq N^+_H(v)$; and
-%     \item each edge $vw$ on the boundary of the outer face of $H$ is on the boundary of an inner face $vwx$ of $H$ for some $x\in I(H)$.
-% \end{compactenum}
-% We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each of its biconnected components are dom-minimal.
-% Note that (DM1) implies that, unless $|H|=1$, each vertex $v\in B(H)$ has $\deg^+_H(v)\ge 1$.
-%
-% \Cref{bridgeless,dom_minimal} still hold under this new definition of dom-minimal.
-%
-% \pat{Did I really need to change the definition of dom-minimal?  Check.}
-
-
 \subsection{Finding a $2$--$3$ Combo}
 
-Note that the next two lemmas each consider a graph $H$ that is a near triangulation, not a generalized near-triangulation.
+Next we show that, in most cases our algorithm for constructing a connected dominating set is never forced to choose a single-vertex of inner-degree $2$. Note that the next two lemmas each consider a graph $H$ that is a near triangulation, not a generalized near-triangulation.
 
 \begin{lem}\label{chord_incident}
-  let $H$ be a dom-minimal near-triangulation and let $v_0$ be a vertex in $B(H)$ with $|N_H(v_0)\cap B(H)|\ge 3$.  Then $\deg^+_H(v_0)\ge 2$.  In other words, if $v_0$ is incident to a chord of the outerplane graph $H[B(H)]$, then $v_0$ is incident to at least $2$ inner vertices of $H$.
+  let $H$ be a dom-minimal near-triangulation and let $v_0$ be a vertex in $B(H)$ with $|N_H(v_0)\cap B(H)|\ge 3$.  Then $\deg^+_H(v_0)\ge 2$.  In other words, if $v_0$ is incident to a chord of the outerplane graph $H[B(H)]$, then $v_0$ is incident to at least two inner vertices of $H$.
 \end{lem}
 
 \begin{figure}[htbp]
@@ -478,32 +399,39 @@ Note that the next two lemmas each consider a graph $H$ that is a near triangula
 \end{figure}
 \begin{proof}
   Refer to \cref{chord_incident_fig}
-  Since $H$ is a near-triangulation its outer face is bounded by a cycle $v_0,\ldots,v_{k-1}$.  Let $a:=\min\{i\in\{2,\ldots,k-2\}:v_0v_i\in E(H)\}$ and $b:=\max\{i\in\{2,\ldots,k-2\}:v_0v_i\in E(H)\}$. (Possibly $a=b$, but both $a$ and $b$ are well-defined since $|N^+_H(v_0)|\ge 3$.)   Since $H$ is dom-minimal, the edge $v_0v_1$ is on the boundary of an inner face $v_0v_1x$ of $H$ where $x$ is an inner vertex of $H$.  Since $H$ is dom-minimal, the edge $v_{k-1}v_0$ is on the boundary of an inner face $v_{k-1}v_0y$ of $H$ where $y$ is an inner vertex of $H$.  Then $x$ is in the interior of the face of $H[B(H)]$ bounded by the cycle $v_0,v_1,\ldots,v_a$ and $y$ is in the interior of the face of $H[B(H)]$ bounded by the cycle $v_0,v_b,\ldots,v_{k-1}$.  Therefore, $x\neq y$ and $N^+_H(v_0)\supseteq\{x,y\}$ so $\deg^+_H(v_0)\ge 2$.
+  Since $H$ is a near-triangulation its outer face is bounded by a cycle $v_0,\ldots,v_{k-1}$.  Let $a:=\min\{i\in\{2,\ldots,k-2\}:v_0v_i\in E(H)\}$ and $b:=\max\{i\in\{2,\ldots,k-2\}:v_0v_i\in E(H)\}$. (Possibly $a=b$, but both $a$ and $b$ are well-defined since $|N^+_H(v_0)|\ge 3$.)   Since $H$ is dom-minimal, the edge $v_0v_1$ is on the boundary of an inner face $v_0v_1x$ of $H$ where $x$ is an inner vertex of $H$, by \cref{bad_edge}.  Since $H$ is dom-minimal, the edge $v_{k-1}v_0$ is on the boundary of an inner face $v_{k-1}v_0y$ of $H$ where $y$ is an inner vertex of $H$, by \cref{bad_edge}.  Then $x$ is in the interior of the face of $H[B(H)]$ bounded by the cycle $v_0,v_1,\ldots,v_a$ and $y$ is in the interior of the face of $H[B(H)]$ bounded by the cycle $v_0,v_b,\ldots,v_{k-1}$.  Therefore, $x\neq y$ and $N^+_H(v_0)\supseteq\{x,y\}$ so $\deg^+_H(v_0)\ge 2$.
 \end{proof}
 
 \begin{lem}\label{degree_2_outer_neighbour}
   Let $H$ be a dom-minimal near-triangulation. Then either:
   \begin{compactenum}
-    \item $H$ is outerplane;
-    \item $H$ consists of a cycle on the vertices in $B(H)$ plus one dominant inner vertex $w$; or
+    \item $H$ is isomorphic to $K_4$;
+    % \item $H$ consists of a cycle on the vertices in $B(H)$ plus one dominant inner vertex $w$; or
     \item each vertex $w\in B(H-B(H))$ has a neighbour $v$ in $H$ with $\deg^+_H(v)\ge 2$.
   \end{compactenum}
 \end{lem}
 
 \begin{proof}
-   If $H$ is outerplane then there is nothing to prove, so assume otherwise. Let $w$ be a vertex in $B(H-B(H))$. Since $w\not\in B(H)$, $w$ is an inner vertex of $H$. Consider the face $f:=v_0,\ldots,v_{k-1}$ of the outerplane graph $H[B(H)]$ that contains $w$. See \cref{degree_2_outer_neighbour_fig}.
+  If $I(H)=\emptyset$ then the second condition of the lemma is trivially satisified, so there is nothing to prove. Otherwise, let $w$ be any vertex in $B(H-B(H))$ and let $v_0w$ be an edge of $H$ with $v\in B(H)$.
+  % If $H$ is the empty graph, then there is nothing to prove. Otherwise $H$ is non-empty, so $B(H)$ is non-empty. Let $v$ be a vertex in $B(H)$.
+  % By \cref{bad_edge}, $\deg^+_H(v)\ge 1$ so $H$ contains an edge $vw$ with $w\in I(H)$.
+  % Consider the face $f:=v_0,\ldots,v_{k-1}$ of the outerplane graph $H[B(H)]$ that contains $w$.
+
 
    \begin{figure}[htbp]
      \centering
-     \begin{tabular}{cc}
-       \includegraphics[page=1]{figs/degree_2_outer_neighbour} &
-       \includegraphics[page=2]{figs/degree_2_outer_neighbour}
+     \begin{tabular}{ccc}
+       \includegraphics[page=1]{figs/outer_2_2} &
+       \includegraphics[page=2]{figs/outer_2_2} &
+       \includegraphics[page=3]{figs/outer_2_2}
      \end{tabular}
+     % \pat{Redo this figure.}
      \caption{The proof of \cref{degree_2_outer_neighbour}.}
      \label{degree_2_outer_neighbour_fig}
    \end{figure}
 
-   Since $w\in B(H-B(H))$, $w$ is adjacent to at least one vertex, say $v_0$, of $f$.  If $v_0v_{1}$ is a chord of $H[B(H)]$ then, by \cref{chord_incident}, $\deg^+_H(v_0)\ge 2$ and we are done, so assume that $v_0v_{1}$ is not a chord of $H[B(H)]$.  Since $H$ is dom-minimal, $H$ contains an inner face $v_0v_{1}x$ where $x$ is an inner vertex of $H$.  If $x\neq w$, then $\deg_H^+(v_0)\ge 2$ and we are done, so assume that $x=w$.  Therefore, $w$ is adjacent to $v_1$.  Thus, by assuming that $\deg^+_H(v_0)\le 2$ and that $v_0w$ is an edge of $H$ we were able to show that $v_0v_1$ is not a chord of $H[B(H)]$ and that $v_0v_1w$ is an inner face of $H$. This latter fact implies that $v_1w$ is an edge of $H$, so we can repeat this argument to establish that $\deg^+_H(v_j)\ge 2$ for some $j\in\{0,\ldots,k-1\}$ or that $v_{j}v_{j+1}$ is not a chord of $H[B(H)]$ and that $v_{j}v_{j+1}w$ is an inner face of $H$ for all $j\in\{0,\ldots,k-1\}$.  In the first case we are obviously done. In the latter case, $H$ is the graph described in the second alternative given by the lemma.
+   Refer to \cref{degree_2_outer_neighbour_fig}.
+   By \cref{inner_degree_1}, $\deg^+_H(v)\ge 2$ or $H[N_H[v_0]]$ is isomorphic to $K_4$. In the former case the vertex $w$ satisfies the second condition of the lemma.  In the latter case, let $x$ and $y$ be the two neighbours of $v$ on the outer face of $H$, so $H[\{v,w,x,y\}]$ is isomorphic to $K_4$.    If the edge $xy$ is not on the outer face of $H$ then, by \cref{chord_incident}, $\deg^+_H(x),\deg^+_H(y)\ge 2$ so $w$ satisfies the second condition and we are done.  Otherwise, if $I(H)=w$ then $V(H)=\{v,w,xy\}$ and $H$ is isomorphic to $K_4$ and we are done.  Otherwise $I(H)$ at least one vertex $w'\neq w$.  Since $\deg^+_H(v)=1$, the cycle $vxwy$ has no vertices of $H$ in its interior, so $I(H)$ contains vertices in the interior of $xyw$.  By this implies that $\deg^+_H(x),\deg^+_H(y)\ge 2$.
 \end{proof}
 
 
@@ -527,7 +455,7 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
 \begin{proof}
   We will assume that $H$ does not satisfy \cref{two_critical} or \cref{degree_three} and show that $H$ must satisfy \cref{two_three_pair}.  Since $H-B(H)$ is not critical, $B(H-B(H))$ contains a vertex $w$ with $\deg_{H-B(H)}(w)\ge 2$.
 
-  Let $C$ be the biconnected component of $H$ that contains $w$, so $C$ is a near-triangulation.  Therefore, we can apply \cref{degree_2_outer_neighbour} to $C$ and $w$. Each of the first two alternatives in \cref{degree_2_outer_neighbour} are incompatible with the assumption that $\deg^+_{H-B(H)}(w)\ge 2$.  Therefore, we conclude that $N_H(w)\cap B(H)$ contains a vertex $v_0$ with $\deg^+_H(v_0)\ge 2$.  Since $H$ does not satisfy \cref{degree_three}, $\deg^+_H(v_0)< 3$, so $\deg^+_H(v_0)=2$.  Refer to \cref{really_good_fig}
+  Let $C$ be the biconnected component of $H$ that contains $w$.  Then $C$ is a near-triangulation and we can apply \cref{degree_2_outer_neighbour} to $C$ and $w$. The first alternative in \cref{degree_2_outer_neighbour} is incompatible with the assumption that $\deg^+_{H-B(H)}(w)\ge 2$.  Therefore, we conclude that $N_H(w)\cap B(H)$ contains a vertex $v_0$ with $\deg^+_H(v_0)\ge 2$.  Since $H$ does not satisfy \cref{degree_three}, $\deg^+_H(v_0)< 3$, so $\deg^+_H(v_0)=2$.  Refer to \cref{really_good_fig}
   \begin{figure}
     \centering
     \begin{tabular}{ccc}
@@ -539,7 +467,10 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
     \label{really_good_fig}
   \end{figure}
 
-  Let $v_0,\ldots,v_{k-1}$ be the cycle that bounds the inner face $f$ of $H[B(H)]$ that contains $w$ in its interior.  Since $H$ is a near-triangulation, $H$ contains triangles $v_0v_1x$ and $v_{k-1}v_0 y$ with $x$ and $y$ in the interior of or on the boundary of $f$.  Since $f$ is a face of $H[B(H)]$ each of $x$ and $y$ is in the interior of $f$.  At least one of $x$ or $y$ is equal to $w$, say $x$, since otherwise $\deg^+_H(v_0)\ge 3$.  Therefore $v_0v_1 w$ is an inner face of $H$.  Let $j\ge 1$ be the maximum integer such that $v_{a-1}v_{a}w$ is an inner face of $H$ for all $a\in\{1,\ldots,j\}$.  Note that $j<\ell-1$ since, otherwise, the component of $H-B(H)$ that contains $w$ contains only a single vertex, contradicting the fact that $\deg^+_{H-B(H)}(w)=2$.
+  Let $v_0,\ldots,v_{k-1}$ be the cycle that bounds the inner face $f$ of $H[B(H)]$ that contains $w$ in its interior.  Since $H$ is a near-triangulation, $H$ contains triangles $v_0v_1x$ and $v_{k-1}v_0 y$ with $x$ and $y$ in the interior of or on the boundary of $f$.  Since $f$ is a face of $H[B(H)]$ each of $x$ and $y$ is in the interior of $f$.  At least one of $x$ or $y$ is equal to $w$, say $x$, since otherwise $\deg^+_H(v_0)\ge 3$.  Therefore $v_0v_1 w$ is an inner face of $H$.
+
+  Let $j\ge 1$ be the maximum integer such that $v_{a-1}v_{a}w$ is an inner face of $H$ for all $a\in\{1,\ldots,j\}$.  Note that $j<k-1$ since, otherwise, the component of $H-B(H)$ that contains $w$ contains only a single vertex, contradicting the fact that $\deg^+_{H-B(H)}(w)=2$.
+  % \footnote{In fact, $j\in\{0,1\}$ by \cref{inner_degree_1}, but this is not important for the current argument.}
 
   Since $H$ is a near-triangulation and $f$ is a face of $H[B(H)]$, $H$ has some face $v_j v_{j+1} z$ with $z$ in the interior of $f$.  By the definition of $j$, $z\neq w$.  Therefore, $N_H^+(v_j)\supseteq \{w,z\}$ and, since $\deg^+_H(v_j)\le 2$, $N_H^+(v_j))= \{w,z\}$.  Therefore $N^+_H(v_j)\subseteq N_H[w]$.  Since $f$ is a face of $H[B(H)]$, the only neighbours of $v_j$ in $B(H)$ are $v_{j-1}$ and $v_{j+1}$. Since $H$ is a near-triangulation, this implies that $w v_j z$ is a face of $H$.  In particular $wz$ is an edge of $H$.
 
@@ -547,15 +478,34 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
 \end{proof}
 
 
+The following is a restatement of \cref{really_good} in language that is more useful in the description of an algorithm for constructing a connected dominating set.
+
+\begin{cor}\label{really_good_cor}
+  Let $H$ be a dom-minimal generalized near-triangulation.  Then either:
+  \begin{compactenum}[(1)]
+    \item $H-B(H)$ is critical;
+    \item there is a vertex $v\in B(H)$ and a dom-respecting subgraph $H'$ of  $H-v$ with $|H'|\le |H|-1$ and $|B(H')|=|B(H)|+2$; or
+    \item there is an edge $vw\in E(H)$ with $v\in B(H)$, $w\in B(H-B(H))$, and a dom-respecting subgraph $H'$ of $H-\{v,w\}$ with $|H'|= |H|-3$ and $|B(H')|=|B(H)|+2$.
+  \end{compactenum}
+\end{cor}
+
+\begin{proof}
+  In the second case, the graph $H':=H-v$ has $|H'|=|H|-1$ and $|B(H')|=|B(H)|+2$. In the third case, the graph $H':=H-\{v_0,w,v_j\}$ has $|H'|=|H|-3$ and $|B(H')|=|B(H)|+2$.
+\end{proof}
+
+
 \subsection{Eliminating an Inner Leaf}
 
+Next we show that, even when all vertices in $B(H)$ have inner-degree at most $2$ and $H-B(H)$ is critical, we can still efficiently dominate degree-$1$ vertices in $H-B(H)$.
+
+
 \begin{lem}\label{leaf_killer}
-  Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$ and such that $H-B(H)$ contains a vertex $w$ with $\deg_{H-B(H)}(w)=1$.  Then there exists $v\in B(H)$ and a dom-preserving subminor $H'$ of $H-v$ such that $|H'|\le |H|-3$ and $|B(H')|\le |B(H)|-1$.
+  Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$, $H-B(H)$ is critical, and $H-B(H)$ contains a vertex $w$ with $\deg_{H-B(H)}(w)=1$.  Then there exists $v\in B(H)$ and a dom-respecting subgraph $H'$ of $H-v$ such that $|H'|\le |H|-3$ and $|B(H')|\le |B(H)|-1$.
 \end{lem}
 
 \begin{proof}
   Refer to \cref{killing_a_leaf}.
-  Let $x$ be the unique neighbour of $w$ in $H-B(H)$. Since $x$ and $w$ are vertices of $H-B(X)$, $x,w\in I(H)$.  Since $w$ is an inner vertex in a near-triangulation, it is incident to $t\ge 3$ faces $v_iv_{i+1}w$ for $i\in\{0,\ldots,v_{t}\}$, with $v_0=v_t=x$.  Since $\deg_{H-B(H)}(w)=1$, $v_1,\ldots,v_{t-1}\in B(H)$.  Therefore, $H$ contains no edge $v_i v_{i+r}$ for any $i\in\{0,t-r\}$ and any $r\ge 2$.  Therefore, for each $i\in\{1,\ldots,t-1\}$, the only two inner faces of $H$ that include $v_i$ are $v_{i-1}v_iw$ and $v_iv_{i+1}w$.  Therefore $N^+_H(v_i)=\{w\}$ for each $i\in\{2,\ldots,t-2\}$ and $N^+_H(v_1)=N^+_H(v_{t-1})=\{x,w\}$.
+  Let $x$ be the unique neighbour of $w$ in $H-B(H)$. Since $x$ and $w$ are vertices of $H-B(X)$, $x,w\in I(H)$.  Since $w$ is an inner vertex in a near-triangulation, it is incident to $t\ge 3$ faces $v_iv_{i+1}w$ for $i\in\{0,\ldots,v_{t}\}$, with $v_0=v_t=x$.  Since $\deg_{H-B(H)}(w)=1$, $v_1,\ldots,v_{t-1}\in B(H)$.  Therefore, $H$ contains no edge $v_i v_{i+r}$ for any $i\in\{0,t-r\}$ and any $r\ge 2$.  Therefore, for each $i\in\{1,\ldots,t-1\}$, the only two inner faces of $H$ that include $v_i$ are $v_{i-1}v_iw$ and $v_iv_{i+1}w$.  Therefore $N^+_H(v_i)=\{w\}$ for each $i\in\{2,\ldots,t-2\}$ and $N^+_H(v_1)=N^+_H(v_{t-1})=\{x,w\}$.\footnote{In fact, \cref{inner_degree_1} implies that $t=3$, but this is not important for this proof.}
 
   \begin{figure}
     \centering
@@ -569,7 +519,7 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
     \label{killing_a_leaf}
   \end{figure}
 
-  Let $v:=v_1$ and let $H'$ be a dom-preserving subminor of $H-v$ that is dom-minimal.  Then $w,x\in B(H-v)$.  Since $H'$ is dom-minimal, $v_1,\ldots,v_{t-1}\not\in V(H')$, by \cref{bad_vertex}.  Therefore $N_H(w)\cap V(H')=\{v_t\}=\{x\}$. Since $H'$ is dom-minimal, $w\not\in V(H')$. Therefore $V(H')\subseteq V(H)\setminus\{v_1,\ldots,v_{t-1},w\}$, so $|V(H')|\le |H|-t\le |H|-3$.  Finally, $B(H-v)=B(H)\setminus \{v\}\cup\{w,x\}$. By \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus\{v_1,\ldots,v_{t-1},w\}\cup\{x\}$, so $|B(H')|\le |B(H)|+2-t\le |B(H)|-1$.
+  Let $v:=v_1$. Apply \cref{dom_minimal} to $H-v$ to get a dom-minimal graph $H'$ that dom-respects $H-v$.  Then $w,x\in B(H-v)$.  Since $H'$ is dom-minimal, $v_1,\ldots,v_{t-1}\not\in V(H')$, by \cref{bad_vertex}.  Therefore $N_H(w)\cap V(H')=\{v_t\}=\{x\}$. Since $H'$ is dom-minimal, $w\not\in V(H')$, by \cref{bad_vertex}. Therefore $V(H')\subseteq V(H)\setminus\{v_1,\ldots,v_{t-1},w\}$, so $|V(H')|\le |H|-t\le |H|-3$.  Finally, $B(H-v)\subseteq B(H)\setminus \{v\}\cup\{w,x\}$. By \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus\{v_1,\ldots,v_{t-1},w\}\cup\{x\}$, so $|B(H')|\le |B(H)|+2-t\le |B(H)|-1$.
 \end{proof}
 
 \subsection{Eliminating Inner Isolated Vertices}
@@ -577,19 +527,20 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
 \begin{lem}\label{degree_zero_killer}
   Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$ and such that $H-B(H)$ contains a vertex $w$ with $\deg_{H-B(H)}(w)=0$ but does not contain any vertex $w'$ with $\deg_{H-B(H)}(w')=1$.  Then at least one of the following is true:
   \begin{compactenum}[(a)]
-    \item there exists $v\in B(H)$ and a dom-preserving subminor $H'$ of $H-v$ such that $|H'|\le |H|-3$ and $|B(H')|\le |B(H)|-1$; or \label[p]{kill_pair}
-    \item there exists $v\in B(H)$ and a dom-preserving subminor $H'$ of $H-v$ such that $|H'|\le |H|-4$ and $|B(H')|\le |B(H)|-3$. \label[p]{kill_k4}
+    \item there exists $v\in B(H)$ and a graph $H'$ that dom-respects $H-v$ such that $|H'|\le |H|-3$ and $|B(H')|\le |B(H)|-1$; or \label[p]{kill_pair}
+    \item there exists $v\in B(H)$ and a graph $H'$ that dom-respects $H-v$ such that $|H'|\le |H|-4$ and $|B(H')|\le |B(H)|-3$. \label[p]{kill_k4}
   \end{compactenum}
 \end{lem}
 
 \begin{proof}
   By definition $N_H(w)\subseteq B(H)$ and, since $w$ is an inner vertex in a generalized near triangulation $|N_H(w)|\ge 3$. There are two cases to consider:
   \begin{compactenum}[(a)]
-    \item There exists $v\in N_H(w)$ with $\deg^+_H(v)=2$. In this case, $N^+_H(v)=\{w,w'\}$ and the vertices $w$ and $w'$ are in a different biconnected components $C$ and $C'$, respectively, of $H$. The component $C$ has exactly one inner vertex, $w$ so, by \cref{inner_degree_1}, $C$ is isomorphic to $K_4$.  By \cref{inner_degree_1}, $C'[N_{C'}(v)]$ is also isomorphic to $K_4$.  We claim that $C'$ is isomorphic to $K_4$ indeed, the only other possibility is that the triangle $xw'v$ contains inner vertices.  If $xw'v$ contains more than one inner vertex then  $\deg^+_H(x)>2$ or $\deg^+_H(y)>2$, which is ruled out by the statement of the lemma.  If $xw'v$ contains exactly one inner vertex then $\deg_{H-B(H)}(w')=1$, which is ruled out by the statement of the lemma.
+    \item There exists $v\in N_H(w)$ with $\deg^+_H(v)=2$. In this case, $N^+_H(v)=\{w,w'\}$ and the vertices $w$ and $w'$ are in a different biconnected components $C$ and $C'$, respectively, of $H$. The component $C$ has exactly one inner vertex, $w$ so, by \cref{inner_degree_1}, $C$ is isomorphic to $K_4$.  By \cref{inner_degree_1}, $C'[N_{C'}(v)]$ is also isomorphic to $K_4$  Let $x$ and $y$ be the two neighbours of $v$ on the outer face of $C'$. Since $\deg^+_H(v)=2$, $\deg_{C'}^+(v)=1$, so the cycle $vxw'y$ has no vertices of $H$ in its interior.
+    We claim that the triangle $yw'x$ also contains no vertices of $H$ in its interior. Indeed, if $yw'x$ contains more than one inner vertex then $\deg^+_H(x)>2$ or $\deg^+_H(y)>2$, which is ruled out by the statement of the lemma.  If $yw'x$ contains exactly one inner vertex then $\deg_{H-B(H)}(w')=1$, which is ruled out by the statement of the lemma.
 
-    Let $H'$ be a dom-preserving subminor of $H-v$ that is dom-minimal. Then $w$ and $w'$ are both in $B(H-v)$.   Since $\deg^+_{H-v}(w)=\deg^+_{H-v}(w')=0$, neither $w$ nor $w'$ are in $H'$. Therefore $|H'|\le |H-\{v,w,w'\}|=|H|-3$.  Also $B(H-v)=B(H)\setminus\{v\}\cup\{w,w'\}$ so, by \cref{boundary_subset}, $|B(H')|\le |B(H)|-1$.
+    Let $H'$ be a dom-minimal graph that dom-respects $H-v$. Then $w$ and $w'$ are both in $B(H-v)$, so $\deg^+_{H-v}(w)=\deg^+_{H-v}(w')=0$. Therefore, neither $w$ nor $w'$ are in $H'$. Therefore $|H'|\le |H-\{v,w,w'\}|=|H|-3$.  Also $B(H-v)=B(H)\setminus\{v\}\cup\{w,w'\}$ but none of $v$, $w$, or $w'$ are in $H'$.  Therefore, by \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus\{v,w,w'\}$ so $|B(H')|\le |B(H)|-1$.
 
-    \item $\deg^+_H(v)=1$ for all $v\in N_H(w)$.  In this case let $v$ be any vertex in $N_H(w)$ and let $H'$ be a dom-preserving subminor of $H-v$ that is dom-minimal.  Then $w\in B(H-v)$, so $\deg^+_{H-v}(v')=0$ for all $v'\in N_H(w)$. Since $H'$ is dom-minimal, $N_H(w)\cap V(H')=\emptyset$, by \cref{bad_vertex}.  Similarly $w\not\in V(H')$, also by \cref{bad_vertex}. Therefore $|H'|\le |H-(\{w\}\cup N_H(w))| \le |H|-4$. Then $B(H-v)=B(H)\setminus\{v\}\cup\{w\}$.
+    \item $\deg^+_H(v)=1$ for all $v\in N_H(w)$.  In this case let $v$ be any vertex in $N_H(w)$ and let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Then $w\in B(H-v)$, so $\deg^+_{H-v}(v')=0$ for all $v'\in N_H(w)$. Since $H'$ is dom-minimal, $N_H(w)\cap V(H')=\emptyset$, by \cref{bad_vertex}.  Similarly $w\not\in V(H')$, also by \cref{bad_vertex}. Therefore $|H'|\le |H-(\{w\}\cup N_H(w))| \le |H|-4$. Then $B(H-v)=B(H)\setminus\{v\}\cup\{w\}$.
     By \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus N_H[w]$, so $|B(H')|\le |B(H)|-\deg_H(w) \le |B(H)|-3$. \qedhere
   \end{compactenum}
 \end{proof}
@@ -598,9 +549,8 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
 
 \subsection{$2$-Critical Graphs}
 
-\pat{Note: Change in definition}
-We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $H-B(H)$ is critical, $H-B(H)$ has no vertices of degree $1$, and $\deg^+_H(v)\le 2$ for each $v\in B(H)$. (See \cref{two_critical_figure}.)
-% Observe that any critical graph is also $2$-critical.
+
+We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $\deg^+_H(v)\le 2$ for each $v\in B(H)$,  $H-B(H)$ is critical, and $\deg_{H-B(H)}(w)\ge 2$ for all $w\in V(H-B(H))$.  (See \cref{two_critical_figure}.)
 We will work our way up to a proof of the following lemma, which allows our algorithm to handle $2$-critical graphs directly, in one step:
 
 \begin{lem}\label{two_critical_handler}
@@ -609,10 +559,28 @@ We will work our way up to a proof of the following lemma, which allows our algo
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[page=3,trim={0 15 0 0},clip]{figs/bg_layers}
+  \pat{Update this figure}.
+  % \includegraphics[page=3,trim={0 15 0 0},clip]{figs/bg_layers}
   \caption{A $2$-critical generalized near-triangulation.}
   \label{two_critical_figure}
 \end{figure}
+
+\begin{lem}
+  Let $H$ be a dom-minimal $2$-critical generalized near-triangulation.  Then $\deg^+H(v)=2$ for all $v\in B(H)$.
+\end{lem}
+
+\begin{proof}
+  Consider some $v\in B(H)$. By \cref{bad_vertex}, $\deg^+_H(v)\ge 1$. Assume for the sake of contradiction that $\deg_H(v)=1$. By \cref{inner_degree_1}, $H[N_H[v]]$ is isomorphic to $K_4$. Let $x$ and $y$ be the neighbours of $v$ on the outer face of $H$ and let $w$ be the inner neighbour of $v$. Since $\deg^+_H(v)=1$ then the cycle $vxwy$ has no vertices of $H$ in its interior.  Since $H$ is $2$-critical, $deg_{H-B(H)}(w)\ge 2$, which implies that $w$ has at least two neighbours in the interior of the cycle $ywx$.  But this implies that at least one of $x$ or $y$, say $x$, has at least two neighbours in the interior of $ywx$.  But this implies that $\deg^+_H(x)\ge 3$, which contradicts the fact that $H$ is $2$-critical.
+\end{proof}
+
+
+\begin{lem}
+  Let $H$ be a dom-minimal $2$-critical generalized near-triangulation.  Then $|B(H)|\ge |B(H-B(H))|$.
+\end{lem}
+
+\begin{proof}
+  Degree-counting
+\end{proof}
 
 
 %
@@ -804,9 +772,11 @@ Now we drop the requirement that $H$ is biconnected.
   % In the latter two cases, we may assume, without loss of generality (by renaming colours), that $z_0\in X_{1}'$.  Since $z_0\not\in L$, $\deg_H(z_0)\ge 3$ so $\deg_{H'}(z_0)\ge 2$.  Therefore we may assume, without loss of generality, that $X_1'$ and $X_2'$ each dominate $z_0$. Redefine $L_{(2-r)\bmod 3}'\gets L_{(2-r)\bmod 3}'\cup\{z_r\}$ so that $L_0'$, $L_1'$ and $L_2'$ is a partitition of $L$.  Then we take $X_i:=X_{i}'\cup\{z_j:1-j\equiv i\pmod 3\}$, $L_0:=L_0'$, $L_1:= L_1'$, and $L_2:=L_2'$.  These sets satisfy the requirements of the lemma.  Indeed, the only concern would be that $z_0$ is not dominated by $X_0$ because $z_0$ is not necessarily dominated by $X_0'$, but this does not occur because $X_0$ includes $z_1$.
 
   % Finally, we arrive at the case in which $L=\emptyset$.
-  If $H$ is biconnected then, since $H$ is not an even wheel, we can immediately apply \cref{biconnected_critical} and we are done.  Otherwise, $H$ contains a cut vertex $v$ that separates $H$ into components $C_1,\ldots,C_k$ and such that $H':=H[V(C_1)\cup\{v\}]$ is biconnected. Since $L=\emptyset$, $H'$ has at least three vertices. If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H'$ and $v$ to obtain sets $X_0'$, $X_1'$, and $X_2'$. Otherwise, we apply \cref{biconnected_critical} to $H'$ to obtain sets $X_0'$, $X_1'$, and $X_2'$.  In either case we may assume, without loss of generality that $v\in X_1'$, that $X_1'$ and $X_2'$ each dominate $H'$ and that $X_0'$ dominates $V(H')\setminus\{v\}$.
+  If $H$ is biconnected then, since $H$ is not an even wheel, we can immediately apply \cref{biconnected_critical} and we are done.  Otherwise, $H$ contains a cut vertex $v$ that separates $H$ into components $C_1,\ldots,C_k$ and such that $H':=H[V(C_1)\cup\{v\}]$ is biconnected. Since $L=\emptyset$, $H'$ has at least three vertices. If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H'$ and $v$ to obtain sets $X_0'$, $X_1'$, and $X_2'$. Otherwise, we apply \cref{biconnected_critical} to $H'$ to obtain sets $X_0'$, $X_1'$, and $X_2'$.  In either case we may assume, without loss of generality that $v\in X_1'$, that $X_1'$ and $X_2'$ each dominate $H'$ and that $X_0'$ dominates $V(H')\setminus\{v\}$.  
 
-  Let $H'':=H-V(C_1)$. If $H''$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H''$ and $v$ to obtain sets $X_0''$, $X_1''$, $X_2''$. Otherwise, we apply the inductive hypothesis to $H''$ to obtain sets $X_0''$, $X_1''$, $X_2''$ that each dominate $H''$. In either case we may assume, without loss of generality (by renaming) that $v\in X_1''$, that $X_1''$ and $X_2''$ each dominate $H'$ and that $X_0''$ dominates $V(H'')\setminus\{v\}$.  Then the sets $X_0:=X_0'\cup X_2''$, $X_1:=X_1'\cup X_1''$ and $X_2:=X_2'\cup X_0''$ satisfy the requirements of the lemma.  (The only concern is whether each set dominates $v$, but this is guaranteed by the fact that $v\in X_1$, and that $X_2'\subseteq X_2$ and $X_2''\subseteq X_0$ each dominate $v$.)
+  Let $H'':=H-V(C_1)$. \pat{Deal with the case where $\deg_{H''}(v)=1$.}
+
+  If $H''$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H''$ and $v$ to obtain sets $X_0''$, $X_1''$, $X_2''$. Otherwise, we apply the inductive hypothesis to $H''$ to obtain sets $X_0''$, $X_1''$, $X_2''$ that each dominate $H''$. In either case we may assume, without loss of generality (by renaming) that $v\in X_1''$, that $X_1''$ and $X_2''$ each dominate $H'$ and that $X_0''$ dominates $V(H'')\setminus\{v\}$.  Then the sets $X_0:=X_0'\cup X_2''$, $X_1:=X_1'\cup X_1''$ and $X_2:=X_2'\cup X_0''$ satisfy the requirements of the lemma.  (The only concern is whether each set dominates $v$, but this is guaranteed by the fact that $v\in X_1$, and that $X_2'\subseteq X_2$ and $X_2''\subseteq X_0$ each dominate $v$.)
 \end{proof}
 
 
