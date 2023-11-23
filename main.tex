@@ -302,14 +302,7 @@ Besides the data structure used for representing the triangulation $G$, each ver
 \section{A Better Algorithm}
 \label{full_result}
 
-Next we devise an algorithm that produces a smaller connected dominating set than what $\textsc{SimpleGreedy}(G)$ can guarantee.  This involves a more careful analysis of the cases in which \textsc{SimpleGreedy} is forced to take a vertex $v_i$ with $\deg^+_{G_i}(v_i)=2$.  We will show that when this happens, one of the following two cases occurs:
-\begin{compactenum}
-  \item We can directly complete the dominating set $X_r=X_{i+1}$ by adding a set $\Delta_{r-1}=\Delta_i$ with at most $2|B(G_i)|+|I(G_i)|$ additional vertices.
-  \item We can add a pair of vertices $\{v_i,w_i\}$ that increase the size of the dominated set $D_{i+1}=N[X_{i+1}]$ by at least $5$ but only increase the size of the boundary set $B_{i+1}=B(G_{i+1})$ by at most $2$.
-  \item We can add a vertex $v_i$ that increases the size of the dominated set $D_{i+1}$ by at least $2$ and decreases the size of the boundary set $B_{i+1}$ by at least $1$.
-  \item We can add a vertex $v_i$ that increases the size of the dominated set $D_{i+1}$ by $1$ and decreases the size of the boundary set $B_{i+1}$ by at least $3$.
-
-\end{compactenum}
+Next we devise an algorithm that produces a smaller connected dominating set than what $\textsc{SimpleGreedy}(G)$ can guarantee.  This involves a more careful analysis of the cases in which \textsc{SimpleGreedy} is forced to take a vertex $v_i$ with $\deg^+_{G_i}(v_i)=2$.  In this section, we will show that during any step one of the following cases occurs.
 
 % The commented out text below turns out to be completely bullshit
 % \subsection{A Heuristic Analysis}
@@ -601,102 +594,6 @@ We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if
   Let $C$ be a component in $\mathcal{C}$ and let $W:=w_0,\ldots,w_k$ be the walk around the outer face of $C$, so that $w_0=w_k$.  Then, for each $i\in\{1,\ldots,k\}$, $H$ contains an inner face $w_{i-1}w_iv_i$ that is to the left of the edge $w_{i-1}w_i$ when traversed from $w_{i-1}$ to $w_i$.  Since $w_i\in I(H)$, $v_i\in B(H)$.  Since $H$ is $2$-critical and does not contain parallel edges, $v_i\neq v_j$ for any $i\neq j$. Let $N_2(C):=\{v_1,\ldots,v_k\}$.  Therefore $|N_2(C)|= k\ge |B(C)|$. Since $H$ is $2$-critical, $N_2(C)\cap N_2(C')=\emptyset$ for any distinct components $C,C'\in\mathcal{C}$.  Therefore $|B(H)|\ge \sum_{C\in\mathcal{C}} |N_2(C)|\ge \sum_{C\in\mathcal{C}} |B(C)|=|B(H-B(H))|$.
 \end{proof}
 
-
-%
-% For any graph $H$ and two subsets $A$ and $B$ of vertices of $H$, we use $E_H(A,B):=\{vw\in E(H):v\in A, w\in B\}$ to denote the set of edges of $H$ with one endpoint in $A$ and one endpoint in $B$.
-
-
-% \begin{obs}\label{degree_isolated}
-%   Let $H$ be a generalized near-triangulation and let $C$ be a component of $H-B(H)$ that consists of a single vertex. Then $|E_H(V(C),B(H))|\ge 3$.
-% \end{obs}
-%
-% \begin{proof}
-%   The single vertex $w$ in $C$ is an inner vertex of the generalized near-triangulation $H$, $\deg_H(w)\ge 3$.  Since $\deg_{H-B(H)}(w)=0$, every edge incident to $w$ has an endpoint in $B(H)$, so $|E_H(V(C),B(H))|=\deg_H(w)\ge 3$.
-% \end{proof}
-%
-
-% \begin{obs}\label{degree_minimum}
-%   Let $H$ be a generalized near-triangulation and let $C$ be a component of $H-B(H)$. Then $|E_H(V(C),B(H))|\ge 3$.
-% \end{obs}
-%
-% \begin{proof}
-%   By contracting all the vertices of $C$ into a single vertex $w$ and eliminating multiple edges, we obtain a generalized near-triangulation $H'$ in which $w$ is an isolated vertex in $H'-B(H')=H'-B(H)$.  By \cref{degree_isolated}, $|E_{H'}(\{w\},B(H))|\ge 3$.  For every edge $wv\in E_{H'}(\{w\},B(H))$, there is at least one edge $w'v\in E_H(V(C),B(H))$, so $|E_H(V(C),B(H))|\ge |E_{H'}(\{w\},B(H))|\ge 3$.
-% \end{proof}
-
-
-% \begin{obs}\label{degree_minimum}
-%   Let $H$ be a generalized near-triangulation and let $C$ be a component of $H-B(H)$. Then $|E_H(V(C),B(H))|\ge 3$.
-% \end{obs}
-
-
-% \pat{Much of this section can be simplified, since we don't care about degree-$1$ vertices in $H-B(H)$ anymore and we have lots of control over .}
-%
-% For a graph $H$ and a subset $A$ of the vertices of $H$, $\widehat{N}_{H}(A):=\{v\in N_H(A):|N_H(v)\cap A|\ge 2\}$. We will abuse this notation slightly by using the shorthand $\widehat{N}_H(C):=\widehat{N}_H(V(C))$ when $C$ is a subgraph of $H$. (See \cref{n2}.)
-% \begin{figure}[htbp]
-%   \centering
-%   \includegraphics[page=3]{figs/n2}
-%   \caption{An illustration of $\widehat{N}_H(A)$. Vertices of $A$ are black, vertices in $\widehat{N}_H(A)$ are orange and vertices in $N_H(A)\setminus \widehat{N}_H(A)$ are in grey.}
-%   \label{n2}
-% \end{figure}
-% % Let $H$ be a $2$-critical graph and let $C$ be a component of $H-B(H)$. We say that a vertex $v$ in $B(H)$ \defin{belongs} to $C$ if $|N_H(v)\cap V(C)|= 2$.  Note that, since $H$ is $2$-critical any $v\in B(H)$ belongs to at most once component of $H-B(H)$. We use the notation $S_H(C)$ to denote the set of all vertices in $B(H)$ that belong to $C$.
-% A \defin{corner} of a face $f$ in a plane graph $H$ is an ordered pair $(uv,vw)$ of (directed) edges in $H$ that occur consecutively around $v$ and such that the face $f$ is to the left of the path $uvw$.  Note that this includes the possibility that $u=w$, which occurs when $v$ has degree $1$. The vertex $v$ is the \defin{internal vertex} of the corner $(uv,vw)$.  For a plane graph $H$, $\corners(H)$ denotes the set of corners on the outer face of $H$.
-%
-% \begin{lem}\label{corner_degree}
-%   Let $H$ be a $2$-critical generalized near-triangulation, and let $C$ be a component of $H-B(H)$ with at least two vertices. Then $|\widehat{N}_H(C)|\ge |\corners(C)|$.
-% \end{lem}
-%
-% \begin{proof}
-%   Consider some corner $(uv, vw)$ of the outer face of $C$.  Since $u,v,w$ are in $I(H)$, $H$ contains faces $uxv$ and $vyw$ that are to the left of $uv$ and $vw$, respectively. Since the path $uvw$ is on the outer face of $C$, these faces are not faces of $H-B(H)$, so $x,y\in B(H)$.  Since $x$ is adjacent to $u$ and $v$ and $y$ is adjacent to $v$ and $w$, each of $x$ and $y$ is in $\widehat{N}_H(C)$.  We claim that $x\neq y$.  To see this, there are two cases to consider. (See \cref{uvw}.)
-%   \begin{figure}[htbp]
-%     \centering
-%     \begin{tabular}{cc}
-%       \includegraphics[page=1]{figs/corners} &
-%       \includegraphics[page=2]{figs/corners}
-%     \end{tabular}
-%     \caption{The two cases in the  proof of \cref{corner_degree}.}
-%     \label{uvw}
-%   \end{figure}
-%   \begin{compactenum}
-%     \item If $u\neq w$ and $x=y$ then $x\in B(H)$ is adjacent to each of $u,v,w\in I(H)$, so $\deg^+_H(x)\ge 3$, contradicting the fact that $H$ is $2$-critical.
-%     \item If $u=w$ and $x=y$, then there are two distinct inner faces of $H$ (one on each side of $ux$) that each have $u$, $v$, and $w$ on their boundary, which is not possible because $H$ does not have parallel edges.
-%   \end{compactenum}
-%   Therefore, the edges $vx$ and $vy$ can be assigned to the corner $(uv,vw)$. By doing this for each corner of the outer face of $C$ we obtain a mapping from the edges between $\widehat{N}_H(C)$ and $B(C)$ onto $\corners(C)$ in which each corner has two edges mapped onto it.  Therefore, the number of edges between $\widehat{N}_H(C)$ and $B(C)$ is at least $2|\corners{C}|$.  By definition, each vertex in $\widehat{N}_H(C)$ has two neighbours in $C$, so $|\widehat{N}_H(C)|\ge |\corners(C)|$.
-% \end{proof}
-%
-% A \defin{star} is a tree with one vertex of degree at least $2$ and all other vertices of degree $1$.
-% For a graph $H$ and a non-negative integer $d$, let $V_d(H):=\{v\in V(H):\deg_H(v)=d\}$ be the set of vertices of $H$ having degree $d$.
-%
-% \begin{lem}\label{degree_corners_and_leaves}
-%   Let $H$ be a $2$-critical generalized near-triangulation and let $C$ be a component of $H-B(H)$ with at least two vertices. Then $|\widehat{N}_H(C)|\ge |B(C)|$.  Furthermore, if $C$ has at least three vertices and is not a star then $|\widehat{N}_H(C)|\ge |B(C)| + |V_1(C)|$.
-% \end{lem}
-%
-% \begin{proof}
-%   Each vertex in $B(C)$ is the internal vertex of at least one corner in $\corners(C)$ so, by \cref{corner_degree}, $|E_H(V(C),B(H))|\ge 2|B(C)|$.  This establishes the first part of the corollary.
-%
-%   Now suppose $|C|\ge 3$ and $C$ is not a star and consider some vertex $v\in V(C)$ that is adjacent to $d\ge 1$ vertices $v_1,\ldots,v_d$ in $V_1(C)$.  Since $C$ is not a star, $v$ is also adjacent to at least one vertex $w$ in $B(C)\setminus V_1(C)$. We claim that $v$ is the internal vertex of at least $d+1$ corners in $\corners(C)$. Indeed, for each $i\in\{1,\ldots,d\}$ $v$ is the internal vertex of the corners $(x_iv,vv_i)$ and $(v_iv,vy_i)$ for some $x_i,y_i\in B(C)$.  There is at least one value of $i$ for which $x_i\not\in\{v_1,\ldots,v_d\}$.
-%   % and at least one value of $i$ for which $y_1\not\in\{v_1,\ldots,v_d\}$.
-%   For each $i\in\{1,\ldots,d\}$, there is at most one value $j$ such that $(x_iv,vv_i)=(v_jv,vy_j)$ and there is at least one value $i\in\{1,\ldots,d\}$ for which no such $j$ exists.  Therefore
-%   $
-%   |\bigcup_{i=1}^d \{(x_iv,vv_i),(v_iv,vy_i)\}| > d.
-%   $
-%   If we let $A$ denote the subset of vertices in $B(C)$ that are adjacent to at least one vertex in $V_1(C)$ we see that
-%   \[
-%     |\corners(C)| \ge |B(C)\setminus A| + |A| + |V_1(C)|
-%     = |B(C)| + |V_1(C)|  \enspace .
-%   \]
-%   Now the second part of the lemma follows from \cref{corner_degree}.
-% \end{proof}
-%
-%
-% \begin{lem}\label{boundary_size}
-%   Let $H$ be a $2$-critical generalized near-triangulation.  Then $|B(H)|\ge\mu(H-B(H))$.
-% \end{lem}
-%
-% \begin{proof}
-%
-%   Follows immediately from \cref{degree_isolated,degree_walk} and the fact that $\deg^+_H(v)\le 2$ for all $v\in B(H)$.
-% \end{proof}
-
 For each integer $r\ge 3$, the \defin{$r$-wheel} $W_r$ is the near-triangulation whose outer face is bounded by a cycle $v_0,\ldots,v_{r-1}$ that contains a single vertex $x$ in its interior and that is adjacent to each of $v_0,\ldots,v_{r-1}$.  For even values of $r$, $W_r$ is called an \defin{even wheel}. Note that the following lemma, illustrated in \cref{biconnected_critical_colouring} is about critical graphs, not $2$-critical graphs.
 
 \begin{figure}
@@ -872,66 +769,51 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
     \label[bg]{bg_two_critical}
 \end{compactenum}
 
-\begin{figure}
-  \centering
-  \includegraphics[page=2,trim={0 28 0 23},clip]{figs/bg_layers.pdf} \\[0ex]
-  $G[R\cup S]$ \\[2ex]
-  \includegraphics[page=3,trim={0 18 0 10},clip]{figs/bg_layers.pdf} \\
-  $G[Q\cup R\cup S]$ \\[2ex]
-  \includegraphics[page=4]{figs/bg_layers.pdf} \\
-  $G[X\cup Q\cup R\cup S]$ \\[2ex]
-  \caption{A useful figure?}
-\end{figure}
-\begin{thm}\label{best_greedy}
-  When applied to an $n$-vertex triangulation $G$,  $\textsc{BetterGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $10n/21\pm O(1)$.
-\end{thm}
-% \hussein{Is adding the following inequality to the constrains helpful  $r \leq |E|/4 \leq 3n/4 - 3/2$? I don t think so  } \pat{No: The optimal is achieve when $r\approx n/7$}
+
 \begin{proof}
-  For each integer $t\ge 3$, let $x_t$ be the number of times $\textsc{BetterGreedy}(G)$ falls into case \cref{bg_high_degree} and chooses
-  \pat{Continue here....} $v_i$ such that $\deg^+_{G_i}(v_i)=t$ and let $z$ be the number of times $\textsc{BetterGreedy}(G)$ falls into case \cref{bg_two_three}.  Then
-  \[
-     D:=\left|N_G[X_{r-1}]\right| = 3 + \sum_{t\ge 3}tx_t + 5z \enspace .
-  \]
-  is the size of the set dominated $X_{r-1}$ immediately before the final iteration of $\textsc{BetterGreedy}(G)$.
+  By \cref{leaf_killer,degree_zero_killer,really_good} during each of the first $r-1$ steps, one of the following occurs:
+  \begin{compactitem}
+    \item[$x_t$:] For some $t\ge 3$, we can add a single vertex $v_i$ that increases the size of the dominated set $D_{i+1}:=N[X_{i+1}]$ by $t$ and increases the size of the boundary set $B_{i+1}:=N_G(I(G-D_{i+1}))$ by at most $t-1$.
+    \item[$a$:] We can add a vertex $v_i$ that increases the size of the dominated set $D_{i+1}$ by $2$ and \emph{decreases} the size of the boundary set $B_{i+1}$ by at least $1$.
+    \item[$b$:] We can add a vertex $v_i$ that increases the size of the dominated set $D_{i+1}$ by $1$ and \emph{decreases} the size of the boundary set $B_{i+1}$ by at least $3$.
+    \item[$c$:] We can add a pair of vertices $\{v_i,w_i\}$ that increase the size of the dominated set $D_{i+1}$ by at least $5$ and increases the size of the boundary set $B_{i+1}$ by at most $2$.
+    \item[$\bullet$:] We can directly complete the connected dominating set $X_r=X_{i+1}$ by adding a set $\Delta_{r-1}=\Delta_i$ of at most $(2|B(G_{i}-B(G_i))|+|I(G_i-B(G_i))|)/3$ additional vertices where, as before $G_i:=G[B_i\cup (V(G)\setminus D_i)]$ and $r=i+1$.
+  \end{compactitem}
 
-  Let $Q:=|B(G_{r-1})|$, let $R:=|B(G_{r-1}-B(G_{r-1}))|$, and let $S:=|I(G_{r-1}-B(G_{r-1}))$.  In words: $Q$ is the size of the boundary of the $2$-critical graph $G_{r-1}$; $R$ is the size of the of the boundary of the critical graph obtained after removing the boundary of $G_{r-1}$; and $S$ is the independent set of vertices in the interior of this critical graph.
-  Then, by \cref{degree_corners_and_leaves} and \cref{base_case}
+  Let $a$, $b$, $c$, and $\langle x_t\rangle_{t\ge 3}$ denote the number of times each of these cases occurs in the first $r-1$ steps, and let $D:=D_{r-1}$, $B:=B_{r-1}$, and $X:=X_{r-1}$.  Then,
+  \begin{align}
+    |D| & \ge 3 + \sum_{t\ge 3}tx_t + 2a + b + 5c \label{dd_size} \\
+    |B| & \le 3 + \sum_{t\ge 3}(t-1)x_t - a - 3b + 2c \enspace \label{bb_size} \\
+    |X| & \le \sum_{t\ge 3}x_t + a + b + 2c \label{x_size} \enspace .
+  \end{align}
 
+  Let $R:=B(G_{r-1}-B(G_{r-1}))$ and $S:=I(G_{r-1}-B(G_{r-1}))$.  Since $\{D,R,S\}$ is a partition of $V(G)$,
   \begin{equation}
-    Q \ge R \ge 3S \enspace . \label{best2}
+    |D|+|R|+|S|= n \enspace . \label{ttotal_size}
   \end{equation}
-  By definition $r-1 = \sum_{t\ge 3}x_t+z$.
-  As in the proofs of \cref{simple_greedy}, $D+|I(G_i)|=D+R+S=n$, so we get the constraint:
+  As part of this section, we will show that $|B_{r-1}|\ge |B(G_i-B(G_i))|$, i.e., $|B|\ge |R|$.
+
+  Putting everything together we get the constraints:
+  \begin{align}
+        3 + \sum_{t\ge 3}tx_t + 2a + b + 5c + |R| + |S| \le n&
+          & \text{(by \cref{dd_size} and \cref{ttotal_size})}  \label{a} \\
+        3 + \sum_{t\ge 3}(t-1)x_t - a - 3b + 2c \ge |R|
+          & & \text{(by \cref{bb_size} and since $|B|\ge |R|$)} \label{b} \\
+  \end{align}
+  with all values non-negative.  The size of the final connected dominating set $X_r$ is then at most
   \begin{equation}
-    n = D+R+S = \sum_{t\ge 3} tx_t + 5z + R + S \label{best3} \enspace .
+    |X_r| \le \sum_{t\ge 3}x_t + a + b + 2c + 2|R|/3 + |S|/3  \enspace . \label{oobjective}
   \end{equation}
-  Since $B(G_{r-1})\subseteq N_G(X_{r-1})$, $D \ge |X_{r-1}|+|B(G_{r-1})|=r-1+Q$, so
-  \begin{equation}
-    n = D+R+S \ge r-1 + Q + R + S \enspace . \label{best4}
-  \end{equation}
-  Finally, the size $Q$ of the boundary $B(G_{r-1})$ is at most
-  \begin{equation}
-    Q \le 3 + \sum_{t\ge 3}(t-1)x_t + 2z \enspace . \label{best5}
-  \end{equation}
-  By \cref{two_critical_handler}, the size of $\Delta_{r-1}$ is at most $2(R+S)/3$, so the total size of the final set $X$ is at most
-  \begin{equation}
-    r-1 + z + (Q+R+S)2(R + S)/3 \enspace .  \label{best_objective}
-  \end{equation}
-  We can eliminate the variables $x_t$ for $t\ge 4$:
-  \begin{clm}
-    In any assignment of non-negative values to $Q, R, S$, $z$, and $x_3,x_4\ldots$ that maximizes \cref{best_objective} subject to \cref{best2,best3,best4,best5}, $x_t=0$ for all $t\ge 4$.
+
+  \begin{clm}\label{simplify}
+    If $(a,b,c,|R|,|S|,x_3,x_4,\ldots)$ are non-negative and satisfy \cref{a,b}, then setting $x_3\gets x_3+\sum_{t\ge 4}tx_t/2$ and $x_t\gets 0$ for all $t\ge 4$ also satisfy \cref{a,b} and do not decrease \cref{oobjective}.
   \end{clm}
-  \begin{clmproof}
-     If $x_t = c >0$ for some $t\ge 3$, then we can set $x_t\gets 0$, $z\gets z+tc/?$, \ldots \pat{Finish this....}
-  \end{clmproof}
-  \begin{clm}
-    In any assignment of non-negative values to $Q, R, S$, $z$, and $x_3,x_4\ldots$ that maximizes \cref{best_objective} subject to \cref{best2,best3,best4,best5}, $z=0$.
-  \end{clm}
-  \begin{clmproof}
-    If $z = c >0$  then we can set $z\gets 0$, $x_3\gets x_3+5c/3$, $Q\gets Q+10c/3-2c=Q+4c/3$, $R\gets 10c/3-2c=Q+4c/3$, and $S\gets 10c/9-2c/3=S+4c/9$. Then the objective function \cref{best_objective} increases by $(5/3+4/3+4/9)c >0$.  \Cref{best2} is still satisfied because the quantities $Q$, $R$, and $3S$ change by exactly the same amount.  \Cref{best3} is still satisfied because the right hand side decreases by $(5-4/3+4/3)c=7c/3$. \Cref{best4} still holds because the right hand side decreases by $4c/3 + 4c/3 +4c/9 - 5c/3>0$  \Cref{best5} still holds because the left hand side decreases by $4c/3$ and the right hand side increases by $10c/3 - 2c=4c/3$.
 
+  \begin{clmproof}
+    Suppose $x_t>0$ for some integer $t\ge 4$, otherwise there is nothing to prove.  Let $i:=\min\{t\ge 4: x_t>0\}$ and set $x_3\gets x_3+(t-1)x_t/3$ and $x_t\gets 0$. This change causes the left-hand-side of \cref{a} to decrease by $x_t$. This change does not affect the left-hand-side of \cref{b}.  This change increases the value of \cref{oobjective} by $(t-1)x_t/3-x_t\ge 0$.
   \end{clmproof}
-  Therefore, \cref{best2,best3,best4,best5} are inequalities in four non-negative variables $x_3$, $Q$, $R$ and $S$.  Maximizing \cref{best_objective} subject to these constraints is an easy linear programming exercise and the maximum is achieved when \pat{Correct these: $x_3=(n-6)/5$, $Q=R=(2n+3)/5$, $S=0$, giving a final bound of $|X|\le r-1+R/3\le (7n-12)/15$---See Sage Code in the appendix.}.
+
+  By \cref{simplify}, maximizing \cref{oobjective} subject to the constraints given by \cref{a,b} is a linear program in six variables $(x_3,a,b,c,|R|,|S|)$ which can be done easily.  The maximum is achieved when $x_3=a=b=c=|S|=0$, $c=(n-6)/7$ and $|R|=(2n+9)/7$, at which point \cref{oobjective} evaluates to $(10n-18)/21$.
 \end{proof}
 
 
