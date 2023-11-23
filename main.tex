@@ -547,7 +547,7 @@ Next we show that, even when all vertices in $B(H)$ have inner-degree at most $2
     \label{isolated_fig}
   \end{figure}
   \begin{compactenum}[(a)]
-    \item There exists $v\in N_H(w)$ with $\deg^+_H(v)=2$. In this case, $N^+_H(v)=\{w,w'\}$ and the vertices $w$ and $w'$ are in a different biconnected components $C$ and $C'$, respectively, of $H$. The component $C$ has exactly one inner vertex, $w$ so, by \cref{inner_degree_1}, $C$ is isomorphic to $K_4$.  By \cref{inner_degree_1}, $C'[N_{C'}(v)]$ is also isomorphic to $K_4$  Let $x$ and $y$ be the two neighbours of $v$ on the outer face of $C'$. Since $\deg^+_H(v)=2$, $\deg_{C'}^+(v)=1$, so the cycle $vxw'y$ has no vertices of $H$ in its interior.
+    \item There exists $v\in N_H(w)$ with $\deg^+_H(v)=2$. In this case, $N^+_H(v)=\{w,w'\}$ and the vertices $w$ and $w'$ are in a different biconnected components $C$ and $C'$, respectively, of $H$. By \cref{inner_degree_1}, $C[N_C[v]]$ is isomorphic to $K_4$. Since $\deg_{H-B(H)}(w)=0$, the faces of $C[N_C[v]]$ have no vertices of $H$ in their interiors.   By \cref{inner_degree_1}, $C'[N_{C'}[v]]$ is also isomorphic to $K_4$.  Let $x$ and $y$ be the two neighbours of $v$ on the outer face of $C'$. Since $\deg^+_H(v)=2$, $\deg_{C'}^+(v)=1$, so the cycle $vxw'y$ has no vertices of $H$ in its interior.
     We claim that the triangle $yw'x$ also contains no vertices of $H$ in its interior. Indeed, if $yw'x$ contains more than one inner vertex then $\deg^+_H(x)>2$ or $\deg^+_H(y)>2$, which is ruled out by the statement of the lemma.  If $yw'x$ contains exactly one inner vertex then $\deg_{H-B(H)}(w')=1$, which is ruled out by the statement of the lemma.
 
     Let $H'$ be a dom-minimal graph that dom-respects $H-v$. Then $w$ and $w'$ are both in $B(H-v)$, so $\deg^+_{H-v}(w)=\deg^+_{H-v}(w')=0$. Therefore, neither $w$ nor $w'$ are in $H'$. Therefore $|H'|\le |H-\{v,w,w'\}|=|H|-3$.  Also $B(H-v)=B(H)\setminus\{v\}\cup\{w,w'\}$ but none of $v$, $w$, or $w'$ are in $H'$.  Therefore, by \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus\{v,w,w'\}$ so $|B(H')|\le |B(H)|-1$.
@@ -582,7 +582,7 @@ We will work our way up to a proof of the following lemma, which allows our algo
 \end{lem}
 
 \begin{proof}
-  Consider some $v\in B(H)$. By \cref{bad_vertex}, $\deg^+_H(v)\ge 1$. Assume for the sake of contradiction that $\deg_H(v)=1$. By \cref{inner_degree_1}, $H[N_H[v]]$ is isomorphic to $K_4$. Let $x$ and $y$ be the neighbours of $v$ on the outer face of $H$ and let $w$ be the inner neighbour of $v$. Since $\deg^+_H(v)=1$ then the cycle $vxwy$ has no vertices of $H$ in its interior.  Since $H$ is $2$-critical, $deg_{H-B(H)}(w)\ge 2$, which implies that $w$ has at least two neighbours in the interior of the cycle $ywx$.  But this implies that at least one of $x$ or $y$, say $x$, has at least two neighbours in the interior of $ywx$.  But this implies that $\deg^+_H(x)\ge 3$, which contradicts the fact that $H$ is $2$-critical.
+  Consider some $v\in B(H)$. By \cref{bad_vertex}, $\deg^+_H(v)\ge 1$. Assume for the sake of contradiction that $\deg_H(v)=1$. By \cref{inner_degree_1}, $H[N_H[v]]$ is isomorphic to $K_4$. Let $x$ and $y$ be the neighbours of $v$ on the outer face of $H$ and let $w$ be the inner neighbour of $v$. Since $\deg^+_H(v)=1$ then the cycle $vxwy$ has no vertices of $H$ in its interior.  Since $H$ is $2$-critical, $\deg_{H-B(H)}(w)\ge 2$, which implies that $w$ has at least two neighbours in the interior of the cycle $ywx$.  But this implies that at least one of $x$ or $y$, say $x$, has at least two neighbours in the interior of $ywx$.  But this implies that $\deg^+_H(x)\ge 3$, which contradicts the fact that $H$ is $2$-critical.
 \end{proof}
 
 
@@ -622,64 +622,64 @@ We will work our way up to a proof of the following lemma, which allows our algo
 % \end{obs}
 
 
-\pat{Much of this section can be simplified, since we don't care about degree-$1$ vertices in $H-B(H)$ anymore and we have lots of control over .}
-
-For a graph $H$ and a subset $A$ of the vertices of $H$, $\widehat{N}_{H}(A):=\{v\in N_H(A):|N_H(v)\cap A|\ge 2\}$. We will abuse this notation slightly by using the shorthand $\widehat{N}_H(C):=\widehat{N}_H(V(C))$ when $C$ is a subgraph of $H$. (See \cref{n2}.)
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[page=3]{figs/n2}
-  \caption{An illustration of $\widehat{N}_H(A)$. Vertices of $A$ are black, vertices in $\widehat{N}_H(A)$ are orange and vertices in $N_H(A)\setminus \widehat{N}_H(A)$ are in grey.}
-  \label{n2}
-\end{figure}
-% Let $H$ be a $2$-critical graph and let $C$ be a component of $H-B(H)$. We say that a vertex $v$ in $B(H)$ \defin{belongs} to $C$ if $|N_H(v)\cap V(C)|= 2$.  Note that, since $H$ is $2$-critical any $v\in B(H)$ belongs to at most once component of $H-B(H)$. We use the notation $S_H(C)$ to denote the set of all vertices in $B(H)$ that belong to $C$.
-A \defin{corner} of a face $f$ in a plane graph $H$ is an ordered pair $(uv,vw)$ of (directed) edges in $H$ that occur consecutively around $v$ and such that the face $f$ is to the left of the path $uvw$.  Note that this includes the possibility that $u=w$, which occurs when $v$ has degree $1$. The vertex $v$ is the \defin{internal vertex} of the corner $(uv,vw)$.  For a plane graph $H$, $\corners(H)$ denotes the set of corners on the outer face of $H$.
-
-\begin{lem}\label{corner_degree}
-  Let $H$ be a $2$-critical generalized near-triangulation, and let $C$ be a component of $H-B(H)$ with at least two vertices. Then $|\widehat{N}_H(C)|\ge |\corners(C)|$.
-\end{lem}
-
-\begin{proof}
-  Consider some corner $(uv, vw)$ of the outer face of $C$.  Since $u,v,w$ are in $I(H)$, $H$ contains faces $uxv$ and $vyw$ that are to the left of $uv$ and $vw$, respectively. Since the path $uvw$ is on the outer face of $C$, these faces are not faces of $H-B(H)$, so $x,y\in B(H)$.  Since $x$ is adjacent to $u$ and $v$ and $y$ is adjacent to $v$ and $w$, each of $x$ and $y$ is in $\widehat{N}_H(C)$.  We claim that $x\neq y$.  To see this, there are two cases to consider. (See \cref{uvw}.)
-  \begin{figure}[htbp]
-    \centering
-    \begin{tabular}{cc}
-      \includegraphics[page=1]{figs/corners} &
-      \includegraphics[page=2]{figs/corners}
-    \end{tabular}
-    \caption{The two cases in the  proof of \cref{corner_degree}.}
-    \label{uvw}
-  \end{figure}
-  \begin{compactenum}
-    \item If $u\neq w$ and $x=y$ then $x\in B(H)$ is adjacent to each of $u,v,w\in I(H)$, so $\deg^+_H(x)\ge 3$, contradicting the fact that $H$ is $2$-critical.
-    \item If $u=w$ and $x=y$, then there are two distinct inner faces of $H$ (one on each side of $ux$) that each have $u$, $v$, and $w$ on their boundary, which is not possible because $H$ does not have parallel edges.
-  \end{compactenum}
-  Therefore, the edges $vx$ and $vy$ can be assigned to the corner $(uv,vw)$. By doing this for each corner of the outer face of $C$ we obtain a mapping from the edges between $\widehat{N}_H(C)$ and $B(C)$ onto $\corners(C)$ in which each corner has two edges mapped onto it.  Therefore, the number of edges between $\widehat{N}_H(C)$ and $B(C)$ is at least $2|\corners{C}|$.  By definition, each vertex in $\widehat{N}_H(C)$ has two neighbours in $C$, so $|\widehat{N}_H(C)|\ge |\corners(C)|$.
-\end{proof}
-
-A \defin{star} is a tree with one vertex of degree at least $2$ and all other vertices of degree $1$.
-For a graph $H$ and a non-negative integer $d$, let $V_d(H):=\{v\in V(H):\deg_H(v)=d\}$ be the set of vertices of $H$ having degree $d$.
-
-\begin{lem}\label{degree_corners_and_leaves}
-  Let $H$ be a $2$-critical generalized near-triangulation and let $C$ be a component of $H-B(H)$ with at least two vertices. Then $|\widehat{N}_H(C)|\ge |B(C)|$.  Furthermore, if $C$ has at least three vertices and is not a star then $|\widehat{N}_H(C)|\ge |B(C)| + |V_1(C)|$.
-\end{lem}
-
-\begin{proof}
-  Each vertex in $B(C)$ is the internal vertex of at least one corner in $\corners(C)$ so, by \cref{corner_degree}, $|E_H(V(C),B(H))|\ge 2|B(C)|$.  This establishes the first part of the corollary.
-
-  Now suppose $|C|\ge 3$ and $C$ is not a star and consider some vertex $v\in V(C)$ that is adjacent to $d\ge 1$ vertices $v_1,\ldots,v_d$ in $V_1(C)$.  Since $C$ is not a star, $v$ is also adjacent to at least one vertex $w$ in $B(C)\setminus V_1(C)$. We claim that $v$ is the internal vertex of at least $d+1$ corners in $\corners(C)$. Indeed, for each $i\in\{1,\ldots,d\}$ $v$ is the internal vertex of the corners $(x_iv,vv_i)$ and $(v_iv,vy_i)$ for some $x_i,y_i\in B(C)$.  There is at least one value of $i$ for which $x_i\not\in\{v_1,\ldots,v_d\}$.
-  % and at least one value of $i$ for which $y_1\not\in\{v_1,\ldots,v_d\}$.
-  For each $i\in\{1,\ldots,d\}$, there is at most one value $j$ such that $(x_iv,vv_i)=(v_jv,vy_j)$ and there is at least one value $i\in\{1,\ldots,d\}$ for which no such $j$ exists.  Therefore
-  $
-  |\bigcup_{i=1}^d \{(x_iv,vv_i),(v_iv,vy_i)\}| > d.
-  $
-  If we let $A$ denote the subset of vertices in $B(C)$ that are adjacent to at least one vertex in $V_1(C)$ we see that
-  \[
-    |\corners(C)| \ge |B(C)\setminus A| + |A| + |V_1(C)|
-    = |B(C)| + |V_1(C)|  \enspace .
-  \]
-  Now the second part of the lemma follows from \cref{corner_degree}.
-\end{proof}
-
+% \pat{Much of this section can be simplified, since we don't care about degree-$1$ vertices in $H-B(H)$ anymore and we have lots of control over .}
+%
+% For a graph $H$ and a subset $A$ of the vertices of $H$, $\widehat{N}_{H}(A):=\{v\in N_H(A):|N_H(v)\cap A|\ge 2\}$. We will abuse this notation slightly by using the shorthand $\widehat{N}_H(C):=\widehat{N}_H(V(C))$ when $C$ is a subgraph of $H$. (See \cref{n2}.)
+% \begin{figure}[htbp]
+%   \centering
+%   \includegraphics[page=3]{figs/n2}
+%   \caption{An illustration of $\widehat{N}_H(A)$. Vertices of $A$ are black, vertices in $\widehat{N}_H(A)$ are orange and vertices in $N_H(A)\setminus \widehat{N}_H(A)$ are in grey.}
+%   \label{n2}
+% \end{figure}
+% % Let $H$ be a $2$-critical graph and let $C$ be a component of $H-B(H)$. We say that a vertex $v$ in $B(H)$ \defin{belongs} to $C$ if $|N_H(v)\cap V(C)|= 2$.  Note that, since $H$ is $2$-critical any $v\in B(H)$ belongs to at most once component of $H-B(H)$. We use the notation $S_H(C)$ to denote the set of all vertices in $B(H)$ that belong to $C$.
+% A \defin{corner} of a face $f$ in a plane graph $H$ is an ordered pair $(uv,vw)$ of (directed) edges in $H$ that occur consecutively around $v$ and such that the face $f$ is to the left of the path $uvw$.  Note that this includes the possibility that $u=w$, which occurs when $v$ has degree $1$. The vertex $v$ is the \defin{internal vertex} of the corner $(uv,vw)$.  For a plane graph $H$, $\corners(H)$ denotes the set of corners on the outer face of $H$.
+%
+% \begin{lem}\label{corner_degree}
+%   Let $H$ be a $2$-critical generalized near-triangulation, and let $C$ be a component of $H-B(H)$ with at least two vertices. Then $|\widehat{N}_H(C)|\ge |\corners(C)|$.
+% \end{lem}
+%
+% \begin{proof}
+%   Consider some corner $(uv, vw)$ of the outer face of $C$.  Since $u,v,w$ are in $I(H)$, $H$ contains faces $uxv$ and $vyw$ that are to the left of $uv$ and $vw$, respectively. Since the path $uvw$ is on the outer face of $C$, these faces are not faces of $H-B(H)$, so $x,y\in B(H)$.  Since $x$ is adjacent to $u$ and $v$ and $y$ is adjacent to $v$ and $w$, each of $x$ and $y$ is in $\widehat{N}_H(C)$.  We claim that $x\neq y$.  To see this, there are two cases to consider. (See \cref{uvw}.)
+%   \begin{figure}[htbp]
+%     \centering
+%     \begin{tabular}{cc}
+%       \includegraphics[page=1]{figs/corners} &
+%       \includegraphics[page=2]{figs/corners}
+%     \end{tabular}
+%     \caption{The two cases in the  proof of \cref{corner_degree}.}
+%     \label{uvw}
+%   \end{figure}
+%   \begin{compactenum}
+%     \item If $u\neq w$ and $x=y$ then $x\in B(H)$ is adjacent to each of $u,v,w\in I(H)$, so $\deg^+_H(x)\ge 3$, contradicting the fact that $H$ is $2$-critical.
+%     \item If $u=w$ and $x=y$, then there are two distinct inner faces of $H$ (one on each side of $ux$) that each have $u$, $v$, and $w$ on their boundary, which is not possible because $H$ does not have parallel edges.
+%   \end{compactenum}
+%   Therefore, the edges $vx$ and $vy$ can be assigned to the corner $(uv,vw)$. By doing this for each corner of the outer face of $C$ we obtain a mapping from the edges between $\widehat{N}_H(C)$ and $B(C)$ onto $\corners(C)$ in which each corner has two edges mapped onto it.  Therefore, the number of edges between $\widehat{N}_H(C)$ and $B(C)$ is at least $2|\corners{C}|$.  By definition, each vertex in $\widehat{N}_H(C)$ has two neighbours in $C$, so $|\widehat{N}_H(C)|\ge |\corners(C)|$.
+% \end{proof}
+%
+% A \defin{star} is a tree with one vertex of degree at least $2$ and all other vertices of degree $1$.
+% For a graph $H$ and a non-negative integer $d$, let $V_d(H):=\{v\in V(H):\deg_H(v)=d\}$ be the set of vertices of $H$ having degree $d$.
+%
+% \begin{lem}\label{degree_corners_and_leaves}
+%   Let $H$ be a $2$-critical generalized near-triangulation and let $C$ be a component of $H-B(H)$ with at least two vertices. Then $|\widehat{N}_H(C)|\ge |B(C)|$.  Furthermore, if $C$ has at least three vertices and is not a star then $|\widehat{N}_H(C)|\ge |B(C)| + |V_1(C)|$.
+% \end{lem}
+%
+% \begin{proof}
+%   Each vertex in $B(C)$ is the internal vertex of at least one corner in $\corners(C)$ so, by \cref{corner_degree}, $|E_H(V(C),B(H))|\ge 2|B(C)|$.  This establishes the first part of the corollary.
+%
+%   Now suppose $|C|\ge 3$ and $C$ is not a star and consider some vertex $v\in V(C)$ that is adjacent to $d\ge 1$ vertices $v_1,\ldots,v_d$ in $V_1(C)$.  Since $C$ is not a star, $v$ is also adjacent to at least one vertex $w$ in $B(C)\setminus V_1(C)$. We claim that $v$ is the internal vertex of at least $d+1$ corners in $\corners(C)$. Indeed, for each $i\in\{1,\ldots,d\}$ $v$ is the internal vertex of the corners $(x_iv,vv_i)$ and $(v_iv,vy_i)$ for some $x_i,y_i\in B(C)$.  There is at least one value of $i$ for which $x_i\not\in\{v_1,\ldots,v_d\}$.
+%   % and at least one value of $i$ for which $y_1\not\in\{v_1,\ldots,v_d\}$.
+%   For each $i\in\{1,\ldots,d\}$, there is at most one value $j$ such that $(x_iv,vv_i)=(v_jv,vy_j)$ and there is at least one value $i\in\{1,\ldots,d\}$ for which no such $j$ exists.  Therefore
+%   $
+%   |\bigcup_{i=1}^d \{(x_iv,vv_i),(v_iv,vy_i)\}| > d.
+%   $
+%   If we let $A$ denote the subset of vertices in $B(C)$ that are adjacent to at least one vertex in $V_1(C)$ we see that
+%   \[
+%     |\corners(C)| \ge |B(C)\setminus A| + |A| + |V_1(C)|
+%     = |B(C)| + |V_1(C)|  \enspace .
+%   \]
+%   Now the second part of the lemma follows from \cref{corner_degree}.
+% \end{proof}
+%
 %
 % \begin{lem}\label{boundary_size}
 %   Let $H$ be a $2$-critical generalized near-triangulation.  Then $|B(H)|\ge\mu(H-B(H))$.
@@ -784,11 +784,22 @@ Now we drop the requirement that $H$ is biconnected.
   % In the latter two cases, we may assume, without loss of generality (by renaming colours), that $z_0\in X_{1}'$.  Since $z_0\not\in L$, $\deg_H(z_0)\ge 3$ so $\deg_{H'}(z_0)\ge 2$.  Therefore we may assume, without loss of generality, that $X_1'$ and $X_2'$ each dominate $z_0$. Redefine $L_{(2-r)\bmod 3}'\gets L_{(2-r)\bmod 3}'\cup\{z_r\}$ so that $L_0'$, $L_1'$ and $L_2'$ is a partitition of $L$.  Then we take $X_i:=X_{i}'\cup\{z_j:1-j\equiv i\pmod 3\}$, $L_0:=L_0'$, $L_1:= L_1'$, and $L_2:=L_2'$.  These sets satisfy the requirements of the lemma.  Indeed, the only concern would be that $z_0$ is not dominated by $X_0$ because $z_0$ is not necessarily dominated by $X_0'$, but this does not occur because $X_0$ includes $z_1$.
 
   % Finally, we arrive at the case in which $L=\emptyset$.
-  If $H$ is biconnected then, since $H$ is not an even wheel, we can immediately apply \cref{biconnected_critical} and we are done.  Otherwise, $H$ contains a cut vertex $v$ that separates $H$ into components $C_1,\ldots,C_k$ and such that $H':=H[V(C_1)\cup\{v\}]$ is biconnected. Since $L=\emptyset$, $H'$ has at least three vertices. If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H'$ and $v$ to obtain sets $X_0'$, $X_1'$, and $X_2'$. Otherwise, we apply \cref{biconnected_critical} to $H'$ to obtain sets $X_0'$, $X_1'$, and $X_2'$.  In either case we may assume, without loss of generality that $v\in X_1'$, that $X_1'$ and $X_2'$ each dominate $H'$ and that $X_0'$ dominates $V(H')\setminus\{v\}$.
+  If $H$ is biconnected then, since $H$ is not an even wheel, we can immediately apply \cref{biconnected_critical} and we are done.  Otherwise, $H$ contains a cut vertex $v$ that separates $H$ into components $C_1,\ldots,C_k$ and such that $H':=H[V(C_1)\cup\{v\}]$ is biconnected. Refer to \cref{critical_3_colouring}. Since $L=\emptyset$, $H'$ has at least three vertices. If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H'$ and $v$ to obtain sets $X_0'$, $X_1'$, and $X_2'$. Otherwise, we apply \cref{biconnected_critical} to $H'$ to obtain sets $X_0'$, $X_1'$, and $X_2'$.  In either case we may assume, without loss of generality that $v\in X_1'$, that $X_1'$ and $X_2'$ each dominate $H'$ and that $X_0'$ dominates $V(H')\setminus\{v\}$.
 
-  Let $H'':=H-V(C_1)$. \pat{Deal with the case where $\deg_{H''}(v)=1$.}
+  \begin{figure}[htbp]
+    \centering
+    \begin{tabular}{cc}
+      \includegraphics[page=1,trim={10 0 10 0},clip]{figs/critical_3_colouring} &
+      \includegraphics[page=2]{figs/critical_3_colouring}
+    \end{tabular}
+    \caption{Two cases in the proof of \cref{critical}.}
+    \label{critical_3_colouring}
+  \end{figure}
 
+  Let $H'':=H-V(C_1)$. First, suppose that $\deg_{H''}(v)>1$.
   If $H''$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H''$ and $v$ to obtain sets $X_0''$, $X_1''$, $X_2''$. Otherwise, we apply the inductive hypothesis to $H''$ to obtain sets $X_0''$, $X_1''$, $X_2''$ that each dominate $H''$. In either case we may assume, without loss of generality (by renaming) that $v\in X_1''$, that $X_1''$ and $X_2''$ each dominate $H'$ and that $X_0''$ dominates $V(H'')\setminus\{v\}$.  Then the sets $X_0:=X_0'\cup X_2''$, $X_1:=X_1'\cup X_1''$ and $X_2:=X_2'\cup X_0''$ satisfy the requirements of the lemma.  (The only concern is whether each set dominates $v$, but this is guaranteed by the fact that $v\in X_1$, and that $X_2'\subseteq X_2$ and $X_2''\subseteq X_0$ each dominate $v$.)
+
+  Finally, if $\deg_{H''}(v)=1$ then we consider the maximal path $v,v_1,v_2,\ldots,v_{r-1},v_r$ such that $\deg_{H''}(v_i)=2$ for each $i\in\{1,\ldots,r-1\}$.  Let $H''':=H''-\{v,v_1,\ldots,v_{r-1}\}$ and we treat $H'''$ exactly as we treated $H''$ in the previous paragraph to obtain sets $X_0'''$, $X_1'''$ and $X_2'''$.  Without loss of generality, we assume that $v_r\in X_{(r-1)\bmod 3}$, that $X_{(r-1)\bmod 3}$ and $X_{(r\bmod 3)}$ each dominate $H'''$ and that $X_{(r-2)\bmod 3}$ dominates  $V(H''')\setminus\{v_r\}$. Let $X_0'':=X_0'''\cup\{v_i:i\equiv 2\pmod 3\}$, $X_1'':=X_1'''\cup\{v\}\cup\{v_i:i\equiv 0\pmod 3\}$, and  $X_2'':=X_2'''\cup\{v_i:i\equiv 1\pmod 3\}$.  Then $v\in X_1''$, $X_1''$ and $X_2''$ each dominate $H''$, and $X_0''$ dominates $V(H'')\setminus\{v\}$.  We can now define the sets $X_0$, $X_1$, and $X_2$ exactly as we did in the previous paragraph.
 \end{proof}
 
 
