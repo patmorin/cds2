@@ -562,20 +562,26 @@ Next we show that, even when all vertices in $B(H)$ have inner-degree at most $2
 \subsection{$2$-Critical Graphs}
 
 
-We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if $\deg^+_H(v)\le 2$ for each $v\in B(H)$,  $H-B(H)$ is critical, and $\deg_{H-B(H)}(w)\ge 2$ for all $w\in V(H-B(H))$.  (See \cref{two_critical_figure}.)
-We will work our way up to a proof of the following lemma, which allows our algorithm to handle $2$-critical graphs directly, in one step:
+We say that a generalized near-triangulation $H$ is \defin{$2$-critical} if
+\begin{compactenum}[({2-C}1)]
+  \item $\deg^+_H(v)\le 2$ for each $v\in B(H)$; \label[tc]{inner_degree_2}
+  \item $H-B(H)$ is critical; \label[tc]{inner_critical}
+  \item $\deg_{H-B(H)}(w)\ge 2$ for all $w\in V(H-B(H))$. \label[tc]{inner_vertex_degre_2}
+\end{compactenum}
+(See \cref{two_critical_figure}.) We will work our way up to a proof of the following lemma, which allows our algorithm to handle $2$-critical graphs directly, in one step:
+
+\begin{figure}
+  \centering
+  \includegraphics[page=1]{figs/two_critical}
+  \caption{A $2$-critical generalized near-triangulation.}
+  \label{two_critical_figure}
+\end{figure}
+
 
 \begin{lem}\label{two_critical_handler}
   Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X\subseteq V(H)$ of size at most $(2|B(H-B(H))| + I(H-B(H)))/3$ that dominates $I(H)$ and such that each component of $H[X]$ contains at least one vertex in $B(H)$.
 \end{lem}
 
-\begin{figure}[htbp]
-  \centering
-  \pat{Update this figure}.
-  % \includegraphics[page=3,trim={0 15 0 0},clip]{figs/bg_layers}
-  \caption{A $2$-critical generalized near-triangulation.}
-  \label{two_critical_figure}
-\end{figure}
 
 \begin{lem}
   Let $H$ be a dom-minimal $2$-critical generalized near-triangulation.  Then $\deg^+H(v)=2$ for all $v\in B(H)$.
@@ -591,7 +597,8 @@ We will work our way up to a proof of the following lemma, which allows our algo
 \end{lem}
 
 \begin{proof}
-  Degree-counting
+  Let $\mathcal{C}$ be the set of components of $H-B(H)$.
+  Let $C$ be a component in $\mathcal{C}$ and let $W:=w_0,\ldots,w_k$ be the walk around the outer face of $C$, so that $w_0=w_k$.  Then, for each $i\in\{1,\ldots,k\}$, $H$ contains an inner face $w_{i-1}w_iv_i$ that is to the left of the edge $w_{i-1}w_i$ when traversed from $w_{i-1}$ to $w_i$.  Since $w_i\in I(H)$, $v_i\in B(H)$.  Since $H$ is $2$-critical and does not contain parallel edges, $v_i\neq v_j$ for any $i\neq j$. Let $N_2(C):=\{v_1,\ldots,v_k\}$.  Therefore $|N_2(C)|= k\ge |B(C)|$. Since $H$ is $2$-critical, $N_2(C)\cap N_2(C')=\emptyset$ for any distinct components $C,C'\in\mathcal{C}$.  Therefore $|B(H)|\ge \sum_{C\in\mathcal{C}} |N_2(C)|\ge \sum_{C\in\mathcal{C}} |B(C)|=|B(H-B(H))|$.
 \end{proof}
 
 
@@ -690,9 +697,14 @@ We will work our way up to a proof of the following lemma, which allows our algo
 %   Follows immediately from \cref{degree_isolated,degree_walk} and the fact that $\deg^+_H(v)\le 2$ for all $v\in B(H)$.
 % \end{proof}
 
-For each integer $r\ge 3$, the \defin{$r$-wheel} $W_r$ is the near-triangulation whose outer face is bounded by a cycle $v_0,\ldots,v_{r-1}$ that contains a single vertex $x$ in its interior and that is adjacent to each of $v_0,\ldots,v_{r-1}$.
+For each integer $r\ge 3$, the \defin{$r$-wheel} $W_r$ is the near-triangulation whose outer face is bounded by a cycle $v_0,\ldots,v_{r-1}$ that contains a single vertex $x$ in its interior and that is adjacent to each of $v_0,\ldots,v_{r-1}$.  For even values of $r$, $W_r$ is called an \defin{even wheel}. Note that the following lemma, illustrated in \cref{biconnected_critical_colouring} is about critical graphs, not $2$-critical graphs.
 
-Note that the following lemma is about critical graphs, not $2$-critical graphs.
+\begin{figure}
+  \centering
+  \includegraphics[page=7,trim={0 55 0 10},clip]{figs/two_critical}
+  \caption{\cref{biconnected_critical}: Partitioning the vertices of a biconnected critical graph into three dominating sets.}
+  \label{biconnected_critical_colouring}
+\end{figure}
 
 \begin{lem}\label{biconnected_critical}
   Let $H$ be a biconnected critical generalized near-triangulation with at least $3$ vertices and not isomorphic to $W_k$ for any even integer $k$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
@@ -726,7 +738,7 @@ Note that the following lemma is about critical graphs, not $2$-critical graphs.
 \end{proof}
 
 The following lemma, illustrated in \cref{even_wheel}
- explains how we deal with even wheels:
+ explains how we deal with even wheels not covered by \cref{biconnected_critical}:
 
 \begin{lem}\label{wheelie}
   Let $H:=W_k$ for some even integer $k\ge 4$ and let $v$ be any vertex in $B(H)$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
@@ -741,7 +753,7 @@ The following lemma, illustrated in \cref{even_wheel}
 \begin{figure}
   \centering
   \includegraphics{figs/even_wheel}
-  \caption{Partitioning the vertices of an even wheel into sets $X_0$, $X_1$, and $X_2$.}
+  \caption{\cref{wheelie}: Partitioning the vertices of an even wheel into sets $X_0$, $X_1$, and $X_2$.}
   \label{even_wheel}
 \end{figure}
 \begin{proof}
@@ -749,8 +761,14 @@ The following lemma, illustrated in \cref{even_wheel}
 \end{proof}
 
 
-Now we drop the requirement that $H$ is biconnected.
+The following lemma, illustrated in \cref{critical_colouring}, drops the requirement that the critical graph be biconnected and applies even if some of the biconnected components of $H$ are even wheels.
 
+\begin{figure}
+  \centering
+  \includegraphics[page=2]{figs/two_critical}
+  \caption{\cref{critical}: Partitioning the vertices of a connected critical graph into dominating sets $X_0$, $X_1$, and $X_2$.}
+  \label{critical_colouring}
+\end{figure}
 
 \begin{lem}\label{critical}
   Let $H$ be a connected critical generalized near-triangulation with at least $3$ vertices, no vertices of degree $1$ and not isomorphic to $W_k$ for any even integer $k$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
@@ -803,6 +821,16 @@ Now we drop the requirement that $H$ is biconnected.
 \end{proof}
 
 
+At last, the following lemma, illustrated in \cref{two_critical_colouring}, shows how we combine everything to find three dominating sets of a $2$-critical graph $H$ whose total size is at most $2|B(H)| + I(H)$.
+
+\begin{figure}
+  \centering
+  \includegraphics[page=4]{figs/two_critical}
+  \caption{\cref{three_sets_coverage}: Finding three sets $X_0$, $X_1$, and $X_2$ that dominate $I(H)$ in a $2$-critical graph $H$.}
+  \label{two_critical_colouring}
+\end{figure}
+
+
 \begin{lem}\label{three_sets_coverage}
   Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X_0,X_1,X_2\subseteq V(H)$ such that
   \begin{compactenum}[(i)]
@@ -813,55 +841,16 @@ Now we drop the requirement that $H$ is biconnected.
 \end{lem}
 
 \begin{proof}
-  Refer to \cref{covers}.
-  Let $H_1:=H-B(H)$, let $\mathcal{C}$ be the set of components of $H_1$, let $\mathcal{C}_1$ be the set of components of $H_1$ having exactly one vertex,
-  % let $\mathcal{C}_2$ be the set of components of $H_1$ having exactly two vertices, let $\mathcal{C}_\star$ be the set of components of $H_1$ that are stars,
-  and let $\mathcal{C}_{\boxtimes}$ be the set of components of $H_1$ that are even wheels.
-  % , and let $\overline{\mathcal{C}}:=\mathcal{C}$ be the set of componets of $H_1$ that are not in $\mathcal{C}_1\cup \mathcal{C}_{\boxplus}$.
+  % Refer to \cref{covers}.
+  Let $\mathcal{C}$ be the set of components of $H-B(H)$
+  and let $\mathcal{C}_{\boxtimes}$ be the set of components in $\mathcal{C}$  that are even wheels.
 
-  \begin{figure}
-    \centering
-    \includegraphics[page=5,trim={0 10 0 0},clip]{figs/bg_layers}
-    \caption{Partitioning the components of $H-B(H)$ into the classes $\mathcal{C}_1$, $\mathcal{C}_2$, $\mathcal{C}_{\star}$, and $\overline{\mathcal{C}}$.  Edges within each component are ultrafat. Each class is drawn so that it contains the associated vertices of $B(H)$.}
-    \label{covers}
-  \end{figure}
+  For each component $C$ in $\mathcal{C}_{\boxtimes}$ we choose the vertex $x$ that dominates $C$, some vertex $w$ in $B(C)$ and some vertex $v\in B(H)$ adjacent to $w$.  We add $\{v,w,x\}$ to each of $X_0$, $X_1$, and $X_2$. The vertex $x$ ensures that each $X_i$ dominates $C$ and the vertices $v$ and $w$ ensure that the component of $H[X_i]$ that contains $x$ contains at least one vertex in $B(H)$.  Doing this for every component in $\mathcal{C}_{\boxtimes}$ contributes a total of $9|\mathcal{C}_{\boxplus}|$ vertices to $X_0$, $X_1$, and $X_2$. On the other hand, $|B(C)|\ge 4$ and $|I(C)|\ge 1$ for each $C\in \mathcal{C}_{\boxplus}$, so $\sum_{C\in \mathcal{C}_{\boxplus}} (2|B(C)| + I(C))\ge (2\cdot 4+1)|\mathcal{C}_{\boxplus}| = 9|\mathcal{C}_{\boxplus}|$.
 
-  % By \cref{boundary_vs_leaves}, to satisfy \cref{boundary_size} it suffices to construct three sets whose total size is not more than $|I_1|+\mu(H_1)=|I_1|+2|Z| + |L| + |B_1|$.
+  For each component $C$ in $\mathcal{C}\setminus(\mathcal{C}_{\boxplus}\cup\mathcal{C}_1)$, we apply \cref{critical} to obtain sets $X_0'$, $X_1'$, $X_2'$. For each $i\in\{0,1,2\}$ and each $w\in X_i'\cap B(H-B(H))$ we choose a vertex $v\in B(H)$ adjacent to $w$ and add both $v$ and $w$ to $X_i$. \Cref{critical} ensures that each $X_i$ dominates $C$ and the vertex $v$ ensures that the component of $X_i$ that contains $w$ contains at least one vertex of $B(H)$.
+  Doing this for each component $\mathcal{C}\setminus\mathcal{C}_\boxplus$ contributes a total of at most  $\sum_{C\in\mathcal{C}\setminus(\mathcal{C}_{\boxplus}\cup\mathcal{C}_1)}(|C|+|B(C)|)=\sum_{C\in\mathcal{C}\setminus(\mathcal{C}_{\boxplus}\cup\mathcal{C}_1)}(2|B(C)|+|I(C)|)$ to $X_0$, $X_1$, and $X_2$.
 
-  % For each component $C$ in $\mathcal{C}_2$ we choose one vertex $v$ in $B(H)$ that dominates $V(C)$ and place $v$ in each of $X_0$, $X_1$, and $X_2$. This contributes a total of $3|\mathcal{C}_2|$ vertices in $X_0$, $X_1$, and $X_2$. On the other hand, $\sum_{C\in \mathcal{C}_2} |C|=2|\mathcal{C}_2|$ and, by \cref{degree_corners_and_leaves},  $\sum_{C\in \mathcal{C}_2} |\widehat{N}_H(C)|\ge 2|\mathcal{C}_2|$.
-
-  % For each component $C$ in $\mathcal{C}_{\star}$ we choose the vertex $w\in C$ that dominates the star $C$ and a vertex $v\in B(H)$ adjacent to $w$.  We place $\{v,w\}$ in each of $X_0$, $X_1$, and $X_2$.  This contributes a total of $6|\mathcal{C}_{\star}|$ vertices to $X_0$, $X_1$, and $X_2$.  On the other hand, $\sum_{C\in \mathcal{C}_{\star}} |C|\ge 3|\mathcal{C}_{\star}|$ and, by \cref{degree_corners_and_leaves}, $\sum_{C\in \mathcal{C}_{\star}} |\widehat{N}_H(C)|\ge 3|\mathcal{C}_\star|$. \pat{Remark: this inequality is always loose, in fact $|\widehat{N}_H(C)|\ge 4|C|$}
-
-  % For each component $C$ in $\mathcal{C}_{1}$ we choose an arbitrary vertex $v$ in $B(C)$ and add it to each of $X_1$, $X_2$, and $X_3$.  This contributes at most $|\mathcal{C}_1|$ to the total size of these sets.  On the other hand, for each $v
-  %
-  %
-  % the vertex $x$
-
-  For each component $C$ in $\mathcal{C}_{\boxtimes}$ we choose the vertex $x$ that dominates $C$, some vertex $w$ in $B(C)$ and some vertex $v\in B(H)$ adjacent to $w$.  We add $\{v,w,x\}$ to each of $X_0$, $X_1$, and $X_2$.  This contributes a total of $9|\mathcal{C}_{\boxplus}|$ vertices to $X_0$, $X_1$, and $X_2$. On the other hand, $|B(C)|\ge 4$ and $|I(C)|\ge 1$ for each $C\in \mathcal{C}_{\boxplus}$, so
-  $\sum_{C\in \mathcal{C}_{\boxplus}} (2|B(C)| + I(C))\ge (2\cdot 4+1)|\mathcal{C}_{\boxplus}| = 9|\mathcal{C}_{\boxplus}|$.
-
-  For each component $C$ in $\mathcal{C}\setminus(\mathcal{C}_{\boxplus}\cup\mathcal{C}_1)$, we apply \cref{biconnected_critical} to obtain sets $X_0'$, $X_1'$, $X_2'$.
-  For each $j\in\{0,1,2\}$ we add $X_j'$ to $X_j$.  The total number of vertices added to $X_0$, $X_1$, and $X_2$ by this step is $\sum_{C\in\mathcal{C}\setminus(\mathcal{C}_{\boxplus}\cup\mathcal{C}_1)}(|C|+|B(C)|)=\sum_{C\in\mathcal{C}\setminus(\mathcal{C}_{\boxplus}\cup\mathcal{C}_1)}(2|B(C)|+|I(C)|)$.
-
-   % and, by \cref{degree_corners_and_leaves}, $\sum_{C\in \mathcal{C}_{\star}} |\widehat{N}_H(C)|\ge 4|\mathcal{C}_{\boxtimes}|$.
-
-  % On the other hand, by \cref{degree_corners_and_leaves}, $\sum_{C\in \overline{\mathcal{C}}} |\widehat{N}_H(C)|\ge \sum_{C\in \overline{\mathcal{C}}} (|B(C)|+|V_1(C)|)$.
-
-  Finally, it remains to consider the components of $H_1$ that are in $\mathcal{C}_1$. Each of these components is a single vertex in $V_0(H_1)$. These we deal with as a group. For each $w\in V_0(H_1)$, let $H_w:=H[N_H[w]]$ and let $Q:=\bigcup_{w\in V_0(H_1)} H_w$.  For each $w\in V_0(V_1)$, the graph $H_w$ is isomorphic to $W_k$ for some $k\ge 3$, $B(H_w)\subseteq B(H)$ and, for any component $C$ of $H_1$ other than the one containing $w$, $\widehat{N}_H(C)\cap B(H_w)=\emptyset$. In other words, none of the vertices in $B(Q)$ has been counted in the preceding paragraphs.  We construct a $X'\subseteq B(Q)\subseteq B(H)$ that dominates $I(Q)=V_0(V_1)$ by repeating the following as long as there is vertex $w$ in $V_0(H_1)$ not dominated by $X'$:
-  \begin{compactenum}
-    \item  If $H_w$ has no vertex in common with $H_{w'}$ for any $w'\in V_0(H_1)\setminus\{w\}$ then we add any vertex of $B(H_w)$ to $X'$.
-    \item Otherwise there exists $w'\neq w$ and $v\in B(H_w)\cap B(H_{w'})$ and we add $v$ to $X'$.
-  \end{compactenum}
-
-  \pat{Continue.}
-  % In the first case, the four vertices of $B(H_w)$ are no longer relevant and can be removed from $Q$, so $2|V(Q)\cap B(H_1)| + |V(Q)|\cap I(H_1)$ decreases by $7$. In the second case, the vertices $v$, $w$, and $w'$ are no longer relevant and can be removed from $Q$, so $2|V(Q)\cap B(H_1)| + |V(Q)|\cap I(H_1)$ decreases by $4$. Thus, at each step we add one vertex to $X'$ and $2|V(Q)\cap B(H_1)| + |V(Q)|\cap I(H_1)$ decreases by at least $4$, so |X'|\le (2|B(Q)|+I(Q))/4$. We finish by adding $X'$ to each of $X_1$, $X_2$, and $X_3$, which only increases their total size by at most $3|X'| <  2|B(Q)|+I(Q)$.
-  %
-  %
-  % Putting everything together we get that
-  % \[
-  %  |X_1|+|X_2|+|X_3| \le \sum_{C\in\mathcal{C}} (|C|+\widehat{N}_H(C)) + |Q|
-  %  \le \sum_{C\in\mathcal{C}} |C| + B(H) = I(H)+B(H)=|H| \enspace . \qedhere
-  % \]
+  The resulting sets $X_1$, $X_2$, and $X_3$ each dominate $\bigcup_{C\in\mathcal{C}} V(C)=I(H)$ and have total size at most $\sum_{C\in\mathcal{C}} (2|B(C)|+|I(C)|) = 2|B(H-B(H))| + |I(H-B(H))|$.
 \end{proof}
 
 \begin{proof}[Proof of \cref{two_critical_handler}]
@@ -871,13 +860,15 @@ Now we drop the requirement that $H$ is biconnected.
 
 \subsection{The Algorithm}
 
-All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BetterGreedy}(G)$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i$ be a dom-preserving subminor of $G-X_i$ that is dom-minimal, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are now three cases to consider:
+All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BetterGreedy}(G)$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i$ be a dom-preserving subminor of $G-X_i$ that is dom-minimal, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are now more cases to consider:
 \begin{compactenum}[{[}bg1{]}]
     \item If $\deg^+_{G_i}(v_i)\ge 3$ then we set $\Delta_i\gets\{v_i\}$.
     \label[bg]{bg_high_degree}
+    \item If $G_i-B(H_i)$ contains a vertex of degree $1$ we set $\Delta_i:=\{v_i\}$ where $v_i$ is the vertex $v$ guaranteed by \cref{leaf_killer}.
+    \item If $G_i-B(H_i)$ contains a vertex of degree $0$ we set $\Delta_i:=\{v_i\}$ where $v_i$ is the vertex $v$ guaranteed by \cref{degree_zero_killer}.
     \item If there exists distinct $u,v\in B(G_i)$ and $w\in B(G_i-B(G_i))$ such that $\deg^+_{G_i}(v)=2$, $\deg^+_{G_i-v}(w)\ge 3$, and $N^+_{G_i}(u)\subseteq N_{G_i}(w)$ then set $\Delta_i:=\{v,w\}$.
     \label[bg]{bg_two_three}
-    \item Otherwise, $G_i$ is $2$-critical and $i+1=r$.  By \cref{two_critical_handler}, there exists $\Delta_{r-1}\subseteq V(G_i)$ of size at most $|B(G_i-B(G_i))|/3 + |I(G_i[I(G_i)])|$ that dominates $I(G_i)$.
+    \item Otherwise, $G_i$ is $2$-critical and $i+1=r$.  By \cref{two_critical_handler}, there exists $\Delta_{r-1}\subseteq V(G_i)$ of size at most $|B(G_i-B(G_i))|/3 + |I(G_i-B(G_i))|$ that dominates $I(G_i)$.
     \label[bg]{bg_two_critical}
 \end{compactenum}
 
@@ -896,7 +887,8 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
 \end{thm}
 % \hussein{Is adding the following inequality to the constrains helpful  $r \leq |E|/4 \leq 3n/4 - 3/2$? I don t think so  } \pat{No: The optimal is achieve when $r\approx n/7$}
 \begin{proof}
-  For each integer $t\ge 3$, let $x_t$ be the number of times $\textsc{BetterGreedy}(G)$ falls into case \cref{bg_high_degree} and chooses $v_i$ such that $\deg^+_{G_i}(v_i)=t$ and let $z$ be the number of times $\textsc{BetterGreedy}(G)$ falls into case \cref{bg_two_three}.  Then
+  For each integer $t\ge 3$, let $x_t$ be the number of times $\textsc{BetterGreedy}(G)$ falls into case \cref{bg_high_degree} and chooses
+  \pat{Continue here....} $v_i$ such that $\deg^+_{G_i}(v_i)=t$ and let $z$ be the number of times $\textsc{BetterGreedy}(G)$ falls into case \cref{bg_two_three}.  Then
   \[
      D:=\left|N_G[X_{r-1}]\right| = 3 + \sum_{t\ge 3}tx_t + 5z \enspace .
   \]
