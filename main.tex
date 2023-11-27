@@ -22,6 +22,7 @@
 \lstset{basicstyle=\ttfamily, keywordstyle=\bfseries}
 
 
+\newcommand{\R}{\mathbb{R}}
 \newcommand{\pref}[1]{(P\ref{#1})}
 \setlength{\parskip}{1ex}
 
@@ -87,7 +88,9 @@
 
 \section{Introduction}
 
-A set $X$ of vertices in a graph $G$ is a \defin{dominating set} if each vertex of $G$ is in $X$ or adjacent to a vertex in $X$.  A dominating set $X$ of $G$ is \defin{connected} if the subgraph $G[X]$ of $G$ induced by $X$ is connected.  There is an enormous body of literature on dominating sets, and several books are devoted to the topic \cite{haynes.hedetniemi.ea:domination,haynes.hedetniemi.ea:topics}.  A typical result in the area is of the form: ``Every $n$-vertex graph in some family $\mathcal{G}$ of graphs has a (connected) dominating set of size at most $f(n)$.'' or ``For infinitely many $n$, there exists an $n$-vertex member of $\mathcal{G}$ with no (connected) dominating set of size less than $g(n)$.''
+A set $X$ of vertices in a graph $G$ is a \defin{dominating set} if each vertex of $G$ is in $X$ or adjacent to a vertex in $X$.  A dominating set $X$ of $G$ is \defin{connected} if the subgraph $G[X]$ of $G$ induced by $X$ is connected.  There is an enormous body of literature on dominating sets, and several books are devoted to the topic \cite{haynes.hedetniemi.ea:domination,haynes.hedetniemi.ea:topics,du.wan:connected,haynes.hedetniemi.ea:vol2}, including a book and book chapter devoted to connected dominating sets \cite{du.wan:connected,chellali.favaron:connected}.  A typical result in the area is of the form: ``Every $n$-vertex graph in some family $\mathcal{G}$ of graphs has a (connected) dominating set of size at most $f(n)$.'' or ``For infinitely many $n$, there exists an $n$-vertex member of $\mathcal{G}$ with no (connected) dominating set of size less than $g(n)$.''
+
+\subsection{Connected Dominating Sets in Triangulations}
 
 A \defin{triangulation} is an edge-maximal planar graph.  \citet{matheson.tarjan:dominating} proved that every $n$-vertex triangulation has a dominating set of size at most $n/3=0.33\overline{3}n$ and that there exists $n$-vertex triangulations with no dominating set of size less than $n/4=0.25n$. The gap between these upper and lower bounds stood for over $20$ years until a recent breakthrough by \citet{spacapan:domination} reduced the upper bound to $17n/53\approx 0.32075471698n$.  This was swiftly followed by an improvement to $2n/7\approx 0.2\overline{857142}n$ by \citet{christiansen.rotenberg.ea:triangulations}.
 
@@ -97,15 +100,16 @@ In the current paper, we consider connected dominating sets in triangulations.  
   For every $n\ge 4$, every $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $10n/21= 0.\overline{476190}n$.
 \end{thm}
 
-The proof of \cref{main_result2} is constructive and gives an $O(n)$ time algorithm for finding the set $X$.  As far as we know, the best lower bound for this problem is $n/3-2 < 0.33\overline{3} n$, obtained from a triangulation that contains $n/3$ vertex-disjoint pairwise-nested triangles $\Delta_1,\ldots,\Delta_{n/3}$.  In order to dominate $\Delta_1$, any dominating set must contain at least two vertices in $\Delta_1 \cup \Delta_2$. In order to dominate $\Delta_{n/3}$, any dominating set must contain two vertices in $\Delta_{n/3-1}\cup\Delta_{n/3}$.  In order to be connected, any connected dominating set must contain a vertex in each $\Delta_2,\ldots,\Delta_{n/3-1}$.
+The proof of \cref{main_result2} is constructive and gives an $O(n)$ time algorithm for finding the set $X$.  As far as we know, the best lower bound for this problem is $n/3 < 0.33\overline{3} n$, obtained from a triangulation that contains $n/3$ vertex-disjoint pairwise-nested triangles $\Delta_1,\ldots,\Delta_{n/3}$.  In order to dominate $\Delta_1$, any dominating set must contain at least two vertices in $\Delta_1 \cup \Delta_2$. In order to dominate $\Delta_{n/3}$, any dominating set must contain two vertices in $\Delta_{n/3-1}\cup\Delta_{n/3}$.  Then, in order to be connected, any connected dominating set must contain a vertex in each $\Delta_2,\ldots,\Delta_{n/3-1}$.
 
+\subsection{One-Bend Collinear Sets}
 
 
 The original motivation for this research was a graph drawing problem.  It is know that every $n$-vertex planar graph $G$ has a non-crossing drawing in the plane with edges of $G$ drawn as line segments and such that some set $Y$ of $\Omega(n^{1/2})$ vertices of $G$ are drawn on the $x$-axis \cite{bose.dujmovic:polynomial,dujmovic:utility}.  The set $Y$ is called a \defin{collinear set}.  For bounded-degree planar graphs, this result can be improved to $|Y|=\Omega(n^{0.8})$ \cite{dujmovic.morin:dual}.  Determining the supremum value of $\alpha$ such that every $n$-vertex planar graph has a collinear set of size $\Omega(n^{\alpha})$ remains a difficult open problem, but it is known that $\alpha < 1$ \cite{ravsky.verbitsky:collinear}.
 
 We consider a relaxation of this problem in which the edges of the graph can be drawn as a polygonal path consisting of at most two line segments.  Such a drawing is called a \defin{$1$-bend} drawing of $G$.  A subset $Y$ of $V(G)$ is a \defin{$1$-bend collinear set} if $G$ has a $1$-bend drawing in which all vertices of $Y$ appear on the $x$-axis.  We show that, for any connected dominating set $X$ in a triangulation $G$, the set $Y:=V(G)\setminus X$ is a $1$-bend collinear set of $G$.  Combined with \cref{main_result2}, this gives:
 
-\begin{thm}\label{one_bend_collinear}
+\begin{thm}\label{one_bend_collinear_thm}
   For every $n\ge 4$, every $n$-vertex planar graph has a $1$-bend collinear set of size at least $11n/21=0.\overline{523809}n$.
 \end{thm}
 
@@ -117,20 +121,52 @@ Note that if all the vertices of $G$ are on the $x$-axis then no edge in a $1$-b
 
 \subsection{Related Work}
 
-\pat{Add: \newline
-results on edge-maximal outerplanar graphs --- implies $n/2$ bound for Hamiltonian planar graphs (including $4$-connected.) \newline
-connected dominating sets in unit disc graphs \newline
-$2$-bend collinear sets \newline
-$15$-approximation for minimum connected dominating set in planar graphs \newline
-}
-\saeed{
+\paragraph{Connected Dominating Sets}
 
-For every $n \in \mathbb{N}$, Everett et al. \cite{DBLP:conf/gd/EverettLLW07} show that there exists a universal set $\mathcal{U}_n$ of $n$ distinct points in the plane such that every $n$-vertex planar graph admits a 1-bend drawing with vertices on the points of set $\mathcal{U}_n$. Furthermore, Giacomo et al. \cite{DBLP:journals/comgeo/GiacomoDLW05} demonstrate that for a linear ordering $L$ of vertices of a planar triangulation $G$ and strictly convex curve $\lambda$, there is a $1$-bend plane drawing of $G$ such that vertices of $G$ appear on $\lambda$ with the same order as in $L$.
+The book chapter by \citet{chellali.favaron:connected} surveys combinatorial results on connected-dominating sets, including the result of \citet{kleitman.west:spanning} mentioned above.  Most results of this form focus on graphs with lower bounds on their minimum degree, possibly combined with some other constraints.  For example, the Kleitman-West results relevant to triangulations is about graphs of minimum-degree $3$ in which each edge participates in a $3$-cycle.
 
-With further relaxation on the drawing of the edges, de Fraysseix et al. \cite{DBLP:journals/combinatorica/FraysseixPP90} show that any set of $n$ points in the plane is a universal set for the 2-bend drawing of planar graphs. Furthermore, They show that the planar embedding problem of any $n$-vertex graph on an $n$ collinear points in $\mathbb{R}^2$ with at most one bend along each edge is NP-complete.
-}
+\citet{wan.alzoubi.ea:simple} describe an algorithm for finding a connected dominating set in $n$-vertex $K_t$-minor-free graphs. When run on an $n$-vertex planar graph, their algorithm produces a connected dominating set of size at most $15\alpha(G^2)-5$, where $\alpha(H)$ is the size of the largest independent set in a graph $H$.  However, there exists $n$-vertex triangulations $G$ with $\alpha(G^2)=n/4$,\footnote{To create such a triangulation, start with $n/4$ vertex-disjoint copies of $K_4$ embedded so that each copy contributes three vertices to the outer face and has one inner vertex, and then add edges arbitrarily to create a triangulation.  Then the inner vertices of each $K_4$ form an independent set in $G^2$.} for which this algorithm does not guarantee an output of size less than $n$.
 
-The remainder of this paper is organized as follows:  In \cref{strategy}, we describe the general strategy we use for finding connected dominating sets in triangulations.  In \cref{warm_up} we show that a simple version of this strategy can be used to obtain a connected dominating set of size at most $4n/7= 0.\overline{571428}n$, which is already better than the best known bounds for triangulations.  In \cref{full_result} we show that a more careful construction leads to a proof of \cref{main_result2}.  In \cref{one_bend}, we discuss the connection between connected dominating sets and one-bend collinear drawings that leads to \cref{one_bend_collinear}.
+\citet{chen.hao.ea:bounds} show that every edge-maximal outerplanar graph has a connected dominating set of size at most $\lfloor (n-2)/2\rfloor$. Note that this implies that every Hamiltonian $n$-vertex triangulation (including every $4$-connected $n$-vertex triangulation) has a connected dominating set of size at most $\lfloor (n-2)/2\rfloor$.  For even $n\ge 4$, the bound $(n-2)/2$ for edge-maximal outerplanar graphs is tight, as is easily seen by constructing a graph with two degree-$2$ vertices $s$ and $t$ and $(n-2)/2$ disjoint edges, each of which separates $s$ from $t$.  \citet{zhuang:connected} parameterizes the problem by the number, $k$,  of degree-$2$ vertices, and shows that any $n$-vertex edge-maximal outerplanar graph with $k$ degree-$2$ vertices has a connected dominating set of size at most $\lfloor\min\{(n+k-4)/2,2(n-k)/3\}\rfloor$.
+
+%
+%
+%
+%
+% \pat{Add: \newline
+% results on edge-maximal outerplanar graphs --- implies $n/2$ bound for Hamiltonian planar graphs (including $4$-connected.) \newline
+% connected dominating sets in unit disc graphs \newline
+% $2$-bend collinear sets \newline
+% $15$-approximation for minimum connected dominating set in planar graphs \newline
+% }
+
+\paragraph{Collinear Sets}
+
+It is not difficult to establish that a planar graph $G$ has a $1$-bend drawing in which all vertices of $G$ are drawn on the $x$-axis if and only if $G$ has a $2$-page book embedding. It is well-known that $2$-page graphs are \defin{subhamiltonian}; each such graph is a spanning subgraph of some Hamiltonian planar graph. As pointed out already, the non-Hamiltonian Goldner-Harary triangulation can be used to construct an $n$-vertex planar graph with no one-bend collinear set larger than $10n/11$.
+
+The $x$-axis is just one example of an $x$-monotone function $f(x)=x$. Unsurprisingly, this function turns out to be the most difficult for one-bend graph drawing.
+% \citet{DBLP:conf/gd/EverettLLW07} describe a \defin{$1$-bend universal} $n$-point set $S_n$ such that every $n$-vertex planar graph $G$ has a $1$-bend drawing with the vertices of $G$ drawn on the points in $S_n$. By construction, the point set $S_n$ is contained in the graph of a strictly concave decreasing function.
+\citet{DBLP:journals/comgeo/GiacomoDLW05} show that for \defin{any} strictly concave function $f:\R\to\R$, any planar graph $G$, and any total order $<$ on $V(G)$ there exists a function $x:V(G)\to\R$ such that $x(v) < x(w)$ if and only if $x< w$ and $G$ has a $1$-bend drawing in which each vertex $v$ of $G$ is drawn at the point $(x(v),f(x(v)))$.
+% These results are similar in flavour to \cref{one_bend} in that they produce drawings in which a subset of $V(G)$ is drawn on a particular $1$-dimensional curve.
+
+
+
+
+% For every $n \in \mathbb{N}$, Everett et al. \cite{DBLP:conf/gd/EverettLLW07} show that there exists a universal set $\mathcal{U}_n$ of $n$ distinct points in the plane such that every $n$-vertex planar graph admits a 1-bend drawing with vertices on the points of set $\mathcal{U}_n$. Furthermore, Giacomo et al. \cite{DBLP:journals/comgeo/GiacomoDLW05} demonstrate that for a linear ordering $L$ of vertices of a planar triangulation $G$ and strictly convex curve $\lambda$, there is a $1$-bend plane drawing of $G$ such that vertices of $G$ appear on $\lambda$ with the same order as in $L$.
+
+
+\citet{DBLP:conf/gd/EverettLLW07} describe a \defin{$1$-bend universal} $n$-point set $S_n$ such that every $n$-vertex planar graph $G$ has a $1$-bend drawing with the vertices of $G$ drawn on the points in $S_n$.
+% By construction, the point set $S_n$ is contained in the graph of a strictly concave decreasing function.
+With further relaxation on the drawing of the edges, de Fraysseix et al. \cite{DBLP:journals/combinatorica/FraysseixPP90} show that any set of $n$ points in the plane is $2$-bend universal; for any set of $n$ points in $\R^2$, any $n$ vertex planar graph $G$ has a drawing in which the vertices of $G$ are drawn on the points in $S$.
+% .a universal set for the 2-bend drawing of planar graphs.
+
+% Furthermore, They show that the planar embedding problem of any $n$-vertex graph on an $n$ collinear points in $\mathbb{R}^2$ with at most one bend along each edge is NP-complete.
+
+\subsection{Outline}
+
+The remainder of this paper is organized as follows:  In \cref{strategy}, we describe the general strategy we use for finding connected dominating sets in triangulations.  In \cref{warm_up} we show that a simple version of this strategy can be used to obtain a connected dominating set of size at most $4n/7= 0.\overline{571428}n$, which is already better than the best known bounds for triangulations.  In \cref{full_result} we show that a more careful construction leads to a proof of \cref{main_result2}.  In \cref{one_bend}, we discuss the connection between connected dominating sets and one-bend collinear drawings that leads to \cref{one_bend_collinear_thm}.
+
+
 
 % \subsection{Related Work}
 %
@@ -198,7 +234,7 @@ A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ f
 \end{lem}
 
 \begin{proof}
-  Let $B:=B(H)$ and $I:=I(H)$.  If $I$ is empty then the result is trivially true, by taking $X:=\emptyset$ \saeed{$X$ should be $\Delta$}, so we now assume that $I$ is non-empty.  By \cref{critical_structure}, $H$ is formed from the outerplanar graph $H[B]$ by adding $|I|$ stars, one in the interior of each marked face of $H[B]$.  Furthermore, since $\deg_H^+(v)=1$ for each $v\in B$, each vertex of $H[B]$ is on the boundary of exactly one marked face.  For each vertex $w\in I$, the marked face that $f$ of $H[B]$ that contains $w$ has at least $3$ vertices, which do not belong to any other marked face. Therefore $|B|\ge 3|I|$ and by choosing one vertex from each marked face of $H[B]$ we obtain the desired set $\Delta$.
+  Let $B:=B(H)$ and $I:=I(H)$.  If $I$ is empty then the result is trivially true, by taking $\Delta:=\emptyset$, so we now assume that $I$ is non-empty.  By \cref{critical_structure}, $H$ is formed from the outerplanar graph $H[B]$ by adding $|I|$ stars, one in the interior of each marked face of $H[B]$.  Furthermore, since $\deg_H^+(v)=1$ for each $v\in B$, each vertex of $H[B]$ is on the boundary of exactly one marked face.  For each vertex $w\in I$, the marked face that $f$ of $H[B]$ that contains $w$ has at least $3$ vertices, which do not belong to any other marked face. Therefore $|B|\ge 3|I|$ and by choosing one vertex from each marked face of $H[B]$ we obtain the desired set $\Delta$.
 \end{proof}
 
 % \begin{lem}\label{two_critical_helper}
@@ -313,7 +349,8 @@ We begin by identifying unnecessary vertices and edges that can appear in the gr
 \begin{compactenum}[({DM}1)]
     \item each vertex $v\in B(H)$ has $\deg^+_H(v)\ge 1$;  \label[dm]{bad_vertex}
     \item for each $v\in B(H)$ with $\deg^+_H(v)=1$,  $H[N_H[v]]$ is isomorphic to $K_4$; and \label[dm]{inner_degree_1}
-    \item each edge $vw$ on the boundary of the outer face of $H$ is on the boundary an inner face $vwx$ of $H$ for some $x\in I(H)$. \label[dm]{bad_edge} \saeed{this sentence looks unclear }
+    \item each edge $vw$ on the boundary of the outer face of $H$ is also on the boundary an inner face $vwx$ of $H$ for some $x\in I(H)$. \label[dm]{bad_edge}
+    % \saeed{this sentence looks unclear }
 \end{compactenum}
 We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each of its biconnected components are dom-minimal.
 
@@ -820,11 +857,21 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
 
 \section{Discussion}
 
-\Cref{two_critical_handler} is the best result we have right now for handling $2$-critical graphs.  This is a shame, because it is known that maximal outerplanar graphs have connected dominating sets of size at most $4n/11$. Unfortunately our critical graphs are not maximal outerplanar---they may not even be connected.  We can end up in a situation where we have a $2$-critical graph that is a collection of disjoint $6$-vertex graphs (a triangle inside a triangle), each of which requires $2$ vetices to dominate.  In this setting $Q=R=3k$ and we need $2k$ vertices in our dominating set, so the analysis is tight.
+We conclude with two open questions:
 
-\hussein{One approach is : why we ended with a graph where all the boundary vertices has $deg^+(v) = 2$? I think before reaching such a graph we had a sequence of vertices $v_i,...,v_j$  such that $\sum_i deg^+(v_i) = |\text{the boundary of the current graph}|$ and $deg^+(v_i) \geq 3$.}
+\begin{enumerate}
+  \item Is it true that every $n$-vertex triangulation has a connected dominating set of size at most $n/3+O(1)$?
+  \item Is it true that every $4$-connected $n$-vertex triangulation has a connected dominating set of size at most $n/4+O(1)$?
+\end{enumerate}
 
-If we wanted to make use of the results for outerplanar graphs, then we would need to be way more careful in the way we choose vertices to delete.  In fact, I don't see any reasonable way to do this without using some variant of the canonical ordering (so that each intermediate graph $G_i$ is a near-triangulation).  Even if we could do that we'll still need something more because the process of making $G_i$ dom-minimal removes useless vertices and edges.
+
+
+
+% \Cref{two_critical_handler} is the best result we have right now for handling $2$-critical graphs.  This is a shame, because it is known that maximal outerplanar graphs have connected dominating sets of size at most $4n/11$. Unfortunately our critical graphs are not maximal outerplanar---they may not even be connected.  We can end up in a situation where we have a $2$-critical graph that is a collection of disjoint $6$-vertex graphs (a triangle inside a triangle), each of which requires $2$ vetices to dominate.  In this setting $Q=R=3k$ and we need $2k$ vertices in our dominating set, so the analysis is tight.
+%
+% \hussein{One approach is : why we ended with a graph where all the boundary vertices has $deg^+(v) = 2$? I think before reaching such a graph we had a sequence of vertices $v_i,...,v_j$  such that $\sum_i deg^+(v_i) = |\text{the boundary of the current graph}|$ and $deg^+(v_i) \geq 3$.}
+%
+% If we wanted to make use of the results for outerplanar graphs, then we would need to be way more careful in the way we choose vertices to delete.  In fact, I don't see any reasonable way to do this without using some variant of the canonical ordering (so that each intermediate graph $G_i$ is a near-triangulation).  Even if we could do that we'll still need something more because the process of making $G_i$ dom-minimal removes useless vertices and edges.
 
 % because we could we reach a step where $G_{r-1}$ is a $2$-critical near-triangulation but $G_{r-1}-B(G_{r-1})$ has many components.  (Think of a serpentine triangulation where one out of every $4$ faces contains three vertices inside it.)
 
