@@ -100,7 +100,7 @@ In the current paper, we consider connected dominating sets in triangulations.  
   For every $n\ge 4$, every $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $10n/21= 0.\overline{476190}n$.
 \end{thm}
 
-The proof of \cref{main_result2} is constructive and gives an $O(n)$ time algorithm for finding the set $X$.  As far as we know, the best lower bound for this problem is $n/3 < 0.33\overline{3} n$, obtained from a triangulation that contains $n/3$ vertex-disjoint pairwise-nested triangles $\Delta_1,\ldots,\Delta_{n/3}$.  In order to dominate $\Delta_1$, any dominating set must contain at least two vertices in $\Delta_1 \cup \Delta_2$. In order to dominate $\Delta_{n/3}$, any dominating set must contain two vertices in $\Delta_{n/3-1}\cup\Delta_{n/3}$.  Then, in order to be connected, any connected dominating set must contain a vertex in each $\Delta_2,\ldots,\Delta_{n/3-1}$.
+The proof of \cref{main_result2} is constructive and gives an $O(n)$ time algorithm for finding the set $X$.  As far as we know, the best lower bound for this problem is $n/3 < 0.33\overline{3} n$, obtained from a triangulation that contains $n/3$ vertex-disjoint pairwise-nested triangles $\Delta_1,\ldots,\Delta_{n/3}$.  In order to dominate $\Delta_1\cup \Delta_2$, any dominating set must contain at least two vertices in $\Delta_1 \cup \Delta_2$. In order to dominate $\Delta_{n/3-1}\cup \Delta_{n/3}$, any dominating set must contain two vertices in $\Delta_{n/3-1}\cup\Delta_{n/3}$.  Then, in order to be connected, any connected dominating set must contain a vertex in each $\Delta_3,\ldots,\Delta_{n/3-2}$.
 
 \subsection{One-Bend Collinear Sets}
 
