@@ -461,7 +461,7 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
       \includegraphics[page=2]{figs/really_good} &
       \includegraphics[page=3]{figs/really_good}
     \end{tabular}
-    \caption{The proof of \cref{really_good}. \hussein{I think, it might be better if we draw another neighbor of w to its right.}}
+    \caption{The proof of \cref{really_good}. \hussein{I think, it might be better if we draw another neighbor of w to its right.}\pat{Do you mean in the third picture?}}
     \label{really_good_fig}
   \end{figure}
 
@@ -762,9 +762,8 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
     \label[bg]{bg_two_critical}
 \end{compactenum}
 
-\hussein{In the theorem, it should be betterGreedy.}
-\begin{thm}\label{simple_greedy}
-  When applied to an $n$-vertex triangulation $G$,  $\textsc{SimpleGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $(10n-18)/21$.
+\begin{thm}\label{better_greedy}
+  When applied to an $n$-vertex triangulation $G$,  $\textsc{BetterGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $(10n-18)/21$.
 \end{thm}
 
 \begin{proof}
