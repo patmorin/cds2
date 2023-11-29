@@ -249,51 +249,6 @@ A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ f
   Let $B:=B(H)$ and $I:=I(H)$.  If $I$ is empty then the result is trivially true, by taking $\Delta:=\emptyset$, so we now assume that $I$ is non-empty.  By \cref{critical_structure}, $H$ is formed from the outerplanar graph $H[B]$ by adding $|I|$ stars, one in the interior of each marked face of $H[B]$.  Since $\deg_H^+(v)=1$ for each $v\in B$, each vertex of $H[B]$ is on the boundary of exactly one marked face.  For each vertex $w\in I$, the marked face that $f$ of $H[B]$ that contains $w$ has at least $3$ vertices, which do not belong to any other marked face. Therefore $|B|\ge 3|I|$ and by choosing one vertex from each marked face of $H[B]$ we obtain the desired set $\Delta$.
 \end{proof}
 
-% \begin{lem}\label{two_critical_helper}
-%   Let $H$ be a biconnected critical generalized near-triangulation with at least two vertices.  Then $H[B(H)]$ has a proper $3$-colouring such that
-%   \begin{compactenum}[(i)]
-%     \item For each face $f$ of $H[B(H)]$ each colour appeas at least once;
-%     \item For each marked face $f$ of $H[B(H)]$, there is a vertex $v_f$ whose colour is different from every other vertex in $f$.
-%   \end{compactenum}
-% \end{lem}
-%
-% \begin{proof}
-%  The proof is by induction on the number $p$ of inner faces of $H[B(H)]$ with four or more vertices.  If $p=0$ then $H=H[B(H)]$ is an edge-maximal outerplanar graph and $H$ has a proper $3$-colouring that easily satisifies the conditions of the lemma.
-%
-%  Otherwise, let $f$ be a face of $H[B(H)]$ with four or more vertices. Then, by \cref{critical_structure}, the interior of $f$ contains a single vertex $x\in I(H)$ that is adjacent to every vertex in $f$.  Let $H'$
-%
-%  Otherwise, let $v$ be a vertex in $I(H)$ and let
-%
-%
-%
-%  If $|H|=3$ then, since $H$ is connected and bridgeless, $H$ is a cycle $vrw$. Then the conditions of the lemma are easily satisfied with $X_0:=\{v\}$, $X_1:=\{r\}$, and $X_2:=\{w\}$.  We now assume that $|H|\ge 3$.
-%
-%   % If $r$ has degree $1$, then let $r'$ be the unique neighbour of $r$ in $H$ and let $H':=H-r$.  Then $r'\in B(H')$ so we apply the inductive hypothesis on the instance $(H',r')$ to obtain sets $X_0',X_1',X_2'$ where $r'\in X_1'$, each of $X_1'$ and $X_2'$ dominate $V(H')$ and $X_0'$ dominates $V(H')\setminus \{r'\}$. Then we take $X_0:=X_{2}'$, $X_1:=X_0'\cup\{r'\}$ and $X_2:=X_1'$.  Then $X_1$ dominates $V(H)$ since $X_0'$ dominates $V(H)\setminus\{r,r'\}$ and $N_H[r]=\{r,r'\}$. Since $r'\in X_1'$, $X_2$ also dominates $V(H)$. The final set $X_0=X_2'$ dominates $V(H')=V(H)\setminus\{r\}$, as required.
-%
-%   If $r$ is a cut vertex of $H$, then $H-r$ has $k\ge 2$ components $C_1,\ldots,C_k$. For each $i\in\{1,\ldots,k\}$, let $H_i:=H[V(C_i)\cup\{r\}]$ and observe that $r\in B(H_i)$.  For each $i\in\{1,\ldots,k\}$,  we apply the inductive hypothesis on the instance $(H_i,r)$ to obtaine three sets $X_{i,0},X_{i,1},X_{i,2}$. Then, for each $i\in\{1,\ldots,k\}$,  $r\in X_{i,1}$, each of $X_{i,1}$ and $X_{i,2}$ dominate $V(H_i)$, and $X_{i,0}$ dominates $V(H_i)\setminus\{r\}$.  Then taking $X_0:=\bigcup_{i=1}^k X_{i,0}$,$X_1:=\bigcup_{i=1}^k X_{i,1}$, and $X_2:=\bigcup_{i=1}^k X_{i,2}$ gives the desired subsets of vertices.
-%
-%   If $\deg^+H(r)=1$ then let $f$ be the face of $H[B]$ that contains the single vertex $x\in N_H(r)\cap I$. Let $H'$ be the graph obtrained from $H$ by contracting the edge $rx$, creating a new vertex $r'$.  Then we apply the inductive hypothesis on the instance $(H',r')$ to obtain sets $X_0'$, $X_1'$, and $X_2'$ where $r'\in X_1'$, $X_1'$ and $X_2'$ dominate $V(H')$ and $X_0'$ dominates $V(H')\setminus\{r'\}$.
-%
-%
-%   .  Without loss of generality, $r'\in X_1'$, each of $X_1'$ ad $X_2'$ dominate $V(H')$ and $X_0'$ dominates $V(H)\setminus\{r'
-%   \}$.
-%
-%
-%   Otherwise, suppose $r$ is not
-%
-%   Otherwise, $r$ is a vertex on the boundary of some inner face $f$ of $H[B]$.  If $f$ is a triangle $vrw$, then let $
-%
-%   If $f$ has four or more vertices then, by \cref{critical_structure}, $r$ is adjacent to an inner vertex $x$ contains in $f$.
-%
-%
-%
-%
-%    each of which is a dominating set of $H$ and
-% \end{proof}
-
-
-
-
 
 \section{A Simple Algorithm}
 \label{warm_up}
@@ -347,7 +302,7 @@ $|X_r| \le (4n-9)/7$.
 \section{A Better Algorithm}
 \label{full_result}
 
-Next we devise an algorithm that produces a smaller connected dominating set than what $\textsc{SimpleGreedy}(G)$ can guarantee.  This involves a more careful analysis of the cases in which \textsc{SimpleGreedy} is forced to take a vertex $v_i$ with $\deg^+_{G_i}(v_i)=2$.  We will show that in most cases, any time the algorithm is forced to choose a vertex $v$ that has inner-degree $2$ in $G_i$, this can immediately followed by choosing a vertex $w$ that has inner-degree at least $3$ in $G_i-v$.  This is explained in \cref{combo}.
+Next we devise an algorithm that produces a smaller connected dominating set than what $\textsc{SimpleGreedy}(G)$ can guarantee.  This involves a more careful analysis of the cases in which \textsc{SimpleGreedy} is forced to take a vertex $v_i$ with $\deg^+_{G_i}(v_i)=2$.  We will show that in most cases, any time the algorithm is forced to choose a vertex $v$ that has inner-degree $2$ in $G_i$, this can immediately be followed by choosing a vertex $w$ that has inner-degree at least $3$ in $G_i-v$.  This is explained in \cref{combo}.
 
 Eventually, the algorithm will be forced to directly handle a graph $G_i$ in which $\deg^+_{G_i}(v)\le 2$ for all $v\in B(G_i)$.  In \cref{two_critical_section} we explain how this can be done using a set $X_{r-1}$ whose size depends only on $G_i-B(G_i)$.  The results in \cref{two_critical_section} require that the graph $G_i-B(G_i)$ not have any vertices of degree less than $2$.  The steps required to eliminate degree-$1$ and degree-$0$ vertices from $G_i-B(G_i)$ are explained in \cref{zero_kill_sec,one_kill_sec}.
 
@@ -593,7 +548,7 @@ We now show that, even when all vertices in $B(H)$ have inner-degree at most $2$
   \end{figure}
   \begin{compactenum}[(a)]
     \item There exists $v\in N_H(w)$ with $\deg^+_H(v)=2$. In this case, $N^+_H(v)=\{w,w'\}$ and the vertices $w$ and $w'$ are in a different biconnected components $C$ and $C'$, respectively, of $H$. By \cref{inner_degree_1}, $C[N_C[v]]$ is isomorphic to $K_4$. Since $\deg_{H-B(H)}(w)=0$, the faces of $C[N_C[v]]$ have no vertices of $H$ in their interiors.   By \cref{inner_degree_1}, $C'[N_{C'}[v]]$ is also isomorphic to $K_4$.  Let $x$ and $y$ be the two neighbours of $v$ on the outer face of $C'$. Since $\deg^+_H(v)=2$, $\deg_{C'}^+(v)=1$, so the cycle $vxw'y$ has no vertices of $H$ in its interior.
-    We claim that the triangle $yw'x$ also contains no vertices of $H$ in its interior. Indeed, if $yw'x$ contains more than one inner vertex then $\deg^+_H(x)>2$ or $\deg^+_H(y)>2$, which is ruled out by the statement of the lemma.  If $yw'x$ contains exactly one inner vertex then $\deg_{H-B(H)}(w')=1$, which is ruled out by the statement of the lemma.
+    We claim that the triangle $yw'x$ also contains no vertices of $H$ in its interior. Indeed, if $yw'x$ contains more than one inner vertex then $\deg^+_H(x)>2$ or $\deg^+_H(y)>2$, which is ruled out by the statement of the lemma.  If $yw'x$ contains exactly one inner vertex then $\deg_{H-B(H)}(w')=1$, which is also ruled out by the statement of the lemma.
 
     Let $H'$ be a dom-minimal graph that dom-respects $H-v$. Then $w$ and $w'$ are both in $B(H-v)$, so $\deg^+_{H-v}(w)=\deg^+_{H-v}(w')=0$. Therefore, neither $w$ nor $w'$ are in $H'$. Therefore $|H'|\le |H-\{v,w,w'\}|=|H|-3$.  Also $B(H-v)=B(H)\setminus\{v\}\cup\{w,w'\}$ but none of $v$, $w$, or $w'$ are in $H'$.  Therefore, by \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus\{v,w,w'\}$ so $|B(H')|\le |B(H)|-1$.
 
@@ -611,7 +566,7 @@ We now explain what the algorithm does when it finally reaches a state where  no
 A generalized near-triangulation $H$ is \defin{$2$-critical} if
 \begin{compactenum}[({2-C}1)]
   \item $\deg^+_H(v)\le 2$ for each $v\in B(H)$; \label[tc]{inner_degree_2}
-  \item $H-B(H)$ is critical; \label[tc]{inner_critical}
+  \item $H-B(H)$ is critical; \label[tc]{inner_critical} and
   \item $\deg_{H-B(H)}(w)\ge 2$ for all $w\in V(H-B(H))$. \label[tc]{inner_vertex_degre_2}
 \end{compactenum}
 (See \cref{two_critical_figure}.) We will work our way up to a proof of the following lemma, which allows our algorithm to handle $2$-critical graphs directly, in one step:
@@ -630,7 +585,7 @@ A generalized near-triangulation $H$ is \defin{$2$-critical} if
 
 
 \begin{lem}
-  Let $H$ be a dom-minimal $2$-critical generalized near-triangulation.  Then $\deg^+H(v)=2$ for all $v\in B(H)$.
+  Let $H$ be a dom-minimal $2$-critical generalized near-triangulation.  Then $\deg^+_H(v)=2$ for all $v\in B(H)$.
 \end{lem}
 
 \begin{proof}
@@ -638,13 +593,13 @@ A generalized near-triangulation $H$ is \defin{$2$-critical} if
 \end{proof}
 
 
-\begin{lem}
+\begin{lem}\label{two_critical_boundary_size}
   Let $H$ be a dom-minimal $2$-critical generalized near-triangulation.  Then $|B(H)|\ge |B(H-B(H))|$.
 \end{lem}
 
 \begin{proof}
   Let $\mathcal{C}$ be the set of components of $H-B(H)$.
-  Let $C$ be a component in $\mathcal{C}$ and let $W:=w_0,\ldots,w_k$ be the walk around the outer face of $C$, so that $w_0=w_k$.  Then, for each $i\in\{1,\ldots,k\}$, $H$ contains an inner face $w_{i-1}w_iv_i$ that is to the left of the edge $w_{i-1}w_i$ when traversed from $w_{i-1}$ to $w_i$.  Since $w_i\in I(H)$, $v_i\in B(H)$.  Since $H$ is $2$-critical and does not contain parallel edges, $v_i\neq v_j$ for any $i\neq j$. Let $N_2(C):=\{v_1,\ldots,v_k\}$.  Therefore $|N_2(C)|= k\ge |B(C)|$. Since $H$ is $2$-critical, $N_2(C)\cap N_2(C')=\emptyset$ for any distinct components $C,C'\in\mathcal{C}$.  Therefore $|B(H)|\ge \sum_{C\in\mathcal{C}} |N_2(C)|\ge \sum_{C\in\mathcal{C}} |B(C)|=|B(H-B(H))|$.
+  Let $C$ be a component in $\mathcal{C}$ and let $W:=w_0,\ldots,w_k$ be the walk around the outer face of $C$, so that $w_0=w_k$.  Then, for each $i\in\{1,\ldots,k\}$, $H$ contains an inner face $w_{i-1}w_iv_i$ that is to the left of the edge $w_{i-1}w_i$ when traversed from $w_{i-1}$ to $w_i$.  Since $w_i\in I(H)$, $v_i\in B(H)$.  Since $H$ is $2$-critical and does not contain parallel edges, $v_i\neq v_j$ for any $i\neq j$. Let $N_2(C):=\{v_1,\ldots,v_k\}$.  Therefore $|N_2(C)|= k\ge |B(C)|$. Since $H$ is $2$-critical and $\deg^+_C(v)\ge 2$ for all $v\in N_2(C)$, $N_2(C)\cap N_2(C')=\emptyset$ for any distinct components $C,C'\in\mathcal{C}$.  Therefore $|B(H)|\ge \sum_{C\in\mathcal{C}} |N_2(C)|\ge \sum_{C\in\mathcal{C}} |B(C)|=|B(H-B(H))|$.
 \end{proof}
 
 For each integer $r\ge 3$, the \defin{$r$-wheel} $W_r$ is the near-triangulation whose outer face is bounded by a cycle $v_0,\ldots,v_{r-1}$ that contains a single vertex $x$ in its interior and that is adjacent to each of $v_0,\ldots,v_{r-1}$.  For even values of $r$, $W_r$ is called an \defin{even wheel}. Note that the following lemma, illustrated in \cref{biconnected_critical_colouring} is about critical graphs, not $2$-critical graphs.
@@ -674,7 +629,8 @@ For each integer $r\ge 3$, the \defin{$r$-wheel} $W_r$ is the near-triangulation
     \begin{tabular}{ccc}
       \includegraphics[page=1]{figs/biconnected} &
       \includegraphics[page=2]{figs/biconnected} &
-      \includegraphics[page=3]{figs/biconnected}
+      \includegraphics[page=3]{figs/biconnected} \\
+      $H$ & $H'$ & $H$
     \end{tabular}
     \caption{The proof of \cref{biconnected_critical}}
     \label{contraction_proof}
@@ -684,7 +640,7 @@ For each integer $r\ge 3$, the \defin{$r$-wheel} $W_r$ is the near-triangulation
   Since $H[B(H)]$ has at least two inner faces and $H$ is biconnected, $f$ contains an edge $vw$ that is on the boundary of two faces of $H$.  Let $H'$ be the graph obtained by contracting the edge $vx$ into $v$. Then $H'[B(H')]=H[B(H)]$ and $H'$ is a biconnected critical generalized near-triangulation so we apply induction to obtain sets $X_0'$, $X_1'$ and $X_2'$.  Without loss of generality, we can assume that $v$ is in $X_1'$.  Then we set $X_0:=X_0'$, $X_1:=X_1'\cup\{x\}$ and $X_2:=X_2'$. Since $H'[B(H')]=H[B(H)]$ this clearly satisfies \cref{proper}.  Since $H'$ contains the edge $vw$ for each $w\in V(f)\setminus\{v\}$, \cref{proper} implies that the vertices of the path $f-v$ are alternately contained in $X_2$ and $X_0$.
   % In particular, since $f$ has at least three vertices these sets satisfy \cref{colourful}.
 
-  All that remains is to show that $X_0$, $X_1$, and $X_2$ satisfy \cref{dominates_h}.  The inductive hypothesis already implies that each of these sets dominates $V(H)\setminus V(f)$.  Since $x$ is adjacent to every vertex of $f$, it is adjacent to at least one vertex of $X_0$ at least one vertex of $X_2$.  Therefore, each of $X_0$, $X_1$, and $X_2$ dominates $x$.  For each vertex $w\in V(f)\setminus\{v\}$, $w$ is adjacent to $x\in X_1$, $w\in X_{i}$ for some $i\in\{0,2\}$ and $w$ is adjacent a neighbour $w'\in X_{2-i}$ in $f$, so each of these sets dominates $w$.  Finally, since the vertex $v$ is incident to a chord of $H[B(H)]$, it is incident to a second face $f'\neq f$ of $H[B(H)]$.  Since $f$ is marked and $H$ is critical, $f'$ is not marked.  Therefore $f'$ is a triangle with one vertex in each of $X_0$, $X_1$, and $X_2$. Therefore each of these sets dominates $v$.
+  All that remains is to show that $X_0$, $X_1$, and $X_2$ satisfy \cref{dominates_h}.  The inductive hypothesis already implies that each of these sets dominates $V(H)\setminus V(f)$.  Since $x$ is adjacent to every vertex of $f$, it is adjacent to at least one vertex of $X_0$ and at least one vertex of $X_2$.  Therefore, each of $X_0$, $X_1$, and $X_2$ dominates $x$.  For each vertex $w\in V(f)\setminus\{v\}$, $w$ is adjacent to $x\in X_1$, $w\in X_{i}$ for some $i\in\{0,2\}$ and $w$ is adjacent to a neighbour $w'\in X_{2-i}$ in $f$, so each of these sets dominates $w$.  Finally, since the vertex $v$ is incident to a chord of $H[B(H)]$, it is incident to a second face $f'\neq f$ of $H[B(H)]$.  Since $f$ is marked and $H$ is critical, $f'$ is not marked.  Therefore $f'$ is a triangle with one vertex in each of $X_0$, $X_1$, and $X_2$. Therefore each of these sets dominates $v$.
 \end{proof}
 
 The following lemma, illustrated in \cref{even_wheel}
@@ -724,34 +680,13 @@ The following lemma, illustrated in \cref{critical_colouring}, drops the require
   Let $H$ be a connected critical generalized near-triangulation with at least $3$ vertices, no vertices of degree $1$ and not isomorphic to $W_k$ for any even integer $k$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
   \begin{compactenum}[(i)]
     \item for each edge $vw$ of $H[B(H)]$, $v\in X_i$ and $w\in X_j$ for some $i\neq j$;\label[p]{proper_2}
-    % \item for each marked face $f$ of $H[B(H)]$ and each $i\in\{0,1,2\}$, $V(f)\cap X_i\neq\emptyset$; and \label[p]{colourful_2}
-    % that contains $x_f\in I(H)$ in its interior, exactly one vertex $v_f$ of $f$ is in the set $X_i$ that contains $x$ and $v_f$ is incident to a chord of $H[B(H)]$. \pat{Define chord.}
     \item for each $i\in\{0,1,2\}$, $X_i$ dominates $H$,  \label[p]{dominates_h_minus_l}
   \end{compactenum}
 \end{lem}
 
 \begin{proof}
-  The proof is by induction on $|H|$.  First, suppose $|H|=3$. Since $H$ is connected and has no vertices of degree $1$ then $H$ is a triangle $v_0v_1v_2$. We take $X_i:=\{v_i\}$ for each $i\in\{0,1,2\}$.  Clearly these sets satisfy the requirements of the lemma.
+  The proof is by induction on $|H|$.  First, suppose that $|H|=3$. Since $H$ is connected and has no vertices of degree $1$, $H$ is a triangle $v_0v_1v_2$. We take $X_i:=\{v_i\}$ for each $i\in\{0,1,2\}$.  Clearly these sets satisfy the requirements of the lemma.
 
-  % If $L\neq\emptyset$ then let $z$ be a vertex in $L$ and let $z_r,\ldots,z_0$ the maximal path in $H$ such that $z=z_r$ and each of $z_1,\ldots,z_{r-1}$ has degree $2$ in $H$. Consider the graph $H':=H-\{z_1,\ldots,z_{r}\}$.
-  % \begin{enumerate}
-  %   \item If $z_0\in L$, then $H'$ is the graph that contains only $z_0$ and $H=z_r,\ldots,z_0$ is a path.  In this case $L:=\{z_0,z_r\}$. We take $X_i:=\{z_j:j\equiv i\pmod 3\}$ for each $i\in\{0,1,2\}$, $L_2=\{z_0\}$.  Starting with $L_0:=L_1:=\emptyset$ and $L_2:=\{z_0\}$, we then set
-  %   $L_{(r-2)\bmod 3}\gets L_{(r-2)\bmod 3} \cup \{z_r\}$.  This produces sets that satisfy the requirements of the lemma, and we are done.
-  %
-  %   \item If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} with $v=z_0$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
-  %
-  %   \item Otherwise, we apply the inductive hypothesis on $H'$ to obtain sets $X_0'$, $X_1'$, $X_2'$, $L_0'$, $L_1'$, and $L_2'$.
-  % \end{enumerate}
-  % \begin{figure}
-  %   \centering
-  %   \includegraphics{figs/tail}
-  %   \caption{Dealing with a degree-$1$ vertex, $z_r$, in the proof of \cref{critical}.}
-  %   \label{critical_degree_one}
-  % \end{figure}
-  % See \cref{critical_degree_one}.
-  % In the latter two cases, we may assume, without loss of generality (by renaming colours), that $z_0\in X_{1}'$.  Since $z_0\not\in L$, $\deg_H(z_0)\ge 3$ so $\deg_{H'}(z_0)\ge 2$.  Therefore we may assume, without loss of generality, that $X_1'$ and $X_2'$ each dominate $z_0$. Redefine $L_{(2-r)\bmod 3}'\gets L_{(2-r)\bmod 3}'\cup\{z_r\}$ so that $L_0'$, $L_1'$ and $L_2'$ is a partitition of $L$.  Then we take $X_i:=X_{i}'\cup\{z_j:1-j\equiv i\pmod 3\}$, $L_0:=L_0'$, $L_1:= L_1'$, and $L_2:=L_2'$.  These sets satisfy the requirements of the lemma.  Indeed, the only concern would be that $z_0$ is not dominated by $X_0$ because $z_0$ is not necessarily dominated by $X_0'$, but this does not occur because $X_0$ includes $z_1$.
-
-  % Finally, we arrive at the case in which $L=\emptyset$.
   If $H$ is biconnected then, since $H$ is not an even wheel, we can immediately apply \cref{biconnected_critical} and we are done.  Otherwise, $H$ contains a cut vertex $v$ that separates $H$ into components $C_1,\ldots,C_k$ and such that $H':=H[V(C_1)\cup\{v\}]$ is biconnected. Refer to \cref{critical_3_colouring}. Since $L=\emptyset$, $H'$ has at least three vertices. If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H'$ and $v$ to obtain sets $X_0'$, $X_1'$, and $X_2'$. Otherwise, we apply \cref{biconnected_critical} to $H'$ to obtain sets $X_0'$, $X_1'$, and $X_2'$.  In either case we may assume, without loss of generality that $v\in X_1'$, that $X_1'$ and $X_2'$ each dominate $H'$ and that $X_0'$ dominates $V(H')\setminus\{v\}$.
 
   \begin{figure}[htbp]
@@ -771,7 +706,7 @@ The following lemma, illustrated in \cref{critical_colouring}, drops the require
 \end{proof}
 
 
-At last, the following lemma, illustrated in \cref{two_critical_colouring}, shows how we combine everything to find three dominating sets of a $2$-critical graph $H$ whose total size is at most $2|B(H)| + I(H)$.
+At last, the following lemma, illustrated in \cref{two_critical_colouring}, shows how we combine everything to find three sets whose total size is at most $2|B(H)| + I(H)$.
 
 \begin{figure}
   \centering
@@ -797,8 +732,8 @@ At last, the following lemma, illustrated in \cref{two_critical_colouring}, show
 
   For each component $C$ in $\mathcal{C}_{\boxtimes}$ we choose the vertex $x$ that dominates $C$, some vertex $w$ in $B(C)$ and some vertex $v\in B(H)$ adjacent to $w$.  We add $\{v,w,x\}$ to each of $X_0$, $X_1$, and $X_2$. The vertex $x$ ensures that each $X_i$ dominates $C$ and the vertices $v$ and $w$ ensure that the component of $H[X_i]$ that contains $x$ contains at least one vertex in $B(H)$.  Doing this for every component in $\mathcal{C}_{\boxtimes}$ contributes a total of $9|\mathcal{C}_{\boxplus}|$ vertices to $X_0$, $X_1$, and $X_2$. On the other hand, $|B(C)|\ge 4$ and $|I(C)|\ge 1$ for each $C\in \mathcal{C}_{\boxplus}$, so $\sum_{C\in \mathcal{C}_{\boxplus}} (2|B(C)| + I(C))\ge (2\cdot 4+1)|\mathcal{C}_{\boxplus}| = 9|\mathcal{C}_{\boxplus}|$.
 
-  For each component $C$ in $\mathcal{C}\setminus(\mathcal{C}_{\boxplus}\cup\mathcal{C}_1)$, we apply \cref{critical} to obtain sets $X_0'$, $X_1'$, $X_2'$. For each $i\in\{0,1,2\}$ and each $w\in X_i'\cap B(H-B(H))$ we choose a vertex $v\in B(H)$ adjacent to $w$ and add both $v$ and $w$ to $X_i$. \Cref{critical} ensures that each $X_i$ dominates $C$ and the vertex $v$ ensures that the component of $X_i$ that contains $w$ contains at least one vertex of $B(H)$.
-  Doing this for each component $\mathcal{C}\setminus\mathcal{C}_\boxplus$ contributes a total of at most  $\sum_{C\in\mathcal{C}\setminus(\mathcal{C}_{\boxplus}\cup\mathcal{C}_1)}(|C|+|B(C)|)=\sum_{C\in\mathcal{C}\setminus(\mathcal{C}_{\boxplus}\cup\mathcal{C}_1)}(2|B(C)|+|I(C)|)$ to $X_0$, $X_1$, and $X_2$.
+  For each component $C$ in $\mathcal{C}\setminus\mathcal{C}_{\boxplus}$, we apply \cref{critical} to obtain sets $X_0'$, $X_1'$, $X_2'$. For each $i\in\{0,1,2\}$ and each $w\in X_i'\cap B(H-B(H))$ we choose a vertex $v\in B(H)$ adjacent to $w$ and add both $v$ and $w$ to $X_i$. \Cref{critical} ensures that each $X_i$ dominates $C$ and the vertex $v$ ensures that the component of $H[X_i]$ that contains $w$ contains at least one vertex of $B(H)$.
+  Doing this for each component $\mathcal{C}\setminus\mathcal{C}_\boxplus$ contributes a total of at most  $\sum_{C\in\mathcal{C}\setminus\mathcal{C}_{\boxplus}}(|C|+|B(C)|)=\sum_{C\in\mathcal{C}\setminus \mathcal{C}_{\boxplus})}(2|B(C)|+|I(C)|)$ to $X_0$, $X_1$, and $X_2$.
 
   The resulting sets $X_1$, $X_2$, and $X_3$ each dominate $\bigcup_{C\in\mathcal{C}} V(C)=I(H)$ and have total size at most $\sum_{C\in\mathcal{C}} (2|B(C)|+|I(C)|) = 2|B(H-B(H))| + |I(H-B(H))|$.
 \end{proof}
@@ -810,7 +745,7 @@ At last, the following lemma, illustrated in \cref{two_critical_colouring}, show
 
 \subsection{The Algorithm}
 
-All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BetterGreedy}(G)$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i$ be a dom-preserving subminor of $G-X_i$ that is dom-minimal, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are now more cases to consider:
+All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BetterGreedy}(G)$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i$ be a dom-minimal graph that dom-respects $G-X_i$, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are now more cases to consider:
 \begin{compactenum}[{[}bg1{]}]
     \item If $\deg^+_{G_i}(v_i)\ge 3$ then we set $\Delta_i\gets\{v_i\}$.
     \label[bg]{bg_high_degree}
@@ -847,9 +782,7 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
   \begin{equation}
     |D|+|R|+|S|= n \enspace . \label{ttotal_size}
   \end{equation}
-  As part of this section, we will show that $|B_{r-1}|\ge |B(G_i-B(G_i))|$, i.e., $|B|\ge |R|$.
-
-  Putting everything together we get the constraints:
+  By \cref{two_critical_boundary_size}, $|B_{r-1}|\ge |B(G_i-B(G_i))|$, i.e., $|B|\ge |R|$.  Putting everything together we get the constraints:
   \begin{align}
         3 + \sum_{t\ge 3}tx_t + 2a + b + 5c + |R| + |S| \le n&
           & \text{(by \cref{dd_size} and \cref{ttotal_size})}  \label{a} \\
@@ -858,7 +791,7 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
   \end{align}
   with all values non-negative.  The size of the final connected dominating set $X_r$ is then at most
   \begin{equation}
-    |X_r| \le \sum_{t\ge 3}x_t + a + b + 2c + 2|R|/3 + |S|/3  \enspace . \label{oobjective}
+    |X_r| = |X| + |\Delta_{r-1}| \le \sum_{t\ge 3}x_t + a + b + 2c + 2|R|/3 + |S|/3  \enspace . \label{oobjective}
   \end{equation}
 
   \begin{clm}\label{simplify}

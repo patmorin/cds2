@@ -1,113 +1,65 @@
-\section{An Application to Graph Drawing}
+\section{An Application in Graph Drawing - Proof of \cref{one_bend_collinear_thm}}
 \label{one_bend}
-This section illustrates an application for a connected dominating set in planar triangulation. We show that every connected dominating set induces a $1$-bend collinear set.
+This section demonstrates an application of a connected dominating set in graph drawing. We establish that each planar graph with a small connected dominating set has a one-bend drawing with a large collinear set. We start with introducing a topological equivalent of one-bend collinear sets as in $\cite{DBLP:journals/jocg/LozzoDFMR18}$.
 
 
 % We are interested in finding bounds on the size of $h$-bend collinear set. For $0$-bend collinear set, constructions of non-Hamiltonian cubic triconnected planar graphs \cite{DBLP:journals/jct/GrunbaumW73,DBLP:conf/wg/RavskyV11,DBLP:journals/jocg/LozzoDFMR18} imply that planar triangulation has a 0-bend collinear set of size at most $O(n^{\sigma})$ where $\sigma < 0.986$. Moreover, every planar triangulation has a 0-bend collinear set of size at least $\Omega(\sqrt{n})$ \cite{DBLP:journals/dcg/BoseDHLMW09} \cite{DBLP:journals/jgaa/Dujmovic17}. In a recent work, Dujmovic and Morin \cite{DBLP:conf/compgeom/DujmovicM19} show that every planar triangulation with maximum degree $\Delta$ has $0$-bend collinear set of size at least $\Omega(\frac{n^{0.8}}{\Delta^4})$.
 
-For the $1$-bend drawing of planar triangulation with $n$ vertices,  Everett et al. \cite{DBLP:conf/gd/EverettLLW07} show the existence of a set $\mathcal{U}$ of $n$ distinct points in the plane such that every $n$-vertex planar graph admits an embedding on vertex set $\mathcal{U}$ with at most one bend along each edge. Furthermore, Giacomo et al. \cite{DBLP:journals/comgeo/GiacomoDLW05} show that for a linear ordering $L$ of vertices of a planar triangulation $G$ and strictly convex curve $\lambda$, there is a $1$-bend planar drawing of $G$ such that vertices of $G$ appear on $\lambda$ with the same order in $L$.
+% For the one-bend drawing of planar triangulation with $n$ vertices,  Everett et al. \cite{DBLP:conf/gd/EverettLLW07} show the existence of a set $\mathcal{U}$ of $n$ distinct points in the plane such that every $n$-vertex planar graph admits an embedding on vertex set $\mathcal{U}$ with at most one bend along each edge. Furthermore, Giacomo et al. \cite{DBLP:journals/comgeo/GiacomoDLW05} show that for a linear ordering $L$ of vertices of a planar triangulation $G$ and strictly convex curve $\lambda$, there is a one-bend planar drawing of $G$ such that vertices of $G$ appear on $\lambda$ with the same order in $L$.
 
-With further relaxation on the drawing of the edges, de Fraysseix et al. \cite{DBLP:journals/combinatorica/FraysseixPP90} show that any set of $n$ points in the plane is a universal set for the two-bend drawing of planar graphs. Furthermore, They show that the planar embedding problem of any $n$-vertex graph onto an $n$ collinear points in $\mathbb{R}^2$ with at most one bend along each edge is NP-complete.
+% With further relaxation on the drawing of the edges, de Fraysseix et al. \cite{DBLP:journals/combinatorica/FraysseixPP90} show that any set of $n$ points in the plane is a universal set for the two-bend drawing of planar graphs. Furthermore, They show that the planar embedding problem of any $n$-vertex graph onto an $n$ collinear points in $\mathbb{R}^2$ with at most one bend along each edge is NP-complete.
 
 \subsection{Characterisation of 1-Bend Collinear Sets}
-A curve $C$ is a continuous mapping from $[0, 1]$ to $\mathbb{R}^2$. We usually call $C(0)$ and $C(1)$ the endpoints of $C$. If these two endpoints coincide, the curve is closed. Otherwise, it is open. A curve $C$ is called simple if $C$ is $C(x) \neq C(y)$ for all $x \neq y$ with exception for the endpoints of $C$ i.e $\{0, 1\}$. $C$ is a \textit{Jordan Curve} if it is simple and closed.
+A curve $C$ is a continuous mapping from $[0, 1]$ to $\mathbb{R}^2$. We usually call $C(0)$ and $C(1)$ the endpoints of $C$. If these two endpoints coincide, the curve is closed. Otherwise, it is open. A curve $C$ is called simple if $C$ is $C(x) \neq C(y)$ for all $x \neq y$ with exception for the endpoints of $C$ i.e $\{0, 1\}$. $C$ is a \defin{Jordan Curve} if it is simple and closed.
 
-Let $G$ be plane graph, a Jordan curve $C$ is a \defin{$k$-proper good curve} if it contains a point in the interior of some face of $G$ (\textit{good}), and the intersection between $C$ and each edge $e$ of $G$ is empty, or at most k points, or the entire edge $e$ (\textit{proper}).
+Let $G$ be plane graph, a Jordan curve $C$ is a \defin{$k$-proper good curve} if it contains a point in the interior of some face of $G$ (\textit{good}), and the intersection between $C$ and each edge $e$ of $G$ is empty, or at most $k$ points, or the entire edge $e$ (\textit{proper}).
 
-A $0$-bend collinear set is characterized using 1-proper good curve.
+Da Lozzo et al. \cite{DBLP:journals/jocg/LozzoDFMR18} characterize the collinear sets in the straight line drawing of a planar graph using 1-proper good curves.
 
-\begin{thm}[\cite{DBLP:journals/jocg/LozzoDFMR18} ]
-A set $S \subseteq V(G)$ is 0-bend collinear if and only if there exists a $1$-proper good curve that contains $S$.
+\begin{thm}[\cite{DBLP:journals/jocg/LozzoDFMR18} ] \label{straightline-topological}
+Let $G$ be a plane graph. A set $S \subseteq V(G)$ is a collinear set if and only if there exists a $1$-proper good curve that contains $S$.
 \end{thm}
 
-Analogously, one can make the following observation.
-\begin{observation} {\label{new_topo}}
-    A planar graph $G$ has $1$-bend collinear set $S$ if $G$ has a $2$-proper good curve $C$ that contains $S$.
+Similarly, we bring a sufficient condition for one-bend collinear sets.
+
+\begin{observation} \label{1-bend-topological}
+    Let $G$ be a plane graph. A set $S \subseteq V(G)$ is a one-bend collinear set if $G$ has a $2$-proper good curve $C$ that contains $S$.
 \end{observation}
+
 \begin{proof}
-Assume $C$ is a 2-proper good curve for $G$. For each $e \in E(G)$ such that $|C \cap e| = 2$, add a vertex $u_e$ between the two intersection points. At the end of this operation we obtain a subdivision of $G$, we call it $TG$. Now, $C$ is $1$-proper good curve for $TG$, since every edge of $TG$ is intersected by $C$ at most one. Thus by Theorem 1.1, $S$ is 0-bend collinear set for $TG$. Let $TG'$ be a drawing of $TG$ where $S$ is mapped to a straight line. Suppressing $u_e$ will yield a drawing of $G$ with at most one bend per edge.
+Let $C$ be a 2-proper good curve that contains $S$. For each edge $e \in E(G)$ such that $|C \cap e| = 2$, we introduce a new subdivision vertex $u_e$ between the two intersection points of $C$ and $e$. By adding these new vertices, we obtain a planer drawing of a subdivision of $G$, denoted as $G^+$. Since every edge of $G^+$ is intersected by $C$ at most one, $C$ is $1$-proper good curve for $G^+$. Thus, by \cref{straightline-topological}, $S$ is collinear set for $G^+$. Note that a straight line drawing of $G^+$ is a one-bend drawing for $G$. Therefore, $S$ is a one-bend collinear set for $G$.
 \end{proof}
 
-\subsection{From a Spanning Tree to a 1-bend Collinear Set}
-% Now, we are ready to describe how a connected dominating set induces a $1$-bend collinear set. More precisely, we want to prove the following theorem.
-% \begin{theorem} \label{applicatino}
-%     Let $G$ be a triangulation and $X$ be a connected dominating set of $G$. Then $G$ has $1$-bend collinear set $S$ of size at least $|V(G)| - |X|$.
-% \end{theorem}
+\subsection{From a Spanning Tree to a One-bend Collinear Set}
 
-% \begin{proof}
+We prove that the leaves of a spanning tree of a planar graph induce a one-bend collinear set. Precisely, we prove the following theorem.
 
-%     \todo[inline]{lets use $\Gamma$, $\cal  G$ is usually used for a class of graphs.
+\begin{lem} \label{spanning_tree_to_collinear_set}
 
-%     why do you call it $1$-bend proper good curve? bend has nothing to do with the curve.
-%     what is wrong with 2-proper good curve? 2 indicates how many times an edge is allowed to be crossed.}
+Let $G$ be a planar graph and $T$ be a spanning tree of $G$. Then, the leaves of $T$ form a one-bend collinear set for $G$.
 
-%     Let $\Gamma$ be a straight-line drawing of $G$. By Observation 1, it is enough to introduce a $1$-bend proper good curve $\ell$ on $\Gamma$ containing the vertices of $V(G) \setminus X$.  We will construct $\ell$ following these steps. First, for each vertex $v \in V(G)$, we consider a small circle, $C_v$, centered at $v$ on $\Gamma$ and disjoint from all the other circles $C_u$ for $u \neq v$. In addition, For a $v \in V(G)$, $C_v$ intersects only the edges incident to $v$. Then, for each edge $uv \in E(G)$, we draw two parallel segments, $L_{uv}$ and $R_{uv}$, on both sides of $uv$ with endpoints on the boundary of corresponding circles of $u$ and $v$. These parallel segments are close enough to the corresponding edges such that no two of them intersect. (see \cref{proof:main}-b as an example). We will use this circles and segments to navigate the curve $\ell$ around vertices and edges on $\Gamma$.
-
-%     Now, we compute a spanning tree $T$ for $G[X]$. Then, for every vertex in $G - X$, we add exactly one We provide a proof that a spanning tree induces a 1-bend Collinear Set. Precisely, we are proving the following theorem.edge connecting it to $T$. The last operation is possible since every vertex in $V(G) - X$ is dominated by a vertex in $X$. Now, $T$ has at least $|V(G)| - |X|$ leaves. We root $T$ at an arbitrary vertex in $X$.
-
-%     We build the curve $\ell$ as follow. Starting from the root, we traverse the tree in \textit{depth first search} order. For each edge $uv \in E(T)$, we add the segment on the right side of traversal direction of $uv$ into the curve $\ell$.
-
-%     For each vertex $w \in V(T)$, we append to $\ell$ the circular arcs on $C_w$ between the segments in $\ell$ in the order of traversal, unless $w$ is a leaf, we join the segments around the edge $wx \in T$ directly to $w$. Now, $\ell$ is a closed curve (see \cref{proof:main}-c).  It is straightforward to verify that the curve $\ell$ contains no vertex of $X$ and for each edge $uv \in E(G)$:
-
-%     \begin{enumerate}
-%         \item [(P1)] if $uv \in E(T)$, then $uv \cap \ell' = \emptyset$, and
-
-%         \item [(P2)] if $uv \notin E(T)$, then $|uv \cap \ell'| = |\{u, v\} \cap X| \leq 2$ .
-%         {\color{purple} $H^2:$ P2 is not straightforward., to change}
-%     \end{enumerate}
-
-%     % Next step, we are aiming to finish the construction of $1$-bend proper good curve $\ell$ by editing the curve $\ell'$ to include the leaves of $T$.
-
-
-%     % For each $v \in V(G)\setminus X$, let $u$ be the neighbour of $v$ in $T$, then by (P2) we know that the edge $uv$ has exactly one intersection with $\ell'$. To achieve a $1$-proper good curve $\ell$, we erase from $\ell'$ an arc of $C_u$, that intersects the edge $uv$ and connects the endpoints of $L_{uv}$ and $R_{uv}$ on $C_u$. Then, we include the segments $L_{uv}$ and $R_{uv}$ to the curve $\ell$ and connect $v$ to the intersections of the parallel segments $L_{uv}$ and $R_{uv}$ with $C_v$. This can be done by drawing a segment along the radii of $C_v$ to the intersections of $C_v$ with $L_{uv}$ and $R_{uv}$. This completes the construction of curve $\ell$ (\cref{proof:main}-d).
-
-%     {\color{purple} $H^2$: Rewrite this from the beginning}
-
-%     The curve $\ell$ is closed. Let $uv \notin E(T[X])$, by (P2), $uv$ can intersect the curve at most in two distinct points. If the end points $u,v \in X$ then $uv$ intersects the curve in $C_v$ and $C_u$. Otherwise, $u,v \notin X$, they are leaves, and $uv$ intersects $\ell$ in $u$ and $v$.
-
-%     If $uv \in E(T)$, then we have two cases. Either $u \in X$ and $v \notin X$, the $v$ is a leaf of $T$. And the curve intersect $uv$ in $v$. Otherwise, $u \in X$ or $v \in X$, the the curve is completely disjoint from $uv$, as $\ell$ follow the construction of $\ell'$ in $T[X]$.
-
-%     Since the tree $T[X]$ is not empty, $\ell$ on the circle of a vertex in $T$ touches at least one face of $\Gamma$. Therefore, $\ell$ is $1$-bend proper good curve. By \cref{cds}, $|V(G) \setminus X|$ is at least $\lceil |V(G)| - |X| \rceil$. That is, $\ell$ contains at least $\lceil |G| - |X|  \rceil$ vertices. Thus, \cref{new_topo} finishes the proof.
-% \end{proof}
-
-
-% \section{An application on graph drawing}
-
-
-We provide a proof that a spanning tree induces a 1-bend Collinear Set. Precisely, we are proving the following theorems.
-
-\begin{thm} \label{app-main}
-
-Let $G$ be a planar graph and $T$ be a spanning tree of $G$. Then, the leaves of $T$ form a $1$-bend collinear set for $G$.
-
-\end{thm}
+\end{lem}
 
 \begin{proof}
+
     Let $\Gamma$ be a straight-line drawing of $G$.
-    By Observation 1, it is enough to introduce a 2-proper good curve $\ell$ on $\Gamma$ containing all the leaves of $T$. To navigate the curve $\ell$ on the drawing $\Gamma$, we construct an envelope around $\Gamma$ as follows. For each vertex $v \in V(G)$, we draw a small circle, $C_v$, centered at $v$. We make the radii of the circles small enough such that each vertex $v \in V(G)$, $C_v$ intersects only the edges incident to $v$ and it is disjoint from all the other circles that correspond to the other vertices. Moreover, for each edge $uv \in E(G)$, we draw two parallel segments, $L_{uv}$ and $R_{uv}$, on both sides of $uv$ with endpoints on the boundary of corresponding circles of $u$ and $v$. These parallel segments are close enough to the corresponding edges such that no two of them intersect. (see \cref{proof:main}-b). Note that each edge $uv \in E(G)$ crosses the envelope exactly twice, once at $C_u$ and once at $C_v$.
+    By \cref{1-bend-topological}, it is enough to introduce a 2-proper good curve $\ell$ on $\Gamma$ containing all the leaves of $T$. To navigate the curve $\ell$ on the drawing $\Gamma$, we construct an envelope around $\Gamma$ as follows. For each vertex $v \in V(G)$, we draw a small circle, $C_v$, centered at $v$. We make the radii of the circles small enough such that each vertex $v \in V(G)$, $C_v$ intersects only the edges incident to $v$ and it is disjoint from all the other circles that correspond to the other vertices. Moreover, for each edge $uv \in E(G)$, we draw two parallel segments on both sides of $uv$ with endpoints on the boundary of corresponding circles of $u$ and $v$. These parallel segments are close enough to the corresponding edges such that no two of them intersect. (see \cref{proof:main} \saeed{a figure is missing!}). Note that each edge $uv \in E(G)$ crosses the envelope exactly twice, once at $C_u$ and once at $C_v$.
 
     Assume $T$ is rooted at an arbitrary vertex of degree at least 2. We build the curve $\ell$ on the envelope of $\Gamma$ as follows. Starting from the root, we traverse the tree in \textit{depth first search} order. For each edge $uv \in E(T)$, we add the segment on the right side of the traversal direction of $uv$ into the curve $\ell$.
 
-    For each non-leaf vertex $u \in V(T)$, we append to $\ell$ the circular arcs on $C_u$ between the segments in $\ell$ in the order of the traversal. For each leaf $u$ of $T$, let $v$ be its neighbor in $T$. We join the segments around the edge $uv \in E(T)$ directly to $u$. By the properties of the depth first traversal, $\ell$ is a closed curve. By construction, $\ell$ contains all the leaves of $T$ and all the other vertices of $T$ are inside $\ell$. Moreover, for each edge $uv \in E(G)$:
+    For each leaf $u$ of $T$, let $v_u$ be its neighbor in $T$. To include all the leaves of $T$ on the curve $\ell$, we join $u$ to the endpoint of segments around the edge $uv_u \in E(T)$ on $C_u$. To keep the curve $\ell$ closed, for each non-leaf vertex $u \in V(T)$, we append to $\ell$ the circular arcs from $C_u$ between the segments in $\ell$ in the order of the traversal. By the properties of the depth first traversal, $\ell$ is a closed curve. By construction, $\ell$ contains all the leaves of $T$ and all the other vertices of $T$ are inside $\ell$. Moreover, for each edge $uv \in E(G)$:
 
     \begin{enumerate}
-        \item [(P1)] if $uv \in E(T)$ and neither $u$ nor $v$ is a leaf, then $|uv \cap \ell| = 0$,
+        \item [(P1)] If $uv \in E(T)$ and neither $u$ nor $v$ is a leaf, then $|uv \cap \ell| = 0$,
 
-        \item [(P2)] if $uv \in E(T)$ and either $u$ or $v$ is a leaf of $T$, then $|uv \cap \ell| = 1$, and
+        \item [(P2)] If $uv \in E(T)$ and either $u$ or $v$ is a leaf of $T$, then $|uv \cap \ell| = 1$, and
 
-        \item [(P3)] if $uv \notin E(T)$, then $|uv \cap \ell| = 2$.
+        \item [(P3)] If $uv \notin E(T)$, then $|uv \cap \ell| = 2$.
     \end{enumerate}
 
-    The properties P1-P3 guarantee that $\ell$ is a 2-proper curve. Since the tree $T$ is not empty, $\ell$ on the circle of a vertex in $T$ touches a face of $\Gamma$. Therefore, $\ell$ is $2$-proper good curve and by Observation 1, there exists a $1$-bend collinear set for $G$ formed by the leaves of $T$.
-
-
+    Properties P1-P3 guarantee that $\ell$ is a 2-proper curve. Since the tree $T$ is not empty, $\ell$ on the circle of a vertex in $T$ touches a face of $\Gamma$. Therefore, $\ell$ is $2$-proper good curve and by \cref{1-bend-topological}, there exists a one-bend collinear set for $G$ formed by the leaves of $T$.
 \end{proof}
 
-
-\begin{thm}
-    Let $G$ be a planar graph on $n$ vertices, then $G$ has a $1$-bend collinear set of size at least $n(1 - \frac{10}{21})$.
-\end{thm}
-
-\begin{proof}
-We first triangulate $G$ by adding edges. So, $G$ becomes an edge maximal planar graph. We apply Theorem 4 to obtain a dominating set $X$ of size at most $10n/21$. Next, we compute a spanning tree $T$ on $G[X]$. we append every vertex $v \in V(G)\setminus X$ to $T$ as leaf. This operation is possible because every $v \in V(G) \setminus X$ is dominated by $X$. Thus, $T$ has at least $n(1 - 10/21)$ leaves. By Theorem 6, we obtain the desired 1-bend collinear set.
+\begin{proof}[Proof of \cref{one_bend_collinear_thm}]
+Let $G$ be an $n$-vertex planar graph. \cref{main_result2} implies that $G$ has a spanning tree with at least $\frac{11}{21}n$ leaves. Using the maximum leaf spanning tree of $G$ in \cref{spanning_tree_to_collinear_set} establishes \cref{one_bend_collinear_thm}.
 \end{proof}
