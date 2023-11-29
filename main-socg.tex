@@ -1,0 +1,966 @@
+\documentclass[a4paper,UKenglish,cleveref, autoref, thm-restate]{lipics-v2021}
+\usepackage[OT1]{fontenc}
+\usepackage[utf8]{inputenc}
+% \usepackage{kpfonts}
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{amsthm}
+\usepackage[longnamesfirst,numbers,sort&compress]{natbib}
+% \usepackage[margin=1.25in]{geometry}
+% \usepackage[sf,bf,small,raggedright,compact]{titlesec}
+% \usepackage{hyperref}
+% \definecolor{linkblue}{named}{MidnightBlue}
+% \hypersetup{colorlinks=true, linkcolor=linkblue,  anchorcolor=linkblue,
+%         citecolor=linkblue, filecolor=linkblue, menucolor=linkblue,
+%         urlcolor=linkblue}
+\usepackage{paralist}
+% \usepackage[capitalize]{cleveref}
+% \usepackage[normalem]{ulem}
+
+% LiPICS stuff
+
+
+% \usepackage{listings,newtxtt}
+% \lstset{basicstyle=\ttfamily, keywordstyle=\bfseries}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\pref}[1]{(P\ref{#1})}
+% \setlength{\parskip}{1ex}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{obs}{Observation}
+\newtheorem{lem}{Lemma}
+\crefname{lem}{Lemma}{Lemmata}
+\newtheorem{cor}{Corollary}
+\newtheorem{clm}{Claim}
+\newenvironment{clmproof}{\noindent\emph{Proof of Claim:}}{\hfill{$\blacksquare$}\par}
+
+\crefname{dm}{}{}
+\creflabelformat{dm}{#2(DM#1)#3}
+\crefname{dp}{}{}
+\creflabelformat{dp}{#2(DP#1)#3}
+\crefname{p}{}{}
+\creflabelformat{p}{#2(#1)#3}
+\crefname{bg}{}{}
+\creflabelformat{bg}{#2[bg#1]#3}
+
+
+\DeclareMathOperator{\corners}{\Gamma}
+\DeclareMathOperator{\dist}{d}
+\DeclareMathOperator{\pack}{pack}
+\DeclareMathOperator{\hit}{hit}
+
+\newcommand{\defin}[1]{\emph{\textcolor{Maroon}{#1}}}
+
+
+% \theoremstyle{definition}
+% \newtheorem{definition}{Definition}[section]
+% \newtheorem{observation}{Observation}
+
+\newcommand{\pat}[1]{[\textcolor{red}{PM: #1}]}
+\newcommand{\vida}[1]{[{\color{pink}VD: #1}]}
+\newcommand{\saeed}[1]{[{\color{blue}SO: #1}]}
+\newcommand{\hussein}[1]{[\textcolor{purple}{$H^2$: #1}]}
+
+\title{Connected Dominating Sets in Triangulations}
+% \author{Prosenjit Bose \and Vida Dujmović \and Hussein Houdrouge \and Pat Morin \and Saeed Odak}
+% \date{}
+\author{Anonymous}{No Affiliation}{email@anon.org}{orcidid}{No funding}
+\authorrunning{Anonymous}
+
+% \author{Jane {Open Access}}{Dummy University Computing Laboratory, [optional: Address], Country \and My second affiliation, Country \and \url{http://www.myhomepage.edu} }{johnqpublic@dummyuni.org}{https://orcid.org/0000-0002-1825-0097}{(Optional) author-specific funding acknowledgements}%TODO mandatory, please use full name; only 1 author per \author macro; first two parameters are mandatory, other parameters can be empty. Please provide at least the name of the affiliation and the country. The full address is optional. Use additional curly braces to indicate the correct name splitting when the last name consists of multiple name parts.
+
+\Copyright{The authors} %TODO mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+
+\ccsdesc[100]{\textcolor{red}{Replace ccsdesc macro with valid one}} %TODO mandatory: Please choose ACM 2012 classifications from https://dl.acm.org/ccs/ccs_flat.cfm
+
+\keywords{connected domination, triangulations, planar graphs, graph drawing, collinear sets} %TODO mandatory; please add comma-separated list of keywords
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  We show that every $n$-vertex triangulation has a connected dominating set of size at most $10n/21$.  Equivalently, every $n$ vertex triangulation has a spanning tree with at least $11n/21$ leaves. Prior to the current work, the best known bounds were $2n/3$ and $n/3$, respectively. (In the special case of Hamiltonian triangulations the previous bounds were $n/2$.)  As an application of this, we show that every $n$-vertex planar graph has a one-bend non-crossing drawing in which some set of at least $11n/21$ vertices is drawn on the $x$-axis.
+\end{abstract}
+
+\section{Introduction}
+
+A set $X$ of vertices in a graph $G$ is a \defin{dominating set} of $G$ if each vertex of $G$ is in $X$ or adjacent to a vertex in $X$.  A dominating set $X$ of $G$ is \defin{connected} if the subgraph $G[X]$ of $G$ induced by $X$ is connected.  There is an enormous body of literature on dominating sets, and several books are devoted to the topic \cite{haynes.hedetniemi.ea:domination,haynes.hedetniemi.ea:topics,du.wan:connected,haynes.hedetniemi.ea:vol2}, including a book and book chapter devoted to connected dominating sets \cite{du.wan:connected,chellali.favaron:connected}.  A typical result in the area is of the form: ``Every $n$-vertex graph in some family $\mathcal{G}$ of graphs has a (connected) dominating set of size at most $f(n)$.'' or ``For infinitely many $n$, there exists an $n$-vertex member of $\mathcal{G}$ with no (connected) dominating set of size less than $g(n)$.''
+
+\subsection{Connected Dominating Sets in Triangulations}
+
+A \defin{triangulation} is an edge-maximal planar graph.  \citet{matheson.tarjan:dominating} proved that every $n$-vertex triangulation has a dominating set of size at most $n/3=0.33\overline{3}n$ and that there exists $n$-vertex triangulations with no dominating set of size less than $n/4=0.25n$. The gap between these upper and lower bounds stood for over $20$ years until a recent breakthrough by \citet{spacapan:domination} reduced the upper bound to $17n/53\approx 0.32075471698n$.  This was swiftly followed by an improvement to $2n/7= 0.2\overline{857142}n$ by \citet{christiansen.rotenberg.ea:triangulations}.
+
+In the current paper, we consider connected dominating sets in triangulations.  An easy consequence of the proof used by \citet{matheson.tarjan:dominating} is that $n$-vertex triangulations have connected dominating sets of size at most $2n/3=0.66\overline{6}n$.  A more general result, due to  \citet{kleitman.west:spanning} shows that graphs of minimum-degree $3$ in which each edge is included in a $3$-cycle have connected dominating set of size at most $2(n-5)/3<0.66\overline{6}n$.
+% \citet{kleitman.west:spanning} also show that graphs of minimum degree $4$ have connected dominating sets of size at most $(3n-8)/5<0.6n$. This result applies to triangulations of minimum degree $4$, which includes all $4$-connected triangulations.  The main result in this paper is the following:
+
+\begin{thm}\label{main_result2}
+  For every $n\ge 4$, every $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $10n/21= 0.\overline{476190}n$.
+\end{thm}
+
+The proof of \cref{main_result2} is constructive and gives an $O(n)$ time algorithm for finding the set $X$.  As far as we know, the best lower bound for this problem is $n/3 < 0.33\overline{3} n$, obtained from a triangulation that contains $n/3$ vertex-disjoint pairwise-nested triangles $\Delta_1,\ldots,\Delta_{n/3}$.  In order to dominate $\Delta_1\cup \Delta_2$, any dominating set must contain at least two vertices in $\Delta_1 \cup \Delta_2$. In order to dominate $\Delta_{n/3-1}\cup \Delta_{n/3}$, any dominating set must contain two vertices in $\Delta_{n/3-1}\cup\Delta_{n/3}$.  Then, in order to be connected, any connected dominating set must contain a vertex in each of $\Delta_3,\ldots,\Delta_{n/3-2}$.
+
+Connected dominating sets are closely related to spanning trees with many leaves.  If $X$ is a connected dominating set of a graph $G$, then $G$ has a spanning tree in which the vertices of $G-X$ are all leaves.  To see this, start with a spanning tree $T$ of $G[X]$ and then, for each  $v\in V(G)\setminus X$ choose some $x\in N_G(v)\cap X$ and add the edge $xv$ to $T$. Conversely, if $T$ is a spanning tree of $G$ with leaf set $L$, then $X:=V(T-L)$ is a connected dominating set of $G$.  Thus, \cref{main_result2} has the following equivalent statement:
+
+\begin{cor}\label{main_theorem_cor}
+  For every $n\ge 4$, every $n$-vertex triangulation $G$ has a spanning tree $T$ with at least $11n/21= 0.\overline{523809}n$ leaves.
+\end{cor}
+
+\subsection{One-Bend Collinear Sets in Planar Graphs}
+
+
+The original motivation for this research was a graph drawing problem.  It is know that every $n$-vertex planar graph $G$ has a non-crossing drawing in the plane with edges of $G$ drawn as line segments and such that some set $Y$ of $\Omega(n^{1/2})$ vertices of $G$ are drawn on the $x$-axis \cite{bose.dujmovic:polynomial,dujmovic:utility}.  The set $Y$ is called a \defin{collinear set}.  For bounded-degree planar graphs, this result can be improved to $|Y|=\Omega(n^{0.8})$ \cite{dujmovic.morin:dual}.  Determining the supremum value of $\alpha$ such that every $n$-vertex planar graph has a collinear set of size $\Omega(n^{\alpha})$ remains a difficult open problem, but it is known that $\alpha < 1$ \cite{ravsky.verbitsky:collinear}.
+
+We consider a relaxation of this problem in which the edges of the graph can be drawn as a polygonal path consisting of at most two line segments.  Such a drawing is called a \defin{one-bend} drawing of $G$.  A subset $Y$ of $V(G)$ is a \defin{one-bend collinear set} if $G$ has a one-bend drawing in which all vertices of $Y$ appear on the $x$-axis.  We show that, for any connected dominating set $X$ in a triangulation $G$, the set $Y:=V(G)\setminus X$ is a one-bend collinear set of $G$.  Combined with \cref{main_result2}, this gives:
+
+\begin{thm}\label{one_bend_collinear_thm}
+  For every $n\ge 4$, every $n$-vertex planar graph has a one-bend collinear set of size at least $11n/21=0.\overline{523809}n$.
+\end{thm}
+
+Note that if all the vertices of $G$ are on the $x$-axis then no edge in a one-bend drawing of $G$ crosses the $x$-axis, so this one bend drawing is a $2$-page book-embedding of $G$. This implies that $G$ is a spanning subgraph of some Hamiltonian triangulation $G^+$.  The Goldner–Harary graph is an $11$-vertex triangulation that is not Hamiltonian. It follows that the graph $G$ obtained by taking $k$ vertex-disjoint copies of the Goldner-Harary graph has $n:=11k$ vertices and has no one-bend collinear set of size greater than $10k=10n/11=0.90\overline{90}n$.
+
+\subsection{Related Work}
+
+\textbf{Connected Dominating Sets:}
+The book chapter by \citet{chellali.favaron:connected} surveys combinatorial results on connected-dominating sets, including the result of \citet{kleitman.west:spanning} mentioned above.  Most results of this form focus on graphs with lower bounds on their minimum degree, possibly combined with some other constraints.  For example, the Kleitman-West results relevant to triangulations is about graphs of minimum-degree $3$ in which each edge participates in a $3$-cycle.
+
+\citet{wan.alzoubi.ea:simple} describe an algorithm for finding a connected dominating set in a $K_t$-minor-free graph. When run on an $n$-vertex planar graph, their algorithm produces a connected dominating set of size at most $15\alpha(G^2)-5$, where $\alpha(H)$ is the size of the largest independent set in a graph $H$.  However, there exists $n$-vertex triangulations $G$ with $\alpha(G^2)=n/4$,\footnote{To create such a triangulation, start with $n/4$ vertex-disjoint copies of $K_4$ embedded so that each copy contributes three vertices to the outer face and has one inner vertex, and then add edges arbitrarily to create a triangulation.  Then the inner vertices of the copies of the original copies of $K_4$ form an independent set in $G^2$.} for which this algorithm does not guarantee an output of size less than $n$.
+
+\citet{hernandez:vigilancia} and \citet{chen.hao.ea:bounds} show that every edge-maximal outerplanar graph has a connected dominating set of size at most $\lfloor (n-2)/2\rfloor$. This immediately implies that every Hamiltonian $n$-vertex triangulation (including every $4$-connected $n$-vertex triangulation) has a connected dominating set of size at most $\lfloor (n-2)/2\rfloor$.  For even $n\ge 4$, the bound $(n-2)/2$ for edge-maximal outerplanar graphs is tight, as is easily seen by constructing a graph with two degree-$2$ vertices $s$ and $t$ and $(n-2)/2$ disjoint edges, each of which separates $s$ from $t$.  \citet{zhuang:connected} parameterizes the problem by the number, $k$,  of degree-$2$ vertices, and shows that any $n$-vertex edge-maximal outerplanar graph with $k$ degree-$2$ vertices has a connected dominating set of size at most $\lfloor\min\{(n+k-4)/2,2(n-k)/3\}\rfloor$.
+
+%
+%
+%
+%
+% \pat{Add: \newline
+% results on edge-maximal outerplanar graphs --- implies $n/2$ bound for Hamiltonian planar graphs (including $4$-connected.) \newline
+% connected dominating sets in unit disc graphs \newline
+% $2$-bend collinear sets \newline
+% $15$-approximation for minimum connected dominating set in planar graphs \newline
+% }
+
+\textbf{Collinear Sets:}
+It is not difficult to establish that a planar graph $G$ has a one-bend drawing in which all vertices of $G$ are drawn on the $x$-axis if and only if $G$ has a $2$-page book embedding. It is well-known that $2$-page graphs are \defin{subhamiltonian}; each such graph is a spanning subgraph of some Hamiltonian planar graph. As pointed out already, the non-Hamiltonian Goldner-Harary triangulation can be used to construct an $n$-vertex planar graph with no one-bend collinear set larger than $10n/11$.
+
+The $x$-axis is just one example of an $x$-monotone function $f(x)=x$. Unsurprisingly, perhaps this function turns out to be the most difficult for one-bend graph drawing.
+% \citet{DBLP:conf/gd/EverettLLW07} describe a \defin{one-bend universal} $n$-point set $S_n$ such that every $n$-vertex planar graph $G$ has a one-bend drawing with the vertices of $G$ drawn on the points in $S_n$. By construction, the point set $S_n$ is contained in the graph of a strictly concave decreasing function.
+\citet{DBLP:journals/comgeo/GiacomoDLW05} show that for \defin{any} strictly concave function $f:[0,1]\to\R$ and any planar graph $G$ there exists a function $x:V(G)\to[0,1]$ such that $G$
+% , and any total order $<$ on $V(G)$ there exists a function $x:V(G)\to\R$ such that $x(v) < x(w)$ if and only if $x< w$ and $G$
+has a one-bend drawing in which each vertex $v$ of $G$ is drawn at the point $(x(v),f(x(v)))$.\footnote{Their result is actually considerably stronger: For any total order $<_G$ on $V(G)$ they provide a function $x$ such that $x(v) < x(w)$ if and only if $x<_G w$.}
+  In our language, every $n$-vertex planar graph $G$ has a \defin{co-$f$-ular} set of size $n$.
+% These results are similar in flavour to \cref{one_bend} in that they produce drawings in which a subset of $V(G)$ is drawn on a particular $1$-dimensional curve.
+
+% For every $n \in \mathbb{N}$, Everett et al. \cite{DBLP:conf/gd/EverettLLW07} show that there exists a universal set $\mathcal{U}_n$ of $n$ distinct points in the plane such that every $n$-vertex planar graph admits a 1-bend drawing with vertices on the points of set $\mathcal{U}_n$. Furthermore, Giacomo et al. \cite{DBLP:journals/comgeo/GiacomoDLW05} demonstrate that for a linear ordering $L$ of vertices of a planar triangulation $G$ and strictly convex curve $\lambda$, there is a one-bend plane drawing of $G$ such that vertices of $G$ appear on $\lambda$ with the same order as in $L$.
+
+Another interpretation of the result of \citet{DBLP:journals/comgeo/GiacomoDLW05} is that every strictly concave curve $C_f:=\{(x,f(x)):0\le x\le 1\}$ is \defin{one-bend universal}; for every planar graph $G$ there exists a one-bend drawing of $G$ in which the vertices of $G$ are mapped to points in $C_f$. \citet{DBLP:conf/gd/EverettLLW07} take this a step further and describe a \defin{one-bend universal} $n$-point set $S_n$ such that every $n$-vertex planar graph $G$ has a two-bend drawing with the vertices of $G$ drawn on the points in $S_n$. (In their construction, the points in $S_n$ happen to lie on a strictly concave curve.)
+% By construction, the point set $S_n$ is contained in the graph of a strictly concave decreasing function.
+With further relaxation on the drawing of the edges, de Fraysseix et al. \cite{DBLP:journals/combinatorica/FraysseixPP90} show that \emph{any} set of $n$ points in the plane is \defin{$2$-bend universal}; for \emph{any} set of $n$ points in $\R^2$ and any $n$ vertex planar graph $G$ there exist a two-bend drawing of $G$ in which the vertices of $G$ are drawn on the points in $S$.
+% .a universal set for the 2-bend drawing of planar graphs.
+
+% Furthermore, They show that the planar embedding problem of any $n$-vertex graph on an $n$ collinear points in $\mathbb{R}^2$ with at most one bend along each edge is NP-complete.
+
+\subsection{Outline}
+
+The remainder of this paper is organized as follows:  In \cref{strategy}, we describe the general strategy we use for finding connected dominating sets in triangulations.  In \cref{warm_up} we show that a simple version of this strategy can be used to obtain a connected dominating set of size at most $4n/7= 0.\overline{571428}n$, which is already better than the best known bounds for triangulations.  In \cref{full_result} we show that a more careful construction leads to a proof of \cref{main_result2}.  In \cref{one_bend}, we discuss the connection between connected dominating sets and one-bend collinear drawings that leads to \cref{one_bend_collinear_thm}.
+
+
+
+% \subsection{Related Work}
+%
+% \pat{Explain how Kleitman-West result gives $3n/4$.  Explain how Matheson-Tarjan gives $2n/3$. Mention results on connected dominating sets in maximal outerplanar graphs.  Talk about connected dominating sets in unit disk graphs.}
+
+
+\section{The General Strategy}
+\label{strategy}
+
+Throughout this paper, we use standard graph-theoretic terminology as used, for example, by \citet{diestel:graph}.
+For a graph $G$, let $|G|=|V(G)|$ denote the number of vertices of $G$.  A \defin{bridge} in a graph $G$ is an edge $e$ of $G$ such that $G-e$ has more connected components than $G$.  For a vertex $v\in G$, $N_G(v):=\{w\in V(G):vw\in E(G)\}$ is the \defin{open neighbourhood} of $v$ in $G$,  $N_G[v]:=N_G(v)\cup\{v\}$ is the \defin{closed neighbourhood} of $v$ in $G$.  For a vertex subset $S\subseteq V(G)$, $N_G[S]:=\bigcup_{v\in S} N_{G}[v]$ is the \defin{closed neighbourhood} of $S$ in $G$ and $N_G(S):=N_G[S]\setminus S$ is the \defin{open neighbourhood} of $S$ in $G$.  A set $X\subseteq V(G)$ \defin{dominates} a set $B\subseteq V(G)$ if $B\subseteq N_G[X]$.  Thus, $X$ is a dominating set of $G$ if and only if $X$ dominates $V(G)$.
+
+A \defin{plane graph} is a graph equipped with a non-crossing embedding in $\mathbb{R}^2$.  A plane graph is \defin{outerplane} if all its vertices appear on the outer face.  A \defin{triangle} is a cycle of length $3$. A \defin{near-triangulation} is a plane graph whose outer face is bounded by a cycle and whose inner faces are all bounded by triangles.  A \defin{generalized near-triangulation} is a plane graph whose inner faces are bounded by triangles. Note that a generalized near triangulation may have multiple components, cut vertices, and bridges.
+
+In several places we will make use of the following observation, which is really a statement about the triangulation contained in $xyz$.
+\begin{obs}\label{useful_little_guy}
+  Let $H$ be a generalized near-triangulation and let $xyz$ be a cycle in $H$.  Then,
+  \begin{compactenum}
+    \item If the interior of $xyz$ contains at least one vertex of $H$, then each of $x$, $y$, and $z$ has at least one neighbour in $H$.
+
+    \item If the interior of $xyz$ contains at least two vertices of $H$, then at least two of $x$, $y$, and $z$ have at least two neighbours in $H$.
+  \end{compactenum}
+\end{obs}
+
+
+
+
+
+For a plane graph $H$, we use the notation $B(H)$ to denote the vertex set of the outer face of $H$ and define $I(H):=V(H)\setminus B(H)$.  The vertices in $B(H)$ are \defin{boundary vertices} of $H$ and the vertices in $I(G)$ are \defin{inner vertices} of $H$. For any vertex $v$ of $H$, the \defin{inner neighbourhood} of $v$ in $H$ is defined as $N_H^+(v):=N_H(v)\cap I(H)$, the vertices in $N^+_H(v)$ are \defin{inner neighbours} of $v$ in $H$, and $\deg^+_H(v)=|N^+_H(v)|$ is the \defin{inner degree} of $v$ in $H$.
+
+Let $G$ be a triangulation.  Our procedure for constructing a connected dominating set $X$ begins with an incremental phase that eats away at $G$ ``from the outside.'' The process of constructing $X$ is captured by the following definition:   A vertex subset $X\subseteq V(G)$ is \defin{outer-domatic} if it can be partitioned into non-empty subsets $\Delta_0,\Delta_1,\ldots,\Delta_{r-1}$ such that
+\begin{compactenum}[(P1)]
+    \item $\Delta_0\subseteq B(G)$; \label{outer_face}
+    \item $\Delta_i\subseteq B(G-(\bigcup_{j=0}^{i-1}\Delta_j))$ for each $i\in\{1,\ldots,r-1\}$; and \label{incremental}
+    \item $G-(\bigcup_{j=0}^{r-1}\Delta_j)$ is outerplane. \label{outerplanar}
+\end{compactenum}
+
+\begin{lem}\label{outer_domatic}
+    Let $G$ be a triangulation.  Then any outer-domatic $X\subseteq V(G)$ is a connected dominating set of $G$.
+\end{lem}
+
+\begin{proof}
+  Suppose $X$ is outer-domatic and let $\Delta_0,\ldots,\Delta_{r-1}$ be the corresponding partition of $X$.  For each $i\in\{1,\ldots,r\}$, let $X_i:=\bigcup_{j=0}^{i-1} \Delta_i$.  First observe that, since $\Delta_0\subseteq B(G)$ is non-empty, $X_i$ contains at least one vertex of $B(G)$, for each $i\in\{1,\ldots,r\}$. We claim that,
+  \begin{compactenum}[(P1)]\setcounter{enumi}{3}
+    \item for each $i\in\{2,\ldots,r\}$ each vertex in $B(G-X_{i-1})$ is adjacent to some vertex in $X_{i-1}$. \label{adjacent}
+  \end{compactenum}
+  Indeed, for any $i\in\{2,\ldots,r\}$ each vertex $v\in B(G-X_{i-1})$ is either in $B(G)$ or adjacent to a vertex in $X_{i-1}$. Even in the former case, (P1) ensures that $v$ is adjacent to a vertex in $X_1=\Delta_0\subseteq X_{i-1}$, because $G[B(G)]$ is a clique.
+
+  We now prove, by induction on $i$, that $G[X_i]$ is connected, for each $i\in\{1,\ldots,r\}$.
+  The fact that $G[B(G)]$ is a clique and \pref{outer_face} implies that $G[X_1]=G[\Delta_0]$ is connected. For each $i\in\{2,\ldots,r\}$, the assumption that $G[X_{i-1}]$ is connected, \pref{incremental}, and \pref{adjacent} then imply that $G[X_i]=G[X_{i-1}\cup\Delta_{i-1}]$ is connected.
+
+  In particular $G[X_r]=G[X]$ is connected.  Finally, \pref{adjacent}, with $i=r$ and \pref{outerplanar} implies that $N_G(X_r)=B(G-X_r)=V(G-X_r)$, so $X_r=X$ is a dominating set of $G$.
+\end{proof}
+
+We will present two algorithms that grow a connected dominating in small batches $\Delta_0,\Delta_1,\ldots,\Delta_{r-2}$ that result in a sequence of sets $X_1,\ldots,X_{r-1}$ where $X_{i}=\bigcup_{j=0}^{i-1}\Delta_j$.  Each of these algorithms is unable to continue once they reach a point where each vertex in $B(G-X_i)$ has inner-degree at most $1$ in $G-X_i$.  We begin by studying the graphs that cause this to happen.
+
+\subsection{Critical Graphs}
+
+A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ for each $v\in B(H)$. We say that an inner face of $H[B(H)]$ is \defin{marked} if it contains an inner vertex of $H$.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[page=1]{figs/critical}
+    \caption{Some critical graphs.}
+    \label{critical_fig}
+\end{figure}
+
+
+\begin{lem}\label{critical_structure}
+    Let $H$ be a critical generalized near-triangulation. Then each $f$ face of $H[B(H)]$ contains at most one vertex of $I(H)$ and this vertex is adjacent to every vertex of $f$.
+\end{lem}
+
+\begin{proof}
+  Let $B:=B(H)$ and $I:=I(H)$.
+  By definition, the graph $H[B]$ is outerplanar.  Consider some marked face $f$ of $H[B]$.  This face is marked because it contains at least one vertex in $I$.  Since $H$ is a triangulation, there is an edge $vx$ in $H$ with $v\in B$ on the boundary of $f$ and $x\in I$ in the interior of $f$. Since $H$ is a generalized near-triangulation and $x$ is an inner vertex of $H$, the edge $vx$ is on the boundary of two faces $vxv_1$ and $vxv_{k-1}$ of $H$ with $v_1\neq v_{k-1}$.  Since $\deg^+_H(v)=1$, each of $v_1$ and $v_{k-1}$ are in $B$.  By the same argument, $H$ contains a face $v_1xv_2$ with $v_2\in B$, $v_2\neq v_1$, and repeating this argument shows that $v,v_1,v_2,\ldots,v_{k-1}$ is the cycle in $H[B]$ that bounds $f$.  Therefore, $f$ contains exactly one vertex $x$ of $I$ and $x$ is adjacent to each vertex of $f$.
+\end{proof}
+
+\begin{lem}\label{base_case}
+    Let $H$ be a critical generalized near-triangulation. Then $|B(H)|\ge 3|I(H)|$ and there exists $\Delta\subseteq B(H)$ of size at most $|I(H)|$ that dominates $I(H)$.
+\end{lem}
+
+\begin{proof}
+  Let $B:=B(H)$ and $I:=I(H)$.  If $I$ is empty then the result is trivially true, by taking $\Delta:=\emptyset$, so we now assume that $I$ is non-empty.  By \cref{critical_structure}, $H$ is formed from the outerplanar graph $H[B]$ by adding $|I|$ stars, one in the interior of each marked face of $H[B]$.  Since $\deg_H^+(v)=1$ for each $v\in B$, each vertex of $H[B]$ is on the boundary of exactly one marked face.  For each vertex $w\in I$, the marked face that $f$ of $H[B]$ that contains $w$ has at least $3$ vertices, which do not belong to any other marked face. Therefore $|B|\ge 3|I|$ and by choosing one vertex from each marked face of $H[B]$ we obtain the desired set $\Delta$.
+\end{proof}
+
+
+\section{A Simple Algorithm}
+\label{warm_up}
+
+We start with the simplest possible greedy algorithm, that we call $\textsc{SimpleGreedy}(G)$, to choose $\Delta_0,\ldots,\Delta_{r-1}$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i:=G-X_i$, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are only two cases to consider:
+\begin{compactenum}[{[}g1{]}]
+    \item If $\deg^+_{G_i}(v_i)\ge 2$ then we set $\Delta_i\gets\{v_i\}$.
+    \item If $\deg^+_{G_i}(v_i)\le 1$ for all $v\in B(G_i)$ then $G_i$ is critical and this is the final step, so $r:=i+1$.  By \cref{base_case}, there exists $\Delta_i\subseteq B(G_i)$ of size at most $|I(G_i)|$ that dominates $I(G_i)$. Then $X_r:=X_{r-1}\cup\Delta_{i}$ and we are done.
+\end{compactenum}
+
+\begin{thm}\label{simple_greedy}
+  When applied to an $n$-vertex triangulation $G$,  $\textsc{SimpleGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $(4n-9)/7$.
+\end{thm}
+
+\begin{proof}
+By the choice of $\Delta_0,\ldots,\Delta_{r-1}$, $X_r$ is an outer-domatic subset of $V(G)$ so, by \cref{outer_domatic}, $X_r$ is a connected dominating set of $G$.  All that remains is to analyze the size of $X_r$.  For each $i\in\{1,\ldots,r\}$, let $D_i:=N_G[X_i]$ be the subset of $V(G)$ that is dominated by $X_i$, let $I_i:=V(G)\setminus D_i$ be the subset of $V(G)$ not dominated by $X_i$, and let $B_i:=N_G(I_i)$ be the vertices of $G$ that have at least one neighbour in each of $X_i$ and $I_i$.  We use the convention that $D_0:=B(G)$.
+
+First observe that, for $i\in\{0,\ldots,r-2\}$, $|D_{i+1}|\ge |D_i|+\deg_{G_i}^+(v_i)$ since $D_{i+1}\supseteq D_i$ and $D_{i+1}$ contains the $\deg_{G_i}^+(v_i)$ inner neighbours of $v_i$ in $G_i$.  Therefore
+\[
+    |D_{r-1}| \ge |D_0| + \sum_{i=0}^{r-2} \deg_{G_i}^+(v_i) \ge 3 + \sum_{i=0}^{r-2} 2 =  2r+1 \enspace . \label{double_d}
+\]
+Since $D_{r-1}$ and $I_{r-1}$ partition $V(G)$,
+\begin{equation}
+  n = |D_{r-1}| + |I_{r-1}| \ge 2r+1 + |I_{r-1}|  \enspace . \label{c1}
+\end{equation}
+
+Since $X_{r-1}$ and $B_{r-1}$ are disjoint and $D_{r-1}\supseteq B_{r-1}\cup X_{r-1}$, we have $|D_{r-1}|\ge |X_{r-1}| + |B_{r-1}|=r-1+|B_{r-1}|$.  Therefore,
+\begin{align}
+    n & = |D_{r-1}| + |I_{r-1}| \ge r-1 + |B_{r-1}| + |I_{r-1}| \ge r - 1 + 4|I_{r-1}| \enspace , \label{c2}
+\end{align}
+where the last inequality follows from \cref{base_case}.
+
+The final dominating set $X_r$ has size $|X_r| = |X_{r-1}| + \Delta_{r-1} = r - 1 +|I_{r-1}|$, so the size of $|X_r|$ can be upper-bounded by maximizing $r-1+|I_{r-1}|$ subject to \cref{c1,c2}.
+% More precisely, by setting $x:=r$ and $y:=|I_{r-1}|$, the maximum size of $X_r$ is upper-bounded by the maximum value of $x-1+y$ subject to the constraints
+% \begin{align*}
+% x,y \ge 0 \\
+%   x - 1 + 4y & \le n \\
+%   2x + 1 + y & \le n
+% \end{align*}
+This is an easy linear programming exercise and the maximum value of $X_{r}$ is obtained when $r=(3n-5)/7$ and $|I_{r-1}|=(n+3)/7$, which gives
+$|X_r| \le (4n-9)/7$.
+\end{proof}
+
+% \subsection{An $O(n)$ Time Implementation}
+%
+% We note that the implementation of $\textsc{SimpleGreedy}(G)$ is even simpler than the definition given above.  Nothing special needs to be done for the critical graph $G_{r-1}$.  Repeatedly selecting a vertex of maximum innner-degree and removing it will produce a dominating set of size exactly $|I_{r-1}|$.  Thus, $\textsc{SimpleGreedy}(G)$ has a simple linear time implementation.  In this implementation, each vertex $v$ stores a value $d_v$ which is initially set to $\deg_G(v)$.  For the three vertices on the outer face of $G$, $d_v$ is initially set to $\deg_G(v)-2$.  In general, $d_v$ is kept updated so that it is always equal to the inner-degree of $v$ in $G_i$.
+%
+% Besides the data structure used for representing the triangulation $G$, each vertex $v$ also participates in a doubly-linked list $L_{d_v}$  that stores all the vertices with the same $d_v$ value.  A global doubly-linked list $L$ then stores all the lists $L_d$ such that $L_d$ is non-empty, sorted by increasing order of $d$.   Extracting a vertex of maximum inner-degree can then be done in constant time and the total time spent moving vertices between different lists in $L$ is proportional to the number of edges of $G$. Thus, the entire algorithm can be implemented in $O(n)$ time.
+
+\section{A Better Algorithm}
+\label{full_result}
+
+Next we devise an algorithm that produces a smaller connected dominating set than what $\textsc{SimpleGreedy}(G)$ can guarantee.  This involves a more careful analysis of the cases in which \textsc{SimpleGreedy} is forced to take a vertex $v_i$ with $\deg^+_{G_i}(v_i)=2$.  We will show that in most cases, any time the algorithm is forced to choose a vertex $v$ that has inner-degree $2$ in $G_i$, this can immediately be followed by choosing a vertex $w$ that has inner-degree at least $3$ in $G_i-v$.  This is explained in \cref{combo}.
+
+Eventually, the algorithm will be forced to directly handle a graph $G_i$ in which $\deg^+_{G_i}(v)\le 2$ for all $v\in B(G_i)$.  In \cref{two_critical_section} we explain how this can be done using a set $X_{r-1}$ whose size depends only on $G_i-B(G_i)$.  The results in \cref{two_critical_section} require that the graph $G_i-B(G_i)$ not have any vertices of degree less than $2$.  The steps required to eliminate degree-$1$ and degree-$0$ vertices from $G_i-B(G_i)$ are explained in \cref{zero_kill_sec,one_kill_sec}.
+
+% In this section, we will show that during any step one of the following cases occurs.
+
+% \pat{Give overview of algorithm here.}
+
+\subsection{Dom-Respecting Graphs}
+
+We begin by identifying unnecessary vertices and edges that can appear in the graphs $G_1,\ldots,G_{r-1}$ during the construction of $X$.   We say that a near-triangulation $H$ is \defin{dom-minimal} if
+\begin{compactenum}[({DM}1)]
+    \item each vertex $v\in B(H)$ has $\deg^+_H(v)\ge 1$;  \label[dm]{bad_vertex}
+    \item for each $v\in B(H)$ with $\deg^+_H(v)=1$,  $H[N_H[v]]$ is isomorphic to $K_4$; and \label[dm]{inner_degree_1}
+    \item each edge $vw$ on the boundary of the outer face of $H$ is also on the boundary some inner face $vwx$ of $H$, where $x\in I(H)$. \label[dm]{bad_edge}
+    % \saeed{this sentence looks unclear }
+\end{compactenum}
+We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each of its biconnected components are dom-minimal.
+
+\begin{obs}\label{bridgeless}
+    Any dom-minimal generalized near-triangulation $H$ is bridgeless.
+\end{obs}
+
+\begin{proof}
+   If $vw$ is a bridge in $H$ then both $v$ and $w$ are in $B(H)$.  Since $vw$ is a bridge in $H$, there is no path $vxw$ in $H$ and hence no inner face $vwx$ in $H$. Thus $H$ does not satisfy \cref{bad_edge}.
+\end{proof}
+
+Let $H$ and $H'$ be two generalized near-triangulations.  We say that $H'$ \defin{dom-respects} $H$ if
+\begin{compactenum}[({DP}1)]
+  \item $B(H')\subseteq B(H)$; \label[dp]{boundary_subset}
+  % \item $N^+_{H'}(v)\subseteq N^+_H(v)$ for all $v\in B(H')$; \label[dp]{same_inner_neighbourhood}
+  \item $I(H')=I(H)$; and \label[dp]{same_inner_vertices}
+  \item $N_{H'}(v)\cap I(H)\subseteq N_H(v)\cap I(H)$ for all $v\in V(H')$. \label[dp]{same_neighbourhood}
+\end{compactenum}
+
+\begin{obs}
+  Let $H$ and $H'$ be generalized near-triangulations where $H'$ dom-respect $H$ and let $\Delta'$ be a subset of $V(H')$ that dominates $I(H')$ in $H'$.  Then $\Delta'$ dominates $I(H)$ in $H$.
+\end{obs}
+
+\begin{proof}
+  By \cref{same_inner_vertices}, $I(H)=I(H')$. For each $w\in I(H)=I(H')$, $w\in \Delta'$ or there exists an edge $vw\in E(H')$ with $v\in\Delta'$.  In the latter case, $vw\in E(H)$ by \cref{same_neighbourhood}, so $\Delta'$ dominates $w$.
+\end{proof}
+
+\begin{lem}\label{dom_minimal}
+  For any generalized near-triangulation $H$, there exists dom-minimal generalized near-triangulation $H'$ that dom-respects $H$.
+\end{lem}
+
+\begin{figure}
+  \centering
+  \begin{tabular}{ccc}
+    \includegraphics[page=1]{figs/minimal} &
+    \includegraphics[page=3]{figs/minimal} &
+    \includegraphics[page=5]{figs/minimal} \\
+    $\Downarrow$ & $\Downarrow$ & $\Downarrow$ \\
+    \includegraphics[page=2]{figs/minimal} &
+    \includegraphics[page=4]{figs/minimal} &
+    \includegraphics[page=6]{figs/minimal}
+  \end{tabular}
+  \caption{Three cases on the way to making $H$ dom-minimal.}
+  \label{minimal_fig}
+\end{figure}
+The proof of \cref{dom_minimal}, illustrated in \cref{minimal_fig} involves small modifications that eliminate violations of \cref{boundary_subset,same_inner_vertices,same_neighbourhood}.  The full proof is included in the appendix.
+
+
+\subsection{Finding a $2$--$3$ Combo}
+\label{combo}
+
+Next we show that, in most cases our algorithm for constructing a connected dominating set is not forced to choose a single vertex of inner-degree $2$. Instead, it can choose a pair $v,w$ such that $\deg^+_H(v)=2$ and $\deg^+_{H-v}(w)\ge 3$. Note that the next two lemmas each consider a graph $H$ that is a near triangulation, not a generalized near-triangulation.
+
+\begin{lem}\label{chord_incident}
+  let $H$ be a dom-minimal near-triangulation and let $v_0$ be a vertex in $B(H)$ with $|N_H(v_0)\cap B(H)|\ge 3$.  Then $\deg^+_H(v_0)\ge 2$.  In other words, if $v_0$ is incident to a chord of the outerplane graph $H[B(H)]$, then $v_0$ is incident to at least two inner vertices of $H$.
+\end{lem}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{figs/chord_incident}
+  \caption{The proof of \cref{chord_incident}}
+  \label{chord_incident_fig}
+\end{figure}
+\begin{proof}
+  Refer to \cref{chord_incident_fig}
+  Since $H$ is a near-triangulation its outer face is bounded by a cycle $v_0,\ldots,v_{k-1}$.  Let $a:=\min\{i\in\{2,\ldots,k-2\}:v_0v_i\in E(H)\}$ and $b:=\max\{i\in\{2,\ldots,k-2\}:v_0v_i\in E(H)\}$. (Possibly $a=b$, but both $a$ and $b$ are well-defined since $|N^+_H(v_0)|\ge 3$.)   Since $H$ is dom-minimal, the edge $v_0v_1$ is on the boundary of an inner face $v_0v_1x$ of $H$ where $x$ is an inner vertex of $H$, by \cref{bad_edge}.  Since $H$ is dom-minimal, the edge $v_{k-1}v_0$ is on the boundary of an inner face $v_{k-1}v_0y$ of $H$ where $y$ is an inner vertex of $H$, by \cref{bad_edge}.  Then $x$ is in the interior of the face of $H[B(H)]$ bounded by the cycle $v_0,v_1,\ldots,v_a$ and $y$ is in the interior of the face of $H[B(H)]$ bounded by the cycle $v_0,v_b,\ldots,v_{k-1}$.  Therefore, $x\neq y$ and $N^+_H(v_0)\supseteq\{x,y\}$ so $\deg^+_H(v_0)\ge 2$.
+\end{proof}
+
+\begin{lem}\label{degree_2_outer_neighbour}
+  Let $H$ be a dom-minimal near-triangulation. Then either:
+  \begin{compactenum}
+    \item $H$ is isomorphic to $K_4$;
+    % \item $H$ consists of a cycle on the vertices in $B(H)$ plus one dominant inner vertex $w$; or
+    \item each vertex $w\in B(H-B(H))$ has a neighbour $v$ in $B(H)$ with $\deg^+_H(v)\ge 2$.
+  \end{compactenum}
+\end{lem}
+
+\begin{proof}
+  If $I(H)=\emptyset$ then the second condition of the lemma is trivially satisified, so there is nothing to prove. Otherwise, let $w$ be any vertex in $B(H-B(H))$ and let $vw$ be an edge of $H$ with $v\in B(H)$.
+  % If $H$ is the empty graph, then there is nothing to prove. Otherwise $H$ is non-empty, so $B(H)$ is non-empty. Let $v$ be a vertex in $B(H)$.
+  % By \cref{bad_edge}, $\deg^+_H(v)\ge 1$ so $H$ contains an edge $vw$ with $w\in I(H)$.
+  % Consider the face $f:=v_0,\ldots,v_{k-1}$ of the outerplane graph $H[B(H)]$ that contains $w$.
+
+
+   \begin{figure}[htbp]
+     \centering
+     \begin{tabular}{ccc}
+       \includegraphics[page=1]{figs/outer_2_2} &
+       \includegraphics[page=2]{figs/outer_2_2} &
+       \includegraphics[page=3]{figs/outer_2_2}
+     \end{tabular}
+     % \pat{Redo this figure.}
+     \caption{The proof of \cref{degree_2_outer_neighbour}.}
+     \label{degree_2_outer_neighbour_fig}
+   \end{figure}
+
+   Refer to \cref{degree_2_outer_neighbour_fig}.
+   By \cref{inner_degree_1}, $\deg^+_H(v)\ge 2$ or $H[N_H[v_0]]$ is isomorphic to $K_4$. In the former case the vertex $w$ satisfies the second condition of the lemma.  In the latter case, let $x$ and $y$ be the two neighbours of $v$ on the outer face of $H$, so $H[\{v,w,x,y\}]$ is isomorphic to $K_4$.    If the edge $xy$ is not on the outer face of $H$ then, by \cref{chord_incident}, $\deg^+_H(x),\deg^+_H(y)\ge 2$ so $w$ satisfies the second condition and we are done.  Otherwise, if $I(H)=w$ then $V(H)=\{v,w,x,y\}$ and $H$ is isomorphic to $K_4$ and we are done.  Otherwise $I(H)$ at least one vertex $w'\neq w$.  Since $\deg^+_H(v)=1$, the cycle $vxwy$ has no vertices of $H$ in its interior (by \cref{useful_little_guy}, so $I(H)$ contains vertices in the interior of $xyw$.  But then \cref{useful_little_guy} implies that $\deg^+_H(x),\deg^+_H(y)\ge 2$.
+\end{proof}
+
+% Note that the next three lemmas consider the case where $H$ is a generalized near triangulation.
+
+The proof of the following lemma, which is illustrated in \cref{2_3_figure}, is deferred to the appendix.
+
+\begin{figure}
+  \centering
+  \includegraphics[page=1]{figs/2_3_figure}
+  \includegraphics[page=2]{figs/2_3_figure}
+  \includegraphics[page=3]{figs/2_3_figure}
+  \caption{Remove an inner-degree $2$ vertex $v$ is immediately followed by removing an inner-degree $3$ vertex $w$.}
+  \label{2_3_figure}
+\end{figure}
+
+\begin{lem}\label{really_good}
+  Let $H$ be a dom-minimal generalized near-triangulation.  Then either:
+  \begin{compactenum}[(1)]
+    \item $H-B(H)$ is critical; \label[p]{two_critical}
+    \item $B(H)$ contains a vertex $v$ with $\deg^+_H(v)\ge 3$; or \label[p]{degree_three}
+    \item $H$ contains distinct vertices $v_0$, $v_j$, and $w$ such that
+    \begin{compactenum}[(a)]
+      \item $v_0\in B(H)$ and $\deg^+_H(v_0)=2$;
+      \item $w\in B(H-v_0)$ and $\deg^+_{H-v_0}(w)\ge 3$; and
+      \item $v_j\in B(H)$ and $N^+_H(v_j) \subseteq N_H[w] $.
+    \end{compactenum}
+    \label[p]{two_three_pair}
+  \end{compactenum}
+\end{lem}
+
+
+
+% The following is a restatement of \cref{really_good} in language that is more useful in the description of an algorithm for constructing a connected dominating set.
+%
+% \begin{cor}\label{really_good_cor}
+%   Let $H$ be a dom-minimal generalized near-triangulation.  Then either:
+%   \begin{compactenum}[(1)]
+%     \item $H-B(H)$ is critical;
+%     \item there is a vertex $v\in B(H)$ and a dom-respecting subgraph $H'$ of  $H-v$ with $|H'|\le |H|-1$ and $|B(H')|\ge |B(H)|+2$; or
+%     \item there is an edge $vw\in E(H)$ with $v\in B(H)$, $w\in B(H-B(H))$, and a dom-respecting subgraph $H'$ of $H-\{v,w\}$ with $|H'|= |H|-3$ and $|B(H')|=|B(H)|+2$.
+%   \end{compactenum}
+% \end{cor}
+%
+% \begin{proof}
+%   In the second case, the graph $H':=H-v$ has $|H'|=|H|-1$ and $|B(H')|\ge |B(H)|+2$. In the third case, the graph $H':=H-\{v_0,w,v_j\}$ has $|H'|=|H|-3$ and $|B(H')|=|B(H)|+2$.
+% \end{proof}
+
+
+\subsection{Eliminating Inner Leaves}
+\label{one_kill_sec}
+
+Next we show that, even when all vertices in $B(H)$ have inner-degree at most $2$ and $H-B(H)$ is critical, we can still efficiently dominate degree-$1$ vertices in $H-B(H)$.
+
+
+\begin{lem}\label{leaf_killer}
+  Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$, $H-B(H)$ is critical, and $H-B(H)$ contains a vertex $w$ with $\deg_{H-B(H)}(w)=1$.  Then there exists $v\in B(H)$ and a dom-respecting subgraph $H'$ of $H-v$ such that $|H'|\le |H|-3$ and $|B(H')|\le |B(H)|-1$.
+\end{lem}
+
+\begin{proof}
+  Refer to \cref{killing_a_leaf}.
+  Let $x$ be the unique neighbour of $w$ in $H-B(H)$. Since $x$ and $w$ are vertices of $H-B(X)$, $x,w\in I(H)$.  Since $w$ is an inner vertex in a near-triangulation, it is incident to $t\ge 3$ faces $v_iv_{i+1}w$ for $i\in\{0,\ldots,v_{t}\}$, with $v_0=v_t=x$.  Since $\deg_{H-B(H)}(w)=1$, $v_1,\ldots,v_{t-1}\in B(H)$.  Therefore, $H$ contains no edge $v_i v_{i+r}$ for any $i\in\{0,\ldots,t-r\}$ and any $r\ge 2$.  Therefore, for each $i\in\{1,\ldots,t-1\}$, the only two inner faces of $H$ that include $v_i$ are $v_{i-1}v_iw$ and $v_iv_{i+1}w$.  Therefore $N^+_H(v_i)=\{w\}$ for each $i\in\{2,\ldots,t-2\}$ and $N^+_H(v_1)=N^+_H(v_{t-1})=\{x,w\}$.\footnote{In fact, \cref{inner_degree_1} implies that $t=3$, but this is not important for this proof.}
+
+  \begin{figure}[htbp]
+    \centering
+    \begin{tabular}{ccc}
+      \includegraphics[page=1]{figs/killing_a_leaf} &
+      \includegraphics[page=2]{figs/killing_a_leaf} &
+      \includegraphics[page=3]{figs/killing_a_leaf} \\
+      $H$ & $H-v$ & $H'$
+    \end{tabular}
+    \caption{The proof of \cref{leaf_killer}.}
+    \label{killing_a_leaf}
+  \end{figure}
+
+  Let $v:=v_1$. Apply \cref{dom_minimal} to $H-v$ to get a dom-minimal graph $H'$ that dom-respects $H-v$.  Then $w,x\in B(H-v)$.  Since $H'$ is dom-minimal, $v_1,\ldots,v_{t-1}\not\in V(H')$, by \cref{bad_vertex}.  Therefore $N_H(w)\cap V(H')=\{v_t\}=\{x\}$. Since $H'$ is dom-minimal, $w\not\in V(H')$, by \cref{bad_vertex}. Therefore $V(H')\subseteq V(H)\setminus\{v_1,\ldots,v_{t-1},w\}$, so $|V(H')|\le |H|-t\le |H|-3$.  Finally, $B(H-v)\subseteq B(H)\setminus \{v\}\cup\{w,x\}$. By \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus\{v_1,\ldots,v_{t-1},w\}\cup\{x\}$, so $|B(H')|\le |B(H)|+2-t\le |B(H)|-1$.
+\end{proof}
+
+\subsection{Eliminating Inner Isolated Vertices}
+\label{zero_kill_sec}
+
+We now show that, even when all vertices in $B(H)$ have inner-degree at most $2$, $H-B(H)$ is critical, and $H-B(H)$ has no degree-$1$ vertices, we can still efficiently dominate degree-$0$ vertices in $H-B(H)$.
+
+
+\begin{lem}\label{degree_zero_killer}
+  Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$ and such that $H-B(H)$ contains a vertex $w$ with $\deg_{H-B(H)}(w)=0$ but does not contain any vertex $w'$ with $\deg_{H-B(H)}(w')=1$.  Then at least one of the following is true:
+  \begin{compactenum}[(a)]
+    \item there exists $v\in B(H)$ and a graph $H'$ that dom-respects $H-v$ such that $|H'|\le |H|-3$ and $|B(H')|\le |B(H)|-1$; or \label[p]{kill_pair}
+    \item there exists $v\in B(H)$ and a graph $H'$ that dom-respects $H-v$ such that $|H'|\le |H|-4$ and $|B(H')|\le |B(H)|-3$. \label[p]{kill_k4}
+  \end{compactenum}
+\end{lem}
+
+The proof of \cref{degree_zero_killer}, illustrated in \cref{isolated_fig}, chooses a vertex $v$ that belongs to one or two induced $K_4$ subgraphs.  The full proof is included in the appendix.
+
+\begin{figure}[htpb]
+  \centering
+  \begin{tabular}{cc}
+    \includegraphics[page=1]{figs/isolated} &
+    \includegraphics[page=3]{figs/isolated} \\
+    $\Downarrow$ & $\Downarrow$ \\
+    \includegraphics[page=2]{figs/isolated} &
+    \includegraphics[page=4]{figs/isolated}
+  \end{tabular}
+  \caption{Eliminating isolated vertices in $H-B(H)$.}
+  \label{isolated_fig}
+\end{figure}
+
+
+
+
+
+\subsection{$2$-Critical Graphs}
+\label{two_critical_section}
+
+We now explain what the algorithm does when it finally reaches a state where  none of \cref{really_good_cor}, \cref{leaf_killer} or \cref{degree_zero_killer} can be used to make an incremental step.  The inapplicability of \cref{leaf_killer,degree_zero_killer,really_good_cor} leads to the following definition:
+A generalized near-triangulation $H$ is \defin{$2$-critical} if
+\begin{compactenum}[({2-C}1)]
+  \item $\deg^+_H(v)\le 2$ for each $v\in B(H)$; \label[tc]{inner_degree_2}
+  \item $H-B(H)$ is critical; \label[tc]{inner_critical} and
+  \item $\deg_{H-B(H)}(w)\ge 2$ for all $w\in V(H-B(H))$. \label[tc]{inner_vertex_degre_2}
+\end{compactenum}
+(See \cref{two_critical_figure}.) We will work our way up to a proof of the following lemma, which allows our algorithm to handle $2$-critical graphs directly, in one step:
+
+\begin{figure}
+  \centering
+  \includegraphics[page=1]{figs/two_critical}
+  \caption{A $2$-critical generalized near-triangulation.}
+  \label{two_critical_figure}
+\end{figure}
+
+
+\begin{lem}\label{two_critical_handler}
+  Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X\subseteq V(H)$ of size at most $(2|B(H-B(H))| + I(H-B(H)))/3$ that dominates $I(H)$ and such that each component of $H[X]$ contains at least one vertex in $B(H)$.
+\end{lem}
+
+
+\begin{lem}
+  Let $H$ be a dom-minimal $2$-critical generalized near-triangulation.  Then $\deg^+_H(v)=2$ for all $v\in B(H)$.
+\end{lem}
+
+\begin{proof}
+  Consider some $v\in B(H)$. By \cref{bad_vertex}, $\deg^+_H(v)\ge 1$. Assume for the sake of contradiction that $\deg_H(v)=1$. By \cref{inner_degree_1}, $H[N_H[v]]$ is isomorphic to $K_4$. Let $x$ and $y$ be the neighbours of $v$ on the outer face of $H$ and let $w$ be the inner neighbour of $v$. Since $\deg^+_H(v)=1$ then the cycle $vxwy$ has no vertices of $H$ in its interior.  Since $H$ is $2$-critical, $\deg_{H-B(H)}(w)\ge 2$, which implies that $w$ has at least two neighbours in the interior of the cycle $ywx$.  But this implies that at least one of $x$ or $y$, say $x$, has at least two neighbours in the interior of $ywx$.  But this implies that $\deg^+_H(x)\ge 3$, which contradicts the fact that $H$ is $2$-critical.
+\end{proof}
+
+
+\begin{lem}\label{two_critical_boundary_size}
+  Let $H$ be a dom-minimal $2$-critical generalized near-triangulation.  Then $|B(H)|\ge |B(H-B(H))|$.
+\end{lem}
+
+\begin{proof}
+  Let $\mathcal{C}$ be the set of components of $H-B(H)$.
+  Let $C$ be a component in $\mathcal{C}$ and let $W:=w_0,\ldots,w_k$ be the walk around the outer face of $C$, so that $w_0=w_k$.  Then, for each $i\in\{1,\ldots,k\}$, $H$ contains an inner face $w_{i-1}w_iv_i$ that is to the left of the edge $w_{i-1}w_i$ when traversed from $w_{i-1}$ to $w_i$.  Since $w_i\in I(H)$, $v_i\in B(H)$.  Since $H$ is $2$-critical and does not contain parallel edges, $v_i\neq v_j$ for any $i\neq j$. Let $N_2(C):=\{v_1,\ldots,v_k\}$.  Therefore $|N_2(C)|= k\ge |B(C)|$. Since $H$ is $2$-critical and $\deg^+_C(v)\ge 2$ for all $v\in N_2(C)$, $N_2(C)\cap N_2(C')=\emptyset$ for any distinct components $C,C'\in\mathcal{C}$.  Therefore $|B(H)|\ge \sum_{C\in\mathcal{C}} |N_2(C)|\ge \sum_{C\in\mathcal{C}} |B(C)|=|B(H-B(H))|$.
+\end{proof}
+
+For each integer $r\ge 3$, the \defin{$r$-wheel} $W_r$ is the near-triangulation whose outer face is bounded by a cycle $v_0,\ldots,v_{r-1}$ that contains a single vertex $x$ in its interior and that is adjacent to each of $v_0,\ldots,v_{r-1}$.  For even values of $r$, $W_r$ is called an \defin{even wheel}. Note that the following lemma, illustrated in \cref{biconnected_critical_colouring} is about critical graphs, not $2$-critical graphs.
+
+\begin{figure}
+  \centering
+  \includegraphics[page=7,trim={0 55 0 10},clip]{figs/two_critical}
+  \caption{\cref{biconnected_critical}: Partitioning the vertices of a biconnected critical graph into three dominating sets.}
+  \label{biconnected_critical_colouring}
+\end{figure}
+
+\begin{lem}\label{biconnected_critical}
+  Let $H$ be a biconnected critical generalized near-triangulation with at least $3$ vertices and not isomorphic to $W_k$ for any even integer $k$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
+  \begin{compactenum}[(i)]
+    \item For each edge $vw$ of $H[B(H)]$, $v\in X_i$ and $w\in X_j$ for some $i\neq j$;\label[p]{proper}
+    \item for each $i\in\{0,1,2\}$, $X_i$ dominates $H$. \label[p]{dominates_h}
+  \end{compactenum}
+\end{lem}
+
+The proof of \cref{biconnected_critical}, whose main step is illustrated in \cref{contraction_proof} involves repeatedly contracting an inner vertex into an appropriately-chosen boundary vertex until the resulting graph is outerplanar and then using a proper $3$-colouring of the outerplanar graph to define the sets $X_0$, $X_1$, and $X_2$.  The full proof is included in the appendix.
+
+\begin{figure}
+  \centering
+  \begin{tabular}{ccc}
+    \includegraphics[page=1]{figs/biconnected} &
+    \includegraphics[page=2]{figs/biconnected} &
+    \includegraphics[page=3]{figs/biconnected} \\
+    $H$ & $H'$ & $H$
+  \end{tabular}
+  \caption{The proof of \cref{biconnected_critical}}
+  \label{contraction_proof}
+\end{figure}
+
+
+
+The following lemma, illustrated in \cref{even_wheel}
+ explains how we deal with even wheels not covered by \cref{biconnected_critical}:
+
+\begin{lem}\label{wheelie}
+  Let $H:=W_k$ for some even integer $k\ge 4$ and let $v$ be any vertex in $B(H)$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
+  \begin{compactenum}[(i)]
+    \item For each edge $vw$ of $H[B(H)]$, $v\in X_i$ and $w\in X_j$ for some $i\neq j$;\label[p]{proper2}
+    % \item For each inner face $f$ of $H[B(H)]$ and each $i\in\{0,1,2\}$, $V(f)\cap X_i\neq\emptyset$; and \label[p]{colourful}
+    % that contains $x_f\in I(H)$ in its interior, exactly one vertex $v_f$ of $f$ is in the set $X_i$ that contains $x$ and $v_f$ is incident to a chord of $H[B(H)]$. \pat{Define chord.}
+    \item $X_0$ dominates $V(H)\setminus\{v\}$ and $X_1$ and $X_2$ each dominate $H$. \label[p]{weak_dominates_h}
+  \end{compactenum}
+\end{lem}
+
+\begin{figure}
+  \centering
+  \includegraphics{figs/even_wheel}
+  \caption{\cref{wheelie}: Partitioning the vertices of an even wheel into sets $X_0$, $X_1$, and $X_2$.}
+  \label{even_wheel}
+\end{figure}
+\begin{proof}
+  Label the vertices of $W_k$ as $v_0,\ldots,v_{k-1}$ so that $v=v_0$.  Then the sets $X_1:=\{v_0, x\}$, $X_2:=\{v_{2i-1}:i\in\{1,\ldots,k/2\}\}$, and $X_0:=\{v_{2i}:i\in\{1,\ldots, k/2-1\}\}$ satisfy the requirements of the lemma.
+\end{proof}
+
+
+The following lemma, illustrated in \cref{critical_colouring}, drops the requirement that the critical graph be biconnected and applies even if some of the biconnected components of $H$ are even wheels.
+
+\begin{figure}
+  \centering
+  \includegraphics[page=2]{figs/two_critical}
+  \caption{\cref{critical}: Partitioning the vertices of a connected critical graph into dominating sets $X_0$, $X_1$, and $X_2$.}
+  \label{critical_colouring}
+\end{figure}
+
+\begin{lem}\label{critical}
+  Let $H$ be a connected critical generalized near-triangulation with at least $3$ vertices, no vertices of degree $1$ and not isomorphic to $W_k$ for any even integer $k$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
+  \begin{compactenum}[(i)]
+    \item for each edge $vw$ of $H[B(H)]$, $v\in X_i$ and $w\in X_j$ for some $i\neq j$;\label[p]{proper_2}
+    \item for each $i\in\{0,1,2\}$, $X_i$ dominates $H$,  \label[p]{dominates_h_minus_l}
+  \end{compactenum}
+\end{lem}
+
+The proof of \cref{critical} involves handling each biconnected component of $H$ using \cref{biconnected_critical} or \cref{wheelie}, as appropriate, and then renaming the resulting triple of sets that the vertex shared between two or more components appears in exactly one of $X_0$, $X_1$, or $X_2$ and is dominated by each of $X_0$, $X_1$, and $X_2$.  The full proof is included in the appendix.
+
+
+
+
+
+At last, the following lemma, illustrated in \cref{two_critical_colouring}, shows how we combine everything to find three sets whose total size is at most $2|B(H)| + I(H)$.
+
+\begin{figure}
+  \centering
+  \includegraphics[page=4]{figs/two_critical}
+  \caption{\cref{three_sets_coverage}: Finding three sets $X_0$, $X_1$, and $X_2$ that dominate $I(H)$ in a $2$-critical graph $H$.}
+  \label{two_critical_colouring}
+\end{figure}
+
+
+\begin{lem}\label{three_sets_coverage}
+  Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X_0,X_1,X_2\subseteq V(H)$ such that
+  \begin{compactenum}[(i)]
+    \item $|X_0|+|X_1|+|X_2| \le 2|B(H-B(H))|+|I(H-B(H))|$; \label[p]{total_size}
+    \item for each $i\in\{0,1,2\}$, $X_i$ dominates $I(H)$ in $H$; and \label[p]{dominates_i}
+    \item for each $i\in\{0,1,2\}$, each component of $H[X_i]$ contains at least one vertex in $B(H)$. \label[p]{connectivity}
+  \end{compactenum}
+\end{lem}
+
+The proof of \cref{three_sets_coverage} considers each component of $H-B(H)$ separately.  Even wheels are handled directly and other components are handled using \cref{critical}.  The full proof is included in the appendix.
+
+
+\begin{proof}[Proof of \cref{two_critical_handler}]
+  Take $X$ to be the smallest of the three sets $X_0$, $X_1$, and $X_2$ guaranteed by \cref{three_sets_coverage}.
+\end{proof}
+
+
+\subsection{The Algorithm}
+
+All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BetterGreedy}(G)$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i$ be a dom-minimal graph that dom-respects $G-X_i$, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are now more cases to consider:
+\begin{compactenum}[{[}bg1{]}]
+    \item If $\deg^+_{G_i}(v_i)\ge 3$ then we set $\Delta_i\gets\{v_i\}$.
+    \label[bg]{bg_high_degree}
+    \item If $G_i-B(H_i)$ contains a vertex of degree $1$ we set $\Delta_i:=\{v_i\}$ where $v_i$ is the vertex $v$ guaranteed by \cref{leaf_killer}.
+    \item If $G_i-B(H_i)$ contains a vertex of degree $0$ we set $\Delta_i:=\{v_i\}$ where $v_i$ is the vertex $v$ guaranteed by \cref{degree_zero_killer}.
+    \item If there exists distinct $u,v\in B(G_i)$ and $w\in B(G_i-B(G_i))$ such that $\deg^+_{G_i}(v)=2$, $\deg^+_{G_i-v}(w)\ge 3$, and $N^+_{G_i}(u)\subseteq N_{G_i}(w)$ then set $\Delta_i:=\{v,w\}$.
+    \label[bg]{bg_two_three}
+    \item Otherwise, $G_i$ is $2$-critical and $i+1=r$.  By \cref{two_critical_handler}, there exists $\Delta_{r-1}\subseteq V(G_i)$ of size at most $|B(G_i-B(G_i))|/3 + |I(G_i-B(G_i))|$ that dominates $I(G_i)$.
+    \label[bg]{bg_two_critical}
+\end{compactenum}
+
+\begin{thm}\label{better_greedy}
+  When applied to an $n$-vertex triangulation $G$,  $\textsc{BetterGreedy}(G)$ produces a connected dominating set $X_r$ of size at most $(10n-18)/21$.
+\end{thm}
+
+The proof of \cref{better_greedy} is similar to that of \cref{simple_greedy} in that it involves defining a small linear program that bounds the worst-case size of $X_r$ is deferred to the appendix.
+
+%%%%%%%% The application section %%%%
+
+\section{An Application in Graph Drawing - Proof of \cref{one_bend_collinear_thm}}
+\label{one_bend}
+This section demonstrates an application of a connected dominating set in graph drawing. We establish that each planar graph with a small connected dominating set has a one-bend drawing with a large collinear set. We start with introducing a topological equivalent of one-bend collinear sets as in $\cite{DBLP:journals/jocg/LozzoDFMR18}$.
+
+
+% We are interested in finding bounds on the size of $h$-bend collinear set. For $0$-bend collinear set, constructions of non-Hamiltonian cubic triconnected planar graphs \cite{DBLP:journals/jct/GrunbaumW73,DBLP:conf/wg/RavskyV11,DBLP:journals/jocg/LozzoDFMR18} imply that planar triangulation has a 0-bend collinear set of size at most $O(n^{\sigma})$ where $\sigma < 0.986$. Moreover, every planar triangulation has a 0-bend collinear set of size at least $\Omega(\sqrt{n})$ \cite{DBLP:journals/dcg/BoseDHLMW09} \cite{DBLP:journals/jgaa/Dujmovic17}. In a recent work, Dujmovic and Morin \cite{DBLP:conf/compgeom/DujmovicM19} show that every planar triangulation with maximum degree $\Delta$ has $0$-bend collinear set of size at least $\Omega(\frac{n^{0.8}}{\Delta^4})$.
+
+% For the one-bend drawing of planar triangulation with $n$ vertices,  Everett et al. \cite{DBLP:conf/gd/EverettLLW07} show the existence of a set $\mathcal{U}$ of $n$ distinct points in the plane such that every $n$-vertex planar graph admits an embedding on vertex set $\mathcal{U}$ with at most one bend along each edge. Furthermore, Giacomo et al. \cite{DBLP:journals/comgeo/GiacomoDLW05} show that for a linear ordering $L$ of vertices of a planar triangulation $G$ and strictly convex curve $\lambda$, there is a one-bend planar drawing of $G$ such that vertices of $G$ appear on $\lambda$ with the same order in $L$.
+
+% With further relaxation on the drawing of the edges, de Fraysseix et al. \cite{DBLP:journals/combinatorica/FraysseixPP90} show that any set of $n$ points in the plane is a universal set for the two-bend drawing of planar graphs. Furthermore, They show that the planar embedding problem of any $n$-vertex graph onto an $n$ collinear points in $\mathbb{R}^2$ with at most one bend along each edge is NP-complete.
+
+\subsection{Characterisation of 1-Bend Collinear Sets}
+A \defin{curve} $C$ is a continuous mapping from $[0, 1]$ to $\mathbb{R}^2$. We usually call $C(0)$ and $C(1)$ the \defin{endpoints} of $C$. If $C(0)=C(1)$ then  the curve is \defin{closed}. Otherwise, it is \defin{open}. A curve $C$ is called \defin{simple} if $C$ is $C(x) \neq C(y)$ for all $0\le x<y\le 1$ with the exception of $x=0$, $y=1$. $C$ is a \defin{Jordan Curve} if it is simple and closed.
+
+Let $G$ be plane graph, a Jordan curve $C$ is a \defin{$k$-proper good curve} if it contains a point in the interior of some face of $G$ (\textit{good}), and the intersection between $C$ and each edge $e$ of $G$ is empty, or at most $k$ points, or the entire edge $e$ (\textit{proper}).
+
+% Da Lozzo et al.
+\citet{DBLP:journals/jocg/LozzoDFMR18} characterize collinear sets in the straight line drawing of a planar graph using 1-proper good curves.
+
+\begin{thm}[\cite{DBLP:journals/jocg/LozzoDFMR18} ] \label{straightline-topological}
+Let $G$ be a plane graph. A set $S \subseteq V(G)$ is a collinear set if and only if there exists a $1$-proper good curve that contains $S$.
+\end{thm}
+
+The following lemma, illustrated in \cref{subdivisions}, gives a similar condition for one-bend collinear sets.
+
+\begin{figure} [htbp]
+  \centering
+  \includegraphics[page=6]{figs/proper_good} \\
+  $\Downarrow$ \\
+  \includegraphics[page=7]{figs/proper_good}
+  \caption{Subdividing $G$ so that a $2$-proper good curve $C$ becomes a $1$-proper good curve for the subdivided graph $G^+$.}
+  \label{subdivisions}
+\end{figure}
+
+\begin{observation} \label{1-bend-topological}
+    Let $G$ be a plane graph. A set $S \subseteq V(G)$ is a one-bend collinear set if $G$ has a $2$-proper good curve $C$ that contains $S$.
+\end{observation}
+
+\begin{proof}
+Let $C$ be a 2-proper good curve that contains $S$. For each edge $e \in E(G)$ such that $|C \cap e| = 2$, we introduce a new subdivision vertex $u_e$ between the two intersection points of $C$ and $e$. By adding these new vertices, we obtain a plane drawing of a subdivision of $G$, denoted as $G^+$. Since every edge of $G^+$ is intersected by $C$ at most once, $C$ is $1$-proper good curve for $G^+$. Thus, by \cref{straightline-topological}, $S$ is a collinear set for $G^+$. Note that a straight line drawing of $G^+$ is a one-bend drawing for $G$. Therefore, $S$ is a one-bend collinear set for $G$.
+\end{proof}
+
+
+\subsection{From a Spanning Tree to a One-bend Collinear Set}
+
+We prove that the leaves of a spanning tree of a planar graph induce a one-bend collinear set. Precisely, we prove the following theorem.
+
+\begin{lem} \label{spanning_tree_to_collinear_set}
+  Let $G$ be a planar graph and $T$ be a spanning tree of $G$. Then, the leaves of $T$ form a one-bend collinear set for $G$.
+\end{lem}
+
+The proof of \cref{spanning_tree_to_collinear_set}, illustrated in \cref{tree_walking}, involves constructing a $2$-proper good curve that walks the contour of $T$ and then applying \cref{1-bend-topological}.
+
+\begin{figure}
+    \centering
+    % \includegraphics[page=2]{figs/proper_good} \\
+    % $\Downarrow$ \\
+    \includegraphics[page=3]{figs/proper_good}\\
+    $\Downarrow$ \\
+    \includegraphics[page=4]{figs/proper_good}
+    \caption{Constructing a $2$-proper good of $G$ that contains all the leaves of the tree $T$.}
+    \label{tree_walking}
+\end{figure}
+
+
+\begin{proof}[Proof of \cref{one_bend_collinear_thm}]
+Let $G$ be an $n$-vertex planar graph. \cref{main_result2} implies that $G$ has a spanning tree with at least $11n/21$ leaves. Using this tree in \cref{spanning_tree_to_collinear_set} establishes \cref{one_bend_collinear_thm}.
+\end{proof}
+
+\section{Discussion}
+
+We conclude with two open questions:
+
+\begin{compactenum}
+  \item Is it true that every $n$-vertex triangulation has a connected dominating set of size at most $n/3+O(1)$?  A positive answer to this question seems to require additional new ideas.  In particular, it would seem to require a more global approach than the greedy approaches presented here.
+
+  \item Is it true that every $4$-connected $n$-vertex triangulation has a connected dominating set of size at most $n/4+O(1)$?  If this question has a positive answer, then the $O(1)$ term is necessary.  It is easy to construct a $4$-connected $6$-vertex triangulation $G$ for which any connected dominating set has at least two vertices.
+
+\end{compactenum}
+
+
+
+\bibliographystyle{plainurlnat}
+\bibliography{main}
+
+\appendix
+
+\section{Omitted Proofs}
+
+\begin{proof}[Proof of \cref{dom_minimal}]
+  The proof is by induction on $|V(H)|+|E(H)|$.  If $H$ is already dom-minimal, then setting $H'=H$ satisfies the requirements of the lemma, so assume that $H$ is not dom-minimal.  Since \cref{boundary_subset,same_inner_vertices,same_neighbourhood} are transitive relations, the dom-respecting relation is transitive: If $H'$ dom-respects $H^*$ and $H^*$ dom-respects $H$, then $H'$ dom-respects $H$.  Therefore, it is sufficient to find $H^*$ with fewer edges or fewer vertices than $H$ that dom-respects $H$, and the inductive hypothesis provides the desired dom-minimal graph $H'$ that dom-respects $H^*$ and $H$.
+
+  If $H$ contains a vertex $v\in B(H)$ with $\deg^+_H(v)=0$ then $H-v$ is a generalized near-triangulation, $B(H-v)\subset B(H)$, $I(H-v)=I(H)$, and $N_{H-v}(v)\cap I(H)=N_{H}(v)\cap I(H)$ for all $v\in V(H-v)$. Therefore $H-v$ dom-respects $H$ and has fewer vertices than $H$ so we can apply the inductive hypothesis and be done.  We now assume that $\deg^+_H(v)\ge 1$ for all $v\in B(H)$.  Since $H$ is not dom-minimal then $H$ contains a biconnected component $C$ that is not dom-minimal. (See \cref{minimal_fig}.)
+  \begin{compactenum}
+    \item \cref{bad_edge}: If there exists an edge $vw$ on the outer face of $C$ that is not incident to any inner face $vwx$ with $x\in I(C)$ then $H-vw$ is a generalized near-triangulation, $B(H-vw)=B(H)$, and $I(H-vw)=I(H)$, and $N_{H-vw}(v)\cap I(H)=N_{H}(v)\cap I(H)$ for all $v\in V(H-vw)$. Therefore, $H-vw$ dom-respects $H$ and has few edges than $H$. (This includes the case where $C$ consists of the single edge $vw$.)
+
+    \item \cref{bad_vertex}: If there exists a vertex $v\in B(C)$ with $\deg^+_C(v)=0$ then $v$ is incident to an edge $vw$ that is on the outer face of $C$ and on the outer face of $H$. Since $\deg^+_C(v)=0$, $vw$ is not incident to any inner face $vwx$ with $x\in I(C)$ and we can proceed as in the previous case.
+
+    \item \cref{inner_degree_1}: If there exists a vertex $v\in B(C)$ with $\deg^+_C(v)=1$ then $H$ contains faces $xvw$ and $vyw$ where $x$ and $y$ are on the outer face of $C$ and $w$ is an inner vertex. If $H[N_H[v]]$ is not isomorphic to $K_4$, then $xy\not\in E(H)$.  In this case, let $H^\star$ be the graph obtained from $H$ by replacing the edges $xv$ and $vy$ with the edge $xy$. Then $H^\star$ is a generalized near-triangulation, $B(H^*)=B(H)$, $I(H^*)=I(H)$, and $N_{H^*}(v)\cap I(H)\subseteq N_{H}(v)\cap I(H)$.  Therefore $H^*$ dom-respects $H$ and has fewer edges than $H$. \qedhere
+  \end{compactenum}
+\end{proof}
+
+\begin{proof}[Proof of \cref{two_three_pair}]
+  We will assume that $H$ does not satisfy \cref{two_critical} or \cref{degree_three} and show that $H$ must satisfy \cref{two_three_pair}.  Since $H-B(H)$ is not critical, $B(H-B(H))$ contains a vertex $w$ with $\deg_{H-B(H)}(w)\ge 2$.
+
+  Let $C$ be the biconnected component of $H$ that contains $w$.  Then $C$ is a near-triangulation and we can apply \cref{degree_2_outer_neighbour} to $C$ and $w$. The first alternative in \cref{degree_2_outer_neighbour} is incompatible with the assumption that $\deg^+_{H-B(H)}(w)\ge 2$.  Therefore, we conclude that $N_H(w)\cap B(H)$ contains a vertex $v_0$ with $\deg^+_H(v_0)\ge 2$.  Since $H$ does not satisfy \cref{degree_three}, $\deg^+_H(v_0)< 3$, so $\deg^+_H(v_0)=2$.  Refer to \cref{really_good_fig}
+  \begin{figure}
+    \centering
+    \begin{tabular}{ccc}
+      \includegraphics[page=1]{figs/really_good} &
+      \includegraphics[page=2]{figs/really_good} &
+      \includegraphics[page=3]{figs/really_good}
+    \end{tabular}
+    \caption{The proof of \cref{really_good}. \hussein{I think, it might be better if we draw another neighbor of w to its right.}}
+    \label{really_good_fig}
+  \end{figure}
+
+  Let $v_0,\ldots,v_{k-1}$ be the cycle that bounds the inner face $f$ of $H[B(H)]$ that contains $w$ in its interior. In the remainder of this proof, alls subscripts on $v$ are implicitly modulo $k$.  Since $H$ is a near-triangulation, $H$ contains triangles $v_0v_1x$ and $v_{k-1}v_0 y$ with $x$ and $y$ in the interior of or on the boundary of $f$.  Since $f$ is a face of $H[B(H)]$ each of $x$ and $y$ is in the interior of $f$.  At least one of $x$ or $y$ is equal to $w$, say $x$, since otherwise $\deg^+_H(v_0)\ge 3$.  Therefore $v_0v_1 w$ is an inner face of $H$.
+
+  Let $j\ge 1$ be the maximum integer such that $v_{a-1}v_{a}w$ is an inner face of $H$ for all $a\in\{1,\ldots,j\}$.  Note that $j\le k-1$ since, otherwise, the component of $H-B(H)$ that contains $w$ contains only a single vertex, contradicting the fact that $\deg^+_{H-B(H)}(w)\ge 2$.
+  % \footnote{In fact, $j\in\{0,1\}$ by \cref{inner_degree_1}, but this is not important for the current argument.}
+
+  Since $H$ is a near-triangulation and $f$ is a face of $H[B(H)]$, $H$ has some face $v_j v_{j+1} z$ with $z$ in the interior of $f$.  By the definition of $j$, $z\neq w$.  Therefore, $N_H^+(v_j)\supseteq \{w,z\}$ and, since $\deg^+_H(v_j)\le 2$, $N_H^+(v_j))= \{w,z\}$.
+  % Therefore $N^+_H(v_j)\subseteq N_H[w]$.
+  Since $f$ is a face of $H[B(H)]$, the only neighbours of $v_j$ in $B(H)$ are $v_{j-1}$ and $v_{j+1}$. Since $H$ is a near-triangulation, this implies that $w v_j z$ is a face of $H$.  In particular $wz$ is an edge of $H$.
+
+  All that remains is to show that $\deg^+_{H-v_0}(w)\ge 3$.  First, observe that $z$ is in $B(H-B(H))$, so $z$ does not contribute to $\deg^+_{H-B(H)}(w)$. We claim that $z$ is in $I(H-v_0)$, so $z$ does contribute to $\deg^+_{H-v_0}(w)$.   Indeed, the only other possibility is that $z$ is adjacent to $v_0$.  In this case, consider the cycle $C:=v_0,\ldots,v_j,z$.  This cycle has $w$ in its interior. The vertices of $N^+_{H-B(H)}(w)$ must be in the interior of $C$. For each $a\in\{1,\ldots,j\}$, $v_{a-1}v_a w$ is a face of $H$, so the cycle $D:=v_0,\ldots,v_j,w$ does not contain any vertices of $N^+_{H-B(H)}(w)$ in its interior.  Therefore, the vertices in $N^+_{H-B(H)}(w)$ must be in the interior of the cycle $\overline{D}:=v_0,w,z$.  By \cref{useful_little_guy}, $v_0$ is adjacent to some vertex in $I(H)\setminus\{w,z\}$. But this is not possible since it would imply that $\deg^+_H(v_0)\ge 3$.  Therefore $v_0$ is not adjacent to $z$, so $z$ is in the interior of $H-v_0$ and $N^+_{H-v_0}(w)\supseteq N^+_{H-B(H)}(w)\uplus\{z\}$, so $\deg^+_H(w)\ge 3$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{degree_zero_killer}]
+  By definition $N_H(w)\subseteq B(H)$ and, since $w$ is an inner vertex in a generalized near triangulation $|N_H(w)|\ge 3$. There are two cases to consider (see \cref{isolated_fig}):
+  \begin{compactenum}[(a)]
+    \item There exists $v\in N_H(w)$ with $\deg^+_H(v)=2$. In this case, $N^+_H(v)=\{w,w'\}$ and the vertices $w$ and $w'$ are in a different biconnected components $C$ and $C'$, respectively, of $H$. By \cref{inner_degree_1}, $C[N_C[v]]$ is isomorphic to $K_4$. Since $\deg_{H-B(H)}(w)=0$, the faces of $C[N_C[v]]$ have no vertices of $H$ in their interiors.   By \cref{inner_degree_1}, $C'[N_{C'}[v]]$ is also isomorphic to $K_4$.  Let $x$ and $y$ be the two neighbours of $v$ on the outer face of $C'$. Since $\deg^+_H(v)=2$, $\deg_{C'}^+(v)=1$, so the cycle $vxw'y$ has no vertices of $H$ in its interior.
+    We claim that the triangle $yw'x$ also contains no vertices of $H$ in its interior. Indeed, if $yw'x$ contains more than one inner vertex then, by \cref{useful_little_guy}, $\deg^+_H(x)>2$ or $\deg^+_H(y)>2$, which is ruled out by the statement of the lemma.  If $yw'x$ contains exactly one inner vertex then $\deg_{H-B(H)}(w')=1$, which is also ruled out by the statement of the lemma.
+
+    Let $H'$ be a dom-minimal graph that dom-respects $H-v$. Then $w$ and $w'$ are both in $B(H-v)$, so $\deg^+_{H-v}(w)=\deg^+_{H-v}(w')=0$. Therefore, neither $w$ nor $w'$ are in $H'$. Therefore $|H'|\le |H-\{v,w,w'\}|=|H|-3$.  Also $B(H-v)=B(H)\setminus\{v\}\cup\{w,w'\}$ but none of $v$, $w$, or $w'$ are in $H'$.  Therefore, by \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus\{v,w,w'\}$ so $|B(H')|\le |B(H)|-1$.
+
+    \item $\deg^+_H(v)=1$ for all $v\in N_H(w)$.  In this case let $v$ be any vertex in $N_H(w)$ and let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Then $w\in B(H-v)$, so $\deg^+_{H-v}(v')=0$ for all $v'\in N_H(w)$. Since $H'$ is dom-minimal, $N_H(w)\cap V(H')=\emptyset$, by \cref{bad_vertex}.  Similarly $w\not\in V(H')$, also by \cref{bad_vertex}. Therefore $|H'|\le |H-(\{w\}\cup N_H(w))| \le |H|-4$. Then $B(H-v)=B(H)\setminus\{v\}\cup\{w\}$.
+    By \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus N_H[w]$, so $|B(H')|\le |B(H)|-\deg_H(w) \le |B(H)|-3$. \qedhere
+  \end{compactenum}
+\end{proof}
+
+
+\begin{proof}[Proof of \cref{biconnected_critical}]
+  If $H$ is isomorphic to $W_k$ for some odd integer $k\ge 3$, then we take $X_0:=\{v_0, x\}$, $X_1:=\{v_{2i-1}:i\in\{1,\ldots,\lfloor k/2\rfloor\}$, and $X_2:=\{v_{2i}:i\in\{1,\ldots,\lfloor k/2\rfloor\}$.  It is straightforward to verify that these sets satisfy \cref{proper,dominates_h}.  (The fact that $k$ is odd ensures that $v_0$ has a neighbour $v_1\in X_1$ and $v_{k-1}\in X_2$, which ensures \cref{dominates_h}---this is not true for even $k$.)   We now assume that $H$ is not isomorphic to $W_k$ for any integer $k$.  By \cref{critical_structure}, this implies that $H$ is outerplanar or that $H[B(H)]$ has at least two inner faces.
+
+  We now proceed by induction on $|I(H)|$.  If $|I(H)|=0$ then $H$ is an edge-maximal outerplanar graph, and therefore has a proper $3$-colouring.  We take $X_0$, $X_1$, and $X_2$ to be the three colour classes in this colouring.  This choice clearly satisfies \cref{proper}. Since each vertex of $H$ is included in at least one triangle, each vertex of $H$ is dominated by each of $X_0$, $X_1$, and $X_2$, so this choice satisfies \cref{dominates_h}.
+
+  If $|I(H)|\ge 1$ then $H$ is not outerplanar.  See \cref{contraction_proof}.  Since $H$ is not isomorphic to $W_k$ for any integer $k$, $H[B(H)]$ contains at least two inner faces.  Let $x$ be an inner vertex of $H$ and let $f$ be the marked face of $H[B(H)]$ that contains $x$.
+  % If $f$ has only three vertices, then we apply induction on $H':=H-x$ to obtain sets $X_0'$, $X_1'$, and $X_2'$.  We then set $X_0:=X_0'\cup\{x\}$, $X_1:=X_1'$ and $X_2:=X_2'$.  These sets satisfy \cref{proper} because every edge of $H[B(H)]$ is also an edge of $H'[B(H')]$.  These sets satisfy \cref{colourful} because $f$ is a clique of size $3$ in $H'$ so, by \cref{proper}, each $X_i$ contains at least one vertex of $f$. Now, \cref{colourful} also implies that each $X_i$ dominates $x$ and (by induction) dominates $V(H)\setminus\{x\}$, so each $X_i$ is a dominating set.
+  Since $H[B(H)]$ has at least two inner faces and $H$ is biconnected, $f$ contains an edge $vw$ that is on the boundary of two faces of $H$.  Let $H'$ be the graph obtained by contracting the edge $vx$ into $v$. Then $H'[B(H')]=H[B(H)]$ and $H'$ is a biconnected critical generalized near-triangulation so we apply induction to obtain sets $X_0'$, $X_1'$ and $X_2'$.  Without loss of generality, we can assume that $v$ is in $X_1'$.  Then we set $X_0:=X_0'$, $X_1:=X_1'\cup\{x\}$ and $X_2:=X_2'$. Since $H'[B(H')]=H[B(H)]$ this clearly satisfies \cref{proper}.  Since $H'$ contains the edge $vw$ for each $w\in V(f)\setminus\{v\}$, \cref{proper} implies that the vertices of the path $f-v$ are alternately contained in $X_2$ and $X_0$.
+  % In particular, since $f$ has at least three vertices these sets satisfy \cref{colourful}.
+
+  All that remains is to show that $X_0$, $X_1$, and $X_2$ satisfy \cref{dominates_h}.  The inductive hypothesis already implies that each of these sets dominates $V(H)\setminus V(f)$.  Since $x$ is adjacent to every vertex of $f$, it is adjacent to at least one vertex of $X_0$ and at least one vertex of $X_2$.  Therefore, each of $X_0$, $X_1$, and $X_2$ dominates $x$.  For each vertex $w\in V(f)\setminus\{v\}$, $w$ is adjacent to $x\in X_1$, $w\in X_{i}$ for some $i\in\{0,2\}$ and $w$ is adjacent to a neighbour $w'\in X_{2-i}$ in $f$, so each of these sets dominates $w$.  Finally, since the vertex $v$ is incident to a chord of $H[B(H)]$, it is incident to a second face $f'\neq f$ of $H[B(H)]$.  Since $f$ is marked and $H$ is critical, $f'$ is not marked.  Therefore $f'$ is a triangle with one vertex in each of $X_0$, $X_1$, and $X_2$. Therefore each of these sets dominates $v$.
+\end{proof}
+
+
+
+\begin{proof}[Proof of \cref{critical}]
+  The proof is by induction on $|H|$.  First, suppose that $|H|=3$. Since $H$ is connected and has no vertices of degree $1$, $H$ is a triangle $v_0v_1v_2$. We take $X_i:=\{v_i\}$ for each $i\in\{0,1,2\}$.  Clearly these sets satisfy the requirements of the lemma.
+
+  If $H$ is biconnected then, since $H$ is not an even wheel, we can immediately apply \cref{biconnected_critical} and we are done.  Otherwise, $H$ contains a cut vertex $v$ that separates $H$ into components $C_1,\ldots,C_k$ and such that $H':=H[V(C_1)\cup\{v\}]$ is biconnected. Refer to \cref{critical_3_colouring}. Since $L=\emptyset$, $H'$ has at least three vertices. If $H'$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H'$ and $v$ to obtain sets $X_0'$, $X_1'$, and $X_2'$. Otherwise, we apply \cref{biconnected_critical} to $H'$ to obtain sets $X_0'$, $X_1'$, and $X_2'$.  In either case we may assume, without loss of generality that $v\in X_1'$, that $X_1'$ and $X_2'$ each dominate $H'$ and that $X_0'$ dominates $V(H')\setminus\{v\}$.
+
+  \begin{figure}[htbp]
+    \centering
+    \begin{tabular}{cc}
+      \includegraphics[page=1,trim={10 0 10 0},clip]{figs/critical_3_colouring} &
+      \includegraphics[page=2]{figs/critical_3_colouring}
+    \end{tabular}
+    \caption{Two cases in the proof of \cref{critical}.}
+    \label{critical_3_colouring}
+  \end{figure}
+
+  Let $H'':=H-V(C_1)$. First, suppose that $\deg_{H''}(v)>1$.
+  If $H''$ is isomorphic to $W_k$ for some even integer $k$ then we apply \cref{wheelie} to $H''$ and $v$ to obtain sets $X_0''$, $X_1''$, $X_2''$. Otherwise, we apply the inductive hypothesis to $H''$ to obtain sets $X_0''$, $X_1''$, $X_2''$ that each dominate $H''$. In either case we may assume, without loss of generality (by renaming) that $v\in X_1''$, that $X_1''$ and $X_2''$ each dominate $H'$ and that $X_0''$ dominates $V(H'')\setminus\{v\}$.  Then the sets $X_0:=X_0'\cup X_2''$, $X_1:=X_1'\cup X_1''$ and $X_2:=X_2'\cup X_0''$ satisfy the requirements of the lemma.  (The only concern is whether each set dominates $v$, but this is guaranteed by the fact that $v\in X_1$, and that $X_2'\subseteq X_2$ and $X_2''\subseteq X_0$ each dominate $v$.)
+
+  Finally, if $\deg_{H''}(v)=1$ then we consider the maximal path $v,v_1,v_2,\ldots,v_{r-1},v_r$ such that $\deg_{H''}(v_i)=2$ for each $i\in\{1,\ldots,r-1\}$.  Let $H''':=H''-\{v,v_1,\ldots,v_{r-1}\}$ and we treat $H'''$ exactly as we treated $H''$ in the previous paragraph to obtain sets $X_0'''$, $X_1'''$ and $X_2'''$.  Without loss of generality, we assume that $v_r\in X_{(r-1)\bmod 3}$, that $X_{(r-1)\bmod 3}$ and $X_{(r\bmod 3)}$ each dominate $H'''$ and that $X_{(r-2)\bmod 3}$ dominates  $V(H''')\setminus\{v_r\}$. Let $X_0'':=X_0'''\cup\{v_i:i\equiv 2\pmod 3\}$, $X_1'':=X_1'''\cup\{v\}\cup\{v_i:i\equiv 0\pmod 3\}$, and  $X_2'':=X_2'''\cup\{v_i:i\equiv 1\pmod 3\}$.  Then $v\in X_1''$, $X_1''$ and $X_2''$ each dominate $H''$, and $X_0''$ dominates $V(H'')\setminus\{v\}$.  We can now define the sets $X_0$, $X_1$, and $X_2$ exactly as we did in the previous paragraph.
+\end{proof}
+
+\begin{proof}[Proof of \cref{three_sets_coverage}]
+  % Refer to \cref{covers}.
+  Let $\mathcal{C}$ be the set of components of $H-B(H)$
+  and let $\mathcal{C}_{\boxtimes}$ be the set of components in $\mathcal{C}$  that are even wheels.
+
+  For each component $C$ in $\mathcal{C}_{\boxtimes}$ we choose the vertex $x$ that dominates $C$, some vertex $w$ in $B(C)$ and some vertex $v\in B(H)$ adjacent to $w$.  We add $\{v,w,x\}$ to each of $X_0$, $X_1$, and $X_2$. The vertex $x$ ensures that each $X_i$ dominates $C$ and the vertices $v$ and $w$ ensure that the component of $H[X_i]$ that contains $x$ contains at least one vertex in $B(H)$.  Doing this for every component in $\mathcal{C}_{\boxtimes}$ contributes a total of $9|\mathcal{C}_{\boxplus}|$ vertices to $X_0$, $X_1$, and $X_2$. On the other hand, $|B(C)|\ge 4$ and $|I(C)|\ge 1$ for each $C\in \mathcal{C}_{\boxplus}$, so $\sum_{C\in \mathcal{C}_{\boxplus}} (2|B(C)| + I(C))\ge (2\cdot 4+1)|\mathcal{C}_{\boxplus}| = 9|\mathcal{C}_{\boxplus}|$.
+
+  For each component $C$ in $\mathcal{C}\setminus\mathcal{C}_{\boxplus}$, we apply \cref{critical} to obtain sets $X_0'$, $X_1'$, $X_2'$. For each $i\in\{0,1,2\}$ and each $w\in X_i'\cap B(H-B(H))$ we choose a vertex $v\in B(H)$ adjacent to $w$ and add both $v$ and $w$ to $X_i$. \Cref{critical} ensures that each $X_i$ dominates $C$ and the vertex $v$ ensures that the component of $H[X_i]$ that contains $w$ contains at least one vertex of $B(H)$.
+  Doing this for each component $\mathcal{C}\setminus\mathcal{C}_\boxplus$ contributes a total of at most  $\sum_{C\in\mathcal{C}\setminus\mathcal{C}_{\boxplus}}(|C|+|B(C)|)=\sum_{C\in\mathcal{C}\setminus \mathcal{C}_{\boxplus})}(2|B(C)|+|I(C)|)$ to $X_0$, $X_1$, and $X_2$.
+
+  The resulting sets $X_1$, $X_2$, and $X_3$ each dominate $\bigcup_{C\in\mathcal{C}} V(C)=I(H)$ and have total size at most $\sum_{C\in\mathcal{C}} (2|B(C)|+|I(C)|) = 2|B(H-B(H))| + |I(H-B(H))|$.
+\end{proof}
+
+
+\begin{proof}[Proof of \cref{simple_greedy}]
+  By \cref{leaf_killer,degree_zero_killer,really_good} during each of the first $r-1$ steps, one of the following occurs:
+  \begin{compactitem}
+    \item[$x_t$:] For some $t\ge 3$, we can add a single vertex $v_i$ that increases the size of the dominated set $D_{i+1}:=N[X_{i+1}]$ by $t$ and increases the size of the boundary set $B_{i+1}:=N_G(I(G-D_{i+1}))$ by at most $t-1$.
+    \item[$a$:] We can add a vertex $v_i$ that increases the size of the dominated set $D_{i+1}$ by $2$ and \emph{decreases} the size of the boundary set $B_{i+1}$ by at least $1$.
+    \item[$b$:] We can add a vertex $v_i$ that increases the size of the dominated set $D_{i+1}$ by $1$ and \emph{decreases} the size of the boundary set $B_{i+1}$ by at least $3$.
+    \item[$c$:] We can add a pair of vertices $\{v_i,w_i\}$ that increase the size of the dominated set $D_{i+1}$ by at least $5$ and increases the size of the boundary set $B_{i+1}$ by at most $2$.
+    \item[$\bullet$:] We can directly complete the connected dominating set $X_r=X_{i+1}$ by adding a set $\Delta_{r-1}=\Delta_i$ of at most $(2|B(G_{i}-B(G_i))|+|I(G_i-B(G_i))|)/3$ additional vertices where, as before $G_i:=G[B_i\cup (V(G)\setminus D_i)]$ and $r=i+1$.
+  \end{compactitem}
+
+  Let $a$, $b$, $c$, and $\langle x_t\rangle_{t\ge 3}$ denote the number of times each of these cases occurs in the first $r-1$ steps, and let $D:=D_{r-1}$, $B:=B_{r-1}$, and $X:=X_{r-1}$.  Then,
+  \begin{align}
+    |D| & \ge 3 + \sum_{t\ge 3}tx_t + 2a + b + 5c \label{dd_size} \\
+    |B| & \le 3 + \sum_{t\ge 3}(t-1)x_t - a - 3b + 2c \enspace \label{bb_size} \\
+    |X| & \le \sum_{t\ge 3}x_t + a + b + 2c \label{x_size} \enspace .
+  \end{align}
+
+  Let $R:=B(G_{r-1}-B(G_{r-1}))$ and $S:=I(G_{r-1}-B(G_{r-1}))$.  Since $\{D,R,S\}$ is a partition of $V(G)$,
+  \begin{equation}
+    |D|+|R|+|S|= n \enspace . \label{ttotal_size}
+  \end{equation}
+  By \cref{two_critical_boundary_size}, $|B_{r-1}|\ge |B(G_i-B(G_i))|$, i.e., $|B|\ge |R|$.  Putting everything together we get the constraints:
+  \begin{align}
+        3 + \sum_{t\ge 3}tx_t + 2a + b + 5c + |R| + |S| \le n&
+          & \text{(by \cref{dd_size} and \cref{ttotal_size})}  \label{a} \\
+        3 + \sum_{t\ge 3}(t-1)x_t - a - 3b + 2c \ge |R|
+          & & \text{(by \cref{bb_size} and since $|B|\ge |R|$)} \label{b} \\
+  \end{align}
+  with all values non-negative.  The size of the final connected dominating set $X_r$ is then at most
+  \begin{equation}
+    |X_r| = |X| + |\Delta_{r-1}| \le \sum_{t\ge 3}x_t + a + b + 2c + 2|R|/3 + |S|/3  \enspace . \label{oobjective}
+  \end{equation}
+
+  \begin{clm}\label{simplify}
+    If $(a,b,c,|R|,|S|,x_3,x_4,\ldots)$ are non-negative and satisfy \cref{a,b}, then setting $x_3\gets x_3+\sum_{t\ge 4}tx_t/2$ and $x_t\gets 0$ for all $t\ge 4$ also satisfy \cref{a,b} and do not decrease \cref{oobjective}.
+  \end{clm}
+
+  \begin{clmproof}
+    Suppose $x_t>0$ for some integer $t\ge 4$, otherwise there is nothing to prove.  Let $i:=\min\{t\ge 4: x_t>0\}$ and set $x_3\gets x_3+(t-1)x_t/3$ and $x_t\gets 0$. This change causes the left-hand-side of \cref{a} to decrease by $x_t$. This change does not affect the left-hand-side of \cref{b}.  This change increases the value of \cref{oobjective} by $(t-1)x_t/3-x_t\ge 0$.
+  \end{clmproof}
+
+  By \cref{simplify}, maximizing \cref{oobjective} subject to the constraints given by \cref{a,b} is a linear program in six variables $(x_3,a,b,c,|R|,|S|)$ which can be done easily.  The maximum is achieved when $x_3=a=b=c=|S|=0$, $c=(n-6)/7$ and $|R|=(2n+9)/7$, at which point \cref{oobjective} evaluates to $(10n-18)/21$.
+\end{proof}
+
+
+\begin{proof}[Proof of \cref{1-bend-topological}]
+    Let $\Gamma$ be a straight-line drawing of $G$.
+    By \cref{1-bend-topological}, it is enough to introduce a 2-proper good curve $\ell$ on $\Gamma$ containing all the leaves of $T$. To navigate the curve $\ell$ on the drawing $\Gamma$, we construct an envelope around $\Gamma$ as follows. For each vertex $v \in V(G)$, we draw a small circle, $C_v$, centered at $v$. We make the radii of the circles small enough such that each vertex $v \in V(G)$, $C_v$ intersects only the edges incident to $v$ and it is disjoint from all the other circles that correspond to the other vertices. Moreover, for each edge $uv \in E(G)$, we draw two parallel segments on both sides of $uv$ with endpoints on the boundary of corresponding circles of $u$ and $v$. These parallel segments are close enough to the corresponding edges such that no two of them intersect. (see \cref{tree_walking}). Note that each edge $uv \in E(G)$ crosses the envelope exactly twice, once at $C_u$ and once at $C_v$.
+
+    Assume $T$ is rooted at an arbitrary vertex of degree at least 2. We build the curve $\ell$ on the envelope of $\Gamma$ as follows. Starting from the root, we traverse the tree in \textit{depth first search} order. For each edge $uv \in E(T)$, we add the segment on the right side of the traversal direction of $uv$ into the curve $\ell$.
+
+    For each leaf $u$ of $T$, let $v_u$ be its neighbor in $T$. To include all the leaves of $T$ on the curve $\ell$, we join $u$ to the endpoint of segments around the edge $uv_u \in E(T)$ on $C_u$. To keep the curve $\ell$ closed, for each non-leaf vertex $u \in V(T)$, we append to $\ell$ the circular arcs from $C_u$ between the segments in $\ell$ in the order of the traversal. By the properties of the depth first traversal, $\ell$ is a closed curve. By construction, $\ell$ contains all the leaves of $T$ and all the other vertices of $T$ are inside $\ell$. Moreover, for each edge $uv \in E(G)$:
+
+    \begin{enumerate}
+        \item [(P1)] If $uv \in E(T)$ and neither $u$ nor $v$ is a leaf, then $|uv \cap \ell| = 0$,
+
+        \item [(P2)] If $uv \in E(T)$ and either $u$ or $v$ is a leaf of $T$, then $|uv \cap \ell| = 1$, and
+
+        \item [(P3)] If $uv \notin E(T)$, then $|uv \cap \ell| = 2$.
+    \end{enumerate}
+
+    Properties P1-P3 guarantee that $\ell$ is a 2-proper curve. Since the tree $T$ is not empty, $\ell$ intersects the circle of some vertex in $T$, so $\ell$ touches a face of $\Gamma$. Therefore, $\ell$ is $2$-proper good curve and by \cref{1-bend-topological}, there exists a one-bend collinear set for $G$ formed by the leaves of $T$.
+\end{proof}
+
+
+% \section{Sage Code}
+
+% \lstinputlisting[basicstyle=\ttfamily\scriptsize,language=Python]{cds.py}
+
+
+\end{document}
