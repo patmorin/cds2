@@ -10,11 +10,12 @@ This section demonstrates an application of a connected dominating set in graph 
 % With further relaxation on the drawing of the edges, de Fraysseix et al. \cite{DBLP:journals/combinatorica/FraysseixPP90} show that any set of $n$ points in the plane is a universal set for the two-bend drawing of planar graphs. Furthermore, They show that the planar embedding problem of any $n$-vertex graph onto an $n$ collinear points in $\mathbb{R}^2$ with at most one bend along each edge is NP-complete.
 
 \subsection{Characterisation of 1-Bend Collinear Sets}
-A curve $C$ is a continuous mapping from $[0, 1]$ to $\mathbb{R}^2$. We usually call $C(0)$ and $C(1)$ the endpoints of $C$. If these two endpoints coincide, the curve is closed. Otherwise, it is open. A curve $C$ is called simple if $C$ is $C(x) \neq C(y)$ for all $x \neq y$ with exception for the endpoints of $C$ i.e $\{0, 1\}$. $C$ is a \defin{Jordan Curve} if it is simple and closed.
+A \defin{curve} $C$ is a continuous mapping from $[0, 1]$ to $\mathbb{R}^2$. We usually call $C(0)$ and $C(1)$ the \defin{endpoints} of $C$. If these $C(0)=C(1)$ then  the curve is \defin{closed}. Otherwise, it is \defin{open}. A curve $C$ is called \defin{simple} if $C$ is $C(x) \neq C(y)$ for all $0\le x<y\le 1$ with the exception of $x=0$, $y=1$. $C$ is a \defin{Jordan Curve} if it is simple and closed.
 
 Let $G$ be plane graph, a Jordan curve $C$ is a \defin{$k$-proper good curve} if it contains a point in the interior of some face of $G$ (\textit{good}), and the intersection between $C$ and each edge $e$ of $G$ is empty, or at most $k$ points, or the entire edge $e$ (\textit{proper}).
 
-Da Lozzo et al. \cite{DBLP:journals/jocg/LozzoDFMR18} characterize the collinear sets in the straight line drawing of a planar graph using 1-proper good curves.
+% Da Lozzo et al. 
+\citet{DBLP:journals/jocg/LozzoDFMR18} characterize collinear sets in the straight line drawing of a planar graph using 1-proper good curves.
 
 \begin{thm}[\cite{DBLP:journals/jocg/LozzoDFMR18} ] \label{straightline-topological}
 Let $G$ be a plane graph. A set $S \subseteq V(G)$ is a collinear set if and only if there exists a $1$-proper good curve that contains $S$.
