@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass{article}
 \usepackage[OT1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{kpfonts}
@@ -713,7 +713,7 @@ The following lemma, illustrated in \cref{critical_colouring}, drops the require
 \end{proof}
 
 
-At last, the following lemma, illustrated in \cref{two_critical_colouring}, shows how we combine everything to find three sets whose total size is at most $2|B(H-B(H))| + |I(H-B(H))|$. 
+At last, the following lemma, illustrated in \cref{two_critical_colouring}, shows how we combine everything to find three sets whose total size is at most $2|B(H-B(H))| + |I(H-B(H))|$.
 % \saeed{this is correct. but do you mean $H-B(H)$ instead of $H$?}\pat{Yes, good catch}
 
 \begin{figure}
@@ -794,7 +794,7 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
       \caption{The sets $X$, $D$, $B$, $R$, and $S$}
       \label{dbrs}
   \end{figure}
-  
+
   Let $R:=B(G_{r-1}-B(G_{r-1}))$ and $S:=I(G_{r-1}-B(G_{r-1}))$.  Since $\{D,R,S\}$ is a partition of $V(G)$,
   \begin{equation}
     |D|+|R|+|S|= n \enspace . \label{ttotal_size}
@@ -827,7 +827,7 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
 
 \section{An Application in Graph Drawing - Proof of \cref{one_bend_collinear_thm}}
 \label{one_bend}
-This section demonstrates an application of connected dominating sets to graph drawing. We establish that each planar graph with a small connected dominating set has a one-bend drawing with a large collinear set. We start by introducing a topological equivalent of one-bend collinear sets as in $\cite{DBLP:journals/jocg/LozzoDFMR18}$.
+This section demonstrates an application of connected dominating sets to graph drawing. We establish that each planar graph with a small connected dominating set has a one-bend drawing with a large collinear set. We start by introducing a topological equivalent of one-bend collinear sets as in \cite{DBLP:journals/jocg/LozzoDFMR18}.
 
 
 % We are interested in finding bounds on the size of $h$-bend collinear set. For $0$-bend collinear set, constructions of non-Hamiltonian cubic triconnected planar graphs \cite{DBLP:journals/jct/GrunbaumW73,DBLP:conf/wg/RavskyV11,DBLP:journals/jocg/LozzoDFMR18} imply that planar triangulation has a 0-bend collinear set of size at most $O(n^{\sigma})$ where $\sigma < 0.986$. Moreover, every planar triangulation has a 0-bend collinear set of size at least $\Omega(\sqrt{n})$ \cite{DBLP:journals/dcg/BoseDHLMW09} \cite{DBLP:journals/jgaa/Dujmovic17}. In a recent work, Dujmovic and Morin \cite{DBLP:conf/compgeom/DujmovicM19} show that every planar triangulation with maximum degree $\Delta$ has $0$-bend collinear set of size at least $\Omega(\frac{n^{0.8}}{\Delta^4})$.
@@ -841,7 +841,7 @@ A \defin{curve} $C$ is a continuous mapping from $[0, 1]$ to $\mathbb{R}^2$. We 
 
 Let $G$ be plane graph, a Jordan curve $C$ is a \defin{$k$-proper good curve} if it contains a point in the interior of some face of $G$ (\defin{good}), and the intersection between $C$ and each edge $e$ of $G$ is empty, or at most $k$ points, or the entire edge $e$ (\defin{$k$-proper}).
 
-% Da Lozzo et al. 
+% Da Lozzo et al.
 \citet{DBLP:journals/jocg/LozzoDFMR18} characterize collinear sets in the straight line drawing of a planar graph using 1-proper good curves.
 
 \begin{thm}[\cite{DBLP:journals/jocg/LozzoDFMR18} ] \label{straightline-topological}
@@ -921,7 +921,7 @@ Let $G$ be an $n$-vertex planar graph. \cref{main_result2} implies that $G$ has 
 % \end{thm}
 
 % \begin{proof}
-%     Embed $G-Y$ as a generalized near triangulation and let $G'$ be the graph obtained by adding three vertices $x,y,z$ to this embedding and adding edges to obtain a triangulation in which $xyz$ is the outer face.  The graph $G'$ is a triangulation with $n-|Y|+3$ vertices so, by \cref{better_greedy} it has a connected dominating set $X_0$ of size at most $(10n-|Y|+12)/21$.  
+%     Embed $G-Y$ as a generalized near triangulation and let $G'$ be the graph obtained by adding three vertices $x,y,z$ to this embedding and adding edges to obtain a triangulation in which $xyz$ is the outer face.  The graph $G'$ is a triangulation with $n-|Y|+3$ vertices so, by \cref{better_greedy} it has a connected dominating set $X_0$ of size at most $(10n-|Y|+12)/21$.
 % \end{proof}
 
 
