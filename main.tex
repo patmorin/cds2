@@ -91,14 +91,14 @@ A set $X$ of vertices in a graph $G$ is a \defin{dominating set} of $G$ if each 
 
 A \defin{triangulation} is an edge-maximal planar graph.  \citet{matheson.tarjan:dominating} proved that every $n$-vertex triangulation has a dominating set of size at most $n/3=0.33\overline{3}n$ and that there exists $n$-vertex triangulations with no dominating set of size less than $n/4=0.25n$. The gap between these upper and lower bounds stood for over $20$ years until a recent breakthrough by \citet{spacapan:domination} reduced the upper bound to $17n/53\approx 0.32075471698n$.  This was swiftly followed by an improvement to $2n/7= 0.2\overline{857142}n$ by \citet{christiansen.rotenberg.ea:triangulations}.
 
-In the current paper, we consider connected dominating sets in triangulations.  An easy consequence of the proof used by \citet{matheson.tarjan:dominating} is that $n$-vertex triangulations have connected dominating sets of size at most $2n/3=0.66\overline{6}n$.  A more general result, due to  \citet{kleitman.west:spanning} shows that graphs of minimum-degree $3$ in which each edge is included in a $3$-cycle have connected dominating set of size at most $2(n-5)/3<0.66\overline{6}n$. \citet{albertson.berman.ea:graphs} prove that every triangulation has a spanning tree $T$ with no vertices of degree $2$, which implies that the number of leaves of $T$ exceeds the number of non-leaves by at least $2$.  In particular, the number of leaves is greater than $(n+2)/2$. Thus, the set $X$ of non-leaf vertices of $T$ is a connected dominating set of size at most $(n-2)/2$. We prove:
+In the current paper, we consider connected dominating sets in triangulations.  An easy consequence of the proof used by \citet{matheson.tarjan:dominating} is that $n$-vertex triangulations have connected dominating sets of size at most $2n/3=0.66\overline{6}n$.  A more general result, due to  \citet{kleitman.west:spanning} shows that graphs of minimum-degree $3$ in which each edge is included in a $3$-cycle have connected dominating sets of size at most $2(n-5)/3<0.66\overline{6}n$. \citet{albertson.berman.ea:graphs} prove that every triangulation has a spanning tree $T$ with no vertices of degree $2$, which implies that the number of leaves of $T$ exceeds the number of non-leaves by at least $2$.  In particular, the number of leaves is greater than $(n+2)/2$. Thus, the set $X$ of non-leaf vertices of $T$ is a connected dominating set of size at most $(n-2)/2<0.5n$. We prove:
 % \citet{kleitman.west:spanning} also show that graphs of minimum degree $4$ have connected dominating sets of size at most $(3n-8)/5<0.6n$. This result applies to triangulations of minimum degree $4$, which includes all $4$-connected triangulations.  The main result in this paper is the following:
 
 \begin{thm}\label{main_result2}
   For every $n\ge 3$, every $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $10n/21= 0.\overline{476190}n$.
 \end{thm}
 
-The proof of \cref{main_result2} is constructive and gives an $O(n)$ time algorithm for finding the set $X$.  As far as we know, the best lower bound for this problem is $n/3 = 0.33\overline{3} n$, obtained from a triangulation that contains $n/3$ vertex-disjoint pairwise-nested triangles $\Delta_1,\ldots,\Delta_{n/3}$.  In order to dominate $\Delta_1\cup \Delta_2$, any dominating set must contain at least two vertices in $\Delta_1 \cup \Delta_2$. In order to dominate $\Delta_{n/3-1}\cup \Delta_{n/3}$, any dominating set must contain two vertices in $\Delta_{n/3-1}\cup\Delta_{n/3}$.  Then, in order to be connected, any connected dominating set must contain a vertex in each of $\Delta_3,\ldots,\Delta_{n/3-2}$.
+The proof of \cref{main_result2} is constructive and gives an $O(n)$ time algorithm for finding the set $X$.  The best known lower bound for this problem is $n/3 = 0.33\overline{3} n$, obtained from a triangulation that contains $n/3$ vertex-disjoint pairwise-nested triangles $\Delta_1,\ldots,\Delta_{n/3}$.  In order to dominate $\Delta_1\cup \Delta_2$, any dominating set must contain at least two vertices in $\Delta_1 \cup \Delta_2$. In order to dominate $\Delta_{n/3-1}\cup \Delta_{n/3}$, any dominating set must contain two vertices in $\Delta_{n/3-1}\cup\Delta_{n/3}$.  Then, in order to be connected, any connected dominating set must contain a vertex in each of $\Delta_3,\ldots,\Delta_{n/3-2}$.
 
 Connected dominating sets are closely related to spanning trees with many leaves.  If $X$ is a connected dominating set of a graph $G$, then $G$ has a spanning tree in which the vertices of $G-X$ are all leaves.  To see this, start with a spanning tree $T$ of $G[X]$ and then, for each  $v\in V(G)\setminus X$ choose some $x\in N_G(v)\cap X$ and add the edge $xv$ to $T$. Conversely, if $T$ is a spanning tree of $G$ with leaf set $L$, then $X:=V(T-L)$ is a connected dominating set of $G$.  Thus, \cref{main_result2} has the following equivalent statement:
 
@@ -106,13 +106,13 @@ Connected dominating sets are closely related to spanning trees with many leaves
   For every $n\ge 3$, every $n$-vertex triangulation $G$ has a spanning tree $T$ with at least $11n/21= 0.\overline{523809}n$ leaves.
 \end{cor}
 
-\Cref{main_theorem_cor} makes progress on the maxleaf spanning-tree problem for triangulations, posed by \citet[Question~4.2]{bradshaw.masarik.ea:robust}.
+\Cref{main_theorem_cor} makes progress on the maxleaf spanning-tree problem for triangulations, explicitly posed by \citet[Question~4.2]{bradshaw.masarik.ea:robust}.
 
 
 \subsection{One-Bend Collinear Sets in Planar Graphs}
 
 
-The original motivation for this research was a graph drawing problem.  It is know that every $n$-vertex planar graph $G$ has a non-crossing drawing in the plane with edges of $G$ drawn as line segments and such that some set $Y$ of $\Omega(n^{1/2})$ vertices of $G$ are drawn on the $x$-axis \cite{bose.dujmovic:polynomial,dujmovic:utility}.  The set $Y$ is called a \defin{collinear set}.  For bounded-degree planar graphs, this result can be improved to $|Y|=\Omega(n^{0.8})$ \cite{dujmovic.morin:dual}.  Determining the supremum value of $\alpha$ such that every $n$-vertex planar graph has a collinear set of size $\Omega(n^{\alpha})$ remains a difficult open problem, but it is known that $\alpha \le \log_{23}(22)<0.9859$ \cite{ravsky.verbitsky:collinear}.
+The original motivation for this research was a graph drawing problem, which we now describe.  It is known that every $n$-vertex planar graph $G$ has a non-crossing drawing in the plane with edges of $G$ drawn as line segments and such that some set $Y$ of $\Omega(n^{1/2})$ vertices of $G$ are drawn on the $x$-axis \cite{bose.dujmovic:polynomial,dujmovic:utility}.  The set $Y$ is called a \defin{collinear set}.  For bounded-degree planar graphs, this result can be improved to $|Y|=\Omega(n^{0.8})$ \cite{dujmovic.morin:dual}.  Determining the supremum value of $\alpha$ such that every $n$-vertex planar graph has a collinear set of size $\Omega(n^{\alpha})$ remains a difficult open problem, but it is known that $\alpha \le \log_{23}(22)<0.9859$ \cite{ravsky.verbitsky:collinear}.
 
 We consider a relaxation of this problem in which the edges of the graph can be drawn as a polygonal path consisting of at most two line segments.  Such a drawing is called a \defin{one-bend} drawing of $G$.  A subset $Y$ of $V(G)$ is a \defin{one-bend collinear set} if $G$ has a one-bend drawing in which all vertices of $Y$ appear on the $x$-axis.  We show that, for any spanning tree $T$ of $G$, the leaves of $T$ are a one-bend collinear set of $G$.  Combined with \cref{main_theorem_cor}, this gives:
 
@@ -126,9 +126,9 @@ Note that if all the vertices of $G$ are on the $x$-axis then no edge in a one-b
 
 \paragraph{Connected Dominating Sets}
 
-The book chapter by \citet{chellali.favaron:connected} surveys combinatorial results on connected-dominating sets, including the result of \citet{kleitman.west:spanning} mentioned above.  Most results of this form focus on graphs with lower bounds on their minimum degree, possibly combined with some other constraints.  For example, the Kleitman-West results relevant to triangulations is about graphs of minimum-degree $3$ in which each edge participates in a $3$-cycle.
+The book chapter by \citet{chellali.favaron:connected} surveys combinatorial results on connected-dominating sets, including the result of \citet{kleitman.west:spanning} mentioned above.  Most results of this form focus on graphs with lower bounds on their minimum degree, possibly combined with some other constraints.  For example, the Kleitman-West result relevant to triangulations is about graphs of minimum-degree $3$ in which each edge participates in a $3$-cycle.
 
-\citet{wan.alzoubi.ea:simple} describe an algorithm for finding a connected dominating set in a $K_t$-minor-free graph. When run on an $n$-vertex planar graph, their algorithm produces a connected dominating set of size at most $15\alpha(G^2)-5$, where $\alpha(H)$ is the size of the largest independent set in a graph $H$.  However, there exists $n$-vertex triangulations $G$ with $\alpha(G^2)=n/4$,\footnote{To create such a triangulation, start with $n/4$ vertex-disjoint copies of $K_4$ embedded so that each copy contributes three vertices to the outer face and has one inner vertex, and then add edges arbitrarily to create a triangulation.  Then the inner vertices of the copies of the original copies of $K_4$ form an independent set in $G^2$.} for which this algorithm does not guarantee an output of size less than $n$.
+\citet{wan.alzoubi.ea:simple} describe an algorithm for finding a connected dominating set in a $K_t$-minor-free graph. When run on an $n$-vertex planar graph, their algorithm produces a connected dominating set of size at most $15\alpha(G^2)-5$, where $\alpha(G^2)$ is the size of the largest \defin{distance-$2$ independent set} in $G$; i.e., the largest subset of $V(G)$ that contains no pair of vertices whose distance in $G$ is less than or equal to $2$.  However, there exists $n$-vertex triangulations $G$ with $\alpha(G^2)=n/4$,\footnote{To create such a triangulation, start with $n/4$ vertex-disjoint copies of $K_4$ embedded so that each copy contributes three vertices to the outer face and has one inner vertex, and then add edges arbitrarily to create a triangulation.  Then the inner vertices of the copies of the original copies of $K_4$ form an independent set in $G^2$.} for which this algorithm does not guarantee an output of size less than $n$.
 
 As discussed above, the result of \citet{albertson.berman.ea:graphs} on spanning-trees without degree-$2$ vertices implies that every $n$-vertex triangulation has a connected dominating set of size $(n-2)/2$.  Motivated by  a graph drawing problem (SEFE without mapping) \citet{angelini.evans.ea:sefe} show that every $n$-vertex plane graph $G$ (and therefore every triangulation) contains an induced outerplane graph $G[L]$ with least $n/2$ vertices.  If $G$ is a triangulation, then the set $X:=V(G-L)$ is a connected dominating set.  Conversely, if $X$ is a connected dominating set in a triangulation $G$, then $G-X$ is an outerplane graph.  Our \cref{main_result2} therefore implies an improved result for their graph drawing problem, improving the bound from $n/2$ to $11n/21$, as described in the following theorem:
 
@@ -137,11 +137,11 @@ As discussed above, the result of \citet{albertson.berman.ea:graphs} on spanning
   \begin{compactenum}[(a)]
     \item the vertices of $G_i$ are mapped to the points in $P_i$ for each $i\in\{1,2\}$;
     \item the edges of $G_2$ are drawn as line segments; and
-    \item each edge $e$ of $G_1$ whose endpoints are mapped to points in $P_2$ is drawn as a line segment.
+    \item each edge $e$ of $G_1$ whose endpoints are both mapped to points in $P_2$ is drawn as a line segment.
   \end{compactenum}
 \end{thm}
 
-\citet{hernandez:vigilancia} and \citet{chen.hao.ea:bounds} show that every edge-maximal outerplanar graph has a connected dominating set of size at most $\lfloor (n-2)/2\rfloor$. This immediately implies that every Hamiltonian $n$-vertex triangulation (including every $4$-connected $n$-vertex triangulation) has a connected dominating set of size at most $\lfloor (n-2)/2\rfloor$.  For even $n\ge 4$, the bound $(n-2)/2$ for edge-maximal outerplanar graphs is tight, as is easily seen by constructing a graph with two degree-$2$ vertices $s$ and $t$ and $(n-2)/2$ disjoint edges, each of which separates $s$ from $t$.  \citet{zhuang:connected} parameterizes the problem by the number, $k$,  of degree-$2$ vertices, and shows that any $n$-vertex edge-maximal outerplanar graph with $k$ degree-$2$ vertices has a connected dominating set of size at most $\lfloor\min\{(n+k-4)/2,2(n-k)/3\}\rfloor$.
+In the current paper, we consider triangulations; edge-maximal planar graphs. \citet{hernandez:vigilancia} and \citet{chen.hao.ea:bounds} show that every edge-maximal \emph{outerplanar} graph has a connected dominating set of size at most $\lfloor (n-2)/2\rfloor$. This immediately implies that every Hamiltonian $n$-vertex triangulation (including every $4$-connected $n$-vertex triangulation) has a connected dominating set of size at most $\lfloor (n-2)/2\rfloor$.  For even $n\ge 4$, the bound $(n-2)/2$ for edge-maximal outerplanar graphs is tight, as is easily seen by constructing a graph with two degree-$2$ vertices $s$ and $t$ and $(n-2)/2$ disjoint edges, each of which separates $s$ from $t$.  \citet{zhuang:connected} parameterizes the problem by the number, $k$,  of degree-$2$ vertices, and shows that any $n$-vertex edge-maximal outerplanar graph with $k$ degree-$2$ vertices has a connected dominating set of size at most $\lfloor\min\{(n+k-4)/2,2(n-k)/3\}\rfloor$.
 
 %
 %
@@ -317,7 +317,7 @@ $|X_r| \le (4n-9)/7$.
 %
 % Besides the data structure used for representing the triangulation $G$, each vertex $v$ also participates in a doubly-linked list $L_{d_v}$  that stores all the vertices with the same $d_v$ value.  A global doubly-linked list $L$ then stores all the lists $L_d$ such that $L_d$ is non-empty, sorted by increasing order of $d$.   Extracting a vertex of maximum inner-degree can then be done in constant time and the total time spent moving vertices between different lists in $L$ is proportional to the number of edges of $G$. Thus, the entire algorithm can be implemented in $O(n)$ time.
 
-\section{A Better Algorithm}
+\section{A Better Algorithm: Proof of \cref{main_result2}}
 \label{full_result}
 
 Next we devise an algorithm that produces a smaller connected dominating set than what $\textsc{SimpleGreedy}(G)$ can guarantee.  This involves a more careful analysis of the cases in which \textsc{SimpleGreedy} is forced to take a vertex $v_i$ with $\deg^+_{G_i}(v_i)=2$.  We will show that in most cases, any time the algorithm is forced to choose a vertex $v$ that has inner-degree $2$ in $G_i$, this can immediately be followed by choosing a vertex $w$ that has inner-degree at least $3$ in $G_i-v$.  This is explained in \cref{combo}.
@@ -848,7 +848,7 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
 
 %%%%%%%% The application section %%%%
 
-\section{An Application in Graph Drawing - Proof of \cref{one_bend_collinear_thm}}
+\section{An Application in Graph Drawing: Proof of \cref{one_bend_collinear_thm}}
 \label{one_bend}
 This section demonstrates an application of connected dominating sets to graph drawing. We establish that each planar graph with a small connected dominating set has a one-bend drawing with a large collinear set. We start by introducing a topological equivalent of one-bend collinear sets as in \cite{DBLP:journals/jocg/LozzoDFMR18}.
 
@@ -953,9 +953,9 @@ Let $G$ be an $n$-vertex planar graph. \cref{main_result2} implies that $G$ has 
 We conclude with two open questions:
 
 \begin{compactenum}
-  \item Is it true that every $n$-vertex triangulation has a connected dominating set of size at most $n/3+O(1)$?  A positive answer to this question seems to require additional new ideas.  In particular, it would seem to require a more global approach than the greedy approaches presented here.
+  \item Is it true that every $n$-vertex triangulation has a connected dominating set of size at most $n/3+O(1)$?  A positive answer to this question seems to require additional new ideas.  In particular, it would seem to require a more global approach than the greedy approaches presented here. (This question is also posed by \citet[Question~4.2]{bradshaw.masarik.ea:robust}.)
 
-  \item What is the maximum value $\alpha$ such that every $n$-vertex planar graph contains a one-bend collinear set of size $\alpha n-O(1)$?  \cref{one_bend_collinear_thm} shows $\alpha \ge 11n/21$ and disjoint copies of the Goldner-Harary graph show $\alpha \le 10n/11$.
+  \item What is the maximum value $\alpha$ such that every $n$-vertex planar graph contains a one-bend collinear set of size $\alpha n-O(1)$?  \cref{one_bend_collinear_thm} shows $\alpha \ge 11/21$ and disjoint copies of the Goldner-Harary graph show that $\alpha \le 10/11$.
 
 \end{compactenum}
 
