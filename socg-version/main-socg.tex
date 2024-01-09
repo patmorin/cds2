@@ -23,6 +23,7 @@
 % \usepackage{listings,newtxtt}
 % \lstset{basicstyle=\ttfamily, keywordstyle=\bfseries}
 
+\graphicspath{{../figs/}}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\pref}[1]{(P\ref{#1})}
@@ -250,7 +251,7 @@ A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ f
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[page=1]{figs/critical}
+    \includegraphics[page=1]{critical}
     \caption{Some critical graphs with marked faces of $H[B(H)]$ shown in pink.}
     \label{critical_fig}
 \end{figure}
@@ -375,13 +376,13 @@ Let $H$ and $H'$ be two generalized near-triangulations.  We say that $H'$ \defi
 \begin{figure}
   \centering
   \begin{tabular}{ccc}
-    \includegraphics[page=1]{figs/minimal} &
-    \includegraphics[page=3]{figs/minimal} &
-    \includegraphics[page=5]{figs/minimal} \\
+    \includegraphics[page=1]{minimal} &
+    \includegraphics[page=3]{minimal} &
+    \includegraphics[page=5]{minimal} \\
     $\Downarrow$ & $\Downarrow$ & $\Downarrow$ \\
-    \includegraphics[page=2]{figs/minimal} &
-    \includegraphics[page=4]{figs/minimal} &
-    \includegraphics[page=6]{figs/minimal}
+    \includegraphics[page=2]{minimal} &
+    \includegraphics[page=4]{minimal} &
+    \includegraphics[page=6]{minimal}
   \end{tabular}
   \caption{Three cases on the way to making $H$ dom-minimal.}
   \label{minimal_fig}
@@ -400,7 +401,7 @@ Next we show that, in most cases our algorithm for constructing a connected domi
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics{figs/chord_incident}
+  \includegraphics{chord_incident}
   \caption{The proof of \cref{chord_incident}}
   \label{chord_incident_fig}
 \end{figure}
@@ -428,9 +429,9 @@ Next we show that, in most cases our algorithm for constructing a connected domi
    \begin{figure}[htbp]
      \centering
      \begin{tabular}{ccc}
-       \includegraphics[page=1]{figs/outer_2_2} &
-       \includegraphics[page=2]{figs/outer_2_2} &
-       \includegraphics[page=3]{figs/outer_2_2}
+       \includegraphics[page=1]{outer_2_2} &
+       \includegraphics[page=2]{outer_2_2} &
+       \includegraphics[page=3]{outer_2_2}
      \end{tabular}
      % \pat{Redo this figure.}
      \caption{The proof of \cref{degree_2_outer_neighbour}.}
@@ -447,9 +448,9 @@ The proof of the following lemma, which is illustrated in \cref{2_3_figure}, is 
 
 \begin{figure}
   \centering
-  \includegraphics[page=1]{figs/2_3_figure}
-  \includegraphics[page=2]{figs/2_3_figure}
-  \includegraphics[page=3]{figs/2_3_figure}
+  \includegraphics[page=1]{2_3_figure}
+  \includegraphics[page=2]{2_3_figure}
+  \includegraphics[page=3]{2_3_figure}
   \caption{Remove an inner-degree $2$ vertex $v$ is immediately followed by removing an inner-degree $3$ vertex $w$.}
   \label{2_3_figure}
 \end{figure}
@@ -504,9 +505,9 @@ Next we show that, even when all vertices in $B(H)$ have inner-degree at most $2
   \begin{figure}[htbp]
     \centering
     \begin{tabular}{ccc}
-      \includegraphics[page=1]{figs/killing_a_leaf} &
-      \includegraphics[page=2]{figs/killing_a_leaf} &
-      \includegraphics[page=3]{figs/killing_a_leaf} \\
+      \includegraphics[page=1]{killing_a_leaf} &
+      \includegraphics[page=2]{killing_a_leaf} &
+      \includegraphics[page=3]{killing_a_leaf} \\
       $H$ & $H-v$ & $H'$
     \end{tabular}
     \caption{The proof of \cref{leaf_killer}.}
@@ -535,11 +536,11 @@ The proof of \cref{degree_zero_killer}, illustrated in \cref{isolated_fig}, choo
 \begin{figure}[htpb]
   \centering
   \begin{tabular}{cc}
-    \includegraphics[page=1]{figs/isolated} &
-    \includegraphics[page=3]{figs/isolated} \\
+    \includegraphics[page=1]{isolated} &
+    \includegraphics[page=3]{isolated} \\
     $\Downarrow$ & $\Downarrow$ \\
-    \includegraphics[page=2]{figs/isolated} &
-    \includegraphics[page=4]{figs/isolated}
+    \includegraphics[page=2]{isolated} &
+    \includegraphics[page=4]{isolated}
   \end{tabular}
   \caption{Eliminating isolated vertices in $H-B(H)$.}
   \label{isolated_fig}
@@ -563,7 +564,7 @@ A generalized near-triangulation $H$ is \defin{$2$-critical} if
 
 \begin{figure}
   \centering
-  \includegraphics[page=1]{figs/two_critical}
+  \includegraphics[page=1]{two_critical}
   \caption{A $2$-critical generalized near-triangulation.}
   \label{two_critical_figure}
 \end{figure}
@@ -596,7 +597,7 @@ For each integer $r\ge 3$, the \defin{$r$-wheel} $W_r$ is the near-triangulation
 
 \begin{figure}
   \centering
-  \includegraphics[page=7,trim={0 55 0 10},clip]{figs/two_critical}
+  \includegraphics[page=7,trim={0 55 0 10},clip]{two_critical}
   \caption{\cref{biconnected_critical}: Partitioning the vertices of a biconnected critical graph into three dominating sets.}
   \label{biconnected_critical_colouring}
 \end{figure}
@@ -614,9 +615,9 @@ The proof of \cref{biconnected_critical}, whose main step is illustrated in \cre
 \begin{figure}
   \centering
   \begin{tabular}{ccc}
-    \includegraphics[page=1]{figs/biconnected} &
-    \includegraphics[page=2]{figs/biconnected} &
-    \includegraphics[page=3]{figs/biconnected} \\
+    \includegraphics[page=1]{biconnected} &
+    \includegraphics[page=2]{biconnected} &
+    \includegraphics[page=3]{biconnected} \\
     $H$ & $H'$ & $H$
   \end{tabular}
   \caption{The proof of \cref{biconnected_critical}}
@@ -640,7 +641,7 @@ The following lemma, illustrated in \cref{even_wheel}
 
 \begin{figure}
   \centering
-  \includegraphics{figs/even_wheel}
+  \includegraphics{even_wheel}
   \caption{\cref{wheelie}: Partitioning the vertices of an even wheel into sets $X_0$, $X_1$, and $X_2$.}
   \label{even_wheel}
 \end{figure}
@@ -653,7 +654,7 @@ The following lemma, illustrated in \cref{critical_colouring}, drops the require
 
 \begin{figure}
   \centering
-  \includegraphics[page=2]{figs/two_critical}
+  \includegraphics[page=2]{two_critical}
   \caption{\cref{critical}: Partitioning the vertices of a connected critical graph into dominating sets $X_0$, $X_1$, and $X_2$.}
   \label{critical_colouring}
 \end{figure}
@@ -672,7 +673,7 @@ At last, the following lemma, illustrated in \cref{two_critical_colouring}, show
 
 \begin{figure}
   \centering
-  \includegraphics[page=4]{figs/two_critical}
+  \includegraphics[page=4]{two_critical}
   \caption{\cref{three_sets_coverage}: Finding three sets $X_0$, $X_1$, and $X_2$ that dominate $I(H)$ in a $2$-critical graph $H$.}
   \label{two_critical_colouring}
 \end{figure}
@@ -741,9 +742,9 @@ The following lemma, illustrated in \cref{subdivisions}, gives a similar conditi
 
 \begin{figure} [htbp]
   \centering
-  \includegraphics[page=6]{figs/proper_good} \\
+  \includegraphics[page=6]{proper_good} \\
   $\Downarrow$ \\
-  \includegraphics[page=7]{figs/proper_good}
+  \includegraphics[page=7]{proper_good}
   \caption{Subdividing $G$ so that a $2$-proper good curve $C$ becomes a $1$-proper good curve for the subdivided graph $G^+$.}
   \label{subdivisions}
 \end{figure}
@@ -769,11 +770,11 @@ The proof of \cref{spanning_tree_to_collinear_set}, illustrated in \cref{tree_wa
 
 \begin{figure}
     \centering
-    % \includegraphics[page=2]{figs/proper_good} \\
+    % \includegraphics[page=2]{proper_good} \\
     % $\Downarrow$ \\
-    \includegraphics[page=3]{figs/proper_good}\\
+    \includegraphics[page=3]{proper_good}\\
     $\Downarrow$ \\
-    \includegraphics[page=4]{figs/proper_good}
+    \includegraphics[page=4]{proper_good}
     \caption{Constructing a $2$-proper good curve for $G$ that contains all the leaves of the tree $T$.}
     \label{tree_walking}
 \end{figure}
@@ -827,9 +828,9 @@ We conclude with two open questions:
   \begin{figure}
     \centering
     \begin{tabular}{ccc}
-      \includegraphics[page=1]{figs/really_good} &
-      \includegraphics[page=2]{figs/really_good} &
-      \includegraphics[page=3]{figs/really_good}
+      \includegraphics[page=1]{really_good} &
+      \includegraphics[page=2]{really_good} &
+      \includegraphics[page=3]{really_good}
     \end{tabular}
     \caption{The proof of \cref{really_good}.
     % \hussein{I think, it might be better if we draw another neighbor of w to its right.}\pat{No, the third figure illustrates something that is not possible (the edge $v_0z$). The third neighbour of $w$ is $z$}
@@ -886,8 +887,8 @@ We conclude with two open questions:
   \begin{figure}[htbp]
     \centering
     \begin{tabular}{cc}
-      \includegraphics[page=1,trim={30 0 30 0},clip]{figs/critical_3_colouring} &
-      \includegraphics[page=2]{figs/critical_3_colouring}
+      \includegraphics[page=1,trim={30 0 30 0},clip]{critical_3_colouring} &
+      \includegraphics[page=2]{critical_3_colouring}
     \end{tabular}
     \caption{Two cases in the proof of \cref{critical}.}
     \label{critical_3_colouring}
@@ -932,7 +933,7 @@ We conclude with two open questions:
 
   \begin{figure}
       \centering
-      \includegraphics{figs/dbrs}
+      \includegraphics{dbrs}
       \caption{The sets $X$, $D$, $B$, $R$, and $S$}
       \label{dbrs}
   \end{figure}
