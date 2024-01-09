@@ -1,1 +1,0 @@
-../plainurlnat.bst
