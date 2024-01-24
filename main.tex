@@ -851,7 +851,7 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
   \end{equation}
 
   \begin{clm}\label{simplify}
-    If $(a,b,c,|R|,|S|,x_3,x_4,\ldots)$ are non-negative and satisfy \cref{a,b}, then setting $x_3\gets x_3+\sum_{t\ge 4}tx_t/2$ and $x_t\gets 0$ for all $t\ge 4$ also satisfy \cref{a,b} and do not decrease \cref{oobjective}.
+    If $(a,b,c,|R|,|S|,x_3,x_4,\ldots)$ are non-negative and satisfy \cref{a,b}, then setting $x_3\gets x_3+\sum_{t\ge 4}(t-1)x_t/3$ and $x_t\gets 0$ for all $t\ge 4$ also satisfy \cref{a,b} and do not decrease \cref{oobjective}.
   \end{clm}
 
   \begin{clmproof}
