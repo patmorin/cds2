@@ -1,0 +1,421 @@
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[normalem]{ulem}
+\usepackage{xmpmulti}
+% \usepackage[dvipsnames]{xcolor}
+
+\newcommand{\emphh}[1]{\textcolor{blue}{\emph{#1}}}
+
+\title{Connected Dominating Sets in Triangulations}
+
+\author{}
+\author{%
+  Prosenjit~Bose \and
+  Vida~Dujmović \and
+  Hussein~Houdrouge \and
+  Pat~Morin \and
+  Saeed~Odak}
+\date{}
+
+\setbeameroption{hide notes} % Only slides
+%\setbeameroption{show only notes} % Only notes
+% \setbeameroption{show notes on second screen=right} % Both
+
+
+% \DeclareMathOperator{\tw}{tw}
+% \DeclareMathOperator{\td}{td}
+% \DeclareMathOperator{\wcol}{wcol}
+% \DeclareMathOperator{\lvr}{\chi_{\ell-\mathrm{vr}}}
+% \DeclareMathOperator{\pcn}{\chi_{p}}
+
+\begin{document}
+
+\begin{frame}
+  % \begin{center}
+    \maketitle
+  % \end{center}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{(Connected) Dominating Sets}
+
+  \begin{itemize}
+    \item Dominating Set: $N[X]=V(G)$
+    \item Connected Dominating Set: $G[X]$ is connected
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Connected Dominating Sets and Lush Spanning Trees}
+
+  \begin{itemize}
+    \item $X$ is a connected dominating set of $G$ iff \newline $G$ has a spanning tree in which $V(G)\setminus X$ are leaves.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Triangulations}
+
+  \textbf{Theorem (Albertson, Berman, Hutchinson, and Thomassen 1990):}  Every triangulation has a spanning tree whose non-leaf nodes have degree $\ge 3$.\\[2em]
+
+\textbf{Corollary:} Every $n$-vertex triangulation has a spanning tree with at least $n/2$ leaves.\\[2em]
+
+\textbf{Corollary:} Every $n$-vertex triangulation has a connected dominating set of size at least $n/2$.
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Induced Outerplanar Graphs}
+
+  \textbf{Theorem (Angelini, Evans, Frati, and Gudmundsson 2016):}  Every $n$-vertex triangulation $G$ has an induced outerplane graph $G[Y]$ with at least $n/2$ vertices.\\[2em]
+
+  For $n\ge 4$, $G[Y]$ is outerplane if and only if $X:=V(G)\setminus Y$ is a connected dominating set.\\[2em]
+
+  Gives solution to SEFENOMAP problem.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Main Result}
+
+  \textbf{Theorem:}  Every $n$-vertex triangulation $G$ has a connected dominating set of size at most $10n/21=\overline{476190}n$.\\[2em]
+
+  \textbf{Corollary:}  Every $n$-vertex triangulation $G$ has a spanning tree with at least $11n/21=\overline{523809}n$ leaves.\\[2em]
+
+  \textbf{Corollary:}  Every $n$-vertex triangulation $G$ has an induced outerplane graph $G[Y]$ with at least $11n/21=\overline{523809}n$ vertices.\\[2em]
+
+  Gives improved solution to SEFENOMAP problem.
+\end{frame}
+
+
+
+\end{document}
+
+
+
+
+
+\begin{frame}
+  \frametitle{The Strong Graph Product $\boxtimes$}
+
+  \includegraphics[page=1]{figs/blowup}
+  % \only<2>{\includegraphics[page=2]{figs/blowup}}
+  % \only<3>{\includegraphics[page=3]{figs/blowup}}
+  % \includegraphics{figs/product-lhs} \raisebox{.11\textwidth}{$=$}
+  % \includegraphics{figs/product-rhs}%
+\end{frame}
+
+\begin{frame}
+  \frametitle{Motivation: Graph Product Structure Theory}
+
+  \only<1>{\includegraphics[page=1]{figs/procedure}}%
+  \only<2>{\includegraphics[page=2]{figs/procedure}}%
+  \only<3->{\includegraphics[page=3]{figs/procedure}}
+
+  To solve some problem on $G$:
+  \begin{itemize}
+    \item<2->Show $G\subseteq H\boxtimes K_c$ where $c$ and $\tw(H)$ are small
+    \item<3->Show $H$ has solution of ``cost'' at most $f(\tw(H))$
+    \item<3->Extend to solution of $H\boxtimes K_c$ of ``cost'' $f(\tw(H))\cdot c$
+  \end{itemize}
+  % \textbf{Theorem (Dujmović, Joret, Micek, M., Ueckerdt, Wood 2019):} For every planar graph $G$ there exists
+  % \begin{itemize}
+  %   \item a graph ${\color{red}H}$ of treewidth at most $3$; and
+  %   \item a path ${\color{blue}P}$; such that
+  % \end{itemize}
+  % $G$ is isomorphic to a subgraph of ${\color{red}H}\boxtimes {\color{blue}P\boxtimes K_3}$\newline ($G\subseteq {\color{red}H}\boxtimes {\color{blue}P\boxtimes K_3}$).\vspace{1em}
+  %
+  % \includegraphics[scale=.6]{figs/planar-subgraph}%
+  % \only<2>{\raisebox{.066\textwidth}{$\subseteq$}\includegraphics[scale=.6]{figs/product-rhs}}%
+  % \only<3>{\raisebox{.066\textwidth}{$\subseteq$}\includegraphics[scale=.6]{figs/product-lhs}}
+  %
+  % \uncover<4->{
+  %   Applications:
+  %   \begin{itemize}
+  %     \item For monotone $\rho$, $\rho(G)\le \rho({\color{red}H}\boxtimes {\color{blue}K_c})$
+  %     \item For many $\rho$, $\rho(H\boxtimes P)\le {\color{red}f(\tw(H))}\cdot {\color{blue}c}$
+  %   \end{itemize}
+  %
+  % }
+  % \note[item]{State theorems}
+  % \note[item]{Used to bound many graph parameters for planar graphs}
+  % \note[item]{Similar theorems hold for some other graph families}
+  % \note[item]{Usually parameter is bounded by a fast growing function of $\tw(H)$ and the $P\boxtimes K_3$ factor increases the bound by a constant factor.}
+  % \note[item]{In other applications, $\tw(H)$ appears as a factor in some function of $n$, for example, $tw(H)\log\log n$}
+  % \note[item]{In one application, $\tw(H)$ affects the asymptotic growth, for example $\log n/log^{(\tw(H))} n$}
+  % \note[item]{Example, non-repetitive chromatic number is at most $4^{\tw(H)}\cdot 12$}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The Graph Minor Relation $\preceq$}
+
+  \begin{center}
+    \begin{tabular}{ccc}
+      \includegraphics[page=1]{figs/minors} & &
+      \includegraphics[page=2]{figs/minors} \\
+      $K_4$ & $\preceq$ & $G$
+    \end{tabular}
+  \end{center}
+  \only<2->{$G$ is \emph{$X$-minor-free} if $X \not\preceq G$}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{The Grid-Minor Theorem}
+
+  \uncover<1->{\textbf{Theorem (Robertson-Seymour 1986):}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $\tw(G)\le f(X)$.\vspace{1em}}
+
+  \uncover<3>{\textbf{Theorem (Robertson-Seymour 1986):}  Every $k$-vertex planar graph $X$ is a minor of the $2k\times 2k$ grid.
+
+  \textbf{Theorem (Chuzoy and Tan 2019):} Every graph of treewidth at least $ck^{9+\epsilon}$ contains a $2k\times 2k$ grid minor.\vspace{1em}}
+
+  \uncover<2->{\textbf{Corollary (RSCT):} For any planar graph $X$ every $X$-minor-free graph $G$ satisfies $\tw(G)\le c|V(X)|^{9+\epsilon}$.\vspace{1em}}
+
+  % \uncover<4->{Can we refine RS86 to get $G\subseteq H\boxtimes K_c$ where $\tw(H)$ depends on the ``complexity'' of $X$?}
+
+  \note[item]{Note that the treewidth of $G$ depends on the size of $X$}
+  \note[item]{Can it depend, instead, on the complexity of $X$?}
+  \note[item]{Not really, the $k\times k$ grid excludes an $\Omega(k)$ vertex star as a minor.}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The Grid-Minor Theorem}
+
+  \textbf{Corollary (RSCT):} For any planar graph $X$ every $X$-minor-free graph $G$ satisfies $\tw(G)\le c|V(X)|^{9+\epsilon}$.\vspace{1.5em}
+
+  \uncover<2->{Q: Can we bound $\tw(G)$ by the ``complexity'' of $X$?\vspace{.5em}}
+
+  \uncover<3->{\raisebox{8ex}{A: No}\hspace{2em} \includegraphics{figs/star-vs-grid}}
+
+  \uncover<4->{Q:Can we refine RS86 to get $G\subseteq H\boxtimes K_c$ where $\tw(H)$ depends on the ``complexity'' of $X$ and only $c$ depends on $|V(X)|$?\vspace{.5em}}
+
+  % \uncover<5->{A: Maybe, since $\boxplus_{k\times k}\subseteq K_1\boxtimes K_{k^2}$}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Treedepth}
+  \framesubtitle{The right measure of complexity for $X$}
+
+  \centering{\includegraphics{figs/treedepth}}
+
+  \[  \td(X) = \min\{\operatorname{height}(T): \
+    \mbox{$T$ is a tree and $X\subseteq \operatorname{closure}(T)$} \} \]
+
+  \begin{itemize}
+    \item<2-> $\td(T) \le \operatorname{height}(T)$ for any tree $T$
+    \item<3-> $\td(K_c\oplus I_n) = c+1$
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Theorem 1}
+
+  \uncover<1-3>{\textbf{Theorem (Robertson-Seymour 1986):}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $\tw(G)\le f(X)$.\vspace{1em}}
+
+  \uncover<2->{\textbf{Corollary (RSCT):} For any planar graph $X$ every $X$-minor-free graph $G$ satisfies $\tw(G)\le c|V(X)|^{9+\epsilon}$.\vspace{1em}}
+
+  \uncover<3->{\textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Application: Weak Colouring Numbers}
+
+  \textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
+
+  \begin{center}
+    \includegraphics{figs/rweak}
+  \end{center}
+
+  \textbf{Application 1:} For any planar graph $X$, any $r\ge 1$, and any $X$-minor-free graph $G$, the $r$-th weak colouring number of $G$ satisfies
+  \[  \wcol_r(G) \le r^{f(\td(X))}\cdot c(X) \enspace . \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Application: $p$-Centered Colouring}
+
+  \textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
+
+  \begin{center}
+    \includegraphics{figs/pcentered}
+  \end{center}
+
+  (Pilipczuk-Siebertz 2021)
+
+  \textbf{Application 2:} For any planar graph $X$, any $p\ge 1$, and any $X$-minor-free graph $G$, the $p$-centered chromatic number of $G$ is at most
+  \[  \chi_p(G) \le p^{f(\td(X))}\cdot c(X) \enspace . \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Application: Adjacency Labelling}
+
+  \textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
+
+  \begin{center}
+    \includegraphics[page=4,scale=.7]{figs/labelling-scheme}
+  \end{center}
+
+  (Gavoille et al.) \\
+  \textbf{Application 3:} For any planar graph $X$, any $p\ge 1$, and any $X$-minor-free $n$-vertex graph $G$, there exists an adjacency labelling scheme for $G$ in which labels have length at most
+  \[   \log n + f(\td(X))\log\log n + c(X) \enspace . \]
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Application: $\ell$-Vertex-Ranking}
+
+  \textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
+
+  \begin{center}
+    \includegraphics{figs/lvr}
+  \end{center}
+
+  (Bose, Dujmović, Javarsineh, M. 2020)
+  \textbf{Application 4:} For any planar graph $X$, any $\ell\ge 2$, and any $X$-minor-free $n$-vertex graph $G$, the $\ell$-vertex-ranking number of $G$ satisfies
+  \[  \chi_{\ell\mathrm{-vr}}(G) \le \frac{\log n}{\log^{(f(\td(X)))} n}\cdot c(\ell,X) \enspace . \]
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{The General Result}
+
+  \textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
+
+  \textbf{Theorem 2:}  For any graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{ct}$ where $\tw(H)\le 2^{\td(X)+1}$, $c=c(X)$, and $t=\tw(G)$.\vspace{1em}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Proof Ideas}
+  \framesubtitle{$H$-Partitions}
+
+  \textbf{Theorem 2:}  For any graph $X$, every $X$-minor-free graph $G$ has an $H$-partition $(B_x:x\in V(H))$ where $\tw(H)\le 2^{\td(X)+1}$ and $|B_x|\le c(X)\cdot\tw(G)$ for each $x\in V(H)$.\vspace{1em}
+
+  \includegraphics[page=4]{figs/procedure}%
+
+  $vw\in E(G)$, $v\in B_x$, $w\in B_y$ $\Rightarrow$ $x=y$ or $xy\in E(H)$
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Proof Ideas}
+  \framesubtitle{Universal treewidth-$h$ graph}
+
+  Instead of $X$, assume $G$ is $U_{h,d}$-minor-free, where $h=\td(X)$ and $d=|V(X)|$.
+
+  \begin{center}
+    \only<1>{\includegraphics{figs/uhd.pdf}}%
+    \only<2->{\includegraphics[page=2]{figs/uhd.pdf}}%
+  \end{center}
+
+  \only<2->{Inductively, we even assume $(K_k\oplus U_{h,d})$-minor-free}
+  % \includegraphics[page=4]{figs/procedure}%
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Proof Ideas}
+  \framesubtitle{Rooted Minors}
+
+  Assume $G$ has no $R$-rooted $K_k\oplus U_{h,d}$ minor, use decomposition similar to Kawarabayashi (2004).
+
+  \begin{center}
+    \includegraphics[scale=0.6]{../figs/c-subgraph1.pdf}
+  \end{center}
+
+
+
+  % \includegraphics[page=4]{figs/procedure}%
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Proof Ideas}
+  \framesubtitle{Erd\H{o}s-Posa}
+
+  Hit all $R$-rooted copies of $K_{k+d}\oplus U_{h-1,d}$ in $C^0$ with a small set $X$
+  \begin{center}
+    \includegraphics[scale=0.6]{../figs/combining-minors4.pdf}
+  \end{center}
+
+  % \includegraphics[page=4]{figs/procedure}%
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Proof Ideas}
+  \framesubtitle{Divide and Conquer}
+
+  \begin{center}
+    \includegraphics[scale=.66]{../figs/final-clique-sums1.pdf}
+  \end{center}
+
+  $C_0-X$ is $K_{k+d}\oplus U_{h-1,d}$-minor free.
+
+  $C_1,\ldots,C_r$ are smaller and $K_{k}\oplus U_{h,d}$-minor-free.
+
+  % \includegraphics[page=4]{figs/procedure}%
+\end{frame}
+
+\begin{frame}
+  \frametitle{Weak Colouring Numbers}
+
+  \textbf{Application 1:} For any planar graph $X$, any $r\ge 1$, and any $X$-minor-free graph $G$, the $r$-th weak colouring number of $G$ satisfies
+  \[  \wcol_r(G) \le r^{f(\td(X))}\cdot c(X) \enspace . \]
+
+  \textbf{Theorem:} For any graph $X$, any $r\ge 1$, and any $X$-minor-free graph $G$, the $r$-th weak colouring number of $G$ satisfies
+  \[  \wcol_r(G) \le r^{f(\td(X))}\cdot c(X) \enspace . \]
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Extension to Apex-Minor-Free Graphs}
+
+  \textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
+
+  \textbf{Theorem 3:}  For any \emph{apex} graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes P\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Summary}
+
+
+  \textbf{Main Result:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
+
+  \uncover<2->{\textbf{Open Question:} Improve the dependence on $\td(X)$}\vspace{1em}
+
+  \uncover<3->{\textbf{Open Question:} For any graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{ct}$ where $\tw(H)\le f(\td(X))$, $c=c(X)$, and $t=\tw(G)$.\vspace{1em}
+  }
+
+  \begin{center}
+    \uncover<4->{\Huge Thank You!}
+  \end{center}
+\end{frame}
+
+% \begin{frame}
+%   \frametitle{Main Theorem}
+%
+%   \textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c\tw(X)}$ where $\tw(H)\le 2^{\td(X)+1}$.
+%
+%   \uncover<3->{\textbf{Theorem (Robertson-Seymour 1986):}  Every $k$-vertex planar graph $X$ is a minor of the $2k\times 2k$ grid.
+%
+%   \textbf{Theorem (Chuzoy and Tan 2019):} Every graph of treewidth at least $ck^9+\epsilon$ contains a $2k\times 2k$ grid minor.\vspace{1em}}
+%
+%   \uncover<2->{\textbf{Corollary (RSCT):} For any planar graph $X$ every $X$-minor-free graph $G$ satisfies $\tw(G)\le c|V(X)|^{9+\epsilon}$.}
+% \end{frame}
+
+
+
+\end{document}
