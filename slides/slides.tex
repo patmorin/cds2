@@ -87,8 +87,17 @@
   \end{center}
 
   \uncover<2->{Gives a bound of $n/2$ for the \emphh{SEFENOMAP} graph drawing problem.\\[1em]}
-  \uncover<3->{\textbf{Observation:} If $X$ is a connected dominating set then $G[V(G)\setminus X]$ is an induced outerplace graph.}
+  \uncover<3->{\textbf{Observation:} If $X$ is a connected dominating set then $G-X$ is an induced outerplace graph with $n-|X|$ vertices.}
 \end{frame}
+
+\begin{frame}
+  \frametitle{The Benchmark: $n/3$}
+
+  \begin{center}
+    \includegraphics[height=.7\textheight]{figs/nover3}
+  \end{center}
+\end{frame}
+
 
 \begin{frame}
   \frametitle{Main Result}
@@ -159,10 +168,16 @@
 
   \textbf{Theorem:} $\textsc{NaïveGreedy}(G)$ produces a dominating set of size at most $4n/7$.
 
-  \textit{Proof:} Take vertices of inner degree at least $2$ until $G-X$ is $1$-critical.
+  \uncover<2->{
+  \textit{Proof:} Takes vertices of inner degree at least $2$ until $G-X$ is $1$-critical.
+  \begin{center}
+    \includegraphics{figs/greedy} \includegraphics[page=6]{figs/walkthrough}
+  \end{center}
   \[
-     |X| = r + I , \quad 2r \le n, \quad I \le (n-r)/4
+     |X| = r + I , \quad 2r + I \le n, \quad I \le (n-r)/4
   \]
+  Maximized when $r=3n/7$, $I=n/7$
+  }
 \end{frame}
 
 
