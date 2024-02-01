@@ -582,12 +582,13 @@ We now show that, even when all vertices in $B(H)$ have inner-degree at most $2$
   \begin{compactenum}[(a)]
     \item there exists $v\in B(H)$ and a graph $H'$ that dom-respects $H-v$ such that $|H'|\le |H|-3$ and $|B(H')|\le |B(H)|-1$; \label[p]{kill_pair}
     \item there exists $v\in B(H)$ and a graph $H'$ that dom-respects $H-v$ such that $|H'|\le |H|-4$ and $|B(H')|\le |B(H)|-3$; or \label[p]{kill_k4}
-    \item there exists $u,v\in B(H)$ and a graph $H'$ that dom-respects $H-\{u,v\}$ such that $|H'|\le |H|-6$ and $|B(H')|\le |B(H)|-1$. \label[p]{kill_double}
+    \item \pat{Unnecessary} there exists $u,v\in B(H)$ and a graph $H'$ that dom-respects $H-\{u,v\}$ such that $|H'|\le |H|-6$ and $|B(H')|\le |B(H)|-1$. \label[p]{kill_double}
   \end{compactenum}
 \end{lem}
 
 \pat{There is an issue with this lemma/proof. I'm working on it now.}
 \begin{proof}
+  Let $abw$ be an inner face of $H$ such that the component of $H-\{a,b\}$ that contains $w$ contains no other vertex $w'$ with $\deg_{H-B(H)}(w')=0$.....
   By definition $N_H(w)\subseteq B(H)$ and, since $w$ is an inner vertex in a generalized near triangulation $|N_H(w)|\ge 3$.
 
   There are two cases to consider (see \cref{isolated_fig}):
