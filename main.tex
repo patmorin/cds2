@@ -124,6 +124,7 @@ A \defin{surface triangulation} is a graph $G$ embedded on a surface $\mathcal{S
 
 \subsection{One-Bend Collinear Sets in Planar Graphs}
 
+\pat{Rewrite this section in terms of one-bend free sets.}
 
 The original motivation for this research was a graph drawing problem, which we now describe.  It is known that every $n$-vertex planar graph $G$ has a non-crossing drawing in the plane with edges of $G$ drawn as line segments and such that some set $Y$ of $\Omega(n^{1/2})$ vertices of $G$ are drawn on the $x$-axis \cite{bose.dujmovic:polynomial,dujmovic:utility}.  The set $Y$ is called a \defin{collinear set}.  For bounded-degree planar graphs, this result can be improved to $|Y|=\Omega(n^{0.8})$ \cite{dujmovic.morin:dual}.  Determining the supremum value of $\alpha$ such that every $n$-vertex planar graph has a collinear set of size $\Omega(n^{\alpha})$ remains a difficult open problem, but it is known that $\alpha \le \log_{23}(22)<0.9859$ \cite{ravsky.verbitsky:collinear}.
 
@@ -144,7 +145,12 @@ The book chapter by \citet{chellali.favaron:connected} surveys combinatorial res
 \citet{wan.alzoubi.ea:simple} describe an algorithm for finding a connected dominating set in a $K_t$-minor-free graph. When run on an $n$-vertex planar graph, their algorithm produces a connected dominating set of size at most $15\alpha(G^2)-5$, where $\alpha(G^2)$ is the size of the largest \defin{distance-$2$ independent set} in $G$; i.e., the largest subset of $V(G)$ that contains no pair of vertices whose distance in $G$ is less than or equal to $2$.  However, there exists $n$-vertex triangulations $G$ with $\alpha(G^2)=n/4$,\footnote{To create such a triangulation, start with $n/4$ vertex-disjoint copies of $K_4$ embedded so that each copy contributes three vertices to the outer face and has one inner vertex, and then add edges arbitrarily to create a triangulation.  Then the inner vertices of the copies of the original copies of $K_4$ form an independent set in $G^2$.} for which this algorithm does not guarantee an output of size less than $n$.
 
 As discussed above, the result of \citet{albertson.berman.ea:graphs} on spanning-trees without degree-$2$ vertices implies that every $n$-vertex triangulation has a connected dominating set of size $(n-2)/2$.  \citet{chen.ren.ea:homeomorphically} give a significant generalization of this result, which applies to any connected graph $G$ in which the graph induced by the neighbours of each vertex is connected. 
- Motivated by  a graph drawing problem (SEFE without mapping) \citet{angelini.evans.ea:sefe} show that every $n$-vertex plane graph $G$ (and therefore every triangulation) contains an induced outerplane graph $G[L]$ with least $n/2$ vertices.  If $G$ is a triangulation, then the set $X:=V(G-L)$ is a connected dominating set.  Conversely, if $X$ is a connected dominating set in a triangulation $G$, then $G-X$ is an outerplane graph.  Our \cref{main_result2} therefore implies an improved result for their graph drawing problem, improving the bound from $n/2$ to $11n/21$, as described in the following theorem:
+ Motivated by  a graph drawing problem (SEFE without mapping) \citet{angelini.evans.ea:sefe} show that every $n$-vertex plane graph $G$ (and therefore every triangulation) contains an induced outerplane graph $G[L]$ with least $n/2$ vertices.  If $X$ is a connected dominating set in a triangulation $G$, then $G-X$ is an outerplane graph.\footnote{In \cref{discussion}, we show that the converse of this statement is almost true: the largest $Y\subset V(G)$ such that $G[Y]$ is outerplane and the smallest connected dominating set $X\subset V(G)$ satisfy $|X|+|Y|=|V(G)|$.}  Our \cref{main_result2} therefore implies an improved result for their graph drawing problem, improving the bound from $n/2$ to $11n/21$, as described in the following theorem:
+
+% \pat{Unlike what we wrote in a previous version, the problem of finding the largest induced outerplane graph $G[Y]$ is not immediately equivalent to finding the smallest connected dominating set.  Any cycle $C$ in $G[Y]$ could be a separating cycle in $G$. One has to show that we can always replace such a cycle $C$ with a cycle $C'$ of at least the same length, but such that $C'$ has fewer vertices of $G$ in its interior.  
+% For that you need to show that at least one of the following is true: (i) $C$ contains a vertex $v$ in its interior that is adjacent to at least three consecutive vertices $xyz$ of $C$, in which case we replace $y$ with $v$. (ii) the number of vertices in the interior of $C$ that are adjacent to $C$ is at least $|V(C)|$, in which case we replace $C$ with this set of vertices.  Is this something we should include?
+% See the last section for the start of a proof....
+% }
 
 \begin{thm}\label{sefenomap}
   For every $n$-vertex planar graph $G_1$ and every $\lceil 11n/21\rceil$-vertex planar graph $G_2$, there exists point sets $P_1\supseteq P_2$ with $|P_1|=n$, $|P_2|=\lceil 11n/21\rceil$ and non-crossing embeddings of $G_1$ and $G_2$ such that
@@ -155,9 +161,10 @@ As discussed above, the result of \citet{albertson.berman.ea:graphs} on spanning
   \end{compactenum}
 \end{thm}
 
+
 In the introduction we describe an $n$-vertex triangulation (containing a sequence of nested triangles) for which every connected dominating set has size at least $n/3$.  Since this example contains many separating triangles it is natural to consider the special case of $4$-connected triangulations.  \citet{noguchi.zamfirescu:spanning} describe, for infinitely many values of $n$, $4$-connected $n$-vertex triangulations for which any connected dominating set has at least $n/3$ vertices.
 
-In the current paper, we consider triangulations; edge-maximal planar graphs. \citet{hernandez:vigilancia} and \citet{chen.hao.ea:bounds} show that every edge-maximal \emph{outerplanar} graph has a connected dominating set of size at most $\lfloor (n-2)/2\rfloor$. This immediately implies that every Hamiltonian $n$-vertex triangulation (including every $4$-connected $n$-vertex triangulation) has a connected dominating set of size at most $\lfloor (n-2)/2\rfloor$.  For even $n\ge 4$, the bound $(n-2)/2$ for edge-maximal outerplanar graphs is tight, as is easily seen by constructing a graph with two degree-$2$ vertices $s$ and $t$ and $(n-2)/2$ disjoint edges, each of which separates $s$ from $t$.  \citet{zhuang:connected} parameterizes the problem by the number, $k$,  of degree-$2$ vertices, and shows that any $n$-vertex edge-maximal outerplanar graph with $k$ degree-$2$ vertices has a connected dominating set of size at most $\lfloor\min\{(n+k-4)/2,2(n-k)/3\}\rfloor$.
+In the current paper, we consider \defin{triangulations}; edge-maximal planar graphs. \citet{hernandez:vigilancia} and \citet{chen.hao.ea:bounds} show that every edge-maximal \emph{outerplanar} graph has a connected dominating set of size at most $\lfloor (n-2)/2\rfloor$. This immediately implies that every Hamiltonian $n$-vertex triangulation (including every $4$-connected $n$-vertex triangulation) has a connected dominating set of size at most $\lfloor (n-2)/2\rfloor$.  For even $n\ge 4$, the bound $(n-2)/2$ for edge-maximal outerplanar graphs is tight, as is easily seen by constructing a graph with two degree-$2$ vertices $s$ and $t$ and $(n-2)/2$ disjoint edges, each of which separates $s$ from $t$.  \citet{zhuang:connected} parameterizes the problem by the number, $k$,  of degree-$2$ vertices, and shows that any $n$-vertex edge-maximal outerplanar graph with $k$ degree-$2$ vertices has a connected dominating set of size at most $\lfloor\min\{(n+k-4)/2,2(n-k)/3\}\rfloor$.
 
 %
 %
@@ -571,15 +578,26 @@ We now show that, even when all vertices in $B(H)$ have inner-degree at most $2$
 
 
 \begin{lem}\label{degree_zero_killer}
-  Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$ and such that $H-B(H)$ contains a vertex $w$ with $\deg_{H-B(H)}(w)=0$ but does not contain any vertex $w'$ with $\deg_{H-B(H)}(w')=1$.  Then at least one of the following is true:
+  Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$, $H-B(H)$ is critical, $H-B(H)$ contains a vertex $w$ with $\deg_{H-B(H)}(w)=0$ but does not contain any vertex $w'$ with $\deg_{H-B(H)}(w')=1$.  Then at least one of the following is true:
   \begin{compactenum}[(a)]
     \item there exists $v\in B(H)$ and a graph $H'$ that dom-respects $H-v$ such that $|H'|\le |H|-3$ and $|B(H')|\le |B(H)|-1$; or \label[p]{kill_pair}
     \item there exists $v\in B(H)$ and a graph $H'$ that dom-respects $H-v$ such that $|H'|\le |H|-4$ and $|B(H')|\le |B(H)|-3$. \label[p]{kill_k4}
   \end{compactenum}
 \end{lem}
 
+\pat{There is an issue with this lemma/proof. I'm working on it now.}
 \begin{proof}
-  By definition $N_H(w)\subseteq B(H)$ and, since $w$ is an inner vertex in a generalized near triangulation $|N_H(w)|\ge 3$. There are two cases to consider (see \cref{isolated_fig}):
+  By definition $N_H(w)\subseteq B(H)$ and, since $w$ is an inner vertex in a generalized near triangulation $|N_H(w)|\ge 3$.  Let $F$ be the face of $H[B(H)]$ that contains $w$ in its interior, so $V(F)=N_H(w)$.  We claim that $V(F)$ contains a cut vertex of $H$, that $V(F)$ contains a vertex $v$ with $N_H(v)=\{w\}$, or that $V(F)$ contains a pair of vertices $v$ and $v'$ with $N^+_H(v)=N^+_(v')$.  
+  
+  
+  To prove this claim, let $F:=v_0,\ldots,v_{r-1}$.  If $\deg^+_H(v_i)=1$ for some $i\in\{0,\ldots,r\}$, then $N^+_H(v_i)=\{w\}$ and we are done.  Assume, therefore that $\deg^+_H(v_i)=2$ for each $i\in\{0,\ldots,r-1\}$. Thus, $v_0$ is adjacent to some vertex $x_0\in I(H)\setminus\{w\}$. Let $F_0$ be the face of $H[B(H)]$ that contains $x_0$ in its interior. Since $\deg_{H-B(H)}(w)=0$, $F\neq F_0$.  If $v_0$ is not a cut vertex of $H$, then the faces $F$ and $F_0$ have an edge in common.  Without loss of generality, assume that $F$ and $F_0$ have the edge $v_0v_1$ in common.  We claim that $F_0$
+  
+  .  Since $H[B(H)]$ is outerplanar  If $v_0$ is not a cut vertex of $H$, there is a cycle $w$ and $x_0$ are in the same component of $S$
+  
+  
+  
+  
+  There are two cases to consider (see \cref{isolated_fig}):
   \begin{figure}[htpb]
     \centering
     \begin{tabular}{cc}
@@ -593,10 +611,18 @@ We now show that, even when all vertices in $B(H)$ have inner-degree at most $2$
     \label{isolated_fig}
   \end{figure}
   \begin{compactenum}[(a)]
-    \item There exists $v\in N_H(w)$ with $\deg^+_H(v)=2$. In this case, $N^+_H(v)=\{w,w'\}$ and the vertices $w$ and $w'$ are in a different biconnected components $C$ and $C'$, respectively, of $H$. By \cref{inner_degree_1}, $C[N_C[v]]$ is isomorphic to $K_4$. Since $\deg_{H-B(H)}(w)=0$, the faces of $C[N_C[v]]$ have no vertices of $H$ in their interiors.   By \cref{inner_degree_1}, $C'[N_{C'}[v]]$ is also isomorphic to $K_4$.  Let $x$ and $y$ be the two neighbours of $v$ on the outer face of $C'$. Since $\deg^+_H(v)=2$, $\deg_{C'}^+(v)=1$, so the cycle $vxw'y$ has no vertices of $H$ in its interior.
-    We claim that the triangle $yw'x$ also contains no vertices of $H$ in its interior. Indeed, if $yw'x$ contains more than one inner vertex then, by \cref{useful_little_guy}, $\deg^+_H(x)>2$ or $\deg^+_H(y)>2$, which is ruled out by the statement of the lemma.  If $yw'x$ contains exactly one inner vertex then $\deg_{H-B(H)}(w')=1$, which is also ruled out by the statement of the lemma.
+    \item There exists $v\in N_H(w)$ with $\deg^+_H(v)=2$. In this case, $N^+_H(v)=\{w,w'\}$.  There are two cases to consider:
+    \begin{compactenum}[(i)]
+        \item The vertices $w$ and $w'$ are in a different biconnected components $C$ and $C'$, respectively, of $H$. By \cref{inner_degree_1}, $C[N_C[v]]$ is isomorphic to $K_4$. Since $\deg_{H-B(H)}(w)=0$, the faces of $C[N_C[v]]$ have no vertices of $H$ in their interiors.   By \cref{inner_degree_1}, $C'[N_{C'}[v]]$ is also isomorphic to $K_4$.  Let $x$ and $y$ be the two neighbours of $v$ on the outer face of $C'$. Since $\deg^+_H(v)=2$, $\deg_{C'}^+(v)=1$, so the cycle $vxw'y$ has no vertices of $H$ in its interior. We claim that the triangle $yw'x$ also contains no vertices of $H$ in its interior. Indeed, if $yw'x$ contains more than one inner vertex then, by \cref{useful_little_guy}, $\deg^+_H(x)>2$ or $\deg^+_H(y)>2$, which is ruled out by the statement of the lemma.  If $yw'x$ contains exactly one inner vertex then $\deg_{H-B(H)}(w')=1$, which is also ruled out by the statement of the lemma.
 
-    Let $H'$ be a dom-minimal graph that dom-respects $H-v$. Then $w$ and $w'$ are both in $B(H-v)$, so $\deg^+_{H-v}(w)=\deg^+_{H-v}(w')=0$. Therefore, neither $w$ nor $w'$ are in $H'$. Therefore $|H'|\le |H-\{v,w,w'\}|=|H|-3$.  Also $B(H-v)=B(H)\setminus\{v\}\cup\{w,w'\}$ but none of $v$, $w$, or $w'$ are in $H'$.  Therefore, by \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus\{v,w,w'\}$ so $|B(H')|\le |B(H)|-1$.
+        Let $H'$ be a dom-minimal graph that dom-respects $H-v$. Then $w$ and $w'$ are both in $B(H-v)$, so $\deg^+_{H-v}(w)=\deg^+_{H-v}(w')=0$. Therefore, neither $w$ nor $w'$ are in $H'$. Therefore $|H'|\le |H-\{v,w,w'\}|=|H|-3$.  Also $B(H-v)=B(H)\setminus\{v\}\cup\{w,w'\}$ but none of $v$, $w$, or $w'$ are in $H'$.  Therefore, by \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus\{v,w,w'\}$ so $|B(H')|\le |B(H)|-1$.
+
+        \item The vertices $w$ and $w'$ are in the same biconnected component of $H$.  Let $F$ and $F'$ be the inner faces of $H[B(H)]$, where $F$ contains $w$ in its interior and $F'$ contains $w'$ in its interior. 
+        
+        Since $\deg_{H-B(H)}(w)=0$, $w$ is only vertex of $H$ in the interior of $F$.  The faces $F$ and $F'$ share an edge $vv'$.
+        
+        , one of which contains $w$ and the other of which contains $w'$.
+    \end{compactenum}
 
     \item $\deg^+_H(v)=1$ for all $v\in N_H(w)$.  In this case let $v$ be any vertex in $N_H(w)$ and let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Then $w\in B(H-v)$, so $\deg^+_{H-v}(v')=0$ for all $v'\in N_H(w)$. Since $H'$ is dom-minimal, $N_H(w)\cap V(H')=\emptyset$, by \cref{bad_vertex}.  Similarly $w\not\in V(H')$, also by \cref{bad_vertex}. Therefore $|H'|\le |H-(\{w\}\cup N_H(w))| \le |H|-4$. Then $B(H-v)=B(H)\setminus\{v\}\cup\{w\}$.
     By \cref{boundary_subset}, $B(H')\subseteq B(H-v)\setminus N_H[w]$, so $|B(H')|\le |B(H)|-\deg_H(w) \le |B(H)|-3$. \qedhere
@@ -830,7 +856,7 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
   \begin{figure}
       \centering
       \includegraphics{figs/dbrs}
-      \caption{The sets $X$, $D$, $B$, $R$, and $S$}
+          \caption{The sets $X$, $D$, $B$, $R$, and $S$}
       \label{dbrs}
   \end{figure}
 
@@ -955,6 +981,7 @@ Let $G$ be an $n$-vertex planar graph. \cref{main_result2} implies that $G$ has 
 \end{proof}
 
 \section{Discussion}
+\label{discussion}
 
 % It is worth pointing out the following corollary of \cref{main_result2}:
 
@@ -967,7 +994,21 @@ Let $G$ be an $n$-vertex planar graph. \cref{main_result2} implies that $G$ has 
 %     Embed $G-Y$ as a generalized near triangulation and let $G'$ be the graph obtained by adding three vertices $x,y,z$ to this embedding and adding edges to obtain a triangulation in which $xyz$ is the outer face.  The graph $G'$ is a triangulation with $n-|Y|+3$ vertices so, by \cref{better_greedy} it has a connected dominating set $X_0$ of size at most $(10n-|Y|+12)/21$.
 % \end{proof}
 
+In the introduction we argued that, if $X$ is a connected dominating set in a triangulation $G$, then the induced graph $G[V(G)\setminus X]$ is an outerplane graph.  Although it is not immediately obvious, finding the largest induced outerplane graph in a triangulation $G$ is equivalent to the problem of finding the smallest connected dominating set.
 
+\begin{thm}
+  Let $G$ be a triangulation with $n\ge 4$ vertices, let $X$ be a minimum-sized connected dominating set of $G$, and let $Y$ be a maximum-sized subset of $V(G)$ such that all vertices of $G[Y]$ lie on a common face of $G[Y]$. Then $|X|+|Y|=n$.
+\end{thm}
+
+\begin{proof}
+  Let $X$ be a minimum-size connected dominating set of $G$ and let $Y'=V(G)\setminus X$.  Then $G[Y']$ is outerplane, since every vertex in $Y':=V(G)\setminus X$ is on the boundary of the face of $G[Y]$ that contains all vertices of $X$ in its interior.  Since $Y$ has maximum size $|X|+|Y|\ge |X|+|Y'|= n$.
+
+  Now consider a set $Y$ of maximum size such that all vertices of $G[Y]$ lie on a common face $F_Y$ of $G[Y]$ and, among all such maximum-size sets, choose $Y$ to maximize the number of vertices of $G$ that are contained in the interior $F_Y$.  Without loss of generality, suppose $F_Y$ is the outer face of $G[Y]$, so $G[Y]$ is outerplane.  Let $X':=V(G)\setminus Y$. Since $n\ge 4$, $Y$ does not contain all three vertices on the outer face of $G$, so $X'$ dominates the vertices on the outer face of $G$. For any vertex $w\in Y$ not on the outer face of $G$, some neighbour of $v\in N_G(w)$ is in $X'$ since, otherwise $G[N_G(v)]\subseteq G[Y]$ contains a cycle with $w$ in its interior, contradicting the fact that $G[Y]$ is outerplane. Therefore $X'$ is a dominating set of $G$.
+
+  We now show that all vertices of $X'$ are in the outer face of $G[Y]$, which implies that $G[X']$ is connected.  Suppose, by way of contradiction, that some inner face $F$ of $G[Y]$ contains at least one vertex of $X'$ in its interior.  Since $G$ is connected, there is at least one vertex $v\in V(F)$ such that $N_G(v)$ contains at least one vertex in the interior of $F$.  Let $Z:=\{w\in N_G(v):\text{$w$ is in the interior of $F$}\}$. Let $Y':=Y\cup Z \setminus\{v\}$.  Then $|Y'|\ge |Y|$, $G[Y']$ is outerplane, and the outer face of $G[Y']$ contains more vertices of $G$ than the outer face of $G[Y]$. This contradicts the choice of $Y$.
+
+  Therefore $X'$ is a connected dominating set of $G$.  Since $X$ is of minimum size, $|X|+|Y|\le |X'|+|Y|=n$.  Therefore $n\le |X|+|Y|\le n$, so $|X|+|Y|=n$, as required.  
+\end{proof}
 
 
 We conclude with two open questions:
