@@ -39,6 +39,55 @@
 \end{frame}
 
 
+
+\begin{frame}
+  \frametitle{SEFENOMAP}
+  \uncover<3->{\textbf{Theorem (Angelini, Evans, Frati, and Gudmundsson 2016):}  If $|G_1|=n$ and $|G_2|\le n/2$ then SEFENOMAP has a solution.}
+
+  \begin{center}
+    \begin{tabular}{cc}
+    \includegraphics[page=1,scale=.8]{figs/sefenomap} & \includegraphics[page=2,scale=.8]{figs/sefenomap} \\
+    $G_1$ & $G_2$
+  \end{tabular}
+    \only<2->{\includegraphics[page=3,scale=.8]{figs/sefenomap}}
+  \end{center}
+  \only<4>{\textbf{Solution:} Find induced outerplane graph $G_1[S]$ with $|S|=|V(G_2)|$}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Free Sets}
+
+  $S\subseteq V(G)$ is a \emphh{free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{straight-line} non-crossing drawing with all vertices in $S$ mapped to points in $P$.\\[1em]
+
+  \uncover<2->{\textbf{Theorem (Bose-Dujmović-Da~Lozza-Hurtado-Langerman-Mchedlidze--M-Roselli-Rote-Wood 2009--2021):} Every $n$-vertex planar graph $G$ has a free set of size $\Omega(\sqrt{n})$.\\[1em]
+
+  \textbf{Theorem (Ravsky-Verbistky 2011):}  There exists $n$-vertex planar $G$ with no free set of size $\Omega(n^{0.98583})$.}
+
+  % \uncover<2->{$S$ is a free-set iff and only if $S$ is contained in a \emphh{proper good curve}}
+  \begin{center}
+    \uncover<3->{\includegraphics[page=2,scale=0.8]{figs/1-proper}}
+  \end{center}
+  % \uncover<2->{$S\subseteq V(G)$ is a \emphh{one-bend free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{one-bend} non-crossing drawing with all vertices in $S$ mapped to points in $P$.}
+\end{frame}
+
+\begin{frame}
+  \frametitle{One-Bend Free Sets}
+
+  $S\subseteq V(G)$ is a \emphh{one-bend free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{one-bend} non-crossing drawing with all vertices in $S$ mapped to points in $P$.\\[1em]
+  % $S\subseteq V(G)$ is a \emphh{free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{straight-line} non-crossing drawing with all vertices in $S$ mapped to points in $P$.\\[1em]
+
+  % \textbf{Theorem (Here):} Every $n$-vertex planar graph $G$ has a one-bend free set of size at least $11n/21$.\\[2em]
+
+  \textbf{Theorem (Goldner-Harary):}  There exists $n$-vertex planar $G$ with no free set of size greater than $10n/11$.
+
+  \uncover<2->{\textbf{Observation:} $S\subseteq V(G)$ is a one-bend free set iff $S$ is a free set in a $1$-subdvision of $G$}
+
+  \only<1-2>{\includegraphics[page=9]{figs/proper_good}}%
+  \only<3>{\includegraphics[page=7]{figs/proper_good}}%
+  \only<4->{\includegraphics[page=8]{figs/proper_good}}%
+\end{frame}
+
+
 \begin{frame}
   \frametitle{(Connected) Dominating Sets}
 
@@ -74,21 +123,38 @@
   \uncover<2->{\textbf{Corollary:} Every $n$-vertex triangulation has a spanning tree with at least $n/2$ leaves.\\[2em]}
 
   \uncover<3->{\textbf{Corollary:} Every $n$-vertex triangulation has a connected dominating set of size at least $n/2$.}
-
 \end{frame}
 
 \begin{frame}
-  \frametitle{Induced Outerplanar Graphs}
+  \frametitle{Induced Outerplane Graphs}
 
-  \textbf{Theorem (Angelini, Evans, Frati, and Gudmundsson 2016):}  Every $n$-vertex triangulation $G$ has an induced outerplane graph $G[Y]$ with at least $n/2$ vertices.
   \begin{center}
     \only<1>{\includegraphics[page=13]{figs/walkthrough}}%
     \only<2->{\includegraphics[page=14]{figs/walkthrough}}%
   \end{center}
 
-  \uncover<2->{Gives a bound of $n/2$ for the \emphh{SEFENOMAP} graph drawing problem.\\[1em]}
-  \uncover<3->{\textbf{Observation:} If $X$ is a connected dominating set then $G-X$ is an induced outerplace graph with $n-|X|$ vertices.}
+  \uncover<2->{\textbf{Observation:} If $X$ is a connected dominating set then $G-X$ is an induced outerplace graph with $n-|X|$ vertices.}\\[2em]
+
+  \uncover<3->{Better solution to SEFENOMAP if $|X|< n/2$}
 \end{frame}
+
+\begin{frame}
+  \frametitle{$2$-Proper Good Curves}
+
+  \begin{center}
+    \only<1>{\includegraphics[page=1]{figs/proper_good}}%
+    \only<2>{\includegraphics[page=2]{figs/proper_good}}%
+    \only<3>{\includegraphics[page=3]{figs/proper_good}}%
+    \only<4>{\includegraphics[page=4]{figs/proper_good}}%
+    \only<5>{\includegraphics[page=5]{figs/proper_good}}%
+    \only<6>{\includegraphics[page=6]{figs/proper_good}}%
+    % \only<7>{\includegraphics[page=7]{figs/proper_good}}%
+    % \only<8>{\includegraphics[page=8]{figs/proper_good}}%
+  \end{center}
+
+  \uncover<7->{\textbf{Observation:} If $X$ is a connected dominating set then $V(G)\setminus X$ is a one-bend free set.}
+\end{frame}
+
 
 \begin{frame}
   \frametitle{The Benchmark: $n/3$}
@@ -100,6 +166,15 @@
 
 
 \begin{frame}
+  \frametitle{Proper Good Curves}
+
+  Free sets correspond to vertices on a \emphh{proper good curves}:
+
+  One-bend free sets correspond to vertices on a \emphh{$2$-proper good curve}.
+
+\end{frame}
+
+\begin{frame}
   \frametitle{Main Result}
 
   \textbf{Theorem:}  Every $n$-vertex triangulation $G$ has a connected dominating set of size at most $10n/21=\overline{0.476190}n$.\\[2em]
@@ -108,11 +183,13 @@
 
   \textbf{Corollary:}  Every $n$-vertex triangulation $G$ has an induced outerplane graph $G[Y]$ with at least $11n/21=\overline{0.523809}n$ vertices.\\[2em]
 
-  Gives a bound of $11n/21$ for the SEFENOMAP problem.
+  \textbf{Corollary:}  A bound of $11n/21$ for SEFENOMAP.\\[2em]
+
+  \textbf{Corollary:}  Every $n$-vertex planar graph has a one-bend free set of size $11n/21$.
 \end{frame}
 
 \begin{frame}
-  \frametitle{Greedy Strategy}
+  \frametitle{NaïveGreedy Strategy}
 
   \begin{tabular}{p{.6\textwidth}c}
 
@@ -166,10 +243,10 @@
 \begin{frame}
   \frametitle{A First Attempt}
 
-  \textbf{Theorem:} $\textsc{NaïveGreedy}(G)$ produces a dominating set of size at most $4n/7$.
+  \textbf{Theorem:} $\textsc{NaïveGreedy}(G)$ produces a connected dominating set $X$ of size at most $4n/7$.\\[1em]
 
   \uncover<2->{
-  \textit{Proof:} Takes vertices of inner-degree at least $2$ until $G-X$ is $1$-critical.
+  \textit{Proof:} Takes vertices of inner-degree at least $2$ until $G-X$ is $1$-critical then takes $I:=V(G)-N[X]$ additional vertices.
   \begin{center}
     \includegraphics{figs/greedy} \includegraphics[page=6]{figs/walkthrough}
   \end{center}
@@ -180,333 +257,143 @@
   }
 \end{frame}
 
-
 \begin{frame}
-  \frametitle{Lesson}
-
-  To beat $n/2$, we need to choose vertices of inner-degree at least $3$
-\end{frame}
-
-\end{document}
-
-\begin{frame}
-  \frametitle{The Strong Graph Product $\boxtimes$}
-
-  \includegraphics[page=1]{figs/blowup}
-  % \only<2>{\includegraphics[page=2]{figs/blowup}}
-  % \only<3>{\includegraphics[page=3]{figs/blowup}}
-  % \includegraphics{figs/product-lhs} \raisebox{.11\textwidth}{$=$}
-  % \includegraphics{figs/product-rhs}%
-\end{frame}
-
-\begin{frame}
-  \frametitle{Motivation: Graph Product Structure Theory}
-
-  \only<1>{\includegraphics[page=1]{figs/procedure}}%
-  \only<2>{\includegraphics[page=2]{figs/procedure}}%
-  \only<3->{\includegraphics[page=3]{figs/procedure}}
-
-  To solve some problem on $G$:
-  \begin{itemize}
-    \item<2->Show $G\subseteq H\boxtimes K_c$ where $c$ and $\tw(H)$ are small
-    \item<3->Show $H$ has solution of ``cost'' at most $f(\tw(H))$
-    \item<3->Extend to solution of $H\boxtimes K_c$ of ``cost'' $f(\tw(H))\cdot c$
-  \end{itemize}
-  % \textbf{Theorem (Dujmović, Joret, Micek, M., Ueckerdt, Wood 2019):} For every planar graph $G$ there exists
-  % \begin{itemize}
-  %   \item a graph ${\color{red}H}$ of treewidth at most $3$; and
-  %   \item a path ${\color{blue}P}$; such that
-  % \end{itemize}
-  % $G$ is isomorphic to a subgraph of ${\color{red}H}\boxtimes {\color{blue}P\boxtimes K_3}$\newline ($G\subseteq {\color{red}H}\boxtimes {\color{blue}P\boxtimes K_3}$).\vspace{1em}
-  %
-  % \includegraphics[scale=.6]{figs/planar-subgraph}%
-  % \only<2>{\raisebox{.066\textwidth}{$\subseteq$}\includegraphics[scale=.6]{figs/product-rhs}}%
-  % \only<3>{\raisebox{.066\textwidth}{$\subseteq$}\includegraphics[scale=.6]{figs/product-lhs}}
-  %
-  % \uncover<4->{
-  %   Applications:
-  %   \begin{itemize}
-  %     \item For monotone $\rho$, $\rho(G)\le \rho({\color{red}H}\boxtimes {\color{blue}K_c})$
-  %     \item For many $\rho$, $\rho(H\boxtimes P)\le {\color{red}f(\tw(H))}\cdot {\color{blue}c}$
-  %   \end{itemize}
-  %
-  % }
-  % \note[item]{State theorems}
-  % \note[item]{Used to bound many graph parameters for planar graphs}
-  % \note[item]{Similar theorems hold for some other graph families}
-  % \note[item]{Usually parameter is bounded by a fast growing function of $\tw(H)$ and the $P\boxtimes K_3$ factor increases the bound by a constant factor.}
-  % \note[item]{In other applications, $\tw(H)$ appears as a factor in some function of $n$, for example, $tw(H)\log\log n$}
-  % \note[item]{In one application, $\tw(H)$ affects the asymptotic growth, for example $\log n/log^{(\tw(H))} n$}
-  % \note[item]{Example, non-repetitive chromatic number is at most $4^{\tw(H)}\cdot 12$}
-\end{frame}
-
-\begin{frame}
-  \frametitle{The Graph Minor Relation $\preceq$}
-
-  \begin{center}
-    \begin{tabular}{ccc}
-      \includegraphics[page=1]{figs/minors} & &
-      \includegraphics[page=2]{figs/minors} \\
-      $K_4$ & $\preceq$ & $G$
-    \end{tabular}
-  \end{center}
-  \only<2->{$G$ is \emph{$X$-minor-free} if $X \not\preceq G$}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{The Grid-Minor Theorem}
-
-  \uncover<1->{\textbf{Theorem (Robertson-Seymour 1986):}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $\tw(G)\le f(X)$.\vspace{1em}}
-
-  \uncover<3>{\textbf{Theorem (Robertson-Seymour 1986):}  Every $k$-vertex planar graph $X$ is a minor of the $2k\times 2k$ grid.
-
-  \textbf{Theorem (Chuzoy and Tan 2019):} Every graph of treewidth at least $ck^{9+\epsilon}$ contains a $2k\times 2k$ grid minor.\vspace{1em}}
-
-  \uncover<2->{\textbf{Corollary (RSCT):} For any planar graph $X$ every $X$-minor-free graph $G$ satisfies $\tw(G)\le c|V(X)|^{9+\epsilon}$.\vspace{1em}}
-
-  % \uncover<4->{Can we refine RS86 to get $G\subseteq H\boxtimes K_c$ where $\tw(H)$ depends on the ``complexity'' of $X$?}
-
-  \note[item]{Note that the treewidth of $G$ depends on the size of $X$}
-  \note[item]{Can it depend, instead, on the complexity of $X$?}
-  \note[item]{Not really, the $k\times k$ grid excludes an $\Omega(k)$ vertex star as a minor.}
-\end{frame}
-
-\begin{frame}
-  \frametitle{The Grid-Minor Theorem}
-
-  \textbf{Corollary (RSCT):} For any planar graph $X$ every $X$-minor-free graph $G$ satisfies $\tw(G)\le c|V(X)|^{9+\epsilon}$.\vspace{1.5em}
-
-  \uncover<2->{Q: Can we bound $\tw(G)$ by the ``complexity'' of $X$?\vspace{.5em}}
-
-  \uncover<3->{\raisebox{8ex}{A: No}\hspace{2em} \includegraphics{figs/star-vs-grid}}
-
-  \uncover<4->{Q:Can we refine RS86 to get $G\subseteq H\boxtimes K_c$ where $\tw(H)$ depends on the ``complexity'' of $X$ and only $c$ depends on $|V(X)|$?\vspace{.5em}}
-
-  % \uncover<5->{A: Maybe, since $\boxplus_{k\times k}\subseteq K_1\boxtimes K_{k^2}$}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Treedepth}
-  \framesubtitle{The right measure of complexity for $X$}
-
-  \centering{\includegraphics{figs/treedepth}}
-
-  \[  \td(X) = \min\{\operatorname{height}(T): \
-    \mbox{$T$ is a tree and $X\subseteq \operatorname{closure}(T)$} \} \]
+  \frametitle{Some Lies I've Told}
 
   \begin{itemize}
-    \item<2-> $\td(T) \le \operatorname{height}(T)$ for any tree $T$
-    \item<3-> $\td(K_c\oplus I_n) = c+1$
+    \item Actually a linear program that involves:
+    \begin{itemize}
+      \item $r$: number of rounds
+      \item $x_d$: number of times we choose a vertex of inner-degree $d$
+      \item $D$: Number of dominated vertices $\sum_{d\ge 2}d x_d$
+      \item $I$: Number of undominated vertices
+      \item $B$: Number of \emphh{boundary} vertices  (X---D---I)
+    \end{itemize}
+    \[
+       B \le D - r
+    \]
+    \[
+       D+I \le n
+    \]
+    \[
+      I \le B/3
+    \]
+    \[
+       |X| \le r + I
+    \]
   \end{itemize}
 \end{frame}
 
-
 \begin{frame}
-  \frametitle{Theorem 1}
+  \frametitle{Lessons}
 
-  \uncover<1-3>{\textbf{Theorem (Robertson-Seymour 1986):}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $\tw(G)\le f(X)$.\vspace{1em}}
-
-  \uncover<2->{\textbf{Corollary (RSCT):} For any planar graph $X$ every $X$-minor-free graph $G$ satisfies $\tw(G)\le c|V(X)|^{9+\epsilon}$.\vspace{1em}}
-
-  \uncover<3->{\textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Application: Weak Colouring Numbers}
-
-  \textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
-
+  \begin{itemize}[<+->]
+    \item Always taking inner-degree $\ge2$ leads to $|X|\le n/2$
+    \item We lose a bit in the final step ($1$-critical graph)
+    \item To beat $n/2$, we need to choose vertices of inner-degree $>2$\\[3em]
+  \end{itemize}
+  \uncover<4->{
   \begin{center}
-    \includegraphics{figs/rweak}
+    But...\\[1em]
+    \includegraphics{figs/ring}
   \end{center}
-
-  \textbf{Application 1:} For any planar graph $X$, any $r\ge 1$, and any $X$-minor-free graph $G$, the $r$-th weak colouring number of $G$ satisfies
-  \[  \wcol_r(G) \le r^{f(\td(X))}\cdot c(X) \enspace . \]
-\end{frame}
-
-\begin{frame}
-  \frametitle{Application: $p$-Centered Colouring}
-
-  \textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
-
-  \begin{center}
-    \includegraphics{figs/pcentered}
-  \end{center}
-
-  (Pilipczuk-Siebertz 2021)
-
-  \textbf{Application 2:} For any planar graph $X$, any $p\ge 1$, and any $X$-minor-free graph $G$, the $p$-centered chromatic number of $G$ is at most
-  \[  \chi_p(G) \le p^{f(\td(X))}\cdot c(X) \enspace . \]
-\end{frame}
-
-\begin{frame}
-  \frametitle{Application: Adjacency Labelling}
-
-  \textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
-
-  \begin{center}
-    \includegraphics[page=4,scale=.7]{figs/labelling-scheme}
-  \end{center}
-
-  (Gavoille et al.) \\
-  \textbf{Application 3:} For any planar graph $X$, any $p\ge 1$, and any $X$-minor-free $n$-vertex graph $G$, there exists an adjacency labelling scheme for $G$ in which labels have length at most
-  \[   \log n + f(\td(X))\log\log n + c(X) \enspace . \]
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Application: $\ell$-Vertex-Ranking}
-
-  \textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
-
-  \begin{center}
-    \includegraphics{figs/lvr}
-  \end{center}
-
-  (Bose, Dujmović, Javarsineh, M. 2020)
-  \textbf{Application 4:} For any planar graph $X$, any $\ell\ge 2$, and any $X$-minor-free $n$-vertex graph $G$, the $\ell$-vertex-ranking number of $G$ satisfies
-  \[  \chi_{\ell\mathrm{-vr}}(G) \le \frac{\log n}{\log^{(f(\td(X)))} n}\cdot c(\ell,X) \enspace . \]
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-  \frametitle{The General Result}
-
-  \textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
-
-  \textbf{Theorem 2:}  For any graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{ct}$ where $\tw(H)\le 2^{\td(X)+1}$, $c=c(X)$, and $t=\tw(G)$.\vspace{1em}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-  \frametitle{Proof Ideas}
-  \framesubtitle{$H$-Partitions}
-
-  \textbf{Theorem 2:}  For any graph $X$, every $X$-minor-free graph $G$ has an $H$-partition $(B_x:x\in V(H))$ where $\tw(H)\le 2^{\td(X)+1}$ and $|B_x|\le c(X)\cdot\tw(G)$ for each $x\in V(H)$.\vspace{1em}
-
-  \includegraphics[page=4]{figs/procedure}%
-
-  $vw\in E(G)$, $v\in B_x$, $w\in B_y$ $\Rightarrow$ $x=y$ or $xy\in E(H)$
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-  \frametitle{Proof Ideas}
-  \framesubtitle{Universal treewidth-$h$ graph}
-
-  Instead of $X$, assume $G$ is $U_{h,d}$-minor-free, where $h=\td(X)$ and $d=|V(X)|$.
-
-  \begin{center}
-    \only<1>{\includegraphics{figs/uhd.pdf}}%
-    \only<2->{\includegraphics[page=2]{figs/uhd.pdf}}%
-  \end{center}
-
-  \only<2->{Inductively, we even assume $(K_k\oplus U_{h,d})$-minor-free}
-  % \includegraphics[page=4]{figs/procedure}%
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-  \frametitle{Proof Ideas}
-  \framesubtitle{Rooted Minors}
-
-  Assume $G$ has no $R$-rooted $K_k\oplus U_{h,d}$ minor, use decomposition similar to Kawarabayashi (2004).
-
-  \begin{center}
-    \includegraphics[scale=0.6]{../figs/c-subgraph1.pdf}
-  \end{center}
-
-
-
-  % \includegraphics[page=4]{figs/procedure}%
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-  \frametitle{Proof Ideas}
-  \framesubtitle{Erd\H{o}s-Posa}
-
-  Hit all $R$-rooted copies of $K_{k+d}\oplus U_{h-1,d}$ in $C^0$ with a small set $X$
-  \begin{center}
-    \includegraphics[scale=0.6]{../figs/combining-minors4.pdf}
-  \end{center}
-
-  % \includegraphics[page=4]{figs/procedure}%
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-  \frametitle{Proof Ideas}
-  \framesubtitle{Divide and Conquer}
-
-  \begin{center}
-    \includegraphics[scale=.66]{../figs/final-clique-sums1.pdf}
-  \end{center}
-
-  $C_0-X$ is $K_{k+d}\oplus U_{h-1,d}$-minor free.
-
-  $C_1,\ldots,C_r$ are smaller and $K_{k}\oplus U_{h,d}$-minor-free.
-
-  % \includegraphics[page=4]{figs/procedure}%
-\end{frame}
-
-\begin{frame}
-  \frametitle{Weak Colouring Numbers}
-
-  \textbf{Application 1:} For any planar graph $X$, any $r\ge 1$, and any $X$-minor-free graph $G$, the $r$-th weak colouring number of $G$ satisfies
-  \[  \wcol_r(G) \le r^{f(\td(X))}\cdot c(X) \enspace . \]
-
-  \textbf{Theorem:} For any graph $X$, any $r\ge 1$, and any $X$-minor-free graph $G$, the $r$-th weak colouring number of $G$ satisfies
-  \[  \wcol_r(G) \le r^{f(\td(X))}\cdot c(X) \enspace . \]
-\end{frame}
-
-
-
-\begin{frame}
-  \frametitle{Extension to Apex-Minor-Free Graphs}
-
-  \textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
-
-  \textbf{Theorem 3:}  For any \emph{apex} graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes P\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Summary}
-
-
-  \textbf{Main Result:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c}$ where $\tw(H)\le 2^{\td(X)+1}$ and $c=c(X)$.\vspace{1em}
-
-  \uncover<2->{\textbf{Open Question:} Improve the dependence on $\td(X)$}\vspace{1em}
-
-  \uncover<3->{\textbf{Open Question:} For any graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{ct}$ where $\tw(H)\le f(\td(X))$, $c=c(X)$, and $t=\tw(G)$.\vspace{1em}
   }
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{The Next-Best Thing}
+
+  Take vertices of inner-degree $\ge 2.5$
 
   \begin{center}
-    \uncover<4->{\Huge Thank You!}
+    \only<+>{\includegraphics[page=1]{figs/ring}}%
+    \only<+>{\includegraphics[page=2]{figs/ring}}%
+    \only<+>{\includegraphics[page=3]{figs/ring}}%
+    \only<+>{\includegraphics[page=4]{figs/ring}}%
+    \only<+>{\includegraphics[page=5]{figs/ring}}%
+    \only<+>{\includegraphics[page=6]{figs/ring}}%
+    \only<+>{\includegraphics[page=7]{figs/ring}}%
+    \only<+>{\includegraphics[page=8]{figs/ring}}%
   \end{center}
 \end{frame}
 
-% \begin{frame}
-%   \frametitle{Main Theorem}
-%
-%   \textbf{Theorem 1:}  For any planar graph $X$, every $X$-minor-free graph $G$ satisfies $G\subseteq H\boxtimes K_{c\tw(X)}$ where $\tw(H)\le 2^{\td(X)+1}$.
-%
-%   \uncover<3->{\textbf{Theorem (Robertson-Seymour 1986):}  Every $k$-vertex planar graph $X$ is a minor of the $2k\times 2k$ grid.
-%
-%   \textbf{Theorem (Chuzoy and Tan 2019):} Every graph of treewidth at least $ck^9+\epsilon$ contains a $2k\times 2k$ grid minor.\vspace{1em}}
-%
-%   \uncover<2->{\textbf{Corollary (RSCT):} For any planar graph $X$ every $X$-minor-free graph $G$ satisfies $\tw(G)\le c|V(X)|^{9+\epsilon}$.}
-% \end{frame}
 
+\begin{frame}
+  \frametitle{Final Step: $2$-Critical Graphs}
 
+  \begin{center}
+    \only<+>{\includegraphics[page=1]{figs/2-critical}}%
+    \only<+>{\includegraphics[page=2]{figs/2-critical}}%
+    \only<+->{\includegraphics[page=3]{figs/2-critical}}%
+    % \only<+>{\includegraphics[page=4]{figs/2-critical}}%
+    % \only<+>{\includegraphics[page=5]{figs/2-critical}}%
+    % \only<+>{\includegraphics[page=6]{figs/2-critical}}%
+    % \only<+>{\includegraphics[page=7]{figs/2-critical}}%
+    % \only<+>{\includegraphics[page=8]{figs/2-critical}}%
+  \end{center}
+  \uncover<4->{
+    \[
+      \tfrac{2}{3}\operatorname{boundary}(G-N[X]) + \tfrac{1}{3}\operatorname{interior}(G-N[X]) =: \tfrac{2}{3}R + \tfrac{1}{3}S
+    \]
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Analysis}
+
+  \textbf{Theorem:} $\textsc{BestGreedy}(G)$ produces a connected dominating set of size at most $10n/21$.\\[1em]
+
+  \textit{Proof:} Takes vertices of inner-degree at least $2.5$ until $G-X$ is $2$-critical then takes $\tfrac{2}{3}R+\tfrac{1}{3}S$ additional vertices
+
+  % \begin{center}
+  %   \includegraphics{figs/greedy} \includegraphics[page=6]{figs/walkthrough}
+  % \end{center}
+  \begin{tabular}{p{.05\textwidth}c}
+  \[
+     |X| \le r + \tfrac{2}{3}R + \tfrac{1}{3}S
+  \]
+  \[
+     D \ge 2.5r
+  \]
+  \[
+    D + R + S = n
+  \]
+  \[
+    B \le D - r
+  \]
+  \[
+    R \le B
+  \]
+  \[
+    S \le \tfrac{1}{3}R
+  \]
+  & \raisebox{-\height}{\includegraphics{figs/dbrs}}
+  \end{tabular}
+  LP gives $|X|\le 10n/21$.
+  \uncover<2->{\hfill{$\Box$}}
+  % }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Conclusions}
+
+  \begin{itemize}[<+->]
+    \item Lower Bound is $n/3$ upper bound is $10n/21$.
+
+    \item Better way to get one-bend free sets?
+
+    \item SEFENOMAP where all edges of $G_1$ have small complexity?
+
+    \item Connected dominating sets in edge-maximal beyond-planar classes?
+    \begin{itemize}[<+->]
+      \item Start with edge-maximal $1$-planar
+    \end{itemize}
+  \end{itemize}
+
+  \begin{center}
+    \uncover<+->{\Huge Thank You!}
+  \end{center}
+\end{frame}
 
 \end{document}
