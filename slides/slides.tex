@@ -8,7 +8,9 @@
 
 \newcommand{\emphh}[1]{\textcolor{blue}{\emph{#1}}}
 \newcommand{\hilite}[1]{\emphh{#1}}
-\title{Connected Dominating Sets in Triangulations}
+\title{Connected Dominating Sets in \newline (Surface) Triangulations}
+
+\newcommand{\verteq}{\rotatebox{90}{$\equiv$}}
 
 \author{}
 \author{%
@@ -38,7 +40,17 @@
   % \end{center}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Outline}
 
+  \begin{itemize}
+    \item Two applications
+    \item Connections with other problems
+    \item Analysis of naïve greedy strategy
+    \item Analysis of best strategy (so far)
+    \item Directions for future work
+  \end{itemize}
+\end{frame}
 
 \begin{frame}
   \frametitle{SEFENOMAP}
@@ -49,9 +61,9 @@
     \includegraphics[page=1,scale=.8]{figs/sefenomap} & \includegraphics[page=2,scale=.8]{figs/sefenomap} \\
     $G_1$ & $G_2$
   \end{tabular}
-    \only<2->{\includegraphics[page=3,scale=.8]{figs/sefenomap}}
+    \uncover<2->{\includegraphics[page=3,scale=.8]{figs/sefenomap}}
   \end{center}
-  \only<4>{\textbf{Solution:} Find induced outerplane graph $G_1[S]$ with $|S|=|V(G_2)|$}
+  \uncover<4>{\textbf{Solution:} Find induced outerplane graph $G_1[S]$ with $|S|=|V(G_2)|$}
 \end{frame}
 
 \begin{frame}
@@ -59,13 +71,25 @@
 
   $S\subseteq V(G)$ is a \emphh{free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{straight-line} non-crossing drawing with all vertices in $S$ mapped to points in $P$.\\[1em]
 
-  \uncover<2->{\textbf{Theorem (Bose-Dujmović-Da~Lozza-Hurtado-Langerman-Mchedlidze--M-Roselli-Rote-Wood 2009--2021):} Every $n$-vertex planar graph $G$ has a free set of size $\Omega(\sqrt{n})$.\\[1em]
+  \includegraphics[page=1]{figs/universal}%
+  \only<2>{\includegraphics[page=2]{figs/universal}}%
+  \only<3>{\includegraphics[page=3]{figs/universal}}%
+  \only<4>{\includegraphics[page=4]{figs/universal}}%
+  \only<5>{\includegraphics[page=5]{figs/universal}}%
+  \only<6>{\includegraphics[page=6]{figs/universal}}%
+  \only<7->{\includegraphics[page=7]{figs/universal}}%
+
+
+  \uncover<8->{\textbf{Theorem (Bose-Dujmović-Da~Lozza-Hurtado-Langerman-Mchedlidze--M-Roselli-Rote-Wood 2009--2021):} Every $n$-vertex planar graph $G$ has a free set of size $\Omega(\sqrt{n})$.\\[1em]
 
   \textbf{Theorem (Ravsky-Verbistky 2011):}  There exists $n$-vertex planar $G$ with no free set of size $\Omega(n^{0.98583})$.}
+\end{frame}
 
+\begin{frame}
+  \frametitle{Free Sets, Collinear Sets, and Proper Good Curves}
   % \uncover<2->{$S$ is a free-set iff and only if $S$ is contained in a \emphh{proper good curve}}
   \begin{center}
-    \uncover<3->{\includegraphics[page=2,scale=0.8]{figs/1-proper}}
+    \includegraphics[page=2,scale=0.8]{figs/1-proper}
   \end{center}
   % \uncover<2->{$S\subseteq V(G)$ is a \emphh{one-bend free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{one-bend} non-crossing drawing with all vertices in $S$ mapped to points in $P$.}
 \end{frame}
@@ -78,7 +102,7 @@
 
   % \textbf{Theorem (Here):} Every $n$-vertex planar graph $G$ has a one-bend free set of size at least $11n/21$.\\[2em]
 
-  \textbf{Theorem (Goldner-Harary):}  There exists $n$-vertex planar $G$ with no free set of size greater than $10n/11$.
+  \textbf{Theorem (Goldner-Harary):}  There exists $n$-vertex planar $G$ with no free set of size greater than $10n/11$.\\[1em]
 
   \uncover<2->{\textbf{Observation:} $S\subseteq V(G)$ is a one-bend free set iff $S$ is a free set in a $1$-subdvision of $G$}
 
@@ -147,7 +171,7 @@
     \only<3>{\includegraphics[page=3]{figs/proper_good}}%
     \only<4>{\includegraphics[page=4]{figs/proper_good}}%
     \only<5>{\includegraphics[page=5]{figs/proper_good}}%
-    \only<6>{\includegraphics[page=6]{figs/proper_good}}%
+    \only<6->{\includegraphics[page=6]{figs/proper_good}}%
     % \only<7>{\includegraphics[page=7]{figs/proper_good}}%
     % \only<8>{\includegraphics[page=8]{figs/proper_good}}%
   \end{center}
@@ -165,27 +189,27 @@
 \end{frame}
 
 
-\begin{frame}
-  \frametitle{Proper Good Curves}
-
-  Free sets correspond to vertices on a \emphh{proper good curves}:
-
-  One-bend free sets correspond to vertices on a \emphh{$2$-proper good curve}.
-
-\end{frame}
+% \begin{frame}
+%   \frametitle{Proper Good Curves}
+%
+%   Free sets correspond to vertices on a \emphh{proper good curves}:
+%
+%   One-bend free sets correspond to vertices on a \emphh{$2$-proper good curve}.
+%
+% \end{frame}
 
 \begin{frame}
   \frametitle{Main Result}
 
-  \textbf{Theorem:}  Every $n$-vertex triangulation $G$ has a connected dominating set of size at most $10n/21=\overline{0.476190}n$.\\[2em]
+  \uncover<+->{\textbf{Theorem:}  Every $n$-vertex triangulation $G$ has a connected dominating set of size at most $10n/21=\overline{0.476190}n$.}\\[2em]
 
-  \textbf{Corollary:}  Every $n$-vertex triangulation $G$ has a spanning tree with at least $11n/21=\overline{0.523809}n$ leaves.\\[2em]
+  \uncover<+->{\textbf{Corollary:}  Every $n$-vertex triangulation $G$ has a spanning tree with at least $11n/21=\overline{0.523809}n$ leaves.}\\[2em]
 
-  \textbf{Corollary:}  Every $n$-vertex triangulation $G$ has an induced outerplane graph $G[Y]$ with at least $11n/21=\overline{0.523809}n$ vertices.\\[2em]
+  \uncover<+->{\textbf{Corollary:}  Every $n$-vertex triangulation $G$ has an induced outerplane graph $G[Y]$ with at least $11n/21=\overline{0.523809}n$ vertices.}\\[2em]
 
-  \textbf{Corollary:}  A bound of $11n/21$ for SEFENOMAP.\\[2em]
+  \uncover<+->{\textbf{Corollary:}  A bound of $11n/21$ for SEFENOMAP.}\\[2em]
 
-  \textbf{Corollary:}  Every $n$-vertex planar graph has a one-bend free set of size $11n/21$.
+  \uncover<+->{\textbf{Corollary:}  Every $n$-vertex planar graph has a one-bend free set of size $11n/21$.}
 \end{frame}
 
 \begin{frame}
@@ -267,7 +291,7 @@
       \item $x_d$: number of times we choose a vertex of inner-degree $d$
       \item $D$: Number of dominated vertices $\sum_{d\ge 2}d x_d$
       \item $I$: Number of undominated vertices
-      \item $B$: Number of \emphh{boundary} vertices  (X---D---I)
+      \item $B$: Number of \emphh{boundary} vertices  (X---B---I)
     \end{itemize}
     \[
        B \le D - r
@@ -376,24 +400,75 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Conclusions}
+  \frametitle{Surface Triangulations}
 
-  \begin{itemize}[<+->]
-    \item Lower Bound is $n/3$ upper bound is $10n/21$.
-
-    \item Better way to get one-bend free sets?
-
-    \item SEFENOMAP where all edges of $G_1$ have small complexity?
-
-    \item Connected dominating sets in edge-maximal beyond-planar classes?
-    \begin{itemize}[<+->]
-      \item Start with edge-maximal $1$-planar
-    \end{itemize}
-  \end{itemize}
+  \textbf{Theorem:} For any $g<n$ every $n$-vertex genus-$g$ surface triangulation has a connected dominating set of size at most $10n/21 + O(\sqrt{gn})$.
 
   \begin{center}
-    \uncover<+->{\Huge Thank You!}
+    \only<1>{\includegraphics[page=1]{figs/slicing}}%
+    \only<2>{\includegraphics[page=2]{figs/slicing}}%
+    \only<3>{\includegraphics[page=3]{figs/slicing}}%
   \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Summary}
+
+    \begin{center}
+      mininum connected dominating set ${}\le 10n/21$ \\ \verteq \\
+      maximum-leaf spanning tree ${}\ge 11n/21$ \\ \verteq \\
+      maximimum induced outerplane graph ${}\ge 11n/21$ \\
+    \end{center}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Open problem: Tight bounds}
+
+  For triangulations: Lower Bound is $n/3$ upper bound is $10n/21$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Open Problem: New approaches}
+
+  Different strategy for SEFENOMAP or one-bend free sets?
+
+  \begin{center}
+    \includegraphics[page=13]{figs/walkthrough} \\
+    \includegraphics[page=8,scale=0.8]{figs/proper_good}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Open Problem: One-Bend SEFENOMAP}
+
+  SEFENOMAP where all edges of $G_1$ have small complexity?
+
+  \begin{center}
+    \begin{tabular}{cc}
+    \includegraphics[page=1,scale=.8]{figs/sefenomap} & \includegraphics[page=2,scale=.8]{figs/sefenomap} \\
+    $G_1$ & $G_2$
+  \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Open Problem: CDS in edge-maximal beyond-planar classes}
+
+    Connected dominating sets in edge-maximal beyond-planar classes? \\[2em]
+
+    For edge-maximal $1$-planar, lower bound is also $n/3$
+    \begin{center}
+      \includegraphics[page=1]{figs/nover3}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}
+
+  \resizebox{\textwidth}{!}{Thank You!}
+
 \end{frame}
 
 \end{document}
