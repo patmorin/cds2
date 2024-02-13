@@ -409,8 +409,8 @@ Let $H$ and $H'$ be two generalized near-triangulations.  We say that $H'$ \defi
     \item \cref{bad_vertex}: If there exists a vertex $v\in B(C)$ with $\deg^+_C(v)=0$ then $v$ is incident to an edge $vw$ that is on the outer face of $C$ and on the outer face of $H$. Since $\deg^+_C(v)=0$, $vw$ is not incident to any inner face $vwx$ with $x\in I(C)$ and we can proceed as in the previous case.
 
     \item \cref{inner_degree_1}: If there exists a vertex $v\in B(C)$ with $\deg^+_C(v)=1$ then $H$ contains faces $xvw$ and $vyw$ where $w$ is an inner vertex.  If Case~1 does not apply to either of the two edges on the outer face of $C$ incident to $v$ then $x$ and $y$ are on the outer face of $C$. If $H[N_C[v]]$ is not isomorphic to $K_4$, then $xy\not\in E(H)$.  In this case, let $H^\star$ be the graph obtained from $H$ by removing the edge $vw$ and replacing the edges $xv$ and $vy$ with the edge $xy$. Then $H^\star$ is a generalized near-triangulation, $B(H^*)=B(H)$, $I(H^*)=I(H)$, and $N_{H^*}(v)\cap I(H)\subseteq N_{H}(v)\cap I(H)$.  Therefore $H^\star$ dom-respects $H$ and has fewer edges than $H$. \qedhere
-    
-    \hussein{do we mean 
+
+    \hussein{do we mean
     $B(H^*) \subseteq B(H)$.} \pat{I think $B(H^\star)=B(H)$, no?}
   \end{compactenum}
 \end{proof}
@@ -594,20 +594,23 @@ We now show that, even when all vertices in $B(H)$ have inner-degree at most $2$
   We may assume that $H$ is connected, otherwise we can apply the lemma to one of the components of $H$ that contains a vertex $w\in I(H)$ with $\deg_{H-B(H)}(w)=0$.
   Let $W:=\{w\in V(H-B(H)):\deg_{H-B(H)}(w)=0\}$ and, for each $w\in W$, let $F_w$ denote the face in $H[B(H)]$ that contains $w$ in its interior.  Since $H$ is a generalized near triangulation and $N_H(w)\subseteq B(H)$, it follows that $V(F_w)=N_H(w)$.  Observe that there exists some $w\in W$ and some edge $uv\in E(F_w)$ such that all the vertices in $W$ are contained in a single component of $H-\{u,v\}$. \pat{Does this need more justification?} \hussein{I understand it, but i did not see when we used it, or why it is important.} \pat{It's used in Case~(iii) to argue that $\deg^+_H(x)=2$}
   There are three cases to consider:
-  % \begin{figure}[htpb]
-  %   \centering \pat{Make a figure for this.}
-  %   \begin{tabular}{cc}
-  %     % \includegraphics[page=1]{figs/isolated} &
-  %     % \includegraphics[page=3]{figs/isolated} \\
-  %     % $\Downarrow$ & $\Downarrow$ \\
-  %     % \includegraphics[page=2]{figs/isolated} &
-  %     % \includegraphics[page=4]{figs/isolated}
-  %   \end{tabular}
-  %   \caption{Eliminating isolated vertices in $H-B(H)$.}
-  %   \label{isolated_fig}
-  % \end{figure}
+  \begin{figure}[htpb]
+    \centering
+    \begin{tabular}{cc@{\hspace{4em}}c}
+      \multicolumn{2}{c}{(i)} & (ii) \\
+      \includegraphics[page=1]{figs/degree_zero_killer} &
+      \includegraphics[page=3]{figs/degree_zero_killer} &
+      \includegraphics[page=5]{figs/degree_zero_killer} \\
+      $\Downarrow$ & $\Downarrow$ & $\Downarrow$ \\
+      \includegraphics[page=2]{figs/degree_zero_killer} &
+      \includegraphics[page=4]{figs/degree_zero_killer} &
+      \includegraphics[page=6]{figs/degree_zero_killer}
+    \end{tabular}
+    \caption{Eliminating isolated vertices in $H-B(H)$.}
+    \label{isolated_fig}
+  \end{figure}
   \begin{compactenum}[(i)]
-    \item $\deg^+_H(z)=1$ for some $z\in N_H(w)$.  We will show that one of \cref{kill_pair} or \cref{kill_k4} applies.  By \cref{inner_degree_1}, $H[N_H[z]]$ is isomorphic to $K_4$.  Let $x$ and $y$ be the two vertices, other than $z$ on the outer face of $H[N_H[z]]$.  If $x$ has $\deg^+_H(x)=2$ then we consider a dom-minimal graph $H'$ that dom-respects $H-x$.  Since $\deg^+_{H-x}(z)=0$ and $\deg^+_{H-x}(w)=0$, neither $z$ nor $w$ are in $H'$, by \cref{bad_vertex}.  Therefore, $|H'|\le |H-\{x,z,w\}|=|H|-3$.  By \cref{boundary_subset}, $B(H')\subseteq N^+_H(x)\cup B(H-\{x,z,w\})$, so $|B(H')|\le |B(H)|+2-3=|B(H)|-1$.  Therefore \cref{kill_pair} applies (with $v=x$).  The same argument applies if $\deg^+_H(y)=2$.  Otherwise, $N^+_H(z)=N^+_H(x)=N^+_H(y)=\{w\}$ and $H$ is isomorphic to $K_4$.  In this case, we take $v=z$ and the only dom-minimal graph $H'$ that dom-respects $H-v$ is the graph with no vertices or edges.  Therefore, \cref{kill_k4} applies.\qedhere
+    \item $\deg^+_H(z)=1$ for some $z\in N_H(w)$.  We will show that one of \cref{kill_pair} or \cref{kill_k4} applies.  By \cref{inner_degree_1}, $H[N_H[z]]$ is isomorphic to $K_4$.  Let $x$ and $y$ be the two vertices, other than $z$ on the outer face of $H[N_H[z]]$.  If $x$ has $\deg^+_H(x)=2$ then we consider a dom-minimal graph $H'$ that dom-respects $H-x$.  Since $\deg^+_{H-x}(z)=0$ and $\deg^+_{H-x}(w)=0$, neither $z$ nor $w$ are in $H'$, by \cref{bad_vertex}.  Therefore, $|H'|\le |H-\{x,z,w\}|=|H|-3$.  By \cref{boundary_subset}, $B(H')\subseteq N^+_H(x)\cup B(H-\{x,z,w\})$, so $|B(H')|\le |B(H)|+2-3=|B(H)|-1$.  Therefore \cref{kill_pair} applies (with $v=x$).  The same argument applies if $\deg^+_H(y)=2$.  Otherwise, $N^+_H(z)=N^+_H(x)=N^+_H(y)=\{w\}$ and $H$ is isomorphic to $K_4$.  In this case, we take $v=z$ and the only dom-minimal graph $H'$ that dom-respects $H-v$ is the graph with no vertices or edges.  Therefore, \cref{kill_k4} applies.
 
     \item $\deg^+_H(z)=2$ for each $z\in N_H(w)$ and $N^+_H(x)\supseteq N^+_H(y)$ for some edge $xy\in E(F_w)$.  In this case, let $H'$ be a dom-minimal graph that dom-respects $H-x$. Since $\deg^+_{H-x}(y)=\deg^+_{H-x}(w)=0$, \cref{bad_vertex} implies that neither $y$ nor $w$ is a vertex of $H'$.  Therefore $|H'|\le |H-\{x,y,w\}|=|H|-3$.  Since $B(H-\{x,y,w\})\subseteq B(H)\cup N^+_{H}(x)\setminus \{x,y,w\}$, \cref{boundary_subset} implies that $|B(H')|\le |B(H)|+2-3=|B(H)|-1$. Therefore \cref{kill_pair} applies.
 
@@ -621,9 +624,9 @@ We now show that, even when all vertices in $B(H)$ have inner-degree at most $2$
 
     Let $w''$ be the unique vertex in $N^+_H(x)\setminus\{w'\}$.  Observe that $w''\neq w$ since $w$ is contained in the interior of $F_w$ and $x\not\in V(F_w)$.  Let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Notice that $w''$ is an inner vertex of $H-v$, so $w''$ is an inner vertex of $H'$, by \cref{same_inner_vertices}.  There are now two cases to consider:
     \begin{compactenum}
-      \item If $x\in V(H')$ then $\deg^+_{H'}(x)=1$ so, by \cref{inner_degree_1} $H'[N_H'[x]]$ is isomorphic to $K_4$.  
-      
-      % By \cref{boundary_subset}, $N_{H'-B(H')}(w'')\subseteq N_{H-B(H)}(w'')\setminus\{w'\}$ so $|N_{H'-B(H')}(w'')|\ge|N_{H-B(H)}(w'')|-1$.  
+      \item If $x\in V(H')$ then $\deg^+_{H'}(x)=1$ so, by \cref{inner_degree_1} $H'[N_H'[x]]$ is isomorphic to $K_4$.
+
+      % By \cref{boundary_subset}, $N_{H'-B(H')}(w'')\subseteq N_{H-B(H)}(w'')\setminus\{w'\}$ so $|N_{H'-B(H')}(w'')|\ge|N_{H-B(H)}(w'')|-1$.
       By our choice of $w$ and $uv$, $|N_{H-B(H)}(w'')|\ge 1$.  By the assumptions of the lemma, $|N_{H-B(H)}(w'')|\ge 2$.  By \cref{same_inner_vertices} $I(H')=I(H-v)=I(H)\setminus\{v,w,w'\}$. Therefore, $|N_{H'-B(H')}(w'')|\ge 1$.
 
       Let $q$ be a vertex in $N_{H'}(x)\setminus\{w',w''\}$, so the cycle $x,w',q$ contains at least two vertices ($w''$ and some vertex of $N_{H'-B(H')}(w'')$) in its interior. Since $\deg^+_{H'}(x)=1$, \cref{useful_little_guy} implies that $\deg^+_{H'}(q)\ge 2$.  Since $w'q$ is an edge of $H$ and $w'\in B(H')$, this implies that $\deg^+_H(q)\ge 3$, contradicting the assumptions of the lemma.
