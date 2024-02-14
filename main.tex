@@ -575,61 +575,71 @@ Next we show that, even when all vertices in $B(H)$ have inner-degree at most $2
 We now show that, even when all vertices in $B(H)$ have inner-degree at most $2$, $H-B(H)$ is critical, and $H-B(H)$ has no degree-$1$ vertices, we can still efficiently dominate degree-$0$ vertices in $H-B(H)$.
 
 \begin{lem}\label{degree_zero_killer}
-  Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$, $H-B(H)$ is critical, and $H-B(H)$ contains a vertex $w$ with $\deg_{H-B(H)}(w)=0$ but does not contain any vertex $w'$ with $\deg_{H-B(H)}(w')=1$.  Then at least one of the following is true:
-  \begin{compactenum}[(a)]
-    \item there exists $v\in B(H)$ and a graph $H'$ that dom-respects $H-v$ such that $|H'|\le |H|-3$ and $|B(H')|\le |B(H)|-1$; or \label[p]{kill_pair}
-    \item there exists $v\in B(H)$ and a graph $H'$ that dom-respects $H-v$ such that $|H'|\le |H|-4$ and $|B(H')|\le |B(H)|-3$. \label[p]{kill_k4}
-    % \item \pat{Unnecessary} there exists $u,v\in B(H)$ and a graph $H'$ that dom-respects $H-\{u,v\}$ such that $|H'|\le |H|-6$ and $|B(H')|\le |B(H)|-1$. \label[p]{kill_double}
+  Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$, $H-B(H)$ is critical, and $H-B(H)$ contains a vertex $w$ with $\deg_{H-B(H)}(w)=0$ but does not contain any vertex $w'$ with $\deg_{H-B(H)}(w')=1$.  Then
+    there exists $v\in B(H)$ and a graph $H'$ that dom-respects $H-v$ such that $|H'|\le |H|-3$ and $|B(H')|\le |B(H)|-1$
+    % ; or \label[p]{kill_pair}
+    % \item there exists $v\in B(H)$ and a graph $H'$ that dom-respects $H-v$ such that $|H'|\le |H|-4$ and $|B(H')|\le |B(H)|-3$. \label[p]{kill_k4}
+    % % \item \pat{Unnecessary} there exists $u,v\in B(H)$ and a graph $H'$ that dom-respects $H-\{u,v\}$ such that $|H'|\le |H|-6$ and $|B(H')|\le |B(H)|-1$. \label[p]{kill_double}
   \end{compactenum}
 \end{lem}
 
-\hussein{I was thinking if this can be part of the 2-critical graph.}
-
-\hussein{does part a include part b?}
-
-\pat{Yes, (b) implies (a). Let me reread to see why there's a case disinction.}
+% \hussein{I was thinking if this can be part of the 2-critical graph.}
+%
+% \hussein{does part a include part b?}
+%
+% \pat{Yes, (b) implies (a). Let me reread to see why there's a case disinction.}
 
 % \pat{There is an issue with this lemma/proof. I'm working on it now.}
 \begin{proof}
   We may assume that $H$ is connected, otherwise we can apply the lemma to one of the components of $H$ that contains a vertex $w\in I(H)$ with $\deg_{H-B(H)}(w)=0$.
-  Let $W:=\{w\in V(H-B(H)):\deg_{H-B(H)}(w)=0\}$ and, for each $w\in W$, let $F_w$ denote the face in $H[B(H)]$ that contains $w$ in its interior.  Since $H$ is a generalized near triangulation and $N_H(w)\subseteq B(H)$, it follows that $V(F_w)=N_H(w)$.  Observe that there exists some $w\in W$ and some edge $uv\in E(F_w)$ such that all the vertices in $W$ are contained in a single component of $H-\{u,v\}$. \pat{Does this need more justification?} \hussein{I understand it, but i did not see when we used it, or why it is important.} \pat{It's used in Case~(iii) to argue that $\deg^+_H(x)=2$}
+  Let $W:=\{w\in V(H-B(H)):\deg_{H-B(H)}(w)=0\}$ and, for each $w\in W$, let $F_w$ denote the face in $H[B(H)]$ that contains $w$ in its interior.  Since $H$ is a generalized near triangulation and $N_H(w)\subseteq B(H)$, it follows that $V(F_w)=N_H(w)$.  Observe that there exists some $w\in W$ and some edge $uv\in E(F_w)$ such that all the vertices in $W$ are contained in a single component of $H-\{u,v\}$. This choice of $w$ and $uv$ will be important in Case~(iii), below.
+  % \pat{Does this need more justification?} \hussein{I understand it, but i did not see when we used it, or why it is important.} \pat{It's used in Case~(iii) to argue that $\deg^+_H(x)=2$}
   There are three cases to consider:
   \begin{figure}[htpb]
     \centering
-    \begin{tabular}{cc@{\hspace{4em}}c}
-      \multicolumn{2}{c}{(i)} & (ii) \\
+    \begin{tabular}{c@{\hspace{-4em}}c@{\hspace{-2em}}cc}
+      \multicolumn{2}{c}{(i)} & (ii) & (iii)\\
       \includegraphics[page=1]{figs/degree_zero_killer} &
       \includegraphics[page=3]{figs/degree_zero_killer} &
-      \includegraphics[page=5]{figs/degree_zero_killer} \\
+      \includegraphics[page=5]{figs/degree_zero_killer} &
+      \includegraphics[page=7]{figs/degree_zero_killer} \\
       $\Downarrow$ & $\Downarrow$ & $\Downarrow$ \\
       \includegraphics[page=2]{figs/degree_zero_killer} &
       \includegraphics[page=4]{figs/degree_zero_killer} &
-      \includegraphics[page=6]{figs/degree_zero_killer}
+      \includegraphics[page=6]{figs/degree_zero_killer} &
+      \includegraphics[page=8]{figs/degree_zero_killer} \\
+      $H-x$ & $H-z$ & $H-x$ & $H-v$
     \end{tabular}
     \caption{Eliminating isolated vertices in $H-B(H)$.}
     \label{isolated_fig}
   \end{figure}
   \begin{enumerate}[(i)]
-    \item $\deg^+_H(z)=1$ for some $z\in N_H(w)$.  We will show that one of \cref{kill_pair} or \cref{kill_k4} applies.  By \cref{inner_degree_1}, $H[N_H[z]]$ is isomorphic to $K_4$.  Let $x$ and $y$ be the two vertices, other than $z$ on the outer face of $H[N_H[z]]$.  If $x$ has $\deg^+_H(x)=2$ then we consider a dom-minimal graph $H'$ that dom-respects $H-x$.  Since $\deg^+_{H-x}(z)=0$ and $\deg^+_{H-x}(w)=0$, neither $z$ nor $w$ are in $H'$, by \cref{bad_vertex}.  Therefore, $|H'|\le |H-\{x,z,w\}|=|H|-3$.  By \cref{boundary_subset}, $B(H')\subseteq N^+_H(x)\cup B(H-\{x,z,w\})$, so $|B(H')|\le |B(H)|+2-3=|B(H)|-1$.  Therefore \cref{kill_pair} applies (with $v=x$).  The same argument applies if $\deg^+_H(y)=2$.  Otherwise, $N^+_H(z)=N^+_H(x)=N^+_H(y)=\{w\}$ and $H$ is isomorphic to $K_4$.  In this case, we take $v=z$ and the only dom-minimal graph $H'$ that dom-respects $H-v$ is the graph with no vertices or edges.  Therefore, \cref{kill_k4} applies.
+    \item $\deg^+_H(z)=1$ for some $z\in N_H(w)$. By \cref{inner_degree_1}, $H[N_H[z]]$ is isomorphic to $K_4$.  Let $x$ and $y$ be the two vertices, other than $z$ on the outer face of $H[N_H[z]]$.  If $x$ has $\deg^+_H(x)=2$ then we consider a dom-minimal graph $H'$ that dom-respects $H-x$.  Since $\deg^+_{H-x}(z)=0$ and $\deg^+_{H-x}(w)=0$, neither $z$ nor $w$ are in $H'$, by \cref{bad_vertex}.  Therefore, $|H'|\le |H-\{x,z,w\}|=|H|-3$.  By \cref{boundary_subset}, $B(H')\subseteq N^+_H(x)\cup B(H-\{x,z,w\})$, so $|B(H')|\le |B(H)|+2-3=|B(H)|-1$, which satisfies the conditions of the lemma (with $v=x$).  The same argument applies if $\deg^+_H(y)=2$.  Otherwise, $N^+_H(z)=N^+_H(x)=N^+_H(y)=\{w\}$ and $H$ is isomorphic to $K_4$.  In this case, we take $v=z$ and the only dom-minimal graph $H'$ that dom-respects $H-v$ is the graph with no vertices or edges.  Therefore $|H'|=|H|-4\le |H|-3$ and $|B(H')|=|B(H)|-3\le |B(H)|-1$.
 
-    \item $\deg^+_H(z)=2$ for each $z\in N_H(w)$ and $N^+_H(x)\supseteq N^+_H(y)$ for some edge $xy\in E(F_w)$.  In this case, let $H'$ be a dom-minimal graph that dom-respects $H-x$. Since $\deg^+_{H-x}(y)=\deg^+_{H-x}(w)=0$, \cref{bad_vertex} implies that neither $y$ nor $w$ is a vertex of $H'$.  Therefore $|H'|\le |H-\{x,y,w\}|=|H|-3$.  Since $B(H-\{x,y,w\})\subseteq B(H)\cup N^+_{H}(x)\setminus \{x,y,w\}$, \cref{boundary_subset} implies that $|B(H')|\le |B(H)|+2-3=|B(H)|-1$. Therefore \cref{kill_pair} applies.
+    \item $\deg^+_H(z)=2$ for each $z\in N_H(w)$ and $N^+_H(x)\supseteq N^+_H(y)$ for some edge $xy\in E(F_w)$.  In this case, let $H'$ be a dom-minimal graph that dom-respects $H-x$. Since $\deg^+_{H-x}(y)=\deg^+_{H-x}(w)=0$, \cref{bad_vertex} implies that neither $y$ nor $w$ is a vertex of $H'$.  Therefore $|H'|\le |H-\{x,y,w\}|=|H|-3$.  Since $B(H-\{x,y,w\})\subseteq B(H)\cup N^+_{H}(x)\setminus \{x,y,w\}$, \cref{boundary_subset} implies that $|B(H')|\le |B(H)|+2-3=|B(H)|-1$.
+% \hussein{I think you mean $vw'x$ and $vw'y$?!} \hussein{or did you mean $x, y$ instead $u, v$ this $u,v$ are different from what it is mentioned in the introduction.} \pat{The latter. This is the special edge $uv$ that has no vertices of $W$ on one side of it.}
+    \item $\deg^+_H(z)=2$ for each $z\in N_H(w)$ and $N^+_H(u)\neq N^+_H(v)$.  Let $w'$ be the unique vertex in $N^+_H(v)\setminus\{w\}$.  Let $vw'x$ and $vw'y$ be the two inner faces of $H$ that share the edge $vw'$.  Since $N^+_H(v)=\{w,w'\}$, both $x$ and $y$ are in $B(H)$.  Furthermore, neither $x$ nor $y$ are in $V(F_w)$ since this would imply that $N^+_H(v)= N^+_H(x)=\{w,w'\}$ or that $N^+_H(v)= N^+_H(y)=\{w,w'\}$, and the preceding case would apply.
 
-\hussein{I think you mean $vw'x$ and $vw'y$?!} \hussein{or did you mean $x, y$ instead $u, v$ this $u,v$ are different from what it is mentioned in the introduction.} \pat{The latter. This is the special edge $uv$ that has no vertices of $W$ on one side of it.}
-    \item $\deg^+_H(z)=2$ for each $z\in N_H(w)$ and $N^+_H(u)\neq N^+_H(v)$. \pat{TODO: Add a figure here} Let $w'$ be the unique vertex in $N^+_H(v)\setminus\{w\}$.  Let $vw'x$ and $vw'y$ be the two inner faces of $H$ that share the edge $vw'$.  Since $N^+_H(v)=\{w,w'\}$, both $x$ and $y$ are in $B(H)$.  Furthermore, neither $x$ nor $y$ are in $V(F_w)$ since this would imply that $N^+_H(v)= N^+_H(x)=\{w,w'\}$ or that $N^+_H(v)= N^+_H(y)=\{w,w'\}$, and the preceding case would apply.
-
-    We claim that $\deg^+_H(x)=2$.  Suppose, for the sake of contradiction that $\deg^+_H(x)=1$.  Then, by \cref{inner_degree_1}, $H[N_H[x]]$ is isomorphic to $K_4$ and $w'$ is an inner vertex of $H[N_H[x]]$.  Since $w$ and $w'$ are in different components of $H-\{u,v\}$, our choice of $w$ and $uv$ implies that $\deg_{H-B(H)}(w')\ge 1$ so one of the inner faces of $H[N_H[x]]$ contains a vertex of $H$ other than $w'$.  But then \cref{useful_little_guy} implies that $\deg^+_H(x)>1$ or that $\deg^+_H(v)>2$, a contradiction.  The same argument shows that $\deg^+_H(y)=2$.
+    We claim that $\deg^+_H(x)=2$.  Suppose, for the sake of contradiction that $\deg^+_H(x)=1$.  Then, by \cref{inner_degree_1}, $H[N_H[x]]$ is isomorphic to $K_4$ and $w'$ is an inner vertex of $H[N_H[x]]$.  Since $w$ and $w'$ are in different components of $H-\{u,v\}$, our choice of $w$ and $uv$ implies that $\deg_{H-B(H)}(w')\ge 1$ so one of the inner faces of $H[N_H[x]]$ contains a vertex of $H$ other than $w'$.  But then \cref{useful_little_guy} implies that $\deg^+_H(x)>1$ or that $\deg^+_H(v)>2$, a contradiction.
 
     % We claim that $N^+_H(v)$ and $N^+_H(z)$ are disjoint.
     % By assumption $N^+_H(u)\cap N^+H(v)=\{w\}$, so $w'\not\in N^+_H(u)$.  \pat{Finish this thought.}
 
-    Let $w''$ be the unique vertex in $N^+_H(x)\setminus\{w'\}$.  Observe that $w''\neq w$ since $w$ is contained in the interior of $F_w$ and $x\not\in V(F_w)$. Let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Notice that $w''$ is an inner vertex of $H-v$, so $w''$ is an inner vertex of $H'$, by \cref{same_inner_vertices}.  
+    Let $w''$ be the unique vertex in $N^+_H(x)\setminus\{w'\}$.  Observe that $w''\neq w$ since $w$ is contained in the interior of $F_w$ and $x\not\in V(F_w)$. Let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Notice that $w''$ is an inner vertex of $H-v$, so $w''$ is an inner vertex of $H'$, by \cref{same_inner_vertices}.
 
-    We will now prove that $x\not\in V(H')$.  Suppose, for the sake of contradiction, that $x\in V(H')$.  Then $\deg^+_{H'}(x)=1$ so, by \cref{inner_degree_1} $H'[N_H'[x]]$ is isomorphic to $K_4$ and $w''$ is the inner vertex of this $K_4$.  Let $x'$ be a vertex of $N_{H'}(x)\setminus\{w',w''\}$.  Then $x'$ is on the outer face of $H'$ so, by \cref{same_inner_vertices}, $x'$ is on the outer face of $H$.  Let $y'$ be the unique vertex in $N_{H'}(x)\setminus\{x',w''\}$. (Possibly, $y'=w'$, which occurs if and only if $w'\in V(H')$.)  
+    We will now prove that $x\not\in V(H')$. See \cref{no_x}  Suppose, for the sake of contradiction, that $x\in V(H')$.  Then $\deg^+_{H'}(x)=1$ so, by \cref{inner_degree_1} $H'[N_H'[x]]$ is isomorphic to $K_4$ and $w''$ is the inner vertex of this $K_4$.  Let $x'$ be a vertex of $N_{H'}(x)\setminus\{w',w''\}$.  Then $x'$ is on the outer face of $H'$ so, by \cref{same_inner_vertices}, $x'$ is on the outer face of $H$.  Let $y'$ be the unique vertex in $N_{H'}(x)\setminus\{x',w''\}$. (Possibly, $y'=w'$, which occurs if and only if $w'\in V(H')$.)
+
+    \begin{figure}
+      \centering
+      \includegraphics{figs/no-x}
+      \caption{Proof that $x\not\in V(H')$}
+      \label{no_x}
+    \end{figure}
       % Note that $y'$ may be equal to $w'$.
-      
+
     By our choice of $w$ and $uv$, $|N_{H-B(H)}(w'')|\ge 1$.  The statement of the lemma assumes that $|N_{H-B(H)}(w'')|\neq 1$, so $|N_{H-B(H)}(w'')|\ge 2$.  By \cref{same_inner_vertices} $I(H')=I(H-v)=I(H)\setminus\{v,w,w'\}$. Therefore, $N_{H'-B(H')}(w'')=N_{H-B(H)}(w'')\setminus \{w'\}$, so $|N_{H'-B(H')}(w'')|\ge 1$.  Therefore, one of the inner faces of $H'[N_H'[x]]$ contains a neighbour $q$ of $w''$.  Since $N^+_H(x)=\{w',w''\}$, \cref{useful_little_guy} implies that $q$ is contained in the interior of $x'y'w''$. Then \cref{useful_little_guy} implies that $N_{H'}(x')$ contains a vertex $p$ in the interior of $x'y'w''$. (Possibly $p=q$).  If $y'=w'$, then $N^+_H(x')=N^+_{H'}(x')\supseteq\{w',w'',p\}$, which contradicts the assumption that $\deg^+H(x)\le 2$.  If $y'\neq w'$ then $y'$ is on the outer face of $H$.  Since, $N_{H-B(H)}(q)$ contains $w''$ and $|N_{H-B(H)}(q)|\neq 1$, some neighbour $q'$ of $q$ is also in the interior of $x'y'w''$.  Then \cref{useful_little_guy} implies that at least one of $x'$ or $y'$ has at least two neighbour in the interior $x'y'w''$.  Since each of $x'$ and $y'$ is adjacent to $w''$, this implies that $\deg^+H(x')\ge 3$ or $\deg^+_H(y')\ge 3$, a contradiction.  Therefore $x\not\in V(H')$.
 
-    Since $x\not\in V(H')$, $V(H')\subseteq V(H)\setminus\{v,w,x\}$, and $B(H')\subseteq B(H)\cup N_H(v)\setminus\{v,w,x\}$ so $|V(H')|\le |V(H)|-3$ and $|B(H')|\le|B(H)|+2-3=|B(H)|-1$, so \cref{kill_pair} applies. \qedhere
+    Since $x\not\in V(H')$, $V(H')\subseteq V(H)\setminus\{v,w,x\}$, and $B(H')\subseteq B(H)\cup N_H(v)\setminus\{v,w,x\}$ so $|V(H')|\le |V(H)|-3$ and $|B(H')|\le|B(H)|+2-3=|B(H)|-1$.\qedhere
     %
     %
     %
@@ -684,13 +694,14 @@ A generalized near-triangulation $H$ is \defin{$2$-critical} if
   Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X\subseteq V(H)$ of size at most $(2|B(H-B(H))| + I(H-B(H)))/3$ that dominates $I(H)$ and such that each component of $H[X]$ contains at least one vertex in $B(H)$.
 \end{lem}
 
-\hussein{Here, I think this isomorphism is caused by being critical not necessarily dom-minimal.}
+\hussein{Here, I think this isomorphism is caused by being critical not necessarily dom-minimal.} \pat{No, this graph is $2$-critical, but has a vertex of inner degree 1.\\ \includegraphics{figs/2-critical-not-degree-2}}
+
 \begin{lem}
   Let $H$ be a dom-minimal $2$-critical generalized near-triangulation.  Then $\deg^+_H(v)=2$ for all $v\in B(H)$.
 \end{lem}
 
 \begin{proof}
-  Consider some $v\in B(H)$. By \cref{bad_vertex}, $\deg^+_H(v)\ge 1$. Assume for the sake of contradiction that $\deg_H(v)=1$ \hussein{do we mean $deg_H^+(v)$}. By \cref{inner_degree_1}, $H[N_H[v]]$ is isomorphic to $K_4$. Let $x$ and $y$ be the neighbours of $v$ on the outer face of $H$ and let $w$ be the inner neighbour of $v$. Since $\deg^+_H(v)=1$ then the cycle $vxwy$ has no vertices of $H$ in its interior.  Since $H$ is $2$-critical, $\deg_{H-B(H)}(w)\ge 2$, which implies that $w$ has at least two neighbours in the interior of the cycle $ywx$.  By \cref{useful_little_guy}, at least one of $x$ or $y$, say $x$, has at least two neighbours in the interior of $ywx$.  \Cref{useful_little_guy} implies that $\deg^+_H(x)\ge 3$, which contradicts the fact that $H$ is $2$-critical.
+  Consider some $v\in B(H)$. By \cref{bad_vertex}, $\deg^+_H(v)\ge 1$. Assume for the sake of contradiction that $\deg^+_H(v)=1$. By \cref{inner_degree_1}, $H[N_H[v]]$ is isomorphic to $K_4$. Let $x$ and $y$ be the neighbours of $v$ on the outer face of $H$ and let $w$ be the inner neighbour of $v$. Since $\deg^+_H(v)=1$ then the cycle $vxwy$ has no vertices of $H$ in its interior.  Since $H$ is $2$-critical, $\deg_{H-B(H)}(w)\ge 2$, which implies that $w$ has at least two neighbours in the interior of the cycle $ywx$.  By \cref{useful_little_guy}, at least one of $x$ or $y$, say $x$, has at least two neighbours in the interior of $ywx$.  \Cref{useful_little_guy} implies that $\deg^+_H(x)\ge 3$, which contradicts the fact that $H$ is $2$-critical.
 \end{proof}
 
 
