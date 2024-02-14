@@ -596,24 +596,37 @@ We now show that, even when all vertices in $B(H)$ have inner-degree at most $2$
   There are three cases to consider (see \cref{isolated_fig}):
   \begin{figure}[htpb]
     \centering
-    \begin{tabular}{c@{\hspace{-4em}}c@{\hspace{-2em}}cc}
-      \multicolumn{2}{c}{(i)} & (ii) & (iii)\\
+    \begin{tabular}{ccc}
+      (i) & (ii) & (iii)\\
+      % \includegraphics[page=1]{figs/degree_zero_killer} &
       \includegraphics[page=1]{figs/degree_zero_killer} &
-      \includegraphics[page=3]{figs/degree_zero_killer} &
-      \includegraphics[page=5]{figs/degree_zero_killer} &
-      \includegraphics[page=7]{figs/degree_zero_killer} \\
-      $\Downarrow$ & $\Downarrow$ & $\Downarrow$ \\
-      \includegraphics[page=2]{figs/degree_zero_killer} &
       \includegraphics[page=4]{figs/degree_zero_killer} &
-      \includegraphics[page=6]{figs/degree_zero_killer} &
+      \includegraphics[page=7]{figs/degree_zero_killer} \\
+      $H$ & $H$ & $H$ \\
+      $\Downarrow$ & $\Downarrow$ & $\Downarrow$ \\
+      % \includegraphics[page=2]{figs/degree_zero_killer} &
+      \includegraphics[page=2]{figs/degree_zero_killer} &
+      \includegraphics[page=5]{figs/degree_zero_killer} &
       \includegraphics[page=8]{figs/degree_zero_killer} \\
-      $H-x$ & $H-z$ & $H-x$ & $H-v$
+      $H-x$ & $H-x$ & $H-v$ \\
+      $\Downarrow$ & $\Downarrow$ & $\Downarrow$ \\
+      \includegraphics[page=3]{figs/degree_zero_killer} &
+      \includegraphics[page=6]{figs/degree_zero_killer} &
+      \includegraphics[page=9]{figs/degree_zero_killer} \\
+      $H'$ & $H'$ & $H'$
     \end{tabular}
     \caption{Eliminating isolated vertices in $H-B(H)$.}
     \label{isolated_fig}
   \end{figure}
   \begin{enumerate}[(i)]
-    \item $\deg^+_H(z)=1$ for some $z\in N_H(w)$. By \cref{inner_degree_1}, $H[N_H[z]]$ is isomorphic to $K_4$.  Let $x$ and $y$ be the two vertices, other than $z$ on the outer face of $H[N_H[z]]$.  If $x$ has $\deg^+_H(x)=2$ then we consider a dom-minimal graph $H'$ that dom-respects $H-x$.  Since $\deg^+_{H-x}(z)=0$ and $\deg^+_{H-x}(w)=0$, neither $z$ nor $w$ are in $H'$, by \cref{bad_vertex}.  Therefore, $|H'|\le |H-\{x,z,w\}|=|H|-3$.  By \cref{boundary_subset}, $B(H')\subseteq N^+_H(x)\cup B(H-\{x,z,w\})$, so $|B(H')|\le |B(H)|+2-3=|B(H)|-1$, which satisfies the conditions of the lemma (with $v=x$).  The same argument applies if $\deg^+_H(y)=2$.  Otherwise, $N^+_H(z)=N^+_H(x)=N^+_H(y)=\{w\}$ and $H$ is isomorphic to $K_4$.  In this case, we take $v=z$ and the only dom-minimal graph $H'$ that dom-respects $H-v$ is the graph with no vertices or edges.  Therefore $|H'|=|H|-4\le |H|-3$ and $|B(H')|=|B(H)|-3\le |B(H)|-1$.
+    \item $\deg^+_H(z)=1$ for some $z\in N_H(w)$. By \cref{inner_degree_1}, $H[N_H[z]]$ is isomorphic to $K_4$.  Let $x$ and $y$ be the two vertices, other than $z$ on the outer face of $H[N_H[z]]$.  Since $\deg_{H-B(H)}(w)=0$, \cref{useful_little_guy} implies that $w$ is the only vertex of $H$ in the interior of the cycle $xyz$. Let $H'$ be a dom-minimal graph that dom-respects $H-x$.  Since $\deg^+_{H-x}(w)=\deg^+_{H-x}(z)=0$, neither $x$ or $w$ are vertices of $H'$. Therefore, $|H'|\le |H-\{x,z,w\}|=|H|-3$.  By \cref{boundary_subset}, $B(H')\subseteq N^+_H(x)\cup B(H-\{x,z,w\})$, so $|B(H')|\le |B(H)|+2-3=|B(H)|-1$, which satisfies the conditions of the lemma (with $v=x$).
+
+
+    % If $x$ has $\deg^+_H(x)=2$ then we consider a dom-minimal graph $H'$ that dom-respects $H-x$.  Since $\deg^+_{H-x}(z)=0$ and $\deg^+_{H-x}(w)=0$, neither $z$ nor $w$ are in $H'$, by \cref{bad_vertex}.  Therefore, $|H'|\le |H-\{x,z,w\}|=|H|-3$.  By \cref{boundary_subset}, $B(H')\subseteq N^+_H(x)\cup B(H-\{x,z,w\})$, so $|B(H')|\le |B(H)|+2-3=|B(H)|-1$, which satisfies the conditions of the lemma (with $v=x$).  The same argument applies if $\deg^+_H(y)=2$.  Otherwise, $N^+_H(z)=N^+_H(x)=N^+_H(y)=\{w\}$ and $H$ is isomorphic to $K_4$.
+
+    %
+    %
+    % In this case, we take $v=z$ and the only dom-minimal graph $H'$ that dom-respects $H-v$ is the graph with no vertices or edges.  Therefore $|H'|=|H|-4\le |H|-3$ and $|B(H')|=|B(H)|-3\le |B(H)|-1$.
 
     \item $\deg^+_H(z)=2$ for each $z\in N_H(w)$ and $N^+_H(x)\supseteq N^+_H(y)$ for some edge $xy\in E(F_w)$.  In this case, let $H'$ be a dom-minimal graph that dom-respects $H-x$. Since $\deg^+_{H-x}(y)=\deg^+_{H-x}(w)=0$, \cref{bad_vertex} implies that neither $y$ nor $w$ is a vertex of $H'$.  Therefore $|H'|\le |H-\{x,y,w\}|=|H|-3$.  Since $B(H-\{x,y,w\})\subseteq B(H)\cup N^+_{H}(x)\setminus \{x,y,w\}$, \cref{boundary_subset} implies that $|B(H')|\le |B(H)|+2-3=|B(H)|-1$.
 % \hussein{I think you mean $vw'x$ and $vw'y$?!} \hussein{or did you mean $x, y$ instead $u, v$ this $u,v$ are different from what it is mentioned in the introduction.} \pat{The latter. This is the special edge $uv$ that has no vertices of $W$ on one side of it.}
