@@ -632,29 +632,35 @@ We now show that, even when all vertices in $B(H)$ have inner-degree at most $2$
 % \hussein{I think you mean $vw'x$ and $vw'y$?!} \hussein{or did you mean $x, y$ instead $u, v$ this $u,v$ are different from what it is mentioned in the introduction.} \pat{The latter. This is the special edge $uv$ that has no vertices of $W$ on one side of it.}
     \item $\deg^+_H(z)=2$ for each $z\in N_H(w)$ and $N^+_H(u)\neq N^+_H(v)$.  Let $w'$ be the unique vertex in $N^+_H(v)\setminus\{w\}$.  Let $vw'x$ and $vw'y$ be the two inner faces of $H$ that share the edge $vw'$.  Since $N^+_H(v)=\{w,w'\}$, both $x$ and $y$ are in $B(H)$.  Furthermore, neither $x$ nor $y$ are in $V(F_w)$ since this would imply that $N^+_H(v)= N^+_H(x)=\{w,w'\}$ or that $N^+_H(v)= N^+_H(y)=\{w,w'\}$, and the preceding case would apply.
 
+    If $\deg_{H-B(H)}(w')=0$ then let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Then $V(H')\subseteq V(H)\setminus\{w,v,w'\}$, so $|H'|\le |H|-3$ and $B(H')\subseteq B(H)\setminus\{v\}$ so $|B(H')|\le |B(H)|-1$, which satisfies the requirements of the lemma.
 
-    \pat{Simplify the rest with this:  If $\deg_{H-B(H)}(w')=0$ then let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Then $V(H')\subseteq V(H)\setminus\{w,v,w'\}$\ldots  Otherwise, $N_{H-B(H)}(w')$ contains a vertex $w''$ adjacent to $x$ which forms an inner face $xw''x'$ with $x'\in B(H)$. Note that $x'\neq y$, since this would imply that $\deg_{H-B(H)}(w')=\deg_{H-B(H)}(w'')=1$, which is ruled out by the statement of the lemma.  In this case, consider the graph $H_0$ obtained from $H-v$ by removing $x$ and adding the edge $x'w'$.  Then $H_0$ dom-respects $H-v$ and we let $H'$ be a dom-minimal subgraph that dom-respects $H_0$.}
+    If $\deg_{H-B(H)}(w')>0$, then consider the inner face $xw'x'$ with $x'\neq v$.  The fact that $\deg_{H-B(H)}(w')>0$ implies that $x'\neq y$,  If $x'\in B(H)$ then $N^+_H(x)=\{w'\}$ and we consider a dom-minimal graph $H'$ that dom-respects $H-v$.  Then $V(H')\subseteq V(H)\setminus\{w,v,x\}$, so $|H'|\le |H|-3$ and $B(H')\subseteq B(H)\setminus\{v,x\}\cup\{w'\}$ so $|B(H')|\le |B(H)|-1$, which satisfies the requirements of the lemma.
 
-    We claim that $\deg^+_H(x)=2$.  Suppose, for the sake of contradiction that $\deg^+_H(x)=1$.  Then, by \cref{inner_degree_1}, $H[N_H[x]]$ is isomorphic to $K_4$ and $w'$ is an inner vertex of $H[N_H[x]]$.  Since $w$ and $w'$ are in different components of $H-\{u,v\}$, our choice of $w$ and $uv$ implies that $\deg_{H-B(H)}(w')\ge 1$ so one of the inner faces of $H[N_H[x]]$ contains a vertex of $H$ other than $w'$.  But then \cref{useful_little_guy} implies that $\deg^+_H(x)>1$ or that $\deg^+_H(v)>2$, a contradiction.
+    If $x'\not\in B(H)$ then $N^+_H(x)\supseteq\{w',x'\}$ and, since $\deg^+_{H}(x)\le 2$, there exists an inner face $xx'x''$ with $x''\in B(H)$.  In this case, let $H_0$ be the graph obtained from $H-v$ by removing $x$ and adding the edge $x''w'$.  Note that $H_0$ dom-respects $H-v$.  Now let $H'$ be a dom-minimal graph that dom-respects $H_0$ (and therefore also dom-respects $H-v$). Then $V(H')\subseteq V(H)\setminus\{w,v,x\}$, so $|H'|\le |H|-3$ and $B(H')\subseteq B(H)\setminus\{v,x\}\cup\{w'\}$ so $|B(H')|\le |B(H)|-1$, which satisfies the requirements of the lemma. \qedhere
+    %
+    %
+    % $N_{H-B(H)}(w')$ contains a vertex $w''$ adjacent to $x$ which forms an inner face $xw''x'$ with $x'\in B(H)$. Note that $x'\neq y$, since this would imply that $\deg_{H-B(H)}(w')=\deg_{H-B(H)}(w'')=1$, which is ruled out by the statement of the lemma.  In this case, consider the graph $H_0$ obtained from $H-v$ by removing $x$ and adding the edge $x'w'$.  Then $H_0$ dom-respects $H-v$ and we let $H'$ be a dom-minimal subgraph that dom-respects $H_0$.
+    %
+    % We claim that $\deg^+_H(x)=2$.  Suppose, for the sake of contradiction that $\deg^+_H(x)=1$.  Then, by \cref{inner_degree_1}, $H[N_H[x]]$ is isomorphic to $K_4$ and $w'$ is an inner vertex of $H[N_H[x]]$.  Since $w$ and $w'$ are in different components of $H-\{u,v\}$, our choice of $w$ and $uv$ implies that $\deg_{H-B(H)}(w')\ge 1$ so one of the inner faces of $H[N_H[x]]$ contains a vertex of $H$ other than $w'$.  But then \cref{useful_little_guy} implies that $\deg^+_H(x)>1$ or that $\deg^+_H(v)>2$, a contradiction.
 
     % We claim that $N^+_H(v)$ and $N^+_H(z)$ are disjoint.
     % By assumption $N^+_H(u)\cap N^+H(v)=\{w\}$, so $w'\not\in N^+_H(u)$.  \pat{Finish this thought.}
 
-    Let $w''$ be the unique vertex in $N^+_H(x)\setminus\{w'\}$.  Observe that $w''\neq w$ since $w$ is contained in the interior of $F_w$ and $x\not\in V(F_w)$. Let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Notice that $w''$ is an inner vertex of $H-v$, so $w''$ is an inner vertex of $H'$, by \cref{same_inner_vertices}.
-
-    We will now prove that $x\not\in V(H')$. See \cref{no_x}  Suppose, for the sake of contradiction, that $x\in V(H')$.  Then $\deg^+_{H'}(x)=1$ so, by \cref{inner_degree_1} $H'[N_H'[x]]$ is isomorphic to $K_4$ and $w''$ is the inner vertex of this $K_4$.  Let $x'$ be a vertex of $N_{H'}(x)\setminus\{w',w''\}$.  Then $x'$ is on the outer face of $H'$ so, by \cref{same_inner_vertices}, $x'$ is on the outer face of $H$.  Let $y'$ be the unique vertex in $N_{H'}(x)\setminus\{x',w''\}$. (Possibly, $y'=w'$, which occurs if and only if $w'\in V(H')$.)
-
-    \begin{figure}
-      \centering
-      \includegraphics{figs/no-x}
-      \caption{Proof that $x\not\in V(H')$}
-      \label{no_x}
-    \end{figure}
-      % Note that $y'$ may be equal to $w'$.
-
-    By our choice of $w$ and $uv$, $|N_{H-B(H)}(w'')|\ge 1$.  The statement of the lemma assumes that $|N_{H-B(H)}(w'')|\neq 1$, so $|N_{H-B(H)}(w'')|\ge 2$.  By \cref{same_inner_vertices} $I(H')=I(H-v)=I(H)\setminus\{v,w,w'\}$. Therefore, $N_{H'-B(H')}(w'')=N_{H-B(H)}(w'')\setminus \{w'\}$, so $|N_{H'-B(H')}(w'')|\ge 1$.  Therefore, one of the inner faces of $H'[N_H'[x]]$ contains a neighbour $q$ of $w''$.  Since $N^+_H(x)=\{w',w''\}$, \cref{useful_little_guy} implies that $q$ is contained in the interior of $x'y'w''$. Then \cref{useful_little_guy} implies that $N_{H'}(x')$ contains a vertex $p$ in the interior of $x'y'w''$. (Possibly $p=q$).  If $y'=w'$, then $N^+_H(x')=N^+_{H'}(x')\supseteq\{w',w'',p\}$, which contradicts the assumption that $\deg^+H(x)\le 2$.  If $y'\neq w'$ then $y'$ is on the outer face of $H$.  Since, $N_{H-B(H)}(q)$ contains $w''$ and $|N_{H-B(H)}(q)|\neq 1$, some neighbour $q'$ of $q$ is also in the interior of $x'y'w''$.  Then \cref{useful_little_guy} implies that at least one of $x'$ or $y'$ has at least two neighbour in the interior $x'y'w''$.  Since each of $x'$ and $y'$ is adjacent to $w''$, this implies that $\deg^+H(x')\ge 3$ or $\deg^+_H(y')\ge 3$, a contradiction.  Therefore $x\not\in V(H')$.
-
-    Since $x\not\in V(H')$, $V(H')\subseteq V(H)\setminus\{v,w,x\}$, and $B(H')\subseteq B(H)\cup N_H(v)\setminus\{v,w,x\}$ so $|V(H')|\le |V(H)|-3$ and $|B(H')|\le|B(H)|+2-3=|B(H)|-1$.\qedhere
+    % Let $w''$ be the unique vertex in $N^+_H(x)\setminus\{w'\}$.  Observe that $w''\neq w$ since $w$ is contained in the interior of $F_w$ and $x\not\in V(F_w)$. Let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Notice that $w''$ is an inner vertex of $H-v$, so $w''$ is an inner vertex of $H'$, by \cref{same_inner_vertices}.
+    %
+    % We will now prove that $x\not\in V(H')$. See \cref{no_x}  Suppose, for the sake of contradiction, that $x\in V(H')$.  Then $\deg^+_{H'}(x)=1$ so, by \cref{inner_degree_1} $H'[N_H'[x]]$ is isomorphic to $K_4$ and $w''$ is the inner vertex of this $K_4$.  Let $x'$ be a vertex of $N_{H'}(x)\setminus\{w',w''\}$.  Then $x'$ is on the outer face of $H'$ so, by \cref{same_inner_vertices}, $x'$ is on the outer face of $H$.  Let $y'$ be the unique vertex in $N_{H'}(x)\setminus\{x',w''\}$. (Possibly, $y'=w'$, which occurs if and only if $w'\in V(H')$.)
+    %
+    % \begin{figure}
+    %   \centering
+    %   \includegraphics{figs/no-x}
+    %   \caption{Proof that $x\not\in V(H')$}
+    %   \label{no_x}
+    % \end{figure}
+    %   % Note that $y'$ may be equal to $w'$.
+    %
+    % By our choice of $w$ and $uv$, $|N_{H-B(H)}(w'')|\ge 1$.  The statement of the lemma assumes that $|N_{H-B(H)}(w'')|\neq 1$, so $|N_{H-B(H)}(w'')|\ge 2$.  By \cref{same_inner_vertices} $I(H')=I(H-v)=I(H)\setminus\{v,w,w'\}$. Therefore, $N_{H'-B(H')}(w'')=N_{H-B(H)}(w'')\setminus \{w'\}$, so $|N_{H'-B(H')}(w'')|\ge 1$.  Therefore, one of the inner faces of $H'[N_H'[x]]$ contains a neighbour $q$ of $w''$.  Since $N^+_H(x)=\{w',w''\}$, \cref{useful_little_guy} implies that $q$ is contained in the interior of $x'y'w''$. Then \cref{useful_little_guy} implies that $N_{H'}(x')$ contains a vertex $p$ in the interior of $x'y'w''$. (Possibly $p=q$).  If $y'=w'$, then $N^+_H(x')=N^+_{H'}(x')\supseteq\{w',w'',p\}$, which contradicts the assumption that $\deg^+H(x)\le 2$.  If $y'\neq w'$ then $y'$ is on the outer face of $H$.  Since, $N_{H-B(H)}(q)$ contains $w''$ and $|N_{H-B(H)}(q)|\neq 1$, some neighbour $q'$ of $q$ is also in the interior of $x'y'w''$.  Then \cref{useful_little_guy} implies that at least one of $x'$ or $y'$ has at least two neighbour in the interior $x'y'w''$.  Since each of $x'$ and $y'$ is adjacent to $w''$, this implies that $\deg^+H(x')\ge 3$ or $\deg^+_H(y')\ge 3$, a contradiction.  Therefore $x\not\in V(H')$.
+    %
+    % Since $x\not\in V(H')$, $V(H')\subseteq V(H)\setminus\{v,w,x\}$, and $B(H')\subseteq B(H)\cup N_H(v)\setminus\{v,w,x\}$ so $|V(H')|\le |V(H)|-3$ and $|B(H')|\le|B(H)|+2-3=|B(H)|-1$.\qedhere
     %
     %
     %
@@ -962,27 +968,27 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
     \paragraph{Identifying $\Delta_i$:}
     To identify the set $\Delta_i$ use $\beta$ to find the vertex $v_i\in B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  If $\deg^+_{G_i}(v_i)\ge 3$ then \cref{bg_high_degree} applies and there is nothing more to do.   Otherwise, we use $\zeta$ to identify the vertex $w\in B(G_i-B(G_i))$ that maximizes $\deg_{G_i-B(G_i)}(w)$.  If $\deg_{G_i-B(G_i)}(w)\ge 2$, then this vertex can be used as the vertex $w$ in \cref{bg_two_three}.  In this case, the vertices $u$ and $v$ can be found in $N_{G_i}(w)$ in $O(\deg_G(v))$ time.  If $\deg_{G_i-B(G_i)}(w)=1$ then \cref{bg_leaf} applies and the vertex $v_i\in N_{G_i}(w)$ can be found in $O(\deg_G(w))$ time (this is the vertex $v_1$ in \cref{killing_a_leaf}).  If $\deg_{G_i-B(G_i)}(w)=0$ then \cref{bg_degree_zero} applies \pat{The proof of \cref{degree_zero_killer} requires choosing a specific vertex $w$, we'll need to address this.}
 
-    In each of these cases, we remove a vertex $v_i$ from $G_i$ and then find a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-v_i$.  Removing $v_i$ from $G_i$ is easy.  If $G_i-v_i$ is not already dom-minimal, then any violation of dom-minimality involves a vertex in $N_{G_i}(v_i)$.  Indeed, any violation of dom-minimality occurs because some vertex $x$ in $I(G_i)$ is in $B(G_i-v_i)$.  This causes the inner-degree of some vertex $v\in B(G_i)$ to drop below $2$ or causes some edge $vw$ on the outer face to no longer bound a triangle $vwx$ with $x$ being an inner vertex. $x$ of some triangular face $vwx$  
-    
-    
-    This allows us to find the vertex $v_i\in B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$ in constant time.  
-    
-    
+    In each of these cases, we remove a vertex $v_i$ from $G_i$ and then find a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-v_i$.  Removing $v_i$ from $G_i$ is easy.  If $G_i-v_i$ is not already dom-minimal, then any violation of dom-minimality involves a vertex in $N_{G_i}(v_i)$.  Indeed, any violation of dom-minimality occurs because some vertex $x$ in $I(G_i)$ is in $B(G_i-v_i)$.  This causes the inner-degree of some vertex $v\in B(G_i)$ to drop below $2$ or causes some edge $vw$ on the outer face to no longer bound a triangle $vwx$ with $x$ being an inner vertex. $x$ of some triangular face $vwx$
+
+
+    This allows us to find the vertex $v_i\in B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$ in constant time.
+
+
     If $\deg^+_{G_i}(v_i)\ge 3$ then we remove it. Removing $v_i$ causes some counters of vertices in $N_{G_i}(v_i)$ to decrease and causes some vertices in $N_{G_i}(v_i)$ to appear in $B(G_i-v_i)$ for the first time.  Since all of these counters decrease monotonically and a new vertex that appears on $B(G_i-v_i)$ remains there until its indegree becomes zero, the total time spent managing these counters is $O(n)$.
 
 
-    
 
-    
-    
+
+
+
     \begin{compactenum}
         \item Data structure that stores vertices in $B(G_i)$ ordered by inner-degree lets us find vertices of degree at least $3$ in constant time.
-        
+
         \item Data structure that stores $B(G_i-B(G_i))$ ordered by inner-degree in $G_i-B(G_i)$ lets us find the vertex $w$ in \cref{2_3_figure} in constant time.
 
         \item The preceding structure also signals us when \cref{leaf_killer} and \cref{degree_zero_killer} are applicable.
 
-        \item Algorithms for implementing \cref{leaf_killer} (trivial) and \cref{degree_zero_killer} (trickier, because of special choice of $w$ and $uv$).  
+        \item Algorithms for implementing \cref{leaf_killer} (trivial) and \cref{degree_zero_killer} (trickier, because of special choice of $w$ and $uv$).
 
         \item All of these need algorithms for dom-minimal reductions.
     \end{compactenum}
