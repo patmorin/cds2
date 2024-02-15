@@ -632,6 +632,9 @@ We now show that, even when all vertices in $B(H)$ have inner-degree at most $2$
 % \hussein{I think you mean $vw'x$ and $vw'y$?!} \hussein{or did you mean $x, y$ instead $u, v$ this $u,v$ are different from what it is mentioned in the introduction.} \pat{The latter. This is the special edge $uv$ that has no vertices of $W$ on one side of it.}
     \item $\deg^+_H(z)=2$ for each $z\in N_H(w)$ and $N^+_H(u)\neq N^+_H(v)$.  Let $w'$ be the unique vertex in $N^+_H(v)\setminus\{w\}$.  Let $vw'x$ and $vw'y$ be the two inner faces of $H$ that share the edge $vw'$.  Since $N^+_H(v)=\{w,w'\}$, both $x$ and $y$ are in $B(H)$.  Furthermore, neither $x$ nor $y$ are in $V(F_w)$ since this would imply that $N^+_H(v)= N^+_H(x)=\{w,w'\}$ or that $N^+_H(v)= N^+_H(y)=\{w,w'\}$, and the preceding case would apply.
 
+
+    \pat{Simplify the rest with this:  If $\deg_{H-B(H)}(w')=0$ then let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Then $V(H')\subseteq V(H)\setminus\{w,v,w'\}$\ldots  Otherwise, $N_{H-B(H)}(w')$ contains a vertex $w''$ adjacent to $x$ which forms an inner face $xw''x'$ with $x'\in B(H)$. Note that $x'\neq y$, since this would imply that $\deg_{H-B(H)}(w')=\deg_{H-B(H)}(w'')=1$, which is ruled out by the statement of the lemma.  In this case, consider the graph $H_0$ obtained from $H-v$ by removing $x$ and adding the edge $x'w'$.  Then $H_0$ dom-respects $H-v$ and we let $H'$ be a dom-minimal subgraph that dom-respects $H_0$.}
+
     We claim that $\deg^+_H(x)=2$.  Suppose, for the sake of contradiction that $\deg^+_H(x)=1$.  Then, by \cref{inner_degree_1}, $H[N_H[x]]$ is isomorphic to $K_4$ and $w'$ is an inner vertex of $H[N_H[x]]$.  Since $w$ and $w'$ are in different components of $H-\{u,v\}$, our choice of $w$ and $uv$ implies that $\deg_{H-B(H)}(w')\ge 1$ so one of the inner faces of $H[N_H[x]]$ contains a vertex of $H$ other than $w'$.  But then \cref{useful_little_guy} implies that $\deg^+_H(x)>1$ or that $\deg^+_H(v)>2$, a contradiction.
 
     % We claim that $N^+_H(v)$ and $N^+_H(z)$ are disjoint.
@@ -877,9 +880,9 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
 \begin{compactenum}[{[}bg1{]}]
     \item If $\deg^+_{G_i}(v_i)\ge 3$ then we set $\Delta_i\gets\{v_i\}$.
     \label[bg]{bg_high_degree}
-    \item Otherwise, if $G_i-B(H_i)$ contains a vertex of degree $1$ we set $\Delta_i:=\{v_i\}$ where $v_i$ is the vertex $v$ guaranteed by \cref{leaf_killer}.
-    \item Otherwise, if $G_i-B(H_i)$ contains a vertex of degree $0$ we set $\Delta_i:=\{v_i\}$ where $v_i$ is the vertex $v$ guaranteed by \cref{degree_zero_killer}.
-    \item Otherwise, if there exists distinct $u,v\in B(G_i)$ and $w\in B(G_i-B(G_i))$ such that $\deg^+_{G_i}(v)=2$, $\deg^+_{G_i-v}(w)\ge 3$, and $N^+_{G_i}(u)\subseteq N_{G_i}(w)$ then set $\Delta_i:=\{v,w\}$.
+    \item Otherwise, if $G_i-B(G_i)$ contains a vertex of degree $1$ we set $\Delta_i:=\{v_i\}$ where $v_i$ is the vertex $v$ guaranteed by \cref{leaf_killer}.\label[bg]{bg_leaf}
+    \item Otherwise, if $G_i-B(G_i)$ contains a vertex of degree $0$ we set $\Delta_i:=\{v_i\}$ where $v_i$ is the vertex $v$ guaranteed by \cref{degree_zero_killer}.\label[bg]{bg_degree_zero}
+    \item Otherwise, if there exists distinct $u,w\in B(G_i)$ and $w\in B(G_i-B(G_i))$ such that $\deg^+_{G_i}(v)=2$, $\deg^+_{G_i-v}(w)\ge 3$, and $N^+_{G_i}(u)\subseteq N_{G_i}(w)$ then set $\Delta_i:=\{v,w\}$.
     \label[bg]{bg_two_three}
     \item Otherwise, $G_i$ is $2$-critical and $i+1=r$.  By \cref{two_critical_handler}, there exists $\Delta_{r-1}\subseteq V(G_i)$ of size at most $2|B(G_i-B(G_i))|/3 + |I(G_i-B(G_i))|/3$ that dominates $I(G_i)$.
     \label[bg]{bg_two_critical}
@@ -938,6 +941,51 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
   \end{clmproof}
 
   By \cref{simplify}, maximizing \cref{oobjective} subject to the constraints given by \cref{a,b} is a linear program in six variables $(x_3,a,b,c,|R|,|S|)$ which can be done easily.  The maximum is achieved when $x_3=a=b=c=|S|=0$, $c=(n-6)/7$ and $|R|=(2n+9)/7$, at which point \cref{oobjective} evaluates to $(10n-18)/21$.
+\end{proof}
+
+
+\begin{lem}
+    There exists a linear-time algorithm that implements $\textsc{SimpleGreedy}(G)$.
+\end{lem}
+
+\pat{I'm working here...}
+\begin{proof}
+    There are three main tasks required to implement the algorithm:
+    \begin{compactenum}
+        \item Identify $\Delta_i$: which is either the single vertex $v_i$ from \cref{bg_high_degree,bg_leaf,bg_degree_zero} or the vertices $u$, $v$, and $w$ from \cref{bg_two_three}.
+        \item Compute a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-\Delta_i$.
+        \item Identify when $G_i$ is $2$-critical and find a set $\Delta_{r-1}$ of size at most $2(|B(G_i-B(G_i))| + |I(G_i-B(G_i))|)$ that dominates $I(G_i)$.
+    \end{compactenum}
+
+    The main data structuring tool used to accomplish these steps efficiently is a technique for storing sorted counters.  Each vertex $v$ of $G$ maintains a counter $\delta_i(v):=|N_G(v)\cap I(G_i)|$.  The vertices in $B(G_i)$ are kept in a doubly list of lists $\beta$.  Each item in $\beta$ is a doubly-linked list, called a \defin{bucket} that stores a non-empty set $\beta_d:=\{v\in B(G_i):\delta(v)=d\}$ for some specific value of $d$. Then $\beta$ itself is a doubly-linked list that stores the buckets by increasing value of $d$.  A similar structure $\zeta$ is used to store the vertices of $B(G_i-B(G_i))$.  Since the value of $\delta_i(v)$ decreases monotonically as $i$ increases, $\sum_{v\in V(G)}\delta_0(v)=3n-6$, and each vertex enters and leaves each of $\beta$ and $\zeta$ at most once, it is straightforward to maintain $\beta$ and $\zeta$ so that all operations on them take a total of $O(n)$ time over the entire execution of the algorithm.  From this point on, we will no longer discuss the maintenance of these lists, but we will use them to identify the vertex $v_i$, or the vertices $u,v,w$ when needed.
+
+    \paragraph{Identifying $\Delta_i$:}
+    To identify the set $\Delta_i$ use $\beta$ to find the vertex $v_i\in B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  If $\deg^+_{G_i}(v_i)\ge 3$ then \cref{bg_high_degree} applies and there is nothing more to do.   Otherwise, we use $\zeta$ to identify the vertex $w\in B(G_i-B(G_i))$ that maximizes $\deg_{G_i-B(G_i)}(w)$.  If $\deg_{G_i-B(G_i)}(w)\ge 2$, then this vertex can be used as the vertex $w$ in \cref{bg_two_three}.  In this case, the vertices $u$ and $v$ can be found in $N_{G_i}(w)$ in $O(\deg_G(v))$ time.  If $\deg_{G_i-B(G_i)}(w)=1$ then \cref{bg_leaf} applies and the vertex $v_i\in N_{G_i}(w)$ can be found in $O(\deg_G(w))$ time (this is the vertex $v_1$ in \cref{killing_a_leaf}).  If $\deg_{G_i-B(G_i)}(w)=0$ then \cref{bg_degree_zero} applies \pat{The proof of \cref{degree_zero_killer} requires choosing a specific vertex $w$, we'll need to address this.}
+
+    In each of these cases, we remove a vertex $v_i$ from $G_i$ and then find a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-v_i$.  Removing $v_i$ from $G_i$ is easy.  If $G_i-v_i$ is not already dom-minimal, then any violation of dom-minimality involves a vertex in $N_{G_i}(v_i)$.  Indeed, any violation of dom-minimality occurs because some vertex $x$ in $I(G_i)$ is in $B(G_i-v_i)$.  This causes the inner-degree of some vertex $v\in B(G_i)$ to drop below $2$ or causes some edge $vw$ on the outer face to no longer bound a triangle $vwx$ with $x$ being an inner vertex. $x$ of some triangular face $vwx$  
+    
+    
+    This allows us to find the vertex $v_i\in B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$ in constant time.  
+    
+    
+    If $\deg^+_{G_i}(v_i)\ge 3$ then we remove it. Removing $v_i$ causes some counters of vertices in $N_{G_i}(v_i)$ to decrease and causes some vertices in $N_{G_i}(v_i)$ to appear in $B(G_i-v_i)$ for the first time.  Since all of these counters decrease monotonically and a new vertex that appears on $B(G_i-v_i)$ remains there until its indegree becomes zero, the total time spent managing these counters is $O(n)$.
+
+
+    
+
+    
+    
+    \begin{compactenum}
+        \item Data structure that stores vertices in $B(G_i)$ ordered by inner-degree lets us find vertices of degree at least $3$ in constant time.
+        
+        \item Data structure that stores $B(G_i-B(G_i))$ ordered by inner-degree in $G_i-B(G_i)$ lets us find the vertex $w$ in \cref{2_3_figure} in constant time.
+
+        \item The preceding structure also signals us when \cref{leaf_killer} and \cref{degree_zero_killer} are applicable.
+
+        \item Algorithms for implementing \cref{leaf_killer} (trivial) and \cref{degree_zero_killer} (trickier, because of special choice of $w$ and $uv$).  
+
+        \item All of these need algorithms for dom-minimal reductions.
+    \end{compactenum}
 \end{proof}
 
 %%%%%%% The graph on surfaces section %%%%%
