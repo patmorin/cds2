@@ -591,30 +591,36 @@ We now show that, even when all vertices in $B(H)$ have inner-degree at most $2$
 % \pat{There is an issue with this lemma/proof. I'm working on it now.}
 \begin{proof}
   We may assume that $H$ is connected, otherwise we can apply the lemma to one of the components of $H$ that contains a vertex $w\in I(H)$ with $\deg_{H-B(H)}(w)=0$.
-  Let $W:=\{w\in V(H-B(H)):\deg_{H-B(H)}(w)=0\}$ and, for each $w\in W$, let $F_w$ denote the face in $H[B(H)]$ that contains $w$ in its interior.  Since $H$ is a generalized near triangulation and $N_H(w)\subseteq B(H)$, it follows that $V(F_w)=N_H(w)$.  Observe that there exists some $w\in W$ and some edge $uv\in E(F_w)$ such that all the vertices in $W$ are contained in a single component of $H-\{u,v\}$. This choice of $w$ and $uv$ will be important in Case~(iii), below.
+  Let $W:=\{w\in V(H-B(H)):\deg_{H-B(H)}(w)=0\}$ and, for each $w\in W$, let $F_w$ denote the face in $H[B(H)]$ that contains $w$ in its interior.  Since $H$ is a generalized near triangulation and $N_H(w)\subseteq B(H)$, it follows that $V(F_w)=N_H(w)$.
+   % Observe that there exists some $w\in W$ and some edge $uv\in E(F_w)$ such that all the vertices in $W$ are contained in a single component of $H-\{u,v\}$. This choice of $w$ and $uv$ will be important in Case~(iii), below.
   % \pat{Does this need more justification?} \hussein{I understand it, but i did not see when we used it, or why it is important.} \pat{It's used in Case~(iii) to argue that $\deg^+_H(x)=2$}
+  % \pat{You were right, Hussein, we didn't need it, which is good because it make the linear time algorithm more complicated.}
   There are three cases to consider (see \cref{isolated_fig}):
   \begin{figure}[htpb]
     \centering
-    \begin{tabular}{ccc}
-      (i) & (ii) & (iii)\\
+    \begin{tabular}{cccc}
+      (i) & (ii) & \multicolumn{2}{c}{(iii)}\\
       % \includegraphics[page=1]{figs/degree_zero_killer} &
       \includegraphics[page=1]{figs/degree_zero_killer} &
       \includegraphics[page=4]{figs/degree_zero_killer} &
-      \includegraphics[page=7]{figs/degree_zero_killer} \\
-      $H$ & $H$ & $H$ \\
+      \includegraphics[page=7]{figs/degree_zero_killer} &
+      \includegraphics[page=10]{figs/degree_zero_killer} \\
+      $H$ & $H$ & $H$ & $H$ \\
       $\Downarrow$ & $\Downarrow$ & $\Downarrow$ \\
       % \includegraphics[page=2]{figs/degree_zero_killer} &
       \includegraphics[page=2]{figs/degree_zero_killer} &
       \includegraphics[page=5]{figs/degree_zero_killer} &
-      \includegraphics[page=8]{figs/degree_zero_killer} \\
-      $H-x$ & $H-x$ & $H-v$ \\
+      \includegraphics[page=8]{figs/degree_zero_killer} &
+      \includegraphics[page=11]{figs/degree_zero_killer} \\
+      $H-x$ & $H-x$ & $H-v$ & $H-v$ \\
       $\Downarrow$ & $\Downarrow$ & $\Downarrow$ \\
       \includegraphics[page=3]{figs/degree_zero_killer} &
       \includegraphics[page=6]{figs/degree_zero_killer} &
-      \includegraphics[page=9]{figs/degree_zero_killer} \\
-      $H'$ & $H'$ & $H'$
+      \includegraphics[page=9]{figs/degree_zero_killer} &
+      \includegraphics[page=12]{figs/degree_zero_killer} \\
+      $H'$ & $H'$ & $H'$ & $H'$
     \end{tabular}
+    \pat{TODO: Fix spacing}
     \caption{Eliminating isolated vertices in $H-B(H)$.}
     \label{isolated_fig}
   \end{figure}
