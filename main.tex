@@ -91,13 +91,13 @@
 
 \section{Introduction}
 
-A set $X$ of vertices in a graph $G$ is a \defin{dominating set} of $G$ if each vertex of $G$ is in $X$ or adjacent to a vertex in $X$.  A dominating set $X$ of $G$ is \defin{connected} if the subgraph $G[X]$ of $G$ induced by the vertices in $X$ is connected.  There is an enormous body of literature on dominating sets. Several books are devoted to the topic \cite{haynes.hedetniemi.ea:domination,haynes.hedetniemi.ea:topics,du.wan:connected,haynes.hedetniemi.ea:vol2}, including a book and book chapter devoted to connected dominating sets \cite{du.wan:connected,chellali.favaron:connected}.  A typical result in the area is of the form: ``Every $n$-vertex graph in some family $\mathcal{G}$ of graphs has a (connected) dominating set of size at most $f(n)$.'' or ``For infinitely many $n$, there exists an $n$-vertex member of $\mathcal{G}$ with no (connected) dominating set of size less than $g(n)$.''
+A set $X$ of vertices in a graph $G$ is a \defin{dominating set} of $G$ if each vertex of $G$ is in $X$ or adjacent to a vertex in $X$.  A dominating set $X$ of $G$ is \defin{connected} if the subgraph $G[X]$ of $G$ induced by the vertices in $X$ is connected.  There is an enormous body of literature on dominating sets. Several books are devoted to the topic \cite{haynes.hedetniemi.ea:domination,haynes.hedetniemi.ea:topics,du.wan:connected,haynes.hedetniemi.ea:vol2}, including a book and book chapter devoted to connected dominating sets \cite{du.wan:connected,chellali.favaron:connected}.  A typical result in the area is an upper bound of the form: ``Every $n$-vertex graph in some family $\mathcal{G}$ of graphs has a (connected) dominating set of size at most $f(n)$.'' or a lower bound of the form ``For infinitely many $n$, there exists an $n$-vertex member of $\mathcal{G}$ with no (connected) dominating set of size less than $g(n)$.''
 
 \subsection{Connected Dominating Sets in Triangulations}
 
 A \defin{triangulation} is an edge-maximal planar graph.  \citet{matheson.tarjan:dominating} proved that every $n$-vertex triangulation has a dominating set of size at most $n/3=0.33\overline{3}n$ and that there exists $n$-vertex triangulations with no dominating set of size less than $n/4=0.25n$. The gap between these upper and lower bounds stood for over $20$ years until a recent breakthrough by \citet{spacapan:domination} reduced the upper bound to $17n/53\approx 0.32075471698n$.  This was swiftly followed by an improvement to $2n/7= 0.2\overline{857142}n$ by \citet{christiansen.rotenberg.ea:triangulations}.
 
-In the current paper, we consider connected dominating sets in triangulations.  An easy consequence of the proof used by \citet{matheson.tarjan:dominating} is that $n$-vertex triangulations have connected dominating sets of size at most $2n/3=0.66\overline{6}n$.  A more general result, due to  \citet{kleitman.west:spanning} shows that graphs of minimum-degree $3$ in which each edge is included in a $3$-cycle have connected dominating sets of size at most $2(n-5)/3<0.66\overline{6}n$. \citet{albertson.berman.ea:graphs} prove that every triangulation has a spanning tree $T$ with no vertices of degree $2$, which implies that the number of leaves of $T$ exceeds the number of non-leaves by at least $2$.  In particular, the number of leaves is greater than $(n+2)/2$. Thus, the set $X$ of non-leaf vertices of $T$ is a connected dominating set of size at most $(n-2)/2<0.5n$. We prove:
+In the current paper, we consider connected dominating sets in triangulations.  An easy consequence of the proof used by \citet{matheson.tarjan:dominating} is that $n$-vertex triangulations have connected dominating sets of size at most $2n/3=0.66\overline{6}n$.  A more general result, due to  \citet{kleitman.west:spanning} shows that graphs of minimum-degree $3$ in which each edge is included in a $3$-cycle have connected dominating sets of size at most $2(n-5)/3<0.66\overline{6}n$. \citet{albertson.berman.ea:graphs} prove that every triangulation has a spanning tree $T$ with no vertices of degree $2$, which implies that the number of leaves of $T$ exceeds the number of non-leaves by at least $2$.  In particular, the number of leaves is greater than $(n+2)/2$. Thus, the set $X$ of non-leaf vertices of $T$ is a connected dominating set of size at most $(n-2)/2<0.5n$. In order to resolve a graph drawing problem (discussed further in \cref{related_work}), \citet{angelini.evans.ea:sefe} gave another proof of this $0.5n$ bound by showing that every plane graph contains an induced outerplane graph of size at least $0.5n$.  It is not hard to see that if $G$ is a triangulation with $n\ge 4$ vertices and $G[L]$ is outerplane, then $X:=V(G)\setminus L$ is a connected dominating set of $G$. Motivated by the fact that this $0.5n$ bound has stood for over 30 years, \citet{noguchi.zamfirescu:spanning} ask if this $0.5n$ bound can be improved, even in the special case of $4$-connected triangulations. We prove:
 % \citet{kleitman.west:spanning} also show that graphs of minimum degree $4$ have connected dominating sets of size at most $(3n-8)/5<0.6n$. This result applies to triangulations of minimum degree $4$, which includes all $4$-connected triangulations.  The main result in this paper is the following:
 
 \begin{thm}\label{main_result2}
@@ -136,6 +136,7 @@ We consider a relaxation of this problem in which the edges of $G$ can be drawn 
 Note that if the point set $P$ is contained in the $x$-axis then no edge with both endpoints in $Y$ crosses the $x$-axis, so this one bend drawing is a $2$-page book-embedding of the induced graph $G[Y]$. This implies that $G[Y]$ is a spanning subgraph of some Hamiltonian triangulation $G[Y]^+$.  The Goldner–Harary graph is an $11$-vertex triangulation that is not Hamiltonian. It follows that the graph $G$ obtained by taking $k$ vertex-disjoint copies of the Goldner-Harary graph has $n:=11k$ vertices and has no one-bend free set of size greater than $10k=10n/11=0.90\overline{90}n$.
 
 \subsection{Related Work}
+\label{related_work}
 
 \paragraph{Connected Dominating Sets}
 
@@ -590,59 +591,74 @@ We now show that, even when all vertices in $B(H)$ have inner-degree at most $2$
 
 % \pat{There is an issue with this lemma/proof. I'm working on it now.}
 \begin{proof}
-  We may assume that $H$ is connected, otherwise we can apply the lemma to one of the components of $H$ that contains a vertex $w\in I(H)$ with $\deg_{H-B(H)}(w)=0$.
-  Let $W:=\{w\in V(H-B(H)):\deg_{H-B(H)}(w)=0\}$ and, for each $w\in W$, let $F_w$ denote the face in $H[B(H)]$ that contains $w$ in its interior.  Since $H$ is a generalized near triangulation and $N_H(w)\subseteq B(H)$, it follows that $V(F_w)=N_H(w)$.
+  We may assume that $H$ is connected, otherwise we can apply the lemma to one of the components of $H$ that contains a vertex $w\in I(H)$ with $\deg_{H-B(H)}(w)=0$. Let $F_w$ denote the face in $H[B(H)]$ that contains $w$ in its interior.  Since $H$ is a generalized near triangulation and $N_H(w)\subseteq B(H)$, it follows that $V(F_w)=N_H(w)$.
    % Observe that there exists some $w\in W$ and some edge $uv\in E(F_w)$ such that all the vertices in $W$ are contained in a single component of $H-\{u,v\}$. This choice of $w$ and $uv$ will be important in Case~(iii), below.
   % \pat{Does this need more justification?} \hussein{I understand it, but i did not see when we used it, or why it is important.} \pat{It's used in Case~(iii) to argue that $\deg^+_H(x)=2$}
   % \pat{You were right, Hussein, we didn't need it, which is good because it make the linear time algorithm more complicated.}
   There are three cases to consider (see \cref{isolated_fig}):
-  \begin{figure}[htpb]
+  \begin{figure}%[htpb]
     \centering
-    \begin{tabular}{cccc}
-      (i) & (ii) & \multicolumn{2}{c}{(iii)}\\
+    \begin{tabular}{ccc}
+      (i) & (ii) & (iii)\\
       % \includegraphics[page=1]{figs/degree_zero_killer} &
       \includegraphics[page=1]{figs/degree_zero_killer} &
       \includegraphics[page=4]{figs/degree_zero_killer} &
-      \includegraphics[page=7]{figs/degree_zero_killer} &
-      \includegraphics[page=10]{figs/degree_zero_killer} \\
-      $H$ & $H$ & $H$ & $H$ \\
-      $\Downarrow$ & $\Downarrow$ & $\Downarrow$ \\
+      \includegraphics[page=7]{figs/degree_zero_killer} \\
+      % $H$ & $H$ & $H$ & $H$ \\
+      $\Downarrow$ & $\Downarrow$ & $\Downarrow$  \\
       % \includegraphics[page=2]{figs/degree_zero_killer} &
       \includegraphics[page=2]{figs/degree_zero_killer} &
       \includegraphics[page=5]{figs/degree_zero_killer} &
-      \includegraphics[page=8]{figs/degree_zero_killer} &
-      \includegraphics[page=11]{figs/degree_zero_killer} \\
-      $H-x$ & $H-x$ & $H-v$ & $H-v$ \\
-      $\Downarrow$ & $\Downarrow$ & $\Downarrow$ \\
+      \includegraphics[page=8]{figs/degree_zero_killer} \\
+      % $H-x$ & $H-x$ & $H-v$ & $H-v$ \\
+      $\Downarrow$ & $\Downarrow$ & $\Downarrow$  \\
       \includegraphics[page=3]{figs/degree_zero_killer} &
       \includegraphics[page=6]{figs/degree_zero_killer} &
-      \includegraphics[page=9]{figs/degree_zero_killer} &
-      \includegraphics[page=12]{figs/degree_zero_killer} \\
-      $H'$ & $H'$ & $H'$ & $H'$
+      \includegraphics[page=9]{figs/degree_zero_killer}
+      % $H'$ & $H'$ & $H'$ & $H'$
     \end{tabular}
-    \pat{TODO: Fix spacing}
+    % \begin{tabular}{lccc}
+    %   (i)&\raisebox{-0.5\height}{\includegraphics[page=1]{figs/degree_zero_killer}} &
+    %   \raisebox{-0.5\height}{\includegraphics[page=2]{figs/degree_zero_killer}} & \raisebox{-0.5\height}{\includegraphics[page=3]{figs/degree_zero_killer}} \\
+    %   (ii)&\raisebox{-0.5\height}{\includegraphics[page=4]{figs/degree_zero_killer}} &
+    %   \raisebox{-0.5\height}{\includegraphics[page=5]{figs/degree_zero_killer}} &
+    %   \raisebox{-0.5\height}{\includegraphics[page=6]{figs/degree_zero_killer}} \\
+    %   (iii)(a)&\raisebox{-0.5\height}{\includegraphics[page=7]{figs/degree_zero_killer}} &
+    %   \raisebox{-0.5\height}{\includegraphics[page=8]{figs/degree_zero_killer}} &
+    %   \raisebox{-0.5\height}{\includegraphics[page=9]{figs/degree_zero_killer}} \\
+    %   (iii)(b)&\raisebox{-0.5\height}{\includegraphics[page=10]{figs/degree_zero_killer}}  &
+    %   \raisebox{-0.5\height}{\includegraphics[page=11]{figs/degree_zero_killer}}  &
+    %   \raisebox{-0.5\height}{\includegraphics[page=12]{figs/degree_zero_killer}} \\
+    %   (iii)(c)&\raisebox{-0.5\height}{\includegraphics[page=13]{figs/degree_zero_killer}}  &
+    %   \raisebox{-0.5\height}{\includegraphics[page=14]{figs/degree_zero_killer}}  &
+    %   \raisebox{-0.5\height}{\includegraphics[page=15]{figs/degree_zero_killer}} \\
+    %   & $H$ & $H-v$ & $H'$
+    % \end{tabular}
     \caption{Eliminating isolated vertices in $H-B(H)$.}
     \label{isolated_fig}
   \end{figure}
   \begin{enumerate}[(i)]
-    \item $\deg^+_H(z)=1$ for some $z\in N_H(w)$. By \cref{inner_degree_1}, $H[N_H[z]]$ is isomorphic to $K_4$.  Let $x$ and $y$ be the two vertices, other than $z$ on the outer face of $H[N_H[z]]$.  Since $\deg_{H-B(H)}(w)=0$, \cref{useful_little_guy} implies that $w$ is the only vertex of $H$ in the interior of the cycle $xyz$. Let $H'$ be a dom-minimal graph that dom-respects $H-x$.  Since $\deg^+_{H-x}(w)=\deg^+_{H-x}(z)=0$, neither $x$ or $w$ are vertices of $H'$. Therefore, $|H'|\le |H-\{x,z,w\}|=|H|-3$.  By \cref{boundary_subset}, $B(H')\subseteq N^+_H(x)\cup B(H-\{x,z,w\})$, so $|B(H')|\le |B(H)|+2-3=|B(H)|-1$, which satisfies the conditions of the lemma (with $v=x$).
+    \item $\deg^+_H(z)=1$ for some $z\in N_H(w)$. By \cref{inner_degree_1}, $H[N_H[z]]$ is isomorphic to $K_4$.  Let $u$ and $v$ be the two vertices, other than $z$ on the outer face of $H[N_H[z]]$.  Since $\deg_{H-B(H)}(w)=0$, \cref{useful_little_guy} implies that $w$ is the only vertex of $H$ in the interior of the cycle $uvz$. Let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Since $\deg^+_{H-v}(w)=\deg^+_{H-v}(z)=0$, neither $x$ or $w$ are vertices of $H'$. Therefore, $|H'|\le |H-\{u,v,w\}|=|H|-3$.  By \cref{boundary_subset}, $B(H')\subseteq N^+_H(v)\cup B(H-\{v,z,w\})$, so $|B(H')|\le |B(H)|+2-3=|B(H)|-1$, which satisfies the conditions of the lemma.
 
+    \item $\deg^+_H(z)=2$ for each $z\in N_H(w)$ and $N^+_H(v)\supseteq N^+_H(u)$ for some edge $uv\in E(F_w)$.  In this case, let $H'$ be a dom-minimal graph that dom-respects $H-v$. Since $\deg^+_{H-v}(u)=\deg^+_{H-x}(w)=0$, \cref{bad_vertex} implies that neither $u$ nor $w$ is a vertex of $H'$.  Therefore $|H'|\le |H-\{u,v,w\}|=|H|-3$.  Since $B(H-\{u,v,w\})\subseteq B(H)\cup N^+_{H}(x)\setminus \{u,v,w\}$, \cref{boundary_subset} implies that $|B(H')|\le |B(H)|+2-3=|B(H)|-1$.
 
-    % If $x$ has $\deg^+_H(x)=2$ then we consider a dom-minimal graph $H'$ that dom-respects $H-x$.  Since $\deg^+_{H-x}(z)=0$ and $\deg^+_{H-x}(w)=0$, neither $z$ nor $w$ are in $H'$, by \cref{bad_vertex}.  Therefore, $|H'|\le |H-\{x,z,w\}|=|H|-3$.  By \cref{boundary_subset}, $B(H')\subseteq N^+_H(x)\cup B(H-\{x,z,w\})$, so $|B(H')|\le |B(H)|+2-3=|B(H)|-1$, which satisfies the conditions of the lemma (with $v=x$).  The same argument applies if $\deg^+_H(y)=2$.  Otherwise, $N^+_H(z)=N^+_H(x)=N^+_H(y)=\{w\}$ and $H$ is isomorphic to $K_4$.
+    \item $\deg^+_H(z)=2$ for each $z\in N_H(w)$ and $N^+_H(u)\neq N^+_H(v)$ for some edge $uv\in E(F_w)$.  Let $w'$ be the unique vertex in $N^+_H(v)\setminus\{w\}$.  Let $vw'x$ and $vw'y$ be the two inner faces of $H$ that share the edge $vw'$.  Since $N^+_H(v)=\{w,w'\}$, both $x$ and $y$ are in $B(H)$. Furthermore, neither $x$ nor $y$ are in $V(F_w)$ since this would imply that $N^+_H(v)= N^+_H(x)=\{w,w'\}$ or that $N^+_H(v)= N^+_H(y)=\{w,w'\}$, and the preceding case would apply.
+    By \cref{bad_edge}, the only inner faces of $H$ incident to $v$ are the four faces incident to $vw$ and $vw'$.  Since $x,y\not\in V(F_w)$, this implies that $w$ and $w'$ are in different components, $C$ and $C'$, respectively, of $H-v$.  Then $N^+_{C'}(v)=\{w'\}$ so, by \cref{bad_vertex}, $H[N_{C'}[v]]$ is isomorphic to $K_4$ with vertex set $\{v,x,y,w'\}$.
+
+    We claim that $\deg_{H-B(H)}(w')=0$. For the sake of contradiction, suppose that $\deg_{H-B(H)}(w')>0$.  Since $N_{C'}(v)=\{x,w',y\}$, \cref{useful_little_guy} implies that the cycle $vxw'y$ has no vertices of $H$ in its interior.  Now consider the inner face $xw'x'$ with $x'\neq v$. The fact that $\deg_{H-B(H)}(w')>0$ implies that $x'\neq y$, so $x'$ is in the interior of the cycle $xw'y$. However, $x'$ is the only vertex of $H$ in in the interior of $xw'y$ since, otherwise, \cref{useful_little_guy} implies that $\deg^+_H(x)>2$ or $\deg^+_H(y)>2$.  But this contradicts the assumptions of the lemma, since it implies that $\deg_{H-B(H)}(w')=1$.
+
+    Therefore, $\deg_{H-B(H)}(w')=0$. Let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Then $V(H')\subseteq V(H)\setminus\{w,v,w'\}$, so $|H'|\le |H|-3$ and $B(H')\subseteq B(H)\setminus\{v\}$ so $|B(H')|\le |B(H)|-1$, which satisfies the requirements of the lemma. \qedhere
+    %
+    %
+    % \begin{compactenum}[(a)]
+
+      % \item    If $x'\in B(H)$ then $N^+_H(x)=\{w'\}$ and we consider a dom-minimal graph $H'$ that dom-respects $H-v$.  \pat{No! $x$ may belong to a second bicomponent, making $\deg^+H(x)=2$.} Then $V(H')\subseteq V(H)\setminus\{w,v,x\}$, so $|H'|\le |H|-3$ and $B(H')\subseteq B(H)\setminus\{v,x\}\cup\{w'\}$ so $|B(H')|\le |B(H)|-1$, which satisfies the requirements of the lemma.
 
     %
     %
-    % In this case, we take $v=z$ and the only dom-minimal graph $H'$ that dom-respects $H-v$ is the graph with no vertices or edges.  Therefore $|H'|=|H|-4\le |H|-3$ and $|B(H')|=|B(H)|-3\le |B(H)|-1$.
-
-    \item $\deg^+_H(z)=2$ for each $z\in N_H(w)$ and $N^+_H(x)\supseteq N^+_H(y)$ for some edge $xy\in E(F_w)$.  In this case, let $H'$ be a dom-minimal graph that dom-respects $H-x$. Since $\deg^+_{H-x}(y)=\deg^+_{H-x}(w)=0$, \cref{bad_vertex} implies that neither $y$ nor $w$ is a vertex of $H'$.  Therefore $|H'|\le |H-\{x,y,w\}|=|H|-3$.  Since $B(H-\{x,y,w\})\subseteq B(H)\cup N^+_{H}(x)\setminus \{x,y,w\}$, \cref{boundary_subset} implies that $|B(H')|\le |B(H)|+2-3=|B(H)|-1$.
-% \hussein{I think you mean $vw'x$ and $vw'y$?!} \hussein{or did you mean $x, y$ instead $u, v$ this $u,v$ are different from what it is mentioned in the introduction.} \pat{The latter. This is the special edge $uv$ that has no vertices of $W$ on one side of it.}
-    \item $\deg^+_H(z)=2$ for each $z\in N_H(w)$ and $N^+_H(u)\neq N^+_H(v)$.  Let $w'$ be the unique vertex in $N^+_H(v)\setminus\{w\}$.  Let $vw'x$ and $vw'y$ be the two inner faces of $H$ that share the edge $vw'$.  Since $N^+_H(v)=\{w,w'\}$, both $x$ and $y$ are in $B(H)$.  Furthermore, neither $x$ nor $y$ are in $V(F_w)$ since this would imply that $N^+_H(v)= N^+_H(x)=\{w,w'\}$ or that $N^+_H(v)= N^+_H(y)=\{w,w'\}$, and the preceding case would apply.
-
-    If $\deg_{H-B(H)}(w')=0$ then let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Then $V(H')\subseteq V(H)\setminus\{w,v,w'\}$, so $|H'|\le |H|-3$ and $B(H')\subseteq B(H)\setminus\{v\}$ so $|B(H')|\le |B(H)|-1$, which satisfies the requirements of the lemma.
-
-    If $\deg_{H-B(H)}(w')>0$, then consider the inner face $xw'x'$ with $x'\neq v$.  The fact that $\deg_{H-B(H)}(w')>0$ implies that $x'\neq y$,  If $x'\in B(H)$ then $N^+_H(x)=\{w'\}$ and we consider a dom-minimal graph $H'$ that dom-respects $H-v$.  Then $V(H')\subseteq V(H)\setminus\{w,v,x\}$, so $|H'|\le |H|-3$ and $B(H')\subseteq B(H)\setminus\{v,x\}\cup\{w'\}$ so $|B(H')|\le |B(H)|-1$, which satisfies the requirements of the lemma.
-
-    If $x'\not\in B(H)$ then $N^+_H(x)\supseteq\{w',x'\}$ and, since $\deg^+_{H}(x)\le 2$, there exists an inner face $xx'x''$ with $x''\in B(H)$.  In this case, let $H_0$ be the graph obtained from $H-v$ by removing $x$ and adding the edge $x''w'$.  Note that $H_0$ dom-respects $H-v$.  Now let $H'$ be a dom-minimal graph that dom-respects $H_0$ (and therefore also dom-respects $H-v$). Then $V(H')\subseteq V(H)\setminus\{w,v,x\}$, so $|H'|\le |H|-3$ and $B(H')\subseteq B(H)\setminus\{v,x\}\cup\{w'\}$ so $|B(H')|\le |B(H)|-1$, which satisfies the requirements of the lemma. \qedhere
+    %
+    %   Therefore $N^+_H(x)\supseteq\{w',x'\}$ and, since $\deg^+_{H}(x)\le 2$, there exists an inner face $xx'x''$ with $x''\in B(H)$.  In this case, let $H_0$ be the graph obtained from $H-v$ by removing $x$ and adding the edge $x''w'$.  Note that $H_0$ dom-respects $H-v$.  Now let $H'$ be a dom-minimal graph that dom-respects $H_0$ (and therefore also dom-respects $H-v$). Then $V(H')\subseteq V(H)\setminus\{w,v,x\}$, so $|H'|\le |H|-3$ and $B(H')\subseteq B(H)\setminus\{v,x\}\cup\{w'\}$ so $|B(H')|\le |B(H)|-1$, which satisfies the requirements of the lemma. \qedhere
+    % \end{compactenum}
     %
     %
     % $N_{H-B(H)}(w')$ contains a vertex $w''$ adjacent to $x$ which forms an inner face $xw''x'$ with $x'\in B(H)$. Note that $x'\neq y$, since this would imply that $\deg_{H-B(H)}(w')=\deg_{H-B(H)}(w'')=1$, which is ruled out by the statement of the lemma.  In this case, consider the graph $H_0$ obtained from $H-v$ by removing $x$ and adding the edge $x'w'$.  Then $H_0$ dom-respects $H-v$ and we let $H'$ be a dom-minimal subgraph that dom-respects $H_0$.
@@ -972,7 +988,9 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
     The main data structuring tool used to accomplish these steps efficiently is a technique for storing sorted counters.  Each vertex $v$ of $G$ maintains a counter $\delta_i(v):=|N_G(v)\cap I(G_i)|$.  The vertices in $B(G_i)$ are kept in a doubly list of lists $\beta$.  Each item in $\beta$ is a doubly-linked list, called a \defin{bucket} that stores a non-empty set $\beta_d:=\{v\in B(G_i):\delta(v)=d\}$ for some specific value of $d$. Then $\beta$ itself is a doubly-linked list that stores the buckets by increasing value of $d$.  A similar structure $\zeta$ is used to store the vertices of $B(G_i-B(G_i))$.  Since the value of $\delta_i(v)$ decreases monotonically as $i$ increases, $\sum_{v\in V(G)}\delta_0(v)=3n-6$, and each vertex enters and leaves each of $\beta$ and $\zeta$ at most once, it is straightforward to maintain $\beta$ and $\zeta$ so that all operations on them take a total of $O(n)$ time over the entire execution of the algorithm.  From this point on, we will no longer discuss the maintenance of these lists, but we will use them to identify the vertex $v_i$, or the vertices $u,v,w$ when needed.
 
     \paragraph{Identifying $\Delta_i$:}
-    To identify the set $\Delta_i$ use $\beta$ to find the vertex $v_i\in B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  If $\deg^+_{G_i}(v_i)\ge 3$ then \cref{bg_high_degree} applies and there is nothing more to do.   Otherwise, we use $\zeta$ to identify the vertex $w\in B(G_i-B(G_i))$ that maximizes $\deg_{G_i-B(G_i)}(w)$.  If $\deg_{G_i-B(G_i)}(w)\ge 2$, then this vertex can be used as the vertex $w$ in \cref{bg_two_three}.  In this case, the vertices $u$ and $v$ can be found in $N_{G_i}(w)$ in $O(\deg_G(v))$ time.  If $\deg_{G_i-B(G_i)}(w)=1$ then \cref{bg_leaf} applies and the vertex $v_i\in N_{G_i}(w)$ can be found in $O(\deg_G(w))$ time (this is the vertex $v_1$ in \cref{killing_a_leaf}).  If $\deg_{G_i-B(G_i)}(w)=0$ then \cref{bg_degree_zero} applies \pat{The proof of \cref{degree_zero_killer} requires choosing a specific vertex $w$, we'll need to address this.}
+    To identify the set $\Delta_i$ use $\beta$ to find the vertex $v_i\in B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  If $\deg^+_{G_i}(v_i)\ge 3$ then \cref{bg_high_degree} applies and there is nothing more to do.   Otherwise, we use $\zeta$ to identify the vertex $w\in B(G_i-B(G_i))$ that maximizes $\deg_{G_i-B(G_i)}(w)$.  If $\deg_{G_i-B(G_i)}(w)\ge 2$, then this vertex can be used as the vertex $w$ in \cref{bg_two_three}.  In this case, the vertices $u$ and $v$ can be found in $N_{G_i}(w)$ in $O(\deg_G(v))$ time.  If $\deg_{G_i-B(G_i)}(w)=1$ then \cref{bg_leaf} applies and the vertex $v_i\in N_{G_i}(w)$ can be found in $O(\deg_G(w))$ time (this is the vertex $v_1$ in \cref{killing_a_leaf}).  If $\deg_{G_i-B(G_i)}(w)=0$ then \cref{bg_degree_zero} applies.  The vertex $v_i\in N_{G_i}(w)$ can be found in $O(\deg_G(w))$ time (this is the vertex $v$ in \cref{isolated_fig}).
+
+    \paragraph{Computing $G_{i+1}$:}  After computing $\Delta_i$, we must computing a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-\Delta_i$.  Since $G_i$ was dom-minimal, the only violations of dom-minimality occur at vertices incident to vertices in $N^+_{G_i}(\Delta_i)$ and at edges incident to faces with a vertex in $N^+_{G_i}(\Delta_i)$.  In particular, violations of \cref{bad_vertex,inner_degree_1} can be detected when adjusting the counters of vertices adjacent to vertices in $N^+_{G_i}(\Delta_i)$.  Violations of \cref{bad_edge} can be detected by examining the inner faces incident to each vertex in $N^+_{G_i}(\Delta_i)$. 
 
     In each of these cases, we remove a vertex $v_i$ from $G_i$ and then find a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-v_i$.  Removing $v_i$ from $G_i$ is easy.  If $G_i-v_i$ is not already dom-minimal, then any violation of dom-minimality involves a vertex in $N_{G_i}(v_i)$.  Indeed, any violation of dom-minimality occurs because some vertex $x$ in $I(G_i)$ is in $B(G_i-v_i)$.  This causes the inner-degree of some vertex $v\in B(G_i)$ to drop below $2$ or causes some edge $vw$ on the outer face to no longer bound a triangle $vwx$ with $x$ being an inner vertex. $x$ of some triangular face $vwx$
 
