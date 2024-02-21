@@ -11,3 +11,7 @@ figs/*.autosave.ipe
 main.pdf
 socg-version/main-socg.pdf
 socg-version/main-socg.vtc
+slides/*.nav
+slides/slides.pdf
+slides/*.snm
+slides/*.toc

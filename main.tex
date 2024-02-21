@@ -343,10 +343,6 @@ Next we devise an algorithm that produces a smaller connected dominating set tha
 
 When this is no longer possible, the algorithm will be forced to directly handle a graph $G_i$ in which $\deg^+_{G_i}(v)\le 2$ for all $v\in B(G_i)$ and $G_i-(B_i)$ is critical.  In \cref{two_critical_section} we explain how this can be done using a set $X_{r-1}$ whose size depends only on $G_i-B(G_i)$.  The results in \cref{two_critical_section} require that the graph $G_i-B(G_i)$ not have any vertices of degree less than $2$.  The steps required to eliminate degree-$1$ and degree-$0$ vertices from $G_i-B(G_i)$ are explained in \cref{zero_kill_sec,one_kill_sec}.
 
-% In this section, we will show that during any step one of the following cases occurs.
-
-% \pat{Give overview of algorithm here.}
-
 \subsection{Dom-Minimal Dom-Respecting Graphs}
 
 We begin by identifying unnecessary vertices and edges that can appear in the graphs $G_1,\ldots,G_{r-1}$ during the construction of $X$.   We say that a near-triangulation $H$ is \defin{dom-minimal} if
@@ -447,10 +443,6 @@ Next we show that, in most cases our algorithm for constructing a connected domi
 
 \begin{proof}
   If $I(H)=\emptyset$ then the second condition of the lemma is trivially satisified, so there is nothing to prove. Otherwise, let $w$ be any vertex in $B(H-B(H))$ and let $vw$ be an edge of $H$ with $v\in B(H)$.
-  % If $H$ is the empty graph, then there is nothing to prove. Otherwise $H$ is non-empty, so $B(H)$ is non-empty. Let $v$ be a vertex in $B(H)$.
-  % By \cref{bad_edge}, $\deg^+_H(v)\ge 1$ so $H$ contains an edge $vw$ with $w\in I(H)$.
-  % Consider the face $f:=v_0,\ldots,v_{k-1}$ of the outerplane graph $H[B(H)]$ that contains $w$.
-
 
    \begin{figure}[htbp]
      \centering
@@ -976,55 +968,35 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
     There exists a linear-time algorithm that implements $\textsc{BetterGreedy}(G)$.
 \end{lem}
 
-\pat{I'm working here...}
-
 \begin{proof}
-    There are three main tasks required to implement the algorithm:
+    The techniques needed to implement $\textsc{BetterGreedy}(G)$ in linear time are fairly standard for algorithms on embedded graphs, so we only sketch the main tools used.  There are three main tasks performed by $\textsc{BetterGreedy}(G)$:
     \begin{compactenum}
-        \item Identify $\Delta_i$: which is either the single vertex $v_i$ from \cref{bg_high_degree,bg_leaf,bg_degree_zero} or the vertices $u$, $v$, and $w$ from \cref{bg_two_three}.
+        \item Identify $\Delta_i$, which is either the single vertex $v_i$ from \cref{bg_high_degree,bg_leaf,bg_degree_zero} or the vertices $u$, $v$, and $w$ from \cref{bg_two_three}.
         \item Compute a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-\Delta_i$.
-        \item Identify when $G_i$ is $2$-critical and find a set $\Delta_{r-1}$ of size at most $2(|B(G_i-B(G_i))| + |I(G_i-B(G_i))|)$ that dominates $I(G_i)$.
+        \item When $G_i$ is $2$-critical, $i=r-1$ and we must find a set $\Delta_{r-1}$ of size at most $2(|B(G_i-B(G_i))| + |I(G_i-B(G_i))|)$ that dominates $I(G_i)$.
     \end{compactenum}
 
-    The main data structuring tool used to accomplish these steps efficiently is a technique for storing sorted counters.  Each vertex $v$ of $G$ maintains a counter $\delta_i(v):=|N_G(v)\cap I(G_i)|$.  The vertices in $B(G_i)$ are kept in a doubly list of lists $\beta$.  Each item in $\beta$ is a doubly-linked list, called a \defin{bucket} that stores a non-empty set $\beta_d:=\{v\in B(G_i):\delta(v)=d\}$ for some specific value of $d$. Then $\beta$ itself is a doubly-linked list that stores the buckets by increasing value of $d$.  A similar structure $\zeta$ is used to store the vertices of $B(G_i-B(G_i))$.  Since the value of $\delta_i(v)$ decreases monotonically as $i$ increases, $\sum_{v\in V(G)}\delta_0(v)=3n-6$, and each vertex enters and leaves each of $\beta$ and $\zeta$ at most once, it is straightforward to maintain $\beta$ and $\zeta$ so that all operations on them take a total of $O(n)$ time over the entire execution of the algorithm.  From this point on, we will no longer discuss the maintenance of these lists, but we will use them to identify the vertex $v_i$, or the vertices $u,v,w$ when needed.
+    For an efficient implementation, the triangulation $G$ should be stored in some data structure for storing embedded planar graphs that allows the removal of edges (given a pointer) in constant time. For example, a doubly-connected edge-list \cite{muller.preparata:finding} is sufficient.
+
+    The other main data structuring tool used to accomplish these steps efficiently is a technique for storing a sorted list of counters.  Each vertex $v$ of $G$ maintains a counter $\delta_i(v):=|N_G(v)\cap I(G_i)|$.  The vertices in $B(G_i)$ are kept in a doubly list of lists $\beta$.  Each item in $\beta$ is itself a doubly-linked list, called a \defin{bucket} that stores a non-empty set $\beta_d:=\{v\in B(G_i):\delta_i(v)=d\}$ for some specific value of $d$. Then $\beta$ itself is a doubly-linked list that stores the buckets by increasing value of $d$.  A similar structure $\zeta$ is used to store the vertices of $B(G_i-B(G_i))$.  Since the value of $\delta_i(v)$ decreases monotonically as $i$ increases, $\sum_{v\in V(G)}\delta_0(v)=3n-6$, and each vertex enters and leaves each of $\beta$ and $\zeta$ at most once, it is straightforward to maintain $\beta$ and $\zeta$ so that all operations on them take a total of $O(n)$ time over the entire execution of the algorithm. (When a vertex $v$ enters $B(G_i)$ (i.e., $\beta$) or $B(G-B(G_i))$ (i.e., $\zeta$) for the first time, it can be inserted in $O(\delta_i(v))=O(\deg_G(v))$ time.) From this point on, we will no longer discuss the maintenance of these lists, but we will use them to identify the vertex $v_i$, or the vertices $u,v,w$ when needed.
 
     \paragraph{Identifying $\Delta_i$:}
-    To identify the set $\Delta_i$ use $\beta$ to find the vertex $v_i\in B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  If $\deg^+_{G_i}(v_i)\ge 3$ then \cref{bg_high_degree} applies and there is nothing more to do.   Otherwise, we use $\zeta$ to identify the vertex $w\in B(G_i-B(G_i))$ that maximizes $\deg_{G_i-B(G_i)}(w)$.  If $\deg_{G_i-B(G_i)}(w)\ge 2$, then this vertex can be used as the vertex $w$ in \cref{bg_two_three}.  In this case, the vertices $u$ and $v$ can be found in $N_{G_i}(w)$ in $O(\deg_G(v))$ time.  If $\deg_{G_i-B(G_i)}(w)=1$ then \cref{bg_leaf} applies and the vertex $v_i\in N_{G_i}(w)$ can be found in $O(\deg_G(w))$ time (this is the vertex $v_1$ in \cref{killing_a_leaf}).  If $\deg_{G_i-B(G_i)}(w)=0$ then \cref{bg_degree_zero} applies.  The vertex $v_i\in N_{G_i}(w)$ can be found in $O(\deg_G(w))$ time (this is the vertex $v$ in \cref{isolated_fig}).
-    
-\hussein{I am not sure, if it is straightforward to do the updates on the data structure!, the insertion in $\beta$ is not $O(1)$, it might be $\log n$.}
+    To identify the set $\Delta_i$, we use $\beta$ to find the vertex $v_i\in B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  If $\deg^+_{G_i}(v_i)\ge 3$ then \cref{bg_high_degree} applies and there is nothing more to do.   Otherwise, we use $\zeta$ to identify the vertex $w\in B(G_i-B(G_i))$ that maximizes $\deg_{G_i-B(G_i)}(w)$.  If $\deg_{G_i-B(G_i)}(w)\ge 2$, then this vertex can be used as the vertex $w$ in \cref{bg_two_three}.  In this case, the vertices $u$ and $v$ can be found in $N_{G_i}(w)$ in $O(\deg_G(v))$ time.  If $\deg_{G_i-B(G_i)}(w)=1$ then \cref{bg_leaf} applies and the vertex $v_i\in N_{G_i}(w)$ can be found in $O(\deg_G(w))$ time (this is the vertex $v_1$ in \cref{killing_a_leaf}).  If $\deg_{G_i-B(G_i)}(w)=0$ then \cref{bg_degree_zero} applies.  The vertex $v_i\in N_{G_i}(w)$ can be found in $O(\deg_G(w))$ time (this is the vertex $v$ in \cref{isolated_fig}).
 
-\pat{The insertion of $v$ into $\beta$ can be done in $O(\deg_G(v))$ time by starting at the small end of the list and stopping when we get to the correct bucket.}
-    
-    \paragraph{Computing $G_{i+1}$:}  After computing $\Delta_i$, we must compute a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-\Delta_i$.  Since $G_i$ was dom-minimal, the only violations of dom-minimality occur at vertices incident to vertices in $N^+_{G_i}(\Delta_i)$ and at edges incident to faces with a vertex in $N^+_{G_i}(\Delta_i)$.  In particular, violations of \cref{bad_vertex,inner_degree_1} can be detected when adjusting the counters of vertices adjacent to vertices in $N^+_{G_i}(\Delta_i)$.  Violations of \cref{bad_edge} can be detected by examining the inner faces incident to each vertex in $N^+_{G_i}(\Delta_i)$. 
+% \hussein{I am not sure, if it is straightforward to do the updates on the data structure!, the insertion in $\beta$ is not $O(1)$, it might be $\log n$.}
+%
+% \pat{The insertion of $v$ into $\beta$ can be done in $O(\deg_G(v))$ time by starting at the small end of the list and stopping when we get to the correct bucket.  I added a note about this in the paragraph that describes $\beta$ and $\zeta$.}
 
-    \paragraph{Handling the $2$-critical case:}
-    When none of \cref{bg_high_degree,bg_two_three,bg_degree_zero,bg_leaf} apply, $G_i$ is $2$-critical.  In this case, 
+\paragraph{Computing $G_{i+1}$:}  After computing $\Delta_i$, we must compute a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-\Delta_i$.  Since $G_i$ was dom-minimal, the only violations of dom-minimality occur at vertices incident to vertices in $N^+_{G_i}(\Delta_i)$ and at edges incident to faces with a vertex in $N^+_{G_i}(\Delta_i)$.  In particular, violations of \cref{bad_vertex,inner_degree_1} can be detected when adjusting the counters of vertices adjacent to vertices in $N^+_{G_i}(\Delta_i)$.  Violations of \cref{bad_edge} can be detected by examining the inner faces incident to each vertex in $N^+_{G_i}(\Delta_i)$.  Fixing these violations involves removing two edges incident to a vertex \cref{bad_vertex}, removing two edges incident to a vertex and replacing them with a single edge \cref{inner_degree_1}, or removing a single edge \cref{bad_edge}.
 
-    
-    % In each of these cases, we remove a vertex $v_i$ from $G_i$ and then find a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-v_i$.  Removing $v_i$ from $G_i$ is easy.  If $G_i-v_i$ is not already dom-minimal, then any violation of dom-minimality involves a vertex in $N_{G_i}(v_i)$.  Indeed, any violation of dom-minimality occurs because some vertex $x$ in $I(G_i)$ is in $B(G_i-v_i)$.  This causes the inner-degree of some vertex $v\in B(G_i)$ to drop below $2$ or causes some edge $vw$ on the outer face to no longer bound a triangle $vwx$ with $x$ being an inner vertex. $x$ of some triangular face $vwx$
+\paragraph{Handling the $2$-critical case:}
+When none of \cref{bg_high_degree,bg_two_three,bg_degree_zero,bg_leaf} apply, $G_i$ is $2$-critical.  In this case, we find the set $X$ guaranteed by \cref{two_critical_handler} by finding the sets $X_0$, $X_1$, and $X_2$ described in \cref{three_sets_coverage} and using the smallest of these.  To do this we first compute the critical generalized near-triangulation $H:=G_i-B(G_i)$ and consider each of its components separately.  For a component $C$ of $H$, it is easy to check in linear time if $C$ is an even wheel.  For a component $C$ of $G_i-B(G_i)$ that is not an even wheel, \cref{critical} applies.  In this case, we first compute the block-cut tree of $C$ using the algorithm of \citet{hopcroft.tarjan:efficient}, which implicitly identifies the biconnected components of $C$.
 
+If $C$ is biconnected then \cref{biconnected_critical} applies.  The proof of \cref{biconnected_critical} is by induction on the number of inner vertices of $C$.  In the base case $C$ is an edge-maximal outerplanar graph and the the partition of $V(C)$ into $\{X_0,X_1,X_2\}$ is obtained by properly $3$-colouring $C$, which is easily done using a linear-time greedy algorithm. If $C$ is not outerplanar, then we contract each inner vertex $x$ of $C$ into one of its neighbours $v$ on the outer face of $C$ (\cref{contraction_proof}).  Choosing $v$ can be done in $O(\deg_C(x))$ time using any neighbour of degree at at least $4$.  Once we have done this for each inner vertex $x$, the resulting graph is outerplanar and we use the $3$-colouring procedure from the previous paragraph.  Each contracted inner vertex $x$ is then placed into the same set as the vertex $v$ into which $x$ was contracted.
 
-    % This allows us to find the vertex $v_i\in B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$ in constant time.
+If $C$ is not biconnected, then we let $H'$ be a biconnected component of $C$ that corresponds to a leaf in the block-cut tree for $C$.  (This is the same graph $H'$ described in the proof of \cref{critical}.)  Since $C$ has no vertices of degree less than $2$, $H'$ is biconnected and has exactly one vertex $v$ in common with other biconnected components of $C$.  We then follow the procedure outlined in the proof of \cref{critical} and illustrated in \cref{critical_3_colouring}, which involves splitting $C$ into two subproblems (one of which is $H'$ the other of which is $H''$ or $H'''$).  The solution for $H'$ is obtained using the procedure for biconnected graphs described in the previous paragraph.  The other problem ($H''$ or $H'''$, which has fewer biconnected components than $C$) is solved recursively.  The sets generated in the solution for $H'$ are then renamed and merged with the sets obtained in the solution to the other problem.  Again, this is easily accomplished in linear time.
 
-
-    % If $\deg^+_{G_i}(v_i)\ge 3$ then we remove it. Removing $v_i$ causes some counters of vertices in $N_{G_i}(v_i)$ to decrease and causes some vertices in $N_{G_i}(v_i)$ to appear in $B(G_i-v_i)$ for the first time.  Since all of these counters decrease monotonically and a new vertex that appears on $B(G_i-v_i)$ remains there until its indegree becomes zero, the total time spent managing these counters is $O(n)$.
-
-
-
-
-
-
-    % \begin{compactenum}
-    %     \item Data structure that stores vertices in $B(G_i)$ ordered by inner-degree lets us find vertices of degree at least $3$ in constant time.
-
-    %     \item Data structure that stores $B(G_i-B(G_i))$ ordered by inner-degree in $G_i-B(G_i)$ lets us find the vertex $w$ in \cref{2_3_figure} in constant time.
-
-    %     \item The preceding structure also signals us when \cref{leaf_killer} and \cref{degree_zero_killer} are applicable.
-
-    %     \item Algorithms for implementing \cref{leaf_killer} (trivial) and \cref{degree_zero_killer} (trickier, because of special choice of $w$ and $uv$).
-
-    %     \item All of these need algorithms for dom-minimal reductions.
-    % \end{compactenum}
+Now we have computed a partition $\{X^C_0,X^C_1,X^C_2\}$ of $V(C)$, for each component $C$ of $H$ that is not an even wheel.  Finally, we use this to define the sets $\{X_0,X_1,X_2\}$ as described in the proof of \cref{three_sets_coverage}.  (This is where we deal with components of $H$ that are even wheels.)
 \end{proof}
 
 %%%%%%% The graph on surfaces section %%%%%
