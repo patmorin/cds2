@@ -101,15 +101,15 @@ In the current paper, we consider connected dominating sets in triangulations.  
 % \citet{kleitman.west:spanning} also show that graphs of minimum degree $4$ have connected dominating sets of size at most $(3n-8)/5<0.6n$. This result applies to triangulations of minimum degree $4$, which includes all $4$-connected triangulations.  The main result in this paper is the following:
 
 \begin{thm}\label{main_result2}
-  For every $n\ge 3$, every $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $10n/21= 0.\overline{476190}n$.
+  For every $n\ge 3$, every $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $10n/21= 0.\overline{476190}n$.  Furthermore, there exists an $O(n)$ time algorithm for finding $X$.
 \end{thm}
 
-The proof of \cref{main_result2} is constructive and gives an $O(n)$ time algorithm for finding the set $X$.  The best known lower bound for this problem is $n/3 = 0.33\overline{3} n$, obtained from a triangulation that contains $n/3$ vertex-disjoint pairwise-nested triangles $\Delta_1,\ldots,\Delta_{n/3}$.  In order to dominate $\Delta_1\cup \Delta_2$, any dominating set must contain at least two vertices in $\Delta_1 \cup \Delta_2$. In order to dominate $\Delta_{n/3-1}\cup \Delta_{n/3}$, any dominating set must contain two vertices in $\Delta_{n/3-1}\cup\Delta_{n/3}$.  Then, in order to be connected, any connected dominating set must contain a vertex in each of $\Delta_3,\ldots,\Delta_{n/3-2}$.
+The best known lower bound for this problem is $n/3 = 0.33\overline{3} n$, obtained from a triangulation that contains $n/3$ vertex-disjoint pairwise-nested triangles $\Delta_1,\ldots,\Delta_{n/3}$.  In order to dominate $\Delta_1\cup \Delta_2$, any dominating set must contain at least two vertices in $\Delta_1 \cup \Delta_2$. In order to dominate $\Delta_{n/3-1}\cup \Delta_{n/3}$, any dominating set must contain two vertices in $\Delta_{n/3-1}\cup\Delta_{n/3}$.  Then, in order to be connected, any connected dominating set must contain a vertex in each of $\Delta_3,\ldots,\Delta_{n/3-2}$.
 
 Connected dominating sets are closely related to spanning trees with many leaves.  If $X$ is a connected dominating set of a graph $G$, then $G$ has a spanning tree in which the vertices of $G-X$ are all leaves.  To see this, start with a spanning tree $T$ of $G[X]$ and then, for each  $v\in V(G)\setminus X$ choose some $x\in N_G(v)\cap X$ and add the edge $xv$ to $T$. Conversely, if $T$ is a spanning tree of $G$ with leaf set $L$, then $X:=V(T-L)$ is a connected dominating set of $G$.  Thus, \cref{main_result2} has the following equivalent statement:
 
 \begin{cor}\label{main_theorem_cor}
-  For every $n\ge 3$, every $n$-vertex triangulation $G$ has a spanning tree $T$ with at least $11n/21= 0.\overline{523809}n$ leaves.
+  For every $n\ge 3$, every $n$-vertex triangulation $G$ has a spanning tree $T$ with at least $11n/21= 0.\overline{523809}n$ leaves. Furthermore, there exists an $O(n)$ time algorithm for finding $T$.
 \end{cor}
 
 \Cref{main_theorem_cor} makes progress on the maxleaf spanning-tree problem for triangulations, explicitly posed by \citet[Question~4.2]{bradshaw.masarik.ea:robust}.  \Cref{main_theorem_cor} also answers a problem posed by \citet{noguchi.zamfirescu:spanning}, who asked if there exists some $\epsilon >0$ such that, for every sufficiently large $n$, every $n$-vertex $4$-connected triangulation has a spanning tree with at least $(1/2+\epsilon)n$ leaves.  \Cref{main_theorem_cor} gives an affirmative answer to this question (with $\epsilon=1/42$), even without the $4$-connectivity condition.
@@ -117,7 +117,7 @@ Connected dominating sets are closely related to spanning trees with many leaves
 A \defin{surface triangulation} is a graph $G$ embedded on a surface $\mathcal{S}$ in such a way that each face of the embedding is a topological disc whose boundary is a $3$-cycle in $G$.  The Euler genus of a surface triangulation is the Euler genus of the surface $\mathcal{S}$ on which $G$ is embedded.  Using existing techniques for slicing surface-embedded graphs, we obtain the following generalization of \cref{main_result2,main_theorem_cor}:
 
 \begin{thm}\label{genus_result}
-  For every $n\ge 3$, every $n$-vertex Euler genus-$g$ surface triangulation $G$ has a connected dominating set $X$ of size at most $10n/21 +O(\sqrt{gn})= 0.\overline{476190}n + O(\sqrt{gn})$.  Equivalently, $G$ has a spanning tree with at least $11n/21 -O(\sqrt{gn})=0.\overline{523809}n-O(\sqrt{gn})$ leaves.
+  For every $n\ge 3$, every $n$-vertex Euler genus-$g$ surface triangulation $G$ has a connected dominating set $X$ of size at most $10n/21 +O(\sqrt{gn})= 0.\overline{476190}n + O(\sqrt{gn})$.  Equivalently, $G$ has a spanning tree $T$ with at least $11n/21 -O(\sqrt{gn})=0.\overline{523809}n-O(\sqrt{gn})$ leaves.  Furthermore, there exists an $O(n)$ time algorithm for finding $X$ and $T$.
 \end{thm}
 
 
@@ -130,7 +130,7 @@ For bounded-degree planar graphs, this result can be improved to $|Y|=\Omega(n^{
 We consider a relaxation of this problem in which the edges of $G$ can be drawn as a polygonal path consisting of at most two line segments.  Such a drawing is called a \defin{one-bend} drawing of $G$. A subset $Y$ of $V(G)$ is a \defin{one-bend free set} if, for every $|Y|$-point set $P$,  $G$ has a one-bend drawing in which the vertices of $Y$ are mapped to the points in $P$.  We show that, for any spanning tree $T$ of $G$, the leaves of $T$ are a one-bend free set of $G$.  Combined with \cref{main_theorem_cor}, this gives:
 
 \begin{thm}\label{one_bend_collinear_thm}
-  For every $n\ge 3$, every $n$-vertex planar graph has a one-bend free set of size at least $11n/21=0.\overline{523809}n$.
+  For every $n\ge 3$, every $n$-vertex planar graph has a one-bend free set $L$ of size at least $11n/21=0.\overline{523809}n$.  Furthermore, there exists an $O(n)$ time algorithm for finding $L$.
 \end{thm}
 
 Note that if the point set $P$ is contained in the $x$-axis then no edge with both endpoints in $Y$ crosses the $x$-axis, so this one bend drawing is a $2$-page book-embedding of the induced graph $G[Y]$. This implies that $G[Y]$ is a spanning subgraph of some Hamiltonian triangulation $G[Y]^+$.  The Goldner–Harary graph is an $11$-vertex triangulation that is not Hamiltonian. It follows that the graph $G$ obtained by taking $k$ vertex-disjoint copies of the Goldner-Harary graph has $n:=11k$ vertices and has no one-bend free set of size greater than $10k=10n/11=0.90\overline{90}n$.
@@ -409,6 +409,7 @@ Let $H$ and $H'$ be two generalized near-triangulations.  We say that $H'$ \defi
 
     \hussein{do we mean
     $B(H^*) \subseteq B(H)$.} \pat{I think $B(H^\star)=B(H)$, no?} \hussein{Here if $v$ is not a vertex cut like the right most picture, then $v$ is deleted for ever. Right?}
+    \pat{As written above, $v$ is a vertex of $H^*$ on the outer face of $H^*$, so $B(H^*)=B(H)$.  Of course, $H^*$ is not dom-minimal (because $\deg^+_{H^*}(v)=0$), but that's ok it only has to dom-respect $H$ and have fewer edges.}
   \end{compactenum}
 \end{proof}
 
@@ -963,10 +964,11 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
   By \cref{simplify}, maximizing \cref{oobjective} subject to the constraints given by \cref{a,b} is a linear program in six variables $(x_3,a,b,c,|R|,|S|)$ which can be done easily.  The maximum is achieved when $x_3=a=b=c=|S|=0$, $c=(n-6)/7$ and $|R|=(2n+9)/7$, at which point \cref{oobjective} evaluates to $(10n-18)/21$.
 \end{proof}
 
+\Cref{better_greedy} establishes the combinatorial result in \cref{main_result2} and the following theorem establishes the algorithmic result.
 
-\begin{lem}
+\begin{thm}
     There exists a linear-time algorithm that implements $\textsc{BetterGreedy}(G)$.
-\end{lem}
+\end{thm}
 
 \begin{proof}
     The techniques needed to implement $\textsc{BetterGreedy}(G)$ in linear time are fairly standard for algorithms on embedded graphs, so we only sketch the main tools used.  There are three main tasks performed by $\textsc{BetterGreedy}(G)$:
@@ -983,16 +985,16 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
     \paragraph{Identifying $\Delta_i$:}
     To identify the set $\Delta_i$, we use $\beta$ to find the vertex $v_i\in B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  If $\deg^+_{G_i}(v_i)\ge 3$ then \cref{bg_high_degree} applies and there is nothing more to do.   Otherwise, we use $\zeta$ to identify the vertex $w\in B(G_i-B(G_i))$ that maximizes $\deg_{G_i-B(G_i)}(w)$.  If $\deg_{G_i-B(G_i)}(w)\ge 2$, then this vertex can be used as the vertex $w$ in \cref{bg_two_three}.  In this case, the vertices $u$ and $v$ can be found in $N_{G_i}(w)$ in $O(\deg_G(v))$ time.  If $\deg_{G_i-B(G_i)}(w)=1$ then \cref{bg_leaf} applies and the vertex $v_i\in N_{G_i}(w)$ can be found in $O(\deg_G(w))$ time (this is the vertex $v_1$ in \cref{killing_a_leaf}).  If $\deg_{G_i-B(G_i)}(w)=0$ then \cref{bg_degree_zero} applies.  The vertex $v_i\in N_{G_i}(w)$ can be found in $O(\deg_G(w))$ time (this is the vertex $v$ in \cref{isolated_fig}).
 
-% \hussein{I am not sure, if it is straightforward to do the updates on the data structure!, the insertion in $\beta$ is not $O(1)$, it might be $\log n$.}
-%
-% \pat{The insertion of $v$ into $\beta$ can be done in $O(\deg_G(v))$ time by starting at the small end of the list and stopping when we get to the correct bucket.  I added a note about this in the paragraph that describes $\beta$ and $\zeta$.}
+\hussein{I am not sure, if it is straightforward to do the updates on the data structure!, the insertion in $\beta$ is not $O(1)$, it might be $\log n$.}
 
-\paragraph{Computing $G_{i+1}$:}  After computing $\Delta_i$, we must compute a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-\Delta_i$.  Since $G_i$ was dom-minimal, the only violations of dom-minimality occur at vertices incident to vertices in $N^+_{G_i}(\Delta_i)$ and at edges incident to faces with a vertex in $N^+_{G_i}(\Delta_i)$.  In particular, violations of \cref{bad_vertex,inner_degree_1} can be detected when adjusting the counters of vertices adjacent to vertices in $N^+_{G_i}(\Delta_i)$.  Violations of \cref{bad_edge} can be detected by examining the inner faces incident to each vertex in $N^+_{G_i}(\Delta_i)$.  Fixing these violations involves removing two edges incident to a vertex \cref{bad_vertex}, removing two edges incident to a vertex and replacing them with a single edge \cref{inner_degree_1}, or removing a single edge \cref{bad_edge}.
+\pat{The insertion of $v$ into $\beta$ can be done in $O(\deg_G(v))$ time by starting at the small end of the list and stopping when we get to the correct bucket.  I added a note about this in the paragraph that describes $\beta$ and $\zeta$.}
+
+\paragraph{Computing $G_{i+1}$:}  After computing $\Delta_i$, we must compute a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-\Delta_i$.  Since $G_i$ was dom-minimal, the only violations of dom-minimality occur at vertices incident to vertices in $N^+_{G_i}(\Delta_i)$ and at edges incident to faces with a vertex in $N^+_{G_i}(\Delta_i)$.  In particular, violations of \cref{bad_vertex,inner_degree_1} can be detected when adjusting the counters of vertices adjacent to vertices in $N^+_{G_i}(\Delta_i)$.  Violations of \cref{bad_edge} can be detected by examining the inner faces incident to each vertex in $N^+_{G_i}(\Delta_i)$.  Fixing these violations involves removing a vertex of inner-degree $0$ \cref{bad_vertex}, removing two edges incident to a vertex \cref{bad_vertex}, removing two edges incident to a vertex and replacing them with a single edge \cref{inner_degree_1}, or removing a single edge \cref{bad_edge}.
 
 \paragraph{Handling the $2$-critical case:}
 When none of \cref{bg_high_degree,bg_two_three,bg_degree_zero,bg_leaf} apply, $G_i$ is $2$-critical.  In this case, we find the set $X$ guaranteed by \cref{two_critical_handler} by finding the sets $X_0$, $X_1$, and $X_2$ described in \cref{three_sets_coverage} and using the smallest of these.  To do this we first compute the critical generalized near-triangulation $H:=G_i-B(G_i)$ and consider each of its components separately.  For a component $C$ of $H$, it is easy to check in linear time if $C$ is an even wheel.  For a component $C$ of $G_i-B(G_i)$ that is not an even wheel, \cref{critical} applies.  In this case, we first compute the block-cut tree of $C$ using the algorithm of \citet{hopcroft.tarjan:efficient}, which implicitly identifies the biconnected components of $C$.
 
-If $C$ is biconnected then \cref{biconnected_critical} applies.  The proof of \cref{biconnected_critical} is by induction on the number of inner vertices of $C$.  In the base case $C$ is an edge-maximal outerplanar graph and the the partition of $V(C)$ into $\{X_0,X_1,X_2\}$ is obtained by properly $3$-colouring $C$, which is easily done using a linear-time greedy algorithm. If $C$ is not outerplanar, then we contract each inner vertex $x$ of $C$ into one of its neighbours $v$ on the outer face of $C$ (\cref{contraction_proof}).  Choosing $v$ can be done in $O(\deg_C(x))$ time using any neighbour of degree at at least $4$.  Once we have done this for each inner vertex $x$, the resulting graph is outerplanar and we use the $3$-colouring procedure from the previous paragraph.  Each contracted inner vertex $x$ is then placed into the same set as the vertex $v$ into which $x$ was contracted.
+If $C$ is biconnected then \cref{biconnected_critical} applies.  The proof of \cref{biconnected_critical} is by induction on the number of inner vertices of $C$.  In the base case $C$ is an edge-maximal outerplanar graph and the the partition of $V(C)$ into $\{X_0,X_1,X_2\}$ is obtained by properly $3$-colouring $C$, which is easily done using a linear-time greedy algorithm. If $C$ is not outerplanar, then we contract each inner vertex $x$ of $C$ into one of its neighbours $v$ on the outer face of $C$ (\cref{contraction_proof}).  Choosing $v$ can be done in $O(\deg_C(x))$ time using any neighbour of degree at at least $4$.  Once we have done this for each inner vertex $x$, the resulting graph is outerplanar and we use the $3$-colouring procedure from the previous paragraph.  Each contracted inner vertex $x$ is then placed into the  same set as the vertex $v$ into which $x$ was contracted.
 
 If $C$ is not biconnected, then we let $H'$ be a biconnected component of $C$ that corresponds to a leaf in the block-cut tree for $C$.  (This is the same graph $H'$ described in the proof of \cref{critical}.)  Since $C$ has no vertices of degree less than $2$, $H'$ is biconnected and has exactly one vertex $v$ in common with other biconnected components of $C$.  We then follow the procedure outlined in the proof of \cref{critical} and illustrated in \cref{critical_3_colouring}, which involves splitting $C$ into two subproblems (one of which is $H'$ the other of which is $H''$ or $H'''$).  The solution for $H'$ is obtained using the procedure for biconnected graphs described in the previous paragraph.  The other problem ($H''$ or $H'''$, which has fewer biconnected components than $C$) is solved recursively.  The sets generated in the solution for $H'$ are then renamed and merged with the sets obtained in the solution to the other problem.  Again, this is easily accomplished in linear time.
 
@@ -1089,7 +1091,7 @@ We prove that the leaves of a spanning tree of a planar graph induce a one-bend 
 \end{proof}
 
 \begin{proof}[Proof of \cref{one_bend_collinear_thm}]
-Let $G$ be an $n$-vertex planar graph. \cref{main_result2} implies that $G$ has a spanning tree with at least $11n/21$ leaves. Using this tree in \cref{spanning_tree_to_collinear_set} establishes \cref{one_bend_collinear_thm}.
+Let $G$ be an $n$-vertex planar graph. \cref{main_result2} implies that $G$ has a spanning tree with at least $11n/21$ leaves that can be computed in $O(n)$ time. Using this tree in \cref{spanning_tree_to_collinear_set} establishes \cref{one_bend_collinear_thm}.
 \end{proof}
 
 \section{Discussion}
