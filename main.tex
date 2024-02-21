@@ -412,7 +412,7 @@ Let $H$ and $H'$ be two generalized near-triangulations.  We say that $H'$ \defi
     \item \cref{inner_degree_1}: If there exists a vertex $v\in B(C)$ with $\deg^+_C(v)=1$ then $H$ contains faces $xvw$ and $vyw$ where $w$ is an inner vertex.  If Case~1 does not apply to either of the two edges on the outer face of $C$ incident to $v$ then $x$ and $y$ are on the outer face of $C$. If $H[N_C[v]]$ is not isomorphic to $K_4$, then $xy\not\in E(H)$.  In this case, let $H^\star$ be the graph obtained from $H$ by removing the edge $vw$ and replacing the edges $xv$ and $vy$ with the edge $xy$. Then $H^\star$ is a generalized near-triangulation, $B(H^*)=B(H)$, $I(H^*)=I(H)$, and $N_{H^*}(v)\cap I(H)\subseteq N_{H}(v)\cap I(H)$.  Therefore $H^\star$ dom-respects $H$ and has fewer edges than $H$. \qedhere
 
     \hussein{do we mean
-    $B(H^*) \subseteq B(H)$.} \pat{I think $B(H^\star)=B(H)$, no?}
+    $B(H^*) \subseteq B(H)$.} \pat{I think $B(H^\star)=B(H)$, no?} \hussein{Here if $v$ is not a vertex cut like the right most picture, then $v$ is deleted for ever. Right?}
   \end{compactenum}
 \end{proof}
 
@@ -737,7 +737,7 @@ A generalized near-triangulation $H$ is \defin{$2$-critical} if
   Let $H$ be a $2$-critical generalized near-triangulation.  Then there exists $X\subseteq V(H)$ of size at most $(2|B(H-B(H))| + I(H-B(H)))/3$ that dominates $I(H)$ and such that each component of $H[X]$ contains at least one vertex in $B(H)$.
 \end{lem}
 
-\hussein{Here, I think this isomorphism is caused by being critical not necessarily dom-minimal.} \pat{No, this graph is $2$-critical, but has a vertex of inner degree 1.\\ \includegraphics{figs/2-critical-not-degree-2}}
+% \hussein{Here, I think this isomorphism is caused by being critical not necessarily dom-minimal.} \pat{No, this graph is $2$-critical, but has a vertex of inner degree 1.\\ \includegraphics{figs/2-critical-not-degree-2}}
 
 \begin{lem}
   Let $H$ be a dom-minimal $2$-critical generalized near-triangulation.  Then $\deg^+_H(v)=2$ for all $v\in B(H)$.
@@ -766,7 +766,7 @@ For each integer $r\ge 3$, the \defin{$r$-wheel} $W_r$ is the near-triangulation
   \label{biconnected_critical_colouring}
 \end{figure}
 
-\hussein{probably, we can have shorter proof for the following lemma.}
+%\hussein{probably, we can have shorter proof for the following lemma.}
 \begin{lem}\label{biconnected_critical}
   Let $H$ be a biconnected critical generalized near-triangulation with at least $3$ vertices and not isomorphic to $W_k$ for any even integer $k$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
   \begin{compactenum}[(i)]
@@ -973,10 +973,11 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
 
 
 \begin{lem}
-    There exists a linear-time algorithm that implements $\textsc{SimpleGreedy}(G)$.
+    There exists a linear-time algorithm that implements $\textsc{BetterGreedy}(G)$.
 \end{lem}
 
 \pat{I'm working here...}
+
 \begin{proof}
     There are three main tasks required to implement the algorithm:
     \begin{compactenum}
@@ -989,33 +990,41 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
 
     \paragraph{Identifying $\Delta_i$:}
     To identify the set $\Delta_i$ use $\beta$ to find the vertex $v_i\in B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  If $\deg^+_{G_i}(v_i)\ge 3$ then \cref{bg_high_degree} applies and there is nothing more to do.   Otherwise, we use $\zeta$ to identify the vertex $w\in B(G_i-B(G_i))$ that maximizes $\deg_{G_i-B(G_i)}(w)$.  If $\deg_{G_i-B(G_i)}(w)\ge 2$, then this vertex can be used as the vertex $w$ in \cref{bg_two_three}.  In this case, the vertices $u$ and $v$ can be found in $N_{G_i}(w)$ in $O(\deg_G(v))$ time.  If $\deg_{G_i-B(G_i)}(w)=1$ then \cref{bg_leaf} applies and the vertex $v_i\in N_{G_i}(w)$ can be found in $O(\deg_G(w))$ time (this is the vertex $v_1$ in \cref{killing_a_leaf}).  If $\deg_{G_i-B(G_i)}(w)=0$ then \cref{bg_degree_zero} applies.  The vertex $v_i\in N_{G_i}(w)$ can be found in $O(\deg_G(w))$ time (this is the vertex $v$ in \cref{isolated_fig}).
+    
+\hussein{I am not sure, if it is straightforward to do the updates on the data structure!, the insertion in $\beta$ is not $O(1)$, it might be $\log n$.}
 
-    \paragraph{Computing $G_{i+1}$:}  After computing $\Delta_i$, we must computing a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-\Delta_i$.  Since $G_i$ was dom-minimal, the only violations of dom-minimality occur at vertices incident to vertices in $N^+_{G_i}(\Delta_i)$ and at edges incident to faces with a vertex in $N^+_{G_i}(\Delta_i)$.  In particular, violations of \cref{bad_vertex,inner_degree_1} can be detected when adjusting the counters of vertices adjacent to vertices in $N^+_{G_i}(\Delta_i)$.  Violations of \cref{bad_edge} can be detected by examining the inner faces incident to each vertex in $N^+_{G_i}(\Delta_i)$. 
+\pat{The insertion of $v$ into $\beta$ can be done in $O(\deg_G(v))$ time by starting at the small end of the list and stopping when we get to the correct bucket.}
+    
+    \paragraph{Computing $G_{i+1}$:}  After computing $\Delta_i$, we must compute a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-\Delta_i$.  Since $G_i$ was dom-minimal, the only violations of dom-minimality occur at vertices incident to vertices in $N^+_{G_i}(\Delta_i)$ and at edges incident to faces with a vertex in $N^+_{G_i}(\Delta_i)$.  In particular, violations of \cref{bad_vertex,inner_degree_1} can be detected when adjusting the counters of vertices adjacent to vertices in $N^+_{G_i}(\Delta_i)$.  Violations of \cref{bad_edge} can be detected by examining the inner faces incident to each vertex in $N^+_{G_i}(\Delta_i)$. 
 
-    In each of these cases, we remove a vertex $v_i$ from $G_i$ and then find a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-v_i$.  Removing $v_i$ from $G_i$ is easy.  If $G_i-v_i$ is not already dom-minimal, then any violation of dom-minimality involves a vertex in $N_{G_i}(v_i)$.  Indeed, any violation of dom-minimality occurs because some vertex $x$ in $I(G_i)$ is in $B(G_i-v_i)$.  This causes the inner-degree of some vertex $v\in B(G_i)$ to drop below $2$ or causes some edge $vw$ on the outer face to no longer bound a triangle $vwx$ with $x$ being an inner vertex. $x$ of some triangular face $vwx$
+    \paragraph{Handling the $2$-critical case:}
+    When none of \cref{bg_high_degree,bg_two_three,bg_degree_zero,bg_leaf} apply, $G_i$ is $2$-critical.  In this case, 
 
-
-    This allows us to find the vertex $v_i\in B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$ in constant time.
-
-
-    If $\deg^+_{G_i}(v_i)\ge 3$ then we remove it. Removing $v_i$ causes some counters of vertices in $N_{G_i}(v_i)$ to decrease and causes some vertices in $N_{G_i}(v_i)$ to appear in $B(G_i-v_i)$ for the first time.  Since all of these counters decrease monotonically and a new vertex that appears on $B(G_i-v_i)$ remains there until its indegree becomes zero, the total time spent managing these counters is $O(n)$.
-
-
-
-
+    
+    % In each of these cases, we remove a vertex $v_i$ from $G_i$ and then find a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-v_i$.  Removing $v_i$ from $G_i$ is easy.  If $G_i-v_i$ is not already dom-minimal, then any violation of dom-minimality involves a vertex in $N_{G_i}(v_i)$.  Indeed, any violation of dom-minimality occurs because some vertex $x$ in $I(G_i)$ is in $B(G_i-v_i)$.  This causes the inner-degree of some vertex $v\in B(G_i)$ to drop below $2$ or causes some edge $vw$ on the outer face to no longer bound a triangle $vwx$ with $x$ being an inner vertex. $x$ of some triangular face $vwx$
 
 
-    \begin{compactenum}
-        \item Data structure that stores vertices in $B(G_i)$ ordered by inner-degree lets us find vertices of degree at least $3$ in constant time.
+    % This allows us to find the vertex $v_i\in B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$ in constant time.
 
-        \item Data structure that stores $B(G_i-B(G_i))$ ordered by inner-degree in $G_i-B(G_i)$ lets us find the vertex $w$ in \cref{2_3_figure} in constant time.
 
-        \item The preceding structure also signals us when \cref{leaf_killer} and \cref{degree_zero_killer} are applicable.
+    % If $\deg^+_{G_i}(v_i)\ge 3$ then we remove it. Removing $v_i$ causes some counters of vertices in $N_{G_i}(v_i)$ to decrease and causes some vertices in $N_{G_i}(v_i)$ to appear in $B(G_i-v_i)$ for the first time.  Since all of these counters decrease monotonically and a new vertex that appears on $B(G_i-v_i)$ remains there until its indegree becomes zero, the total time spent managing these counters is $O(n)$.
 
-        \item Algorithms for implementing \cref{leaf_killer} (trivial) and \cref{degree_zero_killer} (trickier, because of special choice of $w$ and $uv$).
 
-        \item All of these need algorithms for dom-minimal reductions.
-    \end{compactenum}
+
+
+
+
+    % \begin{compactenum}
+    %     \item Data structure that stores vertices in $B(G_i)$ ordered by inner-degree lets us find vertices of degree at least $3$ in constant time.
+
+    %     \item Data structure that stores $B(G_i-B(G_i))$ ordered by inner-degree in $G_i-B(G_i)$ lets us find the vertex $w$ in \cref{2_3_figure} in constant time.
+
+    %     \item The preceding structure also signals us when \cref{leaf_killer} and \cref{degree_zero_killer} are applicable.
+
+    %     \item Algorithms for implementing \cref{leaf_killer} (trivial) and \cref{degree_zero_killer} (trickier, because of special choice of $w$ and $uv$).
+
+    %     \item All of these need algorithms for dom-minimal reductions.
+    % \end{compactenum}
 \end{proof}
 
 %%%%%%% The graph on surfaces section %%%%%
