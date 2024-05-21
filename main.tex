@@ -105,7 +105,14 @@ In the current paper, we consider connected dominating sets in triangulations.  
   For every $n\ge 3$, every $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $10n/21= 0.\overline{476190}n$.  Furthermore, there exists an $O(n)$ time algorithm for finding $X$.
 \end{thm}
 
-The best known lower bound for this problem is $n/3 = 0.33\overline{3} n$, obtained from a triangulation that contains $n/3$ vertex-disjoint pairwise-nested triangles $\Delta_1,\ldots,\Delta_{n/3}$.\todo{Add figure showing the triangulation here.}  In order to dominate $\Delta_1\cup \Delta_2$, any dominating set must contain at least two vertices in $\Delta_1 \cup \Delta_2$. In order to dominate $\Delta_{n/3-1}\cup \Delta_{n/3}$, any dominating set must contain two vertices in $\Delta_{n/3-1}\cup\Delta_{n/3}$.  Then, in order to be connected, any connected dominating set must contain a vertex in each of $\Delta_3,\ldots,\Delta_{n/3-2}$.
+The best known lower bound for this problem, illustrated in \cref{lower_bound}, is $n/3 = 0.33\overline{3} n$, obtained from a triangulation that contains $n/3$ vertex-disjoint pairwise-nested triangles $\Delta_1,\ldots,\Delta_{n/3}$.  In order to dominate $\Delta_1\cup \Delta_2$, any connected dominating set must contain at least two vertices in $\Delta_1 \cup \Delta_2$. In order to dominate $\Delta_{n/3-1}\cup \Delta_{n/3}$, any connected dominating set must contain at least two vertices in $\Delta_{n/3-1}\cup\Delta_{n/3}$.  Then, in order to be connected, any connected dominating set must contain a vertex in each of $\Delta_3,\ldots,\Delta_{n/3-2}$.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{figs/nover3}
+  \caption{A triangulation with $n=3k$ vertices whose smallest connected dominating set has size $n/3$.}
+  \label{lower_bound}
+\end{figure}
 
 Connected dominating sets are closely related to spanning trees with many leaves.  If $X$ is a connected dominating set of a graph $G$, then $G$ has a spanning tree in which the vertices of $G-X$ are all leaves.  To see this, start with a spanning tree $T$ of $G[X]$ and then, for each  $v\in V(G)\setminus X$ choose some $x\in N_G(v)\cap X$ and add the edge $xv$ to $T$. Conversely, if $T$ is a spanning tree of $G$ with leaf set $L$, then $X:=V(T-L)$ is a connected dominating set of $G$.  Thus, \cref{main_result2} has the following equivalent statement:
 
@@ -345,14 +352,21 @@ When this is no longer possible, the algorithm will be forced to directly handle
 
 \subsection{Dom-Minimal Dom-Respecting Graphs}
 
-We begin by identifying unnecessary vertices and edges that can appear in the graphs $G_1,\ldots,G_{r-1}$ during the construction of $X$.   We say that a near-triangulation $H$ is \defin{dom-minimal} if
+We begin by identifying unnecessary vertices and edges that can appear in the graphs $G_1,\ldots,G_{r-1}$ during the construction of $X$. Refer to \cref{dom_minimal_fig}.   We say that a near-triangulation $H$ is \defin{dom-minimal} if
 \begin{compactenum}[({DM}1)]
     \item each vertex $v\in B(H)$ has $\deg^+_H(v)\ge 1$;  \label[dm]{bad_vertex}
     \item for each $v\in B(H)$ with $\deg^+_H(v)=1$,  $H[N_H[v]]$ is isomorphic to $K_4$; and \label[dm]{inner_degree_1}
     \item each edge $vw$ on the boundary of the outer face of $H$ is also on the boundary of some inner face $vwx$ of $H$, where $x\in I(H)$. \label[dm]{bad_edge}
     % \saeed{this sentence looks unclear }
 \end{compactenum}
-\todo{Illustrate \cref{bad_vertex,inner_degree_1,bad_edge} with a figure.}We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each of its biconnected components are dom-minimal.
+We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each of its biconnected components are dom-minimal.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[page=2]{figs/dom_minimal}
+  \caption{A generalized near-triangulation that is not dom-minimal. The \textcolor{red}{red} vertex violates \cref{bad_vertex}, the \textcolor{green}{green} vertex violates \cref{inner_degree_1}, and the \textcolor{red}{red} edges violate \cref{bad_edge}}
+  \label{dom_minimal_fig}
+\end{figure}
 
 \begin{obs}\label{bridgeless}
     Any dom-minimal generalized near-triangulation $H$ is bridgeless.
@@ -981,13 +995,13 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
     For an efficient implementation, the triangulation $G$ should be stored in some data structure for storing embedded planar graphs that allows the removal of edges (given a pointer) in constant time. For example, a doubly-connected edge-list \cite{muller.preparata:finding} is sufficient.
 
     The other main data structuring tool used to accomplish these steps efficiently is a technique for storing a sorted list of counters.  Each vertex $v$ of $G$ maintains a counter $\delta_i(v):=|N_G(v)\cap I(G_i)|$.  The vertices in $B(G_i)$ are kept in a doubly list of lists $\beta$.  Each item in $\beta$ is itself a doubly-linked list, called a \defin{bucket} that stores a non-empty set $\beta_d:=\{v\in B(G_i):\delta_i(v)=d\}$ for some specific value of $d$. Then $\beta$ itself is a doubly-linked list that stores the buckets by increasing value of $d$.  A similar structure $\zeta$ is used to store the vertices of $B(G_i-B(G_i))$ ordered by $\delta_i(v)$.  Note that, for $v\in B(G_i)$, $\delta_i(v)=\deg^+_{G_i}(v)$ and that, for $w\in B(G_i-B(G_i))$, $\delta_i(w)=\deg_{G_i-B(G_i)}(w)$.  Finally, a third structure $\Phi$ is used to store the vertices of $B(G_i-B(G_i))$ where the counter for each $w\in B(G_i-B(G_i))$ is equal to $\deg^+_{G_i-B(G_i)}(w)$.
-    
+
     Since the value of $\delta_i(v)$ and $\deg^+_{G_i-B(G_i)}(w)$ decreases monotonically as $i$ increases, $\sum_{v\in V(G)}\delta_0(v)<6(n-2)$, and each vertex enters and leaves each of $\beta$, $\zeta$, and $\Phi$ at most once, it is straightforward to maintain $\beta$, $\zeta$, and $\Phi$ so that all operations on them take a total of $O(n)$ time over the entire execution of the algorithm. (When a vertex $v$ enters $B(G_i)$ (i.e., $\beta$) or $B(G-B(G_i))$ (i.e., $\zeta$ and $\Phi$) for the first time, it can be inserted in $O(\delta_i(v))=O(\deg_G(v))$ time.) From this point on, we will no longer discuss the maintenance of these lists, but we will use them to identify the vertex $v_i$, or the vertices $u,v,w$ when needed.
 
     \paragraph{Identifying $\Delta_i$:}
     To identify the set $\Delta_i$, we use $\beta$ to find the vertex $v_i\in B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  If $\deg^+_{G_i}(v_i)\ge 3$ then \cref{bg_high_degree} applies and there is nothing more to do.   Otherwise, we use $\zeta$ to identify the vertex $x\in B(G_i-B(G_i))$ that maximizes $\deg_{G_i-B(G_i)}(x)$.  If $\deg_{G_i-B(G_i)}(x)=1$ then \cref{bg_leaf} applies and the vertex $v_i\in N_{G_i}(x)$ can be found in $O(\deg_G(x))$ time (this is the vertex $v_1$ in \cref{killing_a_leaf}).  If $\deg_{G_i-B(G_i)}(x)=0$ then \cref{bg_degree_zero} applies.  The vertex $v_i\in N_{G_i}(x)$ can be found in $O(\deg_G(x))$ time (this is the vertex $v$ in \cref{isolated_fig}).  If $\deg_{G_i-B(G_i)}(x)\ge 2$, then we use $\Phi$ to identify the vertex $w\in B(G_i-B(G_i))$ that maximizes $\deg^+_{G_i-B(G_i)}(w)$.  If  $\deg^+_{G_i-B(G_i)}(w)\ge 2$ then this vertex can be used as the vertex $w$ in \cref{bg_two_three}.  In this case, the vertices $u$ and $v$ can be found in $N_{G_i}(w)$ in $O(\deg_G(w))$ time.
 
-\paragraph{Computing $G_{i+1}$:}  After computing $\Delta_i$, we must compute a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-\Delta_i$.  Since $G_i$ was dom-minimal, the only violations of dom-minimality occur at vertices incident to vertices in $N^+_{G_i}(\Delta_i)$ and at edges incident to faces with a vertex in $N^+_{G_i}(\Delta_i)$.  In particular, violations of \cref{bad_vertex,inner_degree_1} can be detected when adjusting the counters of vertices adjacent to vertices in $N^+_{G_i}(\Delta_i)$.  Violations of \cref{bad_edge} can be detected by examining the inner faces incident to each vertex in $N^+_{G_i}(\Delta_i)$.  Fixing these violations involves removing a vertex of inner-degree $0$ \cref{bad_vertex}, removing two edges incident to a vertex \cref{bad_vertex}, removing two edges incident to a vertex and replacing them with a single edge \cref{inner_degree_1}, or removing a single edge \cref{bad_edge}. 
+\paragraph{Computing $G_{i+1}$:}  After computing $\Delta_i$, we must compute a dom-minimal graph $G_{i+1}$ that dom-respects $G_i-\Delta_i$.  Since $G_i$ was dom-minimal, the only violations of dom-minimality occur at vertices incident to vertices in $N^+_{G_i}(\Delta_i)$ and at edges incident to faces with a vertex in $N^+_{G_i}(\Delta_i)$.  In particular, violations of \cref{bad_vertex,inner_degree_1} can be detected when adjusting the counters of vertices adjacent to vertices in $N^+_{G_i}(\Delta_i)$.  Violations of \cref{bad_edge} can be detected by examining the inner faces incident to each vertex in $N^+_{G_i}(\Delta_i)$.  Fixing these violations involves removing a vertex of inner-degree $0$ \cref{bad_vertex}, removing two edges incident to a vertex \cref{bad_vertex}, removing two edges incident to a vertex and replacing them with a single edge \cref{inner_degree_1}, or removing a single edge \cref{bad_edge}.
 
 % \hussein{Our definition of 2-critical, is not when bg1,2,3,4 do not apply. Rather than all the element in $\zeta$ either in bucket $\zeta_1$ or $\zeta_2$.}
 % \pat{If \cref{bg_high_degree} doesn't apply, then $\deg^+_{G_i}(v)\le 2$ for all $v\in B(G_i)$---that's (2-C1).  If \cref{bg_two_three} doesn't apply then $G-B(G_i)$ is critical---that's (2-C2).  If \cref{bg_leaf,bg_degree_zero} don't apply then $\deg_{G_i-B(G_i)}(w)\ge 2$ for all $w\in V(G_i-B(G_i))$---that's (2-C3).}
@@ -996,7 +1010,7 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
 
 
 
-% \pat{There is an issue, though, and it's that I didn't specify what the counter values are in $\zeta$, and I was using them two different ways:  To deal with \cref{bg_leaf,bg_degree_zero} we need to know $\deg_{G_i-B(G_i)}(w)=\delta_i(w)$.  But to deal with \cref{bg_two_three} we need to know $\deg^+_{G_i-B(G_i)}(w)$. 
+% \pat{There is an issue, though, and it's that I didn't specify what the counter values are in $\zeta$, and I was using them two different ways:  To deal with \cref{bg_leaf,bg_degree_zero} we need to know $\deg_{G_i-B(G_i)}(w)=\delta_i(w)$.  But to deal with \cref{bg_two_three} we need to know $\deg^+_{G_i-B(G_i)}(w)$.
 %  This means we need a third sorted counter structure $\Phi$ that stores $\deg^+_{G_i-B(G_i)}(w)$ for the vertices in $B(G_i-B(G_i))$.  I've added this.}
 
 \paragraph{Handling the $2$-critical case:}
