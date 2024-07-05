@@ -92,14 +92,14 @@
 
 \section{Introduction}
 
-A set $X$ of vertices in a graph $G$ is a \defin{dominating set} of $G$ if each vertex of $G$ is in $X$ or adjacent to a vertex in $X$.\footnote{Any graph $G$ that we consider in this paper is a finite undirected graph without self-loops and without parallel edges, with vertex set $V(G)$ and edge set $E(G)$.}  A dominating set $X$ of $G$ is \defin{connected} if the subgraph $G[X]$ of $G$ induced by the vertices in $X$ is connected.  There is an enormous body of literature on dominating sets. Several books are devoted to the topic \cite{haynes.hedetniemi.ea:domination,haynes.hedetniemi.ea:topics,du.wan:connected,haynes.hedetniemi.ea:vol2}, including a book and book chapter devoted to connected dominating sets \cite{du.wan:connected,chellali.favaron:connected}. 
-% \vida{should we note that only connected graphs have connected dominating sets, thus we study he problem in connected and simple graphs} 
+A set $X$ of vertices in a graph $G$ is a \defin{dominating set} of $G$ if each vertex of $G$ is in $X$ or adjacent to a vertex in $X$.\footnote{Any graph $G$ that we consider in this paper is a finite undirected graph without self-loops and without parallel edges, with vertex set $V(G)$ and edge set $E(G)$.}  A dominating set $X$ of $G$ is \defin{connected} if the subgraph $G[X]$ of $G$ induced by the vertices in $X$ is connected.  There is an enormous body of literature on dominating sets. Several books are devoted to the topic \cite{haynes.hedetniemi.ea:domination,haynes.hedetniemi.ea:topics,du.wan:connected,haynes.hedetniemi.ea:vol2}, including a book and book chapter devoted to connected dominating sets \cite{du.wan:connected,chellali.favaron:connected}.
+% \vida{should we note that only connected graphs have connected dominating sets, thus we study he problem in connected and simple graphs}
 % \pat{I vote no.}
 A typical result in the area is an upper bound of the form: ``Every $n$-vertex graph in some family $\mathcal{G}$ of graphs has a (connected) dominating set of size at most $f(n)$.'' or a lower bound of the form ``For infinitely many $n$, there exists an $n$-vertex member of $\mathcal{G}$ with no (connected) dominating set of size less than $g(n)$.''
 
 % \vida{Added this paragraph. Wanted to somehow immediatly make a connection. Do we keep it or?}
-Connected dominating sets are complementary to the leaves of spanning trees: a set of vertices $X$ is a connected dominating set of a graph $G$ if and only if $G$ has a spanning tree in which the vertices of $G-X$ are all leaves. Thus, connected dominating sets are studied implicitly in the literature on spanning trees with many leaves \citep{DBLP:journals/jgt/DingJS01, kleitman.west:spanning, kleitman.west:spanning, doi:10.1137/100801251,doi:10.1137/060664318, DBLP:conf/esa/BousquetI0MOSW20, noguchi.zamfirescu:spanning}. A closely related and extensively studied notion is that of spanning trees with no degree two vertices, known as \emph{homeomorphically irreducible spanning trees} \citep{chen.ren.ea:homeomorphically,albertson.berman.ea:graphs,CHEN2013409, DBLP:journals/jgt/ItoT22, DBLP:journals/jgt/Hoffmann-Ostenhof18a, gessel2023good}.  Since a $n$-vertex tree with no degree $2$-vertices has at least $n/2+1$ leaves, the existence of a homeomorphically irreducible spanning tree implies the existence of a spanning tree with at least $n/2+1$ leaves (and the existence of a connected dominating set of size at most $n/2-1$).
-% % as  
+Connected dominating sets are complementary to the leaves of spanning trees: a set of vertices $X$ is a connected dominating set of a graph $G$ if and only if $G$ has a spanning tree in which the vertices of $G-X$ are all leaves. Thus, connected dominating sets are studied implicitly in the literature on spanning trees with many leaves \citep{DBLP:journals/jgt/DingJS01, kleitman.west:spanning, kleitman.west:spanning, doi:10.1137/100801251,doi:10.1137/060664318, DBLP:conf/esa/BousquetI0MOSW20, noguchi.zamfirescu:spanning}. A closely related and extensively studied notion is that of spanning trees with no degree two vertices, known as \emph{homeomorphically irreducible spanning trees} \citep{chen.ren.ea:homeomorphically,albertson.berman.ea:graphs,CHEN2013409, DBLP:journals/jgt/ItoT22, DBLP:journals/jgt/Hoffmann-Ostenhof18a, gessel2023good}.  Since an $n$-vertex tree with no degree $2$-vertices has at least $n/2+1$ leaves, the existence of a homeomorphically irreducible spanning tree implies the existence of a spanning tree with at least $n/2+1$ leaves (and the existence of a connected dominating set of size at most $n/2-1$).
+% % as
 %  they imply $n/2$ upper bound on connected dominating sets and $n/2$ lower bound on the number of leaves, as discussed in the next section.
 
 % \vida{Also, our problem is related to Good Will Hunting problem :D \citet{gessel2023good}}
@@ -112,13 +112,13 @@ The focus of the current paper is on the existence of small connected dominating
 
 \subsection{Triangulations}
 
-A \defin{triangulation} is an edge-maximal planar graph.  \citet{matheson.tarjan:dominating} proved that every $n$-vertex triangulation has a dominating set of size at most $n/3=0.33\overline{3}n$ and that there exists $n$-vertex triangulations with no dominating set of size less than $n/4=0.25n$. The gap between these upper and lower bounds stood for over $20$ years until a recent breakthrough by \citet{spacapan:domination} reduced the upper bound to $17n/53\approx 0.32075471698n$.  This was swiftly followed by an improvement to $2n/7= 0.2\overline{857142}n$ by \citet{christiansen.rotenberg.ea:triangulations}. 
+A \defin{triangulation} is an edge-maximal planar graph.  \citet{matheson.tarjan:dominating} proved that every $n$-vertex triangulation has a dominating set of size at most $n/3=0.33\overline{3}n$ and that there exists $n$-vertex triangulations with no dominating set of size less than $n/4=0.25n$. The gap between these upper and lower bounds stood for over $20$ years until a recent breakthrough by \citet{spacapan:domination} reduced the upper bound to $17n/53\approx 0.32075471698n$.  This was swiftly followed by an improvement to $2n/7= 0.2\overline{857142}n$ by \citet{christiansen.rotenberg.ea:triangulations}.
 % \vida{Updated this ref}
 
 In the current paper, we consider connected dominating sets in triangulations.  An easy consequence of the proof used by \citet{matheson.tarjan:dominating} is that $n$-vertex triangulations have connected dominating sets of size at most $2n/3=0.66\overline{6}n$.  A more general result, due to  \citet{kleitman.west:spanning} shows that graphs of minimum-degree $3$ in which each edge is included in a $3$-cycle have connected dominating sets of size at most $2(n-5)/3<0.66\overline{6}n$. \citet{albertson.berman.ea:graphs} prove that every triangulation has a homeomorphically irreducible spanning tree which, as discussed above, implies that every triangulation has a connected dominating set of size at most $n/2-1<0.5n$.
-% $T$ with no vertices of degree $2$ (that is, homeomorphically irreducible spanning trees), which implies that the number of leaves of $T$ exceeds the number of non-leaves by at least $2$.  In particular, the number of leaves is greater than $(n+2)/2$. Thus, the set $X$ of non-leaf vertices of $T$ is a connected dominating set of size at most $(n-2)/2<0.5n$.  
+% $T$ with no vertices of degree $2$ (that is, homeomorphically irreducible spanning trees), which implies that the number of leaves of $T$ exceeds the number of non-leaves by at least $2$.  In particular, the number of leaves is greater than $(n+2)/2$. Thus, the set $X$ of non-leaf vertices of $T$ is a connected dominating set of size at most $(n-2)/2<0.5n$.
 \citet{chen.ren.ea:homeomorphically} give a significant generalization of this result, which applies to any connected graph $G$ in which the graph induced by the neighbours of each vertex is connected.
-Answering an open problem by \citet{albertson.berman.ea:graphs} and confirming the conjecture of Archdeacon \citep{Gross_Tucker_2009}, \citet{CHEN2013409} generalize this result to graphs in which every edge is in at least two $3$-cycles.  
+Answering an open problem by \citet{albertson.berman.ea:graphs} and confirming the conjecture of Archdeacon \citep{Gross_Tucker_2009}, \citet{CHEN2013409} generalize this result to graphs in which every edge is in at least two $3$-cycles.
 
 
 Motivated by the fact that this $0.5n$ bound has stood for over 30 years, several authors have asked if it can be improved.  \citet[Question~4.2]{bradshaw.masarik.ea:robust} ask if it can be improved to $n/3$.
@@ -129,7 +129,7 @@ Motivated by the fact that this $0.5n$ bound has stood for over 30 years, severa
   For every $n\ge 3$, every $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $10n/21= 0.\overline{476190}n$.  Equivalently, $G$ has a spanning tree $T$ with at least $11n/21=0.\overline{523809}n$ leaves.  Furthermore, there exists an $O(n)$ time algorithm for finding $X$ and $T$.
 \end{thm}
 
-The best known lower bound for this problem, illustrated in \cref{lower_bound}, is $n/3 = 0.33\overline{3} n$, obtained from a triangulation that contains $n/3$ vertex-disjoint pairwise-nested triangles $\Delta_1,\ldots,\Delta_{n/3}$.  In order to dominate $\Delta_1\cup \Delta_2$, any connected dominating set must contain at least two vertices in $\Delta_1 \cup \Delta_2$. In order to dominate $\Delta_{n/3-1}\cup \Delta_{n/3}$, any connected dominating set must contain at least two vertices in $\Delta_{n/3-1}\cup\Delta_{n/3}$.  Then, in order to be connected, any connected dominating set must contain a vertex in each of $\Delta_3,\ldots,\Delta_{n/3-2}$. 
+The best known lower bound for this problem, illustrated in \cref{lower_bound}, is $n/3 = 0.33\overline{3} n$, obtained from a triangulation that contains $n/3$ vertex-disjoint pairwise-nested triangles $\Delta_1,\ldots,\Delta_{n/3}$.  In order to dominate $\Delta_1\cup \Delta_2$, any connected dominating set must contain at least two vertices in $\Delta_1 \cup \Delta_2$. In order to dominate $\Delta_{n/3-1}\cup \Delta_{n/3}$, any connected dominating set must contain at least two vertices in $\Delta_{n/3-1}\cup\Delta_{n/3}$.  Then, in order to be connected, any connected dominating set must contain a vertex in each of $\Delta_3,\ldots,\Delta_{n/3-2}$.
 
 \begin{figure}[htbp]
   \centering
@@ -173,19 +173,19 @@ Note that if the point set $P$ is contained in the $x$-axis then, in a $1$-bend 
 
 %\vida{INCLUDING ABSTRACT. Aha. I see that you killed it in abstract already}
 
-% \pat{Remove this paragraph.}\vida{or rather move to the section about Frati application} 
-% In order to resolve a graph drawing problem (discussed further in \cref{related_work}), \citet{angelini.evans.ea:sefe} gave another proof of the $0.5n$ bound in triangulations by showing that every plane graph contains an induced outerplane graph of size at least $0.5n$.  
+% \pat{Remove this paragraph.}\vida{or rather move to the section about Frati application}
+% In order to resolve a graph drawing problem (discussed further in \cref{related_work}), \citet{angelini.evans.ea:sefe} gave another proof of the $0.5n$ bound in triangulations by showing that every plane graph contains an induced outerplane graph of size at least $0.5n$.
 
 A planar graph equipped with a non-crossing embedding is called a \defin{plane graph}.  We treat any subgraph $G'$ of a plane graph $G$ as a plane graph that inherits its embedding from $G$. A plane graph in which all vertices appear on a single face is called an \defin{outerplane} graph.  Motivated by a graph drawing problem (SEFE without mapping), \citet{angelini.evans.ea:sefe} prove the following result:
 
 \begin{thm}\label{induced_outerplane_orig}
     Every $n$-vertex plane graph $G$ (and therefore every triangulation) contains an induced outerplane graph $G[L]$ with at least $n/2$ vertices.
-\end{thm}  
+\end{thm}
 
 Observe that if $G$ is a connected plane graph and $X$ is a connected dominating set of $G$, then the vertices of $X$ are all contained in the interior of a single face $F$ of $G-X$.  Since $X$ is a dominating set, every vertex of $G-X$ is on the face $F$.  Thus, all vertices of $G-X$ are on a single face, so $G-X$ is an induced outerplane graph.\footnote{In \cref{discussion}, we show that the converse of this statement is almost true: the largest $Y\subset V(G)$ such that $G[Y]$ is outerplane and the smallest connected dominating set $X\subset V(G)$ satisfy $|X|+|Y|=|V(G)|$.}  Combined with \cref{main_result2}, this implies the following improvement of \cref{induced_outerplane_orig}:
 
 \begin{cor}\label{induced_outerplane_improved}
-    Every connected $n$-vertex plane graph $G$ contains an induced outerplane graph $G'$ with at least $11n/21=0.\overline{523809}n$ vertices, and there exists an $O(n)$ time algorithm to find the graph $G'$. 
+    Every connected $n$-vertex plane graph $G$ contains an induced outerplane graph $G'$ with at least $11n/21=0.\overline{523809}n$ vertices, and there exists an $O(n)$ time algorithm to find the graph $G'$.
 \end{cor}
 
 \Cref{induced_outerplane_improved} immediately implies an improved result for the graph drawing problem considered by \citet{angelini.evans.ea:sefe}, improving the bound from $n/2$ to $11n/21$:
@@ -207,7 +207,7 @@ Observe that if $G$ is a connected plane graph and $X$ is a connected dominating
 
 
 
-% If $G$ is a triangulation with $n\ge 4$ vertices and $G[L]$ is outerplane, then $G$ contains a set $L'$ of size at least $L$ such that $G[L']$ is an outerplane graph whose inner faces are all triangles.  Then $X:=V(G)\setminus L'$ is a connected dominating set of $G$. 
+% If $G$ is a triangulation with $n\ge 4$ vertices and $G[L]$ is outerplane, then $G$ contains a set $L'$ of size at least $L$ such that $G[L']$ is an outerplane graph whose inner faces are all triangles.  Then $X:=V(G)\setminus L'$ is a connected dominating set of $G$.
 
 
 
