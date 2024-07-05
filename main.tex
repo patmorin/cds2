@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \listfiles
 \usepackage[OT1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -6,7 +6,7 @@
 \usepackage{graphicx}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{amsthm}
-\usepackage[margin=1.25in]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage[sf,bf,small,raggedright,compact]{titlesec}
 \usepackage{hyperref}
 \definecolor{linkblue}{named}{MidnightBlue}
@@ -80,15 +80,16 @@
 \date{}
 
 
+% \pagestyle{empty}
 
 \begin{document}
-
+\begin{titlepage}
 \maketitle
 
 \begin{abstract}
   We show that every $n$-vertex triangulation has a connected dominating set of size at most $10n/21$.  Equivalently, every $n$ vertex triangulation has a spanning tree with at least $11n/21$ leaves.   Prior to the current work, the best known bounds were $n/2$, which follow from the work of Albertson, Berman, Hutchinson, and Thomassen (J. Graph Theory \textbf{14}(2):247--258, 1990). One immediate consequence of this result is an improved bound for the SEFE without mapping graph drawing problem studied by Angelini, Evans, Frati, and Gudmundsson (J. Graph Theory \textbf{82}(1):45--64, 2016).  As a second application, we show that for every set $P$ of $\lceil 11n/21\rceil$ points in $\R^2$ every $n$-vertex planar graph has a one-bend non-crossing drawing in which some set of $11n/21$ vertices is drawn on the points of $P$.  The main result extends to $n$-vertex genus-$g$ surface triangulations without parallel edges or self-loops and implies that these have connected dominating sets of size at most $10n/21+O(\sqrt{gn})$.
 \end{abstract}
-
+\end{titlepage}
 
 \section{Introduction}
 
