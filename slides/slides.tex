@@ -44,7 +44,9 @@
   \frametitle{Outline}
 
   \begin{itemize}
-    \item Two applications
+    % \item Two applications
+    \item Basics
+    \item (Connected) dominating sets
     \item Connections with other problems
     \item Analysis of naïve greedy strategy
     \item Analysis of best strategy (so far)
@@ -52,65 +54,76 @@
   \end{itemize}
 \end{frame}
 
+% \begin{frame}
+%   \frametitle{SEFENOMAP}
+%   \uncover<3->{\textbf{Theorem (Angelini, Evans, Frati, and Gudmundsson 2016):}  If $|G_1|=n$ and $|G_2|\le n/2$ then SEFENOMAP has a solution.}
+%
+%   \begin{center}
+%     \begin{tabular}{cc}
+%     \includegraphics[page=1,scale=.8]{figs/sefenomap} & \includegraphics[page=2,scale=.8]{figs/sefenomap} \\
+%     $G_1$ & $G_2$
+%   \end{tabular}
+%     \uncover<2->{\includegraphics[page=3,scale=.8]{figs/sefenomap}}
+%   \end{center}
+%   \uncover<4>{\textbf{Solution:} Find induced outerplane graph $G_1[S]$ with $|S|=|V(G_2)|$}
+% \end{frame}
+%
+% \begin{frame}
+%   \frametitle{Free Sets}
+%
+%   $S\subseteq V(G)$ is a \emphh{free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{straight-line} non-crossing drawing with all vertices in $S$ mapped to points in $P$.\\[1em]
+%
+%   \includegraphics[page=1]{figs/universal}%
+%   \only<2>{\includegraphics[page=2]{figs/universal}}%
+%   \only<3>{\includegraphics[page=3]{figs/universal}}%
+%   \only<4>{\includegraphics[page=4]{figs/universal}}%
+%   \only<5>{\includegraphics[page=5]{figs/universal}}%
+%   \only<6>{\includegraphics[page=6]{figs/universal}}%
+%   \only<7->{\includegraphics[page=7]{figs/universal}}%
+%
+%
+%   \uncover<8->{\textbf{Theorem (Bose-Da~Lozzo-Dujmović-Frati-Hurtado-Langerman-Mchedlidze--M-Roselli-Rote-Wood 2009--2021):} Every $n$-vertex planar graph $G$ has a free set of size $\Omega(\sqrt{n})$.\\[1em]
+%
+%   \textbf{Theorem (Ravsky-Verbistky 2011):}  There exists $n$-vertex planar $G$ with no free set of size $\Omega(n^{0.98583})$.}
+% \end{frame}
+%
+% \begin{frame}
+%   \frametitle{Free Sets, Collinear Sets, and Proper Good Curves}
+%   % \uncover<2->{$S$ is a free-set iff and only if $S$ is contained in a \emphh{proper good curve}}
+%   \begin{center}
+%     \includegraphics[page=2,scale=0.8]{figs/1-proper}
+%   \end{center}
+%   % \uncover<2->{$S\subseteq V(G)$ is a \emphh{one-bend free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{one-bend} non-crossing drawing with all vertices in $S$ mapped to points in $P$.}
+% \end{frame}
+%
+% \begin{frame}
+%   \frametitle{One-Bend Free Sets}
+%
+%   $S\subseteq V(G)$ is a \emphh{one-bend free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{one-bend} non-crossing drawing with all vertices in $S$ mapped to points in $P$.\\[1em]
+%   % $S\subseteq V(G)$ is a \emphh{free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{straight-line} non-crossing drawing with all vertices in $S$ mapped to points in $P$.\\[1em]
+%
+%   % \textbf{Theorem (Here):} Every $n$-vertex planar graph $G$ has a one-bend free set of size at least $11n/21$.\\[2em]
+%
+%   \textbf{Theorem (Goldner-Harary):}  There exists $n$-vertex planar $G$ with no free set of size greater than $10n/11$.\\[1em]
+%
+%   \uncover<2->{\textbf{Observation:} $S\subseteq V(G)$ is a one-bend free set iff $S$ is a free set in a $1$-subdvision of $G$}
+%
+%   \only<1-2>{\includegraphics[page=9]{figs/proper_good}}%
+%   \only<3>{\includegraphics[page=7]{figs/proper_good}}%
+%   \only<4->{\includegraphics[page=8]{figs/proper_good}}%
+% \end{frame}
+
 \begin{frame}
-  \frametitle{SEFENOMAP}
-  \uncover<3->{\textbf{Theorem (Angelini, Evans, Frati, and Gudmundsson 2016):}  If $|G_1|=n$ and $|G_2|\le n/2$ then SEFENOMAP has a solution.}
+  \frametitle{Basics}
 
-  \begin{center}
-    \begin{tabular}{cc}
-    \includegraphics[page=1,scale=.8]{figs/sefenomap} & \includegraphics[page=2,scale=.8]{figs/sefenomap} \\
-    $G_1$ & $G_2$
-  \end{tabular}
-    \uncover<2->{\includegraphics[page=3,scale=.8]{figs/sefenomap}}
-  \end{center}
-  \uncover<4>{\textbf{Solution:} Find induced outerplane graph $G_1[S]$ with $|S|=|V(G_2)|$}
+  \begin{itemize}
+    \item Graph, adjacency, neighbourhood, induced subgraphs
+    \item Plane graph
+    \item Triangulation
+    \item (Generalized) near-triangulation
+    \item Outerplanar triangulation
+  \end{itemize}
 \end{frame}
-
-\begin{frame}
-  \frametitle{Free Sets}
-
-  $S\subseteq V(G)$ is a \emphh{free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{straight-line} non-crossing drawing with all vertices in $S$ mapped to points in $P$.\\[1em]
-
-  \includegraphics[page=1]{figs/universal}%
-  \only<2>{\includegraphics[page=2]{figs/universal}}%
-  \only<3>{\includegraphics[page=3]{figs/universal}}%
-  \only<4>{\includegraphics[page=4]{figs/universal}}%
-  \only<5>{\includegraphics[page=5]{figs/universal}}%
-  \only<6>{\includegraphics[page=6]{figs/universal}}%
-  \only<7->{\includegraphics[page=7]{figs/universal}}%
-
-
-  \uncover<8->{\textbf{Theorem (Bose-Da~Lozzo-Dujmović-Frati-Hurtado-Langerman-Mchedlidze--M-Roselli-Rote-Wood 2009--2021):} Every $n$-vertex planar graph $G$ has a free set of size $\Omega(\sqrt{n})$.\\[1em]
-
-  \textbf{Theorem (Ravsky-Verbistky 2011):}  There exists $n$-vertex planar $G$ with no free set of size $\Omega(n^{0.98583})$.}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Free Sets, Collinear Sets, and Proper Good Curves}
-  % \uncover<2->{$S$ is a free-set iff and only if $S$ is contained in a \emphh{proper good curve}}
-  \begin{center}
-    \includegraphics[page=2,scale=0.8]{figs/1-proper}
-  \end{center}
-  % \uncover<2->{$S\subseteq V(G)$ is a \emphh{one-bend free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{one-bend} non-crossing drawing with all vertices in $S$ mapped to points in $P$.}
-\end{frame}
-
-\begin{frame}
-  \frametitle{One-Bend Free Sets}
-
-  $S\subseteq V(G)$ is a \emphh{one-bend free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{one-bend} non-crossing drawing with all vertices in $S$ mapped to points in $P$.\\[1em]
-  % $S\subseteq V(G)$ is a \emphh{free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{straight-line} non-crossing drawing with all vertices in $S$ mapped to points in $P$.\\[1em]
-
-  % \textbf{Theorem (Here):} Every $n$-vertex planar graph $G$ has a one-bend free set of size at least $11n/21$.\\[2em]
-
-  \textbf{Theorem (Goldner-Harary):}  There exists $n$-vertex planar $G$ with no free set of size greater than $10n/11$.\\[1em]
-
-  \uncover<2->{\textbf{Observation:} $S\subseteq V(G)$ is a one-bend free set iff $S$ is a free set in a $1$-subdvision of $G$}
-
-  \only<1-2>{\includegraphics[page=9]{figs/proper_good}}%
-  \only<3>{\includegraphics[page=7]{figs/proper_good}}%
-  \only<4->{\includegraphics[page=8]{figs/proper_good}}%
-\end{frame}
-
 
 \begin{frame}
   \frametitle{(Connected) Dominating Sets}
@@ -159,25 +172,25 @@
 
   \uncover<2->{\textbf{Observation:} If $X$ is a connected dominating set then $G-X$ is an induced outerplane graph with $n-|X|$ vertices.}\\[2em]
 
-  \uncover<3->{Better solution to SEFENOMAP if $|X|< n/2$}
+  % \uncover<3->{Better solution to SEFENOMAP if $|X|< n/2$}
 \end{frame}
 
-\begin{frame}
-  \frametitle{$2$-Proper Good Curves}
-
-  \begin{center}
-    \only<1>{\includegraphics[page=1]{figs/proper_good}}%
-    \only<2>{\includegraphics[page=2]{figs/proper_good}}%
-    \only<3>{\includegraphics[page=3]{figs/proper_good}}%
-    \only<4>{\includegraphics[page=4]{figs/proper_good}}%
-    \only<5>{\includegraphics[page=5]{figs/proper_good}}%
-    \only<6->{\includegraphics[page=6]{figs/proper_good}}%
-    % \only<7>{\includegraphics[page=7]{figs/proper_good}}%
-    % \only<8>{\includegraphics[page=8]{figs/proper_good}}%
-  \end{center}
-
-  \uncover<7->{\textbf{Observation:} If $X$ is a connected dominating set then $V(G)\setminus X$ is a one-bend free set.}
-\end{frame}
+% \begin{frame}
+%   \frametitle{$2$-Proper Good Curves}
+%
+%   \begin{center}
+%     \only<1>{\includegraphics[page=1]{figs/proper_good}}%
+%     \only<2>{\includegraphics[page=2]{figs/proper_good}}%
+%     \only<3>{\includegraphics[page=3]{figs/proper_good}}%
+%     \only<4>{\includegraphics[page=4]{figs/proper_good}}%
+%     \only<5>{\includegraphics[page=5]{figs/proper_good}}%
+%     \only<6->{\includegraphics[page=6]{figs/proper_good}}%
+%     % \only<7>{\includegraphics[page=7]{figs/proper_good}}%
+%     % \only<8>{\includegraphics[page=8]{figs/proper_good}}%
+%   \end{center}
+%
+%   \uncover<7->{\textbf{Observation:} If $X$ is a connected dominating set then $V(G)\setminus X$ is a one-bend free set.}
+% \end{frame}
 
 
 \begin{frame}
@@ -207,9 +220,9 @@
 
   \uncover<+->{\textbf{Corollary:}  Every $n$-vertex triangulation $G$ has an induced outerplane graph $G[Y]$ with at least $11n/21=\overline{0.523809}n$ vertices.}\\[2em]
 
-  \uncover<+->{\textbf{Corollary:}  A bound of $11n/21$ for SEFENOMAP.}\\[2em]
-
-  \uncover<+->{\textbf{Corollary:}  Every $n$-vertex planar graph has a one-bend free set of size $11n/21$.}
+  % \uncover<+->{\textbf{Corollary:}  A bound of $11n/21$ for SEFENOMAP.}\\[2em]
+  %
+  % \uncover<+->{\textbf{Corollary:}  Every $n$-vertex planar graph has a one-bend free set of size $11n/21$.}
 \end{frame}
 
 \begin{frame}
@@ -331,16 +344,17 @@
   Take vertices of inner-degree $\ge 2.5$
 
   \begin{center}
-    \only<+>{\includegraphics[page=1]{figs/ring}}%
-    \only<+>{\includegraphics[page=2]{figs/ring}}%
-    \only<+>{\includegraphics[page=3]{figs/ring}}%
-    \only<+>{\includegraphics[page=4]{figs/ring}}%
-    \only<+>{\includegraphics[page=5]{figs/ring}}%
-    \only<+>{\includegraphics[page=6]{figs/ring}}%
-    \only<+>{\includegraphics[page=7]{figs/ring}}%
-    \only<+>{\includegraphics[page=8]{figs/ring}}%
-    \only<+>{\includegraphics[page=3]{figs/ring}}%
+    \only<1>{\includegraphics[page=1]{figs/ring}}%
+    \only<2>{\includegraphics[page=2]{figs/ring}}%
+    \only<3>{\includegraphics[page=3]{figs/ring}}%
+    \only<4>{\includegraphics[page=4]{figs/ring}}%
+    \only<5>{\includegraphics[page=5]{figs/ring}}%
+    \only<6>{\includegraphics[page=6]{figs/ring}}%
+    \only<7>{\includegraphics[page=7]{figs/ring}}%
+    \only<8-9>{\includegraphics[page=8]{figs/ring}}%
+    \only<10->{\includegraphics[page=3]{figs/ring}}%
   \end{center}
+  \uncover<9>{Would give $|X|\le n/2.5=2n/5=0.4n$}
 \end{frame}
 
 
@@ -430,41 +444,41 @@
   For triangulations: Lower Bound is $n/3$ upper bound is $10n/21$.
 \end{frame}
 
-\begin{frame}
-  \frametitle{Open Problem: New approaches}
-
-  Different strategy for SEFENOMAP or one-bend free sets?
-
-  \begin{center}
-    \includegraphics[page=13]{figs/walkthrough} \\
-    \includegraphics[page=8,scale=0.8]{figs/proper_good}
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Open Problem: One-Bend SEFENOMAP}
-
-  SEFENOMAP where all edges of $G_1$ have small complexity?
-
-  \begin{center}
-    \begin{tabular}{cc}
-    \includegraphics[page=1,scale=.8]{figs/sefenomap} & \includegraphics[page=2,scale=.8]{figs/sefenomap} \\
-    $G_1$ & $G_2$
-  \end{tabular}
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Open Problem: CDS in edge-maximal beyond-planar classes}
-
-    Connected dominating sets in edge-maximal beyond-planar classes? \\[2em]
-
-    For edge-maximal $1$-planar, lower bound is also $n/3$
-    \begin{center}
-      \includegraphics[page=2,scale=1.5]{figs/nover3}
-    \end{center}
-
-\end{frame}
+% \begin{frame}
+%   \frametitle{Open Problem: New approaches}
+%
+%   Different strategy for SEFENOMAP or one-bend free sets?
+%
+%   \begin{center}
+%     \includegraphics[page=13]{figs/walkthrough} \\
+%     \includegraphics[page=8,scale=0.8]{figs/proper_good}
+%   \end{center}
+% \end{frame}
+%
+% \begin{frame}
+%   \frametitle{Open Problem: One-Bend SEFENOMAP}
+%
+%   SEFENOMAP where all edges of $G_1$ have small complexity?
+%
+%   \begin{center}
+%     \begin{tabular}{cc}
+%     \includegraphics[page=1,scale=.8]{figs/sefenomap} & \includegraphics[page=2,scale=.8]{figs/sefenomap} \\
+%     $G_1$ & $G_2$
+%   \end{tabular}
+%   \end{center}
+% \end{frame}
+%
+% \begin{frame}
+%   \frametitle{Open Problem: CDS in edge-maximal beyond-planar classes}
+%
+%     Connected dominating sets in edge-maximal beyond-planar classes? \\[2em]
+%
+%     For edge-maximal $1$-planar, lower bound is also $n/3$
+%     \begin{center}
+%       \includegraphics[page=2,scale=1.5]{figs/nover3}
+%     \end{center}
+%
+% \end{frame}
 
 \begin{frame}
 
