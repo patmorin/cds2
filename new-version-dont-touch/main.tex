@@ -11,6 +11,7 @@
 \usepackage{graphicx}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{enumitem} 
+\usepackage{calc} % to define labelwidth as \widthof{\bfseries(DM0)}
 \usepackage{microtype}
 \usepackage{authblk}
 \usepackage[hidelinks,unicode]{hyperref}
@@ -278,7 +279,7 @@ When this is no longer possible, the algorithm will be forced to directly handle
 
 \subsection{Dom-Minimal Dom-Respecting Graphs}
 We begin by identifying unnecessary vertices and edges that can appear in the graphs $G_1,\ldots,G_{r-1}$ during the construction of $X$. Refer to \cref{dom_minimal_fig}.   We say that a near-triangulation $H$ is \defin{dom-minimal} if
-\begin{enumerate}[label=(DM\arabic*)]
+\begin{enumerate}[label=(DM\arabic*),labelwidth=\widthof{(DM0)},leftmargin=!]
     \item each vertex $v\in B(H)$ has $\deg^+_H(v)\ge 1$;  \label{bad_vertex}
     \item for each $v\in B(H)$ with $\deg^+_H(v)=1$,  $H[N_H[v]]$ is isomorphic to $K_4$; and \label{inner_degree_1}
     \item each edge $vw$ on the boundary of the outer face of $H$ is also on the boundary of some inner face $vwx$ of $H$, where $x\in I(H)$. \label{bad_edge}
@@ -294,7 +295,7 @@ We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if it ha
 \end{figure}
 
 Let $H$ and $H'$ be two generalized near-triangulations.  We say that $H'$ \defin{dom-respects} $H$ if
-\begin{enumerate}[label=(DP\arabic*)]
+\begin{enumerate}[label=(DP\arabic*),,labelwidth=\widthof{(DP0)},leftmargin=!]
   \item $B(H')\subseteq B(H)$; \label{boundary_subset}
   % \item $N^+_{H'}(v)\subseteq N^+_H(v)$ for all $v\in B(H')$; \label{same_inner_neighbourhood}
   \item $H'[I(H')]=H[I(H)]$; and \label{same_inner_vertices}
@@ -332,13 +333,13 @@ Let $H$ and $H'$ be two generalized near-triangulations.  We say that $H'$ \defi
     \caption{Three cases on the way to making $H$ dom-minimal.}
     \label{minimal_fig}
   \end{figure}
-  \begin{enumerate}
-    \item \ref{bad_edge}: If there exists an edge $e=vw$ on the outer face of $C$ that is not incident to any inner face $vwx$ with $x\in I(C)$ then $H-e$ is a generalized near-triangulation, $B(H-e)=B(H)$, $(H-e)[I(H-e)]=H[I(H)]$, and $N_{H-e}(a)\cap I(H)=N_{H}(a)\cap I(H)$ for all $a\in V(H-e)$. Therefore, $H-e$ dom-respects $H$ and has fewer edges than $H$.
+  \begin{itemize}[labelwidth=\widthof{(DM0)}, leftmargin=!]
+    \item [\ref{bad_edge}] If there exists an edge $e=vw$ on the outer face of $C$ that is not incident to any inner face $vwx$ with $x\in I(C)$ then $H-e$ is a generalized near-triangulation, $B(H-e)=B(H)$, $(H-e)[I(H-e)]=H[I(H)]$, and $N_{H-e}(a)\cap I(H)=N_{H}(a)\cap I(H)$ for all $a\in V(H-e)$. Therefore, $H-e$ dom-respects $H$ and has fewer edges than $H$.
 
-    \item \ref{bad_vertex}: If there exists a vertex $v\in B(C)$ with $\deg^+_C(v)=0$, then since $v$ is on the boundary of $C$, $v$ is incident to an edge $e=vw$ on the boundary of the outer face of $C$. Because $\deg^+_C(v)=0$, $v$ has no inner neighbour in $C$, so $e$ is not incident to any inner face $vwx$ with $x\in I(C)$ and we can proceed as in Case~1.  (This eventually leads to all edges of $C$ incident to $v$ being removed from $H$.)
+    \item [\ref{bad_vertex}] If there exists a vertex $v\in B(C)$ with $\deg^+_C(v)=0$, then since $v$ is on the boundary of $C$, $v$ is incident to an edge $e=vw$ on the boundary of the outer face of $C$. Because $\deg^+_C(v)=0$, $v$ has no inner neighbour in $C$, so $e$ is not incident to any inner face $vwx$ with $x\in I(C)$ and we can proceed as in Case~1.  (This eventually leads to all edges of $C$ incident to $v$ being removed from $H$.)
 
-    \item \ref{inner_degree_1}: If there exists a vertex $v\in B(C)$ with $\deg^+_C(v)=1$ then $H$ contains faces $xvw$ and $vyw$ where $x,y\in B(C)$ and $w\in I(C)$.  If Case~1 does not apply to either of the two edges on the outer face of $C$ incident to $v$ then the edges $vx$ and $vy$ are each on the boundary of the outer face of $C$ and $N_C(v)=\{x,y,w\}$. If $C[N_C[v]]$ is not isomorphic to $K_4$, then $xy\not\in E(H)$.  In this case, let $H^*$ be the graph obtained from $H$ by removing the edge $vw$ and replacing the edges $xv$ and vy with the edge $xy$. Then $H^*$ is a generalized near-triangulation, $B(H^*)=B(H)$, $H^*[I(H^*)]=H[I(H)]$, and $N_{H^*}(a)\cap I(H)\subseteq N_H(a)\cap I(H)$ for every $a\in V(H^*)$, since the only edge $xy$ in $E(H^*)\setminus E(H)$ has $x,y\in B(H)$. Therefore $H^*$ dom-respects $H$ and has fewer edges than $H$. \qedhere
-  \end{enumerate}
+    \item [\ref{inner_degree_1}] If there exists a vertex $v\in B(C)$ with $\deg^+_C(v)=1$ then $H$ contains faces $xvw$ and $vyw$ where $x,y\in B(C)$ and $w\in I(C)$.  If Case~1 does not apply to either of the two edges on the outer face of $C$ incident to $v$ then the edges $vx$ and $vy$ are each on the boundary of the outer face of $C$ and $N_C(v)=\{x,y,w\}$. If $C[N_C[v]]$ is not isomorphic to $K_4$, then $xy\not\in E(H)$.  In this case, let $H^*$ be the graph obtained from $H$ by removing the edge $vw$ and replacing the edges $xv$ and vy with the edge $xy$. Then $H^*$ is a generalized near-triangulation, $B(H^*)=B(H)$, $H^*[I(H^*)]=H[I(H)]$, and $N_{H^*}(a)\cap I(H)\subseteq N_H(a)\cap I(H)$ for every $a\in V(H^*)$, since the only edge $xy$ in $E(H^*)\setminus E(H)$ has $x,y\in B(H)$. Therefore $H^*$ dom-respects $H$ and has fewer edges than $H$. \qedhere
+  \end{itemize}
   % Each operation preserves $H[I(H)]$, and any added edge has two boundary endpoints. These properties hold throughout the inductive construction.
 \end{proof}
 
@@ -420,7 +421,6 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
 
 Next we show that, even when all vertices in $B(H)$ have inner degree at most $2$, we can still efficiently dominate any vertex that has degree $1$ in $H-B(H)$.
 
-
 \begin{lem}\label{leaf_killer}
   Let $H$ be a generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$, and suppose that $H-B(H)$ has a vertex of degree one. Then there is a vertex $v\in B(H)$ and a generalized near-triangulation $H'$ that dom-respects $H-v$ such that
 \[
@@ -442,14 +442,15 @@ Next we show that, even when all vertices in $B(H)$ have inner degree at most $2
   \end{figure}
 
 \begin{proof}[Proof of \cref{leaf_killer}]
-Let $w$ be a vertex of degree one in $H-B(H)$, and let $x$ be its unique
-neighbour in that graph $H-B(H)$. Since $w\in V(H-B(H))$, $w\in I(H)$.  Therefore $\deg_H(w)\ge 3$.  Since $\deg_{H-B(H)}(w)=1$, $w\in B(H-B(H))$.  Since $\deg_{H-B(H)}(w)=1$, the edge $wx$ is on the outer face of $H-B(H)$, so $x\in B(H-B(H))$.  Therefore $\deg^+_{H-B(H)}(w)=0$.
+Let $w$ be a vertex of degree one in $H-B(H)$, and let $\{x\}:=N_{H-B(H)}(w)$, so $x$ is the unique
+neighbour of $w$ in $H-B(H)$. Then $w\in V(H-B(H))=I(H)$, so $\deg_H(w)\ge 3$.  Since $\deg_{H-B(H)}(w)=1$, $w\in B(H-B(H))$.  Since $\deg_{H-B(H)}(w)=1$, the edge $wx$ is on the outer face of $H-B(H)$, so $x\in B(H-B(H))$.  Therefore $N^+_{H-B(H)}(w)\subseteq N_{H-B(H)}(w)\setminus \{x\}=\emptyset$.
 
-Since $w\in I(H)$, $H$ contains two inner faces $wxp$
-and $wxq$, with $p\ne q$. Both $p$ and $q$ are in $B(H)$, since $p,q\in N_H(w)$ and  $N_{H-B(H)}(w)=\{x\}$. Thus $\{w,x\}\subseteq N_H^+(p)\cap N_H^+(q)$.  Thus $N_H^+(p)=N_H^+(q)=\{w,x\}$ since $\deg^+_H(p),\deg^+_H(q)\le 2$.
-Therefore, $B(H-p)=(B(H)\setminus\{p\})\cup\{w,x\}$ and $\deg^+_{H-p}(q)=0$.
-Let $H':=H-\{p,q,w\}$.
-Since $\deg^+_{H-p}(q)=\deg^+_{H-p}(w)=0$,  $B(H')=B(H-p)\setminus\{q,w\}$ and $H'[I(H')]=(H-p)[I(H-p)]$.  For each $v\in B(H')$, $N^+_{H'}(v)=N^+_{H-p}(v)\setminus\{w,x\}\subseteq N^+_{H-p}(v)$.  Thus $H'$ is a near-triangulation that dom-respects $H-p$ and satisfies $|I(H')|=|I(H)|-2$ and $|B(H')|=|B(H)|-1$ (and $|V(H')|=|V(H)|-3$).
+Since $w\in I(H)$, $H$ contains two inner faces $wxv$
+and $wxu$, with $v\ne u$. Then $\{v,u\}\subseteq B(H)$, since $v,u\in N_H(w)$ but $v,u\not\in N_{H-B(H)}(w)=\{x\}$. Thus $\{w,x\}\subseteq N_H^+(v)\cap N_H^+(u)$. Since $\deg^+_H(v),\deg^+_H(u)\le 2$ this implies that $N_H^+(v)=N_H^+(u)=\{w,x\}$.
+Therefore, $B(H-v)=(B(H)\setminus\{v\})\cup\{w,x\}$ and $\deg^+_{H-v}(u)=0$.
+
+Let $H':=H-\{v,u,w\}$.
+Since $\deg^+_{H-v}(u)=\deg^+_{H-v}(w)=0$,  $B(H')=B(H-v)\setminus\{u,w\}$ and $H'[I(H')]=(H-v)[I(H-v)]$.  For each $y\in B(H')$, $N^+_{H'}(y)=N^+_{H-v}(y)\setminus\{w,x\}= N^+_{H-v}(y)$.  Thus $H'$ is a generalized near-triangulation that dom-respects $H-v$ and satisfies $|I(H')|=|I(H)|-2$ and $|B(H')|=|B(H)|-1$ (and $|V(H')|=|V(H)|-3$).
 \end{proof}
 
 \subsection{Eliminating Inner Isolated Vertices}
@@ -460,8 +461,8 @@ We now show that, even when all vertices in $B(H)$ have inner degree at most $2$
 \begin{lem}\label{degree_zero_killer}
   Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$, and suppose that $H-B(H)$ has an isolated vertex but no vertex of degree one. Then there is a vertex $v\in B(H)$ such that applying the operations of \cref{dom_minimal} to $H-v$ gives a graph $H'$ satisfying one of the following:
 \begin{enumerate}[label=(\alph*),nosep,nolistsep]
-\item $|I(H')|=|I(H)|-2$ and $|B(H')|\le|B(H)|-1$;
-\item $|I(H')|=|I(H)|-1$ and $|B(H')|\le|B(H)|-3$.
+\item\label{decrease_inner_by_two} $|I(H')|=|I(H)|-2$ and $|B(H')|\le|B(H)|-1$;
+\item\label{decrease_boundary_by_three} $|I(H')|=|I(H)|-1$ and $|B(H')|\le|B(H)|-3$.
 \end{enumerate}
 \end{lem}
 
@@ -492,32 +493,16 @@ We now show that, even when all vertices in $B(H)$ have inner degree at most $2$
   \end{figure}
 
 \begin{proof}
-The dom-minimization operations preserve the inner vertex set, preserve
-all edges between inner vertices, and introduce edges only between boundary
-vertices. Thus boundary inner degrees can only decrease during cleanup.
-We use these properties below.
+In the following, we make use of the fact that any application of \cref{dom_minimal} preserves the inner vertex set \ref{same_inner_vertices}, the subgraph induced by inner vertices \ref{same_inner_vertices}, and only introduces new edges between boundary vertices \ref{boundary_subset}.
 
-Choose an isolated vertex $w$ of $H-B(H)$. Its neighbours form the boundary
-cycle of the bounded face $F$ of the outerplane graph $H[B(H)]$ containing
-$w$. Indeed all neighbours of $w$ are boundary vertices and the triangular
-faces incident to $w$ fill this disk.
+Choose an isolated vertex $w$ of $H-B(H)$. Let $f$ be the (inner) face of $H[B(H)]$ that has $w$ in its interior. Let $v_0,v_1,\dots,v_{k-1}$ be the vertices of $f$ in clockwise order.  Thus, $N_H(w)=V(f)$ and $wv_iv_{i+1}$ is an inner face of $H$ for each $i\in\{0,\ldots,k-1\}$, where $v_k=v_0$.
 
-Suppose first that a corner $z$ of $F$ has global inner degree one. Since
-every nontrivial block containing a boundary vertex contributes an inner
-neighbour, $z$ belongs to only one block. Dom-minimality gives
-$H[N_H[z]]\cong K_4$; write $u,v$ for its other two boundary vertices.
-The vertex $w$ is the only vertex inside the triangle $zuv$, since any
-additional vertex would give $w$ an inner neighbour by
-\cref{useful_little_guy}. In particular $N_H(w)=\{z,u,v\}$.
-If $u$ or $v$ has global inner degree two, select such a vertex, say $v$.
-Deleting $v$ exposes $w$ and its other inner neighbour. Both $z$ and $w$
-then have inner degree zero and disappear during cleanup. This exposes
-two inner vertices and decreases the boundary by at least one, giving (a).
-If neither $u$ nor $v$ has global inner degree two, all three rim vertices
-$z,u,v$ have global inner degree one. Each belongs to only this block and
-has a $K_4$ closed neighbourhood, so the entire connected component is
-this $K_4$. Select any rim vertex. Its deletion exposes $w$, and cleanup
-removes the other two rim vertices and $w$. This gives (b).
+Suppose first that $\deg^+_H(v_i)=1$ for some $i\in\{0,\ldots,k-1\}$. By \ref{inner_degree_1}, $H[N_H[v_i]]=\{v_{i-1},v_i,v_{i+1},w\}$ induces a $K_4$ in $H$.  If $\deg^+_{H}(v_{i-1})=2$ then $N^+_H(v_{i-1})=\{w,z\}$ for some $z\in I(H)$.  Let $v:=v_{i-1}$. Then $I(H-v)=I(H)\setminus \{w,z\}$ and $B(H-v)=(B(H)\setminus \{v\})\cup \{w,z\}$.  Applying \cref{dom_minimal} to $H-v$ give a dom-minimal graph $H'$ that dom-respects $H-v$.  Since $w\in B(H-v)$ and $\deg^+_{H-v}(w)=0$, \ref{inner_degree_1} implies that $w\not\in V(H')$, so $w\not\in B(H')$.  Since $w\in B(H-v)$, $\deg^+_{H-v}(v_i)=0$ so \ref{inner_degree_1} implies that $v_i\not\in V(H')$, so $v_i\not\in B(H')$.  Therefore, $|B(H')|\le |B(H-v)|-2= |B(H)|-1$.  By \ref{same_inner_vertices}, $|I(H')|=|I(H-v)|=|I(H)|-2$.  Thus $H'$ satisfies \ref{decrease_inner_by_two}.  Similarly, if $\deg^+_H(v_{i+1})=2$ then choosing $v:=v_{i+1}$ establishes the lemma.  Therefore, we may assume that $\deg^+_H(v_{i-1})=\deg^+_H(v_{i+1})=1$.  
+
+Let $v:=v_i$. Then $I(H-v)=I(H)\setminus \{w\}$ and $B(H-v)=(B(H)\setminus \{v\})\cup\{w\}$.  Let $H'$ be obtained by applying \cref{dom_minimal} to $H-v$.  Since $w\in B(H-v)$ and $\deg^+_{H-v}(w)=0$, \ref{inner_degree_1} implies that $w\not\in V(H')$, so $w\not\in B(H')$.  Since $w\in B(H-v)$, $\deg^+_{H-v}(v_{i-1})=\deg^+_{H-v}(v_{i+1})=0$ so \ref{inner_degree_1} implies that $v_{i-1},v_{i+1}\not\in V(H')$, so $v_{i-1},v_{i+1}\not\in B(H')$.  Therefore, $|B(H')|\le |B(H-v)|-3= |B(H)|-3$.  By \ref{same_inner_vertices}, $|I(H')|=|I(H-v)|=|I(H)|-1$.  Thus $H'$ satisfies \ref{decrease_boundary_by_three}.
+
+What remains is the consider the possibility that $\deg^+_H(v_i)=2$ for each $i\in\{0,\ldots,k-1\}$. \textbf{Fix the rest of the bullshit that is written below....}
+
 
 We may therefore assume that every corner of $F$ has global inner degree
 two. If adjacent corners $u,v$ have the same inner neighbourhood, select
