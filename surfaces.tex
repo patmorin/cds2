@@ -1,7 +1,7 @@
 \section{Connected Dominating Set for Surface Triangulations}
 \label{bounded_genus}
 In this section, we establish \cref{genus_result}, the extension of \cref{main_result2} to surface triangulations of genus $g = o(n)$.
-Briefly, a \defin{surface} or \defin{2-manifold} $\mathcal{S}$ is a compact connected Hausdorff topological space such that every point in $\mathcal{S}$ is locally homeomorphic to the plane i.e. it has a neighbourhood homeomorphic to $\mathbb{R}^2$. Every such surface can be created from the sphere $\mathbb{S}^2$, by adding handles and cross-caps. The \defin{Euler genus} of a surface with $h$ handles and $c$ cross-caps is $2h+c$.
+Briefly, a \defin{surface} is a compact connected Hausdorff topological space such that every point in $\mathcal{S}$ is locally homeomorphic to the plane i.e. it has a neighbourhood homeomorphic to $\mathbb{R}^2$. Every such surface can be created from the sphere $\mathbb{S}^2$, by adding handles and cross-caps. The \defin{Euler genus} of a surface with $h$ handles and $c$ cross-caps is $2h+c$.
 % define surfaces related info
 %Briefly, a \defin{surface or 2-manifold} $\mathcal{S}$ is a compact connected Hausdorff topological space such that every point in $\mathcal{S}$ is locally homeomorphic to the plane i.e. it has a neighbourhood homeomorphic to $\mathbb{R}^2$. The genus $g$ of a surface $\mathcal{S}$ is the number of handles or cross-caps added to the sphere $\mathbb{S}^2 = \{x \in \mathbb{R}^3 : ||x||= 1\}$ to form a surface homeomorphic to $\mathcal{S}$. In the former case, we call the surface $\mathcal{S}_g$, and the later case we call it $\mathcal{N}_g$. A surface is \defin{orientable} if it is homeomorphic to $\mathcal{S}_g$ for some non-negative $g$, we say it is \defin{non-orientable} if it is homeomorphic to a surface $\mathcal{N}_g$ for some positive $g$. The Euler-genus $\Bar{g}$ of a surface $\mathcal{S}$ is equal to $2g$ if $\mathcal{S}$ is orientable and $g$ if $\mathcal{S}$ is non-orientable. For a detailed account on graph and surfaces, we refer the reader to \cite{mohar2001graphs, lee2010introduction}.\pat{Consider using Euler genus:  The Euler genus of a surface with $h$ handles and $c$ crosscaps is $2h + c$.}
 
@@ -18,7 +18,7 @@ The set of all arcs in $\mathcal{S}$ is denoted by $A_\mathcal{S}$.
 % \hussein{each arc in S is a subset of S; there is a kind of redandency.} \pat{Sure, but a point in $\mathcal{S}$ is a different kind of object than an arc in $\mathcal{S}$. Vertices map to point of $S$ and edges map to arcs.}
 An \defin{embedding} of a graph $G$ in a surface $\mathcal{S}$ is a map \defin{$\sigma: V(G)\cup E(G) \longrightarrow \mathcal{S}\cup A_\mathcal{S}$} that sends vertices of $G$ to distinct points in $\mathcal{S}$ and sends an edge $xy$ to
 % an $\sigma(x)-\sigma(y)$ arc in $\mathcal{S}$\pat{Suggested rewrite:
-an arc $\sigma(xy)$ in $\mathcal{S}$ with endpoints $\sigma(x)$ and $\sigma(y)$ in such a way that interior of $\sigma(xy)$ is disjoint from $\{\sigma(v):v\in V(G)\}$ and from the interior of $\sigma(vw)$ for every $vw\in E(G)\setminus\{xy\}$.  For a subgraph $Z$ of $G$, we call $\sigma(Z):=\{\sigma(v):v\in V(X)\}\cup \bigcup_{vw\in E(X)}\sigma(vw)$ the \defin{embedded subgraph} $Z$.
+an arc $\sigma(xy)$ in $A_\mathcal{S}$ with endpoints $\sigma(x)$ and $\sigma(y)$ in such a way that interior of $\sigma(xy)$ is disjoint from $\{\sigma(v):v\in V(G)\}$ and from the interior of $\sigma(vw)$ for every $vw\in E(G)\setminus\{xy\}$.  For a subgraph $Z$ of $G$, we call $\sigma(Z):=\{\sigma(v):v\in V(X)\}\cup \bigcup_{vw\in E(X)}\sigma(vw)$ the \defin{embedded subgraph} $Z$.
 % where no inner points of this arc intersects another arc or an image of a vertex. We let $\sigma(G):=\{\sigma(v):v\in V(G)\}\cup \bigcup_{e\in E(G)}\sigma(e)$.
 A graph $G$ equipped with an embedding $\sigma$ on a surface $\mathcal{S}$ is called an \defin{$\mathcal{S}$-embedded} graph. A \defin{face} of $G$ in $\mathcal{S}$ is a component of $\mathcal{S} \setminus \sigma(G)$.
 % In this context, we call $\sigma(vw)$ the \defin{embedded edge} $vw$.
@@ -73,7 +73,7 @@ Every surface triangulation $\Sigma$ with $n$ vertices and Euler-genus $g < n$ h
 We can now prove the main result of this section, which readily establishes \cref{genus_result}.
 
 \begin{lem}\label{generic_surface_thm}
-    Let $f:\mathbb{N} \longrightarrow \mathbb{N}$ be a non-decreasing function such that every $n$-vertex (planar) triangulation has a connected dominating set of size at most $f(n)$. Then every $n$-vertex Euler genus-$g$ surface triangulation $\Sigma$ has a connected dominating set of size at most $f(n + O(\sqrt{gn})) + O(\sqrt{gn})$.
+    Let $f:\mathbb{N} \longrightarrow \mathbb{N}$ be a non-decreasing function such that every $n$-vertex (planar) triangulation has a connected dominating set of size at most $f(n)$. Then every $n$-vertex Euler genus $g < n$ surface triangulation $\Sigma$ has a connected dominating set of size at most $f(n + O(\sqrt{gn})) + O(\sqrt{gn})$.
 \end{lem}
 
 \begin{proof}

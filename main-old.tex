@@ -7,8 +7,9 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage{amsthm}
 \usepackage[margin=1in]{geometry}
-\usepackage[sf,bf,small,raggedright,compact]{titlesec}
+\usepackage[bf,small,raggedright,compact]{titlesec}
 \usepackage{hyperref}
+%\definecolor{linkblue}{named}{Black}
 \definecolor{linkblue}{named}{MidnightBlue}
 \hypersetup{colorlinks=true, linkcolor=linkblue,  anchorcolor=linkblue,
         citecolor=linkblue, filecolor=linkblue, menucolor=linkblue,
@@ -29,6 +30,9 @@
 \usepackage{listings,newtxtt}
 \lstset{basicstyle=\ttfamily, keywordstyle=\bfseries}
 
+% to number the lines
+% \usepackage{lineno}
+% \linenumbers
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\pref}[1]{(P\ref{#1})}
@@ -57,6 +61,7 @@
 \DeclareMathOperator{\pack}{pack}
 \DeclareMathOperator{\hit}{hit}
 
+%\newcommand{\defin}[1]{\emph{\textcolor{Black}{#1}}}
 \newcommand{\defin}[1]{\emph{\textcolor{Maroon}{#1}}}
 
 
@@ -87,7 +92,35 @@
 \maketitle
 
 \begin{abstract}
-  We show that every $n$-vertex triangulation has a connected dominating set of size at most $10n/21$.  Equivalently, every $n$ vertex triangulation has a spanning tree with at least $11n/21$ leaves.   Prior to the current work, the best known bounds were $n/2$, which follow from the work of Albertson, Berman, Hutchinson, and Thomassen (J. Graph Theory \textbf{14}(2):247--258, 1990). One immediate consequence of this result is an improved bound for the SEFE without mapping graph drawing problem studied by Angelini, Evans, Frati, and Gudmundsson (J. Graph Theory \textbf{82}(1):45--64, 2016).  As a second application, we show that for every set $P$ of $\lceil 11n/21\rceil$ points in $\R^2$ every $n$-vertex planar graph has a one-bend non-crossing drawing in which some set of $11n/21$ vertices is drawn on the points of $P$.  The main result extends to $n$-vertex genus-$g$ surface triangulations without parallel edges or self-loops and implies that these have connected dominating sets of size at most $10n/21+O(\sqrt{gn})$.
+A dominating set of a graph $G$ is \emph{connected} if it induces a connected graph in $G$. The \emph{maximum leaf number} of a connected graph $G$ is the maximum number of leaves\footnote{A leaf is a vertex of degree exactly one.} in a spanning tree for $G$. It is
+well-known and easy to see that for every connected $n$-vertex graph $G$ with $n\geq 3$, determining the maximum leaf number of $G$ is equivalent to determining the size of a minimum connected dominating set of $G$; the two quantities sum to $n$.
+
+These two equivalent notions have been extensively studied for numerous graph classes. For planar triangulations, it has been known since 1990 that every $n$-vertex triangulation has a connected dominating set of size at most $n/2- 1$. The bound follows from the work of Albertson, Berman, Hutchinson, and Thomassen on homeomorphically irreducible spanning trees (J. Graph Theory, 1990). The same bound was later rediscovered in a different context, namely that of maximum induced outerplane subgraphs in plane graphs by Angelini, Evans, Frati, and Gudmundsson (J. Graph Theory, 2016). 
+
+From the lower-bound perspective, a natural and simple construction of an infinite family of planar triangulations attaining an $n/3$ lower bound has long been known. The importance of closing the gap between these two longstanding bounds has been reiterated by Bradshaw,  Masar\'ik, Novotn\'a, and Stacho (SIAM J. Discret. Math., 2022), who asked whether $n/3$ is in fact the correct bound. Noguchi and Zamfirescu asked if the upper bound can even be improved to $(1/2 - \epsilon)n$ for any $\epsilon > 0$, even in the special case of 4-connected triangulations (DMTCS 2025). That $n/3$ bound is not the correct bound has recently been shown by Enami, Matsumoto and Yashima (arxiv 2025). Their construction yields a lower bound of $\frac{7}{18}n - \frac{2}{3}$.
+
+We provide the first improvement on the upper bound in over 30 years  by breaking the $n/2$ barrier: every $n$-vertex triangulation has a connected dominating set of size at most $10n/21$.  Equivalently, every $n$-vertex triangulation has a spanning tree with at least $11n/21$ leaves. We generalize the result to triangulations of surfaces. 
+\newpage
+
+
+
+%$n\geq 2$, the maximum le
+
+%For every graph $G$ on $n\geq 2$ vertices, determining the minimum connected dominating set in $G$ is equivalent to determining the maximum leaf number of $G$. 
+
+
+%size of the largest leaf 
+
+%reiterated the importance of the problem by asking if 2/3n is the correct bound. 
+
+
+ % We show that every $n$-vertex triangulation has a connected dominating set of size at most $10n/21$.  Equivalently, every $n$ vertex triangulation has a spanning tree with at least $11n/21$ leaves.   Prior to the current work, the best known bounds were $n/2$, which follow from the work of Albertson, Berman, Hutchinson, and Thomassen (J. Graph Theory \textbf{14}(2):247--258, 1990). 
+ % \vida{Do we remove these applications from the intro}
+ % One immediate consequence of this result is an improved bound for the SEFE without mapping graph drawing problem studied by Angelini, Evans, Frati, and Gudmundsson (J. Graph Theory \textbf{82}(1):45--64, 2016).  As a second application, we show that for every set $P$ of $\lceil 11n/21\rceil$ points in $\R^2$ every $n$-vertex planar graph has a one-bend non-crossing drawing in which some set of $11n/21$ vertices is drawn on the points of $P$.  
+  
+  
+  
+  %The main result extends to $n$-vertex genus-$g$ surface triangulations without parallel edges or self-loops and implies that these have connected dominating sets of size at most $10n/21+O(\sqrt{gn})$.
 \end{abstract}
 \end{titlepage}
 
@@ -107,6 +140,10 @@ Connected dominating sets are complementary to the leaves of spanning trees: a s
 
 The focus of the current paper is on the existence of small connected dominating sets in edge-maximal planar graphs, a.k.a triangulations, and their applications.  In the following subsections we describe the history of this problem and two applications.
 
+
+% \vida{ABOUT APPLICATIONS}
+% Emphasize old applications in wireless networks and mention a book about it.
+% And then talk about recently GD rediscoviring it ... and say that we will mention GD appllictions at the end
 
 
 % \pat{Insert sentence here introducing the next section.}
@@ -300,7 +337,7 @@ For a graph $G$, let $|G|=|V(G)|$ denote the number of vertices of $G$.  A \defi
 
 A \defin{plane graph} is a graph equipped with a non-crossing embedding in $\mathbb{R}^2$.  A plane graph is \defin{outerplane} if all its vertices appear on the outer face.  A \defin{triangle} is a cycle of length $3$. A \defin{near-triangulation} is a plane graph whose outer face is bounded by a cycle and whose inner faces are all bounded by triangles.  A \defin{generalized near-triangulation} is a plane graph whose inner faces are bounded by triangles. Note that a generalized near triangulation may have multiple components, cut vertices, and bridges.
 
-In several places we will make use of the following observation, which is really a statement about the triangulation contained in $xyz$.
+In several places we will make use of the following observation, which is really a statement about the triangulation contained in a cycle of length $3$.
 \begin{obs}\label{useful_little_guy}
   Let $H$ be a generalized near-triangulation and let $xyz$ be a cycle in $H$.  Then,
   \begin{compactenum}
@@ -356,7 +393,7 @@ A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ f
 
 \begin{proof}
   Let $B:=B(H)$ and $I:=I(H)$.
-  By definition, the graph $H[B]$ is outerplanar.  Consider some marked face $f$ of $H[B]$.  This face is marked because it contains at least one vertex in $I$.  Since $H$ is a triangulation, there is an edge $vx$ in $H$ with $v\in B$ on the boundary of $f$ and $x\in I$ in the interior of $f$. Since $H$ is a generalized near-triangulation and $x$ is an inner vertex of $H$, the edge $vx$ is on the boundary of two faces $vxv_1$ and $vxv_{k-1}$ of $H$ with $v_1\neq v_{k-1}$.  Since $\deg^+_H(v)=1$, each of $v_1$ and $v_{k-1}$ are in $B$.  By the same argument, $H$ contains a face $v_1xv_2$ with $v_2\in B$, $v_2\neq v_1$, and repeating this argument shows that $v,v_1,v_2,\ldots,v_{k-1}$ is the cycle in $H[B]$ that bounds $f$.  Therefore, $f$ contains exactly one vertex $x$ of $I$ and $x$ is adjacent to each vertex of $f$.
+  By definition, the graph $H[B]$ is outerplanar.  Consider some marked face $f$ of $H[B]$.  This face is marked because it contains at least one vertex in $I$.  Since $H$ is a near-triangulation, there is an edge $vx$ in $H$ with $v\in B$ on the boundary of $f$ and $x\in I$ in the interior of $f$. Since $H$ is a generalized near-triangulation and $x$ is an inner vertex of $H$, the edge $vx$ is on the boundary of two faces $vxv_1$ and $vxv_{k-1}$ of $H$ with $v_1\neq v_{k-1}$.  Since $\deg^+_H(v)=1$, each of $v_1$ and $v_{k-1}$ are in $B$.  By the same argument, $H$ contains a face $v_1xv_2$ with $v_2\in B$, $v_2\neq v_1$, and repeating this argument shows that $v,v_1,v_2,\ldots,v_{k-1}$ is the cycle in $H[B]$ that bounds $f$.  Therefore, $f$ contains exactly one vertex $x$ of $I$ and $x$ is adjacent to each vertex of $f$.
 \end{proof}
 
 \begin{lem}\label{base_case}
@@ -364,17 +401,16 @@ A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ f
 \end{lem}
 
 \begin{proof}
-  Let $B:=B(H)$ and $I:=I(H)$.  If $I$ is empty then the result is trivially true, by taking $\Delta:=\emptyset$, so we now assume that $I$ is non-empty.  By \cref{critical_structure}, $H$ is formed from the outerplanar graph $H[B]$ by adding $|I|$ stars, one in the interior of each marked face of $H[B]$.  Since $\deg_H^+(v)=1$ for each $v\in B$, each vertex of $H[B]$ is on the boundary of exactly one marked face.  For each vertex $w\in I$, the marked face $f$ of $H[B]$ that contains $w$ has at least $3$ vertices, which do not belong to any other marked face. Therefore $|B|\ge 3|I|$ and by choosing one vertex from each marked face of $H[B]$ we obtain the desired set $\Delta$.
+  Let $B:=B(H)$ and $I:=I(H)$.  If $I$ is empty then the result is trivially true, by taking $\Delta:=\emptyset$, so we now assume that $I$ is non-empty.  By \cref{critical_structure}, $H$ is formed from the outerplanar graph $H[B]$ by adding $|I|$ stars, one in the interior of each marked face of $H[B]$.  Since $\deg_H^+(v) \le 1$ for each $v\in B$, each vertex of $H[B]$ is on the boundary of at most one marked face.  For each vertex $w\in I$, the marked face $f$ of $H[B]$ that contains $w$ has at least $3$ vertices, which do not belong to any other marked face. Therefore $|B|\ge 3|I|$ and by choosing one vertex from each marked face of $H[B]$ we obtain the desired set $\Delta$.
 \end{proof}
 
-
-\section{A Simple Algorithm}
+\subsection{A Simple Algorithm}
 \label{warm_up}
 
 We start with the simplest possible greedy algorithm, that we call $\textsc{SimpleGreedy}(G)$, to choose $\Delta_0,\ldots,\Delta_{r-1}$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i:=G-X_i$, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are only two cases to consider:
 \begin{compactenum}[{[}g1{]}]
-    \item If $\deg^+_{G_i}(v_i)\ge 2$ then we set $\Delta_i\gets\{v_i\}$.
-    \item If $\deg^+_{G_i}(v_i)\le 1$ for all $v\in B(G_i)$ then $G_i$ is critical and this is the final step, so $r:=i+1$.  By \cref{base_case}, there exists $\Delta_i\subseteq B(G_i)$ of size at most $|I(G_i)|$ that dominates $I(G_i)$. Then $X_r:=X_{r-1}\cup\Delta_{i}$ and we are done.
+    \item If $\deg^+_{G_i}(v_i)\ge 2$ then we set $\Delta_i := \{v_i\}$.
+    \item If $\deg^+_{G_i}(v_i)\le 1$ then $G_i$ is critical and this is the final step, so $r:=i+1$.  By \cref{base_case}, there exists $\Delta_i\subseteq B(G_i)$ of size at most $|I(G_i)|$ that dominates $I(G_i)$. Then $X_r:=X_{r-1}\cup\Delta_{i}$ and we are done.
 \end{compactenum}
 
 \begin{thm}\label{simple_greedy}
@@ -438,7 +474,7 @@ We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if each 
 \begin{figure}[htbp]
   \centering
   \includegraphics[page=2]{figs/dom_minimal}
-  \caption{A generalized near-triangulation that is not dom-minimal. The \textcolor{red}{red} vertices violate \cref{bad_vertex}, the \textcolor{green}{green} vertex violates \cref{inner_degree_1}, and the \textcolor{red}{red} edges violate \cref{bad_edge}}
+  \caption{A generalized near-triangulation that is not dom-minimal. The \textcolor{red}{red} vertices violate \cref{bad_vertex}, the \textcolor{green}{green} vertex violates \cref{inner_degree_1}, and the \textcolor{red}{red} edges violate \cref{bad_edge}.}
   \label{dom_minimal_fig}
 \end{figure}
 
@@ -598,9 +634,9 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
   Let $j\ge 1$ be the maximum integer such that $v_{a-1}v_{a}w$ is an inner face of $H$ for all $a\in\{1,\ldots,j\}$.  Note that $j\le k-1$ since, otherwise, the component of $H-B(H)$ that contains $w$ contains only a single vertex, contradicting the fact that $\deg^+_{H-B(H)}(w)\ge 2$.
   % \footnote{In fact, $j\in\{0,1\}$ by \cref{inner_degree_1}, but this is not important for the current argument.}
 
-  Since $H$ is a near-triangulation and $f$ is a face of $H[B(H)]$, $H$ has some face $v_j v_{j+1} z$ with $z$ in the interior of $f$.  By the definition of $j$, $z\neq w$.  Therefore, $N_H^+(v_j)\supseteq \{w,z\}$ and, since $\deg^+_H(v_j)\le 2$, $N_H^+(v_j))= \{w,z\}$.
+  Since $H$ is a generalized near-triangulation and $f$ is a face of $H[B(H)]$, $H$ has some face $v_j v_{j+1} z$ with $z$ in the interior of $f$.  By the definition of $j$, $z\neq w$.  Therefore, $N_H^+(v_j)\supseteq \{w,z\}$ and, since $\deg^+_H(v_j)\le 2$, $N_H^+(v_j))= \{w,z\}$.
   % Therefore $N^+_H(v_j)\subseteq N_H[w]$.
-  Since $f$ is a face of $H[B(H)]$, the only neighbours of $v_j$ in $B(H)$ are $v_{j-1}$ and $v_{j+1}$. Since $H$ is a near-triangulation and $\deg^+_H(v_j)\le 2$, this implies that $w v_j z$ is a face of $H$.  In particular $wz$ is an edge of $H$.
+  Since $f$ is a face of $H[B(H)]$, the only neighbours of $v_j$ in $B(H)$ are $v_{j-1}$ and $v_{j+1}$. Since $H$ is a generalized near-triangulation and $\deg^+_H(v_j)\le 2$, this implies that $w v_j z$ is a face of $H$.  In particular $wz$ is an edge of $H$.
 
   All that remains is to show that $\deg^+_{H-v_0}(w)\ge 3$.  First, observe that $z$ is in $B(H-B(H))$, so $z$ does not contribute to $\deg^+_{H-B(H)}(w)$. We claim that $z$ is in $I(H-v_0)$, so $z$ does contribute to $\deg^+_{H-v_0}(w)$.   Indeed, the only other possibility is that $z$ is adjacent to $v_0$.  In this case, consider the cycle $C:=v_0,\ldots,v_j,z$.  This cycle has $w$ in its interior. The vertices of $N^+_{H-B(H)}(w)$ must be in the interior of $C$. For each $a\in\{1,\ldots,j\}$, $v_{a-1}v_a w$ is a face of $H$ and $v_jwz$ is a face of $H$, so the cycle $D:=v_0,\ldots,v_j,z,w$ does not contain any vertices of $N^+_{H-B(H)}(w)$ in its interior.  Therefore, the vertices in $N^+_{H-B(H)}(w)$ must be in the interior of the cycle $\overline{D}:=v_0,w,z$.  By \cref{useful_little_guy}, $v_0$ is adjacent to some vertex in $I(H)\setminus\{w,z\}$. But this is not possible since it would imply that $\deg^+_H(v_0)\ge 3$.  Therefore $v_0$ is not adjacent to $z$, so $z$ is in the interior of $H-v_0$ and $N^+_{H-v_0}(w)\supseteq N^+_{H-B(H)}(w)\cup\{z\}$, so $\deg^+_H(w)\ge 3$.
 \end{proof}
@@ -721,12 +757,12 @@ We now show that, even when all vertices in $B(H)$ have inner-degree at most $2$
   \begin{enumerate}[(i)]
     \item $\deg^+_H(z)=1$ for some $z\in N_H(w)$. By \cref{inner_degree_1}, $H[N_H[z]]$ is isomorphic to $K_4$.  Let $u$ and $v$ be the two vertices, other than $z$ on the outer face of $H[N_H[z]]$.  Since $\deg_{H-B(H)}(w)=0$, \cref{useful_little_guy} implies that $w$ is the only vertex of $H$ in the interior of the cycle $uvz$. Let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Since $\deg^+_{H-v}(w)=\deg^+_{H-v}(z)=0$, neither $w$ nor $z$ are vertices of $H'$. Therefore, $|H'|\le |H-\{v,w,z\}|=|H|-3$.  By \cref{boundary_subset}, $B(H')\subseteq N^+_H(v)\cup B(H-\{v,w,z\})$, so $|B(H')|\le |B(H)|+2-3=|B(H)|-1$, which satisfies the conditions of the lemma.
 
-    \item $\deg^+_H(z)=2$ for each $z\in N_H(w)$ and $N^+_H(v)\supseteq N^+_H(u)$ for some edge $uv\in E(F_w)$.  In this case, let $H'$ be a dom-minimal graph that dom-respects $H-v$. Since $\deg^+_{H-v}(u)=\deg^+_{H-x}(w)=0$, \cref{bad_vertex} implies that neither $u$ nor $w$ is a vertex of $H'$.  Therefore $|H'|\le |H-\{u,v,w\}|=|H|-3$.  Since $B(H-\{u,v,w\})\subseteq B(H)\cup N^+_{H}(x)\setminus \{u,v,w\}$, \cref{boundary_subset} implies that $|B(H')|\le |B(H)|+2-3=|B(H)|-1$.
+    \item $\deg^+_H(z)=2$ for each $z\in N_H(w)$ and $N^+_H(v)\supseteq N^+_H(u)$ for some edge $uv\in E(F_w)$.  In this case, let $H'$ be a dom-minimal graph that dom-respects $H-v$. Since $\deg^+_{H-v}(u)=\deg^+_{H-v}(w)=0$, \cref{bad_vertex} implies that neither $u$ nor $w$ is a vertex of $H'$.  Therefore $|H'|\le |H-\{u,v,w\}|=|H|-3$.  Since $B(H-\{u,v,w\})\subseteq (B(H)\cup N^+_{H}(v)) \setminus \{u,v,w\}$, \cref{boundary_subset} implies that $|B(H')|\le |B(H)|+2-3=|B(H)|-1$.
 
     \item $\deg^+_H(z)=2$ for each $z\in N_H(w)$ and $N^+_H(u)\neq N^+_H(v)$ for some edge $uv\in E(F_w)$.  Let $w'$ be the unique vertex in $N^+_H(v)\setminus\{w\}$.  Let $vw'x$ and $vw'y$ be the two inner faces of $H$ that share the edge $vw'$.  Since $N^+_H(v)=\{w,w'\}$, both $x$ and $y$ are in $B(H)$. Furthermore, neither $x$ nor $y$ are in $V(F_w)$ since this would imply that $N^+_H(v)= N^+_H(x)=\{w,w'\}$ or that $N^+_H(v)= N^+_H(y)=\{w,w'\}$, and the preceding case would apply.
-    By \cref{bad_edge}, the only inner faces of $H$ incident to $v$ are the four faces incident to $vw$ and $vw'$.  Since $x,y\not\in V(F_w)$, this implies that $w$ and $w'$ are in different components, $C$ and $C'$, respectively, of $H-v$.  Then $N^+_{C'}(v)=\{w'\}$ so, by \cref{bad_vertex}, $H[N_{C'}[v]]$ is isomorphic to $K_4$ with vertex set $\{v,x,y,w'\}$.
+    By \cref{bad_edge}, the only inner faces of $H$ incident to $v$ are the four faces incident to $vw$ and $vw'$.  Since $x,y\not\in V(F_w)$, this implies that $w$ and $w'$ are in different connected components, $C$ and $C'$, respectively, of $H-v$.  Then $N^+_{C'}(v)=\{w'\}$ so, by \cref{bad_vertex}, $H[N_{C'}[v]]$ is isomorphic to $K_4$ with vertex set $\{v,x,y,w'\}$.
 
-    We claim that $\deg_{H-B(H)}(w')=0$. For the sake of contradiction, suppose that $\deg_{H-B(H)}(w')>0$.  Since $N_{C'}(v)=\{x,w',y\}$, \cref{useful_little_guy} implies that the cycle $vxw'y$ has no vertices of $H$ in its interior.  Now consider the inner face $xw'x'$ with $x'\neq v$. The fact that $\deg_{H-B(H)}(w')>0$ implies that $x'\neq y$, so $x'$ is in the interior of the cycle $xw'y$. However, $x'$ is the only vertex of $H$ in in the interior of $xw'y$ since, otherwise, \cref{useful_little_guy} implies that $\deg^+_H(x)>2$ or $\deg^+_H(y)>2$.  But this contradicts the assumptions of the lemma, since it implies that $\deg_{H-B(H)}(w')=1$.
+    We claim that $\deg_{H-B(H)}(w')=0$. For the sake of contradiction, suppose that $\deg_{H-B(H)}(w')>0$.  Since $N_{C'}(v)=\{x,w',y\}$, \cref{useful_little_guy} implies that the cycle $vxw'y$ has no vertices of $H$ in its interior.  Now consider the inner face $xw'x'$ with $x'\neq v$. The fact that $\deg_{H-B(H)}(w')>0$ implies that $x'\neq y$, so $x'$ is in the interior of the cycle $xw'y$. However, $x'$ is the only vertex of $H$ in the interior of $xw'y$ since, otherwise, \cref{useful_little_guy} implies that $\deg^+_H(x)>2$ or $\deg^+_H(y)>2$.  But this contradicts the assumptions of the lemma, since it implies that $\deg_{H-B(H)}(w')=1$.
 
     Therefore, $\deg_{H-B(H)}(w')=0$. Let $H'$ be a dom-minimal graph that dom-respects $H-v$.  Then $V(H')\subseteq V(H)\setminus\{w,v,w'\}$, so $|H'|\le |H|-3$ and $B(H')\subseteq B(H)\setminus\{v\}$ so $|B(H')|\le |B(H)|-1$, which satisfies the requirements of the lemma. \qedhere
     %
@@ -987,13 +1023,13 @@ At last, the following lemma, illustrated in \cref{two_critical_colouring}, show
 
 All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we call $\textsc{BetterGreedy}(G)$.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$.  Let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i$ be a dom-minimal graph that dom-respects $G-X_i$, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are now more cases to consider:
 \begin{compactenum}[{[}bg1{]}]
-    \item If $\deg^+_{G_i}(v_i)\ge 3$ then we set $\Delta_i\gets\{v_i\}$.
+    \item If $\deg^+_{G_i}(v_i)\ge 3$ then we set $\Delta_i := \{v_i\}$.
     \label[bg]{bg_high_degree}
     \item Otherwise, if $G_i-B(G_i)$ contains a vertex of degree $1$ we set $\Delta_i:=\{v_i\}$ where $v_i$ is the vertex $v$ guaranteed by \cref{leaf_killer}.\label[bg]{bg_leaf}
     \item Otherwise, if $G_i-B(G_i)$ contains a vertex of degree $0$ we set $\Delta_i:=\{v_i\}$ where $v_i$ is the vertex $v$ guaranteed by \cref{degree_zero_killer}.\label[bg]{bg_degree_zero}
     \item Otherwise, if there exists distinct $u,v\in B(G_i)$ and $w\in B(G_i-B(G_i))$ such that $\deg^+_{G_i}(v)=2$, $\deg^+_{G_i-v}(w)\ge 3$, and $N^+_{G_i}(u)\subseteq N_{G_i}(w)$ then set $\Delta_i:=\{v,w\}$.
     \label[bg]{bg_two_three}
-    \item Otherwise, $G_i$ is $2$-critical and $i+1=r$.  By \cref{two_critical_handler}, there exists $\Delta_{r-1}\subseteq V(G_i)$ of size at most $2|B(G_i-B(G_i))|/3 + |I(G_i-B(G_i))|/3$ that dominates $I(G_i)$.
+    \item Otherwise, $G_i$ is $2$-critical and $i + 1 =:r$.  By \cref{two_critical_handler}, there exists $\Delta_{r-1}\subseteq V(G_i)$ of size at most $2|B(G_i-B(G_i))|/3 + |I(G_i-B(G_i))|/3$ that dominates $I(G_i)$.
     \label[bg]{bg_two_critical}
 \end{compactenum}
 
@@ -1034,7 +1070,7 @@ All of this has been leading up to a variant  $\textsc{SimpleGreedy}(G)$ that we
         3 + \sum_{t\ge 3}tx_t + 2a + b + 5c + |R| + |S| \le n&
           & \text{(by \cref{dd_size} and \cref{ttotal_size})}  \label{a} \\
         3 + \sum_{t\ge 3}(t-1)x_t - a - 3b + 2c \ge |R|
-          & & \text{(by \cref{bb_size} and since $|B|\ge |R|$)} \label{b} \\
+          & & \text{(by \cref{bb_size} and since $|B|\ge |R|$)} \label{b}
   \end{align}
   with all values non-negative.  The size of the final connected dominating set $X_r$ is then at most
   \begin{equation}

@@ -6,9 +6,13 @@
 \usepackage{xmpmulti}
 % \usepackage[dvipsnames]{xcolor}
 
-\newcommand{\emphh}[1]{\textcolor{blue}{\emph{#1}}}
+% added by Hussein, Comment to return to original
+\usetheme[progressbar=frametitle]{metropolis}
+\usefonttheme[onlymath]{serif}
+
+\newcommand{\emphh}[1]{\textcolor{purple}{\emph{#1}}}
 \newcommand{\hilite}[1]{\emphh{#1}}
-\title{Connected Dominating Sets in \newline (Surface) Triangulations}
+\title{Connected Dominating Sets in Triangulations}
 
 \newcommand{\verteq}{\rotatebox{90}{$\equiv$}}
 
@@ -34,11 +38,11 @@
 
 \begin{document}
 
-\begin{frame}
+% \begin{frame}
   % \begin{center}
-    \maketitle
+\maketitle
   % \end{center}
-\end{frame}
+% \end{frame}
 
 \begin{frame}
   \frametitle{Outline}
@@ -54,7 +58,7 @@
 
 \begin{frame}
   \frametitle{SEFENOMAP}
-  \uncover<3->{\textbf{Theorem (Angelini, Evans, Frati, and Gudmundsson 2016):}  If $|G_1|=n$ and $|G_2|\le n/2$ then SEFENOMAP has a solution.}
+  \uncover<3->{\textbf{Theorem (Angelini, Evans, Frati, and Gudmundsson 2016):}  If $|G_1|=n$ and $|G_2| \le n/2$ then SEFENOMAP has a solution.}
 
   \begin{center}
     \begin{tabular}{cc}
@@ -94,6 +98,16 @@
   % \uncover<2->{$S\subseteq V(G)$ is a \emphh{one-bend free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{one-bend} non-crossing drawing with all vertices in $S$ mapped to points in $P$.}
 \end{frame}
 
+
+\begin{frame}
+  \frametitle{One-Bend Free Sets}
+
+    $S\subseteq V(G)$ is a \emphh{one-bend free set} if, for every $|S|$-point set $P$, $G$ has a \emphh{one-bend} non-crossing drawing with all vertices in $S$ mapped to points in $P$.\\[1em]
+
+    \only<1>{\includegraphics[scale = 0.65, page=1]{slides/figs/1_bend_drawing.pdf}}%
+
+\end{frame}
+
 \begin{frame}
   \frametitle{One-Bend Free Sets}
 
@@ -106,9 +120,9 @@
 
   \uncover<2->{\textbf{Observation:} $S\subseteq V(G)$ is a one-bend free set iff $S$ is a free set in a $1$-subdvision of $G$}
 
-  \only<1-2>{\includegraphics[page=9]{figs/proper_good}}%
-  \only<3>{\includegraphics[page=7]{figs/proper_good}}%
-  \only<4->{\includegraphics[page=8]{figs/proper_good}}%
+ % \only<1-2>{\includegraphics[page=9]{figs/proper_good}}%
+  \only<3>{\includegraphics[scale = 0.75, page=7]{figs/proper_good}}%
+  \only<4->{\includegraphics[scale = 0.75, page = 8]{figs/proper_good}}%
 \end{frame}
 
 
@@ -146,7 +160,7 @@
 
   \uncover<2->{\textbf{Corollary:} Every $n$-vertex triangulation has a spanning tree with at least $n/2$ leaves.\\[2em]}
 
-  \uncover<3->{\textbf{Corollary:} Every $n$-vertex triangulation has a connected dominating set of size at least $n/2$.}
+  \uncover<3->{\textbf{Corollary:} Every $n$-vertex triangulation has a connected dominating set of size at most $n/2$.}
 \end{frame}
 
 \begin{frame}
@@ -186,6 +200,8 @@
   \begin{center}
     \includegraphics[height=.7\textheight]{figs/nover3}
   \end{center}
+
+  \textbf{Theorem (Enami, Matsumoto, and Yashima):} There are $n$-vertex planar triangulations with every connected dominating set has size at least $7n/18$.
 \end{frame}
 
 
@@ -371,46 +387,40 @@
 
   \textit{Proof:} Takes vertices of inner-degree at least $2.5$ until $G-X$ is $2$-critical then takes $\tfrac{2}{3}R+\tfrac{1}{3}S$ additional vertices
 
-  % \begin{center}
-  %   \includegraphics{figs/greedy} \includegraphics[page=6]{figs/walkthrough}
-  % \end{center}
-  \begin{tabular}{p{.05\textwidth}c}
-  \[
-     |X| \le r + \tfrac{2}{3}R + \tfrac{1}{3}S
-  \]
-  \[
-     D \ge 2.5r
-  \]
-  \[
-    D + R + S = n
-  \]
-  \[
-    B \le D - r
-  \]
-  \[
-    R \le B
-  \]
-  \[
-    S \le \tfrac{1}{3}R
-  \]
-  & \raisebox{-\height}{\includegraphics{figs/dbrs}}
-  \end{tabular}
-  LP gives $|X|\le 10n/21$.
-  \uncover<2->{\hfill{$\Box$}}
+    \begin{columns}[c] 
+        
+        % Left Column (Figure)
+        \begin{column}{0.45\textwidth}
+            \begin{align*}
+                |X| \le r + \tfrac{2}{3}R + \tfrac{1}{3}S\\
+                D \ge 2.5r \\
+                D + R + S = n\\
+                B \le D - r\\
+                R \le B \\
+               S \le \tfrac{1}{3}R
+            \end{align*}
+            LP gives $|X|\le 10n/21$.
+        \end{column}
+        
+        % Right Column (Text)
+        \begin{column}{0.60\textwidth}
+            \raisebox{-\height}{\includegraphics[scale=0.5]{figs/dbrs}}         
+        \end{column}
+    \end{columns} 
   % }
 \end{frame}
 
-\begin{frame}
-  \frametitle{Triangulated Surfaces}
+% \begin{frame}
+%   \frametitle{Triangulated Surfaces}
 
-  \textbf{Theorem:} For any $g<n$ every $n$-vertex genus-$g$ triangulated surface has a connected dominating set of size at most $10n/21 + O(\sqrt{gn})$.
+%   \textbf{Theorem:} For any $g<n$ every $n$-vertex genus-$g$ triangulated surface has a connected dominating set of size at most $10n/21 + O(\sqrt{gn})$.
 
-  \begin{center}
-    \only<1>{\includegraphics[page=1]{figs/slicing}}%
-    \only<2>{\includegraphics[page=2]{figs/slicing}}%
-    \only<3>{\includegraphics[page=3]{figs/slicing}}%
-  \end{center}
-\end{frame}
+%   \begin{center}
+%     \only<1>{\includegraphics[page=1]{figs/slicing}}%
+%     \only<2>{\includegraphics[page=2]{figs/slicing}}%
+%     \only<3>{\includegraphics[page=3]{figs/slicing}}%
+%   \end{center}
+% \end{frame}
 
 \begin{frame}
   \frametitle{Summary}
@@ -427,7 +437,7 @@
 \begin{frame}
   \frametitle{Open problem: Tight bounds}
 
-  For triangulations: Lower Bound is $n/3$ upper bound is $10n/21$.
+  For triangulations: Lower Bound is $7n/18 $ upper bound is $10n/21$.
 \end{frame}
 
 \begin{frame}
@@ -441,30 +451,30 @@
   \end{center}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Open Problem: One-Bend SEFENOMAP}
+% \begin{frame}
+%   \frametitle{Open Problem: One-Bend SEFENOMAP}
 
-  SEFENOMAP where all edges of $G_1$ have small complexity?
+%   SEFENOMAP where all edges of $G_1$ have small complexity?
 
-  \begin{center}
-    \begin{tabular}{cc}
-    \includegraphics[page=1,scale=.8]{figs/sefenomap} & \includegraphics[page=2,scale=.8]{figs/sefenomap} \\
-    $G_1$ & $G_2$
-  \end{tabular}
-  \end{center}
-\end{frame}
+%   \begin{center}
+%     \begin{tabular}{cc}
+%     \includegraphics[page=1,scale=.8]{figs/sefenomap} & \includegraphics[page=2,scale=.8]{figs/sefenomap} \\
+%     $G_1$ & $G_2$
+%   \end{tabular}
+%   \end{center}
+% \end{frame}
 
-\begin{frame}
-  \frametitle{Open Problem: CDS in edge-maximal beyond-planar classes}
+% \begin{frame}
+%   \frametitle{Open Problem: CDS in edge-maximal beyond-planar classes}
 
-    Connected dominating sets in edge-maximal beyond-planar classes? \\[2em]
+%     Connected dominating sets in edge-maximal beyond-planar classes? \\[2em]
 
-    For edge-maximal $1$-planar, lower bound is also $n/3$
-    \begin{center}
-      \includegraphics[page=2,scale=1.5]{figs/nover3}
-    \end{center}
+%     For edge-maximal $1$-planar, lower bound is also $n/3$
+%     \begin{center}
+%       \includegraphics[page=2,scale=1.5]{figs/nover3}
+%     \end{center}
 
-\end{frame}
+% \end{frame}
 
 \begin{frame}
 
