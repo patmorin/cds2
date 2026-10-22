@@ -493,9 +493,8 @@ We now show that, even when all vertices in $B(H)$ have inner degree at most $2$
   \end{figure}
 
 \begin{proof}
-In the following, we make use of the fact that any application of \cref{dom_minimal} preserves the inner vertex set \ref{same_inner_vertices}, the subgraph induced by inner vertices \ref{same_inner_vertices}, and only introduces new edges between boundary vertices \ref{boundary_subset}.
-
-Choose an isolated vertex $w$ of $H-B(H)$. Let $f$ be the (inner) face of $H[B(H)]$ that has $w$ in its interior. Let $v_0,v_1,\dots,v_{k-1}$ be the vertices of $f$ in clockwise order.  Thus, $N_H(w)=V(f)$ and $wv_iv_{i+1}$ is an inner face of $H$ for each $i\in\{0,\ldots,k-1\}$, where $v_k=v_0$.
+% In the following, we make use of the fact that any application of \cref{dom_minimal} preserves the inner vertex set \ref{same_inner_vertices}, the subgraph induced by inner vertices \ref{same_inner_vertices}, and only introduces new edges between boundary vertices \ref{boundary_subset}.
+Let $w$ be an isolated vertex of $H-B(H)$. Let $f$ be the (inner) face of $H[B(H)]$ that has $w$ in its interior. Let $v_0,v_1,\dots,v_{k-1}$ be the vertices of $f$ in clockwise order.  For the rest of this proof, let $v_{i}=v_{i\bmod k}$ for every integer $i$.  Thus, $N_H(w)=V(f)$ and $wv_iv_{i+1}$ is an inner face of $H$ for each $i\in\{0,\ldots,k-1\}$.
 
 Suppose first that $\deg^+_H(v_i)=1$ for some $i\in\{0,\ldots,k-1\}$. By \ref{inner_degree_1}, $H[N_H[v_i]]=\{v_{i-1},v_i,v_{i+1},w\}$ induces a $K_4$ in $H$.  If $\deg^+_{H}(v_{i-1})=2$ then $N^+_H(v_{i-1})=\{w,z\}$ for some $z\in I(H)$.  Let $v:=v_{i-1}$. Then $I(H-v)=I(H)\setminus \{w,z\}$ and $B(H-v)=(B(H)\setminus \{v\})\cup \{w,z\}$.  Applying \cref{dom_minimal} to $H-v$ give a dom-minimal graph $H'$ that dom-respects $H-v$.  Since $w\in B(H-v)$ and $\deg^+_{H-v}(w)=0$, \ref{inner_degree_1} implies that $w\not\in V(H')$, so $w\not\in B(H')$.  Since $w\in B(H-v)$, $\deg^+_{H-v}(v_i)=0$ so \ref{inner_degree_1} implies that $v_i\not\in V(H')$, so $v_i\not\in B(H')$.  Therefore, $|B(H')|\le |B(H-v)|-2= |B(H)|-1$.  By \ref{same_inner_vertices}, $|I(H')|=|I(H-v)|=|I(H)|-2$.  Thus $H'$ satisfies \ref{decrease_inner_by_two}.  Similarly, if $\deg^+_H(v_{i+1})=2$ then choosing $v:=v_{i+1}$ establishes the lemma.  Therefore, we may assume that $\deg^+_H(v_{i-1})=\deg^+_H(v_{i+1})=1$.  
 
