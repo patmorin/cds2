@@ -18,6 +18,8 @@
 \usepackage[capitalise,noabbrev]{cleveref}
 \usepackage{amssymb}
 \usepackage{pifont}
+\setlength{\parskip}{1ex}
+\setlength{\parindent}{3em}
 
 \raggedbottom
 \setlength{\emergencystretch}{1em}
@@ -43,9 +45,9 @@
 \DeclareMathOperator{\pack}{pack}
 \DeclareMathOperator{\hit}{hit}
 
-%\definecolor{brightmaroon}{rgb}{0.76, 0.13, 0.28}
-%\newcommand{\defin}[1]{\emph{\textcolor{brightmaroon}{#1}}}
-\newcommand{\defin}[1]{\emph{#1}}
+\definecolor{brightmaroon}{rgb}{0.76, 0.13, 0.28}
+\newcommand{\defin}[1]{\emph{\textcolor{brightmaroon}{#1}}}
+% \newcommand{\defin}[1]{\emph{#1}}
 
 
 \crefname{thm}{Theorem}{Theorems}
@@ -111,7 +113,7 @@ Our main contribution is the first improvement to the longstanding $n/2$ upper b
   For every $n\ge 3$, every $n$-vertex triangulation $G$ has a connected dominating set $X$ of size at most $10n/21= 0.\overline{476190}n$.  Equivalently, $G$ has a spanning tree $T$ with at least $11n/21=0.\overline{523809}n$ leaves.  Furthermore, there exists an $O(n)$ time algorithm for finding $X$ and $T$.
 \end{thm}
 
-Until recently, the best known lower bound for this problem, illustrated in \cref{lower_bound}, was $n/3 = 0.33\overline{3} n$, obtained from a triangulation with $n=3k$, $k\ge4$, that contains $k$ vertex-disjoint pairwise-nested triangles $\Delta_1,\ldots,\Delta_k$. The annuli are triangulated so that each vertex has exactly two neighbours in each adjacent layer: writing $\Delta_i=a_i b_i c_i$, the cross edges are $a_i a_{i+1}$, $a_i c_{i+1}$, $b_i b_{i+1}$, $b_i a_{i+1}$, $c_i c_{i+1}$, and $c_i b_{i+1}$.  In order to dominate $\Delta_1\cup \Delta_2$, any connected dominating set must contain at least two vertices in $\Delta_1 \cup \Delta_2$. In order to dominate $\Delta_{k-1}\cup \Delta_k$, any connected dominating set must contain at least two vertices in $\Delta_{k-1}\cup\Delta_k$.  Then, in order to be connected, any connected dominating set must contain a vertex in each of $\Delta_3,\ldots,\Delta_{k-2}$. Conversely, $\{a_1,\ldots,a_k\}$ induces a path and dominates every layer, so the minimum size is exactly $k=n/3$.
+Until recently, the best known lower bound for this problem, illustrated in \cref{lower_bound}, was $n/3 = 0.33\overline{3} n$, obtained from a triangulation with $n=3k$, $k\ge4$, that contains $k$ vertex-disjoint pairwise-nested triangles $\Delta_1,\ldots,\Delta_k$. The annuli between consecutive triangles are triangulated so that each vertex has exactly two neighbours in each adjacent layer: writing $\Delta_i=a_i b_i c_i$, the cross edges are $a_i a_{i+1}$, $a_i c_{i+1}$, $b_i b_{i+1}$, $b_i a_{i+1}$, $c_i c_{i+1}$, and $c_i b_{i+1}$.  In order to dominate $\Delta_1\cup \Delta_2$, any connected dominating set must contain at least two vertices in $\Delta_1 \cup \Delta_2$. In order to dominate $\Delta_{k-1}\cup \Delta_k$, any connected dominating set must contain at least two vertices in $\Delta_{k-1}\cup\Delta_k$.  Then, in order to be connected, any connected dominating set must contain a vertex in each of $\Delta_3,\ldots,\Delta_{k-2}$. Conversely, $\{a_1,\ldots,a_k\}$ induces a path and dominates every layer, so the minimum size is exactly $k=n/3$.
 
 \begin{figure}[htbp]
   \centering
@@ -120,11 +122,13 @@ Until recently, the best known lower bound for this problem, illustrated in \cre
   \label{lower_bound}
 \end{figure}
 
-Since this example contains many separating triangles it is natural to consider the special case of $4$-connected triangulations.  Noguchi and Zamfirescu \cite{noguchi.zamfirescu:spanning} describe, for infinitely many values of $n$, $4$-connected $n$-vertex triangulations for which any connected dominating set has at least $n/3$ vertices.  For general triangulations, the $n/3$ lower bound has recently been improved to  $\frac{7}{18}n - \frac{2}{3}$ by Enami et al.\ \cite{enami2025contributionsconjecturesplanargraphs}. 
+Since this example contains many separating triangles it is natural to consider the special case of $4$-connected triangulations.  Noguchi and Zamfirescu \cite{noguchi.zamfirescu:spanning} describe, for infinitely many values of $n$, $4$-connected $n$-vertex triangulations for which any connected dominating set has at least $n/3$ vertices.  
+
+The lower bound of $n/3$ for arbitrary triangulations stood for many years until very recently:  \citet{enami2025contributionsconjecturesplanargraphs} given examples of $n$-vertex triangulations in which every connected dominating set has size at least  $\frac{7}{18}n - \frac{2}{3}\approx 0.388\overline{8}$. 
 
 A \defin{surface triangulation} is a cellular embedding of a finite simple
 graph on a closed connected surface, with each face bounded by a $3$-cycle.
-For Euler genus $g$ we extend \cref{main_result2} to connected dominating sets
+For Euler genus $g$ we extend \cref{main_result2} to connected dominating sets 
 of size $10n/21+O(\sqrt{gn})$ and spanning trees with at least
 $11n/21-O(\sqrt{gn})$ leaves; see \cref{genus_result}.
 With the embedding supplied, the running time is $O(n+g)$, hence $O(n)$
@@ -166,27 +170,25 @@ fill the triangle, leaving $w$ as its only interior vertex, a contradiction.
 
 For a plane graph $H$, we use the notation $B(H)$ to denote the vertex set of the outer face of $H$ and define $I(H):=V(H)\setminus B(H)$.  The vertices in $B(H)$ are \defin{boundary vertices} of $H$ and the vertices in $I(H)$ are \defin{inner vertices} of $H$. For any vertex $v$ of $H$, the \defin{inner neighbourhood} of $v$ in $H$ is defined as $N_H^+(v):=N_H(v)\cap I(H)$, the vertices in $N^+_H(v)$ are \defin{inner neighbours} of $v$ in $H$, and $\deg^+_H(v)=|N^+_H(v)|$ is the \defin{inner degree} of $v$ in $H$.
 
-Let $G$ be a triangulation.  Our procedure for constructing a connected dominating set $X$ begins with an incremental phase that eats away at $G$ ``from the outside.'' The process of constructing $X$ is captured by the following definition:   A vertex subset $X\subseteq V(G)$ is \defin{outer-domatic} if, for some $r\ge1$, it can be partitioned into nonempty subsets $\Delta_0,\Delta_1,\ldots,\Delta_{r-1}$ such that
+Let $G$ be a triangulation.  Our procedure for constructing a connected dominating set $X$ begins with an incremental phase that eats away at $G$ ``from the outside.'' The process of constructing $X$ is captured by the following definition: Let let $G_0:=G$, let  $X\subseteq V(G)$ and let $\Delta_0,\ldots,\Delta_{r-1}$ be a partition of $X$. For each $i\in\{1,\ldots,r\}$, let $X_i = \bigcup_{j=0}^{i-1}\Delta_j$, and let $G_i:=G-X_i$. We say that $\Delta_0,\ldots,\Delta_{r-1}$ is an \defin{outer-domatic partition} of $X$ if
 \begin{enumerate}[label=(P\arabic*),labelwidth=\widthof{(P2)}, leftmargin=!]
-    \item $\Delta_0\subseteq B(G)$; \label{outer_face}
-    \item $\Delta_i\subseteq B(G-(\bigcup_{j=0}^{i-1}\Delta_j))$ for each $i\in\{1,\ldots,r-1\}$; and \label{incremental}
-    \item $G-(\bigcup_{j=0}^{r-1}\Delta_j)$ is outerplane. \label{outerplanar}
-\end{enumerate}
+  \item\label{back_connected} each component of $G_i[\Delta_i]$ contains a vertex in $B(G_i)$, for each $i\in\{0,\ldots,r-1\}$; and
+  \item $X_r$ dominates $G$.\label{final_domination}
+\end{enumerate} 
+We say that $X$ is \defin{outer-domatic} if $X$ has an outer-domatic partition.
 
 \begin{lem}\label{outer_domatic}
     Let $G$ be a triangulation.  Then any outer-domatic $X\subseteq V(G)$ is a connected dominating set of $G$.
 \end{lem}
 \begin{proof}
-  Suppose $X$ is outer-domatic and let $\Delta_0,\ldots,\Delta_{r-1}$ be the corresponding partition of $X$.  For each $i\in\{1,\ldots,r\}$, let $X_i:=\bigcup_{j=0}^{i-1} \Delta_j$.  First observe that, since $\Delta_0\subseteq B(G)$ is nonempty, $X_i$ contains at least one vertex of $B(G)$, for each $i\in\{1,\ldots,r\}$. We claim that,
-  \begin{enumerate}[label=(P\arabic*),start=4,labelwidth=\widthof{(P2)}, leftmargin=!]
-    \item for each $i\in\{1,\ldots,r\}$ each vertex in $B(G-X_i)$ is adjacent to some vertex in $X_i$. \label{adjacent}
-  \end{enumerate}
-  Indeed, for any $i\in\{1,\ldots,r\}$ each vertex $v\in B(G-X_i)$ is either in $B(G)$ or adjacent to a vertex in $X_i$. Even in the former case, \ref{outer_face} ensures that $v$ is adjacent to a vertex in $X_1=\Delta_0\subseteq X_i$, because $G[B(G)]$ is a clique. Conversely, every vertex in $N_G(X_i)$ is on the boundary of $G-X_i$, since a remaining neighbour of a removed boundary vertex is exposed to the outer face and remains there under subsequent deletions. Thus $N_G(X_i)=B(G-X_i)$.
-
-  We now prove, by induction on $i$, that $G[X_i]$ is connected, for each $i\in\{1,\ldots,r\}$.
-  The fact that $G[B(G)]$ is a clique and \ref{outer_face} implies that $G[X_1]=G[\Delta_0]$ is connected. For each $i\in\{2,\ldots,r\}$, the assumption that $G[X_{i-1}]$ is connected, \ref{incremental}, and \ref{adjacent} with index $i-1$ then imply that $G[X_i]=G[X_{i-1}\cup\Delta_{i-1}]$ is connected.
-
-  In particular $G[X_r]=G[X]$ is connected.  Finally, \ref{adjacent}, with $i=r$, and \ref{outerplanar} imply that $N_G(X_r)=B(G-X_r)=V(G-X_r)$, so $X_r=X$ is a dominating set of $G$.
+  Suppose $X$ is outer-domatic, let $\Delta_0,\ldots,\Delta_{r-1}$ be an outer-domatic partition of $X$, and let $X_1,\ldots,X_r$ and $G_0,\ldots,G_r$ be as in the definition of outer-domatic partition.  By \ref{final_domination}, $X_r=X$ is a dominating set of $G$. We only need show that $G[X]$ is connected.  
+  % We claim that,
+  % \begin{enumerate}[label=(P\arabic*),start=3,labelwidth=\widthof{(P2)}, leftmargin=!]
+  %   \item for each $i\in\{1,\ldots,r\}$ each vertex in $B(G_i)$ is adjacent, in $G$, to a vertex in $X_i$. \label{adjacent}
+  % \end{enumerate}
+  For each $i\in\{1,\ldots,r\}$, each vertex $v\in B(G-X_i)$ is either in $B(G)$ or adjacent to a vertex in $X_i$. 
+  % Even in the former case the condition \ref{back_connected} ensures that $v$ is adjacent to a vertex in $X_1=\Delta_0\subseteq X_i$, because $G[B(G)]$ is a clique.
+  Thus, for each $i\in\{0,\ldots,r-1\}$ and each $v\in \Delta_i$, the component of $G_i[\Delta_i]$ containing $v$ contains a vertex $v'\in B(G_i)$, by \ref{back_connected}.  If $i\ge 1$ then $v'$ is adjacent to a vertex $u\in X_{i}$.  By definition $u\in \Delta_j$ for some $j\in\{0,\ldots,i-1\}$.  Thus, $G[X]$ contains a path from $v$ to a vertex in $\Delta_0\cap B(G)$.  Since $G[B(G)]$ is a clique, this implies that $G[X]$ is connected.
 \end{proof}
 
 We will present two algorithms that grow a connected dominating set in small batches $\Delta_0,\Delta_1,\ldots,\Delta_{r-2}$ that result in a sequence of sets $X_1,\ldots,X_{r-1}$ where $X_{i}=\bigcup_{j=0}^{i-1}\Delta_j$.  The simple algorithm is unable to continue with single-vertex greedy steps once it reaches a point where each vertex in $B(G-X_i)$ has inner degree at most $1$ in $G-X_i$.  We begin by studying the graphs that cause this to happen.
@@ -230,45 +232,42 @@ A generalized near-triangulation $H$ is \defin{critical} if $\deg^+_H(v)\le 1$ f
   Let $B:=B(H)$ and $I:=I(H)$.  If $I$ is empty then the result is trivially true, by taking $\Delta:=\emptyset$, so we now assume that $I$ is nonempty.  By \cref{critical_structure}, $H$ is formed from the outerplane graph $H[B]$ by adding $|I|$ stars, one in the interior of each marked face of $H[B]$.  Since $\deg_H^+(v) \le 1$ for each $v\in B$, each vertex of $H[B]$ is on the boundary of at most one marked face.  For each vertex $w\in I$, the marked face $f$ of $H[B]$ that contains $w$ has at least $3$ vertices, which do not belong to any other marked face. Therefore $|B|\ge 3|I|$ and by choosing one vertex from each marked face of $H[B]$ we obtain the desired set $\Delta$.
 \end{proof}
 \subsection{A Simple Algorithm} \label{warm_up}
-We start with the simplest possible greedy algorithm, that we call $\textsc{SimpleGreedy}(G)$, to choose $\Delta_0,\ldots,\Delta_{r-1}$. If $G=K_3$, we return any single vertex; otherwise we proceed as follows.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$. For $i \geq 0$, we let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i:=G-X_i$, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are only two cases to consider:
+We start with a variant of the simplest possible greedy algorithm, that we call $\textsc{SimpleGreedy}(G)$, to choose $\Delta_0,\ldots,\Delta_{r}$. If $G=K_3$, we return any single vertex; otherwise we proceed as follows.  Suppose we have already chosen $\Delta_0,\ldots,\Delta_{i-1}$ for some $i\ge 0$ and we now want to choose $\Delta_i$. For $i \geq 0$, we let $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$, let $G_i:=G-X_i$, and let $v_i$ be a vertex in $B(G_i)$ that maximizes $\deg^+_{G_i}(v_i)$.  During iteration $i\ge 0$, there are only two cases to consider:
 \begin{enumerate}[label={[g\arabic*]}]
     \item If $\deg^+_{G_i}(v_i)\ge 2$ then we set $\Delta_i := \{v_i\}$.
-    \item If $\deg^+_{G_i}(v_i)\le 1$ then $G_i$ is critical and this is the final step, so $r:=i+1$.  By \cref{base_case}, there exists $\Delta_i\subseteq B(G_i)$ of size at most $|I(G_i)|$ that dominates $I(G_i)$. Then $X_r:=X_i\cup\Delta_i$ and we are done.
+    \item If $\deg^+_{G_i}(v_i)\le 1$ then $G_i$ is critical and this is the final step, so $r:=i$.  By \cref{base_case}, there exists $\Delta_r\subseteq B(G_r)$ of size at most $|I(G_r)|$ that dominates $I(G_r)$. Then $X_{r+1}:=X_r\cup\Delta_r$ and we are done.
 \end{enumerate}
 
 \begin{thm}\label{simple_greedy}
-  When applied to an $n$-vertex triangulation $G$ with $n\ge4$, $\textnormal{\textsc{SimpleGreedy}}(G)$ produces a connected dominating set $X_r$ of size at most $(4n-9)/7$.
+  When applied to an $n$-vertex triangulation $G$ with $n\ge4$, $\textnormal{\textsc{SimpleGreedy}}(G)$ produces a connected dominating set $X_{r+1}$ of size at most $(4n-9)/7$.
 \end{thm}
 
 \begin{proof}
-By the choice of $\Delta_0,\ldots,\Delta_{r-1}$, $X_r$ is an outer-domatic subset of $V(G)$ so, by \cref{outer_domatic}, $X_r$ is a connected dominating set of $G$. For each $i\in\{0,\ldots,r-1\}$, let $I_i:=I(G_i)$ and $B_i:=B(G_i)$.  We bound the size of $X_r$ using the potential function
+By the choice of $\Delta_0,\ldots,\Delta_{r}$, $X_{r+1}$ is an outer-domatic subset of $V(G)$ so, by \cref{outer_domatic}, $X_{r+1}$ is a connected dominating set of $G$. For each $i\in\{0,\ldots,r\}$, let $I_i:=I(G_i)$ and $B_i:=B(G_i)$.  We bound the size of $X_{r+1}$ using the potential function
 \[
    \Phi_i := \frac{4|I_i|+|B_i|}{7} \enspace .
 \]
-For each greedy step $i\in\{0,\ldots,r-2\}$, case~[g1] applies, so $\Delta_i=\{v_i\}$ and $G_{i+1}=G_i-v_i$. Let $t_i:=\deg^+_{G_i}(v_i)\ge 2$. Because $v_i$ is a boundary vertex and all bounded faces incident to $v_i$ in $G_i$ are triangles, deleting $v_i$ exposes precisely its $t_i$ inner neighbours to the outer face, while all other boundary vertices remain on the boundary. Therefore, $|I_{i+1}|= |I_i|-t_i$ and $|B_{i+1}|= |B_i|+t_i-1$. It follows that
+For each greedy step $i\in\{0,\ldots,r-1\}$, case~[g1] applies, so $\Delta_i=\{v_i\}$ and $G_{i+1}=G_i-v_i$. Let $t_i:=\deg^+_{G_i}(v_i)\ge 2$. Then $I(G_i-v_i)=I_i \setminus N^+_{G_i}(v_i)$ and $B(G_i-v_i) = (B_i \setminus \{v_i\}) \cup N^+_{G_i}(v_i)$.  Thus, $|I_{i+1}|=|I_i|-t_i$ and $|B_{i+1}|=|B_i|+t_i-1$. Then, for $i\in\{0,\ldots,r-1\}$, we have 
 \[
-   \Phi_{i+1}-\Phi_i = \frac{4(|I_{i+1}|-|I_i|)+(|B_{i+1}|-|B_i|)}{7}
-   = \frac{4(-t_i)+t_i-1}{7}=\frac{-3t_i-1}{7} \le -1 \enspace ,
+   \Phi_i - \Phi_{i+1} = \frac{4(|I_{i}|-|I_{i+1}|)+(|B_{i}|-|B_{i+1}|)}{7}
+   = \frac{4(t_i)-(t_i-1)}{7}=\frac{3t_i+1}{7} \ge 1 \enspace ,
 \]
-since $t_i\ge 2$. Summing this decrease over the $r-1$ greedy steps $i\in\{0,\ldots,r-2\}$ yields
+since $t_i\ge 2$.
+Thus, 
 \[
-  \Phi_{r-1} - \Phi_0 = \sum_{i=0}^{r-2} (\Phi_{i+1}-\Phi_i) \le -(r-1) \enspace ,
-\]
-which we rewrite as
-\[
-    (r-1) + \Phi_{r-1} \le \Phi_0 \enspace .
+   \Phi_0-\Phi_{r} = \sum_{i=0}^{r-1} (\Phi_i - \Phi_{i+1}) \ge r = |X_r|\enspace .
 \]
 Since $G_0=G$ is an $n$-vertex triangulation with $n\ge 4$, its outer face is a $3$-cycle, so $|B_0|=3$ and $|I_0|=n-3$. Thus
 \[
   \Phi_0 = \frac{4(n-3)+3}{7} = \frac{4n-9}{7} \enspace .
 \]
-At iteration $r-1$, case~[g2] applies, so $G_{r-1}$ is critical. By \cref{base_case}, $|B_{r-1}|\ge 3|I_{r-1}|$, and there exists $\Delta_{r-1}\subseteq B(G_{r-1})$ of size at most $|I_{r-1}|$ that dominates $I_{r-1}$. Therefore,
+When $i=r$, case~[g2] applies, so $G_{r}$ is critical. By \cref{base_case}, $|B_{r}|\ge 3|I_{r}|$ and $|\Delta_r|\le |I_r|$. Therefore,
 \[
-  |\Delta_{r-1}| \le |I_{r-1}| = \frac{4|I_{r-1}|+3|I_{r-1}|}{7} \le \frac{4|I_{r-1}|+|B_{r-1}|}{7} = \Phi_{r-1} \enspace .
+  |\Delta_{r}| \le |I_{r}| = \frac{4|I_{r}|+3|I_{r}|}{7} \le \frac{4|I_{r}|+|B_{r}|}{7} = \Phi_{r} \enspace .
 \]
-Since each of the $r-1$ greedy batches $\Delta_0,\ldots,\Delta_{r-2}$ is a singleton, $|X_{r-1}|=r-1$. Consequently,
+Therefore,
 \[
-  |X_r| \le |X_{r-1}|+|\Delta_{r-1}| \le (r-1)+|I_{r-1}| \le (r-1)+\Phi_{r-1} \le \Phi_0 = \frac{4n-9}{7} \enspace . \qedhere
+    |X_{r+1}| = |X_r| + |\Delta_r| \le (\Phi_0 - \Phi_r) + \Phi_r = \Phi_0 = \frac{4n-9}{7} \enspace . \qedhere
 \]
 \end{proof}
 
@@ -297,7 +296,7 @@ We say that a generalized near-triangulation $H$ is \defin{dom-minimal} if it ha
 \end{figure}
 
 Let $H$ and $H'$ be two generalized near-triangulations.  We say that $H'$ \defin{dom-respects} $H$ if
-\begin{enumerate}[label=(DP\arabic*),,labelwidth=\widthof{(DP0)},leftmargin=!]
+\begin{enumerate}[label=(DP\arabic*),labelwidth=\widthof{(DR0)},leftmargin=!]
   \item $B(H')\subseteq B(H)$; \label{boundary_subset}
   % \item $N^+_{H'}(v)\subseteq N^+_H(v)$ for all $v\in B(H')$; \label{same_inner_neighbourhood}
   \item $H'[I(H')]=H[I(H)]$; and \label{same_inner_vertices}
@@ -424,10 +423,10 @@ Note that the next three lemmas consider the case where $H$ is a generalized nea
 Next we show that, even when all vertices in $B(H)$ have inner degree at most $2$, we can still efficiently dominate any vertex that has degree $1$ in $H-B(H)$.
 
 \begin{lem}\label{leaf_killer}
-  Let $H$ be a generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$, and suppose that $H-B(H)$ has a vertex of degree one. Then there is a vertex $v\in B(H)$ and a generalized near-triangulation $H'$ that dom-respects $H-v$ such that
+  Let $H$ be a generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$, and suppose that $H-B(H)$ has a vertex of degree one. Then there is a vertex $v\in B(H)$ such that any dom-minimal generalized near-triangulation $H'$ that dom-respects $H-v$ satisfies:
 \[
  |I(H')|=|I(H)|-2,
- \qquad |B(H')|=|B(H)|-1.
+ \qquad |B(H')|\le |B(H)|-1.
 \]
 \end{lem}
 
@@ -451,8 +450,7 @@ Since $w\in I(H)$, $H$ contains two inner faces $wxv$
 and $wxu$, with $v\ne u$. Then $\{v,u\}\subseteq B(H)$, since $v,u\in N_H(w)$ but $v,u\not\in N_{H-B(H)}(w)=\{x\}$. Thus $\{w,x\}\subseteq N_H^+(v)\cap N_H^+(u)$. Since $\deg^+_H(v),\deg^+_H(u)\le 2$ this implies that $N_H^+(v)=N_H^+(u)=\{w,x\}$.
 Therefore, $B(H-v)=(B(H)\setminus\{v\})\cup\{w,x\}$ and $\deg^+_{H-v}(u)=0$.
 
-Let $H':=H-\{v,u,w\}$.
-Since $\deg^+_{H-v}(u)=\deg^+_{H-v}(w)=0$,  $B(H')=B(H-v)\setminus\{u,w\}$ and $H'[I(H')]=(H-v)[I(H-v)]$.  For each $y\in B(H')$, $N^+_{H'}(y)=N^+_{H-v}(y)\setminus\{w,x\}= N^+_{H-v}(y)$.  Thus $H'$ is a generalized near-triangulation that dom-respects $H-v$ and satisfies $|I(H')|=|I(H)|-2$ and $|B(H')|=|B(H)|-1$ (and $|V(H')|=|V(H)|-3$).
+Let $H'$ be a dom-mininal generalized near-triangulation that dom-respects $H-v$.  By \ref{same_inner_vertices}, $I(H')=I(H-v)=I(H)\setminus\{x,w\}$ so $|I(H')|=|I(H)|-2$.  Since $w\in B(H-v)$ and $\deg^+_{H-v}(w)=0$, $w\not\in V(H')$, by \ref{inner_degree_1}.  Since $u\in B(H-v)$ and $\deg^+_{H-v}(u)=0$, $u\not\in V(H')$, by \ref{inner_degree_1}.  Therefore $B(H')\subseteq B(H-v)\setminus\{u,w\}=(B(H)\cup\{x\})\setminus\{u,v\}$, so $|B(H')|\le |B(H)|+1-2 = |B(H)|-1$.
 \end{proof}
 
 \subsection{Eliminating Inner Isolated Vertices}
@@ -461,7 +459,7 @@ Since $\deg^+_{H-v}(u)=\deg^+_{H-v}(w)=0$,  $B(H')=B(H-v)\setminus\{u,w\}$ and $
 We now show that, even when all vertices in $B(H)$ have inner degree at most $2$ and $H-B(H)$ has no degree-$1$ vertices, we can still efficiently dominate degree-$0$ vertices in $H-B(H)$.
 
 \begin{lem}\label{degree_zero_killer}
-  Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$, and suppose that $H-B(H)$ has an isolated vertex but no vertex of degree one. Then there is a vertex $v\in B(H)$ such that applying the operations of \cref{dom_minimal} to $H-v$ gives a graph $H'$ satisfying one of the following:
+  Let $H$ be a dom-minimal generalized near-triangulation such that $\deg^+_H(v)\le 2$ for all $v\in B(H)$, and suppose that $H-B(H)$ has an isolated vertex but no vertex of degree one. Then there is a vertex $v\in B(H)$ such that any dom-minimal graph $H'$ that dom-respects $H-v$ satisfies one of the following:
 \begin{enumerate}[label=\rm(\alph*),nosep,nolistsep]
 \item\label{decrease_inner_by_two} $|I(H')|=|I(H)|-2$ and $|B(H')|\le|B(H)|-1$;
 \item\label{decrease_boundary_by_three} $|I(H')|=|I(H)|-1$ and $|B(H')|\le|B(H)|-3$.
@@ -533,6 +531,10 @@ This contradiction proves that $v_1\not\in V(H')$. Since neither $w$ nor $v_1$ b
   \caption{A $2$-critical generalized near-triangulation.}
   \label{two_critical_figure}
 \end{figure}
+
+
+
+
 \subsection{\texorpdfstring{$2$}{2}-Critical Graphs}
 \label{two_critical_section}
 
@@ -557,11 +559,15 @@ A generalized near-triangulation $H$ is \defin{$2$-critical} if
 \end{lem}
 
 \begin{proof}
+  If $H$ is the empty graph then the result is trivial. If $H$ is non-empty but $H-B(H)$ is the empty graph then the result is also trivial. Now assume that $H-B(H)$ is non-empty.
+
   Let $\mathcal{C}$ be the set of components of $H-B(H)$.
-  Let $C$ be a component in $\mathcal{C}$ and define the set $B_2(C)\subseteq B(H)$ as follows: Let $w_0,\ldots,w_k$ be the clockwise walk around the outer face of $C$, so that $w_0=w_k$.  If an edge $vw$ of $H-B(H)$ appears more than once in $w_0,\ldots,w_k$ then $vw$ is necessarily a bridge in $C$ and is traversed on from $v$ to $w$ and a second time from $w$ to $v$. That is $(v,w)=(w_i,w_{i+1})$ and $(w,v)=(w_j,w_{j+1})$ for distinct $i,j\in\{0,\ldots,k-1\}$. For each $i\in\{1,\ldots,k\}$, $H$ contains an inner face $w_{i-1}w_iv_i$ that is to the left of the edge $w_{i-1}w_i$ when traversed from $w_{i-1}$ to $w_i$ and $v_i\in B(H)$.  The vertices $v_1,\ldots,v_k$ are distinct: the same vertex cannot be adjacent to $w_iw_{i+1}$ and to $w_jw_{j+1}$ since this would imply that $N^+_H(v_i)\supseteq\{w_i,w_{i+1},w_j,w_{j+1}\}$.  If $|\{w_i,w_{i+1},w_j,w_{j+1}\}|>2$ then this contradicts the fact that $\deg^+_H(v_i)\le 2$ (by \ref{inner_degree_2}).  Otherwise $w_i=w_{j+1}$ and $w_{i+1}=w_j$, which would imply that the triangle $v_iw_iw_{i+1}$ is simultaneously to the left and to the right of $w_iw_{i+1}$.  Define $B_2(C):=\{v_1,\ldots,v_k\}$.  Then $|B_2(C)|= k\ge |B(C)|$. Since $H$ is $2$-critical and $|N_H(v)\cap V(C)|=2$ for all $v\in B_2(C)$, $B_2(C)\cap B_2(C')=\emptyset$ for any distinct components $C,C'\in\mathcal{C}$.  Therefore $|B(H)|\ge \sum_{C\in\mathcal{C}} |B_2(C)|\ge \sum_{C\in\mathcal{C}} |B(C)|=|B(H-B(H))|$.
+  Let $C$ be a component in $\mathcal{C}$ and define the set $B_2(C)\subseteq B(H)$ as follows: Let $w_0,\ldots,w_k$ be the clockwise walk around the outer face of $C$, so that $w_0=w_k$ and $|B(C)|=|\{w_1,\ldots,w_k\}|\le k$.  If an edge $vw$ of $H-B(H)$ appears more than once in $w_0,\ldots,w_k$ then $vw$ is necessarily a bridge in $C$ and is traversed once from $v$ to $w$ and a second time from $w$ to $v$. That is $(v,w)=(w_{i-1},w_{i})$ and $(w,v)=(w_{j-1},w_{j})$ for distinct $i,j\in\{1,\ldots,k\}$. For each $i\in\{1,\ldots,k\}$, $H$ contains an inner face $w_{i-1}w_iv_i$ that is to the left of the edge $w_{i-1}w_i$ when traversed from $w_{i-1}$ to $w_i$.  Note that $v_i\in B(H)$ for each $i\in\{1,\ldots,k\}$. The vertices $v_1,\ldots,v_k$ are distinct: For distinct $i,j\in\{1,\ldots,k\}$, the same vertex cannot be adjacent to both $w_{i-1}w_{i}$ and to $w_{j-1}w_{j}$ since this would imply that $N^+_H(v_i)\supseteq\{w_{i-1},w_{i},w_{j-1},w_{j}\}$.  If $|\{w_{i-1},w_{i},w_{j-1},w_{j}\}|>2$ then this contradicts the fact that $\deg^+_H(v_i)\le 2$ (by \ref{inner_degree_2}).  If $|\{w_{i-1},w_{i},w_{j-1},w_{j}\}|=2$ then $w_{i-1}w_i$ is a bridge of $C$ and $w_{i-1}=w_{j}$ and $w_{i}=w_{j-1}$.  This implies that $H$ contains two bounded faces, one bounded by a cycle through $v_i,w_{i-1},w_i$ and another bounded by a cycle through $v_i,w_i,w_{i-1}$.  Since $H$ is a simple graph, this is not possible.  Define $B_2(C):=\{v_1,\ldots,v_k\}$.  Then $|B_2(C)|= k\ge |B(C)|$. 
+  
+  For any two distinct components $C$ and $C'$ of $H-B(H)$, $B_2(C)$ and $B_2(C')$ are disjoint since any vertex $v\in B_2(C)\cap B_2(C')$ would have $\deg^+_H(v)\ge|N^+_C(v)|+|N^+_{C'}(v)|=4 > 2$, contradicting \ref{inner_degree_2}.  Therefore $|B(H)|\ge \sum_{C\in\mathcal{C}} |B_2(C)|\ge \sum_{C\in\mathcal{C}} |B(C)|=|B(H-B(H))|$.
 \end{proof}
 
-For each integer $r\ge 3$, the \defin{$r$-wheel} $W_r$ consists of an outer cycle $v_0,\ldots,v_{r-1}$ and a single inner vertex $x$ adjacent to every vertex of the cycle. For even $r$, $W_r$ is an \defin{even wheel}. The following lemma, illustrated in \cref{biconnected_critical_colouring}, concerns critical graphs.
+For each integer $r\ge 3$, the \defin{$r$-wheel} $W_r$ consists of an outer cycle $v_0,\ldots,v_{r-1}$ and a single inner vertex $x$ adjacent to every vertex of the cycle. For even $r$, $W_r$ is an \defin{even wheel}.  Note that the following lemma, illustrated in \cref{biconnected_critical_colouring}, concerns \emph{critical} graphs (not $2$-critical graphs).
 
 \begin{figure}
   \centering
@@ -592,20 +598,20 @@ For each integer $r\ge 3$, the \defin{$r$-wheel} $W_r$ consists of an outer cycl
   \end{figure}
 
 \begin{proof}
-Let $Q:=H[B(H)]$. Since $H$ is biconnected the outer face of $H$ (and of $Q$) is bounded by a cycle through $B(H)$.  Recall that an inner face of $Q$ is \emph{marked} if it contains a vertex of $I(H)$ in its interior.
-By \cref{critical_structure}, each marked face $f$ contains exactly one inner
-vertex $x_f$ and $x_f$ is adjacent to every vertex of $f$.  In the special case where $H$ is a wheel whose only (marked) face is $f_0$, define $v_{f_0}$ to be an arbitrary vertex in $B(H)$.  Otherwise, for each marked face $f$ of $Q$, the boundary of $f$ contains a \emph{chord} of $Q$: an edge on the boundary of $f$ and some other inner face of $Q$.  Choose $v_f$ to be an endpoint of
-such a chord. 
+Let $Q:=H[B(H)]$. Since $H$ is biconnected the outer face of $H$ (and of $Q$) is bounded by a cycle through $B(H)$.  Recall that an inner face of $Q$ is \emph{marked} if it contains a vertex of $I(H)$ in its interior.  By \cref{critical_structure}, each marked face of $Q$ contains exactly one vertex of $H$ in its interior. Each unmarked bounded face of $Q$ is also a bounded face of $H$, and is therefore a triangle.
+
+First we deal directly with the case in which $Q$ has only one bounded face $f_0$. If $f_0$ is unmarked then $Q=H$ has three vertices $u$, $v$, and $w$.  Setting $X_1:=\{u\}$, $X_2:=\{v\}$, and $X_0:=\{w\}$ satisfies all requirements.  If $f_0$ is marked then $H$ is a wheel graph $W_k$ with $k$ odd. Let $v_0,\ldots,v_{r-1}$ be the cycle that bounds the outer face of $H$ and let $x$ be the single vertex in $I(H)$.  In this case, we choose $X_0:=\{x,v_0\}$, $X_1:=\{v_1,v_3,\ldots,v_{r-2}\}$ and $X_2:=\{v_2,v_4,\ldots,v_{r-1}\}$.  This also satisfies our requirements, for the following reasons: Each of $X_0\cap B(H)$, $X_1$ and $X_2$ is an independent set in $Q$, which satisfies \ref{proper}. For each $b\in\{1,\ldots,r-1\}$, the vertex $v_b$ is in $X_{i}$ for some $j\in\{1,2\}$, $v_b$ is adjacent to $x\in X_0$. If $b\ge 2$ then $v_{b-1}\in X_{3-j}$. Otherwise, $v_{b+1}\in X_{3-j}$. Since $\{0,j,3-j\}=\{0,1,2\}$, $N_H[v_b]$ contains a vertex in each of $X_0$, $X_{j}$, and $X_{3-j}$. The vertex $v_0$ is in $X_0$ and is adjacent to $v_1\in X_1$ and to $v_{r-1}\in X_2$.  Thus, $N_H(v)$ contains a vertex in each of $X_0$, $X_1$, and $X_2$ for all $v\in V(H)$, so $X_0,X_1,X_2$ satisfies \ref{dominates_h}.  The single vertex $x\in I(H)$ is in $X_0$ and has a neighbour $v_0\in B(H)$ that is also in $X_0$, which satisfies \ref{inner_attachment}.  
+
+We now assume that $Q$ has at least two bounded faces. Thus, each bounded face $f$ of $Q$ has a \emph{chord} of $Q$; an edge on the boundary of two bounded faces of $Q$ (one of which is $f$).  For each inner face $f$ of $Q$, let $v_f$ be an endpoint of a chord of $f$.  For each marked inner face $f$ of $Q$, let $x_f$ be the unique vertex in $I(H)$ that is contained in the interior of $f$.
 
 Triangulate $Q$ as follows:  For each marked face $f$ of $Q$, add edges in the interior of $f$ incident to $v_f$ so that $v_f$ is adjacent to all vertices of $f$. Since every inner face of $H$ is a triangle, each unmarked face of $Q$ is a triangle. Therefore, this procedure results in a graph $M\supseteq Q$ where every inner face is a triangle and all vertices of $M$ appear on the outer face of $M$.  Thus, $M$ is a maximal outerplanar graph.  Properly $3$-colour $M$ using colours in $\{0,1,2\}$,
-and, for each marked face $f$ of $Q$, assign $x_f$ the same colour as $v_f$.
-For each $i\in\{0,1,2\}$ define $X_i$ as the set of vertices of $H$ that are assigned colour $i$.
+and, for each marked face $f$ of $Q$, assign $x_f$ the same colour as $v_f$.  For each $i\in\{0,1,2\}$ define $X_i$ as the set of vertices of $H$ that are assigned colour $i$.
 
-Since we start with a proper colouring of $M$, which contains $Q$, the sets $X_0,X_1,X_2$ satisfy \ref{proper}.  For each $x\in I(H)$, $x=x_f$ for some marked face $f$ of $Q$.  Then $x$ and $v_f$ have the same colour, so the sets $X_0,X_1,X_2$ satisfy \ref{inner_attachment}. Finally, we must show that each $X_i$ dominates $V(H)$ for each $i\in\{0,1,2\}$. In terms of colouring, we must show that, for each colour $\alpha\in\{0,1,2\}$, each vertex $v$ of $H$ either has colour $\alpha$ or is adjacent to a vertex of colour $\alpha$. For a vertex $v$ that participates in an unmarked face $f$ of $Q$, this is immediate since $f$ is a triangle (a clique of size $3$) so the three vertices of $f$ receive three distinct colours.
+Since we start with a proper colouring of $M$, which contains $Q$, the sets $X_0,X_1,X_2$ satisfy \ref{proper}.  For each $x\in I(H)$, $x=x_f$ for some marked face $f$ of $Q$.  Then $x$ and $v_f$ have the same colour, so the sets $X_0,X_1,X_2$ satisfy \ref{inner_attachment}. Finally, we must show that each $X_i$ dominates $V(H)$ for each $i\in\{0,1,2\}$.  
 
-For each marked face $f$ of $Q$, consider the path $P_f:=f-v_f$.  The vertices $v_f$ and $x_f$ receive some colour $i$ and vertices of path $P_f$ are alternately coloured with the two colours in $\{0,1,2\}\setminus\{i\}$. Since $f$ has at least three vertices, $P_f$ has at least one edge $e$ whose endpoints have the two colours in $\{0,1,2\}\setminus\{i\}$. The vertex $x_f$ receives colour $i$, and is adjacent to both endpoints of $e$. A vertex $v$ in $P_f$ has a colour $j\in\{0,1,2\}\setminus\{i\}$, is adjacent to $x_f$ (whose colour is $i$), and is incident to an edge of $P_f$ whose other endpoint is assigned the colour in $\{0,1,2\}\setminus\{i,j\}$.  
+First, consider a vertex $v\in B(H)=V(Q)$.  If $v$ is on the boundary of an unmarked face $g$ of $Q$ then $g$ is a triangle, and its three vertices receive three distinct colours.  Thus $N_H[v]$ includes a vertex in each of $X_0$, $X_1$, and $X_2$. If $v$ is not on the boundary of any unmarked face of $Q$, then $v$ is on the boundary of a marked face $f$ of $Q$.  Furthermore, $v\neq v_f$ since $v_f$ is the endpoint of a chord of $Q$, so $v_f$ is also on the boundary of another face $g$ of $Q$ which, by \cref{critical_structure}, is unmarked.  The inner vertex $x_f$ is in $X_i$ for some $i\in\{0,1,2\}$, and $v\in X_j$ for some $j\in\{0,1,2\}\setminus\{i\}$. The vertex $v$ has two neighbours in $Q$, both of which are on the boundary of $f$ and at least one of which, say $w$, is not $v_f$.  Since $vw$ and $wx_f$ are edges of $M$, $w\in X_{k}$ for $k\in \{0,1,2\}\setminus\{i,j\}$.  Thus, $\{i,j,k\}=\{0,1,2\}$, so $N_H[v]$ includes a vertex in each of $X_0$, $X_1$, and $X_2$.  
 
-All that remains is to consider a vertex $v$ of $Q$ that is not on the boundary of any unmarked face of $Q$, and is on the boundary of a marked face $f$ for which $v_f=v$.  This can only happen if $Q$ has only one inner face, which must be $f$.  Indeed, otherwise $v$ is the endpoint of a chord of $Q$ that is on the boundary of two inner faces, $f$ and $g$. Since $H$ is critical, $g$ is unmarked, which contradicts the definition of $v$.  Thus $Q$ has only one inner face $f$, which is marked. Thus, $Q$ is a wheel $W_k$.  By the assumption of the lemma, $k$ is odd, so the path $P_f$ has an odd number of edges, so the endpoints of $P_f$ are assigned different colours.  Thus, if $v_f$ is assigned colour $i$ then the two endpoints of $P_f$ (each of which is adjacent to $v_f$) are assigned the two colours in $\{0,1,2\}\setminus\{i\}$.  
+All that remains is to consider a vertex $x\in I(H)$.  In this case, $x=x_f$ for some face $f$ of $Q$.  The face $f$ has at least three vertices on its boundary.  Then $f-v_f$ is a path with at least one edge $v_1v_2$.  Then $x\in X_i$ for some $i\in\{0,1,2\}$, $v_1\in X_j$ for some $j\in\{0,1,2\}\setminus\{i\}$, and $v_2\in X_k$ for some $k\in\{0,1,2\}\setminus\{i,j\}$.  Thus $\{i,j,k\}=\{0,1,2\}$ so $N_H[x]$ includes a vertex in each of $X_0$, $X_1$, and $X_2$.  Hence each of $X_0$, $X_1$, and $X_2$ dominates $H$, which satisfies \ref{dominates_h}
 \end{proof}
 
 The following lemma, illustrated in \cref{even_wheel}
@@ -613,10 +619,10 @@ The following lemma, illustrated in \cref{even_wheel}
 
 \begin{lem}\label{wheelie}
   Let $H:=W_k$ for some even integer $k\ge 4$ and let $v$ be any vertex in $B(H)$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
-  \begin{enumerate}[label=\rm(\roman*)]
+  \begin{enumerate}[label=\rm(\roman*),nosep,nolistsep]
     \item For each edge $ab$ of $H[B(H)]$, $a\in X_i$ and $b\in X_j$ for some $i\neq j$;\label{proper2}
     
-    \item $X_0$ dominates $V(H)\setminus\{v\}$ and $X_1$ and $X_2$ each dominate $H$; and \label{weak_dominates_h}
+    \item $v\in X_0$, $X_0$ and $X_2$ each dominate $H$ and $X_1$ dominates $V(H)\setminus\{v\}$; and \label{weak_dominates_h}
     \item each $x\in I(H)\cap X_i$ has a neighbour in $B(H)\cap X_i$. \label{inner_attachment_even}
   \end{enumerate}
 \end{lem}
@@ -629,8 +635,7 @@ The following lemma, illustrated in \cref{even_wheel}
   \end{figure}
 \begin{proof}
 Let $v_0,\ldots,v_{k-1}$ be the vertices in $B(H)$ in clockwise order when traversing the outer face of $H$, with $v=v_0$. Let $x$ be the single vertex in $I(H)$.
-Take $X_1=\{v_0,x\}$, $X_2=\{v_1,v_3,\ldots,v_{k-1}\}$, and
-$X_0=\{v_2,v_4,\ldots,v_{k-2}\}$.  It is straightforward to check that this satisfies the requirements of the lemma.
+Take $X_0=\{v_0,x\}$, $X_1=\{v_2,v_4,\ldots,v_{k-2}\}$, and $X_2=\{v_1,v_3,\ldots,v_{k-1}\}$.  It is straightforward to check that $\{X_0,X_1,X_2\}$ is a vertex-partition of $H$ satisfying the requirements of the lemma.
 \end{proof}
 
 The following lemma, illustrated in \cref{critical_colouring}, drops the requirement that the critical graph be biconnected and applies even if some of the biconnected components of $H$ are even wheels.
@@ -644,7 +649,7 @@ The following lemma, illustrated in \cref{critical_colouring}, drops the require
 
 \begin{lem}\label{critical}
   Let $H$ be a connected critical generalized near-triangulation with at least $3$ vertices, no vertices of degree $1$ and not isomorphic to $W_k$ for any even integer $k$.  Then there exists a partition $\{X_0,X_1,X_2\}$ of $V(H)$ such that
-  \begin{enumerate}[label=\rm(\roman*)]
+  \begin{enumerate}[label=\rm(\roman*),nosep,nolistsep]
     \item for each edge $vw$ of $H[B(H)]$, $v\in X_i$ and $w\in X_j$ for some $i\neq j$;\label{proper_2}
     \item for each $i\in\{0,1,2\}$, $X_i$ dominates $H$; and \label{dominates_h_minus_l}
     \item each $x\in I(H)\cap X_i$ has a neighbour in $B(H)\cap X_i$. \label{inner_attachment_connected}
@@ -662,49 +667,20 @@ The following lemma, illustrated in \cref{critical_colouring}, drops the require
   \end{figure}
 
 \begin{proof}
-Induct on $|H|$. For a biconnected graph, apply
-\cref{biconnected_critical}; this includes the three-vertex base case.
-Otherwise consider the block-cut tree, treating each bridge as a two-vertex
-block. Choose an end block with cut vertex $v$, let $C_1$ be its vertex set
-other than $v$, and put $H'=H[C_1\cup\{v\}]$.
-All end blocks have at least three vertices because $H$ has no vertex of
-degree one. Apply \cref{biconnected_critical}, or \cref{wheelie} if this block
-is an even wheel. Label the resulting sets so that $v\in X_1'$, $X_1'$ and
-$X_2'$ dominate $H'$, and $X_0'$ dominates $V(H')\setminus\{v\}$.
-All inner vertices have the attachment property.
+  The proof is by induction on $|V(H)|$. If $H$ is biconnected, the lemma follows immediately from \cref{biconnected_critical}; this includes the case in which $|V(H)|=3$.
 
-Let $H''=H-C_1$. If $\deg_{H''}(v)\ge2$, then $H''$ is connected and
-critical, has minimum degree at least two, and is smaller than $H$.
-Apply induction, or \cref{wheelie} if it is an even wheel, to obtain
-$X_0'',X_1'',X_2''$ with $v\in X_1''$, $X_1''$ and $X_2''$ dominating $H''$,
-and $X_0''$ dominating $V(H'')\setminus\{v\}$.
+  If $H$ has more than three vertices and is not biconnected, then let $A,B\subseteq V(H)$ such that $A\cup B=V(H)$, $H[A]$ is biconnected, $N_H(A)\subseteq A\cap B$, $N_H(B)\subseteq A\cap B$ and $\{v\}:=A\cap B$ has size $1$.  Let $H':=H[A]$.\footnote{In the language of biconnectivity, $H'$ corresponds to a leaf in the block-cut tree of $H$.}  Then $H'$ is a biconnected induced subgraph of $H$ that contains $v$ and has fewer vertices than $H$. Since $H$ has no vertices of degree $1$, $H'$ has at least three vertices.  
 
-If $\deg_{H''}(v)=1$, follow the bridge path
-$v,v_1,\ldots,v_{r-1},v_r$ until the first vertex $v_r$ whose degree in $H''$
-is not two. The internal path vertices have degree two, and
-$\deg_{H''}(v_r)\ge3$: all other vertices of $H''$ have degree at least two.
-Removing $v,v_1,\ldots,v_{r-1}$ leaves a connected critical graph $H'''$ with
-minimum degree at least two. Apply induction, or \cref{wheelie} if it is an
-even wheel. Relabel its partition so that $v_r$ has colour
-$(r+1)\bmod3$, the classes of colours $(r-2)\bmod3$ and $(r-1)\bmod3$
-dominate $H'''$, and the class of colour $r\bmod3$ dominates
-$V(H''')\setminus\{v_r\}$. Give $v$ colour~1 and each $v_i$, $1\le i\le r-1$,
-colour $(i+1)\bmod3$. Let $X_i''$ be the resulting colour classes in $H''$.
-All internal path vertices see all three colours in their closed
-neighbourhoods. The potentially missing colour at $v_r$ occurs at its
-predecessor, of colour $r\bmod3$. The vertex $v$ sees colours~1 and~2, so
-$X_1''$ and $X_2''$ dominate $H''$ and $X_0''$ dominates
-$V(H'')\setminus\{v\}$. The path has no inner vertices, so the attachment
-property is preserved.
-
-In either case, set
-$X_0=X_0'\cup X_2''$, $X_1=X_1'\cup X_1''$, and
-$X_2=X_2'\cup X_0''$. Both copies of $v$ receive colour~1, so these sets
-form a partition and the boundary colouring stays proper. All vertices
-other than $v$ are dominated by all three classes. At $v$, colour~1 occurs
-at $v$ itself, colour~2 occurs in $X_2'$, and colour~0 occurs in $X_2''$.
-Inner vertices and their boundary attachment neighbours belong to the same
-side of the decomposition, so the attachment property also survives.
+  If $H'$ is not an even wheel, apply \cref{biconnected_critical} to obtain a vertex partition $\{X_0',X_1',X_2'\}$ of $H'$ in which each part dominates $H'$.  Without loss of generality (by renaming the sets $X_0'$, $X_1'$, and $X_2'$) we may assume that $v\in X_0'$.  If $H'$ is an even wheel then apply \cref{wheelie} to obtain a vertex partition $\{X_0',X_1',X_2'\}$ of $H'$ with $v\in X_0'$ such that each of $X_0'$ and $X_2'$ dominate $H'$ and $X_1'$ dominates $H'-v$.
+  
+  Let $H''=H-(V(H')\setminus\{v\})$. If $\deg_{H''}(v)\ge2$, then $H''$ is connected and critical, has minimum degree at least two, and has fewer vertices than $H$.  If $H''$ is not an even wheel then apply induction to obtain a vertex-partition $\{X_0'',X_1'',X_2''\}$ of $H''$ satisfying the conditions of the lemma, with $v\in X_0''$.  If $H''$ is an even wheel then apply \cref{wheelie} to obtain a vertex partition $\{X_0'',X_1'',X_2''\}$ of $H''$ such that each of $X_0''$ and $X_2''$ dominate $H''$ and $X_1''$ dominates $H''-v$ and $v\in X_1''$.  Let $X_0:=X_0'\cup X_0''$, $X_1:=X_1'\cup X_2''$ and $X_2:=X_2'\cup X_1''$.  Since $v\in X_0'\cap X_0''$ and $H'-v$ and $H''-v$ are vertex-disjoint, $\{X_0,X_1,X_2\}$ is vertex-partition of $H$. That this partition satisfies \ref{proper_2} and \ref{inner_attachment_connected} is due to the fact that $\{X_0',X_1',X_2'\}$ and $\{X_0'',X_1'',X_2''\}$ satisfy these conditions for $H'$ and $H''$, respectively. For the same reason, each $X_0$, $X_1$, and $X_2$ dominates $V(H)\setminus\{v\}$.  That these sets also dominate $v$ come from the fact that $v\in X_0$, $N_H(v)\supseteq N_{H'}(v)$ contains a vertex in $X_2'\subseteq X_2$, and $N_H(v)\supseteq N_{H''}(v)$ contains a vertex in $X_2''\subseteq X_1$.  Thus $\{X_0,X_1,X_2\}$ satisfies \ref{dominates_h_minus_l}.
+  
+  If $\deg_{H''}(v)=1$, then let $v_0:=v$ and $v_0,\ldots,v_{r-1},v_r$ be the maximal path in $H$ such that $\deg_H(v_i)=2$ for each $i\in\{1,\ldots,r-1\}$.  Since $H$ has no vertex of degree $1$, $\deg_H(v_r)=\deg_{H''}(v_r)\ge 3$.  Then $H''':=H''-\{v,v_1,\ldots,v_{r-1}\}$ is connected, critical, has minimum degree at least two and has fewer vertices than $H$.  As in the preceding case, apply induction or \cref{wheelie} to $H'''$ to obtain a vertex partition $\{X_0''',X_1''',X_2'''\}$ of $H'''$.  By renaming, we can assume that $v_r\in X_{r\bmod 3}$, that $X_{r\bmod 3}$ and $X_{(r+1)\bmod 3}$ each dominate $H'''$, and that $X_{(r-1)  \bmod 3}$ dominates $V(H''')\setminus\{v_r\}$.  For each $i\in\{0,1,2\}$, define
+  \[
+      X_i := X_i' \cup \{ v_j:j\in\{1,\ldots,r-1\},\, j\equiv i\pmod 3\} \cup X_i''' \enspace .  
+  \]
+  Then $\{X_0,X_1,X_2\}$ satisfy \ref{proper2} because $\{X_0',X_1',X_2'\}$ and $\{X_0''',X_1''',X_2'''\}$ satisfy \ref{proper2} for $H'$ and $H'''$ respectively and because, for each $i\in\{2,\ldots,r-1\}$, $v_i\in X_{i\bmod 3}$ and the two neighbours of $v_i$ are $v_{i-1}\in X_{(i-1)\bmod 3}$ and $v_{i+1}\in X_{(i+1)\bmod 3}$.  This partition satisfies \ref{inner_attachment_connected} because $\{X_0',X_1',X_2'\}$ and $\{X_0''',X_1''',X_2'''\}$ satisfy \ref{inner_attachment_connected} for $H'$ and $H'''$ respectively, and $v_1,\ldots,v_{r-1}$ are in $B(H)$.  All that remains is to verify that $\{X_0,X_1,X_2\}$ satisfies \ref{dominates_h_minus_l}. For each vertex $w$ in $H'-v$, $N_{H'}(w)\subseteq N_{H}(w)$ contains a vertex in each of $X_0'\subseteq X_0$, $X_1'\subseteq X_1$, and $X_2'\subseteq X_2$.  For each vertex $w$ in $H'''-v_r$, $N_{H'''}(w)\subseteq N_{H}(w)$ contains a vertex in each of $X_0'''\subseteq X_0$, $X_1'''\subseteq X_1$, and $X_2'''\subseteq X_2$. 
+  For each $i\in\{1,\ldots,r-1\}$, $N_H[v_i]$ contains a vertex in each of $X_{(i-1)\bmod 3}$, $X_{i\bmod 3}$ and $X_{(i+1)\bmod 3}$. The vertex $v=v_0$ is in $X_0$, $N_{H'}(v)\subseteq N_H(v)$ contains a vertex in $X_2'\subseteq X_2$, and $N_H(v)$ contains the vertex $v_1\in X_1$.  The vertex $v_r$ is in $X_{r\bmod 3}$, $N_{H'''}(v_r)\subseteq N_H(v_r)$ contains a vertex in $X_{(r+1)\bmod 3}'''\supseteq X_{(r+1)\bmod 3}$, and $N_H(v_r)$ contains the vertex $v_{r-1}\in X_{(r-1)\bmod 3}$.
 \end{proof}
 
 
@@ -719,7 +695,7 @@ At last, the following lemma, illustrated in \cref{two_critical_colouring}, show
 
 \begin{lem}\label{three_sets_coverage}
   Let $H$ be a $2$-critical generalized near-triangulation. Then there exist $X_0,X_1,X_2\subseteq V(H)$ such that
-  \begin{enumerate}[label=\rm(\roman*)]
+  \begin{enumerate}[label=\rm(\roman*),nosep,nolistsep]
     \item $|X_0|+|X_1|+|X_2| \le 2|B(H-B(H))|+|I(H-B(H))|$; \label{total_size}
     \item for each $i\in\{0,1,2\}$, $X_i$ dominates $I(H)$ in $H$; and \label{dominates_i}
     \item for each $i\in\{0,1,2\}$, each component of $H[X_i]$ contains at least one vertex in $B(H)$. \label{connectivity}
@@ -727,29 +703,13 @@ At last, the following lemma, illustrated in \cref{two_critical_colouring}, show
 \end{lem}
 
 \begin{proof}
-Initialize $X_0=X_1=X_2=\emptyset$, and consider each component $C$ of
-$H-B(H)$. Such a component is critical and has minimum degree at least two.
-Every $w\in B(C)$ has a neighbour in $B(H)$, because $w$ became a boundary
-vertex when $B(H)$ was deleted.
+  Let $\mathcal{C}$ be the set of components of $H-B(H)$. By \ref{inner_degree_2} and \ref{inner_critical}, each $C\in\mathcal{C}$ is critical and has minimum degree at least two.  For each $w\in B(C)$, $N_H(w)$ includes a vertex in $B(H)$.  Initialize $X_0:=X_1:=X_2:=\emptyset$, and process each component $C\in\mathcal{C}$ in turn.
 
-If $C$ is an even wheel, choose its hub $x$, a rim vertex $w$, and a neighbour
-$v\in B(H)$ of $w$. Add $\{v,w,x\}$ to every $X_i$. This dominates $C$ and
-gives each of these three connected sets an outer anchor. Its total cost is
-nine, at most $2|B(C)|+|I(C)|$ because $|B(C)|\ge4$ and $|I(C)|=1$.
+If $C$ is an even wheel, then let $\{x\}:=I(C)$, let $v\in B(C)$, and let $w\in N_H(v)\cap B(H)$.  Add $\{x,v,w\}$ to $X_{i}$ for each $i\in\{0,1,2\}$.  This increases $|X_0|+|X_1|+|X_2|$ by $9=2\cdot 4+1\le 2|B(C)|+I(C)$.  Since $x$ is included in $X_i$, this ensures that $X_i$ dominates $I(H)\cap V(C)$, for each $i\in\{0,1,2\}$ so this ensures \ref{dominates_i}. The induced subgraph $H[\{x,v,w\}]$ is connected and contains $w\in B(H)$, which ensures that \ref{connectivity}.
 
-Otherwise apply \cref{critical} to partition $V(C)$ into
-$Y_0,Y_1,Y_2$. Add \emph{all} of $Y_i$ to $X_i$. For every
-$w\in Y_i\cap B(C)$, choose a neighbour $a(w)\in B(H)$ and also add $a(w)$
-to $X_i$. These additions retain domination of $C$. Every chosen boundary
-vertex $w$ has its outer anchor $a(w)$. Every chosen inner vertex has a
-same-coloured boundary neighbour by \cref{critical}, and hence belongs to
-a component containing such an anchor. The total cost over the three sets
-is at most $|C|+|B(C)|=2|B(C)|+|I(C)|$.
+If $C$ is not an even wheel, then apply \cref{critical} to obtain a vertex partition $\{Y_0,Y_1,Y_2\}$ of $C$.  Add $Y_i$ to $X_i$ for each $i\in \{0,1,2\}$. This increases $|X_0|+|X_1|+|X_2|$ by $|Y_0|+|Y_1|+|Y_2| = |C| = |I(C)|+|B(C)|$.  For each $w\in Y_i\cap B(C)$, choose a neighbour $a(w)\in N_H(w)\cap B(H)$ and also include $a(w)$ in $X_i$.  This increases $|X_0|+|X_1|+|X_2|$ by at most $|B(C)|$. Thus, this step increases $|X_0|+|X_1|+|X_2|$ by at most $2|B(C)|+|I(C)|$.  By \cref{critical} property \ref{dominates_h_minus_l}, $X_i$ dominates $V(C)=I(H)\cap V(C)$, which ensures \ref{dominates_i}.  By \ref{inner_attachment_connected}, each component of $C[Y_i]$ contains a vertex $w\in B(C)$ and the addition of $a(w)$ to $X_i$ ensures that each component of $H[X_i]$ contains a vertex of $B(H)$, which ensures \ref{connectivity}.
 
-Sum this bound over all components $C$. Coincident anchors can only reduce
-the total size, and unions of anchored components remain anchored. Thus
-$|X_0|+|X_1|+|X_2|\le2|B(H-B(H))|+|I(H-B(H))|$, and all the required
-domination and connectivity properties hold.
+For each component $C\in\mathcal{C}$, processing $C$ increases $|X_0|+|X_1|+|X_2|$ by at most $2|B(C)|+|I(C)|$.  Thus, $|X_0|+|X_1|+|X_2| \le \sum_{C\in\mathcal{C}}(2|B(C)|+|I(C)|) = 2|B(H-B(H))| + |I(H-B(H))|$, which ensures \ref{total_size}.
 \end{proof}
 
 \begin{proof}[Proof of \cref{two_critical_handler}]
@@ -760,141 +720,170 @@ domination and connectivity properties hold.
 \subsection{The Algorithm}
 
 {\emergencystretch=2em
-We now define $\textsc{BetterGreedy}(G)$, a refinement of $\textsc{SimpleGreedy}(G)$. We handle the three-vertex triangulation separately, by selecting one vertex. Hence suppose that $n\ge4$, and fix the outer triangle of $G$.\par}
+We now define $\textsc{BetterGreedy}(G)$, a refinement of $\textsc{SimpleGreedy}(G)$.  If $G$ has $n=3$ vertices, then it has a connected dominating set of size $1=n/3<10n/21$, so we may assume that $n\ge 4$.
 
-Let $H_0$ be obtained from $G$ by the dom-minimization operations in the proof of \cref{dom_minimal}. After selecting a batch $\Delta_i$, apply these same operations to $H_i-\Delta_i$ to obtain $H_{i+1}$. For a two-vertex batch, delete the vertices in the indicated order. Thus the residual graphs are maintained recursively, rather than obtained afresh from the original graph. Write $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$ and $J_i:=H_i-B(H_i)$. During iteration $i\ge0$, consider the following cases in order:
-\begin{enumerate}[label={[bg\arabic*]}]
-    \item If $I(H_i)=\emptyset$, terminate with $X_i$; the final batch is empty.
-    \item Otherwise, if some $v_i\in B(H_i)$ has $\deg^+_{H_i}(v_i)\ge3$, choose any such vertex and set $\Delta_i:=\{v_i\}$.
+Let $H_0$ be the dom-minimal generalized near-triangulation obtained by applying \cref{dom_minimal} to the triangulation $G$. As in $\textsc{SimpleGreedy}(G)$ we construct a sequence $\Delta_0,\Delta_1,\ldots,\Delta_{r}$ of subsets of $V(G)$. This defines a nested sequence of sets $X_1,\ldots,X_{r+1}$ with $X_i:=\bigcup_{j=0}^{i-1}\Delta_j$ for each $i\in\{1,\ldots,r+1\}$.  However, for each $i\in\{0,\ldots,r\}$, the graph we use to compute $\Delta_i$ is not $G_i=G-X_i$.  Ideally, we would always choose $\Delta_i=\{v_i\}$ where $v_i\in B(G_i)$ has $\deg^+_{G_i}(v_i)\ge 3$.  Unlike the critical graphs that appear when $\deg^+_G(v)\le 1$ for all $v\in B(G)$, there are near-triangulations with $G$ with $\deg^+_G(v)=2$ for all $v\in B(G)$ that are arbitrarily complicated. To deal with this, we work with dom-minimal graphs.  Define $H_0$ to be a dom-minimal graph that dom-respects $G$.  For each $i\in\{1,\ldots,r\}$, $H_i$ is a dom-minimal graph that dom-respects $H_{i-1}-\Delta_{i-1}$. The fact that each $H_i$ is dom-minimal allows us to use \cref{leaf_killer,degree_zero_killer,really_good} to deal with cases where $\deg^+_{H_i}(v)\le 2$ for all $v\in B(H_i)$. When none of these tools can be used, we are either left with a graph $H_r$ with $I(H_r)=\emptyset$ or a graph $H_r$ that is $2$-critical. In the former case, we can take $\Delta_r=\emptyset$. In the latter case, we use \cref{two_critical_handler} to compute the final set $\Delta_r$ that dominates the remaining vertices in $I(H_r)$.
+
+During iteration $i\ge 0$, we use the following procedure to choose $\Delta_i$:
+\begin{enumerate}[label={[bg\arabic*]},labelwidth=\widthof{[bg0]},leftmargin=!,nosep,nolistsep] 
+    \item If $I(H_i)=\emptyset$ then this is the last iteration, and we set $\Delta_r:=\emptyset$.\label{bg_empty}
+    \item Otherwise, if some $v_i\in B(H_i)$ has $\deg^+_{H_i}(v_i)\ge3$, choose any such vertex and set $\Delta_i:=\{v_i\}$.  
+    % Let $H'_i:=H_i-\Delta_i$. 
     \label{bg_high_degree}
-    \item Otherwise, if $J_i$ is not critical, use \cref{really_good} to choose distinct $u,v\in B(H_i)$ and $w\in B(J_i)$ with $vw\in E(H_i)$, $\deg^+_{H_i}(v)=2$, $\deg^+_{H_i-v}(w)\ge3$, and $N^+_{H_i}(u)\subseteq N_{H_i}[w]$. Set $\Delta_i:=\{v,w\}$, deleting $v$ before $w$.
+    \item Otherwise, if $J_i:=H_i-B(H_i)$ is not critical, use \cref{really_good} to choose distinct $u,v\in B(H_i)$ and $w\in B(J_i)$ with $vw\in E(H_i)$, $\deg^+_{H_i}(v)=2$, $\deg^+_{H_i-v}(w)\ge3$, and $\deg^+_{H_i-\{v,w\}}(u)=0$. Set $\Delta_i:=\{v,w\}$.  
+    % In this case, the graph $H_{i+1}$ obtained by applying \cref{dom_minimal} to $H_i-\Delta_i$ satisfies $|I(H_{i+1})|=|I(H_i)|-2$ and $|B(H_{i+1})|\le|B(H_i)|-3$.
     \label{bg_two_three}
-    \item Otherwise, if $J_i$ has a vertex of degree~1, set $\Delta_i:=\{v_i\}$, where $v_i$ is supplied by \cref{leaf_killer}. In the cleanup, first remove the two vertices of inner degree zero specified in that lemma.
+    \item Otherwise, if $J_i$ has a vertex of degree~1, set $\Delta_i:=\{v_i\}$, where $v_i$ is the vertex guaranteed by \cref{leaf_killer}.
+    % In this case, the graph $H_{i+1}$ obtained by applying \cref{dom_minimal} to $H_i-v_i$ satisfies $|I(H_{i+1})|=|I(H_i)|-2$ and $|B(H_{i+1})|\le |B(H_i)|-1$.     
     \label{bg_leaf}
-    \item Otherwise, if $J_i$ has a vertex of degree~0, set $\Delta_i:=\{v_i\}$, where $v_i$ is supplied by \cref{degree_zero_killer}, including the choice of a rim vertex of global inner degree~2 when its first case has such a vertex.
+    \item Otherwise, if $J_i$ has a vertex of degree~0, set $\Delta_i:=\{v_i\}$, where $v_i$ is the vertex guaranteed by \cref{degree_zero_killer}.  
+    % In this case, the graph $H_{i+1}$ obtained by applying \cref{dom_minimal} to $H_i-v_i$ satisfies $|I(H_{i+1})|=|I(H_i)|-2$ and $|B(H_{i+1})|\le |B(H_i)|-1$ or $|I(H_{i+1})|=|I(H_i)|-1|$ and $|B(H_{i+1})|\le|B(H_i)|-3$.
     \label{bg_degree_zero}
-    \item Otherwise, $H_i$ is $2$-critical. This is the final iteration. Use \cref{two_critical_handler} to choose $\Delta_i$ of size at most
+    \item Otherwise, $H_i$ is $2$-critical. This is the final iteration, so $r=i$. Use \cref{two_critical_handler} to choose $\Delta_r$ of size at most
     \[
       \frac{2|B(J_i)|+|I(J_i)|}{3}
     \]
-    that dominates $I(H_i)$ in $H_i$ and whose every induced component contains a vertex of $B(H_i)$. Return $X_{i+1}:=X_i\cup\Delta_i$.
+    that dominates $I(H_i)$ in $H_i$ and such that every component of $H_i[\Delta_r]$ contains a vertex in $B(H_i)$.  Return $X_{r+1}:=X_i\cup\Delta_r$.
     \label{bg_two_critical}
 \end{enumerate}
-In \ref{bg_two_three}, the cleanup also removes $u$, which has no remaining inner neighbour. Each incremental iteration exposes at least one inner vertex, so the algorithm terminates.
+% In \ref{bg_two_three}, the cleanup also removes $u$, which has no remaining inner neighbour. Each incremental iteration exposes at least one inner vertex, so the algorithm terminates.
 
 \begin{thm}\label{better_greedy}
   When applied to an $n$-vertex triangulation $G$ with $n\ge4$, $\textnormal{\textsc{BetterGreedy}}(G)$ produces a connected dominating set $X$ of size at most $(10n-18)/21$. Moreover, $X$ contains a vertex of the prescribed outer triangle of $G$.
 \end{thm}
 
 \begin{proof}
-We first justify the use of the recursively maintained residual graph. Initially,
-\[
- I(H_0)=I(G),\qquad B(H_0)\subseteq B(G).
-\]
-Every edge introduced by dom-minimization joins current boundary vertices. Boundary vertices never subsequently become inner, and every edge of $H_i$ with an inner endpoint is an original edge of $G$.
+  We first argue that the final set $X_{r+1}$ is a connected dominating set of $G$.  This is based on the following claim: For each $i\in\{1,\ldots,r+1\}$ and each $v\in B(H_{i-1}-\Delta_{i-1})$, $N_G(v)$ contains a vertex in $X_i$.  We now prove this claim.  If $v\in B(G)$ then $N_G(v)$ contains a vertex in $\Delta_0=X_1\subseteq X_i$, since $X_0$ contains a vertex in $B(G)$ and $B(G)$ is a clique. Otherwise, $v\in B(H_{i-1})\setminus (\Delta_{i-1}\cup B(G))$ for some $i\in\{1,\ldots,r+1\}$.  In this case, let $j\in\{1,\ldots,i\}$ be the smallest index such that $v\in B(H_{j-1}-\Delta_{j-1})$.  Thus, $j\le i$. Since $v\not\in B(H_{j-1})$, $N_{H_{j-1}}(v)$ contains a vertex in $\Delta_{j-1} \subseteq X_j\subseteq X_i$.  Since $v\in I(H_\ell)$ for $\ell\in\{0,\ldots,j-1\}$, \ref{same_neighbourhood} and \ref{same_inner_vertices} imply that $N_{H_{j-1}}(v)\subseteq N_{H_{j-2}}(v)\subseteq\cdots\subseteq N_{H_{0}}(v)\subseteq N_{G}(v)$. Thus, $N_G(v)$ contains a vertex in $\Delta_j\subseteq X_i$, as claimed.
 
-For $i\ge1$, we maintain the following invariant: $G[X_i]$ is connected, and every original vertex outside $I(H_i)$ is dominated by $X_i$. The first selected boundary vertex lies on the original outer triangle, whose three vertices form a clique. It therefore dominates that triangle. Deleting a boundary vertex exposes precisely its current inner neighbours, and its edges to those vertices are edges of $G$. The dom-minimization operations preserve the inner vertex set and delete only boundary vertices. Consequently all original vertices outside the next residual interior are dominated.
+  We now use this claim to show that $X_{r+1}$ is a dominating set in $G$. Let $v$ be a vertex of $G$.  If $v\in X_{r+1}$ then there is nothing to prove, so suppose that $v\not\in X_{r+1}$.  
+  If $v\in B(G)$ then $N_G(v)$ contains a vertex in $\Delta_0=X_1\subseteq X_{r+1}$. Otherwise, $v\in I(G)=I(H_0)$.  The algorithm only terminates returns $X_{r+1}$ in cases \ref{bg_empty} and \ref{bg_two_critical}.  In each case, $B(H_{r}-\Delta_r)=V(H_r-\Delta_r)$.  Thus, if $v\in V(H_r-\Delta)$ then $N_G(v)$ contains a vertex in $\Delta_r \subseteq X_{r+1}$.  Otherwise, let $i\in\{1,\ldots,r\}$ be the maximum index such that $v\in I(H_{i-1})$.  Then $v\in B(H_{i-1}-\Delta_{i-1})$.  The preceding claim establishes that $N_G(v)$ contains a vertex in $\Delta_{i-1}\subseteq X_{r+1}$.  
+  
+  We now argue that $G[X_{r+1}]$ is connected.  For each $i\in\{0,\ldots,r\}$, each component of $H_i[\Delta_i]$ contains a vertex in $B(H_i)$. Let $v$ be a vertex in $X_{r+1}$, so $v\in \Delta_i$ for some $i\in\{0,\ldots,r\}$.  Then the component $C$ of $H_i[\Delta_i]$ that contains $v$ has a vertex $v_0$ in $B(H_i)$.  Let $P$ be a shortest path in $C$ from $v$ to a vertex $v_0\in B(H_i)$. By \ref{same_inner_vertices}, \ref{same_neighbourhood}, $P$ is a subgraph of $H_{i-1}-\Delta_{i-1}$, which is a subgraph of $H_{i-1}$. Repeating this argument shows that $P$ is subgraph of $H_{i-2},\ldots,H_0, G$.  Therefore, $P$ is a path in $G$.  By \ref{boundary_subset}, $v_0\in B(H_i)\subseteq B(H_{i-1}-\Delta_{i-1})$. By the claim above, $N_G(v_0)$ contain a vertex $v_1$ in $X_i$, so $v_i\in \Delta_j$ for some $j\in\{0,\ldots,i-1\}$.  Iterating this argument (or induction on $i$) shows that $G$ contains a path from $v_1$ to a vertex in $B(H_0)\subseteq B_G$.  This implies that, for any two vertices $v$ and $w$ in $X_{r+1}$, $G[X_r]$ contains a path from $v$ to a vertex $v'\in B(G)$ and a path from $w$ to a vertex $w'\in B(G)$.  Since $G[B(G)]$ is a clique, this implies that $G[X_{r+1}]$ is connected.
 
-For the connectivity part of the induction, any subsequent selected boundary vertex is already dominated by $X_i$ and is not in $X_i$, so it has an original neighbour in $X_i$. In a two-vertex batch, the second vertex $w$ is joined to the first vertex $v$ by an original edge: before the deletion of $v$, the vertex $w$ was inner. Thus each incremental batch preserves connectivity. This proves the invariant. In particular, the residual interior is a conservative set of vertices still to be covered; it need not equal the undominated vertices in the original graph.
-
-For a residual generalized near-triangulation $H$, define
-\[
- P(H):=\frac{10|I(H)|+4|B(H)|}{21}.
-\]
-Dom-minimization cannot increase $P$, since it preserves the inner vertex set and only removes boundary vertices. We show that the decrease in $P$ pays for each incremental batch.
-\begin{itemize}
-  \item In \ref{bg_high_degree}, let $t:=\deg_H^+(v)\ge3$. Deleting $v$ exposes $t$ inner vertices and changes the boundary size by $t-1$. Hence, after cleanup,
+  What remains is to analyze the size of $X_{r+1}$.
+  We do this using a potential function that uses the following measure of a near-triangulation $H$: 
   \[
-    P(H)-P(H')\ge\frac{10t-4(t-1)}{21}
-    =\frac{6t+4}{21}\ge1.
+     \Phi(H):=\frac{10|I(H)|+4|B(H)|}{21}.
   \]
-  \item In \ref{bg_two_three}, the first deletion exposes two inner vertices, including $w$. The deletion of $w$ exposes at least three more. Let $t\ge5$ be the total number exposed. The two deletions change the boundary size by $t-2$. Every vertex of $N_H^+(u)$ lies in $N_H[w]$, so has been exposed by these deletions. Cleanup removes $u$ and can only decrease the boundary further. Thus
+  If a generalized near-triangulation $H$ dom-respects a generalized near-triangulation $H'$, then $I(H)=I(H')$ (by \ref{same_inner_vertices}) and $B(H)\le B(H')$ (by \ref{boundary_subset}). Therefore $\Phi(H)\le \Phi(H')$.
+  For each $i\in\{1,\ldots,r\}$, the graph $H_i$ dom-respects $H_{i-1}-\Delta_{i-1}$, so $\Phi(H_i)\le\Phi(H_{i-1}-\Delta_{i-1})$.  
+  % For each $i\in\{0,\ldots,r\}$, let $I_i:=I(H_i)$ and $B_i:=B(H_i)$.
+  For each $i\in\{0,\ldots,r\}$, let $\Phi_i:=\Phi(H_i)$.  Since $G$ is an $n$-vertex triangulation and $H_0$ dom-respects $G$,
   \[
-    P(H)-P(H')\ge\frac{10t-4(t-3)}{21}
-      =\frac{6t+12}{21}\ge2.
+    \Phi_0 = \Phi(H_0) \le \Phi(G) 
+      = \frac{10|I(G)|+4|B(G)|}{21} 
+      = \frac{10(n-3)+4(3)}{21} = \frac{10n-18}{21} \enspace .
   \]
-  \item In \ref{bg_leaf}, \cref{leaf_killer} exposes two inner vertices and supplies a cleanup that decreases the boundary size by at least one. Therefore $P(H)-P(H')\ge24/21\ge1$.
-  \item In \ref{bg_degree_zero}, \cref{degree_zero_killer} either exposes two inner vertices and decreases the boundary size by at least one, or exposes one inner vertex and decreases the boundary size by at least three. Therefore $P(H)-P(H')\ge\min\{24/21,22/21\}\ge1$.
-\end{itemize}
-
-At the final residual $H$, put $b:=|B(H)|$, $r:=|B(H-B(H))|$, and $s:=|I(H-B(H))|$. The sets in \cref{dbrs} can be interpreted as the current selected set $X$, the residual boundary $B:=B(H)$, the residual layers $R:=B(H-B(H))$ and $S:=I(H-B(H))$, and $D:=V(G)\setminus I(H)$. Thus $D,R,S$ partition $V(G)$; after a nonempty incremental prefix, $D$ is dominated by that prefix.
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.7]{figs/dbrs}
-    \caption{The sets $X$, $D$, $B$, $R$, and $S$.}
-    \label{dbrs}
-\end{figure}
-
-If the interior is empty, no final vertices are needed. Otherwise, the final residual is $2$-critical. By \cref{two_critical_boundary_size}, $b\ge r$, and by \cref{two_critical_handler} the terminal batch $\Delta$ has size at most $(2r+s)/3$. Since $|I(H)|=r+s$,
-\[
-  P(H)-\frac{2r+s}{3}
-   =\frac{4(b-r)+3s}{21}\ge0.
-\]
-This pays for the terminal batch.
-
-The invariant proves domination by $X_i\cup\Delta$. For connectivity, each component of $H[\Delta]$ meets $B(H)$. If $i\ge1$, each selected boundary vertex has a neighbour in the connected graph $G[X_i]$. Any artificial edge of $H[\Delta]$ has boundary endpoints, and can be replaced by a path through $G[X_i]$. Thus $G[X_i\cup\Delta]$ is connected. If $i=0$, the terminal batch is nonempty, because $I(H_0)=I(G)\ne\emptyset$. Each of its components meets $B(H_0)\subseteq B(G)$, and the original outer triangle joins all these components in $G$. A selected outer vertex also dominates that triangle. In both cases the final set contains an original outer vertex and is a connected dominating set of $G$.
-
-Telescoping the potential decreases gives
-\[
- |X|\le P(H_0)\le\frac{10(n-3)+4\cdot3}{21}
-       =\frac{10n-18}{21}.
-\]
+  % \[
+  %   \Phi_r = \frac{10|I_r|+4|B_r|}{21} .
+  % \]
+  We will show that, for each $i\in\{1,\ldots,r\}$,
+  \begin{equation}
+     \Phi_{i-1}-\Phi_{i} \ge |\Delta_{i-1}| . \label{potential_drop}
+  \end{equation}
+  and that
+  \begin{equation}
+    \Phi_r \ge |\Delta_r| \enspace . \label{last_potential}
+  \end{equation}
+  Then
+  \[
+      |X_{r+1}| = \sum_{i=0}^r|\Delta_i| 
+      \le \sum_{i=1}^{r}(\Phi_{i-1}-\Phi_i)+\Phi_r 
+      =  \Phi_0 \le 
+      \frac{10n-18}{21}   
+  \]
+  All that remains is to establish \eqref{potential_drop} and \eqref{last_potential}.  We begin with \eqref{potential_drop}, which has four cases corresponding to cases \ref{bg_high_degree}, \ref{bg_two_three}, \ref{bg_leaf}, and \ref{bg_degree_zero} in the choice of $\Delta_{i-1}$.
+  
+  \begin{enumerate}[label={[bg\arabic*]},labelwidth=\widthof{[bg0]},leftmargin=!,nosep,nolistsep,start=2]
+  \item In this case, $\Delta_{i-1}=\{v\}$ where $v\in B(H_{i-1})$ has inner-degree $t:=\deg_{H_{i-1}}(v)\ge 3$.   In this case, $|I(H_{i-1}-\Delta_{i-1})|=|I(H_{i-1})|-t$ and $|B(H_{i-1}-\Delta_{i-1})|=|B(H_{i-1})|+t-1$.  Since $t\ge 3$ this gives
+  \[
+    \Phi_{i-1}-\Phi_{i}\ge\Phi_{i-1}-\Phi(H_{i-1}-\Delta_{i-1})\ge\frac{10t-4(t-1)}{21}
+    =\frac{6t+4}{21}\ge 1 = |\Delta_{i-1}|.
+  \]
+  \item In this case, $\Delta_{i-1}=\{v,w\}$ where $w\in N^+_{H_{i-1}}(v)$, $\deg^+_{H_{i-1}}(v)=2$ and $t:=\deg^+_{H_{i-1}-v}(w)\ge 3$. Thus, $I(H_{i-1}-\Delta_{i-1})=I(H_{i-1})\setminus (N_{H_{i-1}}(v)\cup N^+_{H_{i-1}-v}(w))$.  By \ref{same_inner_vertices}, $I(H_i)=I(H_{i-1}-\Delta_i)$.  Therefore, $|I(H_i)|=|I(H_{i-1}-\Delta_{i-1})|=|I(H_{i-1})|-(t+2)$.  
+  
+  In addition to $v$ and $w$, \cref{really_good} guarantees that there is a third vertex $u\in B(H_{i-1})$ such that $\deg^+_{H_{i-1}-\{v,w\}}(u)=0$.  Although $u\in B(H_{i-1}-\Delta_{i-1})$, property \ref{inner_degree_1} of dom-mininality implies that $u\not\in B(H_i)$.   Thus, 
+  \[ 
+    B(H_i)\subseteq (B(H_{i-1})\setminus\{v,u\})\cup (N_{H_{i-1}}(v)\setminus\{w\})\cup N^+_{H_{i-1}-v}(w) \enspace ,
+  \]
+  so 
+  \[ 
+    |B(H_i)|\le |B(H_{i-1})|-2+1+t =|B(H_{i-1})|+t-1 \enspace .
+  \]
+  Since $t\ge 3$, this gives
+  \[
+     \Phi_{i-1}-\Phi_i \ge \frac{10(t+2)-4(t-1)}{21} = \frac{6t+24}{21} \ge 2 = |\Delta_{i-1}|.
+  \]
+  \item In this case, $\Delta_{i-1}=\{v\}$ where $v$ is chosen by \cref{leaf_killer} to ensure that the dom-minimal graph $H_i$ that dom-respects $H_{i-1}-\Delta_{i-1}$ has $|I(H_{i})|=|I(H_{i-1})|-2$ and $|B(H_i)\le B(H_{i-1}-1$.  Thus, $\Phi_{i-1}-\Phi_i\ge (10(2)-4(1))/21 = 24/21 > 1=|\Delta_{i-1}|$.
+  \item In this case, $\Delta_{i-1}=\{v\}$ where $v$ is chosen by \cref{degree_zero_killer} to ensure that the dom-minimal graph $H_i$ that dom-respects $H_{i-1}-\Delta_{i-1}$ satisfies one of the following:
+  \begin{itemize}
+     \item $|I(H_i)|=|I(H_{i-1})|-2$ and $|B(H_i)\le B(H_{i-1})|-1$. In this case, $\Phi_{i-1}-\Phi_i\ge(10(2)+4(1))/21 = 24/21 > 1=|\Delta_{i-1}|$.
+     \item $|I(H_i)|=|I(H_{i-1})|-1$ and $|B(H_i)\le B(H_{i-1})|-3$. In this case, $\Phi_{i-1}-\Phi_i\ge(10(1)+4(3))/21 = 22/21 > 1=|\Delta_{i-1}|$.
+  \end{itemize} 
+\end{enumerate}
+To finish the proof, we need only establish \eqref{last_potential}: $\Phi_r \ge |\Delta_r|$.  The algorithm ends with $\Delta_r$ when \ref{bg_empty} or \ref{bg_two_critical} occurs.  When \ref{bg_empty} occurs, $\Delta_r=\emptyset$ so $\Phi_r\ge 0=|\Delta_r|$.  When \ref{bg_two_critical} occurs, $\Delta_r$ is chosen using \cref{two_critical_handler} so that $|\Delta_r|= (2|B(J_r)|+|I(J_r)|)/3$, where $J_r:=H_r-B(H_r)$.  By definition, $I(H_r)=V(J_r)=B(J_r)\cup I(J_r)$.  By \cref{two_critical_boundary_size}, $|B(H_r)|\ge 2|B(J_r)|$.  Therefore,
+\begin{align*}
+   \Phi_r 
+   & = \frac{10|I(H_r)|+4|B(H_r)|}{21} \\
+   & \ge \frac{10(|B(J_r)|+|I(J_r)|) + 4|B(J_r)|)}{21} \\
+   & = \frac{14|B(J_r)|+10|I(J_r)|}{21} \ge \frac{2|B(J_r)|+|I(J_r)|}{3}\ge |\Delta_r| \enspace . \qedhere
+\end{align*}
 \end{proof}
 
-\Cref{better_greedy}, together with the separate three-vertex case, establishes the connected dominating set bound in \cref{main_result2}. To obtain the spanning tree, take a spanning tree of $G[X]$ and attach every vertex outside $X$ to an arbitrary neighbour in $X$. The resulting tree has at least $n-|X|\ge11n/21$ leaves. The following theorem establishes the algorithmic result.
+% \Cref{better_greedy}, together with the separate three-vertex case, establishes the connected dominating set bound in \cref{main_result2}. To obtain the spanning tree, take a spanning tree of $G[X]$ and attach every vertex outside $X$ to an arbitrary neighbour in $X$. The resulting tree has at least $n-|X|\ge11n/21$ leaves. The following theorem establishes the algorithmic result.
 
-\begin{thm}\label{better_greedy_linear}
-    There exists a linear-time algorithm that implements $\textnormal{\textsc{BetterGreedy}}(G)$ and constructs the corresponding spanning tree.
-\end{thm}
+% \begin{thm}\label{better_greedy_linear}
+%     There exists a linear-time algorithm that implements $\textnormal{\textsc{BetterGreedy}}(G)$ and constructs the corresponding spanning tree.
+% \end{thm}
 
-\begin{proof}
-If a plane embedding is not supplied, first obtain one in linear time \cite{hopcroft.tarjan:planarity}. Store the embedding using a doubly-connected edge list \cite{muller.preparata:finding}, with pointers to the darts, triangular faces, and cyclic incidence lists. We describe all the work in terms of changes to these local records; no global scan or block-cut decomposition is repeated during the incremental phase.
+% \begin{proof}
+% If a plane embedding is not supplied, first obtain one in linear time \cite{hopcroft.tarjan:planarity}. Store the embedding using a doubly-connected edge list \cite{muller.preparata:finding}, with pointers to the darts, triangular faces, and cyclic incidence lists. We describe all the work in terms of changes to these local records; no global scan or block-cut decomposition is repeated during the incremental phase.
 
-Each vertex passes through the stages inner, boundary, and deleted at most once. Every added edge is a boundary shortcut from the proof of \cref{dom_minimal}. That operation removes three edges and inserts one, so the total number of inserted edges is $O(n)$, as is the total number of deleted edges and faces. An inserted edge is on the current outer face, and remains there until it is deleted. The same charging bound applies to all incidence records of the added edges.
+% Each vertex passes through the stages inner, boundary, and deleted at most once. Every added edge is a boundary shortcut from the proof of \cref{dom_minimal}. That operation removes three edges and inserts one, so the total number of inserted edges is $O(n)$, as is the total number of deleted edges and faces. An inserted edge is on the current outer face, and remains there until it is deleted. The same charging bound applies to all incidence records of the added edges.
 
-Maintain the actual residual counters
-\[
- \begin{aligned}
- d_H(v)&:=|N_H(v)\cap I(H)|, & d_J(w)&:=\deg_J(w),\\
- q_J(w)&:=|N_J(w)\cap I(J)|, & J&:=H-B(H).
- \end{aligned}
-\]
-Maintain lists of boundary vertices satisfying $d_H(v)\ge3$, and of
-vertices in $B(J)$ satisfying $q_J(w)\ge2$, $d_J(w)=1$, and $d_J(w)=0$.
-Update list membership whenever a counter or boundary membership changes.
-These counters use current adjacency, including decrementing $d_H$ when
-cleanup deletes a boundary--inner edge. Added boundary edges increase none
-of them. The graphs $J$ change only by deletion of exposed inner vertices,
-so their boundary memberships and counters are monotone. A vertex enters
-$B(H)$ and $B(J)$ at most once; its counters can be initialized by scanning
-its original incidence list. The total of all such scans is $O(n)$, because
-the original graph has $3n-6$ edges. Every counter decrement is charged to
-an edge deletion or to an endpoint changing from inner to boundary. Thus
-there are $O(n)$ counter changes and list updates, and each list supplies
-a witness or reports that it is empty in constant time. Every vertex of
-degree zero or one in $J$ belongs to $B(J)$, since an inner vertex of a
-generalized near-triangulation is surrounded by triangular faces and has
-degree at least three. Hence the two low-degree lists include every
-possible witness.
+% Maintain the actual residual counters
+% \[
+%  \begin{aligned}
+%  d_H(v)&:=|N_H(v)\cap I(H)|, & d_J(w)&:=\deg_J(w),\\
+%  q_J(w)&:=|N_J(w)\cap I(J)|, & J&:=H-B(H).
+%  \end{aligned}
+% \]
+% Maintain lists of boundary vertices satisfying $d_H(v)\ge3$, and of
+% vertices in $B(J)$ satisfying $q_J(w)\ge2$, $d_J(w)=1$, and $d_J(w)=0$.
+% Update list membership whenever a counter or boundary membership changes.
+% These counters use current adjacency, including decrementing $d_H$ when
+% cleanup deletes a boundary--inner edge. Added boundary edges increase none
+% of them. The graphs $J$ change only by deletion of exposed inner vertices,
+% so their boundary memberships and counters are monotone. A vertex enters
+% $B(H)$ and $B(J)$ at most once; its counters can be initialized by scanning
+% its original incidence list. The total of all such scans is $O(n)$, because
+% the original graph has $3n-6$ edges. Every counter decrement is charged to
+% an edge deletion or to an endpoint changing from inner to boundary. Thus
+% there are $O(n)$ counter changes and list updates, and each list supplies
+% a witness or reports that it is empty in constant time. Every vertex of
+% degree zero or one in $J$ belongs to $B(J)$, since an inner vertex of a
+% generalized near-triangulation is surrounded by triangular faces and has
+% degree at least three. Hence the two low-degree lists include every
+% possible witness.
 
-These lists identify a high-degree boundary vertex, a noncritical witness $w\in B(J)$ with $q_J(w)\ge2$, or a degree-1 or degree-0 witness in $J$, in the order specified by the algorithm. The local constructions in \cref{really_good,leaf_killer,degree_zero_killer} determine the selected vertices by scanning the incidence list of the witness. Each such witness is exposed or selected in that iteration, and never serves again while inner. In the leaf case the two third vertices of the triangular faces incident to its unique inner edge give the required pair. In the isolated case, its cyclic list of boundary neighbours and their stored inner-neighbour lists implement the choices in \cref{degree_zero_killer}; the relevant inner degrees are available in the counters. In the two-vertex case, the scan around $w$ implements the construction in \cref{really_good}. The total cost is therefore $O(n)$.
+% These lists identify a high-degree boundary vertex, a noncritical witness $w\in B(J)$ with $q_J(w)\ge2$, or a degree-1 or degree-0 witness in $J$, in the order specified by the algorithm. The local constructions in \cref{really_good,leaf_killer,degree_zero_killer} determine the selected vertices by scanning the incidence list of the witness. Each such witness is exposed or selected in that iteration, and never serves again while inner. In the leaf case the two third vertices of the triangular faces incident to its unique inner edge give the required pair. In the isolated case, its cyclic list of boundary neighbours and their stored inner-neighbour lists implement the choices in \cref{degree_zero_killer}; the relevant inner degrees are available in the counters. In the two-vertex case, the scan around $w$ implements the construction in \cref{really_good}. The total cost is therefore $O(n)$.
 
-For cleanup, maintain a queue of affected boundary vertices, boundary edges, and boundary--inner darts. Initially enqueue all such records, taking $O(n)$ time. Deleting a selected vertex, exposing an inner vertex, and performing any cleanup operation enqueue the constantly many neighbouring records per changed dart or triangular face. Whenever a face or outer-dart predicate changes, enqueue the incident sector records whose tests depend on it. An outer edge with no inner third vertex is a violation of \ref{bad_edge}; an isolated vertex or a boundary vertex with no inner neighbour can be removed. To detect \ref{inner_degree_1} locally, inspect an edge $vw$ with $v$ boundary and $w$ inner whose incident bounded faces are $vwx$ and $vwy$. If $vx$ and $vy$ are outer edges, these two triangles form the one-inner-neighbour sector of the block containing $vw$. The closed neighbourhood in this block is a $K_4$ exactly when $xy$ is an edge. Thus block-local tests use local face and dart records, and do not require recomputing biconnected components.
+% For cleanup, maintain a queue of affected boundary vertices, boundary edges, and boundary--inner darts. Initially enqueue all such records, taking $O(n)$ time. Deleting a selected vertex, exposing an inner vertex, and performing any cleanup operation enqueue the constantly many neighbouring records per changed dart or triangular face. Whenever a face or outer-dart predicate changes, enqueue the incident sector records whose tests depend on it. An outer edge with no inner third vertex is a violation of \ref{bad_edge}; an isolated vertex or a boundary vertex with no inner neighbour can be removed. To detect \ref{inner_degree_1} locally, inspect an edge $vw$ with $v$ boundary and $w$ inner whose incident bounded faces are $vwx$ and $vwy$. If $vx$ and $vy$ are outer edges, these two triangles form the one-inner-neighbour sector of the block containing $vw$. The closed neighbourhood in this block is a $K_4$ exactly when $xy$ is an edge. Thus block-local tests use local face and dart records, and do not require recomputing biconnected components.
 
-For completeness, the adjacency tests for $xy$ can also be performed deterministically in constant amortized time without searching an incidence list. Keep the original graph in a bounded-arboricity adjacency structure, and keep all boundary shortcuts ever inserted in a second such structure. Mark deleted edges inactive instead of deleting them from these structures. These are two separate graphs; the union of original edges and historical shortcuts need not be planar.
+% For completeness, the adjacency tests for $xy$ can also be performed deterministically in constant amortized time without searching an incidence list. Keep the original graph in a bounded-arboricity adjacency structure, and keep all boundary shortcuts ever inserted in a second such structure. Mark deleted edges inactive instead of deleting them from these structures. These are two separate graphs; the union of original edges and historical shortcuts need not be planar.
 
-The shortcut graph itself has a planar embedding maintained as follows. The outer region of the residual graph grows monotonically: deletions enlarge it, and a shortcut $xy$ is drawn across the two bounded triangles at the removed boundary corner, leaving that corner on the outer side of $xy$. The shortcut does not enter the previous outer region. A live shortcut is an outer edge. When it is deleted, its open arc lies in the enlarged outer region and stays there. A later shortcut is drawn in current bounded triangles, so avoids all inactive shortcut arcs and all active shortcut arcs except at shared endpoints. If the same pair is inserted again, reroute its historical edge along the new shortcut, which also avoids every other historical edge. Induction therefore gives a planar simple graph of historical shortcut pairs.
+% The shortcut graph itself has a planar embedding maintained as follows. The outer region of the residual graph grows monotonically: deletions enlarge it, and a shortcut $xy$ is drawn across the two bounded triangles at the removed boundary corner, leaving that corner on the outer side of $xy$. The shortcut does not enter the previous outer region. A live shortcut is an outer edge. When it is deleted, its open arc lies in the enlarged outer region and stays there. A later shortcut is drawn in current bounded triangles, so avoids all inactive shortcut arcs and all active shortcut arcs except at shared endpoints. If the same pair is inserted again, reroute its historical edge along the new shortcut, which also avoids every other historical edge. Induction therefore gives a planar simple graph of historical shortcut pairs.
 
-The insertion-only bounded-arboricity structure of Brodal and Fagerberg \cite[Theorem~3]{brodal.fagerberg:sparse} supports constant-time adjacency queries and constant amortized insertion time. An adjacency query returns the edge record and its active flag; reinserting an existing historical pair only changes that flag. Initializing the structure for the original planar graph also takes $O(n)$ time. There are $O(n)$ queries and shortcut insertions.
+% The insertion-only bounded-arboricity structure of Brodal and Fagerberg \cite[Theorem~3]{brodal.fagerberg:sparse} supports constant-time adjacency queries and constant amortized insertion time. An adjacency query returns the edge record and its active flag; reinserting an existing historical pair only changes that flag. Initializing the structure for the original planar graph also takes $O(n)$ time. There are $O(n)$ queries and shortcut insertions.
 
-Every queued test takes constant time, apart from scanning incidences when a vertex is first exposed or deleted. Every such incidence is charged once to an original or added edge. A cleanup operation reduces the number of edges or vertices; its new shortcut and new triangular face each create only constantly many further local records. The total queue work and all cleanup therefore take $O(n)$ time.
+% Every queued test takes constant time, apart from scanning incidences when a vertex is first exposed or deleted. Every such incidence is charged once to an original or added edge. A cleanup operation reduces the number of edges or vertices; its new shortcut and new triangular face each create only constantly many further local records. The total queue work and all cleanup therefore take $O(n)$ time.
 
-At the terminal iteration, compute $J=H-B(H)$ and its components once. Detect even wheels by scanning their vertices and edges. For each remaining component, compute its block-cut tree in linear time \cite{hopcroft.tarjan:efficient} and implement the constructions in \cref{biconnected_critical,wheelie,critical}. Use \cref{wheelie} for even-wheel blocks. In every other biconnected critical block, \cref{critical_structure} gives a star in each marked face of the boundary graph. The fan construction in \cref{biconnected_critical} replaces all these stars simultaneously. Scan each marked face once to choose its fan centre and insert the fan edges, properly three-colour the resulting maximal outerplane graph, and give each hub the colour of its fan centre. For the three-colouring, repeatedly remove a degree-2 vertex until a triangle remains, colour that triangle, and restore the removed vertices in reverse order, giving each the colour missing from its two neighbours. The sum of the marked-face boundary lengths and of the degrees of the hubs is linear in the block size.
+% At the terminal iteration, compute $J=H-B(H)$ and its components once. Detect even wheels by scanning their vertices and edges. For each remaining component, compute its block-cut tree in linear time \cite{hopcroft.tarjan:efficient} and implement the constructions in \cref{biconnected_critical,wheelie,critical}. Use \cref{wheelie} for even-wheel blocks. In every other biconnected critical block, \cref{critical_structure} gives a star in each marked face of the boundary graph. The fan construction in \cref{biconnected_critical} replaces all these stars simultaneously. Scan each marked face once to choose its fan centre and insert the fan edges, properly three-colour the resulting maximal outerplane graph, and give each hub the colour of its fan centre. For the three-colouring, repeatedly remove a degree-2 vertex until a triangle remains, colour that triangle, and restore the removed vertices in reverse order, giving each the colour missing from its two neighbours. The sum of the marked-face boundary lengths and of the degrees of the hubs is linear in the block size.
 
-Process the block-cut tree and any intervening bridge paths once. The colour permutations prescribed in \cref{critical} are stored as permutations of three labels attached to the blocks and paths. Propagate them in one final traversal, rather than repeatedly relabelling or copying a previously processed component. The sum of all block sizes, counting their cut-vertex occurrences, is $O(|V(J)|+|E(J)|)$. Finally, implement \cref{three_sets_coverage} by adding a boundary anchor for each selected boundary vertex of $J$, retaining all selected inner vertices, and using the special triple for each even wheel. Incidence scans find the anchors in total linear time; Boolean membership flags suppress repeated anchors. Taking the smallest of the three sets completes the algorithm.
+% Process the block-cut tree and any intervening bridge paths once. The colour permutations prescribed in \cref{critical} are stored as permutations of three labels attached to the blocks and paths. Propagate them in one final traversal, rather than repeatedly relabelling or copying a previously processed component. The sum of all block sizes, counting their cut-vertex occurrences, is $O(|V(J)|+|E(J)|)$. Finally, implement \cref{three_sets_coverage} by adding a boundary anchor for each selected boundary vertex of $J$, retaining all selected inner vertices, and using the special triple for each even wheel. Incidence scans find the anchors in total linear time; Boolean membership flags suppress repeated anchors. Taking the smallest of the three sets completes the algorithm.
 
-All incremental and terminal work is $O(n)$. A search in $G[X]$ constructs its spanning tree, and one scan of the original edges assigns a neighbour in $X$ to every other vertex. This also takes $O(n)$ time.
-\end{proof}
+% All incremental and terminal work is $O(n)$. A search in $G[X]$ constructs its spanning tree, and one scan of the original edges assigns a neighbour in $X$ to every other vertex. This also takes $O(n)$ time.
+% \end{proof}
 
 \section{Connected Domination in Surface Triangulations}
 \label{bounded_genus}
