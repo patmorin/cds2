@@ -777,13 +777,14 @@ During iteration $i\ge 0$, let $J_i:=H_i-B(H_i)$. We use the following procedure
 % In \ref{bg_two_three}, the cleanup also removes $u$, which has no remaining inner neighbour. Each incremental iteration exposes at least one inner vertex, so the algorithm terminates.
 
 \begin{thm}\label{better_greedy}
-  When applied to an $n$-vertex triangulation $G$ with $n\ge4$, $\textnormal{\textsc{BetterGreedy}}(G)$ produces a connected dominating set $X$ of size at most $(10n-18)/21$. 
-  % Moreover, $X$ contains a vertex of the prescribed outer triangle of $G$.
+  When applied to an $n$-vertex triangulation $G$ with $n\ge4$, $\textnormal{\textsc{BetterGreedy}}(G)$ produces a connected dominating set $X$ of size at most $(10n-18)/21$.  Additionally, $X$ contains at least one vertex on the outer face of $G$. 
 \end{thm}
 \begin{proof}
-  We first argue that the final set $X$ is a connected dominating set of $G$.  This is based on the following claim: For each $i\in\{1,\ldots,r+1\}$ and each $v\in B(H_{i-1}-\Delta_{i-1})$, $N_G(v)$ contains a vertex in $X_i$.  We now prove this claim.  If $v\in B(G)$ then $N_G(v)$ contains a vertex in $\Delta_0=X_1\subseteq X_i$, since $\Delta_0$ contains a vertex in $B(H_0)\subseteq B(G)$, $N_G[v]\supseteq B(G)$, and $v\not\in X_i$. Otherwise, $v\in B(H_{i-1}-\Delta_{i-1})\setminus B(G)$.  In this case, let $j\in\{1,\ldots,i\}$ be the smallest index such that $v\in B(H_{j-1}-\Delta_{j-1})$.  Since $v\not\in B(G)=B(H_0)$, $v\in I(H_0)$, and by the minimality of $j$, $v\in I(H_{j-1})$. In particular, $v\not\in B(H_{j-1})$, so $N_{H_{j-1}}(v)$ contains a vertex in $\Delta_{j-1} \subseteq X_j\subseteq X_i$.  Since $v\in I(H_\ell)$ for $\ell\in\{0,\ldots,j-1\}$, \ref{same_neighbourhood} and \ref{same_inner_vertices} imply that $N_{H_{j-1}}(v)\subseteq N_{H_{j-2}}(v)\subseteq\cdots\subseteq N_{H_{0}}(v)\subseteq N_{G}(v)$. Thus, $N_G(v)$ contains a vertex in $\Delta_{j-1}\subseteq X_i$, as claimed.
+  That $X$ contains a vertex on the outer face of $G$ follows immediately from the fact that $B(H_0)\subseteq B(G)$ and $\Delta_0\subseteq X$ contains a vertex in $B(H_0)$.
 
-  We now use this claim to show that $X_{r+1}$ is a dominating set in $G$. Let $v$ be a vertex of $G$.  If $v\in X_{r+1}$ then there is nothing to prove, so suppose that $v\not\in X_{r+1}$.  
+  Next we argue that $X$ is a connected dominating set of $G$.  This is based on the following claim: For each $i\in\{1,\ldots,r+1\}$ and each $v\in B(H_{i-1}-\Delta_{i-1})$, $N_G(v)$ contains a vertex in $X_i$.  We now prove this claim.  If $v\in B(G)$ then $N_G(v)$ contains a vertex in $\Delta_0=X_1\subseteq X_i$, since $\Delta_0$ contains a vertex in $B(H_0)\subseteq B(G)$, $N_G[v]\supseteq B(G)$, and $v\not\in X_i$. Otherwise, $v\in B(H_{i-1}-\Delta_{i-1})\setminus B(G)$.  In this case, let $j\in\{1,\ldots,i\}$ be the smallest index such that $v\in B(H_{j-1}-\Delta_{j-1})$.  Since $v\not\in B(G)=B(H_0)$, $v\in I(H_0)$, and by the minimality of $j$, $v\in I(H_{j-1})$. In particular, $v\not\in B(H_{j-1})$, so $N_{H_{j-1}}(v)$ contains a vertex in $\Delta_{j-1} \subseteq X_j\subseteq X_i$.  Since $v\in I(H_\ell)$ for $\ell\in\{0,\ldots,j-1\}$, \ref{same_neighbourhood} and \ref{same_inner_vertices} imply that $N_{H_{j-1}}(v)\subseteq N_{H_{j-2}}(v)\subseteq\cdots\subseteq N_{H_{0}}(v)\subseteq N_{G}(v)$. Thus, $N_G(v)$ contains a vertex in $\Delta_{j-1}\subseteq X_i$, as claimed.
+
+  We now use this claim to show that $X=X_{r+1}$ is a dominating set in $G$. Let $v$ be a vertex of $G$.  If $v\in X_{r+1}$ then there is nothing to prove, so suppose that $v\not\in X_{r+1}$.  
   If $v\in B(G)$ then $N_G(v)$ contains a vertex in $\Delta_0=X_1\subseteq X_{r+1}$. Otherwise, $v\in I(G)=I(H_0)$.  We consider two cases:
   \begin{itemize}
     \item If $v\in I(H_r)$, then the algorithm must have terminated in case~\ref{bg_two_critical} (since $I(H_r)=\emptyset$ in case~\ref{bg_empty}). In case~\ref{bg_two_critical}, $\Delta_r$ dominates $I(H_r)$ in $H_r$ by \cref{two_critical_handler}. Thus $v$ has a neighbour $w\in\Delta_r$ in $H_r$. Since $v\in I(H_r)$, \ref{same_neighbourhood} and \ref{same_inner_vertices} ensure that $vw\in E(G)$, so $w\in N_G(v)\cap X_{r+1}$.
@@ -852,6 +853,9 @@ To finish the proof, we need only establish \eqref{last_potential}: $\Phi_r \ge 
 \end{align*}
 \end{proof}
 
+
+
+
 % \Cref{better_greedy}, together with the separate three-vertex case, establishes the connected dominating set bound in \cref{main_result2}. To obtain the spanning tree, take a spanning tree of $G[X]$ and attach every vertex outside $X$ to an arbitrary neighbour in $X$. The resulting tree has at least $n-|X|\ge11n/21$ leaves. The following theorem establishes the algorithmic result.
 
 % \begin{thm}\label{better_greedy_linear}
@@ -906,12 +910,11 @@ To finish the proof, we need only establish \eqref{last_potential}: $\Phi_r \ge 
 
 % All incremental and terminal work is $O(n)$. A search in $G[X]$ constructs its spanning tree, and one scan of the original edges assigns a neighbour in $X$ to every other vertex. This also takes $O(n)$ time.
 % \end{proof}
-
 \section{Connected Domination in Surface Triangulations}
 \label{bounded_genus}
 
 In this section, we establish \cref{genus_result}, the extension of \cref{main_result2} to surface triangulations of Euler genus $g$.
-Briefly, a \defin{surface} $\mathcal{S}$ is a compact connected Hausdorff topological space such that every point in $\mathcal{S}$ is locally homeomorphic to the plane, i.e., it has a neighbourhood homeomorphic to $\mathbb{R}^2$. Every such surface can be created from the sphere $\mathbb{S}^2$ by adding handles and cross-caps. The \defin{Euler genus} of a surface with $h$ handles and $c$ cross-caps is $2h+c$.
+Briefly, a \defin{surface} $\mathcal{S}$ is a compact connected Hausdorff topological space that is locally homeomorphic to the plane, i.e., every point in $\mathcal{S}$ has a neighbourhood homeomorphic to $\mathbb{R}^2$. Every such surface can be created from the sphere $\mathbb{S}^2$ by adding handles or cross-caps. The \defin{Euler genus} of a surface with $h$ handles and $c$ cross-caps is $2h+c$.
 % define surfaces related info
 %Briefly, a \defin{surface or 2-manifold} $\mathcal{S}$ is a compact connected Hausdorff topological space such that every point in $\mathcal{S}$ is locally homeomorphic to the plane i.e. it has a neighbourhood homeomorphic to $\mathbb{R}^2$. The genus $g$ of a surface $\mathcal{S}$ is the number of handles or cross-caps added to the sphere $\mathbb{S}^2 = \{x \in \mathbb{R}^3 : ||x||= 1\}$ to form a surface homeomorphic to $\mathcal{S}$. In the former case, we call the surface $\mathcal{S}_g$, and the later case we call it $\mathcal{N}_g$. A surface is \defin{orientable} if it is homeomorphic to $\mathcal{S}_g$ for some non-negative $g$, we say it is \defin{non-orientable} if it is homeomorphic to a surface $\mathcal{N}_g$ for some positive $g$. The Euler-genus $\Bar{g}$ of a surface $\mathcal{S}$ is equal to $2g$ if $\mathcal{S}$ is orientable and $g$ if $\mathcal{S}$ is non-orientable. For a detailed account on graph and surfaces, we refer the reader to \cite{mohar2001graphs, lee2010introduction}.\pat{Consider using Euler genus:  The Euler genus of a surface with $h$ handles and $c$ crosscaps is $2h + c$.}
 
@@ -926,29 +929,18 @@ We follow the definitions given in \citet[Appendix~B]{diestel:graph}. An \defin{
 % A closed disk is a disk that contains its boundary.
 The set of all arcs in $\mathcal{S}$ is denoted by $A_\mathcal{S}$.
 % \hussein{each arc in S is a subset of S; there is a kind of redandency.} \pat{Sure, but a point in $\mathcal{S}$ is a different kind of object than an arc in $\mathcal{S}$. Vertices map to point of $S$ and edges map to arcs.}
-An \defin{embedding} of a graph $G$ in a surface $\mathcal{S}$ is a map \defin{$\sigma: V(G)\cup E(G) \longrightarrow \mathcal{S}\cup A_\mathcal{S}$} that sends vertices of $G$ to distinct points in $\mathcal{S}$ and sends an edge $xy$ to
+An \defin{embedding} of a graph $G$ in a surface $\mathcal{S}$ is a map $\sigma: V(G)\cup E(G) \longrightarrow \mathcal{S}\cup A_\mathcal{S}$ that sends vertices of $G$ to distinct points in $\mathcal{S}$ and sends an edge $xy$ to
 % an $\sigma(x)-\sigma(y)$ arc in $\mathcal{S}$\pat{Suggested rewrite:
-an arc $\sigma(xy)$ in $A_\mathcal{S}$ with endpoints $\sigma(x)$ and $\sigma(y)$ in such a way that the interior of $\sigma(xy)$ is disjoint from $\{\sigma(v):v\in V(G)\}$ and from the interior of $\sigma(vw)$ for every $vw\in E(G)\setminus\{xy\}$.  For a subgraph $Z$ of $G$, we call $\sigma(Z):=\{\sigma(v):v\in V(Z)\}\cup \bigcup_{vw\in E(Z)}\sigma(vw)$ the \defin{embedded subgraph} $Z$.
+an arc $\sigma(xy)$ in $A_\mathcal{S}$ with endpoints $\sigma(x)$ and $\sigma(y)$ in such a way that the interior of $\sigma(xy)$ is disjoint from $\{\sigma(v):v\in V(G)\}$ and from the interior of $\sigma(vw)$ for every $vw\in E(G)\setminus\{xy\}$. For any subgraph $H\subseteq G$, we write $\sigma(H):=\{\sigma(v):v\in V(H)\}\cup \bigcup_{vw\in E(H)}\sigma(vw)$.
+% For a subgraph $Z$ of $G$, we call $\sigma(Z):=\{\sigma(v):v\in V(Z)\}\cup \bigcup_{vw\in E(Z)}\sigma(vw)$ the \defin{embedded subgraph} $Z$.
 % where no inner points of this arc intersects another arc or an image of a vertex. We let $\sigma(G):=\{\sigma(v):v\in V(G)\}\cup \bigcup_{e\in E(G)}\sigma(e)$.
 A graph $G$ equipped with an embedding $\sigma$ on a surface $\mathcal{S}$ is called an \defin{$\mathcal{S}$-embedded} graph. A \defin{face} of $G$ in $\mathcal{S}$ is a component of $\mathcal{S} \setminus \sigma(G)$.
 % In this context, we call $\sigma(vw)$ the \defin{embedded edge} $vw$.
 
 
-The \defin{surface-map} $\Sigma$ of an $\mathcal{S}$-embedded graph $G$ is a tuple $(V, E, F)$ where $V$ is the set of vertices, $E$ is the set of edges, and $F$ is the set of faces in the embedding $\sigma$ of $G$. We call a surface-map a \defin{surface triangulation} if every face in $F$ is a disc in $\mathcal{S}$ whose boundary is an embedded $3$-cycle of $G$.  The \defin{Euler genus} of a surface triangulation $\Sigma$ is the Euler genus of the surface $\mathcal{S}$.
-% \hussein{I think this is better because if our embedding of $G$ has every face is a disk, then it works, I guess.} \pat{Good, let's just leave it defined for surface triangulations then.}
-%\hussein{ok, we can double check here \url{https://jeffe.cs.illinois.edu/teaching/comptop/2023/notes/19-surface-maps.pdf}} \pat{I don't think there's anything to check. Euler's formula tells us exactly the number of edges in a surface triangulation, as a function of $n$ and $g$.  If there were a smaller genus surface on which we could embed $G$ then we would get a contradiction.}
-% \hussein{I think we should talk about the surface with minimum genus, because $\Sigma$ can be planar but embedded on higher surface; I think saying $\Sigma$ is maximal triangulation could work, but not sure}. \pat{I think it's the case that the graph of a surface-triangulation has the same genus as the surface (because every triangle is a disk in the surface).  Let me check.  Actually, it doesn't matter because the theorem refers to a genus-$g$ surface triangulation.} \hussein{here $\Sigma$ is ambiguous it can be a planar graph for example...} \pat{But if you embed a planar triangulation on a higher genus surface, then one of its faces will not be a disc, so you don't get a surface triangulation.}
-% \hussein{yes I agree, so when it is maximal triangulation, I guess we are fine but our letter $\Sigma$ does not refer to a triangulation but to a surface-map, the first sentence in the paragraph...!!} \pat{That's ok. The surface map is defined with respect to an underlying surface $\mathcal{S}$.  It's actually instructions for making $\mathcal{S}$ by gluing together faces, so it's ok to call the genus of $\Sigma$ the genus of $\mathcal{S}$.} \hussein{that is fine, I am thinking of it as data-structure for the embedded graph rather than a simplical complex...}
+The \defin{surface map} $\Sigma$ of an $\mathcal{S}$-embedded graph $G$ is a tuple $(V, E, F)$ where $V$ is the set of vertices, $E$ is the set of edges, and $F$ is the set of faces in the embedding $\sigma$ of $G$. If each face of $G$ is homeomorphic to an open disc in $\mathcal{S}$, then each edge in $E$ is on the boundary of exactly two faces in $F$ and gluing the faces in $F$ along their shared edges yields the original surface $\mathcal{S}$.  We call a surface map a \defin{surface triangulation} if every face in $F$ is a disc in $\mathcal{S}$ whose boundary is an embedded $3$-cycle of $G$.  The \defin{Euler genus} of a surface triangulation $\Sigma$ is the Euler genus of the surface $\mathcal{S}$.
 
-% \pat{This isn't needed if we use Euler genus: The \defin{orientable genus} and the \defin{non-orientable genus} of a graph $G$ is the minimum $g$ and the minimum $g'$ such that $G$ has an embedding into surface $\mathcal{S}_g$, or $\mathcal{N}_{g'}$ respectively.  The genus of the surface-map is the genus of the underlying graph. Similarly, we define the Euler-genus of a graph and a surface-map.}
-% \pat{Using Euler genus would simplify this to a single sentence.}
-
-
-% A \defin{cut graph} of a map $\Sigma$ on a surace $S$ is any subgraph $X$ of $\Sigma$ such that $S \setminus X$ an open topological disk. ($\setminus$ means to remove the points from from $S$, not deleting the edges from the map).
-
-As in \cite{EricksonNotes}, \defin{slicing} a surface map $\Sigma$ along a subgraph $Z \subseteq G$ with at least one edge produces a new map $\Sigma \bbslash Z$ which contains $\deg_{Z}(v)$ copies of every vertex $v\in V(G)$ with $\deg_Z(v)\ge 1$, one copy of every vertex $v\in V(G)$ with $\deg_Z(v)=0$, one copy of every edge in $E(G)\setminus E(Z)$, two copies of every edge of $Z$, and at least one new face in addition to the faces of $\Sigma$.  (See \cref{slicing}.)
-% \pat{I find this confusing, because a slicing produces a new graph and a new embedding of this graph, but a surface-map just refers to a set of vertices, edges, and faces.  Also, $\Sigma\bbslash Z$ contains every vertex of $G$ with $\deg_X(v)=0$.}
-The faces of $\Sigma \bbslash Z$ that are not faces of $\Sigma$ are called \defin{holes} that are missing from the surface. A \defin{planarizing subgraph} of $\Sigma$ is any subgraph $Z \subseteq G$ such that the surface-map obtained after slicing along $Z$ has genus $0$ \cite{EricksonNotes}.  A key property of the slicing operation is the following:  If vertices $v'$ and $w'$ are on the boundary of the same hole in $\Sigma\bbslash Z$, then the corresponding vertices $v$ and $w$ of $\Sigma$ are in the same component of $Z$. We use the following theorem of \citet{10.5555/644108.644208}.
+As in \cite{EricksonNotes}, \defin{slicing} the surface map $\Sigma$ of an $\mathcal{S}$-embedded graph $G$ along a subgraph $Z \subseteq G$ with at least one edge produces a new surface map $\Sigma \bbslash Z=(V',E',F')$ where $V'$ contains $\deg_{Z}(v)$ copies of every vertex $v\in V(G)$ with $\deg_Z(v)\ge 1$ and one copy of every vertex $v\in V(G)$ with $\deg_Z(v)=0$; $E'$ contains one copy of every edge in $E(G)\setminus E(Z)$, and two copies of every edge of $Z$. Each copy of an edge of $Z$ is incident to only one face in $F'$ (its other side forms a boundary edge of the sliced surface), whereas each edge in $E(G)\setminus E(Z)$ is incident to two faces in $F'$. Intuitively, $\Sigma\bbslash Z$ describes the surface with boundary $\mathcal{S}\bbslash Z$ obtained by gluing the faces in $F$ along every edge in $E(G)\setminus E(Z)$.  Each boundary component of $\mathcal{S}\bbslash Z$ is called a \defin{hole}. A \defin{planarizing subgraph} of $\Sigma$ is any subgraph $Z \subseteq G$ such that every connected component of $\mathcal{S}\bbslash Z$ has genus $0$ \cite{EricksonNotes}. A key property of the slicing operation is the following: Every edge $e'\in E'$ on the boundary of a hole corresponds to an edge $e\in E(Z)$. Every vertex $v'\in V'$ on the boundary of a hole corresponds to a vertex $v\in V(Z)$.  If vertices $v'$ and $w'$ are on the boundary of the same hole in $\Sigma\bbslash Z$, then the corresponding vertices $v$ and $w$ of $G$ are in the same component of $Z$. We use the following theorem of \citet{10.5555/644108.644208}.
 
 
 \begin{figure}
@@ -977,42 +969,43 @@ The faces of $\Sigma \bbslash Z$ that are not faces of $\Sigma$ are called \defi
 % 4. define a slicing ok.
 % 5. maybe I will add a figure.
 \begin{thm}[\citet{10.5555/644108.644208}]\label{Eppstein}
-Every surface triangulation $\Sigma$ with $n$ vertices and Euler-genus $g < n$ has a planarizing subgraph $Z$ with $O(\sqrt{gn})$ vertices and edges, which can be computed in $O(n)$ time.
+Every surface triangulation $\Sigma$ with $n$ vertices and Euler genus $1\le g < n$ has a planarizing subgraph $Z$ with $O(\sqrt{gn})$ vertices and edges.
+% , which can be computed in $O(n)$ time.
 \end{thm}
 
 We can now prove the main result of this section, which readily establishes \cref{genus_result}.
 
 \begin{lem}\label{generic_surface_thm}
-    Let $f:\mathbb{N} \longrightarrow \mathbb{N}$ be a non-decreasing function such that every $n$-vertex planar triangulation has a connected dominating set of size at most $f(n)$. Then every $n$-vertex Euler genus $g < n$ surface triangulation $\Sigma$ has a connected dominating set of size at most $f(n + O(\sqrt{gn})) + O(\sqrt{gn})$.
+  Suppose that for every $n\ge 3$, every $n$-vertex triangulation has a connected dominating set of size at most $\alpha n + \beta$ for some constants $\alpha, \beta>0$. Then, for every $1\le g < n$, every $n$-vertex surface triangulation of Euler genus $g$ has a connected dominating set of size at most $\alpha n + O(\sqrt{gn})$.
 \end{lem}
 
 \begin{proof}
-If $g = 0$, then $\Sigma$ is already a planar triangulation and the result holds with $Z=\emptyset$. Thus assume $1 \le g < n$.
-Let $\Sigma:=(V,E,F)$ and let $G$ be the graph with vertex set $V$ and edge set $E$.
-By applying \cref{Eppstein}, we obtain a planarizing subgraph $Z$ of $\Sigma$ with $O(\sqrt{gn})$ vertices and edges.
-By repeatedly removing isolated vertices and degree-$1$ vertices (and their incident edges) from $Z$, which does not alter the Euler genus, we may assume that every vertex in $Z$ has degree at least $2$ in $Z$.
+  Let $\mathcal{S}$ be a surface of Euler genus $g$ and let $G$ be a graph embedded on $\mathcal{S}$ such that the resulting surface map $\Sigma:=(V,E,F)$ is a surface triangulation.
+  By \cref{Eppstein}, $\Sigma$ has a planarizing subgraph $Z$ with $O(\sqrt{gn})$ vertices and edges.  If $Z$ contains a vertex $v$ with $\deg_Z(v)<2$, then $Z-v$ is also a planarizing subgraph. Repeatedly removing vertices of degree at most $1$ from $Z$ and their incident edges leaves a planarizing subgraph with minimum degree at least $2$. We may therefore assume that $\deg_Z(v)\ge 2$ for each $v\in V(Z)$.  
 Since $g \ge 1$, $Z$ contains at least one non-contractible cycle, so $Z$ remains non-empty.
 
-Let $\Sigma':=\Sigma\bbslash Z$ and treat $\Sigma'$ as a plane graph. Because every vertex of $Z$ has degree at least $2$ in $Z$, the boundary of each hole of $\Sigma'$ is a simple cycle of length at least $3$. For each hole $f$ of $\Sigma'$, introduce a new vertex $x_f$, embedded in the interior of $f$ and adjacent to all vertices on the boundary of $f$. This makes $G'$ into a simple planar triangulation that has $n+O(\sqrt{gn})$ vertices. By assumption, $G'$ has a connected dominating set $X'$ whose size is at most $f(n + O(\sqrt{gn}))$.
+Let $\Sigma':=(V',E',F'):=\Sigma\bbslash Z$.  Let $G'$ be the graph with vertex set $V'$ and edge set $E'$.  Then $|V'|\le n + \sum_{v\in V(Z)}(\deg_Z(v)-1) \le n + O(\sqrt{gn})$. The total number of edges on the boundaries of the holes in $\Sigma'$ is $2|E(Z)|=O(\sqrt{gn})$.
 
-The connected dominating set $X'$ of $G'$ contains vertices of $G$ and vertices of $G'$ that do not appear in $G$ (copies of vertices of $Z$ and vertices $x_f$ introduced in the interiors of holes). To obtain a connected dominating set $X$ for $G$, we set $X:=(X'\cap V(G))\cup V(Z)$. We now show that $X$ satisfies the requirements of the lemma.
+For each component $C$ of $G'$, $\Sigma'$ describes an embedding of $C$ on a surface $\mathcal{S}_C$ (with boundary) of genus $0$.  Each boundary component of $\mathcal{S}_C$ corresponds to a hole in $\Sigma'$.  The boundary of each hole corresponds to a cycle in $C$ and these boundary cycles are pairwise vertex disjoint.  By filling each hole with a disc, we can treat $C$ as a graph embedded on the sphere. Each disc we attach then becomes a \emph{holy} face of $C$.  Choose some holy face $f_0$ of $C$ and call $f_0$ the outer face.   For each holy face $f$ of $C$,  introduce a new vertex $x_f$ in the interior of $f$ that is adjacent to all vertices of $C$ on the boundary of $f$. The addition of these vertices and edges to $C$ makes a simple planar triangulation $C^+$. Define the outer face of $C^+$ to be any face of $C^+$ contained in $f_0$. By \cref{better_greedy}, $C^+$ has a connected dominating set $X_C$ of size at most $\alpha|V(C^+)|+\beta$ that contains a vertex of the outer face.
+
+Let $X':=\bigcup_{C} X_C$.  The set $X'$ contains vertices of $\Sigma'$ that may or may not appear in $\Sigma$. To obtain a connected dominating set $X$ for $\Sigma$, we set $X:=(X'\cap V(G))\cup V(Z)$. We now show that $X$ satisfies the requirements of the lemma.
 \begin{itemize}
-    \item \emph{$X$ is a dominating set:} Since $X'$ is a dominating set of $G'$, each vertex $w\in V(G)\setminus X$ is adjacent, in $G'$, to some vertex $v'\in X'$. Because $w \notin X \supseteq V(Z)$, $w$ is not on the boundary of any hole, so $w$ is not adjacent to $x_f$ for any hole $f$. Thus, $v' \ne x_f$. If $v'\in V(G)$, then $v'\in X' \cap V(G) \subseteq X$. If $v'\in V(G')\setminus V(G)$, then $v'$ is a copy of some vertex $v \in V(Z) \subseteq X$. In either case, $w$ has a neighbour in $X$. Thus, $X$ is a dominating set of $G$.
+    \item \emph{$X$ is a dominating set:} Since $X'$ is a dominating set of $G'$, each vertex $w\in V(G)\setminus X$ is adjacent, in $G'$, to some vertex $v'\in X'$. Because $w \notin X \supseteq V(Z)$, $w$ is not on the boundary of any hole, so $w$ is not adjacent to $x_f$ for any hole $f$. Thus, $v' \ne x_f$ for any hole $f$. If $v'\in V(G)$, then $v'\in X' \cap V(G) \subseteq X$. If $v'\in V(G')\setminus V(G)$, then $v'$ is a copy of some vertex $v \in V(Z) \subseteq X$. In either case, $w$ has a neighbour in $X$. Thus, $X$ is a dominating set of $G$.
 
-    \item \emph{$G[X]$ is connected:} Let $v$ and $w$ be any two vertices in $X$. Then each of $v$ and $w$ has at least one corresponding vertex $v'$ and $w'$, respectively, in $G'$. Since $X'$ is a connected dominating set of $G'$, there exists a path $P':=v',z_0,\ldots,z_r,w'$ in $G'$ such that $z_0,\ldots,z_r$ is a path in $G'[X']$. For each vertex $x'$ of $P'$ that is a vertex of $\Sigma'$, replace $x'$ with the corresponding vertex $x$ of $G$. For each vertex $x'$ of $P'$ that is not a vertex of $\Sigma'$, $x'=x_f$ for some hole $f$ of $\Sigma'$. Then $x'$ is adjacent on $P'$ to two vertices $y'$ and $z'$ on the boundary of $f$. The corresponding vertices $y$ and $z$ of $G$ are in the same component of $Z$, so we can replace the subpath $y' x_f z'$ in $P'$ by a path in $Z$ from $y$ to $z$. These replacements turn the path $P'$ into a walk in $G$ with endpoints $v$ and $w$ whose vertices all belong to $X$. Thus, there is a walk in $G[X]$ from $v$ to $w$, for each pair $v,w\in X$. Therefore $G[X]$ is connected.
+    \item \emph{$G[X]$ is connected:} Let $v$ and $w$ be any two vertices in $X$. Then each of $v$ and $w$ has at least one corresponding vertex $v'$ and $w'$, respectively, in $G'$. We first consider the case in which $v'$ and $w'$ are in the same component $C$ of $G'$. Let $F_C$ be the set of holy faces of $C$, let $A_C:=\{x_f:f\in F_C\}$, and let $Y_C:=\bigcup_{f\in F_C} N_{C^+}(x_f)$. Then $C^+[A_C\cup X_C\cup Y_C]$ is connected because $C^+[X_C]$ is connected and $X_C$ dominates $V(C)\supseteq Y_C$ in $C^+$. For each $x_f\in A_C$, $C[N_{C^+}(x_f)]=C[V(f)]$ is connected because $f$ is a facial cycle in $C$.  Furthermore, $A_C=V(C^+)\setminus V(C)$ and $N_{C^+}(x_f)\subseteq V(C)$ for each $x_f \in A_C$, so $A_C$ is an independent set in $C^+$. It follows that $H_C:=C[(X_C\cup Y_C)\setminus A_C]$ is connected.  Let $X_C'\subseteq V(G)$ be obtained by replacing each vertex $x'\in (X_C\cup Y_C)\setminus A_C$ with the corresponding vertex $x$ of $G$.  The graph $G_C:=G[X_C']$ can be obtained from $H_C$ by identifying vertices, which preserves connectivity.  Thus $G_C$ is connected.
+    Since $v, w \in X$, their corresponding vertices $v', w'$ in $C$ belong to $(X_C\cup Y_C)\setminus A_C$, so $v, w \in X_C'$. Therefore, $G_C \subseteq G[X]$ contains a path from $v$ to $w$.
+    
+    Now consider the case when $v'$ and $w'$ lie in different components of $G'$.  Let $Q$ be any path in $G$ from $v$ to $w$. Partition the edges of $Q$ into maximal subpaths $Q_1,Q_2,\dots,Q_k$ such that each $Q_i$ corresponds to a path that is contained in some component $C_i$ of $G'$.  For each $i\in\{2,\ldots,k-1\}$, the subpath $Q_i$ has endpoints $v_i,w_i\in V(Z)\subseteq X$ and the component $C_i$ has corresponding vertices $v_i',w_i'\in Y_{C_i}$. The subpath $Q_1$ has endpoints $v_1:=v\in X$ corresponding to $v_1'\in V(C_1)$ and $w_1\in V(Z)\subseteq X$ corresponding to $w_1'\in Y_{C_1}$.  Since $v_1\in X$, $v_1'\in X_{C_1}\cup Y_{C_1}$.  The subpath $Q_k$ has endpoints $v_k\in V(Z)$ corresponding to $v_k'\in Y_{C_k}$ and $w_k:=w\in X$ corresponding to $w_k'\in V(C_k)$.  Since $w_k\in X$, $w_k'\in X_{C_k}\cup Y_{C_k}$. Thus, for each $i\in\{1,\ldots,k\}$, $H_{C_i}$ contains a path from $v_i'$ to $w_i'$, so $G_{C_i}\subseteq G[X]$ contains a path from $v_i$ to $w_i$.  Therefore $G[X]$ contains a path from $v=v_1$ to $w=w_k$.
 
-    \item \emph{$X$ has size $f(n + O(\sqrt{gn}))+O(\sqrt{gn})$:} The size of $X$ is at most $|X'| + |V(Z)|\le f(n + O(\sqrt{gn})) + O(\sqrt{gn})$.
+    \item \emph{$X$ has size at most $\alpha n + O(\sqrt{gn})$:} Each hole $h$ in $\Sigma'$ corresponds to a cycle $D_h$ in $Z$ with at least three edges. Each edge of $Z$ participates in $D_h$ for two holes $h$. Therefore, the number of holes in $\Sigma'$ is at most $2|E(Z)|/3\in O(\sqrt{gn})$. Each hole in $\Sigma'$ contributes one holy face to one component of $G'$ and each component of $G'$ has at least one holy face. Therefore, $G'$ has $O(\sqrt{gn})$ components.  Each holy face $f$ of a component $C$ of $G'$ contributes one vertex $x_f$ to $V(C^+)$. Therefore $\sum_{C}|V(C^+)|\le |V'| + O(\sqrt{gn}) = n + O(\sqrt{gn})$ and $|X|\le |V(Z)| + \sum_{C} (\alpha|V(C^+)|+\beta)\le \alpha n + O(\sqrt{gn})$. \qedhere
 \end{itemize}
-Therefore, $X$ is a connected dominating set of $G$ of size at most $f(n+O(\sqrt{gn}))+ O(\sqrt{gn})$.
 \end{proof}
 
 \begin{thm}\label{genus_result}
-For every $n\ge 3$, every surface triangulation $\Sigma$ with $n$ vertices and Euler genus $g$ has a connected dominating set $X$ of size at most $10n/21 + O(\sqrt{gn})$ and a spanning tree with at least $11n/21 - O(\sqrt{gn})$ leaves.
+For every $n\ge 3$, every surface triangulation $\Sigma$ with $n$ vertices and Euler genus $g$ has a connected dominating set $X$ of size at most $10n/21 + O(\sqrt{gn})$.
 \end{thm}
 \begin{proof}
-    If $g < n$, \cref{generic_surface_thm} with $f(n)= 10n/21$ yields a connected dominating set $X$ of size at most $10 (n + O(\sqrt{gn}))/21 + O(\sqrt{gn}) = 10n/21 + O(\sqrt{gn})$. If $g \ge n$, then $\sqrt{gn}\ge n$, so any spanning tree $T$ of $G$ has $V(T)$ as a connected dominating set of size $n \le 10n/21 + \sqrt{gn}$.
-
-    In either case, taking any spanning tree of $G[X]$ and attaching every vertex of $V(G)\setminus X$ to an arbitrary neighbour in $X$ yields a spanning tree of $G$ in which every vertex of $V(G)\setminus X$ is a leaf, producing at least $n - |X| \ge 11n/21 - O(\sqrt{gn})$ leaves.
+  If $g = 0$, the result follows from \cref{main_result2}. If $1 \le g < n$, \cref{generic_surface_thm,main_result2} imply that $\Sigma$ has a connected dominating set $X$ of size at most $10n/21 + O(\sqrt{gn})$. If $g \ge n$, then $\sqrt{gn}\ge n$, so $V(G)$ is a connected dominating set of size $n \le 10n/21 + \sqrt{gn}$.
 \end{proof}
 
 
@@ -1158,10 +1151,11 @@ A \defin{$k$-bend drawing} of a graph $G$ is a crossing-free drawing in which ea
 In this section, we prove:
 
 \begin{thm}\label{one_bend_collinear_thm}
-  For every $n\ge 3$, every $n$-vertex planar graph has a one-bend free set (and hence a one-bend collinear set) $L$ of size at least $11n/21=0.\overline{523809}n$. Furthermore, there exists an $O(n)$ time algorithm for finding $L$.
+  For every $n\ge 3$, every $n$-vertex planar graph has a one-bend free set  $L$ of size at least $11n/21=0.\overline{523809}n$. 
+  % Furthermore, there exists an $O(n)$ time algorithm for finding $L$.
 \end{thm}
 
-Note that if the point set $P$ is contained in the $x$-axis, then in a $1$-bend drawing, no edge with both endpoints in $Y$ crosses the $x$-axis. Therefore, such a drawing yields a $2$-page book embedding of $G[Y]$. A graph with a $2$-page book embedding is subhamiltonian. The Goldner–Harary graph is an $11$-vertex triangulation that is not Hamiltonian. If more than $10k$ vertices were selected from $k$ disjoint copies, one whole copy would be selected, implying it is subhamiltonian and thus Hamiltonian, a contradiction. Thus this $n:=11k$ vertex graph has no one-bend free set of size greater than $10k=10n/11=0.90\overline{90}n$.
+Note that if the point set $P$ is contained in the $x$-axis, then in a $1$-bend drawing, no edge with both endpoints in $Y$ crosses the $x$-axis. Therefore, such a drawing yields a $2$-page book embedding of $G[Y]$. If $G$ is a triangulation, then $G$ has a cycle that visits the vertices of $Y$ in the order they appear along the cycle.  The \defin{Goldner–Harary} graph $H$ is an $11$-vertex triangulation that is not Hamiltonian.  Let $G$ be the triangulation obtained by taking $k$ pairwise vertex-disjoint copies $H_1,\ldots,H_k$ of $H$ and greedily adding edges to get a triangulation.  If the graph $G$ has a $1$-bend collinear set $Y$ of size at least $10k+1$, then $V(H_i)\subseteq Y$ for at least one $i\in\{1,\ldots,k\}$.  Thus, $H_i$ has a $2$-page book embedding and therefore has a Hamiltonian cycle, which is not possible.  Therefore, the largest $1$-bend free set in $G$ is of size at most $10k = 10n/11=0.\overline{90}n$.
 
 In the remainder of this subsection we prove \cref{one_bend_collinear_thm}. We start by introducing the topological characterization of collinear sets from \cite{DBLP:journals/jocg/LozzoDFMR18}. A \defin{curve} $C$ is a continuous mapping from $[0, 1]$ to $\mathbb{R}^2$. We call $C(0)$ and $C(1)$ the \defin{endpoints} of $C$. If $C(0)=C(1)$, the curve is \defin{closed}; otherwise, it is \defin{open}. A curve $C$ is called \defin{simple} if $C(x) \neq C(y)$ for all $0\le x<y\le 1$, with the possible exception of $C(0)=C(1)$. A \defin{Jordan curve} is a simple closed curve.
 
@@ -1186,7 +1180,7 @@ The following observation, illustrated in \cref{subdivisions}, gives a similar s
 Let $G$ be a plane graph. A set $S\subseteq V(G)$ is a one-bend free set if $G$ has a $2$-proper good curve containing $S$.
 \end{obs}
 \begin{proof}
-Let $C$ be a $2$-proper good curve that contains $S$. For each edge $e \in E(G)$ such that $|C \cap e| = 2$, introduce a new subdivision vertex $u_e$ between the two intersection points of $C$ and $e$. By adding these new vertices, we obtain a plane drawing of a subdivision $G^+$ of $G$. Since every edge of $G^+$ meets $C$ at most once (unless contained in $C$), $C$ is a $1$-proper good curve for $G^+$ containing $S$. Thus, by \cref{straightline-topological}, $S$ is a free set for $G^+$. For any prescribed $|S|$-point set $P$, drawing $G^+$ straight-line with $S$ on $P$ and suppressing the subdivision vertices produces a one-bend drawing of $G$. Therefore, $S$ is a one-bend free set for $G$.
+Let $C$ be a $2$-proper good curve that contains $S$. For each edge $e \in E(G)$ such that $|C \cap e| = 2$, introduce a new subdivision vertex $u_e$ between the two intersection points of $C$ and $e$. By adding these new vertices, we obtain a plane drawing of a subdivision $G^+$ of $G$. Since every edge of $G^+$ is either contained in $C$ or intersects $C$ at most once, $C$ is a $1$-proper good curve for $G^+$ that contains $S$. Thus, by \cref{straightline-topological}, $S$ is a free set for $G^+$. For any prescribed $|S|$-point set $P$, drawing $G^+$ straight-line with $S$ on $P$ and suppressing the subdivision vertices produces a one-bend drawing of $G$. Therefore, $S$ is a one-bend free set for $G$.
 \end{proof}
 
 We next show that the leaves of a spanning tree of a planar graph form a one-bend free set.
@@ -1196,9 +1190,9 @@ We next show that the leaves of a spanning tree of a planar graph form a one-ben
 \end{lem}
 
 \begin{proof}
-The result is immediate when $G$ has at most two vertices. Otherwise, $n\ge 3$. Let $\Gamma$ be a straight-line plane drawing of $G$. By \cref{1-bend-topological}, it suffices to construct a $2$-proper good curve $\ell$ on $\Gamma$ containing all the leaves of $T$.
+The result is immediate when $G$ has at most two vertices, so assume that $G$ has $n\ge 3$ vertices. Let $\Gamma$ be a straight-line plane drawing of $G$. Let $T$ be a spanning tree of $G$ that inherits the embedding $\Gamma$.  By \cref{1-bend-topological}, it suffices to construct a curve $\ell$ that is a $2$-proper good curve with respect to $\Gamma$ and that contains all the leaves of $T$.
 
-For each vertex $v \in V(G)$, draw a small circle $C_v$ centered at $v$. Choose the radii of these circles small enough that for each $v \in V(G)$, $C_v$ intersects only edges incident to $v$ and is disjoint from all other vertex circles. Furthermore, for each edge $uv \in E(T)$ of the spanning tree $T$, draw two parallel segments on either side of $uv$ with endpoints on the boundaries of $C_u$ and $C_v$. Choose these parallel segments sufficiently close to $uv$ that they do not intersect any other edges or segments (see \cref{tree_walking}).
+For each vertex $v \in V(G)$, draw a small circle $C_v$ centered at $v$. Choose the radii of these circles small enough that for each $v \in V(G)$, $C_v$ intersects only edges incident to $v$ and is disjoint from all other vertex circles. Furthermore, for each edge $uv \in E(T)$ of the spanning tree $T$, draw two parallel segments on either side of $uv$ with endpoints on the boundaries of $C_u$ and $C_v$.  Choose these parallel segments sufficiently close to $uv$ that they do not intersect any other edges or segments (see \cref{tree_walking}).
 
 \begin{figure}[htbp]
     \centering
@@ -1212,16 +1206,16 @@ For each vertex $v \in V(G)$, draw a small circle $C_v$ centered at $v$. Choose 
 Since $n\ge 3$, $T$ has at least one vertex of degree at least $2$, and no edge of $T$ joins two leaves. Root $T$ at an arbitrary vertex of degree at least $2$. We construct the curve $\ell$ by traversing $T$ in depth-first search order. For each directed tree edge $uv$ traversed, we add to $\ell$ the segment on the right side of the traversal direction. At each leaf $u$ with tree neighbour $v$, we join $u$ to the endpoints of the two segments along $uv$ on $C_u$. At each non-leaf vertex $u$, we connect the incident tree segments along circular arcs of $C_u$ in cyclic order.
 
 The resulting curve $\ell$ is a closed Jordan curve containing all leaves of $T$ and enclosing all non-leaf vertices. Moreover, for each edge $uv \in E(G)$:
-\begin{enumerate}[label=(P\arabic*),labelwidth=\widthof{(P2)}, leftmargin=!]
+\begin{itemize}[nosep,nolistsep]
     \item If $uv \in E(T)$ and neither $u$ nor $v$ is a leaf, then $|uv \cap \ell| = 0$.
-    \item If $uv \in E(T)$ and one endpoint is a leaf, then $|uv \cap \ell| = 1$, at that leaf.
-    \item If $uv \in E(G) \setminus E(T)$, then $uv$ avoids all tubes around $E(T)$ because $\Gamma$ is a plane drawing. Thus $uv$ meets $\ell$ only at $C_u$ and $C_v$, so $|uv \cap \ell| = 2$.
-\end{enumerate}
-Properties P1–P3 guarantee that $\ell$ is $2$-proper. Since the arcs and segments lie in face interiors, $\ell$ contains points in the interior of faces of $\Gamma$, so it is a good curve. By \cref{1-bend-topological}, the leaves of $T$ form a one-bend free set for $G$.
+    \item If $uv \in E(T)$ and $u$ is a leaf, then $uv\cap\ell = \{u\}$, so $|uv \cap \ell| = 1$.
+    \item If $uv \in E(G) \setminus E(T)$, then $uv\cap\ell = (C_u\cap uv) \cup (C_v\cap uv)$, so  $|uv \cap \ell| = 2$.
+\end{itemize}
+Therefore, $\ell$ is $2$-proper with respect to $\Gamma$. Since the arcs and segments that make up $\ell$ lie in the interiors of the faces of $\Gamma$, $\ell$ is a good curve. By \cref{1-bend-topological}, the leaves of $T$ form a one-bend free set for $G$.
 \end{proof}
 
 \begin{proof}[Proof of \cref{one_bend_collinear_thm}]
-Let $G$ be an $n$-vertex planar graph with $n\ge 3$. Find a plane embedding of $G$ and augment it to a triangulation $G^+$ on the same vertex set $V(G)$. Planar embedding and triangulation augmentation take linear time. By \cref{main_result2}, $G^+$ has a spanning tree $T^+$ with at least $11n/21$ leaves, computable in $O(n)$ time. By \cref{spanning_tree_to_collinear_set}, the leaves of $T^+$ form a one-bend free set of $G^+$. Deleting the added edges $E(G^+) \setminus E(G)$ from any such drawing yields a drawing of $G$ showing that the same set of vertices is a one-bend free set (and collinear set) of $G$.
+Let $G$ be an $n$-vertex planar graph with $n\ge 3$. Add edges to $G$ as needed to produce a triangulation $G^+$ on the same vertex set $V(G)$. By \cref{main_result2}, $G^+$ has a spanning tree $T^+$ with at least $11n/21$ leaves. By \cref{spanning_tree_to_collinear_set}, the leaves of $T^+$ form a one-bend free set of $G^+$, which is also a one-bend free set of $G$.
 \end{proof}
 
 \subsection{Simultaneous Embedding with Fixed Edges and Without Mapping}
@@ -1249,7 +1243,7 @@ The claim is immediate for $n\le2$. For $n\ge3$, augment $G$ to a plane triangul
 
 \begin{thm}\label{sefenomap}
   For every $n$-vertex planar graph $G_1$ and every $\lceil 11n/21\rceil$-vertex planar graph $G_2$, there exist point sets $P_1\supseteq P_2$ with $|P_1|=n$, $|P_2|=\lceil 11n/21\rceil$ and crossing-free embeddings of $G_1$ and $G_2$ such that
-  \begin{enumerate}[label=\rm(\alph*)]
+  \begin{enumerate}[nosep,nolistsep,label=\rm(\alph*)]
     \item the vertices of $G_i$ are mapped to the points in $P_i$ for each $i\in\{1,2\}$;
     \item the edges of $G_2$ are drawn as line segments; and
     \item each edge $e$ of $G_1$ whose endpoints are both mapped to points in $P_2$ is drawn as a line segment.
@@ -1303,7 +1297,7 @@ We conclude with two natural open questions:
 \section*{History and Statement on AI Use}
 The results in this paper were obtained in 2023. Vida~Dujmović presented the results at the \href{https://math.nyu.edu/seminars/geometry/fall23/Dujmovic.html}{New York Geometry Seminar} on December~5, 2023. The first preprint, \href{https://arxiv.org/abs/2312.03399v1}{arXiv:2312.03399v1},  includes \cref{main_result2,one_bend_collinear_thm} and was posted on December~6, 2023. An updated preprint, \href{https://arxiv.org/abs/2312.03399v1}{arXiv:2312.03399v2}, posted in April~2024, includes \cref{generic_surface_thm}.  A preliminary version of this article appeared in the proceedings of \href{https://doi.org/10.4230/LIPIcs.ICALP.2026.41}{ICALP~2026}.
 
-The current revision of this paper was prepared with the assistance of LLMs.  Specifically, GPT-6 Astra proofread the paper, pointed out several errors and omissions, suggested easy fixes, and offered suggestions for simplifications and improvements to the exposition.  The current version of the paper is the result of incorporating some of these suggestions.  One of the authors (Pat Morin) uses an AI-integrated text editor (Antigravity IDE with Gemini) while working on the manuscript.
+The current revision of this paper was prepared with the assistance of LLMs.  Specifically, GPT-6 Astra proofread the paper, pointed out several errors and omissions, suggested easy fixes, and offered suggestions for simplifications and improvements to the exposition.  The current version of the paper is the result of incorporating some of these suggestions.  The most significant of these is the use of potential functions rather than linear programs to bound the sizes of the connected dominating sets in \cref{simple_greedy,better_greedy}. One of the authors (Pat Morin) uses an AI-integrated text editor (Antigravity IDE with Gemini) while working on the manuscript.
 
 \bibliographystyle{plainurlnat}
 
