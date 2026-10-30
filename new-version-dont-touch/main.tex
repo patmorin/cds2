@@ -1,5 +1,6 @@
 % -*- mode: latex; TeX-engine: default; TeX-PDF-mode: t -*-
-\documentclass[11pt,a4paper]{article}
+\documentclass{patmorin}
+\usepackage{pat}
 
 % Standard journal working style.
 \usepackage[T1]{fontenc}
@@ -15,8 +16,8 @@
 \usepackage{microtype}
 % \usepackage{authblk}
 \usepackage[numbers,sort&compress]{natbib}
-\usepackage[hidelinks,unicode]{hyperref}
-\usepackage[capitalise,noabbrev]{cleveref}
+% \usepackage[hidelinks,unicode]{hyperref}
+% \usepackage[capitalise,noabbrev]{cleveref}
 \usepackage{pifont}
 \usepackage{stmaryrd}
 \setlength{\parskip}{1ex}
@@ -29,16 +30,16 @@
 % \renewcommand{\Authfont}{\normalsize}
 % \renewcommand{\Affilfont}{\small}
 
-\newcommand{\R}{\mathbb{R}}
+% \newcommand{\R}{\mathbb{R}}
 % \setlength{\parskip}{1ex}
 
-\newtheorem{thm}{Theorem}
-\newtheorem{obs}{Observation}
-\newtheorem{lem}{Lemma}
-\crefname{lem}{Lemma}{Lemmata}
-\newtheorem{cor}{Corollary}
-\newtheorem{clm}{Claim}
-\newenvironment{clmproof}{\noindent\emph{Proof of Claim:}}{\hfill{$\blacksquare$}\par}
+% \newtheorem{thm}{Theorem}
+% \newtheorem{obs}{Observation}
+% \newtheorem{lem}{Lemma}
+% \crefname{lem}{Lemma}{Lemmata}
+% \newtheorem{cor}{Corollary}
+% \newtheorem{clm}{Claim}
+% \newenvironment{clmproof}{\noindent\emph{Proof of Claim:}}{\hfill{$\blacksquare$}\par}
 
 
 \DeclareMathOperator{\corners}{\Gamma}
@@ -57,7 +58,15 @@
 \crefname{clm}{Claim}{Claims}
 
 
-\title{Connected Dominating Sets in Triangulations}
+\title{\MakeUppercase{Connected Dominating Sets in Triangulations}}
+\author{Prosenjit Bose\thanks{Email: \href{mailto:jit@scs.carleton.ca}{\texttt{jit@scs.carleton.ca}}. ORCID: \href{https://orcid.org/0000-0002-8906-0573}{0000-0002-8906-0573}. Research partially funded by NSERC.}, \quad
+Vida Dujmovi\'c\thanks{Email: \href{mailto:vida.dujmovic@uottawa.ca}{\texttt{vida.dujmovic@uottawa.ca}}. ORCID: \href{https://orcid.org/0000-0001-7250-0600}{0000-0001-7250-0600}. Research partially funded by NSERC and a University of Ottawa Research Chair.}, \quad
+Hussein Houdrouge\thanks{Email: \href{mailto:houdrouge.hussein@gmail.com}{\texttt{houdrouge.hussein@gmail.com}}. ORCID: \href{https://orcid.org/0009-0007-4908-5294}{0009-0007-4908-5294}. Research partially funded by NSERC.}, \quad
+Pat Morin\thanks{Email: \href{mailto:morin@scs.carleton.ca}{\texttt{morin@scs.carleton.ca}}. ORCID: \href{https://orcid.org/0000-0003-0471-4118}{0000-0003-0471-4118}. Research partially funded by NSERC.}, \quad
+Saeed Odak\thanks{Email: \href{mailto:saeedodak@gmail.com}{\texttt{saeedodak@gmail.com}}. ORCID: \href{https://orcid.org/0009-0005-6290-0965}{0009-0005-6290-0965}.}}
+
+
+
 % \author[1]{Prosenjit Bose\thanks{Email: \href{mailto:jit@scs.carleton.ca}{\texttt{jit@scs.carleton.ca}}. ORCID: \href{https://orcid.org/0000-0002-8906-0573}{0000-0002-8906-0573}. Research partially funded by NSERC.}}
 % \author[2]{Vida Dujmović\thanks{Email: \href{mailto:vida.dujmovic@uottawa.ca}{\texttt{vida.dujmovic@uottawa.ca}}. ORCID: \href{https://orcid.org/0000-0001-7250-0600}{0000-0001-7250-0600}. Research partially funded by NSERC and a University of Ottawa Research Chair.}}
 % \author[1]{Hussein Houdrouge\thanks{Email: \href{mailto:houdrouge.hussein@gmail.com}{\texttt{houdrouge.hussein@gmail.com}}. ORCID: \href{https://orcid.org/0009-0007-4908-5294}{0009-0007-4908-5294}. Research partially funded by NSERC.}}
