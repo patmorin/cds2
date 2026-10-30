@@ -1,0 +1,93 @@
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{thm-restate}
+
+\usepackage[nameinlink,noabbrev,capitalise]{cleveref}
+
+\declaretheorem[name=Theorem]{thm}
+\crefname{thm}{Theorem}{Theorems}
+\declaretheorem[name=Lemma,sibling=thm]{lem}
+\declaretheorem[name=Corollary,sibling=thm]{cor}
+\declaretheorem[name=Conjecture,sibling=thm]{conj}
+\declaretheorem[name=Observation,sibling=thm]{obs}
+\crefname{obs}{Observation}{Observations}
+\declaretheorem[name=Property,sibling=thm]{prop}
+\declaretheorem[name=Claim,sibling=thm]{clm}
+
+% \usepackage{cleveref}
+
+% \newtheorem{thm}{Theorem}{\bfseries}{\itshape}
+% \newcommand{\thmlabel}[1]{\showlabel{thm:#1}}
+% \newcommand{\thmref}[1]{Theorem~\ref{thm:#1}}
+
+
+% \newtheorem{lem}[thm]{Lemma}{\bfseries}{\itshape}
+% \newcommand{\lemlabel}[1]{\showlabel{lem:#1}}
+% \newcommand{\lemref}[1]{Lemma~\ref{lem:#1}}
+% \crefname{lem}{Lemma}{Lemma}
+%
+% \newtheorem{conj}[thm]{Conjecture}{\bfseries}{\itshape}
+% \newcommand{\conjlabel}[1]{\showlabel{lem:#1}}
+% \newcommand{\conjref}[1]{Conjecture~\ref{lem:#1}}
+% \crefname{conj}{Conjecture}{Conjecture}
+%
+% \newtheorem{cor}[thm]{Corollary}{\bfseries}{\itshape}
+% \newcommand{\corlabel}[1]{\showlabel{cor:#1}}
+% \newcommand{\corref}[1]{Corollary~\ref{cor:#1}}
+% \crefname{cor}{Corollary}{Corollary}
+
+% \newtheorem{obs}[thm]{Observation}{\bfseries}{\itshape}
+% \newcommand{\obslabel}[1]{\showlabel{obs:#1}}
+% \newcommand{\obsref}[1]{Observation~\ref{obs:#1}}
+
+% \newtheorem{prop}[thm]{Proposition}{\bfseries}{\itshape}
+% \newcommand{\proplabel}[1]{\showlabel{prop:#1}}
+% \newcommand{\propref}[1]{Proposition~\ref{prop:#1}}
+% \crefname{prop}{Proposition}{Proposition}
+
+% \newtheorem{clm}[thm]{Claim}{\bfseries}{\itshape}
+% \newcommand{\clmlabel}[1]{\showlabel{clm:#1}}
+% \newcommand{\clmref}[1]{Claim~\ref{clm:#1}}
+% \crefname{clm}{Claim}{Claim}
+
+\newtheorem{assumption}{Assumption}{\bfseries}{\rm}
+\newenvironment{ass}{\begin{assumption}\rm}{\end{assumption}}
+\crefname{assumption}{Assumption}{Assumption}
+
+\crefname{proc}{Procedure}{Procedure}
+
+\theoremstyle{definition}
+
+\newtheorem{defn}{Definition}
+\crefname{defn}{Definition}{Definition}
+
+\newtheorem{rem}[thm]{Remark}
+\crefname{rem}{Remark}{Remark}
+
+\newtheorem{lesson}{Lesson}
+\crefname{lesson}{Lesson}{Lesson}
+
+\newtheorem{op}{Open Problem}
+\crefname{op}{Open Problem}{Open Problem}
+
+\newtheorem{prb}{Problem}{\bfseries}{\rm}
+\crefname{prb}{Problem}{Problem}
+
+\theoremstyle{plain}
+
+\newcommand{\etal}{et al.}
+
+\newcommand{\keywords}[1]{\noindent\textbf{Keywords:} #1}
+\newcommand{\voronoi}{Vorono\u\i}
+\newcommand{\ceil}[1]{{\lceil #1 \rceil}}
+\newcommand{\Ceil}[1]{{\left\lceil #1 \right\rceil}}
+\newcommand{\floor}[1]{{\lfloor #1 \rfloor}}
+\newcommand{\Floor}[1]{{\left\lfloor #1 \right\rfloor}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Sp}{\mathbb{S}}
+\newcommand{\E}{\mathrm{E}}
+
+\allowdisplaybreaks
