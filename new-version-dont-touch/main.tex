@@ -1145,19 +1145,19 @@ In this section we apply our results to two problems in graph drawing: one-bend 
 
 \subsection{One-Bend Free Sets}
 
-For a planar graph $G$, a set $Y\subseteq V(G)$ is called a \defin{free set} if, for every $|Y|$-point set $P\subseteq\R^2$, there exists a crossing-free straight-line drawing of $G$ in the plane such that the vertices of $Y$ are mapped to the points of $P$. A set $Y\subseteq V(G)$ is called a \defin{collinear set} if it can be drawn on a single straight line. \citet{dujmovic.frati.ea:every} showed that a set is free if and only if it is collinear.
+For a planar graph $G$, a set $Y\subseteq V(G)$ is called a \defin{free set} if, for every $|Y|$-point set $P\subseteq\R^2$, there exists a crossing-free straight-line drawing of $G$ in the plane such that the vertices of $Y$ are mapped to the points of $P$. A set $Y\subseteq V(G)$ is called a \defin{collinear set} if $G$ admits a crossing-free straight-line drawing in which all vertices of $Y$ lie on a single line. \citet{dujmovic.frati.ea:every} showed that a set is free if and only if it is collinear.
 A \defin{$k$-bend drawing} of a graph $G$ is a crossing-free drawing in which each edge is represented by a polygonal chain consisting of at most $k+1$ line segments (with at most $k$ bends). A subset $Y\subseteq V(G)$ is a \defin{$k$-bend free set} if, for every $|Y|$-point set $P\subseteq\R^2$, $G$ admits a $k$-bend drawing in which the vertices of $Y$ are mapped to the points in $P$. A subset $Y\subseteq V(G)$ is a \defin{$k$-bend collinear set} if $G$ admits a $k$-bend drawing in which all vertices of $Y$ lie on a single line.
 \citet{KaufmannWiese2002} showed that $V(G)$ is a $2$-bend free set for every planar graph $G$. This leaves open the question of $1$-bend free sets.
 In this section, we prove:
 
 \begin{thm}\label{one_bend_collinear_thm}
-  For every $n\ge 3$, every $n$-vertex planar graph has a one-bend free set  $L$ of size at least $11n/21=0.\overline{523809}n$. 
+  For every $n\ge 3$, every $n$-vertex planar graph has a one-bend free set $L$ of size at least $11n/21=0.\overline{523809}n$. 
   % Furthermore, there exists an $O(n)$ time algorithm for finding $L$.
 \end{thm}
 
-Note that if the point set $P$ is contained in the $x$-axis, then in a $1$-bend drawing, no edge with both endpoints in $Y$ crosses the $x$-axis. Therefore, such a drawing yields a $2$-page book embedding of $G[Y]$. If $G$ is a triangulation, then $G$ has a cycle that visits the vertices of $Y$ in the order they appear along the cycle.  The \defin{Goldner–Harary} graph $H$ is an $11$-vertex triangulation that is not Hamiltonian.  Let $G$ be the triangulation obtained by taking $k$ pairwise vertex-disjoint copies $H_1,\ldots,H_k$ of $H$ and greedily adding edges to get a triangulation.  If the graph $G$ has a $1$-bend collinear set $Y$ of size at least $10k+1$, then $V(H_i)\subseteq Y$ for at least one $i\in\{1,\ldots,k\}$.  Thus, $H_i$ has a $2$-page book embedding and therefore has a Hamiltonian cycle, which is not possible.  Therefore, the largest $1$-bend free set in $G$ is of size at most $10k = 10n/11=0.\overline{90}n$.
+Note that if the point set $P$ is contained in the $x$-axis, then in a $1$-bend drawing, no edge with both endpoints in $Y$ crosses the $x$-axis. Therefore, such a drawing yields a $2$-page book embedding of $G[Y]$. A triangulation has a $2$-page book embedding if and only if it is Hamiltonian \cite{bernhart.kainen:the}, in which case the cyclic ordering of vertices along the spine forms a Hamiltonian cycle.  The \defin{Goldner–Harary} graph $H$ is an $11$-vertex triangulation that is not Hamiltonian.  Let $G$ be the triangulation obtained by taking $k$ pairwise vertex-disjoint copies $H_1,\ldots,H_k$ of $H$ and greedily adding edges to get a triangulation.  If the graph $G$ has a $1$-bend collinear set $Y$ of size at least $10k+1$, then $V(H_i)\subseteq Y$ for at least one $i\in\{1,\ldots,k\}$.  Thus, $H_i$ has a $2$-page book embedding and therefore has a Hamiltonian cycle, which is not possible.  Therefore, the largest $1$-bend free set in $G$ is of size at most $10k = 10n/11=0.\overline{90}n$.
 
-In the remainder of this subsection we prove \cref{one_bend_collinear_thm}. We start by introducing the topological characterization of collinear sets from \cite{DBLP:journals/jocg/LozzoDFMR18}. A \defin{curve} $C$ is a continuous mapping from $[0, 1]$ to $\mathbb{R}^2$. We call $C(0)$ and $C(1)$ the \defin{endpoints} of $C$. If $C(0)=C(1)$, the curve is \defin{closed}; otherwise, it is \defin{open}. A curve $C$ is called \defin{simple} if $C(x) \neq C(y)$ for all $0\le x<y\le 1$, with the possible exception of $C(0)=C(1)$. A \defin{Jordan curve} is a simple closed curve.
+In the remainder of this subsection, we prove \cref{one_bend_collinear_thm}. We start by introducing the topological characterization of collinear sets from \cite{DBLP:journals/jocg/LozzoDFMR18}. A \defin{curve} $C$ is a continuous mapping from $[0, 1]$ to $\mathbb{R}^2$. We call $C(0)$ and $C(1)$ the \defin{endpoints} of $C$. If $C(0)=C(1)$, the curve is \defin{closed}; otherwise, it is \defin{open}. A curve $C$ is called \defin{simple} if $C(x) \neq C(y)$ for all $0\le x<y\le 1$, with the possible exception of $C(0)=C(1)$. A \defin{Jordan curve} is a simple closed curve.
 
 Let $G$ be a plane graph. A Jordan curve $C$ is a \defin{$k$-proper good curve} if it contains a point in the interior of some face of $G$ (\defin{good}), and the intersection between $C$ and each edge $e$ of $G$ is empty, or at most $k$ points, or the entire edge $e$ (\defin{$k$-proper}).
 
@@ -1171,7 +1171,7 @@ The following observation, illustrated in \cref{subdivisions}, gives a similar s
   \centering
   \includegraphics[page=7, scale=0.7]{figs/proper_good} \\
   $\Downarrow$ \\
-  \includegraphics[page=6, scale=0.7]{figs/proper_good}
+  \includegraphics[page=8, scale=0.7]{figs/proper_good}
   \caption{Subdividing $G$ so that a $2$-proper good curve $C$ becomes a $1$-proper good curve for the subdivided graph $G^+$.}
   \label{subdivisions}
 \end{figure}
@@ -1208,35 +1208,34 @@ Since $n\ge 3$, $T$ has at least one vertex of degree at least $2$, and no edge 
 The resulting curve $\ell$ is a closed Jordan curve containing all leaves of $T$ and enclosing all non-leaf vertices. Moreover, for each edge $uv \in E(G)$:
 \begin{itemize}[nosep,nolistsep]
     \item If $uv \in E(T)$ and neither $u$ nor $v$ is a leaf, then $|uv \cap \ell| = 0$.
-    \item If $uv \in E(T)$ and $u$ is a leaf, then $uv\cap\ell = \{u\}$, so $|uv \cap \ell| = 1$.
-    \item If $uv \in E(G) \setminus E(T)$, then $uv\cap\ell = (C_u\cap uv) \cup (C_v\cap uv)$, so  $|uv \cap \ell| = 2$.
+    \item If $uv \in E(T)$ and one endpoint (say $u$) is a leaf, then $uv\cap\ell = \{u\}$, so $|uv \cap \ell| = 1$.
+    \item If $uv \in E(G) \setminus E(T)$, then $uv$ intersects $\ell$ once near each endpoint: at the circle boundary if the endpoint is an internal vertex of $T$, or at the vertex itself if the endpoint is a leaf. Thus $|uv \cap \ell| = 2$.
 \end{itemize}
-Therefore, $\ell$ is $2$-proper with respect to $\Gamma$. Since the arcs and segments that make up $\ell$ lie in the interiors of the faces of $\Gamma$, $\ell$ is a good curve. By \cref{1-bend-topological}, the leaves of $T$ form a one-bend free set for $G$.
+Therefore, $\ell$ is $2$-proper with respect to $\Gamma$. Since $\ell$ contains points in the interiors of faces of $\Gamma$, $\ell$ is a good curve. By \cref{1-bend-topological}, the leaves of $T$ form a one-bend free set for $G$.
 \end{proof}
 
 \begin{proof}[Proof of \cref{one_bend_collinear_thm}]
-Let $G$ be an $n$-vertex planar graph with $n\ge 3$. Add edges to $G$ as needed to produce a triangulation $G^+$ on the same vertex set $V(G)$. By \cref{main_result2}, $G^+$ has a spanning tree $T^+$ with at least $11n/21$ leaves. By \cref{spanning_tree_to_collinear_set}, the leaves of $T^+$ form a one-bend free set of $G^+$, which is also a one-bend free set of $G$.
+Let $G$ be an $n$-vertex planar graph with $n\ge 3$. Add edges to $G$ as needed to produce a triangulation $G'$ on the same vertex set $V(G)$. By \cref{main_result2}, $G'$ has a spanning tree $T'$ with at least $11n/21$ leaves. By \cref{spanning_tree_to_collinear_set}, the leaves of $T'$ form a one-bend free set of $G'$, which is also a one-bend free set of $G$.
 \end{proof}
 
 \subsection{Simultaneous Embedding with Fixed Edges and Without Mapping}
 
-We call a vertex set \defin{cofacial} if all vertices of its induced plane graph lie on a common face; that face may be bounded. Motivated by simultaneous embedding with fixed edges and without mapping, \citet{angelini.evans.ea:sefe} prove the following result:
+For an embedded planar graph $G$, a vertex set $L \subseteq V(G)$ is called \defin{cofacial} if all vertices in $L$ lie on a common face of $G[L]$. Motivated by simultaneous embedding with fixed edges and without mapping, \citet{angelini.evans.ea:sefe} prove the following result:
 
 \begin{thm}[\cite{angelini.evans.ea:sefe}]
 \label{induced_outerplane_orig}
     Every $n$-vertex plane graph $G$ (and therefore every triangulation) contains an induced outerplane graph $G[L]$ with at least $n/2$ vertices.
 \end{thm}
 
-Observe that if $G$ is a connected plane graph and $X$ is a connected dominating set, the vertices and edges of $G[X]$ are contained in a single face $F$ of $G-X$. Domination implies that every remaining vertex is incident to $F$. Thus $V(G)\setminus X$ is cofacial. If $X$ contains a vertex of the prescribed outer face of $G$, then $F$ is the outer face, and $G-X$ is outerplane in its inherited embedding. The extra outer-vertex property in \cref{better_greedy} therefore supplies precisely the fixed-outer-face conclusion needed here.
-
+Observe that if $G$ is a connected plane graph and $X$ is a connected dominating set, the vertices and edges of $G[X]$ are contained in a single face $f$ of $G-X$. Domination implies that every remaining vertex is incident to $f$. Thus $V(G)\setminus X$ is cofacial. If $X$ contains a vertex of the outer face of $G$, then $f$ is the outer face of $G-X$, so $G-X$ is an induced outerplane subgraph of $G$.
 Combined with \cref{main_result2}, this implies the following improvement of \cref{induced_outerplane_orig}:
 
 \begin{cor}\label{induced_outerplane_improved}
-    Every connected $n$-vertex plane graph $G$ contains an induced outerplane graph $G'$ with at least $11n/21=0.\overline{523809}n$ vertices, and there exists an $O(n)$ time algorithm to find the graph $G'$.
+    Every connected $n$-vertex plane graph $G$ contains an induced outerplane graph $G'$ with at least $11n/21=0.\overline{523809}n$ vertices.
 \end{cor}
 
 \begin{proof}
-The claim is immediate for $n\le2$. For $n\ge3$, augment $G$ to a plane triangulation $G^+$ on the same vertex set, preserving the given embedding. Apply \cref{better_greedy}, or the separate three-vertex case, to obtain a connected dominating set $X$ of size at most $10n/21$ containing an outer-triangle vertex of $G^+$. The observation above shows that $G^+-X$ is outerplane. Deleting the added edges can only enlarge its outer face, so $G-X$ is outerplane as well. Embedding augmentation and the algorithm take linear time.
+The claim is immediate for $n\le3$. For $n\ge 4$, augment $G$ to a plane triangulation $G^+$ on the same vertex set, preserving the given embedding. Apply \cref{better_greedy} to obtain a connected dominating set $X$ of $G^+$ that contains a vertex of the outer face of $G^+$.  The observation above shows that $G^+-X$ is outerplane. Deleting the edges in $E(G^+)\setminus E(G)$ can only enlarge the outer face of $G^+-X$, so $G-X$ is outerplane as well.
 \end{proof}
 
 \Cref{induced_outerplane_improved} immediately implies an improved result for the graph drawing problem considered by \cite{angelini.evans.ea:sefe}, improving the bound from $n/2$ to $11n/21$:
@@ -1251,40 +1250,32 @@ The claim is immediate for $n\le2$. For $n\ge3$, augment $G$ to a plane triangul
 \end{thm}
 
 \begin{proof}[Proof of \cref{sefenomap}]
-For $n\le2$ the claim is immediate. Otherwise, embed $G_1$ and augment it to a plane triangulation on the same vertex set. The preceding proof gives an induced outerplane subgraph of $G_1$ on at least $m:=\lceil11n/21\rceil$ vertices. Restrict it to exactly $m$ vertices, which preserves its outerplane embedding.
+For $n\le2$ the claim is immediate. Otherwise, embed $G_1$ and augment it to a plane triangulation on the same vertex set.  By \cref{induced_outerplane_improved}, there exists $Y\subseteq V(G_1)$ of size $m:=\lceil11n/21\rceil$ such that $G_1[Y]$ is outerplane.
 
-Draw $G_2$ straight-line with its vertices on a point set $P_2$ in general position. As in \cite{angelini.evans.ea:sefe}, an outerplane graph can be drawn straight-line on any such point set while preserving its plane embedding, with a suitable bijection of its vertices to the points. Draw the chosen induced subgraph of $G_1$ on $P_2$ in this way. Extend this drawing to a topological plane drawing of $G_1$: an embedding-preserving homeomorphism between the original and new drawings of the induced subgraph extends over its faces, and transports the remaining vertices and edges of $G_1$. Let $P_1$ be the resulting vertex set of this drawing. The drawings have the three stated properties. In particular, an edge present in both drawings after identifying their point sets is the same straight segment between its endpoints.
+Fix some straight-line non-crossing drawing of $G_2$ so that no three vertices of $G_2$ are collinear. Let $P_2$ be the (general position) point set on which the vertices of $G_2$ are drawn.  Since $G_1[Y]$ is outerplane, it can be drawn straight-line on $P_2$ while preserving its plane embedding, with a suitable bijection of its vertices to the points \cite{angelini.evans.ea:sefe}. Extend this drawing of $G_1[Y]$ to a topological plane drawing of $G_1$: an embedding-preserving homeomorphism between the original and new drawings of the induced subgraph extends over its faces, and maps the remaining vertices and edges of $G_1$ into the interior of the outer face of $G_1[Y]$ without additional crossings. Let $P_1$ be the vertex set of this drawing. Then $P_1\supseteq P_2$, $|P_1|=n$, $|P_2|=m$ and the drawings of $G_1$ and $G_2$ satisfy the three conditions of the theorem.
 \end{proof}
 
-We end this section with the following observation. The complement of a connected dominating set is cofacial, as argued above. Conversely, in a triangulation, the maximum size of a cofacial vertex set equals $n$ minus the minimum size of a connected dominating set, where $n$ is the number of vertices. Here cofaciality allows a common bounded face; a prescribed outer face would give a different optimization problem.
+We end this section with the following observation. The complement $Y:=V(G)\setminus X$ of a connected dominating set $X$ is cofacial, as argued above.  Here we show that, in triangulations, the smallest connected dominating set problem and the maximum cofacial set problem are duals of each other.
 
 \begin{thm}\label{cofacial_equivalence}
-  Let $G$ be a triangulation with $n\ge4$ vertices, let $X$ be a minimum-sized connected dominating set of $G$, and let $Y$ be a maximum-sized subset of $V(G)$ such that all vertices of $G[Y]$ lie on a common face of $G[Y]$. Then $|X|+|Y|=n$.
+  Let $G$ be a triangulation with $n\ge4$ vertices, let $X$ be a minimum-sized connected dominating set of $G$, and let $Y$ be a maximum-sized cofacial set in $G$. Then $|X|+|Y|=n$.
 \end{thm}
 
 \begin{proof}
-Work on the sphere, so the choice of the outer face is immaterial. The complement $Y':=V(G)\setminus X$ is cofacial by the observation above. Maximality of $|Y|$ therefore gives $|X|+|Y|\ge n$.
+  Since the complement of any connected dominating set of $G$ is cofacial, $|Y| \ge n - |X|$, which gives $|X| + |Y| \ge n$. To prove the reverse inequality, it suffices to construct a connected dominating set of size $n - |Y|$.
 
-Among all maximum-size cofacial sets and their common faces, choose a pair $(Y,F)$ maximizing the number of original vertices contained in the interior of $F$. Put $Q:=G[Y]$ and $X':=V(G)\setminus Y$. The set $X'$ is nonempty: every face of the triangulation $G$ is bounded by three vertices, whereas $n\ge4$, so $G$ itself is not cofacial. Choose a point of $F$ as the point at infinity. Then $Q$ is outerplane. Every other face of $Q$ is bounded by a simple cycle: a repeated boundary vertex would separate boundary portions into different blocks, and a dangling edge or a component inside such a bounded region would have a vertex not incident to the outer face. This is the usual facial-cycle property of an outerplane graph, including disconnected outerplane graphs.
+  Let $Y$ be a maximum-sized cofacial set in $G$ and let $X:=V(G)\setminus Y$.  For each face $f$ of $G[Y]$, let $X_f\subseteq X$ be the subset of $X$ in the interior of $f$.  Let $f_0$ be a face of $G[Y]$ that has all the vertices of $Y$ on its boundary. We claim that $Y$ can be chosen such that $X_{f_0}=X$. Choose the outer face of $G$ so that this face is contained in $f_0$.  Suppose that $X_{f_0}\neq X$ and consider the generalized near-triangulation $G_Y:=G-X_{f_0}$.  Since $X_{f_0}\neq X$, $I(G_Y)$ is non-empty, so there exists a vertex $v\in B(G_Y)$ with $|N^+_{G_Y}(v)|\ge 1$. Let $f_0'$ be the face of $G-(X_{f_0}\cup\{v\})$ that contains $f_0$ (and $v$) in its interior.  Let $Y':=(Y\cup N^+_{G_Y}(v))\setminus \{v\}$ and let $G_{Y'}:=G-(X_{f_0}\cup\{v\})$.  Observe that $B(G_{Y'})=Y'$, so $Y'$ is a cofacial set and $|Y'| = |Y| + |N^+_{G_Y}(v)| - 1\ge |Y|$.  Since $Y$ is a maximum-sized cofacial set, we must have $|Y'|=|Y|$ and $|N^+_{G_Y}(v)|=1$.  Furthermore, $f_0'$ contains $f_0$ and $v$ in its interior, so the subset of $V(G)\setminus Y'$ in the interior of $f_0'$ contains $X_{f_0}\cup\{v\}$, which has size $|X_{f_0}|+1>|X_{f_0}|$. Thus, we have found a new cofacial set $Y'$ with the same size as $Y$, such that the face $f_0'$ that has all vertices of $Y'$ on its boundary contains $f_0$ and strictly more vertices of its complement than $f_0$. We can repeat this operation until we eventually obtain a cofacial set $Y^*$ with $|Y^*|=|Y|$ such that the outer face $f_0^*$ of $G[Y^*]$ has all vertices of $X^*:=V(G)\setminus Y^*$ in its interior.
 
-We claim that every vertex of $X'$ is in $F$. Suppose that a face $F'\ne F$ contains a vertex of $X'$. Since $G$ is connected, some vertex $v$ of the boundary cycle of $F'$ has an original neighbour inside $F'$. Let $Z$ be the nonempty set of all such neighbours of $v$, and let $Y'':=(Y\setminus\{v\})\cup Z$. The neighbours of $v$ encountered inside $F'$, between its two boundary neighbours, are exactly the vertices of $Z$. Consecutive neighbours form triangular faces with $v$, giving a fan in $F'$.
+  We now assume that $Y$ is chosen so that $X_{f_0}=X$.  All that remains is to show that $X$ is a connected dominating set of $G$.  Since each face of $G$ has only three vertices on its boundary and $n\ge 4$, $Y\neq V(G)$, so $X$ is non-empty.  First we argue that $G[X]$ is connected. For any two distinct vertices $v,w\in X$, let $\gamma$ be a curve with endpoints $v$ and $w$ contained in the interior of $f_0$ whose interior avoids all vertices of $G$ and crosses edges of $G$ transversely. Let $t_1,\ldots,t_k$ be the triangular faces of $G$ whose interiors are intersected by $\gamma$, in the order they occur while traversing $\gamma$. If $k=1$, then $v$ and $w$ belong to the same triangle $t_1$, so $vw\in E(G[X])$. Otherwise, for each $i\in\{1,\ldots,k-1\}$, the triangles $t_i$ and $t_{i+1}$ share an edge $e_i$. Because $\gamma$ lies in the interior of $f_0$, $e_i$ cannot be an edge of $G[Y]$, so at least one endpoint $v_i$ of $e_i$ belongs to $X$. For each $i\in\{1,\ldots,k-2\}$, the vertices $v_i$ and $v_{i+1}$ both belong to the triangle $t_{i+1}$, so $v_i=v_{i+1}$ or $v_i v_{i+1}\in E(G[X])$. Furthermore, $v, v_1 \in V(t_1) \cap X$, so $v=v_1$ or $vv_1\in E(G[X])$, and similarly $w=v_{k-1}$ or $wv_{k-1}\in E(G[X])$. Thus $G[X]$ contains a walk from $v$ to $w$, showing that $G[X]$ is connected.
 
-Removing $v$ opens this fan to $F$. Adding the vertices of $Z$ and their induced edges leaves each vertex of $Z$ incident to that opened region: the interiors of the fan triangles and of the deleted spokes from $v$ provide access from the former position of $v$ to every vertex of $Z$. All new edges lie in the closure of $F'$, because its boundary is a cycle of $Q$ and no edge of $G$ crosses that cycle. Thus no new edge cuts the interior of the old common face $F$, and every vertex of $Y\setminus\{v\}$ remains incident to the same enlarged common face, say $F''$. This proves that $Y''$ is cofacial and $|Y''|=|Y|-1+|Z|\ge|Y|$.
+  To see that $X$ dominates $G$, suppose that some $u\in Y$ is not adjacent to any vertex in $X$. Then $N_G(u)\subseteq Y$, so all triangular faces of $G$ incident to $u$ have all their vertices and edges in $G[Y]$. None of these faces contains a vertex of $G$ in its interior, so none of these faces is $f_0$ (since $f_0$ contains $X$ in its interior). The union of these triangles is a disk with $u$ in its interior. This contradicts the fact that $f_0$ has all vertices of $Y$ on its boundary.
 
-If this inequality is strict, it contradicts maximality of $|Y|$. Otherwise, all original vertices previously inside $F$ remain inside $F''$, and the former position of $v$ is now also in its interior. The added vertices $Z$ were inside $F'$, not inside $F$. Hence $F''$ contains strictly more original vertices than $F$, contradicting the tie-break. The claim follows.
-
-It remains to prove that $X'$ is connected and dominates $G$. Consider the triangular faces of $G$ whose interiors lie in $F$. Their adjacency graph, allowing passage only across edges not in $Q$, is connected. Indeed $F$ is a connected open region; a path in it can be chosen to avoid the finitely many vertices of $G$ and to cross edges transversely, giving such a face walk. This argument does not cross any edge of $Q$, including a bridge with both sides incident to $F$.
-
-Every triangle in this face walk has a vertex of $X'$. Otherwise all its edges belong to $Q$, so its interior is an entire face of $Q$ containing no original vertex. That face cannot equal $F$, because $X'$ is nonempty and all its vertices are inside $F$. Within each triangle the vertices of $X'$ form a nonempty clique. Each edge crossed by the face walk is not in $Q$, so has an endpoint in $X'$; consecutive cliques therefore intersect. Every vertex of $X'$ is incident to a triangle inside $F$. This proves that $G[X']$ is connected.
-
-Finally every vertex of $Y$ is incident to $F$, and hence to a triangular face of $G$ inside $F$. That triangle has an $X'$ vertex, adjacent to the given vertex of $Y$. Thus $X'$ dominates $G$, so it is a connected dominating set. Minimality of $X$ gives $|X|\le|X'|=n-|Y|$. Combining this with the first inequality yields $|X|+|Y|=n$.
+  Therefore $X$ is a connected dominating set of $G$, so $|X| \le |V(G) \setminus Y| = n - |Y|$. Combining this with $|X| + |Y| \ge n$ yields $|X| + |Y| = n$.
 \end{proof}
 
 \section{Conclusions}
 \label{conclusions}
-In this paper, we broke the longstanding $n/2$ barrier for connected dominating sets in triangulations, showing that every triangulation admits a connected dominating set of size at most $10n/21$ (and that it can be computed in optimal, linear time). This result narrows the gap to the best-known lower bound and has applications to graph drawing.
-
-We conclude with two natural open questions:
+In this paper, we improve the long-standing upper bound of $n/2$ for the size of connected dominating sets in triangulations, showing that every triangulation admits a connected dominating set of size at most $10n/21$. This result narrows the gap to the best-known lower bound and has applications to graph drawing.  Two natural open questions arise from this work:
 
 \begin{enumerate}
   \item What is the infimum of the constants $c$ for which every $n$-vertex triangulation (with $n\geq 3$) has a connected dominating set of size at most $c n+O(1)$? Our main result, \cref{main_result2}, and the recent lower bound \cite{enami2025contributionsconjecturesplanargraphs} place this infimum in $[7/18,10/21]$.
@@ -1295,7 +1286,7 @@ We conclude with two natural open questions:
 
 
 \section*{History and Statement on AI Use}
-The results in this paper were obtained in 2023. Vida~Dujmović presented the results at the \href{https://math.nyu.edu/seminars/geometry/fall23/Dujmovic.html}{New York Geometry Seminar} on December~5, 2023. The first preprint, \href{https://arxiv.org/abs/2312.03399v1}{arXiv:2312.03399v1},  includes \cref{main_result2,one_bend_collinear_thm} and was posted on December~6, 2023. An updated preprint, \href{https://arxiv.org/abs/2312.03399v1}{arXiv:2312.03399v2}, posted in April~2024, includes \cref{generic_surface_thm}.  A preliminary version of this article appeared in the proceedings of \href{https://doi.org/10.4230/LIPIcs.ICALP.2026.41}{ICALP~2026}.
+The results in this paper were obtained in 2023. Vida~Dujmović presented the results at the \href{https://math.nyu.edu/seminars/geometry/fall23/Dujmovic.html}{New York Geometry Seminar} on December~5, 2023 and Pat~Morin presented these results at the Dagstuhl Seminar 24062 on Beyond-Planar Graphs on February~5, 2024. The first preprint, \href{https://arxiv.org/abs/2312.03399v1}{arXiv:2312.03399v1},  includes \cref{main_result2,one_bend_collinear_thm} and was posted on December~6, 2023. An updated preprint, \href{https://arxiv.org/abs/2312.03399v1}{arXiv:2312.03399v2}, posted in April~2024, includes \cref{generic_surface_thm}.  A preliminary version of this article appeared in the proceedings of \href{https://doi.org/10.4230/LIPIcs.ICALP.2026.41}{ICALP~2026}.
 
 The current revision of this paper was prepared with the assistance of LLMs.  Specifically, GPT-6 Astra proofread the paper, pointed out several errors and omissions, suggested easy fixes, and offered suggestions for simplifications and improvements to the exposition.  The current version of the paper is the result of incorporating some of these suggestions.  The most significant of these is the use of potential functions rather than linear programs to bound the sizes of the connected dominating sets in \cref{simple_greedy,better_greedy}. One of the authors (Pat Morin) uses an AI-integrated text editor (Antigravity IDE with Gemini) while working on the manuscript.
 
